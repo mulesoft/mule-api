@@ -17,7 +17,7 @@ package org.mule.api.connection;
  * @param <T> the generic type of the connection being wrapped by each individual instance
  * @since 1.0
  */
-public interface ManagedConnection<T>
+public interface ConnectionHandler<T>
 {
 
     /**
@@ -41,6 +41,8 @@ public interface ManagedConnection<T>
      * Just like with {@link #getConnection()}, the implications of executing
      * this method are not guaranteed. Depending on the implementation,
      * the connection could be closed, returned to a pooled, recycled, etc.
+     * It is not to be assumed that any resources allocated by the wrapped connection
+     * will be freed after invoking this method.
      * <p>
      * The only strong piece on the contract is the user's obligation to
      * invoke this method once it's done with the instance

@@ -148,6 +148,8 @@ public class PoolingProfile
 
     private int evictionCheckIntervalMillis = DEFAULT_EVICTION_INTERVAL_MILLIS;
 
+    private boolean disabled = false;
+
     public PoolingProfile()
     {
         super();
@@ -160,6 +162,7 @@ public class PoolingProfile
         this.maxWait = pp.getMaxWait();
         this.exhaustedAction = pp.getExhaustedAction();
         this.initialisationPolicy = pp.getInitialisationPolicy();
+        this.disabled = pp.isDisabled();
     }
 
     public PoolingProfile(int maxActive,
@@ -193,8 +196,8 @@ public class PoolingProfile
 
     /**
      * @return time in miilisconds to wait for a Mule component to be available in a
-     *         service when the pool of Mule components is exhausted and the
-     *         PoolExhaustedAction is set to WHEN_EXHAUSTED_BLOCK
+     * service when the pool of Mule components is exhausted and the
+     * PoolExhaustedAction is set to WHEN_EXHAUSTED_BLOCK
      */
     public long getMaxWait()
     {
@@ -257,5 +260,20 @@ public class PoolingProfile
     public void setEvictionCheckIntervalMillis(int evictionCheckIntervalMillis)
     {
         this.evictionCheckIntervalMillis = evictionCheckIntervalMillis;
+    }
+
+    /**
+     * Return {@code true} when the owner should not perform any pooling
+     *
+     * @return Whether the owner should perform any pooling or not
+     */
+    public boolean isDisabled()
+    {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled)
+    {
+        this.disabled = disabled;
     }
 }

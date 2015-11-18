@@ -14,7 +14,13 @@ package org.mule.api.connection;
  * connection, while remaining abstracted from the concerns of actually manage
  * those connections.
  * <p>
- * Implementations are expected to be reusable and thread-safe
+ * Implementations are expected to be reusable and thread-safe.
+ * <p>
+ * It is valid for implementations to implement any of the lifecycle interfaces
+ * or to request external dependencies through any of the JSR-330 annotations.
+ * However, implementations are not propagate lifecycle or to perform dependency
+ * injection into the generated connections. The runtime will do that automatically
+ * at the proper time.
  *
  * @param <Config>     the generic type of the objects to be used as configs
  * @param <Connection> the generic type of the connections to be handled
@@ -39,4 +45,22 @@ public interface ConnectionProvider<Config, Connection>
      * @param connection a non {@code null} {@code Connection}.
      */
     void disconnect(Connection connection);
+
+    /**
+     * Specifies the {@link ConnectionHandlingStrategy} that should be use to manage
+     * the connections generated through the {@link #connect(Object)} method.
+     * <p>
+     * Implementations <b>MUST</b> return instances created through the provided
+     * {@code handlingStrategyFactory}. Those instances are not to be wrapped,
+     * decorated, or by any other means tampered with.
+     * <p>
+     * This method must also function correctly without dependencies or preconditions.
+     * That means that although it is valid for {@code this} provider to have lifecycle
+     * or external dependencies injected, this particular method must behave correctly
+     * on every possible state.
+     *
+     * @param handlingStrategyFactory the {@link ConnectionHandlingStrategyFactory} to be used to generate the response value
+     * @return a not {@code null} {@link ConnectionHandlingStrategy}
+     */
+    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory handlingStrategyFactory);
 }
