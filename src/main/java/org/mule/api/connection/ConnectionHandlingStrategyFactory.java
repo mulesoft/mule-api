@@ -11,9 +11,11 @@ import org.mule.api.config.PoolingProfile;
 /**
  * Factory to create instances of {@link ConnectionHandlingStrategy}
  *
+ * @param <Config>     the generic type of the config for which connections will be produced
+ * @param <Connection> the generic type of the connections that will be produced
  * @since 1.0
  */
-public interface ConnectionHandlingStrategyFactory
+public interface ConnectionHandlingStrategyFactory<Config, Connection>
 {
 
     /**
@@ -30,10 +32,20 @@ public interface ConnectionHandlingStrategyFactory
      * will actually close the connection.
      *
      * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
-     * @param <Connection>          The generic type of the connections to be produced by the owning {@link ConnectionProvider}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    <Connection> ConnectionHandlingStrategy<Connection> supportsPooling(PoolingProfile defaultPoolingProfile);
+    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingProfile defaultPoolingProfile);
+
+    /**
+     * Performs the exact same contract as {@link #supportsPooling(PoolingProfile)} but adding the possibility
+     * to specify a {@link PoolingListener} which allows additional custom handling of the pooled {@code Connections}
+     * when they're borrowed and returned to the pool
+     *
+     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
+     * @param poolingListener       a not {@code null }{@link PoolingListener}
+     * @return a {@link ConnectionHandlingStrategy}
+     */
+    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingProfile defaultPoolingProfile, PoolingListener<Config, Connection> poolingListener);
 
     /**
      * Creates a strategy in which pooling is enforced. {@link PoolingProfile}s which
@@ -51,26 +63,34 @@ public interface ConnectionHandlingStrategyFactory
      * @return a {@link ConnectionHandlingStrategy}
      * @throws IllegalArgumentException if {@code defaultPoolingProfile} attempts to disable pooling
      */
-    <Connection> ConnectionHandlingStrategy<Connection> requiresPooling(PoolingProfile defaultPoolingProfile);
+    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingProfile defaultPoolingProfile);
+
+    /**
+     * Performs the exact same contract as {@link #requiresPooling(PoolingProfile)} but adding the possibility
+     * to specify a {@link PoolingListener} which allows additional custom handling of the pooled {@code Connections}
+     * when they're borrowed and returned to the pool
+     *
+     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
+     * @param poolingListener       a not {@code null }{@link PoolingListener}
+     * @return a {@link ConnectionHandlingStrategy}
+     */
+    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingProfile defaultPoolingProfile, PoolingListener<Config, Connection> poolingListener);
 
     /**
      * Returns a strategy which lazily creates and caches connections so that each invokation to the
      * {@link ConnectionProvider#connect(Object)} method using the same config argument results in the same
      * connection. Invoking {@link ConnectionHandler#release()} will not close the connection.
      *
-     * @param <Connection> The generic type of the connections to be produced by the owning {@link ConnectionProvider}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    <Connection> ConnectionHandlingStrategy<Connection> cached();
+    ConnectionHandlingStrategy<Connection> cached();
 
     /**
      * Creates a strategy which adds no behaviour. A new connection is created each time
      * {@link ConnectionHandlingStrategy#getConnectionHandler()} is invoked and will be closed when
      * {@link ConnectionHandler#release()} is called.
      *
-     * @param <Connection> The generic type of the connections to be produced by the owning {@link ConnectionProvider}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    <Connection> ConnectionHandlingStrategy<Connection> none();
-
+    ConnectionHandlingStrategy<Connection> none();
 }
