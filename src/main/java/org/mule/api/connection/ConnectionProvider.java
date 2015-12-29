@@ -62,5 +62,5 @@ public interface ConnectionProvider<Config, Connection>
      * @param handlingStrategyFactory the {@link ConnectionHandlingStrategyFactory} to be used to generate the response value
      * @return a not {@code null} {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory handlingStrategyFactory);
+    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory<Config, Connection> handlingStrategyFactory);
 }
