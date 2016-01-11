@@ -47,6 +47,19 @@ public interface ConnectionProvider<Config, Connection>
     void disconnect(Connection connection);
 
     /**
+     * Validates the given {@link Connection}.
+     *
+     * In invalid connection case, the {@link ConnectionValidationResult} should also return a valid
+     * message {@link ConnectionValidationResult#getMessage()}, exception {@link ConnectionValidationResult#getException()}
+     * and code {@link ConnectionValidationResult#getCode()}
+     *
+     * @param connection a non {@code null} {@link Connection}.
+     * @return a {@link ConnectionValidationResult} indicating if the connection
+     * is valid or not.
+     */
+    ConnectionValidationResult validate(Connection connection);
+
+    /**
      * Specifies the {@link ConnectionHandlingStrategy} that should be use to manage
      * the connections generated through the {@link #connect(Object)} method.
      * <p>
