@@ -88,6 +88,18 @@
         <url>https://github.com/mulesoft/mule-api</url>
     </scm>
 
+    <properties>
+        <metadataModelApiVersion>1.0.0-SNAPSHOT</metadataModelApiVersion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.mule</groupId>
+            <artifactId>mule-metadata-model-api</artifactId>
+            <version>${metadataModelApiVersion}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
