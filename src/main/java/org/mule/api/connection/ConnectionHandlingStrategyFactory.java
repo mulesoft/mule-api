@@ -22,62 +22,50 @@ public interface ConnectionHandlingStrategyFactory<Config, Connection>
      * Creates a strategy which supports pooling but does not enforce it. It is
      * possible to disable pooling through a {@link PoolingProfile} which
      * {@link PoolingProfile#isDisabled()} method returns {@code true}.
-     * <p>
-     * The {@code defaultPoolingProfile} is used to provide a default {@link PoolingProfile},
-     * notice however that there's no guarantee that the provided value will actually
-     * be used since the runtime might decide to use another instance per user's configuration.
-     * <p>
+     * <p/>
      * If pooling is enabled, then invoking {@link ConnectionHandler#release()} will not close
-     * the connection, it will just return it to the pool. If disabled, then the the release method
+     * the connection, it will just return it to the pool. If disabled, then the release method
      * will actually close the connection.
      *
-     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
      * @return a {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingProfile defaultPoolingProfile);
+    ConnectionHandlingStrategy<Connection> supportsPooling();
 
     /**
-     * Performs the exact same contract as {@link #supportsPooling(PoolingProfile)} but adding the possibility
+     * Performs the exact same contract as {@link #supportsPooling()} but adding the possibility
      * to specify a {@link PoolingListener} which allows additional custom handling of the pooled {@code Connections}
      * when they're borrowed and returned to the pool
      *
-     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
-     * @param poolingListener       a not {@code null }{@link PoolingListener}
+     * @param poolingListener a not {@code null }{@link PoolingListener}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingProfile defaultPoolingProfile, PoolingListener<Config, Connection> poolingListener);
+    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingListener<Config, Connection> poolingListener);
 
     /**
      * Creates a strategy in which pooling is enforced. {@link PoolingProfile}s which
      * {@link PoolingProfile#isDisabled()} method returns {@code true} are not accepted
      * and will generate an {@link IllegalArgumentException}.
-     * <p>
-     * The {@code defaultPoolingProfile} is used to provide a default {@link PoolingProfile},
-     * notice however that there's no guarantee that the provided value will actually
-     * be used since the runtime might decide to use another instance per user's configuration.
-     * <p>
+     * <p/>
      * Invoking {@link ConnectionHandler#release()} will not close the connection, it will just
      * return it to the pool.
      *
-     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
      * @return a {@link ConnectionHandlingStrategy}
      * @throws IllegalArgumentException if {@code defaultPoolingProfile} attempts to disable pooling
      */
-    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingProfile defaultPoolingProfile);
+    ConnectionHandlingStrategy<Connection> requiresPooling();
 
     /**
-     * Performs the exact same contract as {@link #requiresPooling(PoolingProfile)} but adding the possibility
+     * Performs the exact same contract as {@link #requiresPooling()} but adding the possibility
      * to specify a {@link PoolingListener} which allows additional custom handling of the pooled {@code Connections}
      * when they're borrowed and returned to the pool
      *
-     * @param defaultPoolingProfile the {@link PoolingProfile} to be used by default
-     * @param poolingListener       a not {@code null }{@link PoolingListener}
+     * @param poolingListener a not {@code null }{@link PoolingListener}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingProfile defaultPoolingProfile, PoolingListener<Config, Connection> poolingListener);
+    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingListener<Config, Connection> poolingListener);
 
     /**
-     * Returns a strategy which lazily creates and caches connections so that each invokation to the
+     * Returns a strategy which lazily creates and caches connections so that each invocation to the
      * {@link ConnectionProvider#connect(Object)} method using the same config argument results in the same
      * connection. Invoking {@link ConnectionHandler#release()} will not close the connection.
      *

@@ -10,7 +10,6 @@
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
     <url>https://github.com/mulesoft/mule-api</url>
-
     <organization>
         <name>MuleSoft, Inc.</name>
         <url>http://www.mulesoft.com</url>
@@ -27,6 +26,10 @@
             <post>mule-esb@mulesoft.com</post>
         </mailingList>
     </mailingLists>
+
+    <properties>
+        <commonsLangVersion>3.4</commonsLangVersion>
+    </properties>
 
     <developers>
         <developer>
@@ -135,6 +138,14 @@
             </plugin>
         </plugins>
     </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commonsLangVersion}</version>
+        </dependency>
+    </dependencies>
 
     <distributionManagement>
         <repository>
