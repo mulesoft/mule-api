@@ -27,10 +27,6 @@
         </mailingList>
     </mailingLists>
 
-    <properties>
-        <commonsLangVersion>3.4</commonsLangVersion>
-    </properties>
-
     <developers>
         <developer>
             <id>canoasan</id>
@@ -150,14 +146,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commonsLangVersion}</version>
-        </dependency>
-    </dependencies>
 
     <distributionManagement>
         <repository>
