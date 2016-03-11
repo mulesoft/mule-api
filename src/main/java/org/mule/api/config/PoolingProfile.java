@@ -9,6 +9,8 @@ package org.mule.api.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Configuration object used to define the object pooling parameters for the service it is associated with.
  *
@@ -275,5 +277,28 @@ public class PoolingProfile
     public void setDisabled(boolean disabled)
     {
         this.disabled = disabled;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj instanceof PoolingProfile)
+        {
+            PoolingProfile pp = (PoolingProfile) obj;
+            return pp.getMaxActive() == maxActive &&
+                   pp.getEvictionCheckIntervalMillis() == evictionCheckIntervalMillis &&
+                   pp.getMaxIdle() == maxIdle &&
+                   pp.getMaxWait() == maxWait &&
+                   pp.getExhaustedAction() == exhaustedAction &&
+                   pp.getMinEvictionMillis() == minEvictionMillis &&
+                   pp.isDisabled() == disabled;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode(this, false);
     }
 }
