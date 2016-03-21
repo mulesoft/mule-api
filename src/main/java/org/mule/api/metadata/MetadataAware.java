@@ -1,0 +1,71 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+package org.mule.api.metadata;
+
+import org.mule.api.metadata.descriptor.OperationMetadataDescriptor;
+import org.mule.api.metadata.resolving.MetadataContentResolver;
+import org.mule.api.metadata.resolving.MetadataKeysResolver;
+import org.mule.api.metadata.resolving.MetadataOutputResolver;
+import org.mule.api.metadata.resolving.MetadataResult;
+import org.mule.api.temporary.MuleMessage;
+import org.mule.metadata.api.model.MetadataType;
+
+import java.util.List;
+
+/**
+ * This interface allows a Component that processes a {@link MuleMessage} to expose
+ * its metadata descriptor, containing all the {@link MetadataType} information associated
+ * to the Component's input and output elements
+ *
+ * @since 1.0
+ */
+public interface MetadataAware
+{
+
+    /**
+     * Returns the list of types that can be described, by the {@link MetadataKeysResolver}
+     * associated to this Component
+     *
+     * @return Successful {@link MetadataResult} if the keys are successfully resolved
+     * Failure {@link MetadataResult} if there is an error while retrieving the keys
+     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+     */
+    MetadataResult<List<MetadataKey>> getMetadataKeys() throws MetadataResolvingException;
+
+    /**
+     * Resolves the {@link OperationMetadataDescriptor} for the current operation using
+     * only the static types of the Component's parameters, attributes and output.
+     *
+     * @return An {@link OperationMetadataDescriptor} with the Static Metadata representation
+     * of the Component.
+     * Successful {@link MetadataResult} if the Metadata is successfully retrieved
+     * Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+     */
+    MetadataResult<OperationMetadataDescriptor> getMetadata() throws MetadataResolvingException;
+
+    /**
+     * Resolves the {@link OperationMetadataDescriptor} for the current operation using
+     * both static and dynamic resolving of the Component's parameters, attributes and output.
+     * <p>
+     * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated
+     * that can be used to resolve the Dynamic {@link MetadataType} for the Content or Output,
+     * then the {@link OperationMetadataDescriptor} will contain those Dynamic types instead
+     * of the static type declaration.
+     * <p>
+     * When neither Content nor Output have Dynamic types, then invoking this method is the
+     * same as invoking {@link this#getMetadata}
+     *
+     * @param key {@link MetadataKey} of the type which's structure has to be resolved,
+     *            used both for input and output types
+     *            Successful {@link MetadataResult} if the Metadata is successfully retrieved
+     *            Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+     */
+    MetadataResult<OperationMetadataDescriptor> getMetadata(MetadataKey key) throws MetadataResolvingException;
+}
+
