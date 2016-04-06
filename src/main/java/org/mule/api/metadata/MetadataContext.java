@@ -34,4 +34,9 @@ public interface MetadataContext
      */
     <C> Optional<C> getConnection() throws ConnectionException;
 
+    /**
+     * @returns the {@link MetadataCache} associated with the {@link MetadataContext}.
+     */
+    MetadataCache getCache();
+
 }

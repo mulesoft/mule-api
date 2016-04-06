@@ -69,4 +69,11 @@ public interface MetadataManager
      */
     MetadataResult<OperationMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
 
+    /**
+     * Removes the {@link MetadataCache} with the specified id.
+     *
+     * @param id the id of the cache to be removed
+     */
+    void disposeCache(String id);
+
 }
