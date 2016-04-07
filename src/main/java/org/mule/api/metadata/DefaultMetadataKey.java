@@ -76,14 +76,7 @@ public final class DefaultMetadataKey implements MetadataKey
     @Override
     public boolean equals(Object obj)
     {
-        if (obj instanceof DefaultMetadataKey)
-        {
-            DefaultMetadataKey key = (DefaultMetadataKey) obj;
-            return key.getDisplayName().equals(this.displayName)
-                   && key.getId().equals(this.id)
-                   && key.getProperties().equals(this.properties);
-
-        }
-        return false;
+        return obj instanceof DefaultMetadataKey
+               && ((DefaultMetadataKey) obj).getId().equals(this.id);
     }
 }
