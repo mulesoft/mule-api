@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 /**
  * Default immutable implementation for the {@link MetadataKey}.
  *
@@ -63,5 +65,18 @@ public final class DefaultMetadataKey implements MetadataKey
     public Map<String, String> getProperties()
     {
         return Collections.unmodifiableMap(properties);
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof DefaultMetadataKey
+               && ((DefaultMetadataKey) obj).getId().equals(this.id);
     }
 }
