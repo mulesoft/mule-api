@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface OperationMetadataDescriptor
+public interface ComponentMetadataDescriptor
 {
 
     /**
@@ -37,5 +37,4 @@ public interface OperationMetadataDescriptor
      * @return the {@link TypeMetadataDescriptor} of the Operation's output
      */
     OutputMetadataDescriptor getOutputMetadata();
-
 }

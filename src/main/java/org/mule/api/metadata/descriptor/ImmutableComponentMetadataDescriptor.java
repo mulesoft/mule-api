@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Immutable concrete implementation of {@link OperationMetadataDescriptor}
+ * Immutable concrete implementation of {@link ComponentMetadataDescriptor}
  *
  * @since 1.0
  */
-public final class ImmutableOperationMetadataDescriptor implements OperationMetadataDescriptor
+public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor
 {
 
     private final String name;
@@ -22,7 +22,7 @@ public final class ImmutableOperationMetadataDescriptor implements OperationMeta
     private final OutputMetadataDescriptor outputParameter;
     private final TypeMetadataDescriptor content;
 
-    public ImmutableOperationMetadataDescriptor(String name, List<TypeMetadataDescriptor> parameters,
+    public ImmutableComponentMetadataDescriptor(String name, List<TypeMetadataDescriptor> parameters,
                                                 OutputMetadataDescriptor outputParameter,
                                                 TypeMetadataDescriptor content)
     {
@@ -64,5 +64,4 @@ public final class ImmutableOperationMetadataDescriptor implements OperationMeta
     {
         return this.outputParameter;
     }
-
 }
