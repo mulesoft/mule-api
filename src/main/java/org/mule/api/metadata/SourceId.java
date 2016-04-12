@@ -14,6 +14,7 @@ package org.mule.api.metadata;
 public class SourceId implements ComponentId
 {
 
+    private static final String SOURCE_ID = "-1";
     private final String flowName;
 
     public SourceId(String flowName)
@@ -36,7 +37,7 @@ public class SourceId implements ComponentId
     @Override
     public String getComponentPath()
     {
-        return "-1";
+        return SOURCE_ID;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class SourceId implements ComponentId
     {
         return "SourceId{" +
                "flowName='" + flowName + '\'' +
-               ", executablePath=-1" +
+               ", executablePath=" + SOURCE_ID +
                '}';
     }
 }
