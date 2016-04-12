@@ -6,7 +6,7 @@
  */
 package org.mule.api.metadata;
 
-import org.mule.api.metadata.descriptor.OperationMetadataDescriptor;
+import org.mule.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.api.metadata.resolving.MetadataContentResolver;
 import org.mule.api.metadata.resolving.MetadataKeysResolver;
 import org.mule.api.metadata.resolving.MetadataOutputResolver;
@@ -35,26 +35,26 @@ public interface MetadataManager
     MetadataResult<List<MetadataKey>> getMetadataKeys(ComponentId componentId);
 
     /**
-     * Resolves the {@link OperationMetadataDescriptor} for the {@link MetadataAware} Component
+     * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataAware} Component
      * identified by the {@link ComponentId} using only the static types of its parameters, attributes and output.
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
-     * @return An {@link OperationMetadataDescriptor} with the static Metadata representation
+     * @return An {@link ComponentMetadataDescriptor} with the static Metadata representation
      * of the Component.
      * Successful {@link MetadataResult} if the Metadata is successfully retrieved
      * Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
      * @throws MetadataResolvingException
      */
-    MetadataResult<OperationMetadataDescriptor> getMetadata(ComponentId componentId);
+    MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId);
 
     /**
-     * Resolves the {@link OperationMetadataDescriptor} for the {@link MetadataAware} Component
+     * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataAware} Component
      * identified by the {@link ComponentId} using both static and dynamic resolving of
      * the parameters, attributes and output types.
      * <p>
      * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated
      * that can be used to resolve the dynamic {@link MetadataType} for the Content or Output,
-     * then the {@link OperationMetadataDescriptor} will contain those dynamic types instead
+     * then the {@link ComponentMetadataDescriptor} will contain those dynamic types instead
      * of the static types declaration.
      * <p>
      * When neither Content nor Output have dynamic types, then invoking this method is the
@@ -67,7 +67,7 @@ public interface MetadataManager
      *                    Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
      * @throws MetadataResolvingException
      */
-    MetadataResult<OperationMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
+    MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
 
     /**
      * Removes the {@link MetadataCache} with the specified id.

@@ -6,8 +6,8 @@
  */
 package org.mule.api.metadata.descriptor.builder;
 
-import org.mule.api.metadata.descriptor.ImmutableOperationMetadataDescriptor;
-import org.mule.api.metadata.descriptor.OperationMetadataDescriptor;
+import org.mule.api.metadata.descriptor.ComponentMetadataDescriptor;
+import org.mule.api.metadata.descriptor.ImmutableComponentMetadataDescriptor;
 import org.mule.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.api.metadata.descriptor.TypeMetadataDescriptor;
 
@@ -17,11 +17,11 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Implementation of the builder design pattern to create instances of {@link OperationMetadataDescriptor}
+ * Implementation of the builder design pattern to create instances of {@link ComponentMetadataDescriptor}
  *
  * @since 1.0
  */
-public class OperationMetadataDescriptorBuilder
+public class ComponentMetadataDescriptorBuilder
 {
 
     private final String name;
@@ -30,16 +30,16 @@ public class OperationMetadataDescriptorBuilder
     private TypeMetadataDescriptor content;
 
     /**
-     * Creates a new instance of {@link OperationMetadataDescriptorBuilder} with the name of the operation to describe
+     * Creates a new instance of {@link ComponentMetadataDescriptorBuilder} with the name of the component to describe
      *
-     * @param name of the Operation to describe its metadata. This name can not be blank
+     * @param name of the Component to describe its metadata. This name can not be blank
      * @throws IllegalArgumentException if name is blank
      */
-    OperationMetadataDescriptorBuilder(String name)
+    ComponentMetadataDescriptorBuilder(String name)
     {
         if (StringUtils.isBlank(name))
         {
-            throw new IllegalArgumentException("Name parameter cannot be blank for an OperationMetadataDescriptor");
+            throw new IllegalArgumentException("Name parameter cannot be blank for an ComponentMetadataDescriptor");
         }
 
         this.name = name;
@@ -47,45 +47,45 @@ public class OperationMetadataDescriptorBuilder
 
     /**
      * @param parameters a {@link List} of {@link TypeMetadataDescriptor} that describe the metadata for each parameter
-     *                   of the operation described
+     *                   of the component described
      * @return the contributed descriptor builder
      */
-    public OperationMetadataDescriptorBuilder withParametersDescriptor(List<TypeMetadataDescriptor> parameters)
+    public ComponentMetadataDescriptorBuilder withParametersDescriptor(List<TypeMetadataDescriptor> parameters)
     {
         this.parameters = parameters;
         return this;
     }
 
     /**
-     * @param output the {@link OutputMetadataDescriptor} that describes the output of the operation
+     * @param output the {@link OutputMetadataDescriptor} that describes the output of the component
      * @return the contributed descriptor builder contributed with the {@link OutputMetadataDescriptor}
      */
-    public OperationMetadataDescriptorBuilder withOutputDescriptor(OutputMetadataDescriptor output)
+    public ComponentMetadataDescriptorBuilder withOutputDescriptor(OutputMetadataDescriptor output)
     {
         this.output = output;
         return this;
     }
 
     /**
-     * @param content the {@link TypeMetadataDescriptor} that describes the metadata for the content of the operation described
+     * @param content the {@link TypeMetadataDescriptor} that describes the metadata for the content of the component described
      * @return the contributed descriptor builder contributed with the {@link TypeMetadataDescriptor} for content
      */
-    public OperationMetadataDescriptorBuilder withContentDescriptor(TypeMetadataDescriptor content)
+    public ComponentMetadataDescriptorBuilder withContentDescriptor(TypeMetadataDescriptor content)
     {
         this.content = content;
         return this;
     }
 
     /**
-     * @return a {@link OperationMetadataDescriptor} instance with the metadata description for the content, output, and
-     * type of each of the parameters of the Operation
+     * @return a {@link ComponentMetadataDescriptor} instance with the metadata description for the content, output, and
+     * type of each of the parameters of the Component
      * @throws IllegalArgumentException if the {@link OutputMetadataDescriptor} was not set during building
      */
-    public OperationMetadataDescriptor build()
+    public ComponentMetadataDescriptor build()
     {
         if (output == null)
         {
-            throw new IllegalArgumentException("OutputMetadataDescriptor cannot be null in an OperationMetadataDescriptor");
+            throw new IllegalArgumentException("OutputMetadataDescriptor cannot be null in an ComponentMetadataDescriptor");
         }
 
         if (parameters == null)
@@ -93,7 +93,6 @@ public class OperationMetadataDescriptorBuilder
             parameters = Collections.unmodifiableList(Collections.emptyList());
         }
 
-        return new ImmutableOperationMetadataDescriptor(name, parameters, output, content);
+        return new ImmutableComponentMetadataDescriptor(name, parameters, output, content);
     }
-
 }
