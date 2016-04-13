@@ -19,7 +19,7 @@ import java.util.Map;
 public final class MetadataKeyBuilder
 {
 
-    private final Map<String, String> properties = new HashMap<>();
+    private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties = new HashMap<>();
     private final String id;
     private String displayName;
 
@@ -53,15 +53,20 @@ public final class MetadataKeyBuilder
     }
 
     /**
-     * Add a custom property to the {@link MetadataKey} that is being built
+     * Add a custom {@link MetadataProperty} to the {@link MetadataKey} that is being built
      *
-     * @param propertyId    ID of the new property to be added into the {@link MetadataKey}
-     * @param propertyValue Value of the new property to be added into the {@link MetadataKey}
+     * @param property The new {@link MetadataProperty} to be added into the {@link MetadataKey}
      * @return the builder with the new
      */
-    public MetadataKeyBuilder withProperty(String propertyId, String propertyValue)
+    public MetadataKeyBuilder withProperty(MetadataProperty property)
     {
-        properties.put(propertyId, propertyValue);
+        if (properties.get(property.getClass()) != null)
+        {
+            throw new IllegalArgumentException(String.format("Cannot add a %s type metadata property, there is already one of that type defined",
+                                                             property.getClass()));
+        }
+
+        properties.put(property.getClass(), property);
         return this;
     }
 
