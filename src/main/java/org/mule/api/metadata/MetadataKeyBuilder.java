@@ -8,8 +8,8 @@ package org.mule.api.metadata;
 
 import org.mule.metadata.utils.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * An implementation of the builder design pattern to create a new {@link MetadataKey} instance.
@@ -19,7 +19,7 @@ import java.util.Map;
 public final class MetadataKeyBuilder
 {
 
-    private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties = new HashMap<>();
+    private final Set<MetadataProperty> properties = new HashSet<>();
     private final String id;
     private String displayName;
 
@@ -60,13 +60,12 @@ public final class MetadataKeyBuilder
      */
     public MetadataKeyBuilder withProperty(MetadataProperty property)
     {
-        if (properties.get(property.getClass()) != null)
+        if (properties.stream().anyMatch(p -> p.getClass().equals(property.getClass())))
         {
-            throw new IllegalArgumentException(String.format("Cannot add a %s type metadata property, there is already one of that type defined",
-                                                             property.getClass()));
+            throw new IllegalArgumentException(String.format("The key %s already contains a metadata property of type %s", id, property.getClass().getName()));
         }
 
-        properties.put(property.getClass(), property);
+        properties.add(property);
         return this;
     }
 

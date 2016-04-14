@@ -80,5 +80,4 @@ public class MetadataKeyBuilderTestCase
             return "Invalid";
         }
     }
-
 }

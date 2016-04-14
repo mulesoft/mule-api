@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -26,11 +27,11 @@ public final class DefaultMetadataKey implements MetadataKey
     private final String displayName;
     private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
 
-    public DefaultMetadataKey(String id, String displayName, Map<Class<? extends MetadataProperty>, MetadataProperty>  properties)
+    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty>  properties)
     {
         this.id = id;
-        this.properties = properties;
         this.displayName = displayName;
+        this.properties = properties.stream().collect(Collectors.toMap(MetadataProperty::getClass, p -> p));
     }
 
     /**
