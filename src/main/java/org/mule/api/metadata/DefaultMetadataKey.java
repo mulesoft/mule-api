@@ -6,12 +6,14 @@
  */
 package org.mule.api.metadata;
 
+import static java.util.Collections.unmodifiableMap;
+import static java.util.stream.Collectors.toMap;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -31,7 +33,7 @@ public final class DefaultMetadataKey implements MetadataKey
     {
         this.id = id;
         this.displayName = displayName;
-        this.properties = properties.stream().collect(Collectors.toMap(MetadataProperty::getClass, p -> p));
+        this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
     }
 
     /**
