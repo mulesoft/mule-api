@@ -8,16 +8,13 @@ package org.mule.api.metadata;
 
 import org.mule.metadata.api.model.MetadataType;
 
-import java.util.Map;
-import java.util.Optional;
-
 /**
  * A key, that with the given ID, represents a {@link MetadataType}.
  * This key can be contributed with a display name and user defined properties.
  *
  * @since 1.0
  */
-public interface MetadataKey
+public interface MetadataKey extends MetadataEnrichableModel
 {
 
     /**
@@ -29,15 +26,4 @@ public interface MetadataKey
      * @return human readable name to use when displaying the key
      */
     String getDisplayName();
-
-    /**
-     * @param propertyId Id of the property to retrieve
-     * @return the desired property, if not exist, an {@link Optional#empty()} will be returned.
-     */
-    Optional<String> getProperty(String propertyId);
-
-    /**
-     * @return the entire set of properties of the current {@link MetadataKey}
-     */
-    Map<String, String> getProperties();
 }

@@ -6,9 +6,14 @@
  */
 package org.mule.api.metadata;
 
+import static java.util.Collections.unmodifiableMap;
+import static java.util.stream.Collectors.toMap;
+
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
@@ -22,13 +27,13 @@ public final class DefaultMetadataKey implements MetadataKey
 
     private final String id;
     private final String displayName;
-    private final Map<String, String> properties;
+    private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
 
-    public DefaultMetadataKey(String id, String displayName, Map<String, String> properties)
+    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty>  properties)
     {
         this.id = id;
-        this.properties = properties;
         this.displayName = displayName;
+        this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
     }
 
     /**
@@ -53,18 +58,18 @@ public final class DefaultMetadataKey implements MetadataKey
      * {@inheritDoc}
      */
     @Override
-    public Optional<String> getProperty(String propertyId)
+    public <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType)
     {
-        return Optional.ofNullable(properties.get(propertyId));
+        return Optional.ofNullable((T) properties.get(propertyType));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Map<String, String> getProperties()
+    public Set<MetadataProperty> getProperties()
     {
-        return Collections.unmodifiableMap(properties);
+        return Collections.unmodifiableSet(new HashSet<>(properties.values()));
     }
 
     @Override
