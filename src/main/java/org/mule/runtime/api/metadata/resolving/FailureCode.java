@@ -1,0 +1,40 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+package org.mule.runtime.api.metadata.resolving;
+
+/**
+ * Standard error codes to describe common errors that may occur during
+ * Metadata fetching operations
+ *
+ * @since 1.0
+ */
+public final class FailureCode
+{
+
+    public static final FailureCode NO_DYNAMIC_TYPE_AVAILABLE = new FailureCode("NO_DYNAMIC_TYPE_AVAILABLE");
+    public static final FailureCode NO_DYNAMIC_KEY_AVAILABLE = new FailureCode("NO_DYNAMIC_KEY_AVAILABLE");
+    public static final FailureCode INVALID_CONFIGURATION = new FailureCode("INVALID_CONFIGURATION");
+    public static final FailureCode RESOURCE_UNAVAILABLE = new FailureCode("RESOURCE_UNAVAILABLE");
+    public static final FailureCode INVALID_METADATA_KEY = new FailureCode("INVALID_METADATA_KEY");
+    public static final FailureCode INVALID_CREDENTIALS = new FailureCode("INVALID_CREDENTIALS");
+    public static final FailureCode CONNECTION_FAILURE = new FailureCode("CONNECTION_FAILURE");
+    public static final FailureCode NOT_AUTHORIZED = new FailureCode("NOT_AUTHORIZED");
+    public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
+    public static final FailureCode NONE = new FailureCode("NO_ERROR");
+
+    private String name;
+
+    private FailureCode(String name)
+    {
+        this.name = name;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+}
