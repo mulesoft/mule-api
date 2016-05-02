@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
+import static org.mule.runtime.api.metadata.MetadataKeyBuilder.newKey;
 
 import java.util.Optional;
 
@@ -21,13 +22,14 @@ public class MetadataKeyBuilderTestCase
 
     private static final String ID = "id";
     private static final String DESCRIPTION = "description";
+    private static final String CHILD = "Child";
 
     @Test
     public void createMetadataKey()
     {
         TestMetadataProperty testMetadataProperty = new TestMetadataProperty();
 
-        final MetadataKey key = MetadataKeyBuilder.newKey(ID)
+        final MetadataKey key = newKey(ID)
                 .withDisplayName(DESCRIPTION)
                 .withProperty(testMetadataProperty)
                 .build();
@@ -39,13 +41,12 @@ public class MetadataKeyBuilderTestCase
         assertThat(key.getMetadataProperty(InvalidMetadataProperty.class), is(Optional.empty()));
         assertThat(key.getProperties(), hasSize(1));
         assertThat(key.getProperties(), contains(testMetadataProperty));
-
     }
 
     @Test
     public void createMetadataKeyWithDefaults()
     {
-        MetadataKey key = MetadataKeyBuilder.newKey(ID).build();
+        MetadataKey key = newKey(ID).build();
 
         assertThat(key.getId(), is(ID));
         assertThat(key.getDisplayName(), is(ID));
@@ -55,13 +56,29 @@ public class MetadataKeyBuilderTestCase
     @Test(expected = IllegalArgumentException.class)
     public void addMetadataPropertiesOfTheSameType()
     {
-        MetadataKeyBuilder.newKey(ID)
+        newKey(ID)
                 .withDisplayName(DESCRIPTION)
                 .withProperty(new TestMetadataProperty())
                 .withProperty(new TestMetadataProperty())
                 .build();
     }
 
+    @Test
+    public void createMultilevelMetadataKey()
+    {
+        MetadataKey key = newKey(ID)
+                .withDisplayName(DESCRIPTION)
+                .withProperty(new TestMetadataProperty())
+                    .withChild(newKey(CHILD).withDisplayName(CHILD))
+                    .withChild(newKey(CHILD + "2"))
+                .build();
+
+        assertThat(key.getId(), is(ID));
+        assertThat(key.getDisplayName(), is(DESCRIPTION));
+        assertThat(key.getProperties(), hasSize(1));
+        assertThat(key.getChilds(), hasSize(2));
+        assertThat(key.getChilds().stream().findAny().get().getId(), is(CHILD));
+    }
 
     private class TestMetadataProperty implements MetadataProperty
     {

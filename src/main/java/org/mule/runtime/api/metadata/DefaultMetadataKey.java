@@ -7,9 +7,10 @@
 package org.mule.runtime.api.metadata;
 
 import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
@@ -27,12 +28,14 @@ public final class DefaultMetadataKey implements MetadataKey
 
     private final String id;
     private final String displayName;
+    private final Set<MetadataKey> childs;
     private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
 
-    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty>  properties)
+    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs)
     {
         this.id = id;
         this.displayName = displayName;
+        this.childs = childs;
         this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
     }
 
@@ -58,9 +61,18 @@ public final class DefaultMetadataKey implements MetadataKey
      * {@inheritDoc}
      */
     @Override
+    public Set<MetadataKey> getChilds()
+    {
+        return unmodifiableSet(childs);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType)
     {
-        return Optional.ofNullable((T) properties.get(propertyType));
+        return ofNullable((T) properties.get(propertyType));
     }
 
     /**
@@ -69,7 +81,7 @@ public final class DefaultMetadataKey implements MetadataKey
     @Override
     public Set<MetadataProperty> getProperties()
     {
-        return Collections.unmodifiableSet(new HashSet<>(properties.values()));
+        return unmodifiableSet(new HashSet<>(properties.values()));
     }
 
     @Override
@@ -81,7 +93,15 @@ public final class DefaultMetadataKey implements MetadataKey
     @Override
     public boolean equals(Object obj)
     {
-        return obj instanceof DefaultMetadataKey
-               && ((DefaultMetadataKey) obj).getId().equals(this.id);
+        if (obj instanceof DefaultMetadataKey)
+        {
+            DefaultMetadataKey key = (DefaultMetadataKey) obj;
+            return key.getId().equals(this.id)
+                    && key.getChilds().size() == this.getChilds().size()
+                    && key.getChilds()
+                           .stream()
+                           .allMatch(comparedChild -> this.getChilds().stream().anyMatch(thisChild -> thisChild.equals(comparedChild)));
+        }
+        return false;
     }
 }

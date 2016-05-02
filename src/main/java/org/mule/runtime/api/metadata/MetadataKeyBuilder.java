@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.util.stream.Collectors.toSet;
 import org.mule.metadata.utils.StringUtils;
 
 import java.util.HashSet;
@@ -22,6 +23,7 @@ public final class MetadataKeyBuilder
     private final Set<MetadataProperty> properties = new HashSet<>();
     private final String id;
     private String displayName;
+    private Set<MetadataKeyBuilder> childs = new HashSet<>();
 
     private MetadataKeyBuilder(String id)
     {
@@ -53,10 +55,10 @@ public final class MetadataKeyBuilder
     }
 
     /**
-     * Add a custom {@link MetadataProperty} to the {@link MetadataKey} that is being built
+     * Adds a custom {@link MetadataProperty} to the {@link MetadataKey} that is being built
      *
      * @param property The new {@link MetadataProperty} to be added into the {@link MetadataKey}
-     * @return the builder with the new
+     * @return the builder with the new property
      */
     public MetadataKeyBuilder withProperty(MetadataProperty property)
     {
@@ -70,12 +72,25 @@ public final class MetadataKeyBuilder
     }
 
     /**
+     * Adds a new {@link MetadataKeyBuilder} child to the {@link MetadataKey} that is being built.
+     *
+     * @param metadataKeyBuilder the {@link MetadataKeyBuilder} that is used to create the instance of the new child.
+     * @return the builder with a new child.
+     */
+    public MetadataKeyBuilder withChild(MetadataKeyBuilder metadataKeyBuilder)
+    {
+        childs.add(metadataKeyBuilder);
+        return this;
+    }
+
+    /**
      * Builds a new instance of {@link MetadataKey}.
      *
      * @return an initialized {@link MetadataKey}
      */
     public MetadataKey build()
     {
-        return new DefaultMetadataKey(id, StringUtils.isNotEmpty(displayName) ? displayName : id, properties);
+        String name = StringUtils.isNotEmpty(displayName) ? displayName : id;
+        return new DefaultMetadataKey(id, name, properties, childs.stream().map(MetadataKeyBuilder::build).collect(toSet()));
     }
 }

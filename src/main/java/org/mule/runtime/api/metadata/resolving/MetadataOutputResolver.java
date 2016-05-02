@@ -6,32 +6,32 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.MetadataContext;
-import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
-import org.mule.metadata.api.model.MetadataType;
 
 /**
  * Handles the dynamic {@link MetadataType} resolving for the output of an associated component.
  *
+ * @param <K> the generic type of the objects to be used as MetadataKeyId representing a type structure
  * @since 1.0
  */
-public interface MetadataOutputResolver
+public interface MetadataOutputResolver<K>
 {
 
     /**
-     * Given a {@link MetadataKey} of a type, resolves their {@link MetadataType}, which
+     * Given an instance of type {@link K}, resolves their {@link MetadataType}, which
      * represents the type structure.
      * This {@link MetadataType} will be considered as the output or result of the Operation
      *
      * @param context MetaDataContext of the MetaData resolution
-     * @param key     {@link MetadataKey} of the type which's structure has to be resolved
+     * @param key     {@link K} representing the type which's structure has to be resolved
      * @return {@link MetadataType} from the given {@param key}
      * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
      *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
      * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
      */
-    MetadataType getOutputMetadata(MetadataContext context, MetadataKey key) throws MetadataResolvingException, ConnectionException;
+    MetadataType getOutputMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 
 }

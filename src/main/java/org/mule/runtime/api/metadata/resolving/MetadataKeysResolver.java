@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Handles the dynamic resolution of the available {@link MetadataKey} that can be used to populate the
- * MetadataKeyParam of an associated Component
+ * MetadataKeyId of an associated Component
  *
  * @since 1.0
  */
