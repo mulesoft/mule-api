@@ -21,13 +21,13 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T>
 {
 
     private final T payload;
-    private final boolean isSucess;
+    private final boolean isSuccess;
     private final MetadataFailure failure;
 
     ImmutableMetadataResult(T payload)
     {
         this.payload = payload;
-        this.isSucess = true;
+        this.isSuccess = true;
         this.failure = null;
     }
 
@@ -44,14 +44,14 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T>
     ImmutableMetadataResult(T payload, String message, Exception e)
     {
         this.payload = payload;
-        this.isSucess = false;
+        this.isSuccess = false;
         this.failure = new MetadataFailure(message, ExceptionUtils.getStackTrace(e), getFailureCode(e));
     }
 
     ImmutableMetadataResult(T payload, MetadataFailure failure)
     {
         this.payload = payload;
-        this.isSucess = false;
+        this.isSuccess = false;
         this.failure = failure;
     }
 
@@ -70,7 +70,7 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T>
     @Override
     public boolean isSuccess()
     {
-        return isSucess;
+        return isSuccess;
     }
 
     /**
