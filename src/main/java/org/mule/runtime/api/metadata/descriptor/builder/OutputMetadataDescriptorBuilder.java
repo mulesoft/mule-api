@@ -10,7 +10,7 @@ import org.mule.runtime.api.metadata.MetadataAware;
 import org.mule.runtime.api.metadata.descriptor.ImmutableOutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
-import org.mule.runtime.api.temporary.MuleMessage;
+import org.mule.runtime.api.message.MuleMessage;
 import org.mule.metadata.api.model.MetadataType;
 
 /**

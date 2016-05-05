@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
-import org.mule.runtime.api.temporary.MuleMessage;
+import org.mule.runtime.api.message.MuleMessage;
 
 /**
  * Represents the view of all the Metadata associated to an Component's
