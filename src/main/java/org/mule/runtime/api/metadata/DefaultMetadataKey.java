@@ -10,13 +10,13 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Default immutable implementation for the {@link MetadataKey}.
@@ -87,21 +87,12 @@ public final class DefaultMetadataKey implements MetadataKey
     @Override
     public int hashCode()
     {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object obj)
     {
-        if (obj instanceof DefaultMetadataKey)
-        {
-            DefaultMetadataKey key = (DefaultMetadataKey) obj;
-            return key.getId().equals(this.id)
-                    && key.getChilds().size() == this.getChilds().size()
-                    && key.getChilds()
-                           .stream()
-                           .allMatch(comparedChild -> this.getChilds().stream().anyMatch(thisChild -> thisChild.equals(comparedChild)));
-        }
-        return false;
+        return reflectionEquals(this, obj);
     }
 }

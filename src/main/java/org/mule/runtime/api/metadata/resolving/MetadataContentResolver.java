@@ -21,13 +21,13 @@ public interface MetadataContentResolver<K>
 {
 
     /**
-     * Given an instance of type {@link K}, resolves their {@link MetadataType} which
+     * Given an instance of type {@code K}, resolves their {@link MetadataType} which
      * represents the type structure.
      * This {@link MetadataType} will be considered as the main input of an Operation
      * for their parameter marked as Content.
      *
      * @param context MetaDataContext of the MetaData resolution
-     * @param key     {@link K} representing the type which's structure has to be resolved
+     * @param key     {@code K} representing the type which's structure has to be resolved
      * @return the {@link MetadataType} of the Content parameter
      * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
      *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons

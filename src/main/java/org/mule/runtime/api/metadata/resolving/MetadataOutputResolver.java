@@ -21,12 +21,12 @@ public interface MetadataOutputResolver<K>
 {
 
     /**
-     * Given an instance of type {@link K}, resolves their {@link MetadataType}, which
+     * Given an instance of type {@code K}, resolves their {@link MetadataType}, which
      * represents the type structure.
      * This {@link MetadataType} will be considered as the output or result of the Operation
      *
      * @param context MetaDataContext of the MetaData resolution
-     * @param key     {@link K} representing the type which's structure has to be resolved
+     * @param key     {@code K} representing the type which's structure has to be resolved
      * @return {@link MetadataType} from the given {@param key}
      * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
      *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
