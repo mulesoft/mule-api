@@ -25,7 +25,7 @@ public interface MetadataManager
 {
 
     /**
-     * Returns the list of types that can be described, by the {@link MetadataKeysResolver}
+     * Returns the list of types that can be described by the {@link MetadataKeysResolver}
      * associated to the {@link MetadataAware} Component identified by the {@link ComponentId}.
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
@@ -43,7 +43,6 @@ public interface MetadataManager
      * of the Component.
      * Successful {@link MetadataResult} if the Metadata is successfully retrieved
      * Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
-     * @throws MetadataResolvingException
      */
     MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId);
 
@@ -62,10 +61,9 @@ public interface MetadataManager
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
      * @param key         {@link MetadataKey} of the type which's structure has to be resolved,
-     *                    used both for input and ouput types
+     *                    used both for input and output types
      *                    Successful {@link MetadataResult} if the Metadata is successfully retrieved
      *                    Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
-     * @throws MetadataResolvingException
      */
     MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
 

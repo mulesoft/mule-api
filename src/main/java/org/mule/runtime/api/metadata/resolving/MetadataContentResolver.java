@@ -6,33 +6,33 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.MetadataContext;
-import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
-import org.mule.metadata.api.model.MetadataType;
 
 /**
  * Handles the dynamic {@link MetadataType} resolving for the Content parameter of an associated component.
  *
+ * @param <K> the generic type of the objects to be used as MetadataKeyId representing a type structure
  * @since 1.0
  */
-public interface MetadataContentResolver
+public interface MetadataContentResolver<K>
 {
 
     /**
-     * Given a {@link MetadataKey} of a type, resolves their {@link MetadataType} which
+     * Given an instance of type {@code K}, resolves their {@link MetadataType} which
      * represents the type structure.
      * This {@link MetadataType} will be considered as the main input of an Operation
      * for their parameter marked as Content.
      *
      * @param context MetaDataContext of the MetaData resolution
-     * @param key     {@link MetadataKey} of the type which's structure has to be resolved
+     * @param key     {@code K} representing the type which's structure has to be resolved
      * @return the {@link MetadataType} of the Content parameter
      * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
      *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
      * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
      */
-    MetadataType getContentMetadata(MetadataContext context, MetadataKey key) throws MetadataResolvingException, ConnectionException;
+    MetadataType getContentMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 
 }
