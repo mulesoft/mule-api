@@ -9,23 +9,31 @@ package org.mule.runtime.api.execution;
 /**
  * Handles the result of asynchronous processing.
  *
+ * @param <Response>                         The type of the processing response value
+ * @param <ProcessingException>              The exception type that the processing is expected to throw
+ * @param <HandledCompletionExceptionResult> The type that the {@link ExceptionCallback} produces when it handles exceptions
  * @since 1.0
  */
-public interface CompletionHandler<R, E extends Throwable>
+public interface CompletionHandler<Response, ProcessingException extends Throwable, HandledCompletionExceptionResult>
 {
 
     /**
-     * Invoked on sucessful completion of asynchronous processing
+     * Invoked on successful completion of asynchronous processing.
+     * <p>
+     * Exceptions found while processing the {@code result} are to be notified through
+     * the {@code exceptionCallback}, which might (depending on {@code HandledCompletionExceptionResult})
+     * produce a new value as the result of handling such error
      *
-     * @param result the result of processing
+     * @param result            the result of processing
+     * @param exceptionCallback handles errors processing the {@code result}
      */
-    void onCompletion(R result);
+    void onCompletion(Response result, ExceptionCallback<HandledCompletionExceptionResult, Exception> exceptionCallback);
 
     /**
      * Invoked when a failure occurs during asynchronous processing
      *
      * @param exception the exception thrown during processing
      */
-    void onFailure(E exception);
+    void onFailure(ProcessingException exception);
 
 }
