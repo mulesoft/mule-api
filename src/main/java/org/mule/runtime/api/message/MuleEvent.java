@@ -59,4 +59,13 @@ public interface MuleEvent extends Serializable
      * @param key the name or key of the variable. This must be non-null.
      */
     void removeFlowVariable(String key);
+
+    /**
+     * Returns the message payload for this event
+     *
+     * @param <Payload>    the generic type of the {@link MuleMessage#getPayload()} value
+     * @param <Attributes> the generic type of the {@link MuleMessage#getAttributes()} value
+     * @return the event's {@link MuleMessage}
+     */
+    <Payload, Attributes extends Serializable> MuleMessage<Payload, Attributes> getMessage();
 }
