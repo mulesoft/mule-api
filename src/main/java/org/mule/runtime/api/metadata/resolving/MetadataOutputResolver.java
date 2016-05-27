@@ -6,8 +6,8 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import static org.mule.metadata.api.model.MetadataFormat.JAVA;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
-import org.mule.metadata.api.model.MetadataFormat;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.message.MuleMessage;
@@ -51,7 +51,7 @@ public interface MetadataOutputResolver<K>
      */
     default MetadataType getAttributesMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException
     {
-        return BaseTypeBuilder.create(MetadataFormat.JAVA).nullType().build();
+        return BaseTypeBuilder.create(JAVA).nullType().build();
     }
 
 }
