@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import static org.mule.metadata.api.model.MetadataFormat.JAVA;
+import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
+import org.mule.runtime.api.message.MuleMessage;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
@@ -33,5 +36,22 @@ public interface MetadataOutputResolver<K>
      * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
      */
     MetadataType getOutputMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
+
+    /**
+     * Given an instance of type {@code K}, resolves their {@link MetadataType}, which
+     * represents the type structure.
+     * This {@link MetadataType} will be considered as the resulting {@link MuleMessage} attributes type.
+     *
+     * @param context MetaDataContext of the MetaData resolution
+     * @param key     {@code K} representing the type which's structure has to be resolved
+     * @return {@link MetadataType} associated to the given {@param key}
+     * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
+     *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
+     * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
+     */
+    default MetadataType getAttributesMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException
+    {
+        return BaseTypeBuilder.create(JAVA).nullType().build();
+    }
 
 }
