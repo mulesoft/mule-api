@@ -51,7 +51,7 @@ public interface MetadataOutputResolver<K>
      */
     default MetadataType getAttributesMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException
     {
-        return BaseTypeBuilder.create(new MetadataFormat("Pojo", "java", new String[] {"application/java"})).nullType().build();
+        return BaseTypeBuilder.create(MetadataFormat.JAVA).nullType().build();
     }
 
 }
