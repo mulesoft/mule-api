@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata.resolving;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Container for the Metadata fetch operations provided by {@link MetadataKeysResolver}, {@link MetadataContentResolver}
@@ -104,9 +105,9 @@ public interface MetadataResult<T>
      * Provides a way to enrich a result payload that is composed by several other results
      *
      * @param payload        object returned by the metadata operation
-     * @param resultsToMerge results whose payloads compose this results paylo
-     * @return a failure {@link MetadataResult} instance if any of the resultsToMerge was a failing
-     * result. A sucessful {@link MetadataResult} otherwise
+     * @param resultsToMerge results whose payloads compose this results payload
+     * @return a failure {@link MetadataResult} instance if any of the resultsToMerge was a failing result.
+     * A successful {@link MetadataResult} otherwise
      */
     static <T> MetadataResult<T> mergeResults(T payload, MetadataResult<?>... resultsToMerge)
     {
@@ -120,13 +121,21 @@ public interface MetadataResult<T>
         StringBuilder messageBuilder = new StringBuilder();
         StringBuilder reasonBuilder = new StringBuilder();
 
-        results.stream().filter(r -> !r.isSuccess())
-                .forEach(r -> {
+        final List<MetadataResult<?>> failureResults = results.stream().filter(r -> !r.isSuccess()).collect(Collectors.toList());
+
+        failureResults.forEach(r -> {
                     messageBuilder.append("Message: ").append(r.getFailure().get().getMessage()).append("\n");
                     reasonBuilder.append("Reason: ").append(r.getFailure().get().getReason()).append("\n");
                 });
 
-        return failure(payload, messageBuilder.toString(), FailureCode.UNKNOWN, reasonBuilder.toString());
+        FailureCode failureCode = FailureCode.UNKNOWN;
+        FailureCode firstFailureCode = failureResults.get(0).getFailure().get().getFailureCode();
+        if (failureResults.stream().allMatch(result -> result.getFailure().get().getFailureCode().equals(firstFailureCode)))
+        {
+            failureCode = firstFailureCode;
+        }
+
+        return failure(payload, messageBuilder.toString(), failureCode, reasonBuilder.toString());
     }
 
     /**

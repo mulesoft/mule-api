@@ -37,4 +37,16 @@ public final class FailureCode
     {
         return name;
     }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        return obj instanceof FailureCode && this.getName().equals(((FailureCode) obj).getName());
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Failure Code: " + getName();
+    }
 }
