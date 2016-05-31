@@ -14,6 +14,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.metadata.api.model.MetadataType;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides access to the Metadata of any {@link MetadataAware} Component in the application,
@@ -60,12 +61,12 @@ public interface MetadataManager
      * same as invoking {@link this#getMetadata}
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
-     * @param key         {@link MetadataKey} of the type which's structure has to be resolved,
-     *                    used both for input and output types
-     *                    Successful {@link MetadataResult} if the Metadata is successfully retrieved
-     *                    Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+     * @param key         {@link Map} of the type which's structure has to be resolved, used both for input and output types
+     * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
+     * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
+     * element fails for any reason
      */
-    MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
+    MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, Map<String, String> key);
 
     /**
      * Removes the {@link MetadataCache} with the specified id.
