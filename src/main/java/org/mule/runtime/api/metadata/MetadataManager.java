@@ -6,14 +6,15 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.MetadataContentResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
-import org.mule.metadata.api.model.MetadataType;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Provides access to the Metadata of any {@link MetadataAware} Component in the application,
@@ -32,7 +33,7 @@ public interface MetadataManager
      * @return Successful {@link MetadataResult} if the keys are successfully resolved
      * Failure {@link MetadataResult} if there is an error while resolving the keys
      */
-    MetadataResult<List<MetadataKey>> getMetadataKeys(ComponentId componentId);
+    MetadataResult<Set<MetadataKey>> getMetadataKeys(ComponentId componentId);
 
     /**
      * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataAware} Component
@@ -60,10 +61,10 @@ public interface MetadataManager
      * same as invoking {@link this#getMetadata}
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
-     * @param key         {@link MetadataKey} of the type which's structure has to be resolved,
-     *                    used both for input and output types
-     *                    Successful {@link MetadataResult} if the Metadata is successfully retrieved
-     *                    Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+     * @param key         {@link Map} of the type which's structure has to be resolved, used both for input and output types
+     * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
+     * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
+     * element fails for any reason
      */
     MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
 
@@ -73,5 +74,4 @@ public interface MetadataManager
      * @param id the id of the cache to be removed
      */
     void disposeCache(String id);
-
 }

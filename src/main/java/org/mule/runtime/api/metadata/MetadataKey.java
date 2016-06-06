@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * A key, that with the given ID, represents a {@link MetadataType}.
  * This key can be contributed with a display name and user defined properties.
- *
+ * <p>
  * Also this {@link MetadataKey} can be composed by other {@link MetadataKey MetadataKeys}
  * to form a composed key.
  *
@@ -37,4 +37,8 @@ public interface MetadataKey extends MetadataEnrichableModel
      */
     Set<MetadataKey> getChilds();
 
+    /**
+     * @return the name of the part which this {@link MetadataKey} is from
+     */
+    String getPartName();
 }
