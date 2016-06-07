@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -122,7 +124,7 @@ public interface MetadataResult<T>
         StringBuilder messageBuilder = new StringBuilder();
         StringBuilder reasonBuilder = new StringBuilder();
 
-        final List<MetadataResult<?>> failureResults = results.stream().filter(r -> !r.isSuccess()).collect(Collectors.toList());
+        final List<MetadataResult<?>> failureResults = results.stream().filter(r -> !r.isSuccess()).collect(toList());
 
         failureResults.forEach(r -> {
                     messageBuilder.append("Message: ").append(r.getFailure().get().getMessage()).append("\n");

@@ -61,7 +61,7 @@ public interface MetadataManager
      * same as invoking {@link this#getMetadata}
      *
      * @param componentId the id of the {@link MetadataAware} component to query for its available keys
-     * @param key         {@link Map} of the type which's structure has to be resolved, used both for input and output types
+     * @param key         {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
      * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
      * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
      * element fails for any reason
