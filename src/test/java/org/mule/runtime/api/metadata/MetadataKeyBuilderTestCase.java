@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
@@ -66,22 +67,26 @@ public class MetadataKeyBuilderTestCase
     @Test
     public void createMultilevelMetadataKey()
     {
+        final MetadataKeyBuilder childKey = newKey(CHILD).withDisplayName(CHILD);
+        final MetadataKeyBuilder childKey2 = newKey(CHILD + "2");
+
         MetadataKey key = newKey(ID)
                 .withDisplayName(DESCRIPTION)
                 .withProperty(new TestMetadataProperty())
-                    .withChild(newKey(CHILD).withDisplayName(CHILD))
-                    .withChild(newKey(CHILD + "2"))
+                .withChild(childKey)
+                .withChild(childKey2)
                 .build();
 
         assertThat(key.getId(), is(ID));
         assertThat(key.getDisplayName(), is(DESCRIPTION));
         assertThat(key.getProperties(), hasSize(1));
         assertThat(key.getChilds(), hasSize(2));
-        assertThat(key.getChilds().stream().findAny().get().getId(), is(CHILD));
+        assertThat(key.getChilds(), hasItems(childKey.build(), childKey2.build()));
     }
 
     private class TestMetadataProperty implements MetadataProperty
     {
+
         @Override
         public String getName()
         {
@@ -91,6 +96,7 @@ public class MetadataKeyBuilderTestCase
 
     private class InvalidMetadataProperty implements MetadataProperty
     {
+
         @Override
         public String getName()
         {

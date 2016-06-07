@@ -32,7 +32,7 @@ public final class DefaultMetadataKey implements MetadataKey
     private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
     private final Set<MetadataKey> childs;
 
-    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs, String partName)
+    protected DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs, String partName)
     {
         this.id = id;
         this.displayName = displayName;
