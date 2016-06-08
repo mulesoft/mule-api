@@ -17,15 +17,16 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public final class MetadataKeyBuilder
+public class MetadataKeyBuilder
 {
 
     private final Set<MetadataProperty> properties = new HashSet<>();
     private final String id;
     private String displayName;
     private Set<MetadataKeyBuilder> childs = new HashSet<>();
+    private String partName = "";
 
-    private MetadataKeyBuilder(String id)
+    protected MetadataKeyBuilder(String id)
     {
         this.id = id;
     }
@@ -83,6 +84,11 @@ public final class MetadataKeyBuilder
         return this;
     }
 
+    protected void setPartName(String partName)
+    {
+        this.partName = partName;
+    }
+
     /**
      * Builds a new instance of {@link MetadataKey}.
      *
@@ -91,6 +97,6 @@ public final class MetadataKeyBuilder
     public MetadataKey build()
     {
         String name = isNotEmpty(displayName) ? displayName : id;
-        return new DefaultMetadataKey(id, name, properties, childs.stream().map(MetadataKeyBuilder::build).collect(toSet()));
+        return new DefaultMetadataKey(id, name, properties, childs.stream().map(MetadataKeyBuilder::build).collect(toSet()), partName);
     }
 }

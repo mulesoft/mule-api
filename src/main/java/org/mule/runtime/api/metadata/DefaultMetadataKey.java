@@ -12,11 +12,15 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Default immutable implementation for the {@link MetadataKey}.
@@ -28,15 +32,17 @@ public final class DefaultMetadataKey implements MetadataKey
 
     private final String id;
     private final String displayName;
-    private final Set<MetadataKey> childs;
+    private final String partName;
     private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
+    private final Set<MetadataKey> childs;
 
-    public DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs)
+    protected DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs, String partName)
     {
         this.id = id;
         this.displayName = displayName;
         this.childs = childs;
         this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
+        this.partName = partName;
     }
 
     /**
@@ -70,6 +76,15 @@ public final class DefaultMetadataKey implements MetadataKey
      * {@inheritDoc}
      */
     @Override
+    public String getPartName()
+    {
+        return partName;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType)
     {
         return ofNullable((T) properties.get(propertyType));
@@ -94,5 +109,11 @@ public final class DefaultMetadataKey implements MetadataKey
     public boolean equals(Object obj)
     {
         return reflectionEquals(this, obj);
+    }
+
+    @Override
+    public String toString()
+    {
+        return reflectionToString(this);
     }
 }

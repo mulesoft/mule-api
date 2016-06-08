@@ -14,7 +14,8 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.message.MuleMessage;
 import org.mule.metadata.api.model.MetadataType;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This interface allows a Component that processes a {@link MuleMessage} to expose
@@ -34,7 +35,7 @@ public interface MetadataAware
      * Failure {@link MetadataResult} if there is an error while retrieving the keys
      * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
      */
-    MetadataResult<List<MetadataKey>> getMetadataKeys() throws MetadataResolvingException;
+    MetadataResult<Set<MetadataKey>> getMetadataKeys() throws MetadataResolvingException;
 
     /**
      * Resolves the {@link ComponentMetadataDescriptor} for the current component using
@@ -58,12 +59,12 @@ public interface MetadataAware
      * of the static type declaration.
      * <p>
      * When neither Content nor Output have Dynamic types, then invoking this method is the
-     * same as invoking {@link this#getMetadata}
+     * same as invoking {@link MetadataAware#getMetadata}
      *
-     * @param key {@link MetadataKey} of the type which's structure has to be resolved,
-     *            used both for input and output types
-     *            Successful {@link MetadataResult} if the Metadata is successfully retrieved
-     *            Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+     * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
+     * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
+     * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
+     * element fails for any reason
      * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
      */
     MetadataResult<ComponentMetadataDescriptor> getMetadata(MetadataKey key) throws MetadataResolvingException;

@@ -12,6 +12,7 @@ import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Handles the dynamic resolution of the available {@link MetadataKey} that can be used to populate the
@@ -32,6 +33,5 @@ public interface MetadataKeysResolver
      *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
      * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
      */
-    List<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
-
+    Set<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
 }
