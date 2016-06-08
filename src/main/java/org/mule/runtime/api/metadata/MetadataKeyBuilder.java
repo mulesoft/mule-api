@@ -10,6 +10,7 @@ import static java.util.stream.Collectors.toSet;
 import static org.mule.metadata.utils.StringUtils.isNotEmpty;
 
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public class MetadataKeyBuilder
     private final Set<MetadataProperty> properties = new HashSet<>();
     private final String id;
     private String displayName;
-    private Set<MetadataKeyBuilder> childs = new HashSet<>();
+    private Set<MetadataKeyBuilder> childs = new LinkedHashSet<>();
     private String partName = "";
 
     protected MetadataKeyBuilder(String id)
