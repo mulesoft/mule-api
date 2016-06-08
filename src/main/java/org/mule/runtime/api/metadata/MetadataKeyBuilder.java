@@ -84,7 +84,8 @@ public class MetadataKeyBuilder
         return this;
     }
 
-    protected void setPartName(String partName){
+    protected void setPartName(String partName)
+    {
         this.partName = partName;
     }
 

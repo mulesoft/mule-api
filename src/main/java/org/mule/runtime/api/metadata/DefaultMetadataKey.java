@@ -12,11 +12,15 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Default immutable implementation for the {@link MetadataKey}.
@@ -110,12 +114,6 @@ public final class DefaultMetadataKey implements MetadataKey
     @Override
     public String toString()
     {
-        return "DefaultMetadataKey{" +
-               "id='" + id + '\'' +
-               ", displayName='" + displayName + '\'' +
-               ", partName='" + partName + '\'' +
-               ", properties=" + properties +
-               ", childs=" + childs +
-               '}';
+        return reflectionToString(this);
     }
 }
