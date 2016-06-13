@@ -12,42 +12,64 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
 /**
- * A data type that simply wraps a Java type.  This type also allows a mime type to be associated
- * with the Java type.
+ * A data type that simply wraps a Java type.
+ * <p>
+ * This type also allows a mime type and encoding to be associated with the Java type.
  *
  * @since 1.0
  */
-public class SimpleDataType<T> implements DataType<T>, Cloneable
+public class SimpleDataType<T> implements DataType<T>
 {
+    private static final long serialVersionUID = -4590745924720880358L;
 
     private static final String CHARSET_PARAM = "charset";
 
-    protected final Class<?> type;
-    protected String mimeType = ANY_MIME_TYPE;
+    protected final Class<T> type;
+    protected String mimeType;
     protected String encoding;
 
-    public SimpleDataType(Class<?> type, String mimeType)
+    public SimpleDataType(Class<T> type, String mimeType, String encoding)
     {
+        checkTypeForNull(type);
+        this.type = type;
+        setMimeType(mimeType);
+        setEncoding(encoding);
+    }
+
+    public SimpleDataType(Class<T> type, String mimeType)
+    {
+        checkTypeForNull(type);
         this.type = type;
         setMimeType(mimeType);
     }
 
-    public SimpleDataType(Class type)
+    protected void checkTypeForNull(Class type)
     {
-        this.type = type;
+        // TODO MULE-9895 validate this in the builder.
+        if (type == null)
+        {
+            throw new IllegalArgumentException("'type' cannot be null.");
+        }
     }
 
-    public Class getType()
+    public SimpleDataType(Class<T> type)
+    {
+        this(type, null);
+    }
+
+    @Override
+    public Class<T> getType()
     {
         return type;
     }
 
+    @Override
     public String getMimeType()
     {
         return mimeType;
     }
 
-    public void setMimeType(String mimeType)
+    private void setMimeType(String mimeType)
     {
         if (mimeType == null)
         {
@@ -66,17 +88,18 @@ public class SimpleDataType<T> implements DataType<T>, Cloneable
             }
             catch (MimeTypeParseException e)
             {
-                throw new IllegalArgumentException("MimeType cannot be parsed :" + mimeType);
+                throw new IllegalArgumentException("MimeType cannot be parsed: " + mimeType);
             }
         }
     }
 
+    @Override
     public String getEncoding()
     {
         return encoding;
     }
 
-    public void setEncoding(String encoding)
+    private void setEncoding(String encoding)
     {
         if (encoding != null && encoding.trim().length() > 0)
         {
@@ -87,12 +110,9 @@ public class SimpleDataType<T> implements DataType<T>, Cloneable
         this.encoding = encoding;
     }
 
+    @Override
     public boolean isCompatibleWith(DataType dataType)
     {
-        if (dataType instanceof ImmutableDataType)
-        {
-            dataType = ((ImmutableDataType) dataType).getWrappedDataType();
-        }
         if (this == dataType)
         {
             return true;
@@ -225,18 +245,5 @@ public class SimpleDataType<T> implements DataType<T>, Cloneable
                ", mimeType='" + mimeType + '\'' +
                ", encoding='" + encoding + '\'' +
                '}';
-    }
-
-    public DataType cloneDataType()
-    {
-        try
-        {
-            return (DataType) clone();
-        }
-        catch (CloneNotSupportedException e)
-        {
-            // This cannot happen, because we implement Cloneable
-            throw new IllegalStateException(e);
-        }
     }
 }
