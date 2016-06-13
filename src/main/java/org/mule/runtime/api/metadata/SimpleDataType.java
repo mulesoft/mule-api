@@ -30,6 +30,7 @@ public class SimpleDataType<T> implements DataType<T>
 
     public SimpleDataType(Class type, String mimeType, String encoding)
     {
+        checkTypeForNull(type);
         this.type = type;
         setMimeType(mimeType);
         setEncoding(encoding);
@@ -37,8 +38,17 @@ public class SimpleDataType<T> implements DataType<T>
 
     public SimpleDataType(Class type, String mimeType)
     {
+        checkTypeForNull(type);
         this.type = type;
         setMimeType(mimeType);
+    }
+
+    protected void checkTypeForNull(Class type)
+    {
+        if (type == null)
+        {
+            throw new IllegalArgumentException("'type' cannot be null.");
+        }
     }
 
     public SimpleDataType(Class type)
