@@ -45,6 +45,7 @@ public class SimpleDataType<T> implements DataType<T>
 
     protected void checkTypeForNull(Class type)
     {
+        // TODO MULE-9895 validate this in the builder.
         if (type == null)
         {
             throw new IllegalArgumentException("'type' cannot be null.");
