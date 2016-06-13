@@ -28,7 +28,7 @@ public class SimpleDataType<T> implements DataType<T>
     protected String mimeType;
     protected String encoding;
 
-    public SimpleDataType(Class type, String mimeType, String encoding)
+    public SimpleDataType(Class<T> type, String mimeType, String encoding)
     {
         checkTypeForNull(type);
         this.type = type;
@@ -36,7 +36,7 @@ public class SimpleDataType<T> implements DataType<T>
         setEncoding(encoding);
     }
 
-    public SimpleDataType(Class type, String mimeType)
+    public SimpleDataType(Class<T> type, String mimeType)
     {
         checkTypeForNull(type);
         this.type = type;
@@ -52,7 +52,7 @@ public class SimpleDataType<T> implements DataType<T>
         }
     }
 
-    public SimpleDataType(Class type)
+    public SimpleDataType(Class<T> type)
     {
         this(type, null);
     }
