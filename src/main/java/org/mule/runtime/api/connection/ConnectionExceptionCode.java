@@ -31,6 +31,10 @@ public enum ConnectionExceptionCode
      */
     CREDENTIALS_EXPIRED,
     /**
+     * The client is disconnected.
+     */
+    DISCONNECTED,
+    /**
      * Something else went wrong.
      */
     UNKNOWN
