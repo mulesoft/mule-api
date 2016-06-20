@@ -11,7 +11,6 @@ import static java.util.stream.Collectors.toList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * Container for the Metadata fetch operations provided by {@link MetadataKeysResolver}, {@link MetadataContentResolver}
@@ -127,9 +126,9 @@ public interface MetadataResult<T>
         final List<MetadataResult<?>> failureResults = results.stream().filter(r -> !r.isSuccess()).collect(toList());
 
         failureResults.forEach(r -> {
-                    messageBuilder.append("Message: ").append(r.getFailure().get().getMessage()).append("\n");
-                    reasonBuilder.append("Reason: ").append(r.getFailure().get().getReason()).append("\n");
-                });
+            messageBuilder.append("Message: ").append(r.getFailure().get().getMessage()).append("\n");
+            reasonBuilder.append("Reason: ").append(r.getFailure().get().getReason()).append("\n");
+        });
 
         FailureCode failureCode = FailureCode.UNKNOWN;
         FailureCode firstFailureCode = failureResults.get(0).getFailure().get().getFailureCode();
