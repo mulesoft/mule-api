@@ -13,7 +13,6 @@ import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
