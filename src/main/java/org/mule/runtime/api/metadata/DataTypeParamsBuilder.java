@@ -6,9 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
-
-import javax.activation.MimeType;
 
 public interface DataTypeParamsBuilder<T>
 {
@@ -38,7 +37,6 @@ public interface DataTypeParamsBuilder<T>
      * 
      * @param mimeType the MIME type to set. If null, the builder is not changed.
      * @return this builder.
-     * @throws IllegalArgumentException if the given MIME type string is invalid.
      */
     DataTypeParamsBuilder<T> mimeType(MimeType mimeType);
 
@@ -50,6 +48,14 @@ public interface DataTypeParamsBuilder<T>
      * @throws IllegalCharsetNameException if the {@code encoding} is invalid.
      */
     DataTypeParamsBuilder<T> encoding(String encoding) throws IllegalCharsetNameException;
+
+    /**
+     * Sets the given encoding. See {@link DataType#getEncoding()}.
+     * 
+     * @param encoding the encoding to set. If null or empty, the builder is not changed.
+     * @return this builder.
+     */
+    DataTypeParamsBuilder<T> encoding(Charset encoding);
 
     /**
      * Builds a new {@link DataType} with the values set in this builder.

@@ -105,20 +105,11 @@ public interface DataType<T> extends Serializable
     Class<T> getType();
 
     /**
-     * TODO MULE-9958 return a {@link MimeType}
-     * <p>
      * The mime type of the the source object to transform.
      *
      * @return the mime type of the source object.
      */
-    String getMimeType();
-
-    /**
-     * TODO MULE-9958 remove this, this will be moved to {@link MimeType}
-     * <p>
-     * The encoding for the object to transform
-     */
-    String getEncoding();
+    MimeType getMimeType();
 
     /**
      * Used to determine if this data type is compatible with the data type passed in.  This checks to see if the mime types are

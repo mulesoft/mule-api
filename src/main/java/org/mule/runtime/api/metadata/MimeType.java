@@ -6,29 +6,106 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.nio.charset.Charset;
+import java.util.Objects;
+
 /**
  * Common mime types used in Mule
  *
  * @since 1.0
  */
-public interface MimeType
+public final class MimeType
 {
-    public static final String ANY = "*/*";
+    public static final MimeType ANY = new MimeType("*", "*");
 
-    public static final String JSON = "text/json";
-    public static final String APPLICATION_JSON = "application/json";
-    public static final String ATOM = "application/atom+xml";
-    public static final String RSS = "application/rss+xml";
-    public static final String APPLICATION_XML = "application/xml";
-    public static final String XML = "text/xml";
-    public static final String TEXT = "text/plain";
-    public static final String HTML = "text/html";
+    public static final MimeType JSON = new MimeType("text", "json");
+    public static final MimeType APPLICATION_JSON = new MimeType("application", "json");
+    public static final MimeType ATOM = new MimeType("application", "atom+xml");
+    public static final MimeType RSS = new MimeType("application", "rss+xml");
+    public static final MimeType APPLICATION_XML = new MimeType("application", "xml");
+    public static final MimeType XML = new MimeType("text", "xml");
+    public static final MimeType TEXT = new MimeType("text", "plain");
+    public static final MimeType HTML = new MimeType("text", "html");
 
-    public static final String BINARY = "application/octet-stream";
-    public static final String UNKNOWN = "content/unknown";
-    public static final String MULTIPART_MIXED = "multipart/mixed";
-    public static final String MULTIPART_RELATED = "multipart/related";
-    public static final String MULTIPART_X_MIXED_REPLACE = "multipart/x-mixed-replace";
+    public static final MimeType BINARY = new MimeType("application", "octet-stream");
+    public static final MimeType UNKNOWN = new MimeType("content", "unknown");
+    public static final MimeType MULTIPART_MIXED = new MimeType("multipart", "mixed");
+    public static final MimeType MULTIPART_RELATED = new MimeType("multipart", "related");
+    public static final MimeType MULTIPART_X_MIXED_REPLACE = new MimeType("multipart", "x-mixed-replace");
 
-    // TODO MULE-9958 add getType, getSubType and getCharset methods
+    private final String primaryType;
+    private final String subType;
+    private final Charset encoding;
+
+    public MimeType(String type, String subType, Charset encoding)
+    {
+        this.primaryType = type;
+        this.subType = subType;
+        this.encoding = encoding;
+    }
+
+    public MimeType(String type, String subType)
+    {
+        this.primaryType = type;
+        this.subType = subType;
+        this.encoding = null;
+    }
+
+    public String getPrimaryType()
+    {
+        return primaryType;
+    }
+
+    public String getSubType()
+    {
+        return subType;
+    }
+
+    /**
+     * The encoding for the object to transform
+     */
+    public Charset getEncoding()
+    {
+        return encoding;
+    }
+
+    public boolean matches(MimeType other)
+    {
+        return Objects.equals(primaryType, other.primaryType)
+               && Objects.equals(subType, other.subType);
+    }
+
+    @Override
+    public String toString()
+    {
+        return primaryType + "/" + subType + (encoding != null ? "; charset=" + encoding.name() : "");
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(primaryType, subType, encoding);
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (obj == this)
+        {
+            return true;
+        }
+        if (obj.getClass() != getClass())
+        {
+            return false;
+        }
+        MimeType other = (MimeType) obj;
+
+        return Objects.equals(primaryType, other.primaryType)
+               && Objects.equals(subType, other.subType)
+               && Objects.equals(encoding, other.encoding);
+    }
 }
