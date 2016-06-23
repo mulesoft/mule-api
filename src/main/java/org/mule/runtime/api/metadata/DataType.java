@@ -29,17 +29,6 @@ public interface DataType<T> extends Serializable
     /**
      * Provides a builder to create {@link DataType} objects.
      * 
-     * @param javaType the java type to set.
-     * @return a new {@link DataTypeBuilder} with the given {@code javaType} already set..
-     */
-    static <T> DataTypeOptionalParamsBuilder<T> builder(Class<T> javaType)
-    {
-        return DataTypeBuilderFactory.getInstance().<T> builder().type(javaType);
-    }
-
-    /**
-     * Provides a builder to create {@link DataType} objects.
-     * 
      * @return a new {@link DataTypeBuilder}.
      */
     static DataTypeBuilder builder()
@@ -48,37 +37,22 @@ public interface DataType<T> extends Serializable
     }
 
     /**
-     * Provides a builder to create {@link DataType} objects.
+     * Shortcut to create {@link DataType} objects.
      * 
-     * @param javaType the java type to set.
+     * @param type the java type to set.
      * @return a new {@link DataTypeBuilder} with the given {@code javaType} already set..
      */
-    static <T> DataType<T> forJavaType(Class<T> javaType)
+    static <T> DataType<T> forJavaType(Class<T> type)
     {
-        return builder(javaType).build();
+        return builder().type(type).build();
     }
 
-    /**
-     * Will create a {@link DataType} object from an object instance. This method will check if the
-     * object value is a {@link org.mule.runtime.core.api.MuleMessage} instance and will take the
-     * type from the message payload and check if a mime type is set on the message and used that
-     * when constructing the {@link DataType} object.
-     *
-     * @param value an object instance. This can be a {@link org.mule.runtime.core.api.MuleMessage},
-     *            a collection, a proxy instance or any other object
-     * @return a data type that represents the object type.
-     */
-    static <T> DataType<T> createFromObject(T value)
-    {
-        return DataTypeBuilderFactory.getInstance().<T> builder().from(value).build();
-    }
-
-    DataType<String> TEXT_STRING = builder(String.class).mimeType(MimeType.TEXT).build();
-    DataType<String> XML_STRING = builder(String.class).mimeType(MimeType.XML).build();
-    DataType<String> JSON_STRING = builder(String.class).mimeType(MimeType.APPLICATION_JSON).build();
-    DataType<String> HTML_STRING = builder(String.class).mimeType(MimeType.HTML).build();
-    DataType<String> ATOM_STRING = builder(String.class).mimeType(MimeType.ATOM).build();
-    DataType<String> RSS_STRING = builder(String.class).mimeType(MimeType.RSS).build();
+    DataType<String> TEXT_STRING = builder().type(String.class).mimeType(MimeType.TEXT).build();
+    DataType<String> XML_STRING = builder().type(String.class).mimeType(MimeType.XML).build();
+    DataType<String> JSON_STRING = builder().type(String.class).mimeType(MimeType.APPLICATION_JSON).build();
+    DataType<String> HTML_STRING = builder().type(String.class).mimeType(MimeType.HTML).build();
+    DataType<String> ATOM_STRING = builder().type(String.class).mimeType(MimeType.ATOM).build();
+    DataType<String> RSS_STRING = builder().type(String.class).mimeType(MimeType.RSS).build();
 
     //Common Java types
     DataType<String> STRING = forJavaType(String.class);
@@ -87,7 +61,7 @@ public interface DataType<T> extends Serializable
     DataType<Object> OBJECT = forJavaType(Object.class);
     DataType<byte[]> BYTE_ARRAY = forJavaType(byte[].class);
     DataType<InputStream> INPUT_STREAM = forJavaType(InputStream.class);
-    DataType<MuleMessage> MULE_MESSAGE = builder(MuleMessage.class).mimeType(MimeType.ANY).build();
+    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mimeType(MimeType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
             builder().collectionType(Collection.class).itemType(MuleMessage.class).mimeType(MimeType.ANY).build();
 

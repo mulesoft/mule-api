@@ -23,7 +23,7 @@ public abstract class DataTypeBuilderFactory
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataTypeBuilderFactory.class);
 
-    private static Supplier<DataTypeBuilderFactory> INSTANCE = () ->
+    static
     {
         try
         {
@@ -31,19 +31,20 @@ public abstract class DataTypeBuilderFactory
             LOGGER.info(format("Loaded DataTypeBuilderFactory impementation '%s' form classloader '%s'",
                     factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-            INSTANCE = () -> factory;
-            return factory;
+            INSTANCE = factory;
         }
         catch (Exception e)
         {
             LOGGER.error("Error loading DataTypeBuilderFactory implementation.", e);
             throw e;
         }
-    };
+    }
+    
+    private static DataTypeBuilderFactory INSTANCE;
 
     static DataTypeBuilderFactory getInstance()
     {
-        return INSTANCE.get();
+        return INSTANCE;
     }
 
     /**

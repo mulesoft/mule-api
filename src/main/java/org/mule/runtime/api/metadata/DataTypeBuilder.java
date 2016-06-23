@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.runtime.api.message.MuleMessage;
-
 import java.lang.reflect.Proxy;
 import java.util.Collection;
 
@@ -25,7 +23,7 @@ public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
      * @param type the java type to set.
      * @return this builder.
      */
-    DataTypeOptionalParamsBuilder<T> type(Class<T> type);
+    <N> DataTypeOptionalParamsBuilder<N> type(Class<N> type);
 
     /**
      * Sets the given type for the {@link CollectionDataType} to be built. See
@@ -36,19 +34,19 @@ public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
      *             {@link Collection}.
      */
-    <I> DataTypeCollectionTypeBuilder<T> collectionType(Class<T> collectionType);
+    <N extends Collection> DataTypeCollectionTypeBuilder<N> collectionType(Class<N> collectionType);
 
     /**
      * Populates the builder from the given {@code value}.
      * <p>
-     * This method will get the {@code javaType} and {@code mimeType} given {@code value} according
-     * to its concrete type.
+     * This method will get the {@code javaType} and {@code mimeType} from the given {@code value}
+     * according to its concrete type.
      * <p>
      * This is useful for using existing {@link DataType}s as templates for new ones. Just copying
      * them is not necessary since those are immutable.
      *
-     * @param value an object instance. This can be a {@link MuleMessage}, a {@link Collection}, a
-     *            {@link Proxy} instance or any other object.
+     * @param value an object instance. This can be a {@link Collection}, a {@link Proxy} instance
+     *            or any other object.
      * @return this builder.
      */
     DataTypeBuilder<T> from(T value);
