@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.metadata;
 
-import java.lang.reflect.Proxy;
 import java.util.Collection;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
+public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
 {
 
     /**
@@ -23,7 +22,7 @@ public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
      * @param type the java type to set.
      * @return this builder.
      */
-    <N> DataTypeOptionalParamsBuilder<N> type(Class<N> type);
+    <N> DataTypeParamsBuilder<N> type(Class<N> type);
 
     /**
      * Sets the given type for the {@link CollectionDataType} to be built. See
@@ -39,19 +38,16 @@ public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
     /**
      * Populates the builder from the given {@code value}.
      * <p>
-     * This method will get the {@code javaType} and {@code mimeType} from the given {@code value}
+     * This method will get the {@code type}, {@code mimeType} and {@code encoding} from the given {@code value}
      * according to its concrete type.
      * <p>
-     * This is useful for using existing {@link DataType}s as templates for new ones. Just copying
-     * them is not necessary since those are immutable.
      *
-     * @param value an object instance. This can be a {@link Collection}, a {@link Proxy} instance
-     *            or any other object.
+     * @param value an object instance.
      * @return this builder.
      */
     DataTypeBuilder<T> from(T value);
 
-    interface DataTypeCollectionTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
+    interface DataTypeCollectionTypeBuilder<T> extends DataTypeParamsBuilder<T>
     {
 
         /**
@@ -61,7 +57,7 @@ public interface DataTypeBuilder<T> extends DataTypeOptionalParamsBuilder<T>
          * @param itemType the java type to set.
          * @return this builder.
          */
-        <I> DataTypeOptionalParamsBuilder<T> itemType(Class<I> itemType);
+        <I> DataTypeParamsBuilder<T> itemType(Class<I> itemType);
 
     }
 

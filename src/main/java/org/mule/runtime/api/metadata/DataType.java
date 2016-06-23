@@ -37,15 +37,45 @@ public interface DataType<T> extends Serializable
     }
 
     /**
-     * Shortcut to create {@link DataType} objects.
+     * Provides a builder to create {@link DataType} objects based on an existing {@link DataType} instance.
+     *
+     * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
+     * @return a new {@link DataTypeBuilder} based on the template {@code dataType} provided.
+     * */
+    static <T> DataTypeBuilder<T> builder(DataType<T> dataType)
+    {
+        return DataTypeBuilderFactory.getInstance().builder(dataType);
+    }
+
+    /**
+     * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType}
+     * and {@code encoding}.
      * 
-     * @param type the java type to set.
-     * @return a new {@link DataTypeBuilder} with the given {@code javaType} already set..
+     * @param type the Java type to create {@link DataType} for.
+     * @return a new {@link DataTypeBuilder} for the given {@code type}.
      */
-    static <T> DataType<T> forJavaType(Class<T> type)
+    static <T> DataType<T> forType(Class<T> type)
     {
         return builder().type(type).build();
     }
+
+    /**
+     * Shortcut to create the {@link DataType} for an Object instance.  This behaves in the same way as
+     * {@link #forType(Class)} creating a {@link DataType} based on the value type with default values being used for
+     * {@code mimeType} and {@code encoding} if the Object type has no mimeType or encoding. The {@link DataTypeBuilder}
+     * used by default may introspect certains types that do contain type this meta-data such as
+     * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate {@code mimeType} and
+     * {@code encoding} values based on this.
+     *
+     * @param value the object to determine the {@link DataType} of.
+     * @param <T> the type of the object
+     * @return a new {@link DataType} for the given {@code value}.
+     */
+    static <T> DataType<T> of(T value)
+    {
+        return builder().from(value).build();
+    }
+
 
     DataType<String> TEXT_STRING = builder().type(String.class).mimeType(MimeType.TEXT).build();
     DataType<String> XML_STRING = builder().type(String.class).mimeType(MimeType.XML).build();
@@ -55,12 +85,12 @@ public interface DataType<T> extends Serializable
     DataType<String> RSS_STRING = builder().type(String.class).mimeType(MimeType.RSS).build();
 
     //Common Java types
-    DataType<String> STRING = forJavaType(String.class);
-    DataType<Number> NUMBER = forJavaType(Number.class);
-    DataType<Boolean> BOOLEAN = forJavaType(Boolean.class);
-    DataType<Object> OBJECT = forJavaType(Object.class);
-    DataType<byte[]> BYTE_ARRAY = forJavaType(byte[].class);
-    DataType<InputStream> INPUT_STREAM = forJavaType(InputStream.class);
+    DataType<String> STRING = forType(String.class);
+    DataType<Number> NUMBER = forType(Number.class);
+    DataType<Boolean> BOOLEAN = forType(Boolean.class);
+    DataType<Object> OBJECT = forType(Object.class);
+    DataType<byte[]> BYTE_ARRAY = forType(byte[].class);
+    DataType<InputStream> INPUT_STREAM = forType(InputStream.class);
     DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mimeType(MimeType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
             builder().collectionType(Collection.class).itemType(MuleMessage.class).mimeType(MimeType.ANY).build();

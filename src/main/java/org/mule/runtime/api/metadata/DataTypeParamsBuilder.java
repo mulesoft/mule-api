@@ -8,7 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import javax.activation.MimeType;
 
-public interface DataTypeOptionalParamsBuilder<T>
+public interface DataTypeParamsBuilder<T>
 {
     /**
      * Sets the given {@code mimeType} string. See {@link DataType#getMimeType()}.
@@ -24,7 +24,7 @@ public interface DataTypeOptionalParamsBuilder<T>
      * @return this builder.
      * @throws IllegalArgumentException if the given MIME type string is invalid.
      */
-    DataTypeOptionalParamsBuilder<T> mimeType(String mimeType) throws IllegalArgumentException;
+    DataTypeParamsBuilder<T> mimeType(String mimeType) throws IllegalArgumentException;
 
     /**
      * Sets the given {@code mimeType}. See {@link DataType#getMimeType()}.
@@ -39,7 +39,7 @@ public interface DataTypeOptionalParamsBuilder<T>
      * @return this builder.
      * @throws IllegalArgumentException if the given MIME type string is invalid.
      */
-    DataTypeOptionalParamsBuilder<T> mimeType(MimeType mimeType) throws IllegalArgumentException;
+    DataTypeParamsBuilder<T> mimeType(MimeType mimeType);
 
     /**
      * Sets the given encoding. See {@link DataType#getEncoding()}.
@@ -47,7 +47,7 @@ public interface DataTypeOptionalParamsBuilder<T>
      * @param encoding the encoding to set.
      * @return this builder.
      */
-    DataTypeOptionalParamsBuilder<T> encoding(String encoding);
+    DataTypeParamsBuilder<T> encoding(String encoding);
 
 
     /**
