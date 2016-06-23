@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.nio.charset.IllegalCharsetNameException;
+
 import javax.activation.MimeType;
 
 public interface DataTypeParamsBuilder<T>
@@ -46,9 +48,9 @@ public interface DataTypeParamsBuilder<T>
      * 
      * @param encoding the encoding to set.
      * @return this builder.
+     * @throws IllegalCharsetNameException if the {@code encoding} is invalid.
      */
-    DataTypeParamsBuilder<T> encoding(String encoding);
-
+    DataTypeParamsBuilder<T> encoding(String encoding) throws IllegalCharsetNameException;
 
     /**
      * Builds a new {@link DataType} with the values set in this builder.
