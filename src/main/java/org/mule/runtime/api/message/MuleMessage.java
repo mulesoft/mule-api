@@ -18,7 +18,6 @@ import java.io.Serializable;
  */
 public interface MuleMessage<Payload, Attributes extends Serializable> extends Serializable
 {
-
     /**
      * @return the current message
      */
