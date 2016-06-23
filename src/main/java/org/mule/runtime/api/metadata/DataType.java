@@ -54,7 +54,7 @@ public interface DataType<T> extends Serializable
      * @param type the Java type to create {@link DataType} for.
      * @return a new {@link DataTypeBuilder} for the given {@code type}.
      */
-    static <T> DataType<T> forType(Class<T> type)
+    static <T> DataType<T> fromType(Class<T> type)
     {
         return builder().type(type).build();
     }
@@ -62,7 +62,7 @@ public interface DataType<T> extends Serializable
     /**
      * Shortcut to create the {@link DataType} from an Object instance.
      * <p>
-     * This behaves in the same way as {@link #forType(Class)} creating a {@link DataType} based on
+     * This behaves in the same way as {@link #fromType(Class)} creating a {@link DataType} based on
      * the value type with default values being used for {@code mimeType} and {@code encoding} if
      * the Object type has no mimeType or encoding. The {@link DataTypeBuilder} used by default may
      * introspect certain types that do contain type this meta-data such as
@@ -87,12 +87,12 @@ public interface DataType<T> extends Serializable
     DataType<String> RSS_STRING = builder().type(String.class).mimeType(MimeType.RSS).build();
 
     //Common Java types
-    DataType<String> STRING = forType(String.class);
-    DataType<Number> NUMBER = forType(Number.class);
-    DataType<Boolean> BOOLEAN = forType(Boolean.class);
-    DataType<Object> OBJECT = forType(Object.class);
-    DataType<byte[]> BYTE_ARRAY = forType(byte[].class);
-    DataType<InputStream> INPUT_STREAM = forType(InputStream.class);
+    DataType<String> STRING = fromType(String.class);
+    DataType<Number> NUMBER = fromType(Number.class);
+    DataType<Boolean> BOOLEAN = fromType(Boolean.class);
+    DataType<Object> OBJECT = fromType(Object.class);
+    DataType<byte[]> BYTE_ARRAY = fromType(byte[].class);
+    DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
     DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mimeType(MimeType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
             builder().collectionType(Collection.class).itemType(MuleMessage.class).mimeType(MimeType.ANY).build();
