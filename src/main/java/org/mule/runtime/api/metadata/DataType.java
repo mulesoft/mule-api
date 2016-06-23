@@ -60,20 +60,22 @@ public interface DataType<T> extends Serializable
     }
 
     /**
-     * Shortcut to create the {@link DataType} for an Object instance.  This behaves in the same way as
-     * {@link #forType(Class)} creating a {@link DataType} based on the value type with default values being used for
-     * {@code mimeType} and {@code encoding} if the Object type has no mimeType or encoding. The {@link DataTypeBuilder}
-     * used by default may introspect certains types that do contain type this meta-data such as
-     * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate {@code mimeType} and
-     * {@code encoding} values based on this.
+     * Shortcut to create the {@link DataType} from an Object instance.
+     * <p>
+     * This behaves in the same way as {@link #forType(Class)} creating a {@link DataType} based on
+     * the value type with default values being used for {@code mimeType} and {@code encoding} if
+     * the Object type has no mimeType or encoding. The {@link DataTypeBuilder} used by default may
+     * introspect certain types that do contain type this meta-data such as
+     * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate
+     * {@code mimeType} and {@code encoding} values based on this.
      *
      * @param value the object to determine the {@link DataType} of.
      * @param <T> the type of the object
      * @return a new {@link DataType} for the given {@code value}.
      */
-    static <T> DataType<T> of(T value)
+    static <T> DataType<T> fromObject(T value)
     {
-        return builder().from(value).build();
+        return builder().fromObject(value).build();
     }
 
 

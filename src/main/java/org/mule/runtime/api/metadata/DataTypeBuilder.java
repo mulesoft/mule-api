@@ -10,6 +10,8 @@ import java.util.Collection;
 
 /**
  * Provides a way to build immutable {@link DataType} objects.
+ * <p>
+ * Implementations need not be thread safe.
  *
  * @since 1.0
  */
@@ -45,7 +47,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @param value an object instance.
      * @return this builder.
      */
-    DataTypeBuilder<T> from(T value);
+    DataTypeBuilder<T> fromObject(T value);
 
     interface DataTypeCollectionTypeBuilder<T> extends DataTypeParamsBuilder<T>
     {
