@@ -24,7 +24,7 @@ public interface DataTypeParamsBuilder<T>
      * @return this builder.
      * @throws IllegalArgumentException if the given MIME type string is invalid.
      */
-    DataTypeParamsBuilder<T> mimeType(String mimeType) throws IllegalArgumentException;
+    DataTypeParamsBuilder<T> mimeType(String mimeType);
 
     /**
      * Sets the given {@code mimeType}. See {@link DataType#getMimeType()}.
@@ -38,19 +38,19 @@ public interface DataTypeParamsBuilder<T>
      * @param mimeType the MIME type to set. If null, the builder is not changed.
      * @return this builder.
      */
-    DataTypeParamsBuilder<T> mimeType(MimeType mimeType);
+    DataTypeParamsBuilder<T> mimeType(MediaType mimeType);
 
     /**
-     * Sets the given encoding. See {@link DataType#getEncoding()}.
+     * Sets the given encoding. See {@link MediaType#getEncoding()}.
      * 
      * @param encoding the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
      * @throws IllegalCharsetNameException if the {@code encoding} is invalid.
      */
-    DataTypeParamsBuilder<T> encoding(String encoding) throws IllegalCharsetNameException;
+    DataTypeParamsBuilder<T> encoding(String encoding);
 
     /**
-     * Sets the given encoding. See {@link DataType#getEncoding()}.
+     * Sets the given encoding. See {@link MediaType#getEncoding()}.
      * 
      * @param encoding the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.

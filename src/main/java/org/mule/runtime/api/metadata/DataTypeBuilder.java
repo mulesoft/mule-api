@@ -35,7 +35,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
      *             {@link Collection}.
      */
-    <N extends Collection> DataTypeCollectionTypeBuilder<N> collectionType(Class<N> collectionType);
+    <N extends Collection<I>, I> DataTypeCollectionTypeBuilder<N> collectionType(Class<N> collectionType);
 
     /**
      * Populates the builder from the given {@code value}.
@@ -59,7 +59,16 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
          * @param itemType the java type to set.
          * @return this builder.
          */
-        <I> DataTypeParamsBuilder<T> itemType(Class<I> itemType);
+        <I> DataTypeCollectionTypeBuilder<T> itemType(Class<I> itemType);
+
+        /**
+         * Sets the given item MIME type for the {@link CollectionDataType} to be built. See
+         * {@link CollectionDataType#getItemType()}.
+         * 
+         * @param itemMimeType the MIME type string to set
+         * @return this builder.
+         */
+        <I> DataTypeCollectionTypeBuilder<T> itemMimeType(String itemMimeType);
 
     }
 

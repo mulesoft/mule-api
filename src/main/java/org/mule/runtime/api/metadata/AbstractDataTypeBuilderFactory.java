@@ -17,32 +17,42 @@ import org.slf4j.LoggerFactory;
  *
  * @since 1.0
  */
-public abstract class DataTypeBuilderFactory
+public abstract class AbstractDataTypeBuilderFactory
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DataTypeBuilderFactory.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataTypeBuilderFactory.class);
 
     static
     {
         try
         {
-            final DataTypeBuilderFactory factory = load(DataTypeBuilderFactory.class).iterator().next();
-            LOGGER.info(format("Loaded DataTypeBuilderFactory impementation '%s' form classloader '%s'",
+            final AbstractDataTypeBuilderFactory factory = load(AbstractDataTypeBuilderFactory.class).iterator().next();
+            LOGGER.info(format("Loaded AbstractDataTypeBuilderFactory impementation '%s' form classloader '%s'",
                     factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-            INSTANCE = factory;
+            DEFAULT_FACTORY = factory;
         }
         catch (Exception e)
         {
-            LOGGER.error("Error loading DataTypeBuilderFactory implementation.", e);
+            LOGGER.error("Error loading AbstractDataTypeBuilderFactory implementation.", e);
             throw e;
         }
     }
     
-    private static DataTypeBuilderFactory INSTANCE;
+    private static final AbstractDataTypeBuilderFactory DEFAULT_FACTORY;
 
-    static DataTypeBuilderFactory getInstance()
+    /**
+     * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
+     * this class initialization.
+     * <p>
+     * If more than one implementation is found, the classLoading order of those implementations
+     * will determine which one is used. Information about this will be logged to aid in the
+     * troubleshooting of those cases.
+     * 
+     * @return the implementation of this builder factory provided by the Mule Runtime.
+     */
+    public static final AbstractDataTypeBuilderFactory getDefaultFactory()
     {
-        return INSTANCE;
+        return DEFAULT_FACTORY;
     }
 
     /**
