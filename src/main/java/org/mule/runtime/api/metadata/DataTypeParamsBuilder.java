@@ -18,7 +18,7 @@ public interface DataTypeParamsBuilder<T>
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
-     * {@link #encoding(String)}.
+     * {@link #charset(String)}.
      * 
      * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
      * @return this builder.
@@ -33,7 +33,7 @@ public interface DataTypeParamsBuilder<T>
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
-     * {@link #encoding(String)}.
+     * {@link #charset(String)}.
      * 
      * @param mimeType the media type to set. If null, the builder is not changed.
      * @return this builder.
@@ -43,19 +43,19 @@ public interface DataTypeParamsBuilder<T>
     /**
      * Sets the given encoding. See {@link MediaType#getCharset()}.
      * 
-     * @param encoding the encoding to set. If null or empty, the builder is not changed.
+     * @param charset the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
-     * @throws IllegalCharsetNameException if the {@code encoding} is invalid.
+     * @throws IllegalCharsetNameException if the {@code charset} is invalid.
      */
-    DataTypeParamsBuilder<T> encoding(String encoding);
+    DataTypeParamsBuilder<T> charset(String charset);
 
     /**
      * Sets the given encoding. See {@link MediaType#getCharset()}.
      * 
-     * @param encoding the encoding to set. If null or empty, the builder is not changed.
+     * @param charset the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
      */
-    DataTypeParamsBuilder<T> encoding(Charset encoding);
+    DataTypeParamsBuilder<T> charset(Charset charset);
 
     /**
      * Builds a new {@link DataType} with the values set in this builder.

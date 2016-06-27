@@ -37,22 +37,22 @@ public final class MediaType implements Serializable
     private static final String SUBTYPE_MIXED = "mixed";
     private static final String SUBTYPE_RELATED = "related";
 
-    public static final MediaType ANY = new MediaType("*", "*");
+    public static final MediaType ANY = build("*", "*");
 
-    public static final MediaType JSON = new MediaType(TYPE_TEXT, SUBTYPE_JSON);
-    public static final MediaType APPLICATION_JSON = new MediaType(TYPE_APPLICATION, SUBTYPE_JSON);
-    public static final MediaType ATOM = new MediaType(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
-    public static final MediaType RSS = new MediaType(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
-    public static final MediaType APPLICATION_XML = new MediaType(TYPE_APPLICATION, SUBTYPE_XML);
-    public static final MediaType XML = new MediaType(TYPE_TEXT, SUBTYPE_XML);
-    public static final MediaType TEXT = new MediaType(TYPE_TEXT, SUBTYPE_PLAIN);
-    public static final MediaType HTML = new MediaType(TYPE_TEXT, SUBTYPE_HTML);
+    public static final MediaType JSON = build(TYPE_TEXT, SUBTYPE_JSON);
+    public static final MediaType APPLICATION_JSON = build(TYPE_APPLICATION, SUBTYPE_JSON);
+    public static final MediaType ATOM = build(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
+    public static final MediaType RSS = build(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
+    public static final MediaType APPLICATION_XML = build(TYPE_APPLICATION, SUBTYPE_XML);
+    public static final MediaType XML = build(TYPE_TEXT, SUBTYPE_XML);
+    public static final MediaType TEXT = build(TYPE_TEXT, SUBTYPE_PLAIN);
+    public static final MediaType HTML = build(TYPE_TEXT, SUBTYPE_HTML);
 
-    public static final MediaType BINARY = new MediaType(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
-    public static final MediaType UNKNOWN = new MediaType("content", "unknown");
-    public static final MediaType MULTIPART_MIXED = new MediaType(TYPE_MULTIPART, SUBTYPE_MIXED);
-    public static final MediaType MULTIPART_RELATED = new MediaType(TYPE_MULTIPART, SUBTYPE_RELATED);
-    public static final MediaType MULTIPART_X_MIXED_REPLACE = new MediaType(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
+    public static final MediaType BINARY = build(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
+    public static final MediaType UNKNOWN = build("content", "unknown");
+    public static final MediaType MULTIPART_MIXED = build(TYPE_MULTIPART, SUBTYPE_MIXED);
+    public static final MediaType MULTIPART_RELATED = build(TYPE_MULTIPART, SUBTYPE_RELATED);
+    public static final MediaType MULTIPART_X_MIXED_REPLACE = build(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
     private final String primaryType;
     private final String subType;
@@ -67,13 +67,9 @@ public final class MediaType implements Serializable
      * @param subType
      * @param charset
      */
-    public MediaType(String primaryType, String subType, Charset charset)
+    public static MediaType build(String primaryType, String subType, Charset charset)
     {
-        this.primaryType = primaryType;
-        this.subType = subType;
-        initCharset();
-        this.charset.set(charset);
-        this.charsetStr = charset != null ? charset.name() : null;
+        return new MediaType(primaryType, subType, charset);
     }
 
     /**
@@ -83,9 +79,18 @@ public final class MediaType implements Serializable
      * @param primaryType
      * @param subType
      */
-    public MediaType(String primaryType, String subType)
+    public static MediaType build(String primaryType, String subType)
     {
-        this(primaryType, subType, null);
+        return new MediaType(primaryType, subType, null);
+    }
+    
+    private MediaType(String primaryType, String subType, Charset charset)
+    {
+        this.primaryType = primaryType;
+        this.subType = subType;
+        initCharset();
+        this.charset.set(charset);
+        this.charsetStr = charset != null ? charset.name() : null;
     }
 
     /**
