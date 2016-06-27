@@ -63,9 +63,9 @@ public interface MuleEvent extends Serializable
     /**
      * Returns the message payload for this event
      *
-     * @param <Payload>    the generic type of the {@link MuleMessage#getPayload()} value
-     * @param <Attributes> the generic type of the {@link MuleMessage#getAttributes()} value
+     * @param <PAYLOAD>    the generic type of the {@link MuleMessage#getPayload()} value
+     * @param <ATTRIBUTES> the generic type of the {@link MuleMessage#getAttributes()} value
      * @return the event's {@link MuleMessage}
      */
-    <Payload, Attributes extends Serializable> MuleMessage<Payload, Attributes> getMessage();
+    <PAYLOAD, ATTRIBUTES extends Serializable> MuleMessage<PAYLOAD, ATTRIBUTES> getMessage();
 }
