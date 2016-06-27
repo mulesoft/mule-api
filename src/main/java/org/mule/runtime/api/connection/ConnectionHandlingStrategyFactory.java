@@ -11,11 +11,10 @@ import org.mule.runtime.api.config.PoolingProfile;
 /**
  * Factory to create instances of {@link ConnectionHandlingStrategy}
  *
- * @param <Config>     the generic type of the config for which connections will be produced
  * @param <Connection> the generic type of the connections that will be produced
  * @since 1.0
  */
-public interface ConnectionHandlingStrategyFactory<Config, Connection>
+public interface ConnectionHandlingStrategyFactory<Connection>
 {
 
     /**
@@ -39,7 +38,7 @@ public interface ConnectionHandlingStrategyFactory<Config, Connection>
      * @param poolingListener a not {@code null }{@link PoolingListener}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingListener<Config, Connection> poolingListener);
+    ConnectionHandlingStrategy<Connection> supportsPooling(PoolingListener<Connection> poolingListener);
 
     /**
      * Creates a strategy in which pooling is enforced. {@link PoolingProfile}s which
@@ -62,11 +61,11 @@ public interface ConnectionHandlingStrategyFactory<Config, Connection>
      * @param poolingListener a not {@code null }{@link PoolingListener}
      * @return a {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingListener<Config, Connection> poolingListener);
+    ConnectionHandlingStrategy<Connection> requiresPooling(PoolingListener<Connection> poolingListener);
 
     /**
      * Returns a strategy which lazily creates and caches connections so that each invocation to the
-     * {@link ConnectionProvider#connect(Object)} method using the same config argument results in the same
+     * {@link ConnectionProvider#connect()} method using the same config argument results in the same
      * connection. Invoking {@link ConnectionHandler#release()} will not close the connection.
      *
      * @return a {@link ConnectionHandlingStrategy}
