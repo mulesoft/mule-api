@@ -26,43 +26,54 @@ public final class MediaType implements Serializable
 {
     private static final long serialVersionUID = -3626429370741009489L;
 
+    private static final String TYPE_TEXT = "text";
+    private static final String TYPE_APPLICATION = "application";
+    private static final String TYPE_MULTIPART = "multipart";
+    private static final String SUBTYPE_JSON = "json";
+    private static final String SUBTYPE_XML = "xml";
+    private static final String SUBTYPE_PLAIN = "plain";
+    private static final String SUBTYPE_HTML = "html";
+    private static final String SUBTYPE_OCTET_STREAM = "octet-stream";
+    private static final String SUBTYPE_MIXED = "mixed";
+    private static final String SUBTYPE_RELATED = "related";
+
     public static final MediaType ANY = new MediaType("*", "*");
 
-    public static final MediaType JSON = new MediaType("text", "json");
-    public static final MediaType APPLICATION_JSON = new MediaType("application", "json");
-    public static final MediaType ATOM = new MediaType("application", "atom+xml");
-    public static final MediaType RSS = new MediaType("application", "rss+xml");
-    public static final MediaType APPLICATION_XML = new MediaType("application", "xml");
-    public static final MediaType XML = new MediaType("text", "xml");
-    public static final MediaType TEXT = new MediaType("text", "plain");
-    public static final MediaType HTML = new MediaType("text", "html");
+    public static final MediaType JSON = new MediaType(TYPE_TEXT, SUBTYPE_JSON);
+    public static final MediaType APPLICATION_JSON = new MediaType(TYPE_APPLICATION, SUBTYPE_JSON);
+    public static final MediaType ATOM = new MediaType(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
+    public static final MediaType RSS = new MediaType(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
+    public static final MediaType APPLICATION_XML = new MediaType(TYPE_APPLICATION, SUBTYPE_XML);
+    public static final MediaType XML = new MediaType(TYPE_TEXT, SUBTYPE_XML);
+    public static final MediaType TEXT = new MediaType(TYPE_TEXT, SUBTYPE_PLAIN);
+    public static final MediaType HTML = new MediaType(TYPE_TEXT, SUBTYPE_HTML);
 
-    public static final MediaType BINARY = new MediaType("application", "octet-stream");
+    public static final MediaType BINARY = new MediaType(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
     public static final MediaType UNKNOWN = new MediaType("content", "unknown");
-    public static final MediaType MULTIPART_MIXED = new MediaType("multipart", "mixed");
-    public static final MediaType MULTIPART_RELATED = new MediaType("multipart", "related");
-    public static final MediaType MULTIPART_X_MIXED_REPLACE = new MediaType("multipart", "x-mixed-replace");
+    public static final MediaType MULTIPART_MIXED = new MediaType(TYPE_MULTIPART, SUBTYPE_MIXED);
+    public static final MediaType MULTIPART_RELATED = new MediaType(TYPE_MULTIPART, SUBTYPE_RELATED);
+    public static final MediaType MULTIPART_X_MIXED_REPLACE = new MediaType(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
     private final String primaryType;
     private final String subType;
-    private final String encodingStr;
-    private volatile transient AtomicReference<Charset> encoding;
+    private final String charsetStr;
+    private volatile transient AtomicReference<Charset> charset;
 
     /**
      * Builds a new media-type with the given parameters. This would be the equivalent of the media
-     * type {@code "[primaryType]/[subType]; charset=[encoding]"}.
+     * type {@code "[primaryType]/[subType]; charset=[charset]"}.
      * 
      * @param primaryType
      * @param subType
-     * @param encoding
+     * @param charset
      */
-    public MediaType(String primaryType, String subType, Charset encoding)
+    public MediaType(String primaryType, String subType, Charset charset)
     {
         this.primaryType = primaryType;
         this.subType = subType;
-        initEncoding();
-        this.encoding.set(encoding);
-        this.encodingStr = encoding != null ? encoding.name() : null;
+        initCharset();
+        this.charset.set(charset);
+        this.charsetStr = charset != null ? charset.name() : null;
     }
 
     /**
@@ -97,27 +108,27 @@ public final class MediaType implements Serializable
      * @return The value of the {@code charset} parameter.
      *         <p>
      *         This may be not set, in which case it is up to the caller to determine the
-     *         appropriate encoding to use.
+     *         appropriate charset to use.
      */
-    public Optional<Charset> getEncoding()
+    public Optional<Charset> getCharset()
     {
-        initEncoding();
-        if (encodingStr != null)
+        initCharset();
+        if (charsetStr != null)
         {
-            encoding.compareAndSet(null, Charset.forName(encodingStr));
+            charset.compareAndSet(null, Charset.forName(charsetStr));
         }
-        return ofNullable(encoding.get());
+        return ofNullable(charset.get());
     }
 
-    private void initEncoding()
+    private void initCharset()
     {
-        if (encoding == null)
+        if (charset == null)
         {
             synchronized (this)
             {
-                if (encoding == null)
+                if (charset == null)
                 {
-                    encoding = new AtomicReference<>(null);
+                    charset = new AtomicReference<>(null);
                 }
             }
         }
@@ -126,7 +137,7 @@ public final class MediaType implements Serializable
     /**
      * Evaluates the type of this object against the ones of the {@code other} {@link MediaType}.
      * <p>
-     * This will ignore any optional parameters, such as the encoding.
+     * This will ignore any optional parameters, such as the charset.
      * 
      * @param other The {@link MediaType} to evaluate against.
      * @return {@code true} if the types are the same.
@@ -143,13 +154,13 @@ public final class MediaType implements Serializable
     @Override
     public String toString()
     {
-        return primaryType + "/" + subType + (getEncoding().isPresent() ? "; charset=" + getEncoding().get().name() : "");
+        return primaryType + "/" + subType + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
     }
 
     @Override
     public int hashCode()
     {
-        // TODO MULE-9987 Check if it is actually needed to leave encoding out.
+        // TODO MULE-9987 Check if it is actually needed to leave charset out.
         return Objects.hash(primaryType, subType);
     }
 
@@ -172,6 +183,6 @@ public final class MediaType implements Serializable
 
         return Objects.equals(primaryType, other.primaryType)
                && Objects.equals(subType, other.subType)
-               && Objects.equals(getEncoding(), other.getEncoding());
+               && Objects.equals(getCharset(), other.getCharset());
     }
 }

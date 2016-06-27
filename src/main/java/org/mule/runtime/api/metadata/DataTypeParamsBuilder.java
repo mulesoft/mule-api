@@ -12,9 +12,9 @@ import java.nio.charset.IllegalCharsetNameException;
 public interface DataTypeParamsBuilder<T>
 {
     /**
-     * Sets the given {@code mimeType} string. See {@link DataType#getMimeType()}.
+     * Sets the given {@code mediaType} string. See {@link DataType#getMediaType()}.
      * <p>
-     * If the MIME type for the given string has a {@code charset} parameter, that will be set as
+     * If the media type for the given string has a {@code charset} parameter, that will be set as
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
@@ -22,26 +22,26 @@ public interface DataTypeParamsBuilder<T>
      * 
      * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
      * @return this builder.
-     * @throws IllegalArgumentException if the given MIME type string is invalid.
+     * @throws IllegalArgumentException if the given media type string is invalid.
      */
-    DataTypeParamsBuilder<T> mimeType(String mimeType);
+    DataTypeParamsBuilder<T> mediaType(String mediaType);
 
     /**
-     * Sets the given {@code mimeType}. See {@link DataType#getMimeType()}.
+     * Sets the given {@code mediaType}. See {@link DataType#getMediaType()}.
      * <p>
-     * If the MIME type for the given string has a {@code charset} parameter, that will be set as
+     * If the media type for the given string has a {@code charset} parameter, that will be set as
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
      * {@link #encoding(String)}.
      * 
-     * @param mimeType the MIME type to set. If null, the builder is not changed.
+     * @param mimeType the media type to set. If null, the builder is not changed.
      * @return this builder.
      */
-    DataTypeParamsBuilder<T> mimeType(MediaType mimeType);
+    DataTypeParamsBuilder<T> mediaType(MediaType mediaType);
 
     /**
-     * Sets the given encoding. See {@link MediaType#getEncoding()}.
+     * Sets the given encoding. See {@link MediaType#getCharset()}.
      * 
      * @param encoding the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
@@ -50,7 +50,7 @@ public interface DataTypeParamsBuilder<T>
     DataTypeParamsBuilder<T> encoding(String encoding);
 
     /**
-     * Sets the given encoding. See {@link MediaType#getEncoding()}.
+     * Sets the given encoding. See {@link MediaType#getCharset()}.
      * 
      * @param encoding the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.

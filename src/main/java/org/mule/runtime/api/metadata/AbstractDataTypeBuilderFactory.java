@@ -50,7 +50,7 @@ public abstract class AbstractDataTypeBuilderFactory
      * 
      * @return the implementation of this builder factory provided by the Mule Runtime.
      */
-    public static final AbstractDataTypeBuilderFactory getDefaultFactory()
+    static final AbstractDataTypeBuilderFactory getDefaultFactory()
     {
         return DEFAULT_FACTORY;
     }

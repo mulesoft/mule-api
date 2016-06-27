@@ -81,12 +81,12 @@ public interface DataType<T> extends Serializable
     }
 
 
-    DataType<String> TEXT_STRING = builder().type(String.class).mimeType(MediaType.TEXT).build();
-    DataType<String> XML_STRING = builder().type(String.class).mimeType(MediaType.XML).build();
-    DataType<String> JSON_STRING = builder().type(String.class).mimeType(MediaType.APPLICATION_JSON).build();
-    DataType<String> HTML_STRING = builder().type(String.class).mimeType(MediaType.HTML).build();
-    DataType<String> ATOM_STRING = builder().type(String.class).mimeType(MediaType.ATOM).build();
-    DataType<String> RSS_STRING = builder().type(String.class).mimeType(MediaType.RSS).build();
+    DataType<String> TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
+    DataType<String> XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
+    DataType<String> JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
+    DataType<String> HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
+    DataType<String> ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
+    DataType<String> RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
 
     //Common Java types
     DataType<String> STRING = fromType(String.class);
@@ -95,9 +95,9 @@ public interface DataType<T> extends Serializable
     DataType<Object> OBJECT = fromType(Object.class);
     DataType<byte[]> BYTE_ARRAY = fromType(byte[].class);
     DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
-    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mimeType(MediaType.ANY).build();
+    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
-            getDefaultFactory().<Collection<MuleMessage>> builder().collectionType(Collection.class).mimeType(MediaType.ANY).build();
+            getDefaultFactory().<Collection<MuleMessage>> builder().collectionType(Collection.class).mediaType(MediaType.ANY).build();
 
     /**
      * The object type of the source object to transform.
@@ -111,7 +111,7 @@ public interface DataType<T> extends Serializable
      *
      * @return the mime type of the source object.
      */
-    MediaType getMimeType();
+    MediaType getMediaType();
 
     /**
      * Used to determine if this data type is compatible with the data type passed in.  This checks to see if the mime types are

@@ -62,13 +62,13 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
         <I> DataTypeCollectionTypeBuilder<T> itemType(Class<I> itemType);
 
         /**
-         * Sets the given item MIME type for the {@link CollectionDataType} to be built. See
+         * Sets the given item media type for the {@link CollectionDataType} to be built. See
          * {@link CollectionDataType#getItemType()}.
          * 
-         * @param itemMimeType the MIME type string to set
+         * @param itemMediaType the media type string to set
          * @return this builder.
          */
-        <I> DataTypeCollectionTypeBuilder<T> itemMimeType(String itemMimeType);
+        <I> DataTypeCollectionTypeBuilder<T> itemMediaType(String itemMediaType);
 
     }
 
