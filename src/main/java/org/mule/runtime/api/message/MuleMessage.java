@@ -87,7 +87,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
     {
 
         /**
-         * Sets the {@link MediaType} for the {@link MuleMessage} to be built.  See {@link DataType#getMediaType()}
+         * Sets the {@link MediaType} for the {@link MuleMessage} to be built. See {@link DataType#getMediaType()}
          *
          * @param mediaType the mediaType to set
          * @return this builder
@@ -95,7 +95,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
         Builder<PAYLOAD, ATTRIBUTES> mediaType(MediaType mediaType);
 
         /**
-         * Sets the data type for the {@link MuleMessage} to be built.  See {@link MuleMessage#getDataType()}
+         * Sets the data type for the {@link MuleMessage} to be built. See {@link MuleMessage#getDataType()}
          *
          * @param value the dataType to set
          * @return this builder
