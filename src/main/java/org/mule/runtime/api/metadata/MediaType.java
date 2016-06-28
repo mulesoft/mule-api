@@ -6,13 +6,14 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static java.util.Optional.ofNullable;
+import static java.util.Optional.of;
 
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * Immutable representation of Media Types as defined in
@@ -37,49 +38,48 @@ public final class MediaType implements Serializable
     private static final String SUBTYPE_MIXED = "mixed";
     private static final String SUBTYPE_RELATED = "related";
 
-    public static final MediaType ANY = build("*", "*");
+    public static final MediaType ANY = create("*", "*");
 
-    public static final MediaType JSON = build(TYPE_TEXT, SUBTYPE_JSON);
-    public static final MediaType APPLICATION_JSON = build(TYPE_APPLICATION, SUBTYPE_JSON);
-    public static final MediaType ATOM = build(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
-    public static final MediaType RSS = build(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
-    public static final MediaType APPLICATION_XML = build(TYPE_APPLICATION, SUBTYPE_XML);
-    public static final MediaType XML = build(TYPE_TEXT, SUBTYPE_XML);
-    public static final MediaType TEXT = build(TYPE_TEXT, SUBTYPE_PLAIN);
-    public static final MediaType HTML = build(TYPE_TEXT, SUBTYPE_HTML);
+    public static final MediaType JSON = create(TYPE_TEXT, SUBTYPE_JSON);
+    public static final MediaType APPLICATION_JSON = create(TYPE_APPLICATION, SUBTYPE_JSON);
+    public static final MediaType ATOM = create(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
+    public static final MediaType RSS = create(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
+    public static final MediaType APPLICATION_XML = create(TYPE_APPLICATION, SUBTYPE_XML);
+    public static final MediaType XML = create(TYPE_TEXT, SUBTYPE_XML);
+    public static final MediaType TEXT = create(TYPE_TEXT, SUBTYPE_PLAIN);
+    public static final MediaType HTML = create(TYPE_TEXT, SUBTYPE_HTML);
 
-    public static final MediaType BINARY = build(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
-    public static final MediaType UNKNOWN = build("content", "unknown");
-    public static final MediaType MULTIPART_MIXED = build(TYPE_MULTIPART, SUBTYPE_MIXED);
-    public static final MediaType MULTIPART_RELATED = build(TYPE_MULTIPART, SUBTYPE_RELATED);
-    public static final MediaType MULTIPART_X_MIXED_REPLACE = build(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
+    public static final MediaType BINARY = create(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
+    public static final MediaType UNKNOWN = create("content", "unknown");
+    public static final MediaType MULTIPART_MIXED = create(TYPE_MULTIPART, SUBTYPE_MIXED);
+    public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
+    public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
     private final String primaryType;
     private final String subType;
-    private final String charsetStr;
-    private volatile transient AtomicReference<Charset> charset;
+    private transient Optional<Charset> charset;
 
     /**
-     * Builds a new media-type with the given parameters. This would be the equivalent of the media
+     * Returns a media-type for the given parameters. This would be the equivalent of the media
      * type {@code "[primaryType]/[subType]; charset=[charset]"}.
      * 
      * @param primaryType
      * @param subType
      * @param charset
      */
-    public static MediaType build(String primaryType, String subType, Charset charset)
+    public static MediaType create(String primaryType, String subType, Charset charset)
     {
         return new MediaType(primaryType, subType, charset);
     }
 
     /**
-     * Builds a new media-type with the given parameters. This would be the equivalent of the media
+     * Returns a media-type for. This would be the equivalent of the media
      * type {@code "[primaryType]/[subType]"}.
      * 
      * @param primaryType
      * @param subType
      */
-    public static MediaType build(String primaryType, String subType)
+    public static MediaType create(String primaryType, String subType)
     {
         return new MediaType(primaryType, subType, null);
     }
@@ -88,9 +88,7 @@ public final class MediaType implements Serializable
     {
         this.primaryType = primaryType;
         this.subType = subType;
-        initCharset();
-        this.charset.set(charset);
-        this.charsetStr = charset != null ? charset.name() : null;
+        this.charset = of(charset);
     }
 
     /**
@@ -117,26 +115,7 @@ public final class MediaType implements Serializable
      */
     public Optional<Charset> getCharset()
     {
-        initCharset();
-        if (charsetStr != null)
-        {
-            charset.compareAndSet(null, Charset.forName(charsetStr));
-        }
-        return ofNullable(charset.get());
-    }
-
-    private void initCharset()
-    {
-        if (charset == null)
-        {
-            synchronized (this)
-            {
-                if (charset == null)
-                {
-                    charset = new AtomicReference<>(null);
-                }
-            }
-        }
+        return charset;
     }
 
     /**
@@ -189,5 +168,17 @@ public final class MediaType implements Serializable
         return Objects.equals(primaryType, other.primaryType)
                && Objects.equals(subType, other.subType)
                && Objects.equals(getCharset(), other.getCharset());
+    }
+
+    private void readObject(ObjectInputStream in) throws Exception
+    {
+        in.defaultReadObject();
+        charset = of((Charset) in.readObject());
+    }
+
+    private void writeObject(ObjectOutputStream out) throws Exception
+    {
+        out.defaultWriteObject();
+        out.writeObject(charset.get());
     }
 }
