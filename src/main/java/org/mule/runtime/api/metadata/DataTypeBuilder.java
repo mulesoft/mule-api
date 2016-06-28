@@ -47,7 +47,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @param value an object instance.
      * @return this builder.
      */
-    DataTypeBuilder<T> fromObject(T value);
+    DataTypeParamsBuilder<T> fromObject(T value);
 
     /**
      * Provides methods to set data associated to the items of a {@link Collection}, when the type

@@ -11,7 +11,10 @@ import java.io.Serializable;
 
 /**
  * {@code NullPayload} represents a null event payload
+ *
+ * TODO MULE-9985 Remove use of NullPayload
  */
+@Deprecated
 public final class NullPayload implements Serializable
 {
     /**
