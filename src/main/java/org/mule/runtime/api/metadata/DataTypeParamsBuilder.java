@@ -6,50 +6,56 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
-
-import javax.activation.MimeType;
 
 public interface DataTypeParamsBuilder<T>
 {
     /**
-     * Sets the given {@code mimeType} string. See {@link DataType#getMimeType()}.
+     * Sets the given {@code mediaType} string. See {@link DataType#getMediaType()}.
      * <p>
-     * If the MIME type for the given string has a {@code charset} parameter, that will be set as
+     * If the media type for the given string has a {@code charset} parameter, that will be set as
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
-     * {@link #encoding(String)}.
+     * {@link #charset(String)}.
      * 
      * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
      * @return this builder.
-     * @throws IllegalArgumentException if the given MIME type string is invalid.
+     * @throws IllegalArgumentException if the given media type string is invalid.
      */
-    DataTypeParamsBuilder<T> mimeType(String mimeType) throws IllegalArgumentException;
+    DataTypeParamsBuilder<T> mediaType(String mediaType);
 
     /**
-     * Sets the given {@code mimeType}. See {@link DataType#getMimeType()}.
+     * Sets the given {@code mediaType}. See {@link DataType#getMediaType()}.
      * <p>
-     * If the MIME type for the given string has a {@code charset} parameter, that will be set as
+     * If the media type for the given string has a {@code charset} parameter, that will be set as
      * the encoding for the {@link DataType} being built, unless it had been previously set.
      * <p>
      * An encoding set by a call to this method can be overridden by calling
-     * {@link #encoding(String)}.
+     * {@link #charset(String)}.
      * 
-     * @param mimeType the MIME type to set. If null, the builder is not changed.
+     * @param mimeType the media type to set. If null, the builder is not changed.
      * @return this builder.
-     * @throws IllegalArgumentException if the given MIME type string is invalid.
      */
-    DataTypeParamsBuilder<T> mimeType(MimeType mimeType);
+    DataTypeParamsBuilder<T> mediaType(MediaType mediaType);
 
     /**
-     * Sets the given encoding. See {@link DataType#getEncoding()}.
+     * Sets the given encoding. See {@link MediaType#getCharset()}.
      * 
-     * @param encoding the encoding to set. If null or empty, the builder is not changed.
+     * @param charset the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
-     * @throws IllegalCharsetNameException if the {@code encoding} is invalid.
+     * @throws IllegalCharsetNameException if the {@code charset} is invalid.
      */
-    DataTypeParamsBuilder<T> encoding(String encoding) throws IllegalCharsetNameException;
+    DataTypeParamsBuilder<T> charset(String charset);
+
+    /**
+     * Sets the given encoding. See {@link MediaType#getCharset()}.
+     * 
+     * @param charset the encoding to set. If null or empty, the builder is not changed.
+     * @return this builder.
+     */
+    DataTypeParamsBuilder<T> charset(Charset charset);
 
     /**
      * Builds a new {@link DataType} with the values set in this builder.

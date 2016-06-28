@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
+
 import org.mule.runtime.api.message.MuleMessage;
 
 import java.io.InputStream;
@@ -31,9 +33,9 @@ public interface DataType<T> extends Serializable
      * 
      * @return a new {@link DataTypeBuilder}.
      */
-    static DataTypeBuilder builder()
+    static <T> DataTypeBuilder<T> builder()
     {
-        return DataTypeBuilderFactory.getInstance().builder();
+        return getDefaultFactory().create();
     }
 
     /**
@@ -44,7 +46,7 @@ public interface DataType<T> extends Serializable
      * */
     static <T> DataTypeBuilder<T> builder(DataType<T> dataType)
     {
-        return DataTypeBuilderFactory.getInstance().builder(dataType);
+        return getDefaultFactory().create(dataType);
     }
 
     /**
@@ -75,16 +77,16 @@ public interface DataType<T> extends Serializable
      */
     static <T> DataType<T> fromObject(T value)
     {
-        return builder().fromObject(value).build();
+        return getDefaultFactory().<T> create().fromObject(value).build();
     }
 
 
-    DataType<String> TEXT_STRING = builder().type(String.class).mimeType(MimeType.TEXT).build();
-    DataType<String> XML_STRING = builder().type(String.class).mimeType(MimeType.XML).build();
-    DataType<String> JSON_STRING = builder().type(String.class).mimeType(MimeType.APPLICATION_JSON).build();
-    DataType<String> HTML_STRING = builder().type(String.class).mimeType(MimeType.HTML).build();
-    DataType<String> ATOM_STRING = builder().type(String.class).mimeType(MimeType.ATOM).build();
-    DataType<String> RSS_STRING = builder().type(String.class).mimeType(MimeType.RSS).build();
+    DataType<String> TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
+    DataType<String> XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
+    DataType<String> JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
+    DataType<String> HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
+    DataType<String> ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
+    DataType<String> RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
 
     //Common Java types
     DataType<String> STRING = fromType(String.class);
@@ -93,9 +95,9 @@ public interface DataType<T> extends Serializable
     DataType<Object> OBJECT = fromType(Object.class);
     DataType<byte[]> BYTE_ARRAY = fromType(byte[].class);
     DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
-    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mimeType(MimeType.ANY).build();
+    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
-            builder().collectionType(Collection.class).itemType(MuleMessage.class).mimeType(MimeType.ANY).build();
+            getDefaultFactory().<Collection<MuleMessage>> create().collectionType(Collection.class).mediaType(MediaType.ANY).build();
 
     /**
      * The object type of the source object to transform.
@@ -105,20 +107,11 @@ public interface DataType<T> extends Serializable
     Class<T> getType();
 
     /**
-     * TODO MULE-9958 return a {@link MimeType}
-     * <p>
      * The mime type of the the source object to transform.
      *
      * @return the mime type of the source object.
      */
-    String getMimeType();
-
-    /**
-     * TODO MULE-9958 remove this, this will be moved to {@link MimeType}
-     * <p>
-     * The encoding for the object to transform
-     */
-    String getEncoding();
+    MediaType getMediaType();
 
     /**
      * Used to determine if this data type is compatible with the data type passed in.  This checks to see if the mime types are
