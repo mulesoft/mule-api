@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -89,7 +90,7 @@ public final class MediaType implements Serializable
     {
         this.primaryType = primaryType;
         this.subType = subType;
-        this.charset = of(charset);
+        this.charset = ofNullable(charset);
     }
 
     /**
