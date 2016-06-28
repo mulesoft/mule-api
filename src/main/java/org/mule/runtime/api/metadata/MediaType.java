@@ -62,8 +62,10 @@ public final class MediaType implements Serializable
     private transient Optional<Charset> charset;
 
     /**
-     * Returns a media-type for the given parameters. This would be the equivalent of the media
-     * type {@code "[primaryType]/[subType]; charset=[charset]"}.
+     * Returns a media-type for the given parameters. This would be the equivalent of the media type
+     * {@code "[primaryType]/[subType]; charset=[charset]"}.
+     * <p>
+     * TODO MULE-9995 Preserve media type parameters in mule
      * 
      * @param primaryType
      * @param subType

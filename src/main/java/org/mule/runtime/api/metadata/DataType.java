@@ -35,7 +35,7 @@ public interface DataType<T> extends Serializable
      */
     static <T> DataTypeBuilder<T> builder()
     {
-        return getDefaultFactory().builder();
+        return getDefaultFactory().create();
     }
 
     /**
@@ -46,7 +46,7 @@ public interface DataType<T> extends Serializable
      * */
     static <T> DataTypeBuilder<T> builder(DataType<T> dataType)
     {
-        return getDefaultFactory().builder(dataType);
+        return getDefaultFactory().create(dataType);
     }
 
     /**
@@ -77,7 +77,7 @@ public interface DataType<T> extends Serializable
      */
     static <T> DataType<T> fromObject(T value)
     {
-        return getDefaultFactory().<T> builder().fromObject(value).build();
+        return getDefaultFactory().<T> create().fromObject(value).build();
     }
 
 
@@ -97,7 +97,7 @@ public interface DataType<T> extends Serializable
     DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
     DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
-            getDefaultFactory().<Collection<MuleMessage>> builder().collectionType(Collection.class).mediaType(MediaType.ANY).build();
+            getDefaultFactory().<Collection<MuleMessage>> create().collectionType(Collection.class).mediaType(MediaType.ANY).build();
 
     /**
      * The object type of the source object to transform.

@@ -49,12 +49,18 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      */
     DataTypeBuilder<T> fromObject(T value);
 
+    /**
+     * Provides methods to set data associated to the items of a {@link Collection}, when the type
+     * is a {@link Collection}.
+     *
+     * @param <T>
+     */
     interface DataTypeCollectionTypeBuilder<T> extends DataTypeParamsBuilder<T>
     {
 
         /**
-         * Sets the given item type for the {@link CollectionDataType} to be built. See
-         * {@link CollectionDataType#getItemType()}.
+         * Sets the given {@code itemType} for the {@link DataType} to be built, when the type is a
+         * {@link Collection}.
          * 
          * @param itemType the java type to set.
          * @return this builder.
@@ -62,13 +68,26 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
         <I> DataTypeCollectionTypeBuilder<T> itemType(Class<I> itemType);
 
         /**
-         * Sets the given item media type for the {@link CollectionDataType} to be built. See
-         * {@link CollectionDataType#getItemType()}.
+         * Sets the given {@code itemMediaType} for the {@link DataType} to be built., when the type
+         * is a {@link Collection}.
          * 
          * @param itemMediaType the media type string to set
          * @return this builder.
          */
         <I> DataTypeCollectionTypeBuilder<T> itemMediaType(String itemMediaType);
+
+        /**
+         * Sets the given {@code itemMediaType} for the {@link DataType} to be built, when the type
+         * is a {@link Collection}.
+         * <p>
+         * If the media type for the given string has a {@code charset} parameter, that will be set
+         * as the encoding for the items's {@link DataType} being built, unless it had been
+         * previously set.
+         * 
+         * @param itemMediaType the media type to set. If null, the builder is not changed.
+         * @return this builder.
+         */
+        <I> DataTypeCollectionTypeBuilder<T> itemMediaType(MediaType itemMediaType);
 
     }
 
