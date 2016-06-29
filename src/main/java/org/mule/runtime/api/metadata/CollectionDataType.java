@@ -12,7 +12,7 @@ package org.mule.runtime.api.metadata;
  * When checked for compatibility both the collection type and the generic item type will be
  * compared.
  *
- * @since 3.0
+ * @since 1.0
  */
 public interface CollectionDataType<PAYLOAD, ITEM> extends DataType<PAYLOAD>
 {
