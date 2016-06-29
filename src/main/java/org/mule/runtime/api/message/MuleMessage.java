@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.api.message;
 
+import org.mule.runtime.api.metadata.CollectionDataType;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 /**
  * Represents a message payload. The Message is comprised of
@@ -65,6 +67,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
      */
     DataType<PAYLOAD> getDataType();
 
+
     interface PayloadBuilder<PAYLOAD, ATTRIBUTES extends Serializable>
     {
 
@@ -77,9 +80,26 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
          *
          * @param payload the message payload
+         * @param <N> the payload type
          * @return this builder.
          */
         <N> Builder<N, ATTRIBUTES> payload(N payload);
+
+        /**
+         * Sets the collection payload for the {@link MuleMessage} to be built.
+         *
+         * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
+         * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
+         * it's own {@link MediaType} in which case this will be used instead. See
+         * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
+         *
+         * @param payload the collection payload
+         * @param itemType the collection item type
+         * @param <N> the collection type
+         * @param <E> the item type
+         * @return this builder
+         */
+        <N extends Collection<E>, E> CollectionBuilder<N, ATTRIBUTES> collectionPayload(N payload, Class<E> itemType);
 
     }
 
@@ -93,14 +113,6 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * @return this builder
          */
         Builder<PAYLOAD, ATTRIBUTES> mediaType(MediaType mediaType);
-
-        /**
-         * Sets the data type for the {@link MuleMessage} to be built. See {@link MuleMessage#getDataType()}
-         *
-         * @param value the dataType to set
-         * @return this builder
-         */
-        Builder<PAYLOAD, ATTRIBUTES> dataType(DataType<PAYLOAD> value);
 
         /**
          * Populates the builder from the given {@code value}.
@@ -120,6 +132,20 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * @return a newly built {@link MuleMessage}.
          */
         MuleMessage<PAYLOAD, ATTRIBUTES> build();
+
+    }
+
+    interface CollectionBuilder<PAYLOAD, ATTRIBUTES extends Serializable> extends Builder<PAYLOAD, ATTRIBUTES>
+    {
+
+        /**
+         * Sets the {@link MediaType} for the collection items in the  {@link MuleMessage} to be built.
+         * See {@link CollectionDataType#getItemDataType()}
+         *
+         * @param mediaType the mediaType to set
+         * @return this builder
+         */
+        CollectionBuilder<PAYLOAD, ATTRIBUTES> itemMediaType(MediaType mediaType);
 
     }
 
