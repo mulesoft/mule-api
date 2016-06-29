@@ -22,22 +22,20 @@ package org.mule.runtime.api.connection;
  * injection into the generated connections. The runtime will do that automatically
  * at the proper time.
  *
- * @param <Config>     the generic type of the objects to be used as configs
  * @param <Connection> the generic type of the connections to be handled
  * @since 1.0
  */
-public interface ConnectionProvider<Config, Connection>
+public interface ConnectionProvider<Connection>
 {
 
     /**
-     * Creates a new connection from the given {@code config}.
+     * Creates a new connection.
      * <p>
      * The returned connection is expected to be ready to use
      *
-     * @param config a configuration which parametrizes the connection's creation
      * @return a ready to use {@code Connection}
      */
-    Connection connect(Config config) throws ConnectionException;
+    Connection connect() throws ConnectionException;
 
     /**
      * Disposes the given {@code connection}, freeing all its allocated resources
@@ -61,7 +59,7 @@ public interface ConnectionProvider<Config, Connection>
 
     /**
      * Specifies the {@link ConnectionHandlingStrategy} that should be use to manage
-     * the connections generated through the {@link #connect(Object)} method.
+     * the connections generated through the {@link #connect()} method.
      * <p>
      * Implementations <b>MUST</b> return instances created through the provided
      * {@code handlingStrategyFactory}. Those instances are not to be wrapped,
@@ -75,5 +73,5 @@ public interface ConnectionProvider<Config, Connection>
      * @param handlingStrategyFactory the {@link ConnectionHandlingStrategyFactory} to be used to generate the response value
      * @return a not {@code null} {@link ConnectionHandlingStrategy}
      */
-    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory<Config, Connection> handlingStrategyFactory);
+    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory<Connection> handlingStrategyFactory);
 }

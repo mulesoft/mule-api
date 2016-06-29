@@ -9,11 +9,10 @@ package org.mule.runtime.api.connection;
 /**
  * Gets notifications for events related to connections on a pool.
  *
- * @param <Config>     the generic type for the config object to which the connection is bound
  * @param <Connection> the generic type for the pooled connection
  * @since 1.0
  */
-public interface PoolingListener<Config, Connection>
+public interface PoolingListener<Connection>
 {
 
     /**
@@ -24,10 +23,9 @@ public interface PoolingListener<Config, Connection>
      * This method can alter the state of the {@code connection}
      * as long as it remains on a usable state.
      *
-     * @param config     the config object to which the {@code connection} is bound
      * @param connection the pooled connection
      */
-    void onBorrow(Config config, Connection connection);
+    void onBorrow(Connection connection);
 
     /**
      * Executes right before the pool accepts the {@code connection} back.
@@ -40,8 +38,7 @@ public interface PoolingListener<Config, Connection>
      * This method can alter the state of the {@code connection}
      * as long as it remains on a usable state.
      *
-     * @param config     the config object to which the {@code connection} is bound
      * @param connection the pooled connection
      */
-    void onReturn(Config config, Connection connection);
+    void onReturn(Connection connection);
 }
