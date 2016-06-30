@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
+import static org.mule.metadata.utils.StringUtils.isNotEmpty;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -16,6 +17,9 @@ import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Objects;
 import java.util.Optional;
+
+import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 
 /**
  * Immutable representation of Media Types as defined in
@@ -28,6 +32,8 @@ import java.util.Optional;
 public final class MediaType implements Serializable
 {
     private static final long serialVersionUID = -3626429370741009489L;
+
+    private static final String CHARSET_PARAM = "charset";
 
     private static final String TYPE_TEXT = "text";
     private static final String TYPE_APPLICATION = "application";
@@ -62,11 +68,46 @@ public final class MediaType implements Serializable
     private transient Optional<Charset> charset;
 
     /**
+     * Parses a media type from its string representation.
+     *
+     * TODO MULE-9995 Preserve media type parameters in mule
+     *
+     * @param mediaType String representation to be parsed
+     * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
+     * @return {@link MediaType} instance for the parsed {@code mediaType} string.
+     */
+    public static MediaType parse(String mediaType)
+    {
+        try
+        {
+            MimeType mimeType = new MimeType(mediaType);
+            String charsetParam = mimeType.getParameter(CHARSET_PARAM);
+            Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+            return new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), charset);
+        }
+        catch (MimeTypeParseException e)
+        {
+            throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
+        }
+    }
+
+    /**
+     * Returns a media-type for. This would be the equivalent of the media
+     * type {@code "[primaryType]/[subType]"}.
+     *
+     * @param primaryType
+     * @param subType
+     */
+    public static MediaType create(String primaryType, String subType)
+    {
+        return new MediaType(primaryType, subType, null);
+    }
+
+    /**
      * Returns a media-type for the given parameters. This would be the equivalent of the media type
      * {@code "[primaryType]/[subType]; charset=[charset]"}.
      * <p>
-     * TODO MULE-9995 Preserve media type parameters in mule
-     * 
+     *
      * @param primaryType
      * @param subType
      * @param charset
@@ -76,23 +117,23 @@ public final class MediaType implements Serializable
         return new MediaType(primaryType, subType, charset);
     }
 
-    /**
-     * Returns a media-type for. This would be the equivalent of the media
-     * type {@code "[primaryType]/[subType]"}.
-     * 
-     * @param primaryType
-     * @param subType
-     */
-    public static MediaType create(String primaryType, String subType)
-    {
-        return new MediaType(primaryType, subType, null);
-    }
-    
     private MediaType(String primaryType, String subType, Charset charset)
     {
         this.primaryType = primaryType;
         this.subType = subType;
         this.charset = ofNullable(charset);
+    }
+
+    /**
+     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but replacing the
+     * {@code charset} with the value passed.
+     *
+     * @param charset the new charset to use or {@code null} to clear the current {@code charset}.
+     * @return new immutable {@link MediaType} instance.
+     */
+    public MediaType withCharset(Charset charset)
+    {
+        return new MediaType(this.getPrimaryType(), this.getSubType(), charset);
     }
 
     /**
