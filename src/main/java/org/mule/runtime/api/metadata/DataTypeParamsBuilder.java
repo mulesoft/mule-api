@@ -42,7 +42,7 @@ public interface DataTypeParamsBuilder<T>
 
     /**
      * Sets the given encoding. See {@link MediaType#getCharset()}.
-     * 
+     *
      * @param charset the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
      * @throws IllegalCharsetNameException if the {@code charset} is invalid.
@@ -51,7 +51,7 @@ public interface DataTypeParamsBuilder<T>
 
     /**
      * Sets the given encoding. See {@link MediaType#getCharset()}.
-     * 
+     *
      * @param charset the encoding to set. If null or empty, the builder is not changed.
      * @return this builder.
      */
