@@ -178,12 +178,28 @@ public final class MediaType implements Serializable
     }
 
     /**
-     * @return a textual representation of this object, according to the RFC.
+     * @return a textual representation of the MIME type of this object, in format {@code "[primaryType]/[subType]"}.
+     */
+    public String toMimeTypeString()
+    {
+        return primaryType + "/" + subType;
+    }
+
+    /**
+     * @return a textual representation of this object, in format {@code "[primaryType]/[subType]; charset=[charset]"}.
+     */
+    public String toRfcString()
+    {
+        return toMimeTypeString() + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
+    }
+
+    /**
+     * @return a textual representation of this object.
      */
     @Override
     public String toString()
     {
-        return primaryType + "/" + subType + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
+        return toRfcString();
     }
 
     @Override

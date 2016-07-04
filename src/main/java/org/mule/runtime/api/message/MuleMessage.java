@@ -19,7 +19,7 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends Serializable
+public interface MuleMessage extends Serializable
 {
 
     /**
@@ -27,7 +27,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
      *
      * @return a new {@link Builder}.
      */
-    static <PAYLOAD, ATTRIBUTES extends Serializable> PayloadBuilder<PAYLOAD, ATTRIBUTES> builder()
+    static PayloadBuilder builder()
     {
         return AbstractMuleMessageBuilderFactory.getDefaultFactory().create();
     }
@@ -38,8 +38,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
      * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
      * @return a new {@link Builder} based on the template {@code message} provided.
      */
-    static <PAYLOAD, ATTRIBUTES extends Serializable> Builder<PAYLOAD, ATTRIBUTES> builder(MuleMessage<PAYLOAD,
-            ATTRIBUTES> message)
+    static Builder builder(MuleMessage message)
     {
         return AbstractMuleMessageBuilderFactory.getDefaultFactory().create(message);
     }
@@ -47,7 +46,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
     /**
      * @return the current message payload
      */
-    PAYLOAD getPayload();
+    Object getPayload();
 
     /**
      * Gets the attributes associated with the MuleMessage. The {@code Attributes} attributes object is specifc to
@@ -60,15 +59,15 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
      *
      * @return attributes associated with the message, or null if none exist.
      */
-    ATTRIBUTES getAttributes();
+    Serializable getAttributes();
 
     /**
      * Returns the data type (if any) associated with the message's payload.
      */
-    DataType<PAYLOAD> getDataType();
+    DataType getDataType();
 
 
-    interface PayloadBuilder<PAYLOAD, ATTRIBUTES extends Serializable>
+    interface PayloadBuilder
     {
 
         /**
@@ -80,10 +79,9 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
          *
          * @param payload the message payload
-         * @param <N> the payload type
          * @return this builder.
          */
-        <N> Builder<N, ATTRIBUTES> payload(N payload);
+        Builder payload(Object payload);
 
         /**
          * Sets the collection payload for the {@link MuleMessage} to be built.
@@ -95,15 +93,13 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          *
          * @param payload the collection payload
          * @param itemType the collection item type
-         * @param <N> the collection type
-         * @param <E> the item type
          * @return this builder
          */
-        <N extends Collection<E>, E> CollectionBuilder<N, ATTRIBUTES> collectionPayload(N payload, Class<E> itemType);
+        Builder collectionPayload(Collection payload, Class<?> itemType);
 
     }
 
-    interface Builder<PAYLOAD, ATTRIBUTES extends Serializable> extends PayloadBuilder<PAYLOAD, ATTRIBUTES>
+    interface Builder extends PayloadBuilder
     {
 
         /**
@@ -112,7 +108,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * @param mediaType the mediaType to set
          * @return this builder
          */
-        Builder<PAYLOAD, ATTRIBUTES> mediaType(MediaType mediaType);
+        Builder mediaType(MediaType mediaType);
 
         /**
          * Populates the builder from the given {@code value}.
@@ -124,18 +120,18 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * @param value an object instance.
          * @return this builder.
          */
-        <A extends Serializable> Builder<PAYLOAD, A> attributes(A value);
+        Builder attributes(Serializable value);
 
         /**
          * Builds a new {@link MuleMessage} with the values set in this builder.
          *
          * @return a newly built {@link MuleMessage}.
          */
-        MuleMessage<PAYLOAD, ATTRIBUTES> build();
+        MuleMessage build();
 
     }
 
-    interface CollectionBuilder<PAYLOAD, ATTRIBUTES extends Serializable> extends Builder<PAYLOAD, ATTRIBUTES>
+    interface CollectionBuilder extends Builder
     {
 
         /**
@@ -145,7 +141,7 @@ public interface MuleMessage<PAYLOAD, ATTRIBUTES extends Serializable> extends S
          * @param mediaType the mediaType to set
          * @return this builder
          */
-        CollectionBuilder<PAYLOAD, ATTRIBUTES> itemMediaType(MediaType mediaType);
+        CollectionBuilder itemMediaType(MediaType mediaType);
 
     }
 

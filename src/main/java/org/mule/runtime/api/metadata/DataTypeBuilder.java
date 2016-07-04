@@ -15,7 +15,7 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
+public interface DataTypeBuilder extends DataTypeParamsBuilder
 {
 
     /**
@@ -24,7 +24,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @param type the java type to set.
      * @return this builder.
      */
-    <N> DataTypeParamsBuilder<N> type(Class<N> type);
+    DataTypeParamsBuilder type(Class<?> type);
 
     /**
      * Sets the given type for the {@link CollectionDataType} to be built. See
@@ -35,7 +35,15 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
      *             {@link Collection}.
      */
-    <N extends Collection<I>, I> DataTypeCollectionTypeBuilder<N> collectionType(Class<N> collectionType);
+    DataTypeCollectionTypeBuilder collectionType(Class<? extends Collection> collectionType);
+
+    /**
+     * Down-casts the builder to {@link DataTypeCollectionTypeBuilder}, allowing the builder to be used in a fluent way
+     * without having to cast it when dealing with {@link Collection}s.
+     *
+     * @return this builder.
+     */
+    DataTypeCollectionTypeBuilder asCollectionTypeBuilder();
 
     /**
      * Populates the builder from the given {@code value}.
@@ -47,7 +55,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      * @param value an object instance.
      * @return this builder.
      */
-    DataTypeParamsBuilder<T> fromObject(T value);
+    DataTypeParamsBuilder fromObject(Object value);
 
     /**
      * Provides methods to set data associated to the items of a {@link Collection}, when the type
@@ -55,7 +63,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
      *
      * @param <T>
      */
-    interface DataTypeCollectionTypeBuilder<T> extends DataTypeParamsBuilder<T>
+    interface DataTypeCollectionTypeBuilder extends DataTypeParamsBuilder
     {
 
         /**
@@ -65,7 +73,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
          * @param itemType the java type to set.
          * @return this builder.
          */
-        <I> DataTypeCollectionTypeBuilder<T> itemType(Class<I> itemType);
+        DataTypeCollectionTypeBuilder itemType(Class<?> itemType);
 
         /**
          * Sets the given {@code itemMediaType} for the {@link DataType} to be built., when the type
@@ -74,7 +82,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
          * @param itemMediaType the media type string to set
          * @return this builder.
          */
-        <I> DataTypeCollectionTypeBuilder<T> itemMediaType(String itemMediaType);
+        DataTypeCollectionTypeBuilder itemMediaType(String itemMediaType);
 
         /**
          * Sets the given {@code itemMediaType} for the {@link DataType} to be built, when the type
@@ -87,7 +95,7 @@ public interface DataTypeBuilder<T> extends DataTypeParamsBuilder<T>
          * @param itemMediaType the media type to set. If null, the builder is not changed.
          * @return this builder.
          */
-        <I> DataTypeCollectionTypeBuilder<T> itemMediaType(MediaType itemMediaType);
+        DataTypeCollectionTypeBuilder itemMediaType(MediaType itemMediaType);
 
     }
 

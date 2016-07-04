@@ -25,7 +25,7 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public interface DataType<T> extends Serializable
+public interface DataType extends Serializable
 {
 
     /**
@@ -33,7 +33,7 @@ public interface DataType<T> extends Serializable
      * 
      * @return a new {@link DataTypeBuilder}.
      */
-    static <T> DataTypeBuilder<T> builder()
+    static DataTypeBuilder builder()
     {
         return getDefaultFactory().create();
     }
@@ -44,7 +44,7 @@ public interface DataType<T> extends Serializable
      * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
      * @return a new {@link DataTypeBuilder} based on the template {@code dataType} provided.
      * */
-    static <T> DataTypeBuilder<T> builder(DataType<T> dataType)
+    static DataTypeBuilder builder(DataType dataType)
     {
         return getDefaultFactory().create(dataType);
     }
@@ -56,7 +56,7 @@ public interface DataType<T> extends Serializable
      * @param type the Java type to create {@link DataType} for.
      * @return a new {@link DataTypeBuilder} for the given {@code type}.
      */
-    static <T> DataType<T> fromType(Class<T> type)
+    static DataType fromType(Class<?> type)
     {
         return builder().type(type).build();
     }
@@ -75,36 +75,36 @@ public interface DataType<T> extends Serializable
      * @param <T> the type of the object
      * @return a new {@link DataType} for the given {@code value}.
      */
-    static <T> DataType<T> fromObject(T value)
+    static DataType fromObject(Object value)
     {
-        return getDefaultFactory().<T> create().fromObject(value).build();
+        return getDefaultFactory().create().fromObject(value).build();
     }
 
 
-    DataType<String> TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
-    DataType<String> XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
-    DataType<String> JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
-    DataType<String> HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
-    DataType<String> ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
-    DataType<String> RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
+    DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
+    DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
+    DataType JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
+    DataType HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
+    DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
+    DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
 
     //Common Java types
-    DataType<String> STRING = fromType(String.class);
-    DataType<Number> NUMBER = fromType(Number.class);
-    DataType<Boolean> BOOLEAN = fromType(Boolean.class);
-    DataType<Object> OBJECT = fromType(Object.class);
-    DataType<byte[]> BYTE_ARRAY = fromType(byte[].class);
-    DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
-    DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
-    DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
-            getDefaultFactory().<Collection<MuleMessage>> create().collectionType(Collection.class).itemType(MuleMessage.class).mediaType(MediaType.ANY).build();
+    DataType STRING = fromType(String.class);
+    DataType NUMBER = fromType(Number.class);
+    DataType BOOLEAN = fromType(Boolean.class);
+    DataType OBJECT = fromType(Object.class);
+    DataType BYTE_ARRAY = fromType(byte[].class);
+    DataType INPUT_STREAM = fromType(InputStream.class);
+    DataType MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
+    CollectionDataType MULE_MESSAGE_COLLECTION =
+            (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(MuleMessage.class).mediaType(MediaType.ANY).build();
 
     /**
      * The object type of the source object to transform.
      *
      * @return the class object of the source object. This must not be null
      */
-    Class<T> getType();
+    Class<?> getType();
 
     /**
      * The mime type of the the source object to transform.
@@ -114,8 +114,11 @@ public interface DataType<T> extends Serializable
     MediaType getMediaType();
 
     /**
-     * Used to determine if this data type is compatible with the data type passed in.  This checks to see if the mime types are
-     * equal and whether the Java types are assignable
+     * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime
+     * types matches the one in the given dataType and whether the Java types are assignable.
+     * <p>
+     * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may
+     * yield different result.
      *
      * @param dataType the dataType object to compare with
      * @return true if the mime types are the same and this type can be assigned to the dataType.type.
