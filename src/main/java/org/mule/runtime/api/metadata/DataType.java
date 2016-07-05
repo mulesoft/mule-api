@@ -97,7 +97,7 @@ public interface DataType<T> extends Serializable
     DataType<InputStream> INPUT_STREAM = fromType(InputStream.class);
     DataType<MuleMessage> MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
     DataType<Collection<MuleMessage>> MULE_MESSAGE_COLLECTION =
-            getDefaultFactory().<Collection<MuleMessage>> create().collectionType(Collection.class).mediaType(MediaType.ANY).build();
+            getDefaultFactory().<Collection<MuleMessage>> create().collectionType(Collection.class).itemType(MuleMessage.class).mediaType(MediaType.ANY).build();
 
     /**
      * The object type of the source object to transform.
