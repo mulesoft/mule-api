@@ -133,7 +133,18 @@ public final class MediaType implements Serializable
      */
     public MediaType withCharset(Charset charset)
     {
-        return new MediaType(this.getPrimaryType(), this.getSubType(), charset);
+        return create(this.getPrimaryType(), this.getSubType(), charset);
+    }
+
+    /**
+     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but removing all the
+     * parameters (like the {@code charset})
+     *
+     * @return new immutable {@link MediaType} instance.
+     */
+    public MediaType withoutParameters()
+    {
+        return create(this.getPrimaryType(), this.getSubType());
     }
 
     /**
@@ -178,19 +189,11 @@ public final class MediaType implements Serializable
     }
 
     /**
-     * @return a textual representation of the MIME type of this object, in format {@code "[primaryType]/[subType]"}.
-     */
-    public String toMimeTypeString()
-    {
-        return primaryType + "/" + subType;
-    }
-
-    /**
      * @return a textual representation of this object, in format {@code "[primaryType]/[subType]; charset=[charset]"}.
      */
     public String toRfcString()
     {
-        return toMimeTypeString() + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
+        return primaryType + "/" + subType + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
     }
 
     /**
