@@ -14,7 +14,7 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public interface CollectionDataType<PAYLOAD, ITEM> extends DataType<PAYLOAD>
+public interface CollectionDataType extends DataType
 {
 
     /**
@@ -22,5 +22,5 @@ public interface CollectionDataType<PAYLOAD, ITEM> extends DataType<PAYLOAD>
      *
      * @return the {@link DataType} of collection items.
      */
-    DataType<ITEM> getItemDataType();
+    DataType getItemDataType();
 }

@@ -58,12 +58,12 @@ public abstract class AbstractDataTypeBuilderFactory
     /**
      * @return a fresh {@link DataTypeBuilder} object.
      */
-    protected abstract <T> DataTypeBuilder<T> create();
+    protected abstract DataTypeBuilder create();
 
     /**
      * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
      * @return a fresh {@link DataTypeBuilder} based on the template {@code dataType} provided.
      */
-    protected abstract <T> DataTypeBuilder<T> create(DataType<T> dataType);
+    protected abstract DataTypeBuilder create(DataType dataType);
 
 }
