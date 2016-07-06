@@ -6,12 +6,15 @@
  */
 package org.mule.runtime.api.metadata.descriptor.builder;
 
+import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.typeDescriptor;
+import static org.mule.runtime.api.metadata.resolving.MetadataResult.*;
+import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.message.MuleMessage;
 import org.mule.runtime.api.metadata.MetadataAware;
 import org.mule.runtime.api.metadata.descriptor.ImmutableOutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
-import org.mule.runtime.api.message.MuleMessage;
-import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
  * Implementation of the builder design pattern to create instances of {@link OutputMetadataDescriptor}
@@ -21,8 +24,8 @@ import org.mule.metadata.api.model.MetadataType;
 public class OutputMetadataDescriptorBuilder
 {
 
-    private TypeMetadataDescriptor payload;
-    private TypeMetadataDescriptor attributes;
+    private MetadataResult<TypeMetadataDescriptor> returnTypeResult;
+    private MetadataResult<TypeMetadataDescriptor> attributes;
 
     /**
      * Creates a new instance of {@link OutputMetadataDescriptorBuilder}
@@ -32,30 +35,51 @@ public class OutputMetadataDescriptorBuilder
     }
 
     /**
-     * Describes that the return type of the component will be of {@link MetadataType} {@param payloadType}
+     * Describes that the return type of the component will be of {@link MetadataType} {@param returnTypeResult}
      *
-     * @param payloadType of the component payload output
+     * @param returnTypeResult of the component returnTypeResult output
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
      */
-    public OutputMetadataDescriptorBuilder withReturnType(MetadataType payloadType)
+    public OutputMetadataDescriptorBuilder withReturnType(MetadataResult<TypeMetadataDescriptor> returnTypeResult)
     {
-        this.payload = MetadataDescriptorBuilder.typeDescriptor("Message.Payload")
-                .withType(payloadType)
-                .build();
+        this.returnTypeResult = returnTypeResult;
         return this;
     }
 
     /**
-     * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType} of the component will be {@param attributesType}
+     * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType} of the component will be {@param attributesTypeResult}
+     *
+     * @param attributesTypeResult of the component output attributes
+     * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
+     */
+    public OutputMetadataDescriptorBuilder withAttributesType(MetadataResult<TypeMetadataDescriptor> attributesTypeResult)
+    {
+        this.attributes = attributesTypeResult;
+        return this;
+    }
+
+    /**
+     * Describes that the return type of the component will be of {@link MetadataType} {@param returnTypeResult}
+     *
+     * @param returnType of the component returnTypeResult output
+     * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
+     */
+    public OutputMetadataDescriptorBuilder withReturnType(MetadataType returnType)
+    {
+        this.returnTypeResult = success(typeDescriptor().withType(returnType).build());
+        return this;
+    }
+
+    /**
+     * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType}
+     * of the component will be {@param attributesTypeResult}
      *
      * @param attributesType of the component output attributes
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
      */
     public OutputMetadataDescriptorBuilder withAttributesType(MetadataType attributesType)
     {
-        this.attributes = MetadataDescriptorBuilder.typeDescriptor("Message.Attributes")
-                .withType(attributesType)
-                .build();
+        this.attributes = success(typeDescriptor().withType(attributesType).build());
         return this;
     }
 
@@ -67,7 +91,7 @@ public class OutputMetadataDescriptorBuilder
      */
     public OutputMetadataDescriptor build()
     {
-        if (payload == null)
+        if (returnTypeResult == null)
         {
             throw new IllegalArgumentException("Payload type parameter cannot be null for OutputMetadataDescriptor");
         }
@@ -76,7 +100,7 @@ public class OutputMetadataDescriptorBuilder
             throw new IllegalArgumentException("Attributes type parameter cannot be null for OutputMetadataDescriptor");
         }
 
-        return new ImmutableOutputMetadataDescriptor(payload, attributes);
+        return new ImmutableOutputMetadataDescriptor(returnTypeResult, attributes);
     }
 
 }

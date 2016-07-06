@@ -9,7 +9,7 @@ package org.mule.runtime.api.metadata.descriptor;
 import org.mule.metadata.api.model.MetadataType;
 
 /**
- * Represents the Metadata view of a simple type, including it's reference name and {@link MetadataType}
+ * Represents the Metadata view of a simple {@link MetadataType}
  *
  * @since 1.0
  */
@@ -17,12 +17,7 @@ public interface TypeMetadataDescriptor
 {
 
     /**
-     * @return the Parameter's name
-     */
-    String getName();
-
-    /**
-     * @return the Parameter's {@link MetadataType}
+     * @return the component's {@link MetadataType}
      */
     MetadataType getType();
 }

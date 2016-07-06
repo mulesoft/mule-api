@@ -20,13 +20,13 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 public final class ImmutableMetadataResult<T> implements MetadataResult<T>
 {
 
-    private final T payload;
+    private final T result;
     private final boolean isSuccess;
     private final MetadataFailure failure;
 
-    ImmutableMetadataResult(T payload)
+    ImmutableMetadataResult(T result)
     {
-        this.payload = payload;
+        this.result = result;
         this.isSuccess = true;
         this.failure = null;
     }
@@ -36,32 +36,31 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T>
         this(null, e);
     }
 
-    ImmutableMetadataResult(T payload, Exception e)
+    ImmutableMetadataResult(T result, Exception e)
     {
-        this(payload, e.getMessage(), e);
+        this(result, e.getMessage(), e);
     }
 
-    ImmutableMetadataResult(T payload, String message, Exception e)
+    ImmutableMetadataResult(T result, String message, Exception e)
     {
-        this.payload = payload;
+        this.result = result;
         this.isSuccess = false;
         this.failure = new MetadataFailure(message, ExceptionUtils.getStackTrace(e), getFailureCode(e));
     }
 
-    ImmutableMetadataResult(T payload, MetadataFailure failure)
+    ImmutableMetadataResult(T result, MetadataFailure failure)
     {
-        this.payload = payload;
+        this.result = result;
         this.isSuccess = false;
         this.failure = failure;
     }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public T get()
     {
-        return payload;
+        return result;
     }
 
     /**
