@@ -9,26 +9,15 @@ package org.mule.runtime.api.metadata.descriptor;
 import org.mule.metadata.api.model.MetadataType;
 
 /**
- * Immutable concrete implementation of a {@link TypeMetadataDescriptor}
+ * Represents the Metadata view of a parameter, including it's name and {@link MetadataType}
  *
  * @since 1.0
  */
-public final class ImmutableTypeMetadataDescriptor implements TypeMetadataDescriptor
+public interface ParameterMetadataDescriptor extends TypeMetadataDescriptor
 {
 
-    private final MetadataType type;
-
-    public ImmutableTypeMetadataDescriptor(MetadataType type)
-    {
-        this.type = type;
-    }
-
     /**
-     * {@inheritDoc}
+     * @return the Parameter's name
      */
-    @Override
-    public MetadataType getType()
-    {
-        return type;
-    }
+    String getName();
 }

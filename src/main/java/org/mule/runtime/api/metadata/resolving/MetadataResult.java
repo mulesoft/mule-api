@@ -6,9 +6,6 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
-import static java.util.stream.Collectors.toList;
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +55,7 @@ public interface MetadataResult<T>
     {
         if (!originalResult.getFailure().isPresent())
         {
-            throw new IllegalArgumentException("A failing result was expected but no Failure was found");
+            throw new IllegalArgumentException("A failing result was expected but no Failures were found");
         }
 
         return new ImmutableMetadataResult<>(newPayload, originalResult.getFailure().get());
@@ -103,44 +100,6 @@ public interface MetadataResult<T>
     }
 
     /**
-     * Provides a way to enrich a result payload that is composed by several other results
-     *
-     * @param payload        object returned by the metadata operation
-     * @param resultsToMerge results whose payloads compose this results payload
-     * @return a failure {@link MetadataResult} instance if any of the resultsToMerge was a failing result.
-     * A successful {@link MetadataResult} otherwise
-     */
-    static <T> MetadataResult<T> mergeResults(T payload, MetadataResult<?>... resultsToMerge)
-    {
-        //TODO - MULE-9821 - Improve MetadataResult error communication
-        List<MetadataResult<?>> results = Arrays.asList(resultsToMerge);
-
-        if (results.stream().allMatch(MetadataResult::isSuccess))
-        {
-            return success(payload);
-        }
-
-        StringBuilder messageBuilder = new StringBuilder();
-        StringBuilder reasonBuilder = new StringBuilder();
-
-        final List<MetadataResult<?>> failureResults = results.stream().filter(r -> !r.isSuccess()).collect(toList());
-
-        failureResults.forEach(r -> {
-            messageBuilder.append("Message: ").append(r.getFailure().get().getMessage()).append("\n");
-            reasonBuilder.append("Reason: ").append(r.getFailure().get().getReason()).append("\n");
-        });
-
-        FailureCode failureCode = FailureCode.UNKNOWN;
-        FailureCode firstFailureCode = failureResults.get(0).getFailure().get().getFailureCode();
-        if (failureResults.stream().allMatch(result -> result.getFailure().get().getFailureCode().equals(firstFailureCode)))
-        {
-            failureCode = firstFailureCode;
-        }
-
-        return failure(payload, messageBuilder.toString(), failureCode, reasonBuilder.toString());
-    }
-
-    /**
      * @return the object returned by the invoked Metadata operation
      */
     T get();
@@ -154,8 +113,8 @@ public interface MetadataResult<T>
      * If {@link this#isSuccess} is false, then a {@link MetadataFailure} instance is provided
      * in order to describe the error that occurred during the invocation.
      *
-     * @return the {@link MetadataFailure} describing the error that occurred during the invocation
-     * if one occurred. {@link Optional#empty()} if {@link this#isSuccess} is true
+     * @return a {@link List} of {@link MetadataFailure}s describing the errors that occurred during the invocation
+     * if at least one occurred.
      */
     Optional<MetadataFailure> getFailure();
 

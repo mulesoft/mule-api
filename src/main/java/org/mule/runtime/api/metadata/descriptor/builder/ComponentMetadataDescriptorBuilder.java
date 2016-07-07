@@ -9,7 +9,9 @@ package org.mule.runtime.api.metadata.descriptor.builder;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.ImmutableComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 import java.util.Collections;
 import java.util.List;
@@ -25,9 +27,9 @@ public class ComponentMetadataDescriptorBuilder
 {
 
     private final String name;
-    private List<TypeMetadataDescriptor> parameters;
-    private OutputMetadataDescriptor output;
-    private TypeMetadataDescriptor content;
+    private List<MetadataResult<ParameterMetadataDescriptor>> parameters;
+    private MetadataResult<OutputMetadataDescriptor> output;
+    private MetadataResult<ParameterMetadataDescriptor> content;
 
     /**
      * Creates a new instance of {@link ComponentMetadataDescriptorBuilder} with the name of the component to describe
@@ -50,7 +52,7 @@ public class ComponentMetadataDescriptorBuilder
      *                   of the component described
      * @return the contributed descriptor builder
      */
-    public ComponentMetadataDescriptorBuilder withParametersDescriptor(List<TypeMetadataDescriptor> parameters)
+    public ComponentMetadataDescriptorBuilder withParametersDescriptor(List<MetadataResult<ParameterMetadataDescriptor>> parameters)
     {
         this.parameters = parameters;
         return this;
@@ -60,7 +62,7 @@ public class ComponentMetadataDescriptorBuilder
      * @param output the {@link OutputMetadataDescriptor} that describes the output of the component
      * @return the contributed descriptor builder contributed with the {@link OutputMetadataDescriptor}
      */
-    public ComponentMetadataDescriptorBuilder withOutputDescriptor(OutputMetadataDescriptor output)
+    public ComponentMetadataDescriptorBuilder withOutputDescriptor(MetadataResult<OutputMetadataDescriptor> output)
     {
         this.output = output;
         return this;
@@ -70,7 +72,7 @@ public class ComponentMetadataDescriptorBuilder
      * @param content the {@link TypeMetadataDescriptor} that describes the metadata for the content of the component described
      * @return the contributed descriptor builder contributed with the {@link TypeMetadataDescriptor} for content
      */
-    public ComponentMetadataDescriptorBuilder withContentDescriptor(TypeMetadataDescriptor content)
+    public ComponentMetadataDescriptorBuilder withContentDescriptor(MetadataResult<ParameterMetadataDescriptor> content)
     {
         this.content = content;
         return this;

@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -16,25 +18,25 @@ import java.util.Optional;
  */
 public interface ComponentMetadataDescriptor
 {
-
     /**
      * @return the Operation whose metadata is described
      */
     String getName();
 
     /**
-     * @return a list of {@link TypeMetadataDescriptor} containing one descriptor
-     * for each Parameter the Operation has
+     * @return a {@link List} of {@link MetadataResult} of {@link ParameterMetadataDescriptor}
+     * containing one result for each parameter that the operation has.
      */
-    List<TypeMetadataDescriptor> getParametersMetadata();
+    List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata();
 
     /**
-     * @return the {@link TypeMetadataDescriptor} of the Operation's Content parameter, if present
+     * @return the {@link MetadataResult} of {@link ParameterMetadataDescriptor}
+     * of the operation's content parameter, if present.
      */
-    Optional<TypeMetadataDescriptor> getContentMetadata();
+    Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata();
 
     /**
-     * @return the {@link TypeMetadataDescriptor} of the Operation's output
+     * @return the {@link OutputMetadataDescriptor} of the Operation's output
      */
-    OutputMetadataDescriptor getOutputMetadata();
+    MetadataResult<OutputMetadataDescriptor> getOutputMetadata();
 }

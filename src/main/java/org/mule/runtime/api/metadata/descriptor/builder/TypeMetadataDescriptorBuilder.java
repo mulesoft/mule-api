@@ -6,11 +6,9 @@
  */
 package org.mule.runtime.api.metadata.descriptor.builder;
 
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.descriptor.ImmutableTypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
-import org.mule.metadata.api.model.MetadataType;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Implementation of the builder design pattern to create instances of {@link TypeMetadataDescriptor}
@@ -20,27 +18,17 @@ import org.apache.commons.lang3.StringUtils;
 public class TypeMetadataDescriptorBuilder
 {
 
-    private final String name;
     private MetadataType type;
 
     /**
-     * Creates a new instance of the builder associated to the component parameter {@param name}
-     *
-     * @param name of a component parameter
-     * @throws IllegalArgumentException if name is blank
+     * Creates a new instance of the builder.
      */
-    TypeMetadataDescriptorBuilder(String name)
+    TypeMetadataDescriptorBuilder()
     {
-        if (StringUtils.isBlank(name))
-        {
-            throw new IllegalArgumentException("Name parameter cannot be blank for TypeMetadataDescriptor");
-        }
-
-        this.name = name;
     }
 
     /**
-     * Indicates that the component parameter with name {@link #name} will be of type {@param type}
+     * Indicates that the component will be of type {@param type}
      *
      * @param type of the component parameter
      * @return the instance builder contributed with a {@link MetadataType}
@@ -52,20 +40,21 @@ public class TypeMetadataDescriptorBuilder
     }
 
     /**
-     * Builds and creates the descriptor of the component parameter.
-     * Validates that the name nor type are not null.
+     * Builds and creates the descriptor of the component.
+     * <p>
+     * Validates that the type is not null.
      *
-     * @return a {@link TypeMetadataDescriptor} with the metadata description of the component parameter
+     * @return a {@link TypeMetadataDescriptor} with the metadata description of the component.
      * @throws IllegalArgumentException if type was not set during building
      */
     public TypeMetadataDescriptor build()
     {
         if (type == null)
         {
-            throw new IllegalArgumentException("Type parameter cannot be null for TypeMetadataDescriptor");
+            throw new IllegalArgumentException("Type parameter cannot be null for ParameterMetadataDescriptor");
         }
 
-        return new ImmutableTypeMetadataDescriptor(name, type);
+        return new ImmutableTypeMetadataDescriptor(type);
     }
 
 }

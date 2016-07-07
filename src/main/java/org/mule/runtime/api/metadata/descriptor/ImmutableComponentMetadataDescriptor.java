@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -17,18 +19,19 @@ import java.util.Optional;
 public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor
 {
 
-    private final String name;
-    private final List<TypeMetadataDescriptor> parameters;
-    private final OutputMetadataDescriptor outputParameter;
-    private final TypeMetadataDescriptor content;
+    private final String componentName;
+    private final List<MetadataResult<ParameterMetadataDescriptor>> parameters;
+    private final MetadataResult<OutputMetadataDescriptor> output;
+    private final MetadataResult<ParameterMetadataDescriptor> content;
 
-    public ImmutableComponentMetadataDescriptor(String name, List<TypeMetadataDescriptor> parameters,
-                                                OutputMetadataDescriptor outputParameter,
-                                                TypeMetadataDescriptor content)
+    public ImmutableComponentMetadataDescriptor(String componentName,
+                                                List<MetadataResult<ParameterMetadataDescriptor>> parameters,
+                                                MetadataResult<OutputMetadataDescriptor> output,
+                                                MetadataResult<ParameterMetadataDescriptor> content)
     {
-        this.name = name;
+        this.componentName = componentName;
         this.parameters = parameters;
-        this.outputParameter = outputParameter;
+        this.output = output;
         this.content = content;
     }
 
@@ -36,22 +39,16 @@ public final class ImmutableComponentMetadataDescriptor implements ComponentMeta
      * {@inheritDoc}
      */
     @Override
-    public String getName()
+    public List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata()
     {
-        return name;
+        return this.parameters;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<TypeMetadataDescriptor> getParametersMetadata()
-    {
-        return this.parameters;
-    }
-
-    @Override
-    public Optional<TypeMetadataDescriptor> getContentMetadata()
+    public Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata()
     {
         return Optional.ofNullable(content);
     }
@@ -60,8 +57,17 @@ public final class ImmutableComponentMetadataDescriptor implements ComponentMeta
      * {@inheritDoc}
      */
     @Override
-    public OutputMetadataDescriptor getOutputMetadata()
+    public MetadataResult<OutputMetadataDescriptor> getOutputMetadata()
     {
-        return this.outputParameter;
+        return this.output;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getName()
+    {
+        return componentName;
     }
 }

@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
+
 /**
  * Immutable implementation of {@link OutputMetadataDescriptor}
  *
@@ -14,12 +16,12 @@ package org.mule.runtime.api.metadata.descriptor;
 public final class ImmutableOutputMetadataDescriptor implements OutputMetadataDescriptor
 {
 
-    private final TypeMetadataDescriptor payload;
-    private final TypeMetadataDescriptor attributes;
+    private final MetadataResult<TypeMetadataDescriptor> content;
+    private final MetadataResult<TypeMetadataDescriptor> attributes;
 
-    public ImmutableOutputMetadataDescriptor(TypeMetadataDescriptor payload, TypeMetadataDescriptor attributes)
+    public ImmutableOutputMetadataDescriptor(MetadataResult<TypeMetadataDescriptor> content, MetadataResult<TypeMetadataDescriptor> attributes)
     {
-        this.payload = payload;
+        this.content = content;
         this.attributes = attributes;
     }
 
@@ -27,16 +29,16 @@ public final class ImmutableOutputMetadataDescriptor implements OutputMetadataDe
      * {@inheritDoc}
      */
     @Override
-    public TypeMetadataDescriptor getPayloadMetadata()
+    public MetadataResult<TypeMetadataDescriptor> getPayloadMetadata()
     {
-        return payload;
+        return content;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public TypeMetadataDescriptor getAttributesMetadata()
+    public MetadataResult<TypeMetadataDescriptor> getAttributesMetadata()
     {
         return attributes;
     }

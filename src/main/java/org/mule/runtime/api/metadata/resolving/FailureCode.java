@@ -25,10 +25,11 @@ public final class FailureCode
     public static final FailureCode NOT_AUTHORIZED = new FailureCode("NOT_AUTHORIZED");
     public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
     public static final FailureCode NONE = new FailureCode("NO_ERROR");
+    public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
 
     private String name;
 
-    private FailureCode(String name)
+    public FailureCode(String name)
     {
         this.name = name;
     }

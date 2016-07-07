@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata.descriptor;
 
 import org.mule.runtime.api.message.MuleMessage;
+import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
  * Represents the view of all the Metadata associated to an Component's
@@ -21,12 +22,12 @@ public interface OutputMetadataDescriptor
      * @return the {@link TypeMetadataDescriptor} of the Component's
      * output {@link MuleMessage#getPayload}
      */
-    TypeMetadataDescriptor getPayloadMetadata();
+    MetadataResult<TypeMetadataDescriptor> getPayloadMetadata();
 
     /**
      * @return the {@link TypeMetadataDescriptor} of the Component's
      * output {@link MuleMessage#getAttributes}
      */
-    TypeMetadataDescriptor getAttributesMetadata();
+    MetadataResult<TypeMetadataDescriptor> getAttributesMetadata();
 
 }

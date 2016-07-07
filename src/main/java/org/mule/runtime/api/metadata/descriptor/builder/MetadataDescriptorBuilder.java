@@ -12,7 +12,7 @@ import org.mule.runtime.api.metadata.MetadataAware;
 /**
  * Builder provider for metadata descriptor builders.
  * This class provides instances of {@link ComponentMetadataDescriptorBuilder}, {@link OutputMetadataDescriptorBuilder}
- * and {@link TypeMetadataDescriptorBuilder} to describe the metadata capabilities of a {@link MetadataAware} component
+ * and {@link ParameterMetadataDescriptorBuilder} to describe the metadata capabilities of a {@link MetadataAware} component
  *
  * @since 1.0
  */
@@ -38,10 +38,18 @@ public abstract class MetadataDescriptorBuilder
 
     /**
      * @param name of the component parameter to associate their metadata description
-     * @return a new instance of {@link TypeMetadataDescriptorBuilder} associated to the {@param name}.
+     * @return a new instance of {@link ParameterMetadataDescriptorBuilder} associated to the {@param name}.
      */
-    public static TypeMetadataDescriptorBuilder typeDescriptor(String name)
+    public static ParameterMetadataDescriptorBuilder parameterDescriptor(String name)
     {
-        return new TypeMetadataDescriptorBuilder(name);
+        return new ParameterMetadataDescriptorBuilder(name);
+    }
+
+    /**
+     * @return a new instance of {@link TypeMetadataDescriptorBuilder}.
+     */
+    public static TypeMetadataDescriptorBuilder typeDescriptor()
+    {
+        return new TypeMetadataDescriptorBuilder();
     }
 }
