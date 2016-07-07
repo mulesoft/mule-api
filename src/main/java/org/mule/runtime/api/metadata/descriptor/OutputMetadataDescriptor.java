@@ -19,13 +19,13 @@ public interface OutputMetadataDescriptor
 {
 
     /**
-     * @return the {@link TypeMetadataDescriptor} of the Component's
+     * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
      * output {@link MuleMessage#getPayload}
      */
     MetadataResult<TypeMetadataDescriptor> getPayloadMetadata();
 
     /**
-     * @return the {@link TypeMetadataDescriptor} of the Component's
+     * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
      * output {@link MuleMessage#getAttributes}
      */
     MetadataResult<TypeMetadataDescriptor> getAttributesMetadata();

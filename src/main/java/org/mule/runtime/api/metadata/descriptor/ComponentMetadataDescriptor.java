@@ -36,7 +36,7 @@ public interface ComponentMetadataDescriptor
     Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata();
 
     /**
-     * @return the {@link OutputMetadataDescriptor} of the Operation's output
+     * @return a {@link MetadataResult} with the {@link OutputMetadataDescriptor} of the Operation's output
      */
     MetadataResult<OutputMetadataDescriptor> getOutputMetadata();
 }

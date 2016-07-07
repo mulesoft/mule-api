@@ -48,8 +48,8 @@ public class ComponentMetadataDescriptorBuilder
     }
 
     /**
-     * @param parameters a {@link List} of {@link TypeMetadataDescriptor} that describe the metadata for each parameter
-     *                   of the component described
+     * @param parameters a {@link MetadataResult} of {@link List} of {@link TypeMetadataDescriptor} that describe the metadata for each parameter
+     *                   of the component described.
      * @return the contributed descriptor builder
      */
     public ComponentMetadataDescriptorBuilder withParametersDescriptor(List<MetadataResult<ParameterMetadataDescriptor>> parameters)
@@ -59,7 +59,7 @@ public class ComponentMetadataDescriptorBuilder
     }
 
     /**
-     * @param output the {@link OutputMetadataDescriptor} that describes the output of the component
+     * @param output a {@link MetadataResult} of {@link OutputMetadataDescriptor} that describes the output of the component
      * @return the contributed descriptor builder contributed with the {@link OutputMetadataDescriptor}
      */
     public ComponentMetadataDescriptorBuilder withOutputDescriptor(MetadataResult<OutputMetadataDescriptor> output)
@@ -69,7 +69,7 @@ public class ComponentMetadataDescriptorBuilder
     }
 
     /**
-     * @param content the {@link TypeMetadataDescriptor} that describes the metadata for the content of the component described
+     * @param content a {@link MetadataResult} of {@link ParameterMetadataDescriptor} that describes the metadata for the content of the component described
      * @return the contributed descriptor builder contributed with the {@link TypeMetadataDescriptor} for content
      */
     public ComponentMetadataDescriptorBuilder withContentDescriptor(MetadataResult<ParameterMetadataDescriptor> content)
