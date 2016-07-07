@@ -10,6 +10,7 @@ import org.mule.runtime.api.metadata.CollectionDataType;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 
+import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.Collection;
 
@@ -162,5 +163,27 @@ public interface MuleMessage extends Serializable
         CollectionBuilder itemMediaType(MediaType mediaType);
 
     }
+
+    Attributes NULL_ATTRIBUTES = new Attributes()
+    {
+        private static final long serialVersionUID = 6646369787031499706L;
+
+
+        private Object readResolve() throws ObjectStreamException
+        {
+            return NULL_ATTRIBUTES;
+        }
+
+        @Override
+        public int hashCode ()
+        {
+            return 664636978;}
+
+        @Override
+        public String toString()
+        {
+            return "{NullAttributes}";
+        }
+    };
 
 }
