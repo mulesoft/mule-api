@@ -37,10 +37,23 @@ public interface MuleMessage extends Serializable
      *
      * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
      * @return a new {@link Builder} based on the template {@code message} provided.
+     * @throws NullPointerException if the message is null
      */
     static Builder builder(MuleMessage message)
     {
         return AbstractMuleMessageBuilderFactory.getDefaultFactory().create(message);
+    }
+
+    /**
+     * Create a new {@link MuleMessage instance} with the given payload.
+     *
+     * @param payload the message payload
+     * @return new message instance
+     * @throws NullPointerException if the payload is null
+     */
+    static MuleMessage of(Object payload)
+    {
+        return builder().payload(payload).build();
     }
 
     /**
@@ -59,7 +72,7 @@ public interface MuleMessage extends Serializable
      *
      * @return attributes associated with the message, or null if none exist.
      */
-    Serializable getAttributes();
+    Attributes getAttributes();
 
     /**
      * Returns the data type (if any) associated with the message's payload.
@@ -80,6 +93,7 @@ public interface MuleMessage extends Serializable
          *
          * @param payload the message payload
          * @return this builder.
+         * @throws NullPointerException if the payload is null
          */
         Builder payload(Object payload);
 
@@ -94,6 +108,7 @@ public interface MuleMessage extends Serializable
          * @param payload the collection payload
          * @param itemType the collection item type
          * @return this builder
+         * @throws NullPointerException if the payload is null
          */
         Builder collectionPayload(Collection payload, Class<?> itemType);
 
@@ -107,6 +122,7 @@ public interface MuleMessage extends Serializable
          *
          * @param mediaType the mediaType to set
          * @return this builder
+         * @throws NullPointerException if the payload is null
          */
         Builder mediaType(MediaType mediaType);
 
@@ -119,8 +135,9 @@ public interface MuleMessage extends Serializable
          *
          * @param value an object instance.
          * @return this builder.
+         * @throws NullPointerException if the payload is null
          */
-        Builder attributes(Serializable value);
+        Builder attributes(Attributes value);
 
         /**
          * Builds a new {@link MuleMessage} with the values set in this builder.
@@ -140,6 +157,7 @@ public interface MuleMessage extends Serializable
          *
          * @param mediaType the mediaType to set
          * @return this builder
+         * @throws NullPointerException if the payload is null
          */
         CollectionBuilder itemMediaType(MediaType mediaType);
 
