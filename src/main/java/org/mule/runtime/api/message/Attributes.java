@@ -15,6 +15,8 @@ import java.io.Serializable;
  * parameters etc. for HTTP.
  * <p>
  * Attribute objects should be both immutable and {@link Serializable}.
+ *
+ * @since 1.0
  */
 public interface Attributes extends Serializable
 {
