@@ -35,9 +35,10 @@ public class OutputMetadataDescriptorBuilder
     }
 
     /**
-     * Describes that the return type of the component will be of {@link MetadataType} {@param returnTypeResult}
+     * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the
+     * return type of the component.
      *
-     * @param returnTypeResult of the component returnTypeResult output
+     * @param returnTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output return type
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
      */
     public OutputMetadataDescriptorBuilder withReturnType(MetadataResult<TypeMetadataDescriptor> returnTypeResult)
@@ -47,9 +48,10 @@ public class OutputMetadataDescriptorBuilder
     }
 
     /**
-     * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType} of the component will be {@param attributesTypeResult}
+     * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the
+     * he output {@link MuleMessage#getAttributes} {@link MetadataType}.
      *
-     * @param attributesTypeResult of the component output attributes
+     * @param attributesTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output attributes type.
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
      */
     public OutputMetadataDescriptorBuilder withAttributesType(MetadataResult<TypeMetadataDescriptor> attributesTypeResult)
