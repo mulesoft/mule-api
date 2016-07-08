@@ -84,6 +84,13 @@ public interface MuleMessage extends Serializable
     {
 
         /**
+         * Sets a {@code #null} payload value for the {@link MuleMessage} to be built.
+         *
+         * @return this builder
+         */
+        Builder nullPayload();
+
+        /**
          * Sets the  payload for the {@link MuleMessage} to be built.
          * <p/>
          * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
