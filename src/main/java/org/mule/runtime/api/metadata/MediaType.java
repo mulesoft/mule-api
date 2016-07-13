@@ -120,7 +120,6 @@ public final class MediaType implements Serializable
     /**
      * Returns a media-type for the given parameters. This would be the equivalent of the media type
      * {@code "{primaryType}/{subType}[; charset={charset}]"}.
-     * <p>
      *
      * @param primaryType
      * @param subType
@@ -129,6 +128,20 @@ public final class MediaType implements Serializable
     public static MediaType create(String primaryType, String subType, Charset charset)
     {
         return new MediaType(primaryType, subType, emptyMap(), charset);
+    }
+
+
+    /**
+     * Returns a media-type for the given parameters. This would be the equivalent of the media type
+     * {@code "{primaryType}/{subType}[; charset={charset}]"[; {params}]"}.
+     *
+     * @param primaryType
+     * @param subType
+     * @param charset
+     */
+    public static MediaType create(String primaryType, String subType, Map<String, String> params, Charset charset)
+    {
+        return new MediaType(primaryType, subType, params, charset);
     }
 
     private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset)
@@ -140,7 +153,7 @@ public final class MediaType implements Serializable
     }
 
     /**
-     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but replacing the
+     * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the
      * {@code charset} with the value passed.
      *
      * @param charset the new charset to use or {@code null} to clear the current {@code charset}.
@@ -148,11 +161,11 @@ public final class MediaType implements Serializable
      */
     public MediaType withCharset(Charset charset)
     {
-        return create(this.getPrimaryType(), this.getSubType(), charset);
+        return create(this.getPrimaryType(), this.getSubType(), params, charset);
     }
 
     /**
-     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but removing all the
+     * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but removing all the
      * parameters (like the {@code charset})
      *
      * @return new immutable {@link MediaType} instance.
@@ -241,7 +254,7 @@ public final class MediaType implements Serializable
     @Override
     public int hashCode()
     {
-        // TODO MULE-9987 Check if it is actually needed to leave charset out.
+        // TODO MULE-9987 Check if it is actually needed to leave charset and poarams out.
         return Objects.hash(primaryType, subType);
     }
 
