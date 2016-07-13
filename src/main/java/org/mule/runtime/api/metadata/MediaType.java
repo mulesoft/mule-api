@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.list;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
@@ -15,6 +17,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -65,12 +70,11 @@ public final class MediaType implements Serializable
 
     private final String primaryType;
     private final String subType;
+    private final Map<String, String> params;
     private transient Optional<Charset> charset;
 
     /**
      * Parses a media type from its string representation.
-     *
-     * TODO MULE-9995 Preserve media type parameters in mule
      *
      * @param mediaType String representation to be parsed
      * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
@@ -81,9 +85,20 @@ public final class MediaType implements Serializable
         try
         {
             MimeType mimeType = new MimeType(mediaType);
+
             String charsetParam = mimeType.getParameter(CHARSET_PARAM);
             Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
-            return new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), charset);
+
+            Map<String, String> params = new HashMap<>();
+            for (String paramName : (List<String>) list(mimeType.getParameters().getNames()))
+            {
+                if (!CHARSET_PARAM.equals(paramName))
+                {
+                    params.put(paramName, mimeType.getParameter(paramName));
+                }
+            }
+
+            return new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
         }
         catch (MimeTypeParseException e)
         {
@@ -92,21 +107,19 @@ public final class MediaType implements Serializable
     }
 
     /**
-     * Returns a media-type for. This would be the equivalent of the media
-     * type {@code "[primaryType]/[subType]"}.
+     * Returns a media-type for. This would be the equivalent of the media type {@code "{primaryType}/{subType}"}.
      *
      * @param primaryType
      * @param subType
      */
     public static MediaType create(String primaryType, String subType)
     {
-        return new MediaType(primaryType, subType, null);
+        return new MediaType(primaryType, subType, emptyMap(), null);
     }
 
     /**
      * Returns a media-type for the given parameters. This would be the equivalent of the media type
-     * {@code "[primaryType]/[subType]; charset=[charset]"}.
-     * <p>
+     * {@code "{primaryType}/{subType}[; charset={charset}]"}.
      *
      * @param primaryType
      * @param subType
@@ -114,18 +127,19 @@ public final class MediaType implements Serializable
      */
     public static MediaType create(String primaryType, String subType, Charset charset)
     {
-        return new MediaType(primaryType, subType, charset);
+        return new MediaType(primaryType, subType, emptyMap(), charset);
     }
 
-    private MediaType(String primaryType, String subType, Charset charset)
+    private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset)
     {
         this.primaryType = primaryType;
         this.subType = subType;
+        this.params = params;
         this.charset = ofNullable(charset);
     }
 
     /**
-     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but replacing the
+     * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the
      * {@code charset} with the value passed.
      *
      * @param charset the new charset to use or {@code null} to clear the current {@code charset}.
@@ -133,11 +147,11 @@ public final class MediaType implements Serializable
      */
     public MediaType withCharset(Charset charset)
     {
-        return create(this.getPrimaryType(), this.getSubType(), charset);
+        return new MediaType(this.getPrimaryType(), this.getSubType(), params, charset);
     }
 
     /**
-     * Creates a new {@link MediaType} instance maintaing the {@code type} and {@code sub-type} but removing all the
+     * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but removing all the
      * parameters (like the {@code charset})
      *
      * @return new immutable {@link MediaType} instance.
@@ -175,6 +189,15 @@ public final class MediaType implements Serializable
     }
 
     /**
+     * @param paramName the name of the parameter to get.
+     * @return The value of the {@code paramName} parameter.
+     */
+    public String getParameter(String paramName)
+    {
+        return params.get(paramName);
+    }
+
+    /**
      * Evaluates the type of this object against the ones of the {@code other} {@link MediaType}.
      * <p>
      * This will ignore any optional parameters, such as the charset.
@@ -189,11 +212,20 @@ public final class MediaType implements Serializable
     }
 
     /**
-     * @return a textual representation of this object, in format {@code "[primaryType]/[subType]; charset=[charset]"}.
+     * @return a textual representation of this object, in format {@code "{primaryType}/{subType}[; charset={charset}][;
+     *         {params}]"}.
      */
     public String toRfcString()
     {
-        return primaryType + "/" + subType + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "");
+        final StringBuilder buffer = new StringBuilder();
+        params.forEach((k, v) ->
+        {
+            buffer.append("; " + k + "=\"" + v + "\"");
+        });
+
+        return primaryType + "/" + subType
+               + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "")
+               + (!params.isEmpty() ? buffer.toString() : "");
     }
 
     /**
@@ -208,7 +240,7 @@ public final class MediaType implements Serializable
     @Override
     public int hashCode()
     {
-        // TODO MULE-9987 Check if it is actually needed to leave charset out.
+        // TODO MULE-9987 Check if it is actually needed to leave charset and poarams out.
         return Objects.hash(primaryType, subType);
     }
 
@@ -231,6 +263,7 @@ public final class MediaType implements Serializable
 
         return Objects.equals(primaryType, other.primaryType)
                && Objects.equals(subType, other.subType)
+               && Objects.equals(params, other.params)
                && Objects.equals(getCharset(), other.getCharset());
     }
 
