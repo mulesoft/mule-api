@@ -130,20 +130,6 @@ public final class MediaType implements Serializable
         return new MediaType(primaryType, subType, emptyMap(), charset);
     }
 
-
-    /**
-     * Returns a media-type for the given parameters. This would be the equivalent of the media type
-     * {@code "{primaryType}/{subType}[; charset={charset}]"[; {params}]"}.
-     *
-     * @param primaryType
-     * @param subType
-     * @param charset
-     */
-    public static MediaType create(String primaryType, String subType, Map<String, String> params, Charset charset)
-    {
-        return new MediaType(primaryType, subType, params, charset);
-    }
-
     private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset)
     {
         this.primaryType = primaryType;
@@ -161,7 +147,7 @@ public final class MediaType implements Serializable
      */
     public MediaType withCharset(Charset charset)
     {
-        return create(this.getPrimaryType(), this.getSubType(), params, charset);
+        return new MediaType(this.getPrimaryType(), this.getSubType(), params, charset);
     }
 
     /**
