@@ -37,7 +37,6 @@ public interface MuleMessage extends Serializable
      *
      * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
      * @return a new {@link Builder} based on the template {@code message} provided.
-     * @throws NullPointerException if the message is null
      */
     static Builder builder(MuleMessage message)
     {
@@ -49,7 +48,6 @@ public interface MuleMessage extends Serializable
      *
      * @param payload the message payload
      * @return new message instance
-     * @throws NullPointerException if the payload is null
      */
     static MuleMessage of(Object payload)
     {
@@ -57,9 +55,10 @@ public interface MuleMessage extends Serializable
     }
 
     /**
-     * @return the current message payload
+     * @param <T> the payload type.
+     * @return the message payload.
      */
-    Object getPayload();
+    <T> T getPayload();
 
     /**
      * Gets the attributes associated with the MuleMessage. The {@code Attributes} attributes object is specifc to
@@ -76,9 +75,10 @@ public interface MuleMessage extends Serializable
 
     /**
      * Returns the data type (if any) associated with the message's payload.
+     *
+     * @return the message {@link DataType}
      */
     DataType getDataType();
-
 
     interface PayloadBuilder
     {
@@ -100,7 +100,6 @@ public interface MuleMessage extends Serializable
          *
          * @param payload the message payload
          * @return this builder.
-         * @throws NullPointerException if the payload is null
          */
         Builder payload(Object payload);
 
