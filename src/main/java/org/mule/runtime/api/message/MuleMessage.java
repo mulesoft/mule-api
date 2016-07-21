@@ -11,7 +11,6 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  * Represents a message payload. The Message is comprised of
@@ -116,7 +115,7 @@ public interface MuleMessage extends Serializable
          * @return this builder
          * @throws NullPointerException if the payload is null
          */
-        Builder collectionPayload(Collection payload, Class<?> itemType);
+        Builder collectionPayload(Iterable payload, Class<?> itemType);
 
     }
 

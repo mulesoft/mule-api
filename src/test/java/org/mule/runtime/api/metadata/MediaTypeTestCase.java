@@ -12,6 +12,11 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
 
 import org.junit.Rule;
@@ -203,5 +208,31 @@ public class MediaTypeTestCase
         expected.expectMessage(containsString("MediaType cannot be parsed"));
         expected.expectMessage(containsString("m/s;param=@"));
         MediaType.parse("m/s;param=@");
+    }
+
+    @Test
+    public void serialize() throws IOException, ClassNotFoundException
+    {
+        final MediaType parsed = MediaType.parse("m/s");
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new ObjectOutputStream(os).writeObject(parsed);
+        final Object deserialized = new ObjectInputStream(new ByteArrayInputStream(os.toByteArray())).readObject();
+
+        assertThat(deserialized, is(parsed));
+    }
+
+    @Test
+    public void serializeWithCharset() throws IOException, ClassNotFoundException
+    {
+        final MediaType parsed = MediaType.parse("m/s");
+        final MediaType withCharset = parsed.withCharset(UTF_8);
+
+
+        final ByteArrayOutputStream os = new ByteArrayOutputStream();
+        new ObjectOutputStream(os).writeObject(withCharset);
+        final Object deserialized = new ObjectInputStream(new ByteArrayInputStream(os.toByteArray())).readObject();
+
+        assertThat(deserialized, is(withCharset));
     }
 }
