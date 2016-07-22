@@ -170,7 +170,6 @@ public interface MuleMessage extends Serializable
          * <p>
          * This method will get the {@code type}, {@code mimeType} and {@code encoding} from the given {@code value}
          * according to its concrete type.
-         * <p>
          *
          * @param value an object instance.
          * @return this builder.
