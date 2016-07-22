@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Provides a way to build immutable {@link DataType} objects.
@@ -30,12 +31,23 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
      * Sets the given type for the {@link CollectionDataType} to be built. See
      * {@link CollectionDataType#getType()}.
      * 
+     * @param iteratorType the java collection type to set.
+     * @return this builder.
+     * @throws IllegalArgumentException if the given collectionType is not a descendant of
+     *             {@link Iterator}.
+     */
+    DataTypeCollectionTypeBuilder streamingCollectionType(Class<? extends Iterator> iteratorType);
+    
+    /**
+     * Sets the given type for the {@link CollectionDataType} to be built. See
+     * {@link CollectionDataType#getType()}.
+     * 
      * @param collectionType the java collection type to set.
      * @return this builder.
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
-     *             {@link Iterable}.
+     *             {@link Collection}.
      */
-    DataTypeCollectionTypeBuilder collectionType(Class<? extends Iterable> collectionType);
+    DataTypeCollectionTypeBuilder collectionType(Class<? extends Collection> collectionType);
 
     /**
      * Down-casts the builder to {@link DataTypeCollectionTypeBuilder}, allowing the builder to be used in a fluent way

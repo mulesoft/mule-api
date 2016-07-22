@@ -105,7 +105,7 @@ public interface MuleMessage extends Serializable
         Builder payload(Object payload);
 
         /**
-         * Sets the consumable collection payload for the {@link MuleMessage} to be built.
+         * Sets the consumable streaming collection payload for the {@link MuleMessage} to be built.
          * <p>
          * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
          * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
@@ -119,7 +119,7 @@ public interface MuleMessage extends Serializable
          * @return this builder
          * @throws NullPointerException if the payload is null
          */
-        Builder collectionPayload(Iterator payload, Class<?> itemType);
+        Builder streamPayload(Iterator payload, Class<?> itemType);
 
         /**
          * Sets the collection payload for the {@link MuleMessage} to be built.
@@ -149,7 +149,7 @@ public interface MuleMessage extends Serializable
          * @return this builder
          * @throws NullPointerException if the payload is null
          */
-        Builder collectionPayload(Object[] payload, Class<?> itemType);
+        Builder collectionPayload(Object[] payload);
         
     }
 
