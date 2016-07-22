@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Provides a way to build immutable {@link DataType} objects.
@@ -30,6 +31,17 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
      * Sets the given type for the {@link CollectionDataType} to be built. See
      * {@link CollectionDataType#getType()}.
      * 
+     * @param iteratorType the java collection type to set.
+     * @return this builder.
+     * @throws IllegalArgumentException if the given collectionType is not a descendant of
+     *             {@link Iterator}.
+     */
+    DataTypeCollectionTypeBuilder streamType(Class<? extends Iterator> iteratorType);
+    
+    /**
+     * Sets the given type for the {@link CollectionDataType} to be built. See
+     * {@link CollectionDataType#getType()}.
+     * 
      * @param collectionType the java collection type to set.
      * @return this builder.
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
@@ -39,7 +51,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
 
     /**
      * Down-casts the builder to {@link DataTypeCollectionTypeBuilder}, allowing the builder to be used in a fluent way
-     * without having to cast it when dealing with {@link Collection}s.
+     * without having to cast it when dealing with {@link Iterable}s.
      *
      * @return this builder.
      */
@@ -67,8 +79,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
     {
 
         /**
-         * Sets the given {@code itemType} for the {@link DataType} to be built, when the type is a
-         * {@link Collection}.
+         * Sets the given {@code itemType} for the {@link DataType} to be built, when the type is an
+         * {@link Iterable}.
          * 
          * @param itemType the java type to set.
          * @return this builder.
@@ -77,7 +89,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
 
         /**
          * Sets the given {@code itemMediaType} for the {@link DataType} to be built., when the type
-         * is a {@link Collection}.
+         * is an {@link Iterable}.
          * 
          * @param itemMediaType the media type string to set
          * @return this builder.
@@ -86,7 +98,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
 
         /**
          * Sets the given {@code itemMediaType} for the {@link DataType} to be built, when the type
-         * is a {@link Collection}.
+         * is an {@link Iterable}.
          * <p>
          * If the media type for the given string has a {@code charset} parameter, that will be set
          * as the encoding for the items's {@link DataType} being built, unless it had been

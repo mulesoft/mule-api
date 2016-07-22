@@ -8,8 +8,6 @@ package org.mule.runtime.api.metadata;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.list;
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 import static org.mule.metadata.utils.StringUtils.isNotEmpty;
 
@@ -71,7 +69,7 @@ public final class MediaType implements Serializable
     private final String primaryType;
     private final String subType;
     private final Map<String, String> params;
-    private transient Optional<Charset> charset;
+    private transient Charset charset;
 
     /**
      * Parses a media type from its string representation.
@@ -135,7 +133,7 @@ public final class MediaType implements Serializable
         this.primaryType = primaryType;
         this.subType = subType;
         this.params = params;
-        this.charset = ofNullable(charset);
+        this.charset = charset;
     }
 
     /**
@@ -185,7 +183,7 @@ public final class MediaType implements Serializable
      */
     public Optional<Charset> getCharset()
     {
-        return charset;
+        return ofNullable(charset);
     }
 
     /**
@@ -240,7 +238,7 @@ public final class MediaType implements Serializable
     @Override
     public int hashCode()
     {
-        // TODO MULE-9987 Check if it is actually needed to leave charset and poarams out.
+        // TODO MULE-9987 Check if it is actually needed to leave charset and params out.
         return Objects.hash(primaryType, subType);
     }
 
@@ -264,26 +262,29 @@ public final class MediaType implements Serializable
         return Objects.equals(primaryType, other.primaryType)
                && Objects.equals(subType, other.subType)
                && Objects.equals(params, other.params)
-               && Objects.equals(getCharset(), other.getCharset());
+               && Objects.equals(charset, other.charset);
     }
 
     private void readObject(ObjectInputStream in) throws Exception
     {
         in.defaultReadObject();
         String charsetStr = (String) in.readObject();
-        if (charset != null)
+        if (charsetStr != null)
         {
-            charset = of(Charset.forName(charsetStr));
-        }
-        else
-        {
-            charset = empty();
+            charset = Charset.forName(charsetStr);
         }
     }
 
     private void writeObject(ObjectOutputStream out) throws Exception
     {
         out.defaultWriteObject();
-        out.writeObject(charset.map(cs -> cs.name()).orElse(null));
+        if (charset != null)
+        {
+            out.writeObject(charset.name());
+        }
+        else
+        {
+            out.writeObject(null);
+        }
     }
 }

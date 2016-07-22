@@ -12,6 +12,7 @@ import org.mule.runtime.api.metadata.MediaType;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Represents a message payload. The Message is comprised of
@@ -61,7 +62,7 @@ public interface MuleMessage extends Serializable
     <T> T getPayload();
 
     /**
-     * Gets the attributes associated with the MuleMessage. The {@code Attributes} attributes object is specifc to
+     * Gets the attributes associated with the MuleMessage. The {@code Attributes} attributes object is specific to
      * the connector that was the source of the current message and is used for obtaining message properties or headers
      * if applicable plus additional information that provides context for the current message such as file size, file
      * name and last modified date for FILE, and origin ip address, query parameters etc. for HTTP.
@@ -92,7 +93,7 @@ public interface MuleMessage extends Serializable
 
         /**
          * Sets the  payload for the {@link MuleMessage} to be built.
-         * <p/>
+         * <p>
          * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
          * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
          * it's own {@link MediaType} in which case this will be used instead. See
@@ -104,8 +105,25 @@ public interface MuleMessage extends Serializable
         Builder payload(Object payload);
 
         /**
-         * Sets the collection payload for the {@link MuleMessage} to be built.
+         * Sets the consumable streaming collection payload for the {@link MuleMessage} to be built.
+         * <p>
+         * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
+         * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
+         * it's own {@link MediaType} in which case this will be used instead. See
+         * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}.
+         * <p>
+         * If you already have a {@link Collection} instance, use {@link #collectionPayload(Collection, Class)} instead.
          *
+         * @param payload the iterator for the collection payload
+         * @param itemType the collection item type
+         * @return this builder
+         * @throws NullPointerException if the payload is null
+         */
+        Builder streamPayload(Iterator payload, Class<?> itemType);
+
+        /**
+         * Sets the collection payload for the {@link MuleMessage} to be built.
+         * <p>
          * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
          * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
          * it's own {@link MediaType} in which case this will be used instead. See
@@ -117,7 +135,22 @@ public interface MuleMessage extends Serializable
          * @throws NullPointerException if the payload is null
          */
         Builder collectionPayload(Collection payload, Class<?> itemType);
-
+        
+        /**
+         * Sets the collection payload for the {@link MuleMessage} to be built.
+         * <p>
+         * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the
+         * new {@code payload} class while preserving it's {@link MediaType}, unless the new {@code payload} type defines
+         * it's own {@link MediaType} in which case this will be used instead. See
+         * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
+         *
+         * @param payload the array to use as a collection payload
+         * @param itemType the collection item type
+         * @return this builder
+         * @throws NullPointerException if the payload is null
+         */
+        Builder collectionPayload(Object[] payload);
+        
     }
 
     interface Builder extends PayloadBuilder
@@ -137,7 +170,6 @@ public interface MuleMessage extends Serializable
          * <p>
          * This method will get the {@code type}, {@code mimeType} and {@code encoding} from the given {@code value}
          * according to its concrete type.
-         * <p>
          *
          * @param value an object instance.
          * @return this builder.
