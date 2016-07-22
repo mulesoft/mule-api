@@ -36,7 +36,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder
      * @throws IllegalArgumentException if the given collectionType is not a descendant of
      *             {@link Iterator}.
      */
-    DataTypeCollectionTypeBuilder streamingType(Class<? extends Iterator> iteratorType);
+    DataTypeCollectionTypeBuilder streamType(Class<? extends Iterator> iteratorType);
     
     /**
      * Sets the given type for the {@link CollectionDataType} to be built. See
