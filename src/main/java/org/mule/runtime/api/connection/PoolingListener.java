@@ -9,10 +9,10 @@ package org.mule.runtime.api.connection;
 /**
  * Gets notifications for events related to connections on a pool.
  *
- * @param <Connection> the generic type for the pooled connection
+ * @param <C> the generic type for the pooled connection
  * @since 1.0
  */
-public interface PoolingListener<Connection>
+public interface PoolingListener<C>
 {
 
     /**
@@ -25,7 +25,9 @@ public interface PoolingListener<Connection>
      *
      * @param connection the pooled connection
      */
-    void onBorrow(Connection connection);
+    default void onBorrow(C connection)
+    {
+    }
 
     /**
      * Executes right before the pool accepts the {@code connection} back.
@@ -40,5 +42,7 @@ public interface PoolingListener<Connection>
      *
      * @param connection the pooled connection
      */
-    void onReturn(Connection connection);
+    default void onReturn(C connection)
+    {
+    }
 }

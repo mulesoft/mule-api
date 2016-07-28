@@ -22,10 +22,10 @@ package org.mule.runtime.api.connection;
  * injection into the generated connections. The runtime will do that automatically
  * at the proper time.
  *
- * @param <Connection> the generic type of the connections to be handled
+ * @param <C> the generic type of the connections to be handled
  * @since 1.0
  */
-public interface ConnectionProvider<Connection>
+public interface ConnectionProvider<C>
 {
 
     /**
@@ -35,43 +35,25 @@ public interface ConnectionProvider<Connection>
      *
      * @return a ready to use {@code Connection}
      */
-    Connection connect() throws ConnectionException;
+    C connect() throws ConnectionException;
 
     /**
      * Disposes the given {@code connection}, freeing all its allocated resources
      *
      * @param connection a non {@code null} {@code Connection}.
      */
-    void disconnect(Connection connection);
+    void disconnect(C connection);
 
     /**
-     * Validates the given {@link Connection}.
+     * Validates the given {@link C}.
      *
      * In invalid connection case, the {@link ConnectionValidationResult} should also return a valid
      * message {@link ConnectionValidationResult#getMessage()}, exception {@link ConnectionValidationResult#getException()}
      * and code {@link ConnectionValidationResult#getCode()}
      *
-     * @param connection a non {@code null} {@link Connection}.
+     * @param connection a non {@code null} {@link C}.
      * @return a {@link ConnectionValidationResult} indicating if the connection
      * is valid or not.
      */
-    ConnectionValidationResult validate(Connection connection);
-
-    /**
-     * Specifies the {@link ConnectionHandlingStrategy} that should be use to manage
-     * the connections generated through the {@link #connect()} method.
-     * <p>
-     * Implementations <b>MUST</b> return instances created through the provided
-     * {@code handlingStrategyFactory}. Those instances are not to be wrapped,
-     * decorated, or by any other means tampered with.
-     * <p>
-     * This method must also function correctly without dependencies or preconditions.
-     * That means that although it is valid for {@code this} provider to have lifecycle
-     * or external dependencies injected, this particular method must behave correctly
-     * on every possible state.
-     *
-     * @param handlingStrategyFactory the {@link ConnectionHandlingStrategyFactory} to be used to generate the response value
-     * @return a not {@code null} {@link ConnectionHandlingStrategy}
-     */
-    ConnectionHandlingStrategy<Connection> getHandlingStrategy(ConnectionHandlingStrategyFactory<Connection> handlingStrategyFactory);
+    ConnectionValidationResult validate(C connection);
 }
