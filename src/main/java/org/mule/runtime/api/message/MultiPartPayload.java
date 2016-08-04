@@ -24,8 +24,6 @@ public interface MultiPartPayload
     List<MuleMessage> getParts();
 
     /**
-     * In case the loading of the parts is lazy, this will return just the parts that have been already loaded.
-     * 
      * @return the names of the contained parts.
      */
     List<String> getPartNames();
