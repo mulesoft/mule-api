@@ -16,25 +16,21 @@ import org.mule.runtime.api.metadata.resolving.FailureCode;
  *
  * @since 1.0
  */
-public final class MetadataResolvingException extends Exception
-{
+public final class MetadataResolvingException extends Exception {
 
-    private final FailureCode failure;
+  private final FailureCode failure;
 
-    public MetadataResolvingException(String message, FailureCode failure)
-    {
-        super(message);
-        this.failure = failure;
-    }
+  public MetadataResolvingException(String message, FailureCode failure) {
+    super(message);
+    this.failure = failure;
+  }
 
-    public MetadataResolvingException(String message, FailureCode failure, Throwable cause)
-    {
-        super(message, cause);
-        this.failure = failure;
-    }
+  public MetadataResolvingException(String message, FailureCode failure, Throwable cause) {
+    super(message, cause);
+    this.failure = failure;
+  }
 
-    public FailureCode getFailure()
-    {
-        return failure;
-    }
+  public FailureCode getFailure() {
+    return failure;
+  }
 }

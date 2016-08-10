@@ -13,36 +13,32 @@ import static org.mule.runtime.api.metadata.MetadataKeyBuilder.newKey;
 
 import org.junit.Test;
 
-public class DefaultMetadataKeyTestCase
-{
-    @Test
-    public void equalKeys()
-    {
-        assertThat(europeKey(true).build(), is(europeKey(true).build()));
+public class DefaultMetadataKeyTestCase {
+
+  @Test
+  public void equalKeys() {
+    assertThat(europeKey(true).build(), is(europeKey(true).build()));
+  }
+
+  @Test
+  public void differentKeys() {
+    MetadataKey enrichedEurope = europeKey(false).withChild(newKey("Germany")).build();
+    assertThat(enrichedEurope, is(not(europeKey(false).build())));
+
+    enrichedEurope = europeKey(true).build();
+    assertThat(enrichedEurope, is(not(europeKey(false).build())));
+  }
+
+  private MetadataKeyBuilder europeKey(boolean withManchester) {
+    MetadataKeyBuilder uk = newKey("UK")
+        .withChild(newKey("London"));
+
+    if (withManchester) {
+      uk.withChild(newKey("Manchester"));
     }
 
-    @Test
-    public void differentKeys()
-    {
-        MetadataKey enrichedEurope = europeKey(false).withChild(newKey("Germany")).build();
-        assertThat(enrichedEurope, is(not(europeKey(false).build())));
-
-        enrichedEurope = europeKey(true).build();
-        assertThat(enrichedEurope, is(not(europeKey(false).build())));
-    }
-
-    private MetadataKeyBuilder europeKey(boolean withManchester)
-    {
-        MetadataKeyBuilder uk = newKey("UK")
-                .withChild(newKey("London"));
-
-        if (withManchester)
-        {
-            uk.withChild(newKey("Manchester"));
-        }
-
-        return newKey("Europe")
-                .withChild(newKey("France").withChild(newKey("Paris")))
-                .withChild(uk);
-    }
+    return newKey("Europe")
+        .withChild(newKey("France").withChild(newKey("Paris")))
+        .withChild(uk);
+  }
 }

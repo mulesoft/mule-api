@@ -21,29 +21,28 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface MetadataCache
-{
+public interface MetadataCache {
 
-    /**
-     * Associates the specified value with the specified key in the cache.
-     * if the cache previously contained a mapping for the specified key, the old value gets replaced
-     *
-     * @param key   a key to associate the specified value
-     * @param value the value to persist in the cache
-     */
-    void put(Serializable key, Serializable value);
+  /**
+   * Associates the specified value with the specified key in the cache.
+   * if the cache previously contained a mapping for the specified key, the old value gets replaced
+   *
+   * @param key   a key to associate the specified value
+   * @param value the value to persist in the cache
+   */
+  void put(Serializable key, Serializable value);
 
-    /**
-     * Copies all of the entries from the specified map to the cache.
-     *
-     * @param values values to be stored in the cache
-     */
-    void putAll(Map<? extends Serializable, ? extends Serializable> values);
+  /**
+   * Copies all of the entries from the specified map to the cache.
+   *
+   * @param values values to be stored in the cache
+   */
+  void putAll(Map<? extends Serializable, ? extends Serializable> values);
 
-    /**
-     * @param key the key whose associated value is to be returned
-     * @return the value to which the specified key is mapped,
-     * or {@code Option.empty()} if this map contains no value for the specified key.
-     */
-    <T extends Serializable> Optional<T> get(Serializable key);
+  /**
+   * @param key the key whose associated value is to be returned
+   * @return the value to which the specified key is mapped,
+   * or {@code Option.empty()} if this map contains no value for the specified key.
+   */
+  <T extends Serializable> Optional<T> get(Serializable key);
 }

@@ -13,10 +13,10 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface HasPoolingProfile
-{
-    /**
-    * @returns an {@link Optional} {@link PoolingProfile} to configure the connection pool
-    */
-    Optional<PoolingProfile> getPoolingProfile();
+public interface HasPoolingProfile {
+
+  /**
+  * @returns an {@link Optional} {@link PoolingProfile} to configure the connection pool
+  */
+  Optional<PoolingProfile> getPoolingProfile();
 }

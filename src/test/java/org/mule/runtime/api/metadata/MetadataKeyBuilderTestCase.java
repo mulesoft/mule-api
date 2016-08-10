@@ -18,89 +18,80 @@ import java.util.Optional;
 
 import org.junit.Test;
 
-public class MetadataKeyBuilderTestCase
-{
+public class MetadataKeyBuilderTestCase {
 
-    private static final String ID = "id";
-    private static final String DESCRIPTION = "description";
-    private static final String CHILD = "Child";
+  private static final String ID = "id";
+  private static final String DESCRIPTION = "description";
+  private static final String CHILD = "Child";
 
-    @Test
-    public void createMetadataKey()
-    {
-        TestMetadataProperty testMetadataProperty = new TestMetadataProperty();
+  @Test
+  public void createMetadataKey() {
+    TestMetadataProperty testMetadataProperty = new TestMetadataProperty();
 
-        final MetadataKey key = newKey(ID)
-                .withDisplayName(DESCRIPTION)
-                .withProperty(testMetadataProperty)
-                .build();
+    final MetadataKey key = newKey(ID)
+        .withDisplayName(DESCRIPTION)
+        .withProperty(testMetadataProperty)
+        .build();
 
-        assertThat(key.getId(), is(ID));
-        assertThat(key.getDisplayName(), is(DESCRIPTION));
-        assertThat(key.getMetadataProperty(TestMetadataProperty.class).isPresent(), is(true));
-        assertThat(key.getMetadataProperty(TestMetadataProperty.class).get(), is(testMetadataProperty));
-        assertThat(key.getMetadataProperty(InvalidMetadataProperty.class), is(Optional.empty()));
-        assertThat(key.getProperties(), hasSize(1));
-        assertThat(key.getProperties(), contains(testMetadataProperty));
+    assertThat(key.getId(), is(ID));
+    assertThat(key.getDisplayName(), is(DESCRIPTION));
+    assertThat(key.getMetadataProperty(TestMetadataProperty.class).isPresent(), is(true));
+    assertThat(key.getMetadataProperty(TestMetadataProperty.class).get(), is(testMetadataProperty));
+    assertThat(key.getMetadataProperty(InvalidMetadataProperty.class), is(Optional.empty()));
+    assertThat(key.getProperties(), hasSize(1));
+    assertThat(key.getProperties(), contains(testMetadataProperty));
+  }
+
+  @Test
+  public void createMetadataKeyWithDefaults() {
+    MetadataKey key = newKey(ID).build();
+
+    assertThat(key.getId(), is(ID));
+    assertThat(key.getDisplayName(), is(ID));
+    assertThat(key.getProperties(), is(empty()));
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void addMetadataPropertiesOfTheSameType() {
+    newKey(ID)
+        .withDisplayName(DESCRIPTION)
+        .withProperty(new TestMetadataProperty())
+        .withProperty(new TestMetadataProperty())
+        .build();
+  }
+
+  @Test
+  public void createMultilevelMetadataKey() {
+    final MetadataKeyBuilder childKey = newKey(CHILD).withDisplayName(CHILD);
+    final MetadataKeyBuilder childKey2 = newKey(CHILD + "2");
+
+    MetadataKey key = newKey(ID)
+        .withDisplayName(DESCRIPTION)
+        .withProperty(new TestMetadataProperty())
+        .withChild(childKey)
+        .withChild(childKey2)
+        .build();
+
+    assertThat(key.getId(), is(ID));
+    assertThat(key.getDisplayName(), is(DESCRIPTION));
+    assertThat(key.getProperties(), hasSize(1));
+    assertThat(key.getChilds(), hasSize(2));
+    assertThat(key.getChilds(), hasItems(childKey.build(), childKey2.build()));
+  }
+
+  private class TestMetadataProperty implements MetadataProperty {
+
+    @Override
+    public String getName() {
+      return "TestMetadataProperty";
     }
+  }
 
-    @Test
-    public void createMetadataKeyWithDefaults()
-    {
-        MetadataKey key = newKey(ID).build();
+  private class InvalidMetadataProperty implements MetadataProperty {
 
-        assertThat(key.getId(), is(ID));
-        assertThat(key.getDisplayName(), is(ID));
-        assertThat(key.getProperties(), is(empty()));
+    @Override
+    public String getName() {
+      return "Invalid";
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void addMetadataPropertiesOfTheSameType()
-    {
-        newKey(ID)
-                .withDisplayName(DESCRIPTION)
-                .withProperty(new TestMetadataProperty())
-                .withProperty(new TestMetadataProperty())
-                .build();
-    }
-
-    @Test
-    public void createMultilevelMetadataKey()
-    {
-        final MetadataKeyBuilder childKey = newKey(CHILD).withDisplayName(CHILD);
-        final MetadataKeyBuilder childKey2 = newKey(CHILD + "2");
-
-        MetadataKey key = newKey(ID)
-                .withDisplayName(DESCRIPTION)
-                .withProperty(new TestMetadataProperty())
-                .withChild(childKey)
-                .withChild(childKey2)
-                .build();
-
-        assertThat(key.getId(), is(ID));
-        assertThat(key.getDisplayName(), is(DESCRIPTION));
-        assertThat(key.getProperties(), hasSize(1));
-        assertThat(key.getChilds(), hasSize(2));
-        assertThat(key.getChilds(), hasItems(childKey.build(), childKey2.build()));
-    }
-
-    private class TestMetadataProperty implements MetadataProperty
-    {
-
-        @Override
-        public String getName()
-        {
-            return "TestMetadataProperty";
-        }
-    }
-
-    private class InvalidMetadataProperty implements MetadataProperty
-    {
-
-        @Override
-        public String getName()
-        {
-            return "Invalid";
-        }
-    }
+  }
 }

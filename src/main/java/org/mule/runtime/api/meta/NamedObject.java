@@ -11,13 +11,12 @@ package org.mule.runtime.api.meta;
  *
  * @since 1.0
  */
-public interface NamedObject
-{
+public interface NamedObject {
 
-    /**
-     * Gets the name of the object
-     *
-     * @return the name of the object
-     */
-    String getName();
+  /**
+   * Gets the name of the object
+   *
+   * @return the name of the object
+   */
+  String getName();
 }

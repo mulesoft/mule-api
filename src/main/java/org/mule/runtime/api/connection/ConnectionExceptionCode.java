@@ -11,31 +11,30 @@ package org.mule.runtime.api.connection;
  *
  * @since 1.0
  */
-public enum ConnectionExceptionCode
-{
-    /**
-     * The host cannot be resolved to an IP address
-     */
-    UNKNOWN_HOST,
-    /**
-     * The destination cannot be reached. Either the host is wrong
-     * or the port might be.
-     */
-    CANNOT_REACH,
-    /**
-     * The supplied credentials are not correct.
-     */
-    INCORRECT_CREDENTIALS,
-    /**
-     * The credentials used to authenticate has expired.
-     */
-    CREDENTIALS_EXPIRED,
-    /**
-     * The client is disconnected.
-     */
-    DISCONNECTED,
-    /**
-     * Something else went wrong.
-     */
-    UNKNOWN
+public enum ConnectionExceptionCode {
+  /**
+   * The host cannot be resolved to an IP address
+   */
+  UNKNOWN_HOST,
+  /**
+   * The destination cannot be reached. Either the host is wrong
+   * or the port might be.
+   */
+  CANNOT_REACH,
+  /**
+   * The supplied credentials are not correct.
+   */
+  INCORRECT_CREDENTIALS,
+  /**
+   * The credentials used to authenticate has expired.
+   */
+  CREDENTIALS_EXPIRED,
+  /**
+   * The client is disconnected.
+   */
+  DISCONNECTED,
+  /**
+   * Something else went wrong.
+   */
+  UNKNOWN
 }

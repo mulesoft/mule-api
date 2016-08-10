@@ -11,37 +11,33 @@ package org.mule.runtime.api.connection;
  *
  * @since 1.0
  */
-public class ConnectionException extends Exception
-{
+public class ConnectionException extends Exception {
 
-    /**
-     * Creates a new instance with the specified detail {@code message}
-     *
-     * @param message the detail message
-     */
-    public ConnectionException(String message)
-    {
-        super(message);
-    }
+  /**
+   * Creates a new instance with the specified detail {@code message}
+   *
+   * @param message the detail message
+   */
+  public ConnectionException(String message) {
+    super(message);
+  }
 
-    /**
-     * Creates a new instance with the specified detail {@code message} and {@code cause}
-     *
-     * @param message the detail message
-     * @param cause   the exception's cause
-     */
-    public ConnectionException(String message, Throwable cause)
-    {
-        super(message, cause);
-    }
+  /**
+   * Creates a new instance with the specified detail {@code message} and {@code cause}
+   *
+   * @param message the detail message
+   * @param cause   the exception's cause
+   */
+  public ConnectionException(String message, Throwable cause) {
+    super(message, cause);
+  }
 
-    /**
-     * Creates a new instance with the specified {@code cause}
-     *
-     * @param cause the exception's cause
-     */
-    public ConnectionException(Throwable cause)
-    {
-        super(cause);
-    }
+  /**
+   * Creates a new instance with the specified {@code cause}
+   *
+   * @param cause the exception's cause
+   */
+  public ConnectionException(Throwable cause) {
+    super(cause);
+  }
 }

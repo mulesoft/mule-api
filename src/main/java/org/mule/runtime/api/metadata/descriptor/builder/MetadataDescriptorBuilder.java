@@ -16,40 +16,35 @@ import org.mule.runtime.api.metadata.MetadataAware;
  *
  * @since 1.0
  */
-public abstract class MetadataDescriptorBuilder
-{
+public abstract class MetadataDescriptorBuilder {
 
-    /**
-     * @param name of the component to describe
-     * @return a new instance of {@link ComponentMetadataDescriptorBuilder} associated to the component name
-     */
-    public static ComponentMetadataDescriptorBuilder componentDescriptor(String name)
-    {
-        return new ComponentMetadataDescriptorBuilder(name);
-    }
+  /**
+   * @param name of the component to describe
+   * @return a new instance of {@link ComponentMetadataDescriptorBuilder} associated to the component name
+   */
+  public static ComponentMetadataDescriptorBuilder componentDescriptor(String name) {
+    return new ComponentMetadataDescriptorBuilder(name);
+  }
 
-    /**
-     * @return a new instance of {@link OutputMetadataDescriptorBuilder} to describe metadata output of a component
-     */
-    public static OutputMetadataDescriptorBuilder outputDescriptor()
-    {
-        return new OutputMetadataDescriptorBuilder();
-    }
+  /**
+   * @return a new instance of {@link OutputMetadataDescriptorBuilder} to describe metadata output of a component
+   */
+  public static OutputMetadataDescriptorBuilder outputDescriptor() {
+    return new OutputMetadataDescriptorBuilder();
+  }
 
-    /**
-     * @param name of the component parameter to associate their metadata description
-     * @return a new instance of {@link ParameterMetadataDescriptorBuilder} associated to the {@param name}.
-     */
-    public static ParameterMetadataDescriptorBuilder parameterDescriptor(String name)
-    {
-        return new ParameterMetadataDescriptorBuilder(name);
-    }
+  /**
+   * @param name of the component parameter to associate their metadata description
+   * @return a new instance of {@link ParameterMetadataDescriptorBuilder} associated to the {@param name}.
+   */
+  public static ParameterMetadataDescriptorBuilder parameterDescriptor(String name) {
+    return new ParameterMetadataDescriptorBuilder(name);
+  }
 
-    /**
-     * @return a new instance of {@link TypeMetadataDescriptorBuilder}.
-     */
-    public static TypeMetadataDescriptorBuilder typeDescriptor()
-    {
-        return new TypeMetadataDescriptorBuilder();
-    }
+  /**
+   * @return a new instance of {@link TypeMetadataDescriptorBuilder}.
+   */
+  public static TypeMetadataDescriptorBuilder typeDescriptor() {
+    return new TypeMetadataDescriptorBuilder();
+  }
 }

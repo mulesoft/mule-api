@@ -20,259 +20,206 @@ import java.util.regex.Pattern;
  *
  * @since 1.0
  */
-public class MuleVersion
-{
+public class MuleVersion {
 
-    private static final Pattern pattern = Pattern.compile("([0-9]+)(\\.)([0-9]+)(\\.([0-9]*))?(-(.+))?");
+  private static final Pattern pattern = Pattern.compile("([0-9]+)(\\.)([0-9]+)(\\.([0-9]*))?(-(.+))?");
 
-    private int major = 0;
-    private int minor = 0;
-    private int revision = -1;
-    private String suffix;
+  private int major = 0;
+  private int minor = 0;
+  private int revision = -1;
+  private String suffix;
 
-    public MuleVersion(String version)
-    {
-        parse(version);
+  public MuleVersion(String version) {
+    parse(version);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder v = new StringBuilder(major + "." + minor);
+
+    if (revision >= 0) {
+      v.append(".").append(revision);
     }
 
-    @Override
-    public String toString()
-    {
-        StringBuilder v = new StringBuilder(major + "." + minor);
-
-        if (revision >= 0)
-        {
-            v.append(".").append(revision);
-        }
-
-        if (suffix != null && suffix.trim().length() > 0)
-        {
-            v.append("-").append(suffix);
-        }
-
-        return v.toString();
-
+    if (suffix != null && suffix.trim().length() > 0) {
+      v.append("-").append(suffix);
     }
 
-    private void parse(String version)
-    {
-        Matcher m = pattern.matcher(version);
+    return v.toString();
 
-        if (!m.matches())
-        {
-            throw new IllegalArgumentException("Invalid version " + version);
-        }
+  }
 
-        try
-        {
-            major = Integer.parseInt(m.group(1));
-            minor = Integer.parseInt(m.group(3));
+  private void parse(String version) {
+    Matcher m = pattern.matcher(version);
 
-            if (m.group(4) != null && m.group(4).startsWith("."))
-            {
-                revision = Integer.parseInt(m.group(5));
-            }
-
-            if (m.group(6) != null && m.group(6).startsWith("-"))
-            {
-                suffix = m.group(7);
-            }
-        }
-        catch (NumberFormatException nfe)
-        {
-            throw new IllegalArgumentException("Invalid version " + version);
-        }
-
-        if (!toString().equals(version))
-        {
-            throw new IllegalArgumentException("Invalid version " + version);
-        }
+    if (!m.matches()) {
+      throw new IllegalArgumentException("Invalid version " + version);
     }
 
-    /**
-     * Returns true if the version represented by the current object is
-     * equals newer to the version sent as parameter.
-     *
-     * @param version
-     * @return
-     */
-    public boolean atLeast(String version)
-    {
-        return atLeast(new MuleVersion(version));
+    try {
+      major = Integer.parseInt(m.group(1));
+      minor = Integer.parseInt(m.group(3));
+
+      if (m.group(4) != null && m.group(4).startsWith(".")) {
+        revision = Integer.parseInt(m.group(5));
+      }
+
+      if (m.group(6) != null && m.group(6).startsWith("-")) {
+        suffix = m.group(7);
+      }
+    } catch (NumberFormatException nfe) {
+      throw new IllegalArgumentException("Invalid version " + version);
     }
 
-    public boolean atLeast(MuleVersion version)
-    {
-        return equals(version) || newerThan(version);
+    if (!toString().equals(version)) {
+      throw new IllegalArgumentException("Invalid version " + version);
     }
+  }
 
-    public boolean atLeastBase(String baseVersion)
-    {
-        return getBaseVersion().atLeastBase(new MuleVersion(baseVersion));
-    }
+  /**
+   * Returns true if the version represented by the current object is
+   * equals newer to the version sent as parameter.
+   *
+   * @param version
+   * @return
+   */
+  public boolean atLeast(String version) {
+    return atLeast(new MuleVersion(version));
+  }
 
-    public boolean atLeastBase(MuleVersion baseVersion)
-    {
-        return getBaseVersion().atLeast(baseVersion.getBaseVersion());
-    }
+  public boolean atLeast(MuleVersion version) {
+    return equals(version) || newerThan(version);
+  }
 
-    public boolean sameAs(String version)
-    {
-        return sameAs(new MuleVersion(version));
-    }
+  public boolean atLeastBase(String baseVersion) {
+    return getBaseVersion().atLeastBase(new MuleVersion(baseVersion));
+  }
 
-    public boolean sameAs(MuleVersion version)
-    {
-        return equals(version);
-    }
+  public boolean atLeastBase(MuleVersion baseVersion) {
+    return getBaseVersion().atLeast(baseVersion.getBaseVersion());
+  }
 
-    public boolean priorTo(String version)
-    {
-        return priorTo(new MuleVersion(version));
-    }
+  public boolean sameAs(String version) {
+    return sameAs(new MuleVersion(version));
+  }
 
-    public boolean priorTo(MuleVersion version)
-    {
-        return !atLeast(version);
-    }
+  public boolean sameAs(MuleVersion version) {
+    return equals(version);
+  }
 
-    public boolean newerThan(String version)
-    {
-        return newerThan(new MuleVersion(version));
-    }
+  public boolean priorTo(String version) {
+    return priorTo(new MuleVersion(version));
+  }
 
-    public boolean newerThan(MuleVersion version)
-    {
-        if (getMajor() > version.getMajor())
-        {
+  public boolean priorTo(MuleVersion version) {
+    return !atLeast(version);
+  }
+
+  public boolean newerThan(String version) {
+    return newerThan(new MuleVersion(version));
+  }
+
+  public boolean newerThan(MuleVersion version) {
+    if (getMajor() > version.getMajor()) {
+      return true;
+    } else if (getMajor() == version.getMajor()) {
+      if (getMinor() > version.getMinor()) {
+        return true;
+      } else if (getMinor() == version.getMinor()) {
+        if (getRevision() > version.getRevision()) {
+          return true;
+        } else if (getRevision() == version.getRevision() || (getRevision() <= 0 && version.getRevision() <= 0)) {
+          if (!hasSuffix() && version.hasSuffix()) {
             return true;
+          } else if (hasSuffix() && version.hasSuffix()) {
+            return getSuffix().compareToIgnoreCase(version.getSuffix()) > 0;
+          }
         }
-        else if (getMajor() == version.getMajor())
-        {
-            if (getMinor() > version.getMinor())
-            {
-                return true;
-            }
-            else if (getMinor() == version.getMinor())
-            {
-                if (getRevision() > version.getRevision())
-                {
-                    return true;
-                }
-                else if (getRevision() == version.getRevision() || (getRevision() <= 0 && version.getRevision() <= 0))
-                {
-                    if (!hasSuffix() && version.hasSuffix())
-                    {
-                        return true;
-                    }
-                    else if (hasSuffix() && version.hasSuffix())
-                    {
-                        return getSuffix().compareToIgnoreCase(version.getSuffix()) > 0;
-                    }
-                }
-            }
-        }
-        return false;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns a string representing the complete numeric version, what means the
+   * 3 numbers that represent major.minor.revision. If revision is not present, then it will
+   * be set to 0 (zero).<br/>
+   * Examples:<br/>
+   * <ol>
+   * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
+   * <li>3.4 -> returns 3.4.0</li>
+   * <li>3.4.1 -> returns 3.4.1</li>
+   * </ol>
+   *
+   * @return Complete numeric version: major.minor.revision
+   */
+  public String toCompleteNumericVersion() {
+    StringBuilder v = new StringBuilder(major + "." + minor + ".");
+
+    if (revision >= 0) {
+      v.append(revision);
+    } else {
+      v.append("0");
     }
 
-    /**
-     * Returns a string representing the complete numeric version, what means the
-     * 3 numbers that represent major.minor.revision. If revision is not present, then it will
-     * be set to 0 (zero).<br/>
-     * Examples:<br/>
-     * <ol>
-     * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
-     * <li>3.4 -> returns 3.4.0</li>
-     * <li>3.4.1 -> returns 3.4.1</li>
-     * </ol>
-     *
-     * @return Complete numeric version: major.minor.revision
-     */
-    public String toCompleteNumericVersion()
-    {
-        StringBuilder v = new StringBuilder(major + "." + minor + ".");
+    return v.toString();
+  }
 
-        if (revision >= 0)
-        {
-            v.append(revision);
-        }
-        else
-        {
-            v.append("0");
-        }
+  public boolean hasSuffix() {
+    return getSuffix() != null && getSuffix().length() > 0;
+  }
 
-        return v.toString();
+  private MuleVersion getBaseVersion() {
+    return new MuleVersion(getMajor() + "." + getMinor());
+  }
+
+  @Override
+  public boolean equals(Object otherObject) {
+    if (this == otherObject) {
+      return true;
     }
 
-    public boolean hasSuffix()
-    {
-        return getSuffix() != null && getSuffix().length() > 0;
+    if (!(otherObject instanceof MuleVersion)) {
+      return false;
     }
 
-    private MuleVersion getBaseVersion()
-    {
-        return new MuleVersion(getMajor() + "." + getMinor());
-    }
+    return toString().equals(otherObject.toString());
+  }
 
-    @Override
-    public boolean equals(Object otherObject)
-    {
-        if (this == otherObject)
-        {
-            return true;
-        }
+  @Override
+  public int hashCode() {
+    return toString().hashCode();
+  }
 
-        if (!(otherObject instanceof MuleVersion))
-        {
-            return false;
-        }
+  public int getMajor() {
+    return major;
+  }
 
-        return toString().equals(otherObject.toString());
-    }
+  public void setMajor(int major) {
+    this.major = major;
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return toString().hashCode();
-    }
+  public int getMinor() {
+    return minor;
+  }
 
-    public int getMajor()
-    {
-        return major;
-    }
+  public void setMinor(int minor) {
+    this.minor = minor;
+  }
 
-    public void setMajor(int major)
-    {
-        this.major = major;
-    }
+  public int getRevision() {
+    return revision;
+  }
 
-    public int getMinor()
-    {
-        return minor;
-    }
+  public void setRevision(int revision) {
+    this.revision = revision;
+  }
 
-    public void setMinor(int minor)
-    {
-        this.minor = minor;
-    }
+  public String getSuffix() {
+    return suffix;
+  }
 
-    public int getRevision()
-    {
-        return revision;
-    }
-
-    public void setRevision(int revision)
-    {
-        this.revision = revision;
-    }
-
-    public String getSuffix()
-    {
-        return suffix;
-    }
-
-    public void setSuffix(String suffix)
-    {
-        this.suffix = suffix;
-    }
+  public void setSuffix(String suffix) {
+    this.suffix = suffix;
+  }
 }

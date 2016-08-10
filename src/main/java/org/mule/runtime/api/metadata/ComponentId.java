@@ -12,17 +12,16 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public interface ComponentId
-{
+public interface ComponentId {
 
-    /**
-     * @return Flow name that holds the Component
-     */
-    String getFlowName();
+  /**
+   * @return Flow name that holds the Component
+   */
+  String getFlowName();
 
-    /**
-     * @return Path of the Component inside the flow
-     */
-    String getComponentPath();
+  /**
+   * @return Path of the Component inside the flow
+   */
+  String getComponentPath();
 
 }

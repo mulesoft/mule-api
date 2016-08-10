@@ -11,11 +11,10 @@ package org.mule.runtime.api.tls;
  *
  * @since 1.0
  */
-public interface TlsContextFactoryBuilder
-{
+public interface TlsContextFactoryBuilder {
 
-    /**
-     * @return a {@link TlsContextFactory} with the jvm default certificates.
-     */
-    TlsContextFactory buildDefault();
+  /**
+   * @return a {@link TlsContextFactory} with the jvm default certificates.
+   */
+  TlsContextFactory buildDefault();
 }

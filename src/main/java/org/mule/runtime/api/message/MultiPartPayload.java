@@ -15,26 +15,25 @@ import java.util.NoSuchElementException;
  * 
  * @since 1.0
  */
-public interface MultiPartPayload
-{
+public interface MultiPartPayload {
 
-    /**
-     * @return the contained parts.
-     */
-    List<MuleMessage> getParts();
+  /**
+   * @return the contained parts.
+   */
+  List<MuleMessage> getParts();
 
-    /**
-     * @return the names of the contained parts.
-     */
-    List<String> getPartNames();
+  /**
+   * @return the names of the contained parts.
+   */
+  List<String> getPartNames();
 
-    /**
-     * Looks up the part with the passed {@code partName}.
-     * 
-     * @param partName the name of the part to look for.
-     * @return the part with the given name.
-     * @throws NoSuchElementException if no part with the given name exists.
-     */
-    MuleMessage getPart(String partName);
+  /**
+   * Looks up the part with the passed {@code partName}.
+   * 
+   * @param partName the name of the part to look for.
+   * @return the part with the given name.
+   * @throws NoSuchElementException if no part with the given name exists.
+   */
+  MuleMessage getPart(String partName);
 
 }

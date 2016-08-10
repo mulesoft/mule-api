@@ -14,13 +14,12 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public interface CollectionDataType extends DataType
-{
+public interface CollectionDataType extends DataType {
 
-    /**
-     * Obtains the {@link DataType} of the items in the collection.
-     *
-     * @return the {@link DataType} of collection items.
-     */
-    DataType getItemDataType();
+  /**
+   * Obtains the {@link DataType} of the items in the collection.
+   *
+   * @return the {@link DataType} of collection items.
+   */
+  DataType getItemDataType();
 }

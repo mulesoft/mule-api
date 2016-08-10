@@ -11,74 +11,67 @@ package org.mule.runtime.api.connection;
  *
  * @since 1.0
  */
-public class ConnectionValidationResult
-{
+public class ConnectionValidationResult {
 
-    private boolean validationStatus;
-    private String message;
-    private ConnectionExceptionCode code;
-    private Exception exception;
+  private boolean validationStatus;
+  private String message;
+  private ConnectionExceptionCode code;
+  private Exception exception;
 
-    private ConnectionValidationResult(boolean validationStatus, String message, ConnectionExceptionCode code, Exception exception)
-    {
+  private ConnectionValidationResult(boolean validationStatus, String message, ConnectionExceptionCode code,
+                                     Exception exception) {
 
-        this.validationStatus = validationStatus;
-        this.message = message;
-        this.code = code;
-        this.exception = exception;
-    }
+    this.validationStatus = validationStatus;
+    this.message = message;
+    this.code = code;
+    this.exception = exception;
+  }
 
-    /**
-     * @return a {@link ConnectionValidationResult} with a valid status.
-     */
-    public static ConnectionValidationResult success()
-    {
-        return new ConnectionValidationResult(true, null, null, null);
-    }
+  /**
+   * @return a {@link ConnectionValidationResult} with a valid status.
+   */
+  public static ConnectionValidationResult success() {
+    return new ConnectionValidationResult(true, null, null, null);
+  }
 
-    /**
-     * @param message   Message in case of a invalid connection
-     * @param code      A {@link ConnectionExceptionCode} that represents the cause of the invalid connection
-     * @param exception The exception that causes the connection invalidity
-     * @return a {@link ConnectionValidationResult} with a invalid status.
-     */
-    public static ConnectionValidationResult failure(String message, ConnectionExceptionCode code, Exception exception)
-    {
-        return new ConnectionValidationResult(false, message, code, exception);
-    }
+  /**
+   * @param message   Message in case of a invalid connection
+   * @param code      A {@link ConnectionExceptionCode} that represents the cause of the invalid connection
+   * @param exception The exception that causes the connection invalidity
+   * @return a {@link ConnectionValidationResult} with a invalid status.
+   */
+  public static ConnectionValidationResult failure(String message, ConnectionExceptionCode code, Exception exception) {
+    return new ConnectionValidationResult(false, message, code, exception);
+  }
 
-    /**
-     * @return A {@link boolean} indicating if the connection is valid or not.
-     */
-    public boolean isValid()
-    {
-        return this.validationStatus;
-    }
+  /**
+   * @return A {@link boolean} indicating if the connection is valid or not.
+   */
+  public boolean isValid() {
+    return this.validationStatus;
+  }
 
-    /**
-     * @return A {@link String} indicating the Validation message.
-     * The message should not be null in case of a invalid connection.
-     */
-    public String getMessage()
-    {
-        return this.message;
-    }
+  /**
+   * @return A {@link String} indicating the Validation message.
+   * The message should not be null in case of a invalid connection.
+   */
+  public String getMessage() {
+    return this.message;
+  }
 
-    /**
-     * @return A {@link ConnectionExceptionCode} indicating the Validation code.
-     * The code should not be null in case of a invalid connection.
-     */
-    public ConnectionExceptionCode getCode()
-    {
-        return this.code;
-    }
+  /**
+   * @return A {@link ConnectionExceptionCode} indicating the Validation code.
+   * The code should not be null in case of a invalid connection.
+   */
+  public ConnectionExceptionCode getCode() {
+    return this.code;
+  }
 
-    /**
-     * @return The {@link Exception} that causes the connection invalidity.
-     * The exception should not be null in case of a invalid connection.
-     */
-    public Exception getException()
-    {
-        return this.exception;
-    }
+  /**
+   * @return The {@link Exception} that causes the connection invalidity.
+   * The exception should not be null in case of a invalid connection.
+   */
+  public Exception getException() {
+    return this.exception;
+  }
 }

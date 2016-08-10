@@ -13,22 +13,19 @@ import org.mule.metadata.api.model.MetadataType;
  *
  * @since 1.0
  */
-public final class ImmutableTypeMetadataDescriptor implements TypeMetadataDescriptor
-{
+public final class ImmutableTypeMetadataDescriptor implements TypeMetadataDescriptor {
 
-    private final MetadataType type;
+  private final MetadataType type;
 
-    public ImmutableTypeMetadataDescriptor(MetadataType type)
-    {
-        this.type = type;
-    }
+  public ImmutableTypeMetadataDescriptor(MetadataType type) {
+    this.type = type;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MetadataType getType()
-    {
-        return type;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MetadataType getType() {
+    return type;
+  }
 }

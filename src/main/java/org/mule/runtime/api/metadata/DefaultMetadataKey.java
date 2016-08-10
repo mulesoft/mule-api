@@ -27,93 +27,83 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  *
  * @since 1.0
  */
-public final class DefaultMetadataKey implements MetadataKey
-{
+public final class DefaultMetadataKey implements MetadataKey {
 
-    private final String id;
-    private final String displayName;
-    private final String partName;
-    private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
-    private final Set<MetadataKey> childs;
+  private final String id;
+  private final String displayName;
+  private final String partName;
+  private final Map<Class<? extends MetadataProperty>, MetadataProperty> properties;
+  private final Set<MetadataKey> childs;
 
-    protected DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs, String partName)
-    {
-        this.id = id;
-        this.displayName = displayName;
-        this.childs = childs;
-        this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
-        this.partName = partName;
-    }
+  protected DefaultMetadataKey(String id, String displayName, Set<MetadataProperty> properties, Set<MetadataKey> childs,
+                               String partName) {
+    this.id = id;
+    this.displayName = displayName;
+    this.childs = childs;
+    this.properties = unmodifiableMap(properties.stream().collect(toMap(MetadataProperty::getClass, p -> p)));
+    this.partName = partName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getId()
-    {
-        return id;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getId() {
+    return id;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getDisplayName()
-    {
-        return displayName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getDisplayName() {
+    return displayName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Set<MetadataKey> getChilds()
-    {
-        return unmodifiableSet(childs);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Set<MetadataKey> getChilds() {
+    return unmodifiableSet(childs);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getPartName()
-    {
-        return partName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getPartName() {
+    return partName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType)
-    {
-        return ofNullable((T) properties.get(propertyType));
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType) {
+    return ofNullable((T) properties.get(propertyType));
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Set<MetadataProperty> getProperties()
-    {
-        return unmodifiableSet(new HashSet<>(properties.values()));
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Set<MetadataProperty> getProperties() {
+    return unmodifiableSet(new HashSet<>(properties.values()));
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return reflectionHashCode(this);
-    }
+  @Override
+  public int hashCode() {
+    return reflectionHashCode(this);
+  }
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        return reflectionEquals(this, obj);
-    }
+  @Override
+  public boolean equals(Object obj) {
+    return reflectionEquals(this, obj);
+  }
 
-    @Override
-    public String toString()
-    {
-        return reflectionToString(this);
-    }
+  @Override
+  public String toString() {
+    return reflectionToString(this);
+  }
 }

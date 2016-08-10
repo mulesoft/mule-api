@@ -19,26 +19,25 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface MetadataKey extends MetadataEnrichableModel
-{
+public interface MetadataKey extends MetadataEnrichableModel {
 
-    /**
-     * @return identifier for the current key
-     */
-    String getId();
+  /**
+   * @return identifier for the current key
+   */
+  String getId();
 
-    /**
-     * @return human readable name to use when displaying the key
-     */
-    String getDisplayName();
+  /**
+   * @return human readable name to use when displaying the key
+   */
+  String getDisplayName();
 
-    /**
-     * @return the child {@link MetadataKey MetadataKeys} that form a composed {@link MetadataKey}.
-     */
-    Set<MetadataKey> getChilds();
+  /**
+   * @return the child {@link MetadataKey MetadataKeys} that form a composed {@link MetadataKey}.
+   */
+  Set<MetadataKey> getChilds();
 
-    /**
-     * @return the name of the part which this {@link MetadataKey} is from
-     */
-    String getPartName();
+  /**
+   * @return the name of the part which this {@link MetadataKey} is from
+   */
+  String getPartName();
 }

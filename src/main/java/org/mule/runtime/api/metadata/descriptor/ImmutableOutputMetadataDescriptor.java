@@ -13,33 +13,30 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public final class ImmutableOutputMetadataDescriptor implements OutputMetadataDescriptor
-{
+public final class ImmutableOutputMetadataDescriptor implements OutputMetadataDescriptor {
 
-    private final MetadataResult<TypeMetadataDescriptor> content;
-    private final MetadataResult<TypeMetadataDescriptor> attributes;
+  private final MetadataResult<TypeMetadataDescriptor> content;
+  private final MetadataResult<TypeMetadataDescriptor> attributes;
 
-    public ImmutableOutputMetadataDescriptor(MetadataResult<TypeMetadataDescriptor> content, MetadataResult<TypeMetadataDescriptor> attributes)
-    {
-        this.content = content;
-        this.attributes = attributes;
-    }
+  public ImmutableOutputMetadataDescriptor(MetadataResult<TypeMetadataDescriptor> content,
+                                           MetadataResult<TypeMetadataDescriptor> attributes) {
+    this.content = content;
+    this.attributes = attributes;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MetadataResult<TypeMetadataDescriptor> getPayloadMetadata()
-    {
-        return content;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MetadataResult<TypeMetadataDescriptor> getPayloadMetadata() {
+    return content;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MetadataResult<TypeMetadataDescriptor> getAttributesMetadata()
-    {
-        return attributes;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MetadataResult<TypeMetadataDescriptor> getAttributesMetadata() {
+    return attributes;
+  }
 }

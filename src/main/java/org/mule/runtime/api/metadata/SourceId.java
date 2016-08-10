@@ -11,41 +11,36 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public class SourceId implements ComponentId
-{
+public class SourceId implements ComponentId {
 
-    private static final String SOURCE_ID = "-1";
-    private final String flowName;
+  private static final String SOURCE_ID = "-1";
+  private final String flowName;
 
-    public SourceId(String flowName)
-    {
-        this.flowName = flowName;
-    }
+  public SourceId(String flowName) {
+    this.flowName = flowName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFlowName()
-    {
-        return flowName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getFlowName() {
+    return flowName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getComponentPath()
-    {
-        return SOURCE_ID;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getComponentPath() {
+    return SOURCE_ID;
+  }
 
-    @Override
-    public String toString()
-    {
-        return "SourceId{" +
-               "flowName='" + flowName + '\'' +
-               ", executablePath=" + SOURCE_ID +
-               '}';
-    }
+  @Override
+  public String toString() {
+    return "SourceId{" +
+        "flowName='" + flowName + '\'' +
+        ", executablePath=" + SOURCE_ID +
+        '}';
+  }
 }

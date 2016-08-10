@@ -25,35 +25,34 @@ package org.mule.runtime.api.connection;
  * @param <C> the generic type of the connections to be handled
  * @since 1.0
  */
-public interface ConnectionProvider<C>
-{
+public interface ConnectionProvider<C> {
 
-    /**
-     * Creates a new connection.
-     * <p>
-     * The returned connection is expected to be ready to use
-     *
-     * @return a ready to use {@code Connection}
-     */
-    C connect() throws ConnectionException;
+  /**
+   * Creates a new connection.
+   * <p>
+   * The returned connection is expected to be ready to use
+   *
+   * @return a ready to use {@code Connection}
+   */
+  C connect() throws ConnectionException;
 
-    /**
-     * Disposes the given {@code connection}, freeing all its allocated resources
-     *
-     * @param connection a non {@code null} {@code Connection}.
-     */
-    void disconnect(C connection);
+  /**
+   * Disposes the given {@code connection}, freeing all its allocated resources
+   *
+   * @param connection a non {@code null} {@code Connection}.
+   */
+  void disconnect(C connection);
 
-    /**
-     * Validates the given {@link C}.
-     *
-     * In invalid connection case, the {@link ConnectionValidationResult} should also return a valid
-     * message {@link ConnectionValidationResult#getMessage()}, exception {@link ConnectionValidationResult#getException()}
-     * and code {@link ConnectionValidationResult#getCode()}
-     *
-     * @param connection a non {@code null} {@link C}.
-     * @return a {@link ConnectionValidationResult} indicating if the connection
-     * is valid or not.
-     */
-    ConnectionValidationResult validate(C connection);
+  /**
+   * Validates the given {@link C}.
+   *
+   * In invalid connection case, the {@link ConnectionValidationResult} should also return a valid
+   * message {@link ConnectionValidationResult#getMessage()}, exception {@link ConnectionValidationResult#getException()}
+   * and code {@link ConnectionValidationResult#getCode()}
+   *
+   * @param connection a non {@code null} {@link C}.
+   * @return a {@link ConnectionValidationResult} indicating if the connection
+   * is valid or not.
+   */
+  ConnectionValidationResult validate(C connection);
 }

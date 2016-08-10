@@ -19,54 +19,48 @@ import org.slf4j.LoggerFactory;
  *
  * @since 1.0
  */
-public abstract class AbstractMuleMessageBuilderFactory
-{
+public abstract class AbstractMuleMessageBuilderFactory {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMuleMessageBuilderFactory.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMuleMessageBuilderFactory.class);
 
-    static
-    {
-        try
-        {
-            final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class).iterator().next();
-            LOGGER.info(format("Loaded MuleMessageBuilderFactory impementation '%s' form classloader '%s'",
-                               factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+  static {
+    try {
+      final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class).iterator().next();
+      LOGGER.info(format("Loaded MuleMessageBuilderFactory impementation '%s' form classloader '%s'",
+                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-            DEFAULT_FACTORY = factory;
-        }
-        catch (Exception e)
-        {
-            LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", e);
-            throw e;
-        }
+      DEFAULT_FACTORY = factory;
+    } catch (Exception e) {
+      LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", e);
+      throw e;
     }
+  }
 
-    private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
 
-    /**
-     * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
-     * this class initialization.
-     * <p>
-     * If more than one implementation is found, the classLoading order of those implementations
-     * will determine which one is used. Information about this will be logged to aid in the
-     * troubleshooting of those cases.
-     *
-     * @return the implementation of this builder factory provided by the Mule Runtime.
-     */
-    static final AbstractMuleMessageBuilderFactory getDefaultFactory()
-    {
-        return DEFAULT_FACTORY;
-    }
+  /**
+   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
+   * this class initialization.
+   * <p>
+   * If more than one implementation is found, the classLoading order of those implementations
+   * will determine which one is used. Information about this will be logged to aid in the
+   * troubleshooting of those cases.
+   *
+   * @return the implementation of this builder factory provided by the Mule Runtime.
+   */
+  static final AbstractMuleMessageBuilderFactory getDefaultFactory() {
+    return DEFAULT_FACTORY;
+  }
 
-    /**
-     * @return a fresh {@link Builder} object.
-     */
-    protected abstract MuleMessage.PayloadBuilder create();
+  /**
+   * @return a fresh {@link Builder} object.
+   */
+  protected abstract MuleMessage.PayloadBuilder create();
 
-    /**
-     * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
-     * @return a fresh {@link Builder} based on the template {@code message} provided.
-     */
-    protected abstract MuleMessage.Builder create(MuleMessage message);
+  /**
+   * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
+   * @return a fresh {@link Builder} based on the template {@code message} provided.
+   */
+  protected abstract MuleMessage.Builder create(MuleMessage message);
 
 }

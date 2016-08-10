@@ -13,11 +13,10 @@ import org.mule.metadata.api.model.MetadataType;
  *
  * @since 1.0
  */
-public interface TypeMetadataDescriptor
-{
+public interface TypeMetadataDescriptor {
 
-    /**
-     * @return the component's {@link MetadataType}
-     */
-    MetadataType getType();
+  /**
+   * @return the component's {@link MetadataType}
+   */
+  MetadataType getType();
 }

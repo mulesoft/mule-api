@@ -16,27 +16,27 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface ComponentMetadataDescriptor
-{
-    /**
-     * @return the Operation whose metadata is described
-     */
-    String getName();
+public interface ComponentMetadataDescriptor {
 
-    /**
-     * @return a {@link List} of {@link MetadataResult} of {@link ParameterMetadataDescriptor}
-     * containing one result for each parameter that the operation has.
-     */
-    List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata();
+  /**
+   * @return the Operation whose metadata is described
+   */
+  String getName();
 
-    /**
-     * @return the {@link MetadataResult} of {@link ParameterMetadataDescriptor}
-     * of the operation's content parameter, if present.
-     */
-    Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata();
+  /**
+   * @return a {@link List} of {@link MetadataResult} of {@link ParameterMetadataDescriptor}
+   * containing one result for each parameter that the operation has.
+   */
+  List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata();
 
-    /**
-     * @return a {@link MetadataResult} with the {@link OutputMetadataDescriptor} of the Operation's output
-     */
-    MetadataResult<OutputMetadataDescriptor> getOutputMetadata();
+  /**
+   * @return the {@link MetadataResult} of {@link ParameterMetadataDescriptor}
+   * of the operation's content parameter, if present.
+   */
+  Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata();
+
+  /**
+   * @return a {@link MetadataResult} with the {@link OutputMetadataDescriptor} of the Operation's output
+   */
+  MetadataResult<OutputMetadataDescriptor> getOutputMetadata();
 }

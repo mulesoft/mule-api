@@ -11,17 +11,16 @@ package org.mule.runtime.api.tls;
  *
  * @since 1.0
  */
-public interface TlsContextKeyStoreConfiguration extends TlsContextStoreConfiguration
-{
+public interface TlsContextKeyStoreConfiguration extends TlsContextStoreConfiguration {
 
-    /**
-     * @return The alias of the private key to use.
-     */
-    String getAlias();
+  /**
+   * @return The alias of the private key to use.
+   */
+  String getAlias();
 
-    /**
-     * @return The password used to access the private key.
-     */
-    String getKeyPassword();
+  /**
+   * @return The password used to access the private key.
+   */
+  String getKeyPassword();
 
 }

@@ -19,35 +19,31 @@ package org.mule.runtime.api.execution;
  * @param <HandledCompletionExceptionResult>
  */
 public abstract class BlockingCompletionHandler<Response, ProcessingException extends Throwable, HandledCompletionExceptionResult>
-        implements CompletionHandler<Response, ProcessingException, HandledCompletionExceptionResult>
-{
+    implements CompletionHandler<Response, ProcessingException, HandledCompletionExceptionResult> {
 
-    /**
-     * Delegates into {@link #doOnCompletion(Object)} and channels any thrown exceptions
-     * through the {@code exceptionCallback}
-     *
-     * @param result            the result of processing
-     * @param exceptionCallback handles errors processing the {@code result}
-     */
-    @Override
-    public final void onCompletion(Response result, ExceptionCallback<HandledCompletionExceptionResult, Exception> exceptionCallback)
-    {
-        try
-        {
-            doOnCompletion(result);
-        }
-        catch (Exception e)
-        {
-            exceptionCallback.onException(e);
-        }
+  /**
+   * Delegates into {@link #doOnCompletion(Object)} and channels any thrown exceptions
+   * through the {@code exceptionCallback}
+   *
+   * @param result            the result of processing
+   * @param exceptionCallback handles errors processing the {@code result}
+   */
+  @Override
+  public final void onCompletion(Response result,
+                                 ExceptionCallback<HandledCompletionExceptionResult, Exception> exceptionCallback) {
+    try {
+      doOnCompletion(result);
+    } catch (Exception e) {
+      exceptionCallback.onException(e);
     }
+  }
 
-    /**
-     * Provides a simplified view of the {@link #onCompletion(Object, ExceptionCallback)} contract
-     * that assumes that the operation is blocking, which makes it unnecessary to explicitly
-     * channel exceptions to an {@link ExceptionCallback}
-     *
-     * @param result the result of processing
-     */
-    protected abstract void doOnCompletion(Response result);
+  /**
+   * Provides a simplified view of the {@link #onCompletion(Object, ExceptionCallback)} contract
+   * that assumes that the operation is blocking, which makes it unnecessary to explicitly
+   * channel exceptions to an {@link ExceptionCallback}
+   *
+   * @param result the result of processing
+   */
+  protected abstract void doOnCompletion(Response result);
 }

@@ -16,59 +16,59 @@ import java.nio.charset.IllegalCharsetNameException;
  *
  * @since 1.0
  */
-public interface DataTypeParamsBuilder
-{
-    /**
-     * Sets the given {@code mediaType} string. See {@link DataType#getMediaType()}.
-     * <p>
-     * If the media type for the given string has a {@code charset} parameter, that will be set as
-     * the encoding for the {@link DataType} being built, unless it had been previously set.
-     * <p>
-     * An encoding set by a call to this method can be overridden by calling
-     * {@link #charset(String)}.
-     * 
-     * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
-     * @return this builder.
-     * @throws IllegalArgumentException if the given media type string is invalid.
-     */
-    DataTypeParamsBuilder mediaType(String mediaType);
+public interface DataTypeParamsBuilder {
 
-    /**
-     * Sets the given {@code mediaType}. See {@link DataType#getMediaType()}.
-     * <p>
-     * If the media type for the given string has a {@code charset} parameter, that will be set as
-     * the encoding for the {@link DataType} being built, unless it had been previously set.
-     * <p>
-     * An encoding set by a call to this method can be overridden by calling
-     * {@link #charset(String)}.
-     * 
-     * @param mimeType the media type to set. If null, the builder is not changed.
-     * @return this builder.
-     */
-    DataTypeParamsBuilder mediaType(MediaType mediaType);
+  /**
+   * Sets the given {@code mediaType} string. See {@link DataType#getMediaType()}.
+   * <p>
+   * If the media type for the given string has a {@code charset} parameter, that will be set as
+   * the encoding for the {@link DataType} being built, unless it had been previously set.
+   * <p>
+   * An encoding set by a call to this method can be overridden by calling
+   * {@link #charset(String)}.
+   * 
+   * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
+   * @return this builder.
+   * @throws IllegalArgumentException if the given media type string is invalid.
+   */
+  DataTypeParamsBuilder mediaType(String mediaType);
 
-    /**
-     * Sets the given encoding. See {@link MediaType#getCharset()}.
-     *
-     * @param charset the encoding to set. If null or empty, the builder is not changed.
-     * @return this builder.
-     * @throws IllegalCharsetNameException if the {@code charset} is invalid.
-     */
-    DataTypeParamsBuilder charset(String charset);
+  /**
+   * Sets the given {@code mediaType}. See {@link DataType#getMediaType()}.
+   * <p>
+   * If the media type for the given string has a {@code charset} parameter, that will be set as
+   * the encoding for the {@link DataType} being built, unless it had been previously set.
+   * <p>
+   * An encoding set by a call to this method can be overridden by calling
+   * {@link #charset(String)}.
+   * 
+   * @param mimeType the media type to set. If null, the builder is not changed.
+   * @return this builder.
+   */
+  DataTypeParamsBuilder mediaType(MediaType mediaType);
 
-    /**
-     * Sets the given encoding. See {@link MediaType#getCharset()}.
-     *
-     * @param charset the encoding to set. If null or empty, the builder is not changed.
-     * @return this builder.
-     */
-    DataTypeParamsBuilder charset(Charset charset);
+  /**
+   * Sets the given encoding. See {@link MediaType#getCharset()}.
+   *
+   * @param charset the encoding to set. If null or empty, the builder is not changed.
+   * @return this builder.
+   * @throws IllegalCharsetNameException if the {@code charset} is invalid.
+   */
+  DataTypeParamsBuilder charset(String charset);
 
-    /**
-     * Builds a new {@link DataType} with the values set in this builder.
-     * 
-     * @return a newly built {@link DataType}.
-     */
-    DataType build();
+  /**
+   * Sets the given encoding. See {@link MediaType#getCharset()}.
+   *
+   * @param charset the encoding to set. If null or empty, the builder is not changed.
+   * @return this builder.
+   */
+  DataTypeParamsBuilder charset(Charset charset);
+
+  /**
+   * Builds a new {@link DataType} with the values set in this builder.
+   * 
+   * @return a newly built {@link DataType}.
+   */
+  DataType build();
 
 }

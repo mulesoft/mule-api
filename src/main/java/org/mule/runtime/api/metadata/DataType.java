@@ -25,104 +25,100 @@ import java.util.Collection;
  *
  * @since 1.0
  */
-public interface DataType extends Serializable
-{
+public interface DataType extends Serializable {
 
-    /**
-     * Provides a builder to create {@link DataType} objects.
-     * 
-     * @return a new {@link DataTypeBuilder}.
-     */
-    static DataTypeBuilder builder()
-    {
-        return getDefaultFactory().create();
-    }
+  /**
+   * Provides a builder to create {@link DataType} objects.
+   * 
+   * @return a new {@link DataTypeBuilder}.
+   */
+  static DataTypeBuilder builder() {
+    return getDefaultFactory().create();
+  }
 
-    /**
-     * Provides a builder to create {@link DataType} objects based on an existing {@link DataType} instance.
-     *
-     * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
-     * @return a new {@link DataTypeBuilder} based on the template {@code dataType} provided.
-     * */
-    static DataTypeBuilder builder(DataType dataType)
-    {
-        return getDefaultFactory().create(dataType);
-    }
+  /**
+   * Provides a builder to create {@link DataType} objects based on an existing {@link DataType} instance.
+   *
+   * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
+   * @return a new {@link DataTypeBuilder} based on the template {@code dataType} provided.
+   * */
+  static DataTypeBuilder builder(DataType dataType) {
+    return getDefaultFactory().create(dataType);
+  }
 
-    /**
-     * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType}
-     * and {@code encoding}.
-     * 
-     * @param type the Java type to create {@link DataType} for.
-     * @return a new {@link DataTypeBuilder} for the given {@code type}.
-     */
-    static DataType fromType(Class<?> type)
-    {
-        return builder().type(type).build();
-    }
+  /**
+   * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType}
+   * and {@code encoding}.
+   * 
+   * @param type the Java type to create {@link DataType} for.
+   * @return a new {@link DataTypeBuilder} for the given {@code type}.
+   */
+  static DataType fromType(Class<?> type) {
+    return builder().type(type).build();
+  }
 
-    /**
-     * Shortcut to create the {@link DataType} from an Object instance.
-     * <p>
-     * This behaves in the same way as {@link #fromType(Class)} creating a {@link DataType} based on
-     * the value type with default values being used for {@code mimeType} and {@code encoding} if
-     * the Object type has no mimeType or encoding. The {@link DataTypeBuilder} used by default may
-     * introspect certain types that do contain type this meta-data such as
-     * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate
-     * {@code mimeType} and {@code encoding} values based on this.
-     *
-     * @param value the object to determine the {@link DataType} of.
-     * @param <T> the type of the object
-     * @return a new {@link DataType} for the given {@code value}.
-     */
-    static DataType fromObject(Object value)
-    {
-        return getDefaultFactory().create().fromObject(value).build();
-    }
+  /**
+   * Shortcut to create the {@link DataType} from an Object instance.
+   * <p>
+   * This behaves in the same way as {@link #fromType(Class)} creating a {@link DataType} based on
+   * the value type with default values being used for {@code mimeType} and {@code encoding} if
+   * the Object type has no mimeType or encoding. The {@link DataTypeBuilder} used by default may
+   * introspect certain types that do contain type this meta-data such as
+   * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate
+   * {@code mimeType} and {@code encoding} values based on this.
+   *
+   * @param value the object to determine the {@link DataType} of.
+   * @param <T> the type of the object
+   * @return a new {@link DataType} for the given {@code value}.
+   */
+  static DataType fromObject(Object value) {
+    return getDefaultFactory().create().fromObject(value).build();
+  }
 
 
-    DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
-    DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
-    DataType JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
-    DataType HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
-    DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
-    DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
+  DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
+  DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
+  DataType JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
+  DataType HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
+  DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
+  DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
 
-    //Common Java types
-    DataType STRING = fromType(String.class);
-    DataType NUMBER = fromType(Number.class);
-    DataType BOOLEAN = fromType(Boolean.class);
-    DataType OBJECT = fromType(Object.class);
-    DataType BYTE_ARRAY = fromType(byte[].class);
-    DataType INPUT_STREAM = fromType(InputStream.class);
-    DataType MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
-    CollectionDataType MULE_MESSAGE_COLLECTION =
-            (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(MuleMessage.class).mediaType(MediaType.ANY).build();
+  //Common Java types
+  DataType STRING = fromType(String.class);
+  DataType NUMBER = fromType(Number.class);
+  DataType BOOLEAN = fromType(Boolean.class);
+  DataType OBJECT = fromType(Object.class);
+  DataType BYTE_ARRAY = fromType(byte[].class);
+  DataType INPUT_STREAM = fromType(InputStream.class);
+  DataType MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
+  CollectionDataType MULE_MESSAGE_COLLECTION =
+      (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(MuleMessage.class)
+          .mediaType(MediaType.ANY).build();
 
-    /**
-     * The object type of the source object to transform.
-     *
-     * @return the class object of the source object. This must not be null
-     */
-    Class<?> getType();
+  /**
+   * The object type of the source object to transform.
+   *
+   * @return the class object of the source object. This must not be null
+   */
+  Class<?> getType();
 
-    /**
-     * The mime type of the the source object to transform.
-     *
-     * @return the mime type of the source object.
-     */
-    MediaType getMediaType();
+  /**
+   * The mime type of the the source object to transform.
+   *
+   * @return the mime type of the source object.
+   */
+  MediaType getMediaType();
 
-    /**
-     * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime
-     * types matches the one in the given dataType and whether the Java types are assignable.
-     * <p>
-     * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may
-     * yield different result.
-     *
-     * @param dataType the dataType object to compare with
-     * @return true if the mime types are the same and this type can be assigned to the dataType.type.
-     */
-    boolean isCompatibleWith(DataType dataType);
+  /**
+   * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime
+   * types matches the one in the given dataType and whether the Java types are assignable.
+   * <p>
+   * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may
+   * yield different result.
+   *
+   * @param dataType the dataType object to compare with
+   * @return true if the mime types are the same and this type can be assigned to the dataType.type.
+   */
+  boolean isCompatibleWith(DataType dataType);
 
 }

@@ -16,58 +16,52 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor
-{
+public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor {
 
-    private final String componentName;
-    private final List<MetadataResult<ParameterMetadataDescriptor>> parameters;
-    private final MetadataResult<OutputMetadataDescriptor> output;
-    private final MetadataResult<ParameterMetadataDescriptor> content;
+  private final String componentName;
+  private final List<MetadataResult<ParameterMetadataDescriptor>> parameters;
+  private final MetadataResult<OutputMetadataDescriptor> output;
+  private final MetadataResult<ParameterMetadataDescriptor> content;
 
-    public ImmutableComponentMetadataDescriptor(String componentName,
-                                                List<MetadataResult<ParameterMetadataDescriptor>> parameters,
-                                                MetadataResult<OutputMetadataDescriptor> output,
-                                                MetadataResult<ParameterMetadataDescriptor> content)
-    {
-        this.componentName = componentName;
-        this.parameters = parameters;
-        this.output = output;
-        this.content = content;
-    }
+  public ImmutableComponentMetadataDescriptor(String componentName,
+                                              List<MetadataResult<ParameterMetadataDescriptor>> parameters,
+                                              MetadataResult<OutputMetadataDescriptor> output,
+                                              MetadataResult<ParameterMetadataDescriptor> content) {
+    this.componentName = componentName;
+    this.parameters = parameters;
+    this.output = output;
+    this.content = content;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata()
-    {
-        return this.parameters;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata() {
+    return this.parameters;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata()
-    {
-        return Optional.ofNullable(content);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata() {
+    return Optional.ofNullable(content);
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public MetadataResult<OutputMetadataDescriptor> getOutputMetadata()
-    {
-        return this.output;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MetadataResult<OutputMetadataDescriptor> getOutputMetadata() {
+    return this.output;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getName()
-    {
-        return componentName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getName() {
+    return componentName;
+  }
 }

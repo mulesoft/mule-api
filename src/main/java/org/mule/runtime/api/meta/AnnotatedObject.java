@@ -15,27 +15,26 @@ import javax.xml.namespace.QName;
  *
  * @since 1.0
  */
-public interface AnnotatedObject
-{
+public interface AnnotatedObject {
 
-    String PROPERTY_NAME = "annotations";
+  String PROPERTY_NAME = "annotations";
 
-    /**
-     * Gets the value of specified annotation.
-     *
-     * @return the value of specified annotation
-     */
-    Object getAnnotation(QName name);
+  /**
+   * Gets the value of specified annotation.
+   *
+   * @return the value of specified annotation
+   */
+  Object getAnnotation(QName name);
 
-    /**
-     * Gets all annotations.
-     *
-     * @return all annotation
-     */
-    Map<QName, Object> getAnnotations();
+  /**
+   * Gets all annotations.
+   *
+   * @return all annotation
+   */
+  Map<QName, Object> getAnnotations();
 
-    /**
-     * Sets annotations to the object.
-     */
-    void setAnnotations(Map<QName, Object> annotations);
+  /**
+   * Sets annotations to the object.
+   */
+  void setAnnotations(Map<QName, Object> annotations);
 }
