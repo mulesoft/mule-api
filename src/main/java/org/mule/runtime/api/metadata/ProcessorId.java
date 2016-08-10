@@ -11,43 +11,38 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public final class ProcessorId implements ComponentId
-{
+public final class ProcessorId implements ComponentId {
 
-    private final String flowName;
-    private final String componentPath;
+  private final String flowName;
+  private final String componentPath;
 
-    public ProcessorId(String flowName, String componentPath)
-    {
-        this.flowName = flowName;
-        this.componentPath = componentPath;
-    }
+  public ProcessorId(String flowName, String componentPath) {
+    this.flowName = flowName;
+    this.componentPath = componentPath;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getFlowName()
-    {
-        return flowName;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getFlowName() {
+    return flowName;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getComponentPath()
-    {
-        return componentPath;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getComponentPath() {
+    return componentPath;
+  }
 
 
-    @Override
-    public String toString()
-    {
-        return "ProcessorId{" +
-               "flowName='" + flowName + '\'' +
-               ", componentPath=" + componentPath +
-               '}';
-    }
+  @Override
+  public String toString() {
+    return "ProcessorId{" +
+        "flowName='" + flowName + '\'' +
+        ", componentPath=" + componentPath +
+        '}';
+  }
 }

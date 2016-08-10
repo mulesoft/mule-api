@@ -11,27 +11,26 @@ package org.mule.runtime.api.tls;
  *
  * @since 1.0
  */
-public interface TlsContextStoreConfiguration
-{
+public interface TlsContextStoreConfiguration {
 
-    /**
-     * @return The location of the store.
-     */
-    String getPath();
+  /**
+   * @return The location of the store.
+   */
+  String getPath();
 
-    /**
-     * @return The password to access the store.
-     */
-    String getPassword();
+  /**
+   * @return The password to access the store.
+   */
+  String getPassword();
 
-    /**
-     * @return The type of store ("jks", "pkcs12", "jceks", or any other).
-     */
-    String getType();
+  /**
+   * @return The type of store ("jks", "pkcs12", "jceks", or any other).
+   */
+  String getType();
 
-    /**
-     * @return The algorithm used by the store.
-     */
-    String getAlgorithm();
+  /**
+   * @return The algorithm used by the store.
+   */
+  String getAlgorithm();
 
 }

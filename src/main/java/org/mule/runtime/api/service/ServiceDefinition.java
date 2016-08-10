@@ -14,43 +14,37 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 1.0
  */
-public class ServiceDefinition
-{
+public class ServiceDefinition {
 
-    private final Class<? extends Service> serviceClass;
-    private final Service service;
+  private final Class<? extends Service> serviceClass;
+  private final Service service;
 
-    /**
-     * Defines a new service instance.
-     *
-     * @param serviceInterface interface defining the service. Non null.
-     * @param service implementation of the {@code serviceInterface}. Non null.
-     */
-    public ServiceDefinition(Class<? extends Service> serviceInterface, Service service)
-    {
-        requireNonNull(serviceInterface, "ServiceClass cannot be null");
-        requireNonNull(service, "Service cannot be null");
+  /**
+   * Defines a new service instance.
+   *
+   * @param serviceInterface interface defining the service. Non null.
+   * @param service implementation of the {@code serviceInterface}. Non null.
+   */
+  public ServiceDefinition(Class<? extends Service> serviceInterface, Service service) {
+    requireNonNull(serviceInterface, "ServiceClass cannot be null");
+    requireNonNull(service, "Service cannot be null");
 
-        if (!serviceInterface.isInterface())
-        {
-            throw new IllegalArgumentException("ServiceClass must be an interface");
-        }
-        if (!serviceInterface.isAssignableFrom(service.getClass()))
-        {
-            throw new IllegalArgumentException("Service must be instance of " + serviceInterface +  " but is " + service.getClass());
-        }
-
-        this.serviceClass = serviceInterface;
-        this.service = service;
+    if (!serviceInterface.isInterface()) {
+      throw new IllegalArgumentException("ServiceClass must be an interface");
+    }
+    if (!serviceInterface.isAssignableFrom(service.getClass())) {
+      throw new IllegalArgumentException("Service must be instance of " + serviceInterface + " but is " + service.getClass());
     }
 
-    public Class<? extends Service> getServiceClass()
-    {
-        return serviceClass;
-    }
+    this.serviceClass = serviceInterface;
+    this.service = service;
+  }
 
-    public Service getService()
-    {
-        return service;
-    }
+  public Class<? extends Service> getServiceClass() {
+    return serviceClass;
+  }
+
+  public Service getService() {
+    return service;
+  }
 }

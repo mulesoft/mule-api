@@ -15,19 +15,19 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface MetadataEnrichableModel
-{
-    /**
-     * Returns a registered model property of type{@code propertyType}
-     *
-     * @param propertyType the {@link Class} of the {@link MetadataProperty} which is being queried
-     * @param <T> the generic type of the return value
-     * @return an {@link Optional} {@link MetadataProperty}
-     */
-    <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType);
+public interface MetadataEnrichableModel {
 
-    /**
-     * @return the entire {@link Set} of {@link MetadataProperty}s of the current element.
-     */
-    Set<MetadataProperty> getProperties();
+  /**
+   * Returns a registered model property of type{@code propertyType}
+   *
+   * @param propertyType the {@link Class} of the {@link MetadataProperty} which is being queried
+   * @param <T> the generic type of the return value
+   * @return an {@link Optional} {@link MetadataProperty}
+   */
+  <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType);
+
+  /**
+   * @return the entire {@link Set} of {@link MetadataProperty}s of the current element.
+   */
+  Set<MetadataProperty> getProperties();
 }

@@ -17,72 +17,63 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
  *
  * @since 1.0
  */
-public final class ImmutableMetadataResult<T> implements MetadataResult<T>
-{
+public final class ImmutableMetadataResult<T> implements MetadataResult<T> {
 
-    private final T result;
-    private final boolean isSuccess;
-    private final MetadataFailure failure;
+  private final T result;
+  private final boolean isSuccess;
+  private final MetadataFailure failure;
 
-    ImmutableMetadataResult(T result)
-    {
-        this.result = result;
-        this.isSuccess = true;
-        this.failure = null;
-    }
+  ImmutableMetadataResult(T result) {
+    this.result = result;
+    this.isSuccess = true;
+    this.failure = null;
+  }
 
-    ImmutableMetadataResult(Exception e)
-    {
-        this(null, e);
-    }
+  ImmutableMetadataResult(Exception e) {
+    this(null, e);
+  }
 
-    ImmutableMetadataResult(T result, Exception e)
-    {
-        this(result, e.getMessage(), e);
-    }
+  ImmutableMetadataResult(T result, Exception e) {
+    this(result, e.getMessage(), e);
+  }
 
-    ImmutableMetadataResult(T result, String message, Exception e)
-    {
-        this.result = result;
-        this.isSuccess = false;
-        this.failure = new MetadataFailure(message, ExceptionUtils.getStackTrace(e), getFailureCode(e));
-    }
+  ImmutableMetadataResult(T result, String message, Exception e) {
+    this.result = result;
+    this.isSuccess = false;
+    this.failure = new MetadataFailure(message, ExceptionUtils.getStackTrace(e), getFailureCode(e));
+  }
 
-    ImmutableMetadataResult(T result, MetadataFailure failure)
-    {
-        this.result = result;
-        this.isSuccess = false;
-        this.failure = failure;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public T get()
-    {
-        return result;
-    }
+  ImmutableMetadataResult(T result, MetadataFailure failure) {
+    this.result = result;
+    this.isSuccess = false;
+    this.failure = failure;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isSuccess()
-    {
-        return isSuccess;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public T get() {
+    return result;
+  }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Optional<MetadataFailure> getFailure()
-    {
-        return Optional.ofNullable(failure);
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isSuccess() {
+    return isSuccess;
+  }
 
-    private FailureCode getFailureCode(Exception e)
-    {
-        return e instanceof MetadataResolvingException ? ((MetadataResolvingException) e).getFailure() : FailureCode.UNKNOWN;
-    }
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Optional<MetadataFailure> getFailure() {
+    return Optional.ofNullable(failure);
+  }
+
+  private FailureCode getFailureCode(Exception e) {
+    return e instanceof MetadataResolvingException ? ((MetadataResolvingException) e).getFailure() : FailureCode.UNKNOWN;
+  }
 }

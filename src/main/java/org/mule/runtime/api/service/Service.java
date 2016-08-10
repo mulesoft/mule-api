@@ -22,6 +22,5 @@ import org.mule.runtime.api.meta.NamedObject;
  *
  * @since 1.0
  */
-public interface Service extends NamedObject
-{
+public interface Service extends NamedObject {
 }

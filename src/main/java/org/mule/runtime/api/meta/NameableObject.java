@@ -11,13 +11,12 @@ package org.mule.runtime.api.meta;
  *
  * @since 1.0
  */
-public interface NameableObject extends NamedObject
-{
+public interface NameableObject extends NamedObject {
 
-    /**
-     * Sets the name of the object
-     *
-     * @param name the name of the object
-     */
-    void setName(String name);
+  /**
+   * Sets the name of the object
+   *
+   * @param name the name of the object
+   */
+  void setName(String name);
 }

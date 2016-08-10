@@ -11,12 +11,11 @@ package org.mule.runtime.api.tls;
  *
  * @since 1.0
  */
-public interface TlsContextTrustStoreConfiguration extends TlsContextStoreConfiguration
-{
+public interface TlsContextTrustStoreConfiguration extends TlsContextStoreConfiguration {
 
-    /**
-     * @return true if the trust store was configured and set as insecure, meaning no certificate validations will be performed.
-     */
-    boolean isInsecure();
+  /**
+   * @return true if the trust store was configured and set as insecure, meaning no certificate validations will be performed.
+   */
+  boolean isInsecure();
 
 }

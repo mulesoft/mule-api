@@ -23,49 +23,48 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface MetadataAware
-{
+public interface MetadataAware {
 
-    /**
-     * Returns the list of types that can be described, by the {@link MetadataKeysResolver}
-     * associated to this Component
-     *
-     * @return Successful {@link MetadataResult} if the keys are successfully resolved
-     * Failure {@link MetadataResult} if there is an error while retrieving the keys
-     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
-     */
-    MetadataResult<Set<MetadataKey>> getMetadataKeys() throws MetadataResolvingException;
+  /**
+   * Returns the list of types that can be described, by the {@link MetadataKeysResolver}
+   * associated to this Component
+   *
+   * @return Successful {@link MetadataResult} if the keys are successfully resolved
+   * Failure {@link MetadataResult} if there is an error while retrieving the keys
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<Set<MetadataKey>> getMetadataKeys() throws MetadataResolvingException;
 
-    /**
-     * Resolves the {@link ComponentMetadataDescriptor} for the current component using
-     * only the static types of the Component's parameters, attributes and output.
-     *
-     * @return An {@link ComponentMetadataDescriptor} with the Static Metadata representation
-     * of the Component.
-     * Successful {@link MetadataResult} if the Metadata is successfully retrieved
-     * Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
-     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
-     */
-    MetadataResult<ComponentMetadataDescriptor> getMetadata() throws MetadataResolvingException;
+  /**
+   * Resolves the {@link ComponentMetadataDescriptor} for the current component using
+   * only the static types of the Component's parameters, attributes and output.
+   *
+   * @return An {@link ComponentMetadataDescriptor} with the Static Metadata representation
+   * of the Component.
+   * Successful {@link MetadataResult} if the Metadata is successfully retrieved
+   * Failure {@link MetadataResult} when the Metadata retrieval of any element fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<ComponentMetadataDescriptor> getMetadata() throws MetadataResolvingException;
 
-    /**
-     * Resolves the {@link ComponentMetadataDescriptor} for the current component using
-     * both static and dynamic resolving of the Component's parameters, attributes and output.
-     * <p>
-     * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated
-     * that can be used to resolve the Dynamic {@link MetadataType} for the Content or Output,
-     * then the {@link ComponentMetadataDescriptor} will contain those Dynamic types instead
-     * of the static type declaration.
-     * <p>
-     * When neither Content nor Output have Dynamic types, then invoking this method is the
-     * same as invoking {@link MetadataAware#getMetadata}
-     *
-     * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
-     * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
-     * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
-     * element fails for any reason
-     * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
-     */
-    MetadataResult<ComponentMetadataDescriptor> getMetadata(MetadataKey key) throws MetadataResolvingException;
+  /**
+   * Resolves the {@link ComponentMetadataDescriptor} for the current component using
+   * both static and dynamic resolving of the Component's parameters, attributes and output.
+   * <p>
+   * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated
+   * that can be used to resolve the Dynamic {@link MetadataType} for the Content or Output,
+   * then the {@link ComponentMetadataDescriptor} will contain those Dynamic types instead
+   * of the static type declaration.
+   * <p>
+   * When neither Content nor Output have Dynamic types, then invoking this method is the
+   * same as invoking {@link MetadataAware#getMetadata}
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
+   * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult}
+   * if the Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any
+   * element fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<ComponentMetadataDescriptor> getMetadata(MetadataKey key) throws MetadataResolvingException;
 }
 

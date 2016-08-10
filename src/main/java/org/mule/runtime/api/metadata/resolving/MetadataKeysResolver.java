@@ -20,18 +20,17 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface MetadataKeysResolver
-{
+public interface MetadataKeysResolver {
 
-    /**
-     * Resolves the {@link List} of types that can be described, representing them
-     * as a {@link List} of {@link MetadataKey}
-     *
-     * @param context {@link MetadataContext} of the Metadata resolution
-     * @return A list of {@link MetadataKey} of the available types
-     * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See
-     *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
-     * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
-     */
-    Set<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
+  /**
+   * Resolves the {@link List} of types that can be described, representing them
+   * as a {@link List} of {@link MetadataKey}
+   *
+   * @param context {@link MetadataContext} of the Metadata resolution
+   * @return A list of {@link MetadataKey} of the available types
+   * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See
+   *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
+   */
+  Set<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
 }

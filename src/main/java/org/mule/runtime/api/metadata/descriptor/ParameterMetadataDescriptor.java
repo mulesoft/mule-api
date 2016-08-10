@@ -13,11 +13,10 @@ import org.mule.metadata.api.model.MetadataType;
  *
  * @since 1.0
  */
-public interface ParameterMetadataDescriptor extends TypeMetadataDescriptor
-{
+public interface ParameterMetadataDescriptor extends TypeMetadataDescriptor {
 
-    /**
-     * @return the Parameter's name
-     */
-    String getName();
+  /**
+   * @return the Parameter's name
+   */
+  String getName();
 }

@@ -12,48 +12,42 @@ package org.mule.runtime.api.metadata.resolving;
  *
  * @since 1.0
  */
-public final class FailureCode
-{
+public final class FailureCode {
 
-    public static final FailureCode NO_DYNAMIC_TYPE_AVAILABLE = new FailureCode("NO_DYNAMIC_TYPE_AVAILABLE");
-    public static final FailureCode NO_DYNAMIC_KEY_AVAILABLE = new FailureCode("NO_DYNAMIC_KEY_AVAILABLE");
-    public static final FailureCode INVALID_CONFIGURATION = new FailureCode("INVALID_CONFIGURATION");
-    public static final FailureCode RESOURCE_UNAVAILABLE = new FailureCode("RESOURCE_UNAVAILABLE");
-    public static final FailureCode INVALID_METADATA_KEY = new FailureCode("INVALID_METADATA_KEY");
-    public static final FailureCode INVALID_CREDENTIALS = new FailureCode("INVALID_CREDENTIALS");
-    public static final FailureCode CONNECTION_FAILURE = new FailureCode("CONNECTION_FAILURE");
-    public static final FailureCode NOT_AUTHORIZED = new FailureCode("NOT_AUTHORIZED");
-    public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
-    public static final FailureCode NONE = new FailureCode("NO_ERROR");
-    public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
+  public static final FailureCode NO_DYNAMIC_TYPE_AVAILABLE = new FailureCode("NO_DYNAMIC_TYPE_AVAILABLE");
+  public static final FailureCode NO_DYNAMIC_KEY_AVAILABLE = new FailureCode("NO_DYNAMIC_KEY_AVAILABLE");
+  public static final FailureCode INVALID_CONFIGURATION = new FailureCode("INVALID_CONFIGURATION");
+  public static final FailureCode RESOURCE_UNAVAILABLE = new FailureCode("RESOURCE_UNAVAILABLE");
+  public static final FailureCode INVALID_METADATA_KEY = new FailureCode("INVALID_METADATA_KEY");
+  public static final FailureCode INVALID_CREDENTIALS = new FailureCode("INVALID_CREDENTIALS");
+  public static final FailureCode CONNECTION_FAILURE = new FailureCode("CONNECTION_FAILURE");
+  public static final FailureCode NOT_AUTHORIZED = new FailureCode("NOT_AUTHORIZED");
+  public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
+  public static final FailureCode NONE = new FailureCode("NO_ERROR");
+  public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
 
-    private String name;
+  private String name;
 
-    public FailureCode(String name)
-    {
-        this.name = name;
-    }
+  public FailureCode(String name) {
+    this.name = name;
+  }
 
-    public String getName()
-    {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        return obj instanceof FailureCode && this.getName().equals(((FailureCode) obj).getName());
-    }
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof FailureCode && this.getName().equals(((FailureCode) obj).getName());
+  }
 
-    @Override
-    public int hashCode()
-    {
-        return name.hashCode();
-    }
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
 
-    @Override
-    public String toString()
-    {
-        return "Failure Code: " + getName();
-    }
+  @Override
+  public String toString() {
+    return "Failure Code: " + getName();
+  }
 }

@@ -14,16 +14,15 @@ import java.util.List;
  *
  * @since 1.0
  */
-public interface ServiceProvider
-{
+public interface ServiceProvider {
 
-    /**
-     * Provides service instances.
-     * <p/>
-     * A service provider can return different service definitions depending on the execution
-     * environment.
-     *
-     * @return the service definitions provided by this instance. Non null.
-     */
-    List<ServiceDefinition> providedServices();
+  /**
+   * Provides service instances.
+   * <p/>
+   * A service provider can return different service definitions depending on the execution
+   * environment.
+   *
+   * @return the service definitions provided by this instance. Non null.
+   */
+  List<ServiceDefinition> providedServices();
 }

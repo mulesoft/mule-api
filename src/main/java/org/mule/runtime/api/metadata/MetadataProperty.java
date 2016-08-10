@@ -15,14 +15,13 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
-public interface MetadataProperty
-{
+public interface MetadataProperty {
 
-    /**
-     * A unique name which identifies this property.
-     *
-     * @return a unique name
-     */
-    String getName();
+  /**
+   * A unique name which identifies this property.
+   *
+   * @return a unique name
+   */
+  String getName();
 
 }

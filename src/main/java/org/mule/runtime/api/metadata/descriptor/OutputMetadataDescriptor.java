@@ -15,19 +15,18 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public interface OutputMetadataDescriptor
-{
+public interface OutputMetadataDescriptor {
 
-    /**
-     * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
-     * output {@link MuleMessage#getPayload}
-     */
-    MetadataResult<TypeMetadataDescriptor> getPayloadMetadata();
+  /**
+   * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
+   * output {@link MuleMessage#getPayload}
+   */
+  MetadataResult<TypeMetadataDescriptor> getPayloadMetadata();
 
-    /**
-     * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
-     * output {@link MuleMessage#getAttributes}
-     */
-    MetadataResult<TypeMetadataDescriptor> getAttributesMetadata();
+  /**
+   * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
+   * output {@link MuleMessage#getAttributes}
+   */
+  MetadataResult<TypeMetadataDescriptor> getAttributesMetadata();
 
 }

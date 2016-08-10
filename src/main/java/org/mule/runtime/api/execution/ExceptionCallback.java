@@ -15,14 +15,13 @@ package org.mule.runtime.api.execution;
  * @param <T> the type of the value that is produced as a result of handling the exception
  * @since 1.0
  */
-public interface ExceptionCallback<T, E extends Throwable>
-{
+public interface ExceptionCallback<T, E extends Throwable> {
 
-    /**
-     * Notifies that {@code exception} has occurred
-     *
-     * @param exception a {@link Exception}
-     * @return a nullable value that results from handling the {@code exception}
-     */
-    T onException(E exception);
+  /**
+   * Notifies that {@code exception} has occurred
+   *
+   * @param exception a {@link Exception}
+   * @return a nullable value that results from handling the {@code exception}
+   */
+  T onException(E exception);
 }

@@ -21,47 +21,46 @@ import javax.net.ssl.SSLContext;
  *
  * @since 1.0
  */
-public interface TlsContextFactory
-{
+public interface TlsContextFactory {
 
-    /**
-     * @return a new SSL Context with the configured keystore and trustore.
-     * @throws KeyManagementException
-     * @throws NoSuchAlgorithmException
-     */
-    SSLContext createSslContext() throws KeyManagementException, NoSuchAlgorithmException;
+  /**
+   * @return a new SSL Context with the configured keystore and trustore.
+   * @throws KeyManagementException
+   * @throws NoSuchAlgorithmException
+   */
+  SSLContext createSslContext() throws KeyManagementException, NoSuchAlgorithmException;
 
-    /**
-     * The list of ciphers that must be used to restrict the creation of the SSL Sockets
-     *
-     * @return ths list of enabled cipher suites
-     */
-    String[] getEnabledCipherSuites();
+  /**
+   * The list of ciphers that must be used to restrict the creation of the SSL Sockets
+   *
+   * @return ths list of enabled cipher suites
+   */
+  String[] getEnabledCipherSuites();
 
-    /**
-     * The list of enabled protocols that must be used to restrict the creation of the SSL Sockets
-     *
-     * @return the list of enabled protocols
-     */
-    String[] getEnabledProtocols();
+  /**
+   * The list of enabled protocols that must be used to restrict the creation of the SSL Sockets
+   *
+   * @return the list of enabled protocols
+   */
+  String[] getEnabledProtocols();
 
-    /**
-     * @return true if the keystore was configured, false otherwise
-     */
-    boolean isKeyStoreConfigured();
+  /**
+   * @return true if the keystore was configured, false otherwise
+   */
+  boolean isKeyStoreConfigured();
 
-    /**
-     * @return true if the trust store was configured, false otherwise
-     */
-    boolean isTrustStoreConfigured();
+  /**
+   * @return true if the trust store was configured, false otherwise
+   */
+  boolean isTrustStoreConfigured();
 
-    /**
-     * @return An object with the configuration of the key store.
-     */
-    TlsContextKeyStoreConfiguration getKeyStoreConfiguration();
+  /**
+   * @return An object with the configuration of the key store.
+   */
+  TlsContextKeyStoreConfiguration getKeyStoreConfiguration();
 
-    /**
-     * @return An object with the configuration of the trust store.
-     */
-    TlsContextTrustStoreConfiguration getTrustStoreConfiguration();
+  /**
+   * @return An object with the configuration of the trust store.
+   */
+  TlsContextTrustStoreConfiguration getTrustStoreConfiguration();
 }
