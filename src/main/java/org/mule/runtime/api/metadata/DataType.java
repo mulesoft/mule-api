@@ -121,4 +121,13 @@ public interface DataType extends Serializable {
    */
   boolean isCompatibleWith(DataType dataType);
 
+  /**
+   * Used to determine if this DataType is a stream type. Stream types, for example those that have a java type
+   * {@link InputStream} or {@link Iterable}, cannot be serialized without prior transformation or consumed twice and often their
+   * size, depending on the specific type, is unknown until they have been fully consumed.
+   *
+   * @return {@code true} if the type is a stream type otherwise {@code false}
+   */
+  boolean isStreamType();
+
 }
