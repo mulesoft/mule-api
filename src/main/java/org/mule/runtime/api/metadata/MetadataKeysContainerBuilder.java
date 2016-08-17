@@ -19,14 +19,19 @@ import java.util.Set;
  */
 public final class MetadataKeysContainerBuilder {
 
-  private Map<String, Set<MetadataKey>> keyMap = new HashMap();
+  private Map<String, Set<MetadataKey>> keyMap = new HashMap<>();
+
+  private MetadataKeysContainerBuilder() {}
+
+  public static MetadataKeysContainerBuilder getInstance() {
+    return new MetadataKeysContainerBuilder();
+  }
 
   /**
    * @param name {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
    * @param keys {@link Set<MetadataKey>} associated to ther esolver.
    */
   public MetadataKeysContainerBuilder add(String name, Set<MetadataKey> keys) {
-
     keyMap.put(name, keys);
     return this;
   }
