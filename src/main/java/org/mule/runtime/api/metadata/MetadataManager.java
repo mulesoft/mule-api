@@ -39,11 +39,11 @@ public interface MetadataManager {
    * Returns a map with the resolvers associated to the configuration named {@code configName} as keys, and a {@link Set} of
    * {@link MetadataKey} as the values for that particular config.
    *
-   * @param configName the name of the {@link MetadataKeyAware} component to query for its available keys
+   * @param configurationId with the name of the {@link ConfigurationProviderMetadataAdapter} to query for its available keys
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while resolving the keys
    */
-  MetadataResult<Map<String, Set<MetadataKey>>> getMetadataKeys(String configName);
+  MetadataResult<Map<String, Set<MetadataKey>>> getMetadataKeys(ConfigurationId configurationId);
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataAware} Component identified by the

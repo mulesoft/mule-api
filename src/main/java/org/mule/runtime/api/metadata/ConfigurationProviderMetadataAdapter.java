@@ -13,12 +13,12 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This interface allows a configuration to expose the {@link MetadataKey} information associated to its inner components which
+ * This interface allows a {@link org.mule.runtime.api.connection.ConnectionProvider} to expose the {@link MetadataKey} information associated to its inner components which
  * are associated to a {@link MetadataKeysResolver}.
  *
  * @since 1.0
  */
-public interface MetadataKeyAware {
+public interface ConfigurationProviderMetadataAdapter<T> {
 
   /**
    * Returns a {@link Map} with the fully qualified names of the {@link MetadataKeysResolver} classes as keys, and a {@link Set}
