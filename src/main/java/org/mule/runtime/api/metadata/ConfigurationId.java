@@ -7,25 +7,38 @@
 package org.mule.runtime.api.metadata;
 
 /**
- * Immutable implementation of {@link ComponentId} for identifying MessageProcessors
+ * Immutable implementation of {@link ComponentId} for identifying Message Sources
  *
  * @since 1.0
  */
-public final class ConfigurationId {
+public class ConfigurationId implements ComponentId {
 
-  public ConfigurationId(String configName) {
-    this.configName = configName;
+  private final String componentPath;
+
+  // TODO: MULE-9496 define path for global element
+  public ConfigurationId(String componentPath) {
+    this.componentPath = componentPath;
   }
 
-  public String getConfigName() {
-    return configName;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getFlowName() {
+    throw new UnsupportedOperationException("Configuration element is global and doesn't belong to a particular flow");
   }
 
-  private final String configName;
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getComponentPath() {
+    return componentPath;
+  }
 
   @Override
   public String toString() {
     return "ConfigurationId{" +
-        "configName='" + configName + '}';
+        "configName='" + componentPath + '}';
   }
 }

@@ -13,7 +13,6 @@ import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
-import java.util.Map;
 import java.util.Set;
 
 /**
@@ -33,17 +32,17 @@ public interface MetadataManager {
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while resolving the keys
    */
-  MetadataResult<Set<MetadataKey>> getMetadataKeys(ComponentId componentId);
+  MetadataResult<MetadataKeysContainer> getMetadataKeys(ComponentId componentId);
 
   /**
    * Returns a map with the resolvers associated to the configuration named {@code configName} as keys, and a {@link Set} of
    * {@link MetadataKey} as the values for that particular config.
    *
-   * @param configurationId with the name of the {@link ConfigurationProviderMetadataAdapter} to query for its available keys
+   * @param configurationId with the name of the {@link MetadataKeysAware} to query for its available keys
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while resolving the keys
    */
-  MetadataResult<Map<String, Set<MetadataKey>>> getMetadataKeys(ConfigurationId configurationId);
+  MetadataResult<MetadataKeysContainer> getMetadataKeysForConfig(ComponentId configurationId);
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataAware} Component identified by the
