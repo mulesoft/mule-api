@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.metadata;
 
-import java.util.Collections;
+import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -20,41 +23,29 @@ public final class MetadataKeysContainer {
 
   private Map<String, Set<MetadataKey>> keyMap = new HashMap();
 
-  public MetadataKeysContainer(Map<String, Set<MetadataKey>> keyMap) {
-    this.keyMap = keyMap;
+  MetadataKeysContainer(Map<String, Set<MetadataKey>> keyMap) {
+    this.keyMap = unmodifiableMap(keyMap);
   }
 
   /**
-   * Returns a {@link Set<MetadataKey>} for a given resolver name
+   * Returns an {@link Optional} wuth {@link Set<MetadataKey>} for a given resolver name if it is present.
+   * {@link Optional#empty()} otherwise.
    * 
-   * @param resolverName {@link Class#getSimpleName()} or alias of the {@link Metadata}
-   * @return {@link Set<MetadataKey>} associated to the resolver
+   * @param resolverName {@link Class#getSimpleName()} or alias of the
+   *        {@link org.mule.runtime.api.metadata.resolving.MetadataKeysResolver} class
+   * @return {@link Optional} of {@link Set<MetadataKey>} associated to the resolver
    */
-  public Set<MetadataKey> getKeys(String resolverName) {
-    return Collections.unmodifiableSet(keyMap.get(resolverName));
-  }
-
-  /**
-   * Returns a {@link Set<MetadataKey>} if there was only one resolver present in the container.
-   * 
-   * @return {@link Set<MetadataKey>} for the only resolver present.
-   * @throws {@link IllegalStateException} if there was more than one or no resolver at all.
-   */
-  public Set<MetadataKey> getKeys() {
-    if (keyMap.size() == 1) {
-      return Collections.unmodifiableSet(keyMap.get(keyMap.keySet().toArray()[0]));
-    } else if (keyMap.size() > 1) {
-      throw new IllegalStateException("Could not return keys from container because there was more than one resolver available.");
+  public Optional<Set<MetadataKey>> getKeys(String resolverName) {
+    if (!keyMap.containsKey(resolverName)) {
+      return Optional.empty();
     }
-
-    throw new IllegalStateException("Could not return keys from container because there was no resolver available.");
+    return Optional.of(unmodifiableSet(keyMap.get(resolverName)));
   }
 
   /**
-   *
-   * @return {@link Map} {@link Class#getSimpleName()} or alias of the resolver and its corresponding {@link MetadataKey}s.
+   * @return {@link Set} with the {@link Class#getSimpleName()} or alias of the resolvers
    */
-  public Map<String, Set<MetadataKey>> getAllKeys() {
-    return Collections.unmodifiableMap(keyMap);
+  public Set<String> getResolvers() {
+    return unmodifiableSet(keyMap.keySet());
   }
 }

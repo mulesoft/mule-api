@@ -10,16 +10,15 @@ import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
- * This interface allows a the expose the {@link MetadataKey}
- * information associated to its inner components which are associated to a {@link MetadataKeysResolver}.
- *
+ * This interface allows the exposure of the {@link MetadataKey}s associated to the {@link MetadataKeysResolver} of the component.
+ * 
  * @since 1.0
  */
 public interface MetadataKeysAware {
 
   /**
-   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per
-   * {@link MetadataKeysResolver} associated to this Component.
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link MetadataKeysResolver}
+   * associated to this Component.
    *
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while retrieving the keys
