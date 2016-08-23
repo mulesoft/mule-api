@@ -7,8 +7,11 @@
 package org.mule.runtime.api.message;
 
 import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.metadata.MediaType;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Represents any data event occurring in the Mule environment. All data sent or
@@ -27,42 +30,36 @@ public interface MuleEvent extends Serializable {
   String getId();
 
   /**
-   * Returns the flow variable registered under the given {@code kye}
+   * Returns the flow variable registered under the given {@code key}
    *
    * @param key the name or key of the variable. This must be non-null.
    * @param <T> the value's generic type
    * @return the variable's value
+   * @throws java.util.NoSuchElementException if the flow variable does not exist.
    */
   <T> T getFlowVariable(String key);
 
   /**
-   * Sets a flow variable value with a default data type
-   *
-   * @param key   the name or key of the variable. This must be non-null.
-   * @param value value for the variable
-   */
-  void setFlowVariable(String key, Object value);
-
-  /**
-   * Sets a flow variable value with a given data type
-   *
-   * @param key      the name or key of the variable. This must be non-null.
-   * @param value    value for the variable
-   * @param dataType value's dataType. Not null.
-   */
-  void setFlowVariable(String key, Object value, DataType dataType);
-
-  /**
-   * Removes the flow variable registered under the given {@code key}
+   * Gets the data type for a given flow variable
    *
    * @param key the name or key of the variable. This must be non-null.
+   * @return the flow variable data type or null if the flow variable does not exist
+   * @throws java.util.NoSuchElementException if the flow variable does not exist.
    */
-  void removeFlowVariable(String key);
+  DataType getFlowVariableDataType(String key);
 
   /**
-   * Returns the message payload for this event
+   * Returns an immutable {@link Set} of flow variable names.
+   *
+   * @return the set of names
+   */
+  Set<String> getFlowVariableNames();
+
+  /**
+   * Returns the message for this event
    *
    * @return the event's {@link MuleMessage}
    */
   MuleMessage getMessage();
+
 }
