@@ -19,7 +19,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public interface MetadataAware extends MetadataKeysAware {
+public interface MetadataProvider {
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the current component using only the static types of the Component's
@@ -41,7 +41,7 @@ public interface MetadataAware extends MetadataKeysAware {
    * those Dynamic types instead of the static type declaration.
    * <p>
    * When neither Content nor Output have Dynamic types, then invoking this method is the same as invoking
-   * {@link MetadataAware#getMetadata}
+   * {@link MetadataProvider#getMetadata}
    *
    * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
    * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the

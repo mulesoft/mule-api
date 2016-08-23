@@ -6,8 +6,12 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.lang.String.format;
+
+import java.util.Optional;
+
 /**
- * Immutable implementation of {@link ComponentId} for identifying Message Sources
+ * Immutable implementation of {@link ComponentId} for identifying Configurations
  *
  * @since 1.0
  */
@@ -24,8 +28,8 @@ public class ConfigurationId implements ComponentId {
    * {@inheritDoc}
    */
   @Override
-  public String getFlowName() {
-    throw new UnsupportedOperationException("Configuration element is global and doesn't belong to a particular flow");
+  public Optional<String> getFlowName() {
+    return Optional.empty();
   }
 
   /**
@@ -38,7 +42,6 @@ public class ConfigurationId implements ComponentId {
 
   @Override
   public String toString() {
-    return "ConfigurationId{" +
-        "configName='" + componentPath + '}';
+    return format("ConfigurationId{configName='%s'}", componentPath);
   }
 }

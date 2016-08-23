@@ -7,10 +7,10 @@
 package org.mule.runtime.api.metadata.descriptor.builder;
 
 import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.typeDescriptor;
-import static org.mule.runtime.api.metadata.resolving.MetadataResult.*;
+import static org.mule.runtime.api.metadata.resolving.MetadataResult.success;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.MuleMessage;
-import org.mule.runtime.api.metadata.MetadataAware;
+import org.mule.runtime.api.metadata.MetadataProvider;
 import org.mule.runtime.api.metadata.descriptor.ImmutableOutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
@@ -32,10 +32,11 @@ public class OutputMetadataDescriptorBuilder {
   OutputMetadataDescriptorBuilder() {}
 
   /**
-   * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the
-   * return type of the component.
+   * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the return type of
+   * the component.
    *
-   * @param returnTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output return type
+   * @param returnTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output return
+   *        type
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
    */
   public OutputMetadataDescriptorBuilder withReturnType(MetadataResult<TypeMetadataDescriptor> returnTypeResult) {
@@ -44,10 +45,11 @@ public class OutputMetadataDescriptorBuilder {
   }
 
   /**
-   * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the
-   * he output {@link MuleMessage#getAttributes} {@link MetadataType}.
+   * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the he output
+   * {@link MuleMessage#getAttributes} {@link MetadataType}.
    *
-   * @param attributesTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output attributes type.
+   * @param attributesTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output
+   *        attributes type.
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
    */
   public OutputMetadataDescriptorBuilder withAttributesType(MetadataResult<TypeMetadataDescriptor> attributesTypeResult) {
@@ -67,8 +69,8 @@ public class OutputMetadataDescriptorBuilder {
   }
 
   /**
-   * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType}
-   * of the component will be {@param attributesTypeResult}
+   * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType} of the component will be
+   * {@param attributesTypeResult}
    *
    * @param attributesType of the component output attributes
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
@@ -79,10 +81,10 @@ public class OutputMetadataDescriptorBuilder {
   }
 
   /**
-   * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of
-   * a {@link MetadataAware} component
-   * @throws IllegalArgumentException if the {@link MuleMessage#getPayload} or {@link MuleMessage#getAttributes} were
-   *                                  not set during building
+   * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
+   *         {@link MetadataProvider} component
+   * @throws IllegalArgumentException if the {@link MuleMessage#getPayload} or {@link MuleMessage#getAttributes} were not set
+   *         during building
    */
   public OutputMetadataDescriptor build() {
     if (returnTypeResult == null) {

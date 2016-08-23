@@ -6,9 +6,11 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.util.Optional;
+
 /**
- * Represent the position of a Component inside a flow.
- * With the corresponded flow that holds it and its path inside it.
+ * Represents a component inside a mule application. The component might be inside a flow (like message processors or sources), or
+ * it can be in a more global scope like a configuration.
  *
  * @since 1.0
  */
@@ -17,10 +19,10 @@ public interface ComponentId {
   /**
    * @return Flow name that holds the Component
    */
-  String getFlowName();
+  Optional<String> getFlowName();
 
   /**
-   * @return Path of the Component inside the flow
+   * @return Path of the Component
    */
   String getComponentPath();
 

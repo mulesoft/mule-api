@@ -14,7 +14,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  * 
  * @since 1.0
  */
-public interface MetadataKeysAware {
+public interface MetadataKeyProvider {
 
   /**
    * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link MetadataKeysResolver}

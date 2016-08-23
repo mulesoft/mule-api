@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.util.Optional;
+
 /**
  * Immutable implementation of {@link ComponentId} for identifying MessageProcessors
  *
@@ -25,8 +27,8 @@ public final class ProcessorId implements ComponentId {
    * {@inheritDoc}
    */
   @Override
-  public String getFlowName() {
-    return flowName;
+  public Optional<String> getFlowName() {
+    return Optional.of(flowName);
   }
 
   /**
