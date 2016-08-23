@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,8 +22,7 @@ public final class MetadataKeysContainerBuilder {
   private Map<String, Set<MetadataKey>> keyMap = new HashMap();
 
   /**
-   * @param name {@link Class#getSimpleName()} or alias of the
-   *        {@link org.mule.runtime.api.metadata.resolving.MetadataKeysResolver} class
+   * @param name {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
    * @param keys {@link Set<MetadataKey>} associated to ther esolver.
    */
   public MetadataKeysContainerBuilder add(String name, Set<MetadataKey> keys) {
@@ -38,14 +39,9 @@ public final class MetadataKeysContainerBuilder {
   }
 
   /**
-   * @return {@link MetadataKeysContainer} with the built keys.
-   * @throws {@link IllegalStateException} if a resolver {@link Set<MetadataKey>} is empty.
+   * @return {@link DefaultMetadataKeysContainer} with the built keys.
    */
   public MetadataKeysContainer build() {
-    keyMap.entrySet().stream().filter(entry -> entry.getValue().isEmpty()).findFirst().ifPresent(entry -> {
-      throw new IllegalStateException("Resolver [%s] has an empty key list");
-    });
-
-    return new MetadataKeysContainer(keyMap);
+    return new DefaultMetadataKeysContainer(keyMap);
   }
 }
