@@ -32,10 +32,8 @@ final class DefaultMetadataKeysContainer implements MetadataKeysContainer {
    */
   @Override
   public Optional<Set<MetadataKey>> getKeys(String resolverName) {
-    if (!keyMap.containsKey(resolverName)) {
-      return Optional.empty();
-    }
-    return Optional.of(unmodifiableSet(keyMap.get(resolverName)));
+    Set<MetadataKey> keys = keyMap.get(resolverName);
+    return keys == null ? Optional.empty() : Optional.of(unmodifiableSet(keys));
   }
 
   /**
