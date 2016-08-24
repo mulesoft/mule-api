@@ -16,14 +16,14 @@ public interface Error {
   String getDescription();
 
   /**
-   * Details description of the error. This message may include java exception specific information.
+   * Detailed description of the error. This message may include java exception specific information.
    *
    * @return a details description of the error.
    */
   String getDetailedDescription();
 
   /**
-   * Returns the type of the error which describes .
+   * Returns the type of the error. @see {@link ErrorType}.
    *
    * @return the type of the error
    */

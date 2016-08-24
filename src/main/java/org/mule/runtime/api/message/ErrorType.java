@@ -9,7 +9,7 @@ package org.mule.runtime.api.message;
 /**
  * An {@code ErrorType} describes an type of error that may be thrown by a mule component.
  *
- * The error type has an string representation {@see getStringRepresentation} which is used
+ * The error type has a string representation {@see getStringRepresentation} which is used
  * directly by the user in the mule configuration.
  *
  * Every error belongs to a namespace {@see getNamespace} in order to avoid collisions of error
@@ -38,7 +38,7 @@ public interface ErrorType {
 
   /**
    * An error can be an specific type of a more general error type in which case it must return the
-   * general error as result of calling {@@code getParentErrorType}
+   * general error as result of calling {@code getParentErrorType}
    *
    * @return the parent error type.
    */

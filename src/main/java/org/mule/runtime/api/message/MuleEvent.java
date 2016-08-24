@@ -69,7 +69,7 @@ public interface MuleEvent extends Serializable {
    * will be cleared. If another flow is called from within the error handler the flow
    * will still have access to the error field.
    *
-   * To avoid losing the error field after the error handle the user can define a variable
+   * To avoid losing the error field after the error handler the user can define a variable
    * pointing to the error field.
    *
    * @return the error associated with the event.
