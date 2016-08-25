@@ -6,12 +6,10 @@
  */
 package org.mule.runtime.api.message;
 
-import org.mule.runtime.api.metadata.DataType;
-import org.mule.runtime.api.metadata.MediaType;
-
 import java.io.Serializable;
-import java.util.Map;
 import java.util.Set;
+
+import org.mule.runtime.api.metadata.DataType;
 
 /**
  * Represents any data event occurring in the Mule environment. All data sent or
@@ -61,5 +59,21 @@ public interface MuleEvent extends Serializable {
    * @return the event's {@link MuleMessage}
    */
   MuleMessage getMessage();
+
+  /**
+   * When a mule component throws an error then an {@code Error} object
+   * gets generated with all the data associated to the error.
+   *
+   * This field will only contain a value within the error handler defined
+   * to handle errors. After the error handler is executed the event error field
+   * will be cleared. If another flow is called from within the error handler the flow
+   * will still have access to the error field.
+   *
+   * To avoid losing the error field after the error handler the user can define a variable
+   * pointing to the error field.
+   *
+   * @return the error associated with the event.
+   */
+  Error getError();
 
 }
