@@ -7,12 +7,12 @@
 package org.mule.runtime.api.metadata.descriptor.builder;
 
 
-import org.mule.runtime.api.metadata.MetadataAware;
+import org.mule.runtime.api.metadata.MetadataProvider;
 
 /**
- * Builder provider for metadata descriptor builders.
- * This class provides instances of {@link ComponentMetadataDescriptorBuilder}, {@link OutputMetadataDescriptorBuilder}
- * and {@link ParameterMetadataDescriptorBuilder} to describe the metadata capabilities of a {@link MetadataAware} component
+ * Builder provider for metadata descriptor builders. This class provides instances of {@link ComponentMetadataDescriptorBuilder},
+ * {@link OutputMetadataDescriptorBuilder} and {@link ParameterMetadataDescriptorBuilder} to describe the metadata capabilities of
+ * a {@link MetadataProvider} component
  *
  * @since 1.0
  */

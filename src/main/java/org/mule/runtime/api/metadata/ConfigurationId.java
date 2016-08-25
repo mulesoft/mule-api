@@ -6,20 +6,22 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.lang.String.format;
+
 import java.util.Optional;
 
 /**
- * Immutable implementation of {@link ComponentId} for identifying Message Sources
+ * Immutable implementation of {@link ComponentId} for identifying Configurations
  *
  * @since 1.0
  */
-public class SourceId implements ComponentId {
+public class ConfigurationId implements ComponentId {
 
-  private static final String SOURCE_ID = "-1";
-  private final String flowName;
+  private final String componentPath;
 
-  public SourceId(String flowName) {
-    this.flowName = flowName;
+  // TODO: MULE-9496 define path for global element
+  public ConfigurationId(String componentPath) {
+    this.componentPath = componentPath;
   }
 
   /**
@@ -27,7 +29,7 @@ public class SourceId implements ComponentId {
    */
   @Override
   public Optional<String> getFlowName() {
-    return Optional.of(flowName);
+    return Optional.empty();
   }
 
   /**
@@ -35,14 +37,11 @@ public class SourceId implements ComponentId {
    */
   @Override
   public String getComponentPath() {
-    return SOURCE_ID;
+    return componentPath;
   }
 
   @Override
   public String toString() {
-    return "SourceId{" +
-        "flowName='" + flowName + '\'' +
-        ", executablePath=" + SOURCE_ID +
-        '}';
+    return format("ConfigurationId{configName='%s'}", componentPath);
   }
 }
