@@ -6,7 +6,9 @@
  */
 package org.mule.runtime.api.message;
 
-public interface Error {
+import java.io.Serializable;
+
+public interface Error extends Serializable {
 
   /**
    * Concise description of the error. For more information {@see #getDetailedDescription}
