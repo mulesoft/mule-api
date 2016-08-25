@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.message;
 
+import java.io.Serializable;
+
 /**
  * An {@code ErrorType} describes an type of error that may be thrown by a mule component.
  *
@@ -19,7 +21,7 @@ package org.mule.runtime.api.message;
  * should return the more general error type. This is used when doing error type matching within error handlers
  * so when selecting the general error type for error handling it will also handle the more specialized error types.
  */
-public interface ErrorType {
+public interface ErrorType extends Serializable {
 
   /**
    * String representation of the error. Is the value that is meant to be used in the configuration.
