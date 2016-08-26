@@ -21,13 +21,6 @@ import org.mule.runtime.api.metadata.DataType;
 public interface MuleEvent extends Serializable {
 
   /**
-   * Every event in the system is assigned a universally unique id (UUID).
-   *
-   * @return the unique identifier for the event
-   */
-  String getId();
-
-  /**
    * Returns the flow variable registered under the given {@code key}
    *
    * @param key the name or key of the variable. This must be non-null.
