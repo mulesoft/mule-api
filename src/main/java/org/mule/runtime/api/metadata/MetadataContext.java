@@ -20,15 +20,15 @@ public interface MetadataContext {
 
   /**
    * @param <C> Configuration type
-   * @return The instance of the configuration related to a component
+   * @return Optional instance of the configuration related to the component
    */
-  <C> C getConfig();
+  <C> Optional<C> getConfig();
 
   /**
    * Retrieves the connection for the related a component and configuration
    *
    * @param <C> Connection type
-   * @return A connection instance of {@param <C>} type for the component.
+   * @return Optional connection instance of {@param <C>} type for the component.
    * @throws ConnectionException when not valid connection is found for the related component and configuration
    */
   <C> Optional<C> getConnection() throws ConnectionException;
