@@ -40,7 +40,7 @@ public interface MetadataContext {
   MetadataCache getCache();
 
   /**
-   * @return
+   * @return the {@link ClassTypeLoader} for the current {@link MetadataContext}.
    */
   ClassTypeLoader getTypeLoader();
 }
