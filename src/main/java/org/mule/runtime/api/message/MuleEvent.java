@@ -7,6 +7,7 @@
 package org.mule.runtime.api.message;
 
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.Set;
 
 import org.mule.runtime.api.metadata.DataType;
@@ -72,8 +73,8 @@ public interface MuleEvent extends Serializable {
    * To avoid losing the error field after the error handler the user can define a variable
    * pointing to the error field.
    *
-   * @return the error associated with the event.
+   * @return an optional of the error associated with the event. Will be empty if there's no error associated with the event.
    */
-  Error getError();
+  Optional<Error> getError();
 
 }
