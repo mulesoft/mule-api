@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.runtime.api.connection.ConnectionException;
 
 import java.util.Optional;
@@ -38,4 +39,8 @@ public interface MetadataContext {
    */
   MetadataCache getCache();
 
+  /**
+   * @return the {@link ClassTypeLoader} for the current {@link MetadataContext}.
+   */
+  ClassTypeLoader getTypeLoader();
 }
