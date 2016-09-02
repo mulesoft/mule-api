@@ -11,7 +11,7 @@ import java.io.Serializable;
 /**
  * An {@code ErrorType} describes an type of error that may be thrown by a mule component.
  *
- * The error type has a string representation {@see getStringRepresentation} which is used
+ * The error type has a string representation {@see getIdentifier} which is used
  * directly by the user in the mule configuration.
  *
  * Every error belongs to a namespace {@see getNamespace} in order to avoid collisions of error
@@ -24,11 +24,11 @@ import java.io.Serializable;
 public interface ErrorType extends Serializable {
 
   /**
-   * String representation of the error. Is the value that is meant to be used in the configuration.
+   * Identifier of the error. Is the value that is meant to be used in the configuration.
    *
    * @return the string representation of the error.
    */
-  String getStringRepresentation();
+  String getIdentifier();
 
   /**
    * The namespace of the module where the error is defined. For instance, for runtime errors the
