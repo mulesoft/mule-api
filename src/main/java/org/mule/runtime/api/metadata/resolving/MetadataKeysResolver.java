@@ -11,7 +11,6 @@ import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,11 +22,11 @@ import java.util.Set;
 public interface MetadataKeysResolver {
 
   /**
-   * Resolves the {@link List} of types that can be described, representing them
-   * as a {@link List} of {@link MetadataKey}
+   * Resolves the {@link Set} of types that can be described, representing them
+   * as a {@link Set} of {@link MetadataKey}
    *
    * @param context {@link MetadataContext} of the Metadata resolution
-   * @return A list of {@link MetadataKey} of the available types
+   * @return A set of {@link MetadataKey} of the available types
    * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See
    *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
    * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
