@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @since 1.0
  */
+//TODO: MULE-9047 - review if we can use the standard pooling profile
 public interface DatabasePoolingProfile {
 
   /**
