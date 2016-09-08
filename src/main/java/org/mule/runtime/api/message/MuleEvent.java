@@ -18,6 +18,8 @@ import org.mule.runtime.api.metadata.DataType;
  *
  * @see MuleMessage
  * @since 1.0
+ *
+ * TODO MULE-10487 Remove MuleEvent from mule-api module
  */
 public interface MuleEvent extends Serializable {
 
