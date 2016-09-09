@@ -6,17 +6,17 @@
  */
 package org.mule.runtime.api.message;
 
+import org.mule.runtime.api.metadata.DataType;
+
 import java.io.Serializable;
 import java.util.Optional;
 import java.util.Set;
-
-import org.mule.runtime.api.metadata.DataType;
 
 /**
  * Represents any data event occurring in the Mule environment. All data sent or
  * received within the mule environment will be passed between components as an MuleEvent.
  *
- * @see MuleMessage
+ * @see Message
  * @since 1.0
  *
  * TODO MULE-10487 Remove MuleEvent from mule-api module
@@ -24,37 +24,37 @@ import org.mule.runtime.api.metadata.DataType;
 public interface MuleEvent extends Serializable {
 
   /**
-   * Returns the flow variable registered under the given {@code key}
+   * Returns the variable registered under the given {@code key}
    *
    * @param key the name or key of the variable. This must be non-null.
    * @param <T> the value's generic type
    * @return the variable's value
    * @throws java.util.NoSuchElementException if the flow variable does not exist.
    */
-  <T> T getFlowVariable(String key);
+  <T> T getVariable(String key);
 
   /**
-   * Gets the data type for a given flow variable
+   * Gets the data type for a given variable
    *
    * @param key the name or key of the variable. This must be non-null.
-   * @return the flow variable data type or null if the flow variable does not exist
-   * @throws java.util.NoSuchElementException if the flow variable does not exist.
+   * @return the variable data type or null if the variable does not exist
+   * @throws java.util.NoSuchElementException if the variable does not exist.
    */
-  DataType getFlowVariableDataType(String key);
+  DataType getVariableDataType(String key);
 
   /**
-   * Returns an immutable {@link Set} of flow variable names.
+   * Returns an immutable {@link Set} of variable names.
    *
    * @return the set of names
    */
-  Set<String> getFlowVariableNames();
+  Set<String> getVariableNames();
 
   /**
    * Returns the message for this event
    *
-   * @return the event's {@link MuleMessage}
+   * @return the event's {@link Message}
    */
-  MuleMessage getMessage();
+  Message getMessage();
 
   /**
    * When a mule component throws an error then an {@code Error} object

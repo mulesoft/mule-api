@@ -10,17 +10,17 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * Represents a payload of a {@link MuleMessage} composed of many different parts. Each parts is in itself a
- * {@link MuleMessage}, and has {@code attributes} specific to that parts (such as the headers of a single http part).
+ * Represents a payload of a {@link Message} composed of many different parts. Each parts is in itself a
+ * {@link Message}, and has {@code attributes} specific to that parts (such as the headers of a single http part).
  * 
  * @since 1.0
  */
-public interface MultiPartPayload {
+public interface MultiPartContent {
 
   /**
    * @return the contained parts.
    */
-  List<MuleMessage> getParts();
+  List<Message> getParts();
 
   /**
    * @return the names of the contained parts.
@@ -34,6 +34,6 @@ public interface MultiPartPayload {
    * @return the part with the given name.
    * @throws NoSuchElementException if no part with the given name exists.
    */
-  MuleMessage getPart(String partName);
+  Message getPart(String partName);
 
 }

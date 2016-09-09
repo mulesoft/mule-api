@@ -71,8 +71,6 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   /**
    * Provides methods to set data associated to the items of a {@link Collection}, when the type
    * is a {@link Collection}.
-   *
-   * @param <T>
    */
   interface DataTypeCollectionTypeBuilder extends DataTypeParamsBuilder {
 

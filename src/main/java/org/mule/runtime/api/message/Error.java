@@ -47,6 +47,6 @@ public interface Error extends Serializable {
    *
    * @return the message with the error data.
    */
-  MuleMessage getErrorMessage();
+  Message getErrorMessage();
 
 }

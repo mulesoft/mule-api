@@ -9,7 +9,7 @@ package org.mule.runtime.api.message;
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
-import org.mule.runtime.api.message.MuleMessage.Builder;
+import org.mule.runtime.api.message.Message.Builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,12 +55,12 @@ public abstract class AbstractMuleMessageBuilderFactory {
   /**
    * @return a fresh {@link Builder} object.
    */
-  protected abstract MuleMessage.PayloadBuilder create();
+  protected abstract Message.PayloadBuilder create();
 
   /**
-   * @param message existing {@link MuleMessage} to use as a template to create a new {@link Builder} instance.
+   * @param message existing {@link Message} to use as a template to create a new {@link Builder} instance.
    * @return a fresh {@link Builder} based on the template {@code message} provided.
    */
-  protected abstract MuleMessage.Builder create(MuleMessage message);
+  protected abstract Message.Builder create(Message message);
 
 }
