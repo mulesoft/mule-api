@@ -19,13 +19,13 @@ import org.slf4j.LoggerFactory;
  *
  * @since 1.0
  */
-public abstract class AbstractMuleMessageBuilderFactory {
+public abstract class AbstractMessageBuilderFactory {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMuleMessageBuilderFactory.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMessageBuilderFactory.class);
 
   static {
     try {
-      final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class).iterator().next();
+      final AbstractMessageBuilderFactory factory = load(AbstractMessageBuilderFactory.class).iterator().next();
       LOGGER.info(format("Loaded MuleMessageBuilderFactory impementation '%s' form classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
@@ -36,7 +36,7 @@ public abstract class AbstractMuleMessageBuilderFactory {
     }
   }
 
-  private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractMessageBuilderFactory DEFAULT_FACTORY;
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
@@ -48,7 +48,7 @@ public abstract class AbstractMuleMessageBuilderFactory {
    *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
-  static final AbstractMuleMessageBuilderFactory getDefaultFactory() {
+  static final AbstractMessageBuilderFactory getDefaultFactory() {
     return DEFAULT_FACTORY;
   }
 

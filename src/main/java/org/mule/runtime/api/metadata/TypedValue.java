@@ -24,6 +24,6 @@ public interface TypedValue<T> {
   /**
    * @return this object's content.
    */
-  T getValue();
+  T getContent();
 
 }
