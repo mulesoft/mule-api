@@ -9,7 +9,7 @@ package org.mule.runtime.api.metadata.descriptor.builder;
 import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.typeDescriptor;
 import static org.mule.runtime.api.metadata.resolving.MetadataResult.success;
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.runtime.api.message.MuleMessage;
+import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.MetadataProvider;
 import org.mule.runtime.api.metadata.descriptor.ImmutableOutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
@@ -46,7 +46,7 @@ public class OutputMetadataDescriptorBuilder {
 
   /**
    * Adds a {@link MetadataResult} of {@link TypeMetadataDescriptor} {@param returnTypeResult} that describes the he output
-   * {@link MuleMessage#getAttributes} {@link MetadataType}.
+   * {@link Message#getAttributes} {@link MetadataType}.
    *
    * @param attributesTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output
    *        attributes type.
@@ -69,7 +69,7 @@ public class OutputMetadataDescriptorBuilder {
   }
 
   /**
-   * Describes that the output {@link MuleMessage#getAttributes} {@link MetadataType} of the component will be
+   * Describes that the output {@link Message#getAttributes} {@link MetadataType} of the component will be
    * {@param attributesTypeResult}
    *
    * @param attributesType of the component output attributes
@@ -83,7 +83,7 @@ public class OutputMetadataDescriptorBuilder {
   /**
    * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
    *         {@link MetadataProvider} component
-   * @throws IllegalArgumentException if the {@link MuleMessage#getPayload} or {@link MuleMessage#getAttributes} were not set
+   * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set
    *         during building
    */
   public OutputMetadataDescriptor build() {

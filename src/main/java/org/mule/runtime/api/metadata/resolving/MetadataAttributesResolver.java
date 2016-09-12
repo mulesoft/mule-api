@@ -8,7 +8,7 @@ package org.mule.runtime.api.metadata.resolving;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
-import org.mule.runtime.api.message.MuleMessage;
+import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
@@ -23,7 +23,7 @@ public interface MetadataAttributesResolver<K> {
   /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType}, which
    * represents the type structure.
-   * This {@link MetadataType} will be considered as the resulting {@link MuleMessage} attributes type
+   * This {@link MetadataType} will be considered as the resulting {@link Message} attributes type
    * of the associated Component's output
    *
    * @param context {@link MetadataContext} of the MetaData resolution

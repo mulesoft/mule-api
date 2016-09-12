@@ -8,7 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
 
-import org.mule.runtime.api.message.MuleMessage;
+import org.mule.runtime.api.message.Message;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -68,7 +68,6 @@ public interface DataType extends Serializable {
    * {@code mimeType} and {@code encoding} values based on this.
    *
    * @param value the object to determine the {@link DataType} of.
-   * @param <T> the type of the object
    * @return a new {@link DataType} for the given {@code value}.
    */
   static DataType fromObject(Object value) {
@@ -90,9 +89,9 @@ public interface DataType extends Serializable {
   DataType OBJECT = fromType(Object.class);
   DataType BYTE_ARRAY = fromType(byte[].class);
   DataType INPUT_STREAM = fromType(InputStream.class);
-  DataType MULE_MESSAGE = builder().type(MuleMessage.class).mediaType(MediaType.ANY).build();
+  DataType MULE_MESSAGE = builder().type(Message.class).mediaType(MediaType.ANY).build();
   CollectionDataType MULE_MESSAGE_COLLECTION =
-      (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(MuleMessage.class)
+      (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
           .mediaType(MediaType.ANY).build();
 
   /**

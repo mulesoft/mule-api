@@ -21,13 +21,12 @@ public interface DataTypeParamsBuilder {
   /**
    * Sets the given {@code mediaType} string. See {@link DataType#getMediaType()}.
    * <p>
-   * If the media type for the given string has a {@code charset} parameter, that will be set as
-   * the encoding for the {@link DataType} being built, unless it had been previously set.
+   * If the media type for the given string has a {@code charset} parameter, that will be set as the encoding for the
+   * {@link DataType} being built, unless it had been previously set.
    * <p>
-   * An encoding set by a call to this method can be overridden by calling
-   * {@link #charset(String)}.
+   * An encoding set by a call to this method can be overridden by calling {@link #charset(String)}.
    * 
-   * @param mimeType the MIME type string to set. If null or empty, the builder is not changed.
+   * @param mediaType the MIME type string to set. If null or empty, the builder is not changed.
    * @return this builder.
    * @throws IllegalArgumentException if the given media type string is invalid.
    */
@@ -36,13 +35,12 @@ public interface DataTypeParamsBuilder {
   /**
    * Sets the given {@code mediaType}. See {@link DataType#getMediaType()}.
    * <p>
-   * If the media type for the given string has a {@code charset} parameter, that will be set as
-   * the encoding for the {@link DataType} being built, unless it had been previously set.
+   * If the media type for the given string has a {@code charset} parameter, that will be set as the encoding for the
+   * {@link DataType} being built, unless it had been previously set.
    * <p>
-   * An encoding set by a call to this method can be overridden by calling
-   * {@link #charset(String)}.
+   * An encoding set by a call to this method can be overridden by calling {@link #charset(String)}.
    * 
-   * @param mimeType the media type to set. If null, the builder is not changed.
+   * @param mediaType the media type to set. If null, the builder is not changed.
    * @return this builder.
    */
   DataTypeParamsBuilder mediaType(MediaType mediaType);

@@ -101,8 +101,9 @@ public final class MediaType implements Serializable {
   /**
    * Returns a media-type for. This would be the equivalent of the media type {@code "{primaryType}/{subType}"}.
    *
-   * @param primaryType
-   * @param subType
+   * @param primaryType the left part of the represented type.
+   * @param subType the right part of the represented type.
+   * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType) {
     return new MediaType(primaryType, subType, emptyMap(), null);
@@ -112,9 +113,10 @@ public final class MediaType implements Serializable {
    * Returns a media-type for the given parameters. This would be the equivalent of the media type
    * {@code "{primaryType}/{subType}[; charset={charset}]"}.
    *
-   * @param primaryType
-   * @param subType
-   * @param charset
+   * @param primaryType the left part of the represented type.
+   * @param subType the right part of the represented type.
+   * @param charset the value of the {@code charset} parameter.
+   * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType, Charset charset) {
     return new MediaType(primaryType, subType, emptyMap(), charset);
