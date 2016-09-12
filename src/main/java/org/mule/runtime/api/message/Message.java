@@ -29,7 +29,7 @@ public interface Message extends TypedValue, Serializable {
    * @return a new {@link Builder}.
    */
   static PayloadBuilder builder() {
-    return AbstractMessageBuilderFactory.getDefaultFactory().create();
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory().create();
   }
 
   /**
@@ -39,7 +39,7 @@ public interface Message extends TypedValue, Serializable {
    * @return a new {@link Builder} based on the template {@code message} provided.
    */
   static Builder builder(Message message) {
-    return AbstractMessageBuilderFactory.getDefaultFactory().create(message);
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory().create(message);
   }
 
   /**
