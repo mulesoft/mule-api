@@ -53,10 +53,9 @@ public interface Message extends Serializable {
   }
 
   /**
-   * @param <T> the content type.
    * @return the message content.
    */
-  <T> TypedValue<T> getPayload();
+  TypedValue getPayload();
 
   /**
    * Gets the attributes associated with the Message. The {@code Attributes} attributes object is specific to the connector
