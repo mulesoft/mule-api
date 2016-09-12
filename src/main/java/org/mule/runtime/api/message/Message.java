@@ -43,7 +43,10 @@ public interface Message extends Serializable {
   }
 
   /**
-   * @return the message content.
+   * Gets a {@link TypedValue} with the payload of this message.
+   *
+   * @param <T> the type of the payload.
+   * @return the message payload.
    */
   <T> TypedValue<T> getPayload();
 

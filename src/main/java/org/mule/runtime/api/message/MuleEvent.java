@@ -28,6 +28,7 @@ public interface MuleEvent extends Serializable {
    * Returns the variable registered under the given {@code key}
    *
    * @param key the name or key of the variable. This must be non-null.
+   * @param <T> the type of the variable value.
    * @return a {@link TypedValue} containing the variable's value and {@link DataType}
    * @throws java.util.NoSuchElementException if the flow variable does not exist.
    */
