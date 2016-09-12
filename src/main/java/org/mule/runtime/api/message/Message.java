@@ -16,12 +16,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Represents a message payload. The Message is comprised of the content, its {@link DataType} and {@link Attributes} associated
- * with the content.
+ * Represents a message. The Message is comprised of the payload, (a value and its {@link DataType}) and {@link Attributes}
+ * associated with the content.
  *
  * @since 1.0
  */
-public interface Message extends TypedValue, Serializable {
+public interface Message extends Serializable {
 
   /**
    * Provides a builder to create {@link Message} objects.
@@ -43,20 +43,20 @@ public interface Message extends TypedValue, Serializable {
   }
 
   /**
-   * Create a new {@link Message instance} with the given content.
+   * Create a new {@link Message instance} with the given value as the payload.
    *
-   * @param content content for the {@link Message}.
+   * @param value content for the {@link Message}.
    * @return new message instance
    */
-  static Message of(Object content) {
-    return builder().payload(content).build();
+  static Message of(Object value) {
+    return builder().payload(value).build();
   }
 
   /**
    * @param <T> the content type.
    * @return the message content.
    */
-  <T> T getPayload();
+  <T> TypedValue<T> getPayload();
 
   /**
    * Gets the attributes associated with the Message. The {@code Attributes} attributes object is specific to the connector
@@ -71,81 +71,73 @@ public interface Message extends TypedValue, Serializable {
    */
   Attributes getAttributes();
 
-  /**
-   * Returns the data type (if any) associated with the message's content.
-   *
-   * @return the message {@link DataType}
-   */
-  @Override
-  DataType getDataType();
-
   interface PayloadBuilder {
 
     /**
-     * Sets a {@code #null} content value for the {@link Message} to be built.
+     * Sets a {@code #null} value for the {@link Message}'s payload to be built.
      *
      * @return this builder
      */
     Builder nullPayload();
 
     /**
-     * Sets the content for the {@link Message} to be built.
+     * Sets the value for the {@link Message}'s payload to be built.
      * <p>
      * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the new
      * {@code content} class while preserving it's {@link MediaType}, unless the new {@code content} type defines it's own
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
      *
-     * @param content the message content
+     * @param value the message content
      * @return this builder.
      */
-    Builder payload(Object content);
+    Builder payload(Object value);
 
     /**
-     * Sets the consumable streaming collection content for the {@link Message} to be built.
+     * Sets the consumable streaming collection value for the {@link Message}'s payload to be built.
      * <p>
      * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the new
-     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code content} type defines it's own
+     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code value} type defines it's own
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}.
      * <p>
      * If you already have a {@link Collection} instance, use {@link #collectionPayload(Collection, Class)} instead.
      *
-     * @param content the iterator for the collection content
+     * @param value the iterator for the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the payload is null
      */
-    Builder streamPayload(Iterator content, Class<?> itemType);
+    Builder streamPayload(Iterator value, Class<?> itemType);
 
     /**
-     * Sets the collection content for the {@link Message} to be built.
+     * Sets the collection value for the {@link Message}'s payload to be built.
      * <p>
      * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the new
-     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code content} type defines it's own
+     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code value} type defines it's own
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
      *
-     * @param content the collection content
+     * @param value the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Collection content, Class<?> itemType);
+    Builder collectionPayload(Collection value, Class<?> itemType);
 
     /**
-     * Sets the collection content for the {@link Message} to be built.
+     * Sets the collection value for the {@link Message}'s payload to be built.
      * <p>
      * If a {@link DataType} has previously been set it's {@code type} will be updated to reflect the type of the new
-     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code content} type defines it's own
+     * {@code content} class while preserving it's {@link MediaType}, unless the new {@code value} type defines it's own
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
      *
-     * @param content the array to use as a collection content
+     * @param value the array to use as a collection content
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Object[] content);
+    Builder collectionPayload(Object[] value);
 
   }
 
