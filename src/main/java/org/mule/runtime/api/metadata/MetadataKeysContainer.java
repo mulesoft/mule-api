@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 public interface MetadataKeysContainer {
 
   /**
-   * Returns an {@link Optional} wuth {@link Set<MetadataKey>} for a given resolver name if it is present.
+   * Returns an {@link Optional} with {@link Set<MetadataKey>} for a given resolver name if it is present.
    * {@link Optional#empty()} otherwise.
    *
    * @param resolverName {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
@@ -32,4 +33,9 @@ public interface MetadataKeysContainer {
    * @return {@link Set} with the {@link Class#getSimpleName()} or alias of the resolvers
    */
   Set<String> getResolvers();
+
+  /**
+   * @return {@link Map} with the resolver's name as key and the {@link Set<MetadataKey>} for that resolver as value.
+   */
+  Map<String, Set<MetadataKey>> getKeys();
 }

@@ -43,4 +43,12 @@ final class DefaultMetadataKeysContainer implements MetadataKeysContainer {
   public Set<String> getResolvers() {
     return unmodifiableSet(keyMap.keySet());
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Map<String, Set<MetadataKey>> getKeys() {
+    return keyMap;
+  }
 }
