@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-M3</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -85,7 +83,8 @@
         <connection>scm:git:git://github.com/mulesoft/mule-api.git</connection>
         <developerConnection>scm:git:git@github.com:mulesoft/mule-api.git</developerConnection>
         <url>https://github.com/mulesoft/mule-api</url>
-    </scm>
+      <tag>1.0.0-M3</tag>
+  </scm>
 
     <properties>
         <javaVersion>1.8</javaVersion>
