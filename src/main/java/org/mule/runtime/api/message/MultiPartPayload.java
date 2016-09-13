@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
  * 
  * @since 1.0
  */
-public interface MultiPartContent {
+public interface MultiPartPayload {
 
   /**
    * @return the contained parts.

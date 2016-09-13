@@ -7,6 +7,7 @@
 package org.mule.runtime.api.message;
 
 import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.metadata.TypedValue;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -27,20 +28,11 @@ public interface MuleEvent extends Serializable {
    * Returns the variable registered under the given {@code key}
    *
    * @param key the name or key of the variable. This must be non-null.
-   * @param <T> the value's generic type
-   * @return the variable's value
+   * @param <T> the type of the variable value.
+   * @return a {@link TypedValue} containing the variable's value and {@link DataType}
    * @throws java.util.NoSuchElementException if the flow variable does not exist.
    */
-  <T> T getVariable(String key);
-
-  /**
-   * Gets the data type for a given variable
-   *
-   * @param key the name or key of the variable. This must be non-null.
-   * @return the variable data type or null if the variable does not exist
-   * @throws java.util.NoSuchElementException if the variable does not exist.
-   */
-  DataType getVariableDataType(String key);
+  <T> TypedValue<T> getVariable(String key);
 
   /**
    * Returns an immutable {@link Set} of variable names.

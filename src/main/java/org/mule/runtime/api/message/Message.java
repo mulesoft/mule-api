@@ -43,19 +43,12 @@ public interface Message extends Serializable {
   }
 
   /**
-   * Create a new {@link Message instance} with the given value as the payload.
+   * Gets a {@link TypedValue} with the payload of this message.
    *
-   * @param value content for the {@link Message}.
-   * @return new message instance
+   * @param <T> the type of the payload.
+   * @return the message payload.
    */
-  static Message of(Object value) {
-    return builder().payload(value).build();
-  }
-
-  /**
-   * @return the message content.
-   */
-  TypedValue getPayload();
+  <T> TypedValue<T> getPayload();
 
   /**
    * Gets the attributes associated with the Message. The {@code Attributes} attributes object is specific to the connector
