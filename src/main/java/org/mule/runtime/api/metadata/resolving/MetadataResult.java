@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import static org.mule.runtime.api.metadata.resolving.FailureCode.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +38,7 @@ public interface MetadataResult<T> {
    * @return a failure {@link MetadataResult} instance
    */
   static <T> MetadataResult<T> failure(Exception e) {
-    return new ImmutableMetadataResult<>(e, FailureCode.UNKNOWN);
+    return new ImmutableMetadataResult<>(e, UNKNOWN);
   }
 
   /**

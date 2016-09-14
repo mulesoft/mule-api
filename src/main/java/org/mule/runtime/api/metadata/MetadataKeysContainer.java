@@ -25,7 +25,7 @@ public interface MetadataKeysContainer {
    * @param categoryName of the {@link org.mule.runtime.api.metadata.resolving.MetadataKeysResolver}
    * @return {@link Optional} of {@link Set<MetadataKey>} associated to the resolver
    */
-  Optional<Set<MetadataKey>> getKeysForCategory(String categoryName);
+  Optional<Set<MetadataKey>> getKeys(String categoryName);
 
   /**
    * @return {@link Set} with the categories names
@@ -33,7 +33,8 @@ public interface MetadataKeysContainer {
   Set<String> getCategories();
 
   /**
-   * @return {@link Map} with the resolver's name as key and the {@link Set<MetadataKey>} for that resolver as value.
+   * @return an immutable {@link Map} with the names of the categories as keys and the {@link Set<MetadataKey>} for each category
+   *         as the associated value.
    */
-  Map<String, Set<MetadataKey>> getKeysForAllCategories();
+  Map<String, Set<MetadataKey>> getKeysByCategory();
 }

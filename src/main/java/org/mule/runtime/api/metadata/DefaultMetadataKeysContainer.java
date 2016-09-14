@@ -31,7 +31,7 @@ final class DefaultMetadataKeysContainer implements MetadataKeysContainer {
    * {@inheritDoc}
    */
   @Override
-  public Optional<Set<MetadataKey>> getKeysForCategory(String categoryName) {
+  public Optional<Set<MetadataKey>> getKeys(String categoryName) {
     Set<MetadataKey> keys = keyMap.get(categoryName);
     return keys == null ? Optional.empty() : Optional.of(unmodifiableSet(keys));
   }
@@ -47,7 +47,7 @@ final class DefaultMetadataKeysContainer implements MetadataKeysContainer {
   /**
    * {@inheritDoc}
    */
-  public Map<String, Set<MetadataKey>> getKeysForAllCategories() {
+  public Map<String, Set<MetadataKey>> getKeysByCategory() {
     return keyMap;
   }
 }
