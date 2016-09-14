@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import static org.mule.runtime.api.metadata.resolving.FailureCode.UNKNOWN;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
 import java.util.Optional;
@@ -43,6 +44,12 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T> {
     this.failure = new MetadataFailure(message, ExceptionUtils.getStackTrace(e), getFailureCode(e));
   }
 
+  ImmutableMetadataResult(Exception e, FailureCode code) {
+    this.result = null;
+    this.isSuccess = false;
+    this.failure = new MetadataFailure(e.getMessage(), ExceptionUtils.getStackTrace(e), code);
+  }
+
   ImmutableMetadataResult(T result, MetadataFailure failure) {
     this.result = result;
     this.isSuccess = false;
@@ -74,6 +81,6 @@ public final class ImmutableMetadataResult<T> implements MetadataResult<T> {
   }
 
   private FailureCode getFailureCode(Exception e) {
-    return e instanceof MetadataResolvingException ? ((MetadataResolvingException) e).getFailure() : FailureCode.UNKNOWN;
+    return e instanceof MetadataResolvingException ? ((MetadataResolvingException) e).getFailure() : UNKNOWN;
   }
 }

@@ -36,7 +36,19 @@ public interface MetadataResult<T> {
    * @return a failure {@link MetadataResult} instance
    */
   static <T> MetadataResult<T> failure(Exception e) {
-    return new ImmutableMetadataResult<>(e);
+    return new ImmutableMetadataResult<>(e, FailureCode.UNKNOWN);
+  }
+
+  /**
+   * Creates a failure result obtaining the information from the occurred exception
+   * when there is no payload for the result and adds a custom {@link FailureCode}
+   *
+   * @param e exception that produced the failing {@link MetadataResult}
+   * @param code {@link FailureCode}
+   * @return a failure {@link MetadataResult} instance
+   */
+  static <T> MetadataResult<T> failure(Exception e, FailureCode code) {
+    return new ImmutableMetadataResult<>(e, code);
   }
 
   /**

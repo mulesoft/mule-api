@@ -14,22 +14,21 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
 import java.util.Set;
 
 /**
- * Handles the dynamic resolution of the available {@link MetadataKey} that can be used to populate the
- * MetadataKeyId of an associated Component
+ * Handles the dynamic resolution of the available {@link MetadataKey} that can be used to populate the MetadataKeyId of an
+ * associated Component
  *
  * @since 1.0
  */
-public interface MetadataKeysResolver {
+public interface MetadataKeysResolver extends MetadataResolver {
 
   /**
-   * Resolves the {@link Set} of types that can be described, representing them
-   * as a {@link Set} of {@link MetadataKey}
+   * Resolves the {@link Set} of types that can be described, representing them as a {@link Set} of {@link MetadataKey}
    *
    * @param context {@link MetadataContext} of the Metadata resolution
    * @return A set of {@link MetadataKey} of the available types
-   * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See
-   *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
+   * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See {@link FailureCode} for
+   *         possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   Set<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
 }
