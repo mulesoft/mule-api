@@ -27,6 +27,7 @@ public final class FailureCode {
   public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
   public static final FailureCode NONE = new FailureCode("NO_ERROR");
   public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
+  public static final FailureCode NO_DYNAMIC_METADATA_AVAILABLE = new FailureCode("NO_DYNAMIC_METADATA_AVAILABLE");
 
   private String name;
 
