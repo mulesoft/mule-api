@@ -30,9 +30,19 @@ public final class MetadataKeysContainerBuilder {
   /**
    * @param name {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
    * @param keys {@link Set<MetadataKey>} associated to the category.
+   *                                     @return {@code} this builder
    */
   public MetadataKeysContainerBuilder add(String name, Set<MetadataKey> keys) {
     keyMap.put(name, keys);
+    return this;
+  }
+
+  /**
+   * @param keys a {@link Map} which keys are categories and values are {@link MetadataKey}s associated to them
+   * @return {@code} this builder
+   */
+  public MetadataKeysContainerBuilder addAll(Map<String, Set<MetadataKey>> keys) {
+    keyMap.putAll(keys);
     return this;
   }
 
