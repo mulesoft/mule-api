@@ -18,20 +18,18 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
  * @param <K> the generic type of the objects to be used as MetadataKeyId representing a type structure
  * @since 1.0
  */
-public interface MetadataAttributesResolver<K> {
+public interface MetadataAttributesResolver<K> extends MetadataResolver {
 
   /**
-   * Given an instance of type {@code K}, resolves their {@link MetadataType}, which
-   * represents the type structure.
-   * This {@link MetadataType} will be considered as the resulting {@link Message} attributes type
-   * of the associated Component's output
+   * Given an instance of type {@code K}, resolves their {@link MetadataType}, which represents the type structure. This
+   * {@link MetadataType} will be considered as the resulting {@link Message} attributes type of the associated Component's output
    *
    * @param context {@link MetadataContext} of the MetaData resolution
-   * @param key     {@code K} representing the type which's structure has to be resolved
+   * @param key {@code K} representing the type which's structure has to be resolved
    * @return {@link MetadataType} associated to the given {@param key}
-   * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See
-   *                                    {@link FailureCode} for possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException        if an error occurs when using the connection provided  by the {@link MetadataContext}
+   * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See {@link FailureCode} for
+   *         possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataType getAttributesMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 }

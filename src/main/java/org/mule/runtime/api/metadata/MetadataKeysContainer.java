@@ -7,8 +7,7 @@
 
 package org.mule.runtime.api.metadata;
 
-import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
-
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,16 +19,22 @@ import java.util.Set;
 public interface MetadataKeysContainer {
 
   /**
-   * Returns an {@link Optional} wuth {@link Set<MetadataKey>} for a given resolver name if it is present.
+   * Returns an {@link Optional} with {@link Set<MetadataKey>} for a given resolver name if it is present.
    * {@link Optional#empty()} otherwise.
    *
-   * @param resolverName {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
+   * @param categoryName of the {@link org.mule.runtime.api.metadata.resolving.MetadataKeysResolver}
    * @return {@link Optional} of {@link Set<MetadataKey>} associated to the resolver
    */
-  Optional<Set<MetadataKey>> getKeys(String resolverName);
+  Optional<Set<MetadataKey>> getKeys(String categoryName);
 
   /**
-   * @return {@link Set} with the {@link Class#getSimpleName()} or alias of the resolvers
+   * @return {@link Set} with the categories names
    */
-  Set<String> getResolvers();
+  Set<String> getCategories();
+
+  /**
+   * @return an immutable {@link Map} with the names of the categories as keys and the {@link Set<MetadataKey>} for each category
+   *         as the associated value.
+   */
+  Map<String, Set<MetadataKey>> getKeysByCategory();
 }

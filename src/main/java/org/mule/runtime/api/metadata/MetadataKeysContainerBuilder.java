@@ -29,7 +29,7 @@ public final class MetadataKeysContainerBuilder {
 
   /**
    * @param name {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
-   * @param keys {@link Set<MetadataKey>} associated to ther esolver.
+   * @param keys {@link Set<MetadataKey>} associated to the category.
    */
   public MetadataKeysContainerBuilder add(String name, Set<MetadataKey> keys) {
     keyMap.put(name, keys);
@@ -37,10 +37,10 @@ public final class MetadataKeysContainerBuilder {
   }
 
   /**
-   * @return {@code true} if the resolver was already added
+   * @return {@code true} if the category was already added
    */
-  public boolean containsResolver(String resolverName) {
-    return keyMap.containsKey(resolverName);
+  public boolean containsCategory(String categoryName) {
+    return keyMap.containsKey(categoryName);
   }
 
   /**

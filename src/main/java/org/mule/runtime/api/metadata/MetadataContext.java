@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import org.mule.metadata.api.ClassTypeLoader;
+import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.runtime.api.connection.ConnectionException;
 
 import java.util.Optional;
@@ -43,4 +44,10 @@ public interface MetadataContext {
    * @return the {@link ClassTypeLoader} for the current {@link MetadataContext}.
    */
   ClassTypeLoader getTypeLoader();
+
+  /**
+   *
+   * @return the {@link BaseTypeBuilder} for the current {@link MetadataContext}.
+   */
+  BaseTypeBuilder getTypeBuilder();
 }

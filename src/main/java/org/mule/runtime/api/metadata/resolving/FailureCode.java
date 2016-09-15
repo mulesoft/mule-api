@@ -22,6 +22,8 @@ public final class FailureCode {
   public static final FailureCode INVALID_CREDENTIALS = new FailureCode("INVALID_CREDENTIALS");
   public static final FailureCode CONNECTION_FAILURE = new FailureCode("CONNECTION_FAILURE");
   public static final FailureCode NOT_AUTHORIZED = new FailureCode("NOT_AUTHORIZED");
+  public static final FailureCode COMPONENT_NOT_FOUND = new FailureCode("COMPONENT_NOT_FOUND");
+  public static final FailureCode APPLICATION_NOT_FOUND = new FailureCode("APPLICATION_NOT_FOUND");
   public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
   public static final FailureCode NONE = new FailureCode("NO_ERROR");
   public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
