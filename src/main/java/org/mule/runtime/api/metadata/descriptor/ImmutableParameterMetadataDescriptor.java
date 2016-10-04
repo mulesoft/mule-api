@@ -17,10 +17,12 @@ public final class ImmutableParameterMetadataDescriptor implements ParameterMeta
 
   private final String name;
   private final MetadataType type;
+  private final boolean isDynamic;
 
-  public ImmutableParameterMetadataDescriptor(String name, MetadataType type) {
+  public ImmutableParameterMetadataDescriptor(String name, MetadataType type, boolean isDynamic) {
     this.name = name;
     this.type = type;
+    this.isDynamic = isDynamic;
   }
 
   /**
@@ -37,5 +39,13 @@ public final class ImmutableParameterMetadataDescriptor implements ParameterMeta
   @Override
   public MetadataType getType() {
     return type;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDynamic() {
+    return isDynamic;
   }
 }

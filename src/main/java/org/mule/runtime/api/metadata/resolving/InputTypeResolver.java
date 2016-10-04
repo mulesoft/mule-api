@@ -17,7 +17,7 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
  * @param <K> the generic type of the objects to be used as MetadataKeyId representing a type structure
  * @since 1.0
  */
-public interface MetadataContentResolver<K> extends MetadataResolver {
+public interface InputTypeResolver<K> extends NamedTypeResolver {
 
   /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType} which represents the type structure. This
@@ -30,6 +30,6 @@ public interface MetadataContentResolver<K> extends MetadataResolver {
    *         possible {@link MetadataResolvingException} reasons
    * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
-  MetadataType getContentMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
+  MetadataType getInputMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 
 }

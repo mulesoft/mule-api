@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.metadata;
 
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
+
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -22,7 +24,7 @@ public interface MetadataKeysContainer {
    * Returns an {@link Optional} with {@link Set<MetadataKey>} for a given resolver name if it is present.
    * {@link Optional#empty()} otherwise.
    *
-   * @param categoryName of the {@link org.mule.runtime.api.metadata.resolving.MetadataKeysResolver}
+   * @param categoryName of the {@link TypeKeysResolver}
    * @return {@link Optional} of {@link Set<MetadataKey>} associated to the resolver
    */
   Optional<Set<MetadataKey>> getKeys(String categoryName);

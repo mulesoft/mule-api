@@ -22,6 +22,7 @@ public class ParameterMetadataDescriptorBuilder {
 
   private final String name;
   private MetadataType type;
+  private boolean isDynamic = false;
 
   /**
    * Creates a new instance of the builder associated to the component parameter {@param name}
@@ -49,6 +50,17 @@ public class ParameterMetadataDescriptorBuilder {
   }
 
   /**
+   * Indicates that the type comes from a dynamic type resolver
+   *
+   * @param isDynamic whether or not the provided type comes from a dynamic type resolver
+   * @return the instance builder contributed with a {@link MetadataType}
+   */
+  public ParameterMetadataDescriptorBuilder dynamic(boolean isDynamic) {
+    this.isDynamic = isDynamic;
+    return this;
+  }
+
+  /**
    * Builds and creates the descriptor of the component parameter.
    * Validates that the name nor type are not null.
    *
@@ -60,7 +72,7 @@ public class ParameterMetadataDescriptorBuilder {
       throw new IllegalArgumentException("Type parameter cannot be null for ParameterMetadataDescriptor");
     }
 
-    return new ImmutableParameterMetadataDescriptor(name, type);
+    return new ImmutableParameterMetadataDescriptor(name, type, isDynamic);
   }
 
 }

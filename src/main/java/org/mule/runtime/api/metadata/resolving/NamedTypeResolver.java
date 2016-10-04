@@ -11,9 +11,10 @@ package org.mule.runtime.api.metadata.resolving;
  *
  * @since 1.0
  */
-public interface MetadataResolver {
+public interface NamedTypeResolver {
 
   /**
+   *  //FIXME improve this jdoc
    * @return name of the category
    */
   String getCategoryName();

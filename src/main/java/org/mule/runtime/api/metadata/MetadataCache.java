@@ -6,9 +6,9 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.runtime.api.metadata.resolving.MetadataContentResolver;
-import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
-import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
+import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
+import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -16,8 +16,8 @@ import java.util.Optional;
 
 /**
  * This component provides the capability to store data so future requests
- * for that data can be served faster and accessed from every {@link MetadataContentResolver},
- * {@link MetadataKeysResolver} and {@link MetadataOutputResolver}
+ * for that data can be served faster and accessed from every {@link InputTypeResolver},
+ * {@link TypeKeysResolver} and {@link OutputTypeResolver}
  *
  * @since 1.0
  */

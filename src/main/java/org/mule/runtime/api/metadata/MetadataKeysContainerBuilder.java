@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public final class MetadataKeysContainerBuilder {
   }
 
   /**
-   * @param name {@link Class#getSimpleName()} or alias of the {@link MetadataKeysResolver} class
+   * @param name {@link Class#getSimpleName()} or alias of the {@link TypeKeysResolver} class
    * @param keys {@link Set<MetadataKey>} associated to the category.
    *                                     @return {@code} this builder
    */

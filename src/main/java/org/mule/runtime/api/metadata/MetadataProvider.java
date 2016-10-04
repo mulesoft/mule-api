@@ -9,8 +9,8 @@ package org.mule.runtime.api.metadata;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
-import org.mule.runtime.api.metadata.resolving.MetadataContentResolver;
-import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
+import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
+import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
@@ -36,7 +36,7 @@ public interface MetadataProvider {
    * Resolves the {@link ComponentMetadataDescriptor} for the current component using both static and dynamic resolving of the
    * Component's parameters, attributes and output.
    * <p>
-   * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated that can be used to
+   * If the component has a {@link InputTypeResolver} or {@link OutputTypeResolver} associated that can be used to
    * resolve the Dynamic {@link MetadataType} for the Content or Output, then the {@link ComponentMetadataDescriptor} will contain
    * those Dynamic types instead of the static type declaration.
    * <p>

@@ -8,9 +8,6 @@ package org.mule.runtime.api.metadata.descriptor;
 
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
-import java.util.List;
-import java.util.Optional;
-
 /**
  * Immutable concrete implementation of {@link ComponentMetadataDescriptor}
  *
@@ -18,35 +15,23 @@ import java.util.Optional;
  */
 public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor {
 
-  private final String componentName;
-  private final List<MetadataResult<ParameterMetadataDescriptor>> parameters;
+  private final String name;
+  private final MetadataResult<InputMetadataDescriptor> input;
   private final MetadataResult<OutputMetadataDescriptor> output;
-  private final MetadataResult<ParameterMetadataDescriptor> content;
 
-  public ImmutableComponentMetadataDescriptor(String componentName,
-                                              List<MetadataResult<ParameterMetadataDescriptor>> parameters,
-                                              MetadataResult<OutputMetadataDescriptor> output,
-                                              MetadataResult<ParameterMetadataDescriptor> content) {
-    this.componentName = componentName;
-    this.parameters = parameters;
+  public ImmutableComponentMetadataDescriptor(String name, MetadataResult<InputMetadataDescriptor> input,
+                                              MetadataResult<OutputMetadataDescriptor> output) {
+    this.name = name;
+    this.input = input;
     this.output = output;
-    this.content = content;
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public List<MetadataResult<ParameterMetadataDescriptor>> getParametersMetadata() {
-    return this.parameters;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Optional<MetadataResult<ParameterMetadataDescriptor>> getContentMetadata() {
-    return Optional.ofNullable(content);
+  public MetadataResult<InputMetadataDescriptor> getInputMetadata() {
+    return this.input;
   }
 
   /**
@@ -62,6 +47,6 @@ public final class ImmutableComponentMetadataDescriptor implements ComponentMeta
    */
   @Override
   public String getName() {
-    return componentName;
+    return name;
   }
 }
