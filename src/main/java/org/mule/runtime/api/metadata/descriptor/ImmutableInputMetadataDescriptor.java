@@ -11,10 +11,11 @@ import static java.util.Collections.unmodifiableMap;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 import java.util.Map;
-import java.util.Optional;
 
 /**
- * //TODO
+ * Immutable implementation of {@link InputMetadataDescriptor}
+ *
+ * @since 1.0
  */
 public class ImmutableInputMetadataDescriptor implements InputMetadataDescriptor {
 
