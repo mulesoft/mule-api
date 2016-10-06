@@ -14,7 +14,13 @@ package org.mule.runtime.api.metadata.resolving;
 public interface NamedTypeResolver {
 
   /**
-   *  //FIXME improve this jdoc
+   * This is the name of the TypeResolver Category, that relates a given
+   * {@link TypeKeysResolver} with the {@link InputTypeResolver input} and
+   * {@link OutputTypeResolver output} type resolvers.
+   * For any given component, all the {@link InputTypeResolver input} and
+   * {@link OutputTypeResolver output} resolvers must belong to the same Category,
+   * that is, have the same {@code categoryName}
+   *
    * @return name of the category
    */
   String getCategoryName();

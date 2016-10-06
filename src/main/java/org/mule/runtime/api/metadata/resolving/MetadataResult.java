@@ -123,7 +123,7 @@ public interface MetadataResult<T> {
       return success(payload);
     }
 
-    String messages = failedResults.stream().map(f -> f.getFailure().get().getMessage()).collect(joining(" and "));
+    String messages = failedResults.stream().map(f -> f.getFailure().get().getMessage()).collect(joining("\n"));
     String stackTrace = failedResults.size() == 1 ? failedResults.get(0).getFailure().get().getReason() : "";
     FailureCode failureCode = failedResults.size() == 1
         ? failedResults.get(0).getFailure().get().getFailureCode()
