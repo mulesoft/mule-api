@@ -19,7 +19,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface MetadataKeysResolver extends MetadataResolver {
+public interface TypeKeysResolver extends NamedTypeResolver {
 
   /**
    * Resolves the {@link Set} of types that can be described, representing them as a {@link Set} of {@link MetadataKey}
@@ -30,5 +30,5 @@ public interface MetadataKeysResolver extends MetadataResolver {
    *         possible {@link MetadataResolvingException} reasons
    * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
-  Set<MetadataKey> getMetadataKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
+  Set<MetadataKey> getKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
 }

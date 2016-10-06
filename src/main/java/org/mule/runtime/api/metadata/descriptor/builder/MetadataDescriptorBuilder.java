@@ -34,6 +34,13 @@ public abstract class MetadataDescriptorBuilder {
   }
 
   /**
+   * @return a new instance of {@link InputMetadataDescriptorBuilder} to describe metadata of a component
+   */
+  public static InputMetadataDescriptorBuilder inputDescriptor() {
+    return new InputMetadataDescriptorBuilder();
+  }
+
+  /**
    * @param name of the component parameter to associate their metadata description
    * @return a new instance of {@link ParameterMetadataDescriptorBuilder} associated to the {@param name}.
    */

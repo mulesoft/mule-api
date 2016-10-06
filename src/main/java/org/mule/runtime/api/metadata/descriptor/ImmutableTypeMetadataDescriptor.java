@@ -16,9 +16,11 @@ import org.mule.metadata.api.model.MetadataType;
 public final class ImmutableTypeMetadataDescriptor implements TypeMetadataDescriptor {
 
   private final MetadataType type;
+  private final boolean isDynamic;
 
-  public ImmutableTypeMetadataDescriptor(MetadataType type) {
+  public ImmutableTypeMetadataDescriptor(MetadataType type, boolean isDynamic) {
     this.type = type;
+    this.isDynamic = isDynamic;
   }
 
   /**
@@ -27,5 +29,13 @@ public final class ImmutableTypeMetadataDescriptor implements TypeMetadataDescri
   @Override
   public MetadataType getType() {
     return type;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isDynamic() {
+    return isDynamic;
   }
 }

@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.metadata.descriptor.builder;
 
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.inputDescriptor;
+import static org.mule.runtime.api.metadata.resolving.MetadataResult.success;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.ImmutableComponentMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ImmutableInputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
@@ -26,9 +31,8 @@ import org.apache.commons.lang3.StringUtils;
 public class ComponentMetadataDescriptorBuilder {
 
   private final String name;
-  private List<MetadataResult<ParameterMetadataDescriptor>> parameters;
+  private MetadataResult<InputMetadataDescriptor> input;
   private MetadataResult<OutputMetadataDescriptor> output;
-  private MetadataResult<ParameterMetadataDescriptor> content;
 
   /**
    * Creates a new instance of {@link ComponentMetadataDescriptorBuilder} with the name of the component to describe
@@ -37,7 +41,7 @@ public class ComponentMetadataDescriptorBuilder {
    * @throws IllegalArgumentException if name is blank
    */
   ComponentMetadataDescriptorBuilder(String name) {
-    if (StringUtils.isBlank(name)) {
+    if (isBlank(name)) {
       throw new IllegalArgumentException("Name parameter cannot be blank for an ComponentMetadataDescriptor");
     }
 
@@ -45,12 +49,12 @@ public class ComponentMetadataDescriptorBuilder {
   }
 
   /**
-   * @param parameters a {@link MetadataResult} of {@link List} of {@link TypeMetadataDescriptor} that describe the metadata for each parameter
+   * @param input a {@link MetadataResult} of {@link List} of {@link TypeMetadataDescriptor} that describe the metadata for each parameter
    *                   of the component described.
    * @return the contributed descriptor builder
    */
-  public ComponentMetadataDescriptorBuilder withParametersDescriptor(List<MetadataResult<ParameterMetadataDescriptor>> parameters) {
-    this.parameters = parameters;
+  public ComponentMetadataDescriptorBuilder withInputDescriptor(MetadataResult<InputMetadataDescriptor> input) {
+    this.input = input;
     return this;
   }
 
@@ -64,15 +68,6 @@ public class ComponentMetadataDescriptorBuilder {
   }
 
   /**
-   * @param content a {@link MetadataResult} of {@link ParameterMetadataDescriptor} that describes the metadata for the content of the component described
-   * @return the contributed descriptor builder contributed with the {@link TypeMetadataDescriptor} for content
-   */
-  public ComponentMetadataDescriptorBuilder withContentDescriptor(MetadataResult<ParameterMetadataDescriptor> content) {
-    this.content = content;
-    return this;
-  }
-
-  /**
    * @return a {@link ComponentMetadataDescriptor} instance with the metadata description for the content, output, and
    * type of each of the parameters of the Component
    * @throws IllegalArgumentException if the {@link OutputMetadataDescriptor} was not set during building
@@ -82,10 +77,10 @@ public class ComponentMetadataDescriptorBuilder {
       throw new IllegalArgumentException("OutputMetadataDescriptor cannot be null in an ComponentMetadataDescriptor");
     }
 
-    if (parameters == null) {
-      parameters = Collections.unmodifiableList(Collections.emptyList());
+    if (input == null) {
+      input = success(inputDescriptor().build());
     }
 
-    return new ImmutableComponentMetadataDescriptor(name, parameters, output, content);
+    return new ImmutableComponentMetadataDescriptor(name, input, output);
   }
 }

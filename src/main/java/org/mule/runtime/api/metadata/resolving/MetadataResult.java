@@ -6,14 +6,17 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
-import static org.mule.runtime.api.metadata.resolving.FailureCode.*;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
+import static org.mule.runtime.api.metadata.resolving.FailureCode.UNKNOWN;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
- * Container for the Metadata fetch operations provided by {@link MetadataKeysResolver}, {@link MetadataContentResolver}
- * and {@link MetadataOutputResolver} results.
+ * Container for the Metadata fetch operations provided by {@link TypeKeysResolver}, {@link InputTypeResolver}
+ * and {@link OutputTypeResolver} results.
  * Allows to communicate errors without propagating exceptions to the Metadata fetching service
  *
  * @param <T> return type of the Metadata resolving operation.
@@ -103,6 +106,30 @@ public interface MetadataResult<T> {
    */
   static <T> MetadataResult<T> failure(T payload, String message, FailureCode failure, String reason) {
     return new ImmutableMetadataResult<>(payload, new MetadataFailure(message, reason, failure));
+  }
+
+
+  /**
+   * Merge multiple failed {@link MetadataResult} into one {@link MetadataFailure}.
+   *
+   * @param results the results to be merged as one
+   * @return a new single {@link MetadataFailure}
+   */
+  static <T> MetadataResult<T> mergeResults(T payload, MetadataResult<?>... results) {
+
+    List<MetadataResult<?>> failedResults = Stream.of(results).filter(result -> !result.isSuccess()).collect(toList());
+
+    if (failedResults.isEmpty()) {
+      return success(payload);
+    }
+
+    String messages = failedResults.stream().map(f -> f.getFailure().get().getMessage()).collect(joining("\n"));
+    String stackTrace = failedResults.size() == 1 ? failedResults.get(0).getFailure().get().getReason() : "";
+    FailureCode failureCode = failedResults.size() == 1
+        ? failedResults.get(0).getFailure().get().getFailureCode()
+        : FailureCode.MULTIPLE;
+
+    return failure(payload, messages, failureCode, stackTrace);
   }
 
   /**

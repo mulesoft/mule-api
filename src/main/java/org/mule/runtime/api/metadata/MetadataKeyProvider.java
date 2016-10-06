@@ -6,18 +6,18 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
- * This interface allows the exposure of the {@link MetadataKey}s associated to the {@link MetadataKeysResolver} of the component.
+ * This interface allows the exposure of the {@link MetadataKey}s associated to the {@link TypeKeysResolver} of the component.
  * 
  * @since 1.0
  */
 public interface MetadataKeyProvider {
 
   /**
-   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link MetadataKeysResolver}
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver}
    * associated to this Component.
    *
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an

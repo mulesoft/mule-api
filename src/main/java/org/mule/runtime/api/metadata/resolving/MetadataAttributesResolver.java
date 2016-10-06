@@ -18,7 +18,7 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
  * @param <K> the generic type of the objects to be used as MetadataKeyId representing a type structure
  * @since 1.0
  */
-public interface MetadataAttributesResolver<K> extends MetadataResolver {
+public interface MetadataAttributesResolver<K> extends NamedTypeResolver {
 
   /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType}, which represents the type structure. This

@@ -19,4 +19,9 @@ public interface TypeMetadataDescriptor {
    * @return the component's {@link MetadataType}
    */
   MetadataType getType();
+
+  /**
+   * @return true if the {@link MetadataType} was provided by a dynamic type resolver
+   */
+  boolean isDynamic();
 }

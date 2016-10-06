@@ -9,9 +9,9 @@ package org.mule.runtime.api.metadata;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
-import org.mule.runtime.api.metadata.resolving.MetadataContentResolver;
-import org.mule.runtime.api.metadata.resolving.MetadataKeysResolver;
-import org.mule.runtime.api.metadata.resolving.MetadataOutputResolver;
+import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
+import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
@@ -25,7 +25,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
 public interface MetadataManager {
 
   /**
-   * Returns the list of types that can be described by the {@link MetadataKeysResolver} associated to the
+   * Returns the list of types that can be described by the {@link TypeKeysResolver} associated to the
    * {@link MetadataKeyProvider} Component identified by the {@link ComponentId}.
    *
    * @param componentId the id of the {@link MetadataKeyProvider} component to query for its available keys
@@ -49,7 +49,7 @@ public interface MetadataManager {
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
    * {@link ComponentId} using both static and dynamic resolving of the parameters, attributes and output types.
    * <p>
-   * If the component has a {@link MetadataContentResolver} or {@link MetadataOutputResolver} associated that can be used to
+   * If the component has a {@link InputTypeResolver} or {@link OutputTypeResolver} associated that can be used to
    * resolve the dynamic {@link MetadataType} for the Content or Output, then the {@link ComponentMetadataDescriptor} will contain
    * those dynamic types instead of the static types declaration.
    * <p>
