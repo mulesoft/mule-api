@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api;
+package org.mule.runtime.api.meta;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
