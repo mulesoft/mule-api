@@ -13,7 +13,7 @@ import org.mule.runtime.api.metadata.TypedValue;
 /**
  * Evaluates an expression considering a given context and a global one, via an {@link ExpressionExecutor}.
  *
- * @since 4.0
+ * @since 1.0
  */
 public interface ExpressionLanguage {
 

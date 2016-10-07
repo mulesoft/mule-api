@@ -12,7 +12,7 @@ import org.mule.runtime.api.metadata.TypedValue;
 /**
  * Evaluates an expression considering a set of given bindings and a set of global ones.
  *
- * @since 4.0
+ * @since 1.0
  */
 public interface ExpressionExecutor {
 

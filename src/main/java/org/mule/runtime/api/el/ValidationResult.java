@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * Represents the result of an expression validation.
  *
- * @since 4.0
+ * @since 1.0
  */
 public interface ValidationResult {
 

@@ -11,7 +11,7 @@ import org.mule.runtime.api.metadata.TypedValue;
 /**
  * Represents the relationship between an EL variable or function and its value.
  *
- * @since 4.0
+ * @since 1.0
  */
 public class Binding {
 

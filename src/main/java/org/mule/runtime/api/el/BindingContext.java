@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Contains all the binding definitions required by the EL.
  *
- * @since 4.0
+ * @since 1.0
  */
 public interface BindingContext {
 
