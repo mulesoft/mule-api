@@ -12,6 +12,11 @@ import static java.util.ServiceLoader.load;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Factory class used to create {@link BindingContext.Builder} objects.
+ *
+ * @since 1.0
+ */
 public abstract class AbstractBindingContextBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBindingContextBuilderFactory.class);
@@ -19,7 +24,7 @@ public abstract class AbstractBindingContextBuilderFactory {
   static {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class).iterator().next();
-      LOGGER.info(format("Loaded BindingContextBuilderFactory impementation '%s' form classloader '%s'",
+      LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' form classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
