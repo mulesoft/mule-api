@@ -9,7 +9,7 @@ package org.mule.runtime.api;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-import org.mule.runtime.api.MuleVersion;
+import org.mule.runtime.api.meta.MuleVersion;
 
 import org.junit.Test;
 
