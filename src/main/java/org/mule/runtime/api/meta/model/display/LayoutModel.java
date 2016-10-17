@@ -7,11 +7,13 @@
 
 package org.mule.runtime.api.meta.model.display;
 
+import java.util.Objects;
+
 /**
  * Contains directives about how this parameter should be shown in the UI.
  * <p>
- * Instances should be created through a builder obtained through either
- * the {@link #builder()} or {@link #builderFrom(LayoutModel)}
+ * Instances should be created through a builder obtained through either the {@link #builder()} or
+ * {@link #builderFrom(LayoutModel)}
  *
  * @since 1.0
  */
@@ -38,8 +40,7 @@ public final class LayoutModel {
     }
 
     /**
-     * Indicates that the model represents a password
-     * and should be masked in the UI
+     * Indicates that the model represents a password and should be masked in the UI
      *
      * @return {@code this} builder
      */
@@ -59,9 +60,8 @@ public final class LayoutModel {
     }
 
     /**
-     * Indicates that the model represents a query and should be
-     * treated accordingly in the UI. Invoking this method also
-     * sets the model {@link #asText() as text}
+     * Indicates that the model represents a query and should be treated accordingly in the UI. Invoking this method also sets the
+     * model {@link #asText() as text}
      *
      * @return {@code this} builder
      */
@@ -119,8 +119,7 @@ public final class LayoutModel {
   }
 
   /**
-   * Creates a new {@link LayoutModelBuilder} which state is already
-   * initialised to match that of the given {@code template}.
+   * Creates a new {@link LayoutModelBuilder} which state is already initialised to match that of the given {@code template}.
    *
    * @param template a {@link LayoutModel} to be used as a template
    * @return a new {@link LayoutModelBuilder}
@@ -178,6 +177,26 @@ public final class LayoutModel {
    */
   public String getTabName() {
     return tabName;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof LayoutModel) {
+      LayoutModel other = ((LayoutModel) obj);
+      return other.isText() == this.isText() &&
+          other.isQuery() == this.isQuery() &&
+          other.isPassword() == this.isPassword() &&
+          other.getOrder() == this.getOrder() &&
+          Objects.equals(other.getGroupName(), this.getGroupName()) &&
+          Objects.equals(other.getTabName(), this.getTabName());
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(text, query, password, order, groupName, tabName);
   }
 }
 
