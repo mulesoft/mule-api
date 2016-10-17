@@ -6,9 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.display;
 
+import java.util.Objects;
+
 /**
- * A model which provides directives about how the model should be
- * shown in the user interface.
+ * A model which provides directives about how the model should be shown in the user interface.
  * <p>
  * Instances are to be created through a {@link #builder() builder}
  *
@@ -79,5 +80,21 @@ public final class DisplayModel {
    */
   public String getSummary() {
     return summary;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof DisplayModel) {
+      DisplayModel other = ((DisplayModel) obj);
+      return Objects.equals(other.getDisplayName(), this.getDisplayName()) &&
+          Objects.equals(other.getSummary(), this.getSummary());
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(displayName, summary);
   }
 }
