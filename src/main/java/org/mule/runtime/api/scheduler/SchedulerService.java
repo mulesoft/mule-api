@@ -8,8 +8,6 @@ package org.mule.runtime.api.scheduler;
 
 import org.mule.runtime.api.service.Service;
 
-import java.util.Set;
-
 /**
  * Provides access to the different schedulers and thread pools that exist in the Mule runtime, allowing an artifact to schedule
  * tasks on those.
@@ -55,11 +53,4 @@ public interface SchedulerService extends Service {
    * @return a scheduler for computation tasks
    */
   Scheduler computationScheduler();
-
-  /**
-   * Provides reporting and statistical information about the {@link Scheduler}s maintained by this service instance.
-   * 
-   * @return a set where each element contains the information of an individual {@link Scheduler}.
-   */
-  Set<SchedulerStats> getSchedulerStats();
 }
