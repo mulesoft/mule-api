@@ -17,6 +17,9 @@ import java.util.Set;
  * This interface provides access to different schedulers, each with its own tuning options, optimized for some specific kind of
  * work. Artifacts that need to dispatch tasks need to carefully determine what's the scheduler that best fits the nature of the
  * task in order to keep the resources usage and the impact on other artifacts at a minimum.
+ * <p>
+ * The {@link Scheduler}s returned by methods in the implementations must provide access the the thread pools in the Mule Runtime
+ * that have the expected tuning configuration.
  *
  * @since 1.0
  */
