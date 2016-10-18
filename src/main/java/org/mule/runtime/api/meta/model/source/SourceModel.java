@@ -25,4 +25,8 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
  */
 public interface SourceModel extends ComponentModel, HasDisplayModel {
 
+  /**
+   * @return Whether the declared source emits a response
+   */
+  boolean hasResponse();
 }

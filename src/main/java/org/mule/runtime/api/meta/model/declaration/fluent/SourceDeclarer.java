@@ -23,4 +23,14 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
     super(declaration);
   }
 
+  /**
+   * Allows to specify if the declared source emits responses
+   *
+   * @param hasResponse Whether the declared source emits a response
+   * @return {@code this} declarer
+   */
+  public SourceDeclarer hasResponse(boolean hasResponse) {
+    declaration.setHasResponse(hasResponse);
+    return this;
+  }
 }
