@@ -9,7 +9,7 @@ package org.mule.runtime.api.metadata;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
-import static org.mule.metadata.utils.StringUtils.isNotEmpty;
+import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
