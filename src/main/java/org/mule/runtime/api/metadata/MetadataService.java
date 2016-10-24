@@ -22,7 +22,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public interface MetadataManager {
+public interface MetadataService {
 
   /**
    * Returns the list of types that can be described by the {@link TypeKeysResolver} associated to the

@@ -7,7 +7,7 @@
 package org.mule.runtime.api.meta;
 
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.runtime.api.metadata.MetadataManager;
+import org.mule.runtime.api.metadata.MetadataService;
 
 /**
  * A generic contract for a component that has a type.
@@ -26,7 +26,7 @@ public interface Typed {
   /**
    * Returns {@code true} if the type of the {@link Typed Component} is
    * of dynamic kind, and has to be discovered during design time using
-   * the {@link MetadataManager} service.
+   * the {@link MetadataService} service.
    *
    * @return {@code true} if {@code this} element type is of dynamic kind
    */
