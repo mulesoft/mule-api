@@ -99,6 +99,7 @@
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
+        <commonsLangVersion>2.4</commonsLangVersion>
     </properties>
 
     <dependencies>
@@ -112,6 +113,12 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4jApiVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commonsLangVersion}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- test dependencies -->
