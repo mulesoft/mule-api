@@ -7,7 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.runtime.api.metadata.MetadataManager;
+import org.mule.runtime.api.metadata.MetadataService;
 import org.mule.runtime.api.meta.model.ComponentModel;
 
 /**
@@ -23,7 +23,7 @@ interface HasDynamicType<T> {
    * Specifies that the Element being described has a {@link MetadataType type}
    * of <b>dynamic</b> kind, meaning that this Element's type is
    * bounded to the {@link ComponentModel component}'s configuration during
-   * application design time and should be discovered using the {@link MetadataManager} service
+   * application design time and should be discovered using the {@link MetadataService} service
    *
    * @param type the type of the Element being described
    * @return {@code this} declarer
