@@ -22,7 +22,6 @@ import java.util.Map;
  * information such as Java doc url for a given exception can be resolved using this class 3. Error code mappings can be looked up
  * by providing the the protocol to map to and the Mule exception.
  */
-
 public class ExceptionHelper {
 
   public static final String SERVICE_ROOT = "META-INF/services/";
