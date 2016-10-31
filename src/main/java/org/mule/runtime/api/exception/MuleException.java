@@ -16,8 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.CharUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,7 +76,18 @@ public abstract class MuleException extends Exception {
   }
 
   private static String repeat(char c, int len) {
-    return StringUtils.repeat(CharUtils.toString(c), len);
+    String str = String.valueOf(c);
+    if (str == null) {
+      return null;
+    } else if (len <= 0) {
+      return "";
+    } else {
+      StringBuilder stringBuilder = new StringBuilder();
+      for (int i = 0; i < len; i++) {
+        stringBuilder.append(str);
+      }
+      return stringBuilder.toString();
+    }
   }
 
   protected MuleException() {
@@ -205,13 +214,12 @@ public abstract class MuleException extends Exception {
   }
 
   /**
-   * Template method so when {@code #getSummaryMessage()} is called, specific
-   * implementation can add content to the summary.
+   * Template method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary.
    *
    * @param builder {@link StringBuilder} to use for appending additional summary info.
    */
   protected void appendSummaryMessage(StringBuilder builder) {
-    //Do nothing
+    // Do nothing
   }
 
   @Override
