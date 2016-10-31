@@ -99,6 +99,7 @@
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
+        <commonsLangVersion>2.4</commonsLangVersion>
     </properties>
 
     <dependencies>
