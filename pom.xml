@@ -280,6 +280,17 @@
         </plugins>
     </build>
 
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>nexus.snapshots.repository</id>
+            <name>Nexus Snapshots Repository</name>
+            <layout>default</layout>
+            <url>http://repository-master.mulesoft.org/nexus/content/repositories/snapshots</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+
     <distributionManagement>
         <repository>
             <id>mule-releases</id>
