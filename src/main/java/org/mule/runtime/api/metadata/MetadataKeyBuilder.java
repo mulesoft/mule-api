@@ -7,7 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import static java.util.stream.Collectors.toSet;
-import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
