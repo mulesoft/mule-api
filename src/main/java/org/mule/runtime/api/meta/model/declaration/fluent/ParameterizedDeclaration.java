@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static java.util.Collections.unmodifiableList;
-
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +32,7 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
    * registered through {@link #addParameter(ParameterDeclaration)}
    */
   public List<ParameterDeclaration> getParameters() {
-    return unmodifiableList(parameters);
+    return parameters;
   }
 
   /**

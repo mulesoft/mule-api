@@ -16,6 +16,8 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  */
 public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
 
+  private boolean hasResponse = false;
+
   /**
    * {@inheritDoc}
    */
@@ -23,4 +25,17 @@ public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
     super(name);
   }
 
+  /**
+   * @return Whether the declared source emits a response
+   */
+  public boolean hasResponse() {
+    return hasResponse;
+  }
+
+  /**
+   * @param hasResponse Whether the declared source emits a response
+   */
+  public void setHasResponse(boolean hasResponse) {
+    this.hasResponse = hasResponse;
+  }
 }
