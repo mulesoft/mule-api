@@ -28,6 +28,15 @@ public interface BindingContext {
   }
 
   /**
+   * Provides a builder to create {@link BindingContext} objects, based on an already existing one.
+   *
+   * @return a new {@link BindingContext.Builder}.
+   */
+  static Builder builder(BindingContext context) {
+    return AbstractBindingContextBuilderFactory.getDefaultFactory().create(context);
+  }
+
+  /**
    * Returns all bindings found.
    *
    * @return a {@link Collection} of all {@link Binding}s in the context

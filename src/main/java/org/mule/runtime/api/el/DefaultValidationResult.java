@@ -24,7 +24,7 @@ public class DefaultValidationResult implements ValidationResult {
   }
 
   @Override
-  public boolean success() {
+  public boolean isSuccess() {
     return result;
   }
 }
