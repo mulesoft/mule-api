@@ -15,6 +15,18 @@ import java.util.Optional;
  */
 public interface ValidationResult {
 
+  static ValidationResult success() {
+    return new DefaultValidationResult(true, null);
+  }
+
+  static ValidationResult failure(String message) {
+    return new DefaultValidationResult(false, message);
+  }
+
+  static ValidationResult failure(String message, String expression) {
+    return failure(String.format("%s. Offending expression string is: %s", message, expression));
+  }
+
   /**
    * @return an optional representing the validation error or an empty one
    */
@@ -23,6 +35,6 @@ public interface ValidationResult {
   /**
    * @return true if the validation was ok, false otherwise
    */
-  boolean success();
+  boolean isSuccess();
 
 }
