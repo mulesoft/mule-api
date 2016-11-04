@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.connection;
 
+import static org.apache.commons.lang3.exception.ExceptionUtils.getStackTrace;
+
 /**
  * Represents the result of a Connection Validation.
  *
@@ -16,10 +18,10 @@ public class ConnectionValidationResult {
   private boolean validationStatus;
   private String message;
   private ConnectionExceptionCode code;
-  private Exception exception;
+  private String exception;
 
   private ConnectionValidationResult(boolean validationStatus, String message, ConnectionExceptionCode code,
-                                     Exception exception) {
+                                     String exception) {
 
     this.validationStatus = validationStatus;
     this.message = message;
@@ -41,6 +43,16 @@ public class ConnectionValidationResult {
    * @return a {@link ConnectionValidationResult} with a invalid status.
    */
   public static ConnectionValidationResult failure(String message, ConnectionExceptionCode code, Exception exception) {
+    return new ConnectionValidationResult(false, message, code, getStackTrace(exception));
+  }
+
+  /**
+   * @param message   Message in case of a invalid connection
+   * @param code      A {@link ConnectionExceptionCode} that represents the cause of the invalid connection
+   * @param exception The exception stack trace that causes the connection invalidity
+   * @return a {@link ConnectionValidationResult} with a invalid status.
+   */
+  public static ConnectionValidationResult failure(String message, ConnectionExceptionCode code, String exception) {
     return new ConnectionValidationResult(false, message, code, exception);
   }
 
@@ -68,10 +80,10 @@ public class ConnectionValidationResult {
   }
 
   /**
-   * @return The {@link Exception} that causes the connection invalidity.
-   * The exception should not be null in case of a invalid connection.
+   * @return The stack trace of the exception that causes the connection invalidity.
+   * The stack trace should not be null in case of a invalid connection.
    */
-  public Exception getException() {
+  public String getException() {
     return this.exception;
   }
 }
