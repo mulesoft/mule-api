@@ -24,9 +24,4 @@ public interface Startable {
 
   void start() throws MuleException;
 
-  /**
-   * Determines if this object is started or not
-   */
-  // TODO MULE-3969
-  // boolean isStarted();
 }
