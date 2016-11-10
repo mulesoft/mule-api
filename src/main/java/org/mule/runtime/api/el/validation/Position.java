@@ -6,6 +6,11 @@
  */
 package org.mule.runtime.api.el.validation;
 
+/**
+ * Represents the position within a script.
+ *
+ * @since 1.0
+ */
 public class Position {
 
   private int line;
