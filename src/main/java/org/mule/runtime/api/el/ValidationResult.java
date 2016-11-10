@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.runtime.api.el.validation.ValidationMessage;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,14 +26,23 @@ public interface ValidationResult {
     return new DefaultValidationResult(false, message);
   }
 
+  static ValidationResult failure(String message, List<ValidationMessage> messages) {
+    return new DefaultValidationResult(false, message, messages);
+  }
+
   static ValidationResult failure(String message, String expression) {
     return failure(String.format("%s. Offending expression string is: %s", message, expression));
   }
 
   /**
-   * @return an optional representing the validation error or an empty one
+   * @return an optional representing the generic validation error or an empty one
    */
   Optional<String> errorMessage();
+
+  /**
+   * @return a list of all {@link ValidationMessage}s found or an empty list if no relevant data is present
+   */
+  List<ValidationMessage> messages();
 
   /**
    * @return true if the validation was ok, false otherwise

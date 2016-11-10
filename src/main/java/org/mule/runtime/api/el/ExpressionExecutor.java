@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.el;
 
-import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 
 /**
@@ -30,18 +29,9 @@ public interface ExpressionExecutor {
    * @param expression the EL expression
    * @param context the current dynamic binding context to consider
    * @return the result of the expression plus its type
+   * @throws ExpressionExecutionException when an error occurs during evaluation
    */
-  TypedValue evaluate(String expression, BindingContext context);
-
-  /**
-   * Evaluates an expression according to a given {@link BindingContext}, the global one and the {@link DataType} of the expected result.
-   *
-   * @param expression the expression to evaluate
-   * @param expectedOutputType the expected output type so that automatic conversion can be applied for the resulting value type.
-   * @param context the current dynamic expression binding context to consider
-   * @return the result of the expression plus its type
-   */
-  TypedValue evaluate(String expression, DataType expectedOutputType, BindingContext context);
+  TypedValue evaluate(String expression, BindingContext context) throws ExpressionExecutionException;
 
   /**
    * Verifies whether an expression is valid or not syntactically.
