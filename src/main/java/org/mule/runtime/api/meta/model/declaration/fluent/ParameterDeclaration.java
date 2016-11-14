@@ -8,7 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ElementDslModel.getDefaultInstance;
-import static org.mule.runtime.api.meta.model.parameter.ParameterRole.PARAMETERIZATION;
+import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
@@ -34,7 +34,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private Object defaultValue = null;
   private ElementDslModel dslModel = getDefaultInstance();
   private LayoutModel layoutModel;
-  private ParameterRole parameterRole = PARAMETERIZATION;
+  private ParameterRole parameterRole = BEHAVIOUR;
 
   /**
    * {@inheritDoc}

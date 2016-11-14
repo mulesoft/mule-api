@@ -14,10 +14,10 @@ package org.mule.runtime.api.meta.model.parameter;
 public enum ParameterRole {
 
   /**
-   * Indicates that the parameter is only configuring the operation and doesn't represent
+   * Indicates that the parameter is only configuring the component's behaviour and doesn't represent
    * data that is being sent to another endpoint
    */
-  PARAMETERIZATION,
+  BEHAVIOUR,
 
   /**
    * Indicates that this parameter holds information to be considered content to be sent to a different
