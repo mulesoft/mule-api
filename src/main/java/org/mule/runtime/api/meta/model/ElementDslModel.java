@@ -83,6 +83,17 @@ public final class ElementDslModel {
     return new ElementDslModelBuilder();
   }
 
+  /**
+   * @param prototype a prototype {@link ElementDslModel}
+   * @return a new builder initialised to match the state of the given {@code prototype}
+   */
+  public static ElementDslModelBuilder builder(ElementDslModel prototype) {
+    return builder()
+        .allowsInlineDefinition(prototype.allowsInlineDefinition())
+        .allowsReferences(prototype.allowsReferences())
+        .allowTopLevelDefinition(prototype.allowTopLevelDefinition());
+  }
+
   private boolean allowInlineDefinition = true;
   private boolean allowTopLevelDefinition = false;
   private boolean allowReferences = true;

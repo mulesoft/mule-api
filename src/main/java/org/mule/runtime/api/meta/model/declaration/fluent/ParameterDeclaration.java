@@ -6,13 +6,16 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.mule.runtime.api.meta.model.ElementDslModel.getDefaultInstance;
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
+import static org.mule.runtime.api.meta.model.ElementDslModel.getDefaultInstance;
+import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ElementDslModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
-import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 
 /**
  * A declaration object for a {@link ParameterModel}. It contains raw,
@@ -31,6 +34,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private Object defaultValue = null;
   private ElementDslModel dslModel = getDefaultInstance();
   private LayoutModel layoutModel;
+  private ParameterRole parameterRole = BEHAVIOUR;
 
   /**
    * {@inheritDoc}
@@ -102,5 +106,14 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
 
   public void setLayoutModel(LayoutModel layoutModel) {
     this.layoutModel = layoutModel;
+  }
+
+  public ParameterRole getRole() {
+    return parameterRole;
+  }
+
+  public void setParameterRole(ParameterRole parameterRole) {
+    checkArgument(parameterRole != null, "parameterPurpose cannot be null");
+    this.parameterRole = parameterRole;
   }
 }

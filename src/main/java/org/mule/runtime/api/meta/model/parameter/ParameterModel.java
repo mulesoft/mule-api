@@ -77,4 +77,9 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
    * about how this parameter should be shown in the UI
    */
   Optional<LayoutModel> getLayoutModel();
+
+  /**
+   * @return this parameter's role
+   */
+  ParameterRole getRole();
 }

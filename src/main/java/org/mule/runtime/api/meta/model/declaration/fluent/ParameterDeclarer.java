@@ -7,11 +7,12 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ElementDslModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
-import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 
 /**
  * Allows configuring a {@link ParameterDeclaration} through a fluent API
@@ -86,6 +87,17 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    */
   public T withLayout(LayoutModel layoutModel) {
     declaration.setLayoutModel(layoutModel);
+    return (T) this;
+  }
+
+  /**
+   * Sets the purpose of the declared parameter
+   *
+   * @param role a {@link ParameterRole}
+   * @return {@code this} declarer
+   */
+  public T withRole(ParameterRole role) {
+    declaration.setParameterRole(role);
     return (T) this;
   }
 
