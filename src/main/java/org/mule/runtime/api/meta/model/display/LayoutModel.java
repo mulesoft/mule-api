@@ -19,6 +19,8 @@ import java.util.Objects;
  */
 public final class LayoutModel {
 
+  public static final int DEFAULT_ORDER = Integer.MAX_VALUE;
+
   /**
    * Creates instances of {@link LayoutModel}
    */
@@ -131,7 +133,7 @@ public final class LayoutModel {
   private boolean password = false;
   private boolean text = false;
   private boolean query = false;
-  private int order;
+  private int order = DEFAULT_ORDER;
   private String groupName;
   private String tabName;
 
