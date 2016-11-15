@@ -7,7 +7,12 @@
 
 package org.mule.runtime.api.meta.model.display;
 
+import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
+
 import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * Contains directives about how this parameter should be shown in the UI.
@@ -18,6 +23,8 @@ import java.util.Objects;
  * @since 1.0
  */
 public final class LayoutModel {
+
+  public static final int DEFAULT_ORDER = -1;
 
   /**
    * Creates instances of {@link LayoutModel}
@@ -77,7 +84,7 @@ public final class LayoutModel {
      * @return {@code this} builder
      */
     public LayoutModelBuilder tabName(String tabName) {
-      product.tabName = tabName;
+      product.tabName = orNull(tabName, t -> !isEmpty(t));
       return this;
     }
 
@@ -88,7 +95,7 @@ public final class LayoutModel {
      * @return {@code this} builder
      */
     public LayoutModelBuilder groupName(String groupName) {
-      product.groupName = groupName;
+      product.groupName = orNull(groupName, g -> !isEmpty(g));
       return this;
     }
 
@@ -99,8 +106,12 @@ public final class LayoutModel {
      * @return {@code this} builder
      */
     public LayoutModelBuilder order(int order) {
-      product.order = order;
+      product.order = orNull(order, o -> o != DEFAULT_ORDER);
       return this;
+    }
+
+    private <T> T orNull(T value, Predicate<T> accept) {
+      return accept.test(value) ? value : null;
     }
 
     /**
@@ -131,9 +142,9 @@ public final class LayoutModel {
   private boolean password = false;
   private boolean text = false;
   private boolean query = false;
-  private int order;
-  private String groupName;
-  private String tabName;
+  private Integer order = null;
+  private String groupName = null;
+  private String tabName = null;
 
   private LayoutModel() {}
 
@@ -161,22 +172,22 @@ public final class LayoutModel {
   /**
    * @return The order of the model within its group.
    */
-  public int getOrder() {
-    return order;
+  public Optional<Integer> getOrder() {
+    return ofNullable(order);
   }
 
   /**
    * @return The group element name where the model is going to be located.
    */
-  public String getGroupName() {
-    return groupName;
+  public Optional<String> getGroupName() {
+    return ofNullable(groupName);
   }
 
   /**
    * @return The tab element name where the model and its group it's going to be located.
    */
-  public String getTabName() {
-    return tabName;
+  public Optional<String> getTabName() {
+    return ofNullable(tabName);
   }
 
   @Override
@@ -186,7 +197,7 @@ public final class LayoutModel {
       return other.isText() == this.isText() &&
           other.isQuery() == this.isQuery() &&
           other.isPassword() == this.isPassword() &&
-          other.getOrder() == this.getOrder() &&
+          Objects.equals(other.getOrder(), getOrder()) &&
           Objects.equals(other.getGroupName(), this.getGroupName()) &&
           Objects.equals(other.getTabName(), this.getTabName());
     }
