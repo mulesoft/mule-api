@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
+
 /**
  * Base class for a declarer which allows adding {@link ParameterDeclaration}s
  *
@@ -13,35 +15,32 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
  */
 public abstract class ParameterizedDeclarer<D extends ParameterizedDeclaration> extends Declarer<D> {
 
+  /**
+   * {@inheritDoc}
+   */
   public ParameterizedDeclarer(D declaration) {
     super(declaration);
   }
 
   /**
-   * Adds a required parameter
+   * Provides a {@link ParameterGroupDeclarer} for adding parameters
+   * into a group of the given {@code name}. Use this if you wish to
+   * declare a parameter which should belong to a specific group.
    *
-   * @param name the name of the parameter
-   * @return a new {@link ParameterDeclarer}
+   * @param name the name of the group to declare
+   * @return a {@link ParameterGroupDeclarer}
    */
-  public ParameterDeclarer withRequiredParameter(String name) {
-    return new ParameterDeclarer(newParameter(name, true));
+  public ParameterGroupDeclarer withParameterGroup(String name) {
+    return new ParameterGroupDeclarer(declaration.getParameterGroup(name));
   }
 
   /**
-   * Adds an optional parameter
+   * Provides the default {@link ParameterGroupDeclarer}. Use this if you wish
+   * to add a parameter which shouldn't belong to any specific group.
    *
-   * @param name the name of the parameter
-   * @return a new {@link OptionalParameterDeclarer}
+   * @return a {@link ParameterGroupDeclarer}
    */
-  public OptionalParameterDeclarer withOptionalParameter(String name) {
-    return new OptionalParameterDeclarer(newParameter(name, false));
-  }
-
-  private ParameterDeclaration newParameter(String name, boolean required) {
-    ParameterDeclaration parameter = new ParameterDeclaration(name);
-    parameter.setRequired(required);
-    declaration.addParameter(parameter);
-
-    return parameter;
+  public ParameterGroupDeclarer onDefaultParameterGroup() {
+    return withParameterGroup(DEFAULT_GROUP_NAME);
   }
 }

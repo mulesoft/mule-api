@@ -17,6 +17,7 @@ import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer;
+import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
@@ -73,6 +74,10 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
   public static final String URL = "url";
   public static final String URL_DESCRIPTION = "Url to listen on";
   public static final String PORT_DESCRIPTION = "Port to listen on";
+  public static final String CONFIG_PARAMETER_GROUP = "Config parameters";
+  public static final String OPERATION_PARAMETER_GROUP = "Operation parameters";
+  public static final String CONNECTION_PROVIDER_PARAMETER_GROUP = "Connection Provider parameters";
+  public static final String SOURCE_PARAMETER_GROUP = "Source parameters";
   public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
 
   public static final int DEFAULT_PORT = 8080;
@@ -101,10 +106,12 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
 
     ConfigurationDeclarer config =
         extensionDeclarer.withConfig(CONFIG_NAME).describedAs(CONFIG_DESCRIPTION).withModelProperty(CONFIGURATION_MODEL_PROPERTY);
-    config.withRequiredParameter(ADDRESS).describedAs(SERVICE_ADDRESS).ofType(getStringType());
-    config.withRequiredParameter(PORT).describedAs(SERVICE_PORT).ofType(getStringType());
-    config.withRequiredParameter(SERVICE).describedAs(SERVICE_NAME).ofType(getStringType());
-    config.withRequiredParameter(WSDL_LOCATION).describedAs(URI_TO_FIND_THE_WSDL).ofType(getStringType())
+
+    ParameterGroupDeclarer parameterGroup = config.withParameterGroup(CONFIG_PARAMETER_GROUP);
+    parameterGroup.withRequiredParameter(ADDRESS).describedAs(SERVICE_ADDRESS).ofType(getStringType());
+    parameterGroup.withRequiredParameter(PORT).describedAs(SERVICE_PORT).ofType(getStringType());
+    parameterGroup.withRequiredParameter(SERVICE).describedAs(SERVICE_NAME).ofType(getStringType());
+    parameterGroup.withRequiredParameter(WSDL_LOCATION).describedAs(URI_TO_FIND_THE_WSDL).ofType(getStringType())
         .withExpressionSupport(NOT_SUPPORTED)
         .withModelProperty(PARAMETER_MODEL_PROPERTY);
 
@@ -114,20 +121,22 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     operation.withOutput().ofType(getBinaryType());
     operation.withOutputAttributes().ofType(getStringType());
 
-    operation.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(getStringType());
-    operation.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType()).defaultingTo(true);
+    parameterGroup = operation.withParameterGroup(OPERATION_PARAMETER_GROUP);
+    parameterGroup.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(getStringType());
+    parameterGroup.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType()).defaultingTo(true);
 
     operation = extensionDeclarer.withOperation(BROADCAST).describedAs(BROADCAST_DESCRIPTION);
     operation.withOutput().ofType(typeBuilder.voidType().build());
-    operation.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
+    parameterGroup = operation.withParameterGroup(OPERATION_PARAMETER_GROUP);
+    parameterGroup.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
         .id(List.class.getName())
         .of(typeBuilder.stringType()
             .id(String.class.getName()))
         .build());
 
-    operation.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType())
+    parameterGroup.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType())
         .defaultingTo(true);
-    operation.withRequiredParameter(CALLBACK).describedAs(CALLBACK_DESCRIPTION).ofType(getObjectType(OperationModel.class))
+    parameterGroup.withRequiredParameter(CALLBACK).describedAs(CALLBACK_DESCRIPTION).ofType(getObjectType(OperationModel.class))
         .withExpressionSupport(REQUIRED);
 
     extensionDeclarer.withOperation(ARG_LESS).describedAs(HAS_NO_ARGS).withOutput().ofType(getNumberType());
@@ -136,8 +145,9 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
         extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME).describedAs(CONNECTION_PROVIDER_DESCRIPTION)
             .withConnectionManagementType(NONE);
 
-    connectionProvider.withRequiredParameter(USERNAME).describedAs(USERNAME_DESCRIPTION).ofType(getStringType());
-    connectionProvider.withRequiredParameter(PASSWORD).describedAs(PASSWORD_DESCRIPTION).ofType(getStringType());
+    parameterGroup = connectionProvider.withParameterGroup(CONNECTION_PROVIDER_PARAMETER_GROUP);
+    parameterGroup.withRequiredParameter(USERNAME).describedAs(USERNAME_DESCRIPTION).ofType(getStringType());
+    parameterGroup.withRequiredParameter(PASSWORD).describedAs(PASSWORD_DESCRIPTION).ofType(getStringType());
 
     SourceDeclarer sourceDeclarer =
         extensionDeclarer.withMessageSource(LISTENER).describedAs(LISTEN_DESCRIPTION).withModelProperty(SOURCE_MODEL_PROPERTY);
@@ -145,8 +155,9 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     sourceDeclarer.withOutput().ofType(getBinaryType());
     sourceDeclarer.withOutputAttributes().ofType(getObjectType(Serializable.class));
 
-    sourceDeclarer.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
-    sourceDeclarer.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
+    parameterGroup = sourceDeclarer.withParameterGroup(SOURCE_PARAMETER_GROUP);
+    parameterGroup.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
+    parameterGroup.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
         .defaultingTo(DEFAULT_PORT);
   }
 

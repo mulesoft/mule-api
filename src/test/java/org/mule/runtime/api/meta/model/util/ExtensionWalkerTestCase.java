@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model.util;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import org.mule.runtime.api.meta.model.ExtensionModel;
@@ -16,6 +17,7 @@ import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
@@ -45,6 +47,9 @@ public class ExtensionWalkerTestCase {
   private ConnectionProviderModel connectionProvider;
 
   @Mock
+  private ParameterGroupModel groupModel;
+
+  @Mock
   private ParameterModel parameterModel;
 
   @Mock
@@ -61,12 +66,13 @@ public class ExtensionWalkerTestCase {
     when(configuration.getSourceModels()).thenReturn(asList(source));
     when(configuration.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
+    when(groupModel.getParameterModels()).thenReturn(asList(parameterModel));
     addParameter(configuration, operation, connectionProvider, source);
   }
 
   private void addParameter(ParameterizedModel... models) {
     for (ParameterizedModel model : models) {
-      when(model.getParameterModels()).thenReturn(asList(parameterModel));
+      when(model.getParameterGroupModels()).thenReturn(asList(groupModel));
     }
   }
 
@@ -75,6 +81,7 @@ public class ExtensionWalkerTestCase {
     AtomicInteger configs = new AtomicInteger(0);
     AtomicInteger operations = new AtomicInteger(0);
     AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
     AtomicInteger parameters = new AtomicInteger(0);
     AtomicInteger providers = new AtomicInteger(0);
 
@@ -101,7 +108,13 @@ public class ExtensionWalkerTestCase {
       }
 
       @Override
-      public void onParameter(ParameterizedModel owner, ParameterModel model) {
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
         parameters.incrementAndGet();
       }
     }.walk(extension);
@@ -110,6 +123,7 @@ public class ExtensionWalkerTestCase {
     assertCount(operations, 2);
     assertCount(sources, 2);
     assertCount(providers, 2);
+    assertCount(parameterGroups, 7);
     assertCount(parameters, 7);
   }
 

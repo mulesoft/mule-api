@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
+import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.util.Reference;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
@@ -33,6 +34,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
 
   private Set<Reference<SourceModel>> sources = new HashSet<>();
   private Set<Reference<ParameterModel>> parameters = new HashSet<>();
+  private Set<Reference<ParameterGroupModel>> parameterGroups = new HashSet<>();
   private Set<Reference<OperationModel>> operations = new HashSet<>();
   private Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
 
@@ -46,8 +48,13 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   }
 
   @Override
-  public final void onParameter(ParameterizedModel owner, ParameterModel model) {
-    doOnce(parameters, model, this::onParameter);
+  public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+    doOnce(parameterGroups, model, group -> onParameterGroup(owner, group));
+  }
+
+  @Override
+  public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+    doOnce(parameters, model, p -> onParameter(groupModel, p));
   }
 
   @Override
@@ -89,9 +96,19 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * <p>
    * This method will only be invoked once per each found instance
    *
+   * @param groupModel the {@link ParameterGroupModel} on which the {@code model} is contained
    * @param model the {@link ParameterModel}
    */
-  protected void onParameter(ParameterModel model) {}
+  protected void onParameter(ParameterGroupModel groupModel, ParameterModel model) {}
+
+  /**
+   * Invoked when an {@link ParameterGroupModel} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance
+   *
+   * @param model the {@link ParameterModel}
+   */
+  protected void onParameterGroup(ParameterGroupModel model) {}
 
   /**
    * Invoked when an {@link OperationModel} is found in the traversed {@code extensionModel}.

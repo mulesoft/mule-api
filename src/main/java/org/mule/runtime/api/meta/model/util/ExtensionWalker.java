@@ -12,6 +12,7 @@ import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
@@ -26,7 +27,8 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  * {@link #onOperation(HasOperationModels, OperationModel)} method allows
  * handling operations without requiring to know that they can exist
  * at global or configuration level. Something similar can be said
- * about the {@link #onParameter(ParameterizedModel, ParameterModel)}, etc.
+ * about the {@link #onParameter(ParameterizedModel, ParameterGroupModel, ParameterModel)},
+ * etc.
  *
  * @since 1.0
  */
@@ -93,13 +95,23 @@ public abstract class ExtensionWalker {
   public void onSource(HasSourceModels owner, SourceModel model) {}
 
   /**
+   * Invoked when an {@link ParameterGroupModel} is found in the
+   * traversed {@code extensionModel}
+   *
+   * @param owner The component that owns the source
+   * @param model the {@link ParameterGroupModel}
+   */
+  public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {}
+
+  /**
    * Invoked when an {@link ParameterModel} is found in the
    * traversed {@code extensionModel}
    *
-   * @param owner The component that owns the parameter
-   * @param model the {@link ParameterModel}
+   * @param owner      The component that owns the parameter
+   * @param groupModel the {@link ParameterGroupModel} in which the {@code model} is contained
+   * @param model      the {@link ParameterModel}
    */
-  public void onParameter(ParameterizedModel owner, ParameterModel model) {}
+  public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {}
 
   private void walkSources(HasSourceModels model) {
     model.getSourceModels().forEach(source -> {
@@ -109,7 +121,10 @@ public abstract class ExtensionWalker {
   }
 
   private void walkParameters(ParameterizedModel model) {
-    model.getParameterModels().forEach(parameter -> onParameter(model, parameter));
+    model.getParameterGroupModels().forEach(group -> {
+      onParameterGroup(model, group);
+      group.getParameterModels().forEach(p -> onParameter(model, group, p));
+    });
   }
 
   private void walkConnectionProviders(HasConnectionProviderModels model) {

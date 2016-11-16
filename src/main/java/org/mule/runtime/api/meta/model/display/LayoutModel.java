@@ -41,7 +41,6 @@ public final class LayoutModel {
         product.text = template.text;
         product.query = template.query;
         product.password = template.password;
-        product.groupName = template.groupName;
         product.tabName = template.tabName;
       }
     }
@@ -89,17 +88,6 @@ public final class LayoutModel {
     }
 
     /**
-     * Sets the group element name where the model is going to be located.
-     *
-     * @param groupName the name of the group
-     * @return {@code this} builder
-     */
-    public LayoutModelBuilder groupName(String groupName) {
-      product.groupName = orNull(groupName, g -> !isEmpty(g));
-      return this;
-    }
-
-    /**
      * Sets the order of the model within its group.
      *
      * @param order the position in the group
@@ -143,7 +131,6 @@ public final class LayoutModel {
   private boolean text = false;
   private boolean query = false;
   private Integer order = null;
-  private String groupName = null;
   private String tabName = null;
 
   private LayoutModel() {}
@@ -177,13 +164,6 @@ public final class LayoutModel {
   }
 
   /**
-   * @return The group element name where the model is going to be located.
-   */
-  public Optional<String> getGroupName() {
-    return ofNullable(groupName);
-  }
-
-  /**
    * @return The tab element name where the model and its group it's going to be located.
    */
   public Optional<String> getTabName() {
@@ -198,7 +178,6 @@ public final class LayoutModel {
           other.isQuery() == this.isQuery() &&
           other.isPassword() == this.isPassword() &&
           Objects.equals(other.getOrder(), getOrder()) &&
-          Objects.equals(other.getGroupName(), this.getGroupName()) &&
           Objects.equals(other.getTabName(), this.getTabName());
     }
 
@@ -207,7 +186,7 @@ public final class LayoutModel {
 
   @Override
   public int hashCode() {
-    return Objects.hash(text, query, password, order, groupName, tabName);
+    return Objects.hash(text, query, password, order, tabName);
   }
 }
 
