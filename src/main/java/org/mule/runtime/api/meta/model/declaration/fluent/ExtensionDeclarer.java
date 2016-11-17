@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.mule.metadata.internal.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.metadata.internal.utils.MetadataTypeUtils.isTypeRegistrable;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
@@ -211,18 +211,6 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   public ExtensionDeclarer withSubTypes(MetadataType baseType, Collection<MetadataType> subTypes) {
     declaration.addSubtypes(baseType, subTypes);
     return this;
-  }
-
-  private boolean isTypeRegistrable(ObjectType objectType) {
-    String typeId = getTypeId(objectType).orElse(null);
-    if (typeId != null &&
-        (Object.class.getName().equals(typeId) ||
-            typeId.startsWith("org.mule.runtime.") ||
-            typeId.startsWith("com.mulesoft.mule.runtime."))) {
-      return false;
-    }
-
-    return true;
   }
 
   /**
