@@ -1,0 +1,10 @@
+{
+  "name": "plugin-name",
+  "minMuleVersion": "4.2.3",
+  "extensionModelLoaderDescriptor": {
+    "id": "annotations",
+    "attributes": {
+      "class": "org.mule.extension.internal.ExtensionConnector"
+    }
+  }
+}
