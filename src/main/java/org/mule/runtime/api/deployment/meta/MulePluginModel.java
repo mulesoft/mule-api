@@ -25,7 +25,7 @@ public class MulePluginModel {
 
   final private String name;
   final private String minMuleVersion;
-  final private MulePluginProperty extensionModelLoaderDescriptor;
+  final private MulePluginLoaderProperty extensionModelLoaderDescriptor;
 
   /**
    * Creates an immutable implementation of {@link MulePluginModel}
@@ -35,7 +35,7 @@ public class MulePluginModel {
    * @param extensionModelLoaderDescriptor information related to the plugin to generate an {@link ExtensionModel}
    */
   public MulePluginModel(String name, String minMuleVersion,
-                         MulePluginProperty extensionModelLoaderDescriptor) {
+                         MulePluginLoaderProperty extensionModelLoaderDescriptor) {
     this.name = name;
     this.minMuleVersion = minMuleVersion;
     this.extensionModelLoaderDescriptor = extensionModelLoaderDescriptor;
@@ -49,7 +49,7 @@ public class MulePluginModel {
     return minMuleVersion;
   }
 
-  public Optional<MulePluginProperty> getExtensionModelLoaderDescriptor() {
+  public Optional<MulePluginLoaderProperty> getExtensionModelLoaderDescriptor() {
     return ofNullable(extensionModelLoaderDescriptor);
   }
 }
