@@ -14,24 +14,24 @@ import java.util.Map;
  * Generic descriptor that will be used to describe parametrization to construct {@link ExtensionModel},
  * {@link ClassLoader} and any other descriptor that may arise in a future of {@link MulePluginModel}.
  * <p/>
- * Each {@link MulePluginLoaderProperty} will have an ID that will be used to discover any loader that's responsible of working
+ * Each {@link MulePluginLoaderDescriptor} will have an ID that will be used to discover any loader that's responsible of working
  * with the current set of attributes. It's up to each loader to validate the types, size and all that matters around
  * the attributes.
  *
  * @since 1.0
  */
-public class MulePluginLoaderProperty {
+public class MulePluginLoaderDescriptor {
 
   private final String id;
   private final Map<String, Object> attributes;
 
   /**
-   * Creates an immutable implementation of {@link MulePluginLoaderProperty}
+   * Creates an immutable implementation of {@link MulePluginLoaderDescriptor}
    *
    * @param id ID of the descriptor
    * @param attributes collection of attributes
    */
-  public MulePluginLoaderProperty(String id, Map<String, Object> attributes) {
+  public MulePluginLoaderDescriptor(String id, Map<String, Object> attributes) {
     this.id = id;
     this.attributes = attributes;
   }
