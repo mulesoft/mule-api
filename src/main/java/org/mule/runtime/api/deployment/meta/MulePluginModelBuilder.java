@@ -71,7 +71,7 @@ public class MulePluginModelBuilder {
   }
 
   /**
-   * A builder to create instances of {@link MulePluginProperty}.
+   * A builder to create instances of {@link MulePluginLoaderProperty}.
    * <p>
    * A new instance of this class should be used per each manifest to be
    * created. The created instances will be immutable.
@@ -111,13 +111,13 @@ public class MulePluginModelBuilder {
     }
 
     /**
-     * Creates and returns a new {@link MulePluginProperty} according to the values set
+     * Creates and returns a new {@link MulePluginLoaderProperty} according to the values set
      *
-     * @return a {@link MulePluginProperty}
+     * @return a {@link MulePluginLoaderProperty}
      */
-    private MulePluginProperty build() {
+    private MulePluginLoaderProperty build() {
       checkArgument(!isBlank(id), "ID cannot be a blank");
-      return new MulePluginProperty(id, properties);
+      return new MulePluginLoaderProperty(id, properties);
     }
   }
 }

@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import org.mule.runtime.api.deployment.meta.MulePluginModel;
 import org.mule.runtime.api.deployment.meta.MulePluginModelBuilder;
-import org.mule.runtime.api.deployment.meta.MulePluginProperty;
+import org.mule.runtime.api.deployment.meta.MulePluginLoaderProperty;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -65,7 +65,7 @@ public class MulePluginModelJsonSerializerTestCase {
     assertThat(deserialize.getName(), is("plugin-name"));
     assertThat(deserialize.getMinMuleVersion(), is("4.2.3"));
     assertThat(deserialize.getExtensionModelLoaderDescriptor().isPresent(), is(true));
-    MulePluginProperty extensionModelDescriptor = deserialize.getExtensionModelLoaderDescriptor().get();
+    MulePluginLoaderProperty extensionModelDescriptor = deserialize.getExtensionModelLoaderDescriptor().get();
     assertThat(extensionModelDescriptor.getId(), is("annotations"));
     assertThat(extensionModelDescriptor.getAttributes().size(), is(1));
     assertThat(extensionModelDescriptor.getAttributes().get("class"),
