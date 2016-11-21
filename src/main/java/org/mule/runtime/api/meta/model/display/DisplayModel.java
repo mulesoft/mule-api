@@ -49,6 +49,17 @@ public final class DisplayModel {
     }
 
     /**
+     * An example about the content of this model
+     *
+     * @param example an example
+     * @return {@code this} builder
+     */
+    public DisplayModelBuilder example(String example) {
+      product.example = example;
+      return this;
+    }
+
+    /**
      * @return the built {@link DisplayModel}
      */
     public DisplayModel build() {
@@ -65,6 +76,7 @@ public final class DisplayModel {
 
   private String displayName;
   private String summary;
+  private String example;
 
   private DisplayModel() {}
 
@@ -82,12 +94,20 @@ public final class DisplayModel {
     return summary;
   }
 
+  /**
+   * @return An example of the content that should be used
+   */
+  public String getExample() {
+    return example;
+  }
+
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof DisplayModel) {
       DisplayModel other = ((DisplayModel) obj);
       return Objects.equals(other.getDisplayName(), this.getDisplayName()) &&
-          Objects.equals(other.getSummary(), this.getSummary());
+          Objects.equals(other.getSummary(), this.getSummary()) &&
+          Objects.equals(other.getExample(), this.getExample());
     }
 
     return false;
@@ -95,6 +115,6 @@ public final class DisplayModel {
 
   @Override
   public int hashCode() {
-    return Objects.hash(displayName, summary);
+    return Objects.hash(displayName, summary, example);
   }
 }
