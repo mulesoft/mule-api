@@ -55,6 +55,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
   public static final String CONSUMER = "consumer";
   public static final String GO_GET_THEM_TIGER = "Go get them tiger";
   public static final String OPERATION = "operation";
+  public static final String COLLECTION_PARAMETER = "things";
   public static final String THE_OPERATION_TO_USE = "The operation to use";
   public static final String MTOM_ENABLED = "mtomEnabled";
   public static final String MTOM_DESCRIPTION = "Whether or not use MTOM for attachments";
@@ -128,7 +129,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     operation = extensionDeclarer.withOperation(BROADCAST).describedAs(BROADCAST_DESCRIPTION);
     operation.withOutput().ofType(typeBuilder.voidType().build());
     parameterGroup = operation.withParameterGroup(OPERATION_PARAMETER_GROUP);
-    parameterGroup.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
+    parameterGroup.withRequiredParameter(COLLECTION_PARAMETER).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
         .id(List.class.getName())
         .of(typeBuilder.stringType()
             .id(String.class.getName()))
