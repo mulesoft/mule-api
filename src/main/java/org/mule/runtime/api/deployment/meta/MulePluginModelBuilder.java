@@ -25,6 +25,7 @@ public class MulePluginModelBuilder {
 
   private String name;
   private String minMuleVersion;
+  private Optional<MulePluginPropertyBuilder> classLoaderDescriptorBuilder = empty();
   private Optional<MulePluginPropertyBuilder> extensionModelDescriptorBuilder = empty();
 
   /**
@@ -50,6 +51,17 @@ public class MulePluginModelBuilder {
   }
 
   /**
+   * @return a {@link MulePluginPropertyBuilder} to populate the {@link ClassLoader} describer with the ID and
+   * any additional attributes
+   */
+  public MulePluginPropertyBuilder withClassLoaderModelDescriber() {
+    if (!classLoaderDescriptorBuilder.isPresent()) {
+      classLoaderDescriptorBuilder = of(new MulePluginPropertyBuilder());
+    }
+    return classLoaderDescriptorBuilder.get();
+  }
+
+  /**
    * @return a {@link MulePluginPropertyBuilder} to populate the {@link ExtensionModel} describer with the ID and
    * any additional attributes
    */
@@ -66,8 +78,10 @@ public class MulePluginModelBuilder {
   public MulePluginModel build() {
     checkArgument(!isBlank(name), "name cannot be a blank");
     checkArgument(minMuleVersion != null, "minMuleVersion cannot be null");
-    return new MulePluginModel(name, minMuleVersion, extensionModelDescriptorBuilder.isPresent()
-        ? extensionModelDescriptorBuilder.get().build() : null);
+    return new MulePluginModel(name, minMuleVersion,
+                               classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null,
+                               extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
+                                   : null);
   }
 
   /**
