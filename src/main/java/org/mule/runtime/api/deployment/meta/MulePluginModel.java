@@ -25,6 +25,7 @@ public class MulePluginModel {
 
   final private String name;
   final private String minMuleVersion;
+  final private MulePluginLoaderDescriptor classLoaderModelLoaderDescriptor;
   final private MulePluginLoaderDescriptor extensionModelLoaderDescriptor;
 
   /**
@@ -32,13 +33,16 @@ public class MulePluginModel {
    *
    * @param name of the artifact
    * @param minMuleVersion minimal Mule version it runs on
+   * @param classLoaderModelLoaderDescriptor information related to the plugin to generate an {@link ClassLoader}
    * @param extensionModelLoaderDescriptor information related to the plugin to generate an {@link ExtensionModel}
    */
   public MulePluginModel(String name, String minMuleVersion,
+                         MulePluginLoaderDescriptor classLoaderModelLoaderDescriptor,
                          MulePluginLoaderDescriptor extensionModelLoaderDescriptor) {
     this.name = name;
     this.minMuleVersion = minMuleVersion;
     this.extensionModelLoaderDescriptor = extensionModelLoaderDescriptor;
+    this.classLoaderModelLoaderDescriptor = classLoaderModelLoaderDescriptor;
   }
 
   public String getName() {
@@ -47,6 +51,10 @@ public class MulePluginModel {
 
   public String getMinMuleVersion() {
     return minMuleVersion;
+  }
+
+  public Optional<MulePluginLoaderDescriptor> getClassLoaderModelLoaderDescriptor() {
+    return ofNullable(classLoaderModelLoaderDescriptor);
   }
 
   public Optional<MulePluginLoaderDescriptor> getExtensionModelLoaderDescriptor() {
