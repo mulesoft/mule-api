@@ -31,6 +31,7 @@ public interface ParameterGroupModel extends NamedObject, HasDisplayModel, HasLa
    * Group name for parameters that are considered for advanced usage.
    */
   String ADVANCED = "Advanced";
+
   /**
    * Group name for parameters that are considered to be part of a connection configuration.
    */
