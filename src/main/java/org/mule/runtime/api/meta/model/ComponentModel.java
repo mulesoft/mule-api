@@ -11,6 +11,7 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
+import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
@@ -21,7 +22,8 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  *
  * @since 1.0
  */
-public interface ComponentModel extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel {
+public interface ComponentModel
+    extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel, ThrowsErrors {
 
   /**
    * Returns a {@link MetadataType} for the value that this component sets

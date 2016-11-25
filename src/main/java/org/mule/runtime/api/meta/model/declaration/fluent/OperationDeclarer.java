@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.error.ErrorModel;
+
 /**
  * Allows configuring a {@link OperationDeclaration} through a fluent API
  *
@@ -22,4 +24,12 @@ public class OperationDeclarer extends ComponentDeclarer<OperationDeclarer, Oper
     super(declaration);
   }
 
+  /**
+   * Adds an {@link ErrorModel} to indicate that the current operation could throw the added error.
+   *
+   * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
+   */
+  public void withError(ErrorModel error) {
+    declaration.addError(error);
+  }
 }

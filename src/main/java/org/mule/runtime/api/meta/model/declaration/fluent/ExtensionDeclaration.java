@@ -12,6 +12,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
@@ -46,6 +47,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private XmlDslModel xmlDslModel;
   private Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
   private Set<ImportedTypeModel> importedTypes = new LinkedHashSet<>();
+  private Set<ErrorModel> errorModels = new LinkedHashSet<>();
 
   /**
    * Creates a new instance
@@ -259,5 +261,13 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
 
   public Set<ImportedTypeModel> getImportedTypes() {
     return importedTypes;
+  }
+
+  public void addErrorModel(ErrorModel errorModel) {
+    errorModels.add(errorModel);
+  }
+
+  public Set<ErrorModel> getErrorModels() {
+    return errorModels;
   }
 }
