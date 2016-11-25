@@ -15,6 +15,7 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
@@ -191,4 +192,9 @@ public interface ExtensionModel
    * @return the extension's Min {@link MuleVersion}.
    */
   MuleVersion getMinMuleVersion();
+
+  /**
+   * @return A {@link Set} of {@link ErrorModel} registered in the extension.
+   */
+  Set<ErrorModel> getErrorModels();
 }

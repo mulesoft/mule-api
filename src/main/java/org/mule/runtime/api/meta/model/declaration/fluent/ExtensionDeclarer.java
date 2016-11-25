@@ -11,6 +11,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
@@ -255,6 +256,18 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
     declaration.setMinMuleVersion(minMuleVersion);
+    return this;
+  }
+
+  /**
+   * Registers an {@link ErrorModel} that could be thrown by one their
+   * operations
+   *
+   * @param errorModel to add
+   * @return {@code this} descriptor
+   */
+  public ExtensionDeclarer withErrorModel(ErrorModel errorModel) {
+    declaration.addErrorModel(errorModel);
     return this;
   }
 }

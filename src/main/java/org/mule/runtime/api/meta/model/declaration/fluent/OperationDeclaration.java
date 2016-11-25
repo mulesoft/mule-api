@@ -6,7 +6,11 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A declaration object for a {@link OperationModel}. It contains raw, unvalidated
@@ -16,6 +20,8 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
  */
 public class OperationDeclaration extends ComponentDeclaration<OperationDeclaration> {
 
+  private Set<ErrorModel> errorModels = new HashSet<>();
+
   /**
    * {@inheritDoc}
    */
@@ -23,4 +29,11 @@ public class OperationDeclaration extends ComponentDeclaration<OperationDeclarat
     super(name);
   }
 
+  public void addErrorType(ErrorModel errorModel) {
+    errorModels.add(errorModel);
+  }
+
+  public Set<ErrorModel> getErrorTypes() {
+    return errorModels;
+  }
 }
