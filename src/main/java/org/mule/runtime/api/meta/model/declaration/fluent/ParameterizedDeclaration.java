@@ -6,8 +6,15 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import java.util.LinkedList;
+import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Implementation of {@link NamedDeclaration} which adds
@@ -18,7 +25,7 @@ import java.util.List;
  */
 public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaration> extends NamedDeclaration<T> {
 
-  private List<ParameterDeclaration> parameters = new LinkedList<>();
+  private final Map<String, ParameterGroupDeclaration> parameterGroups = new HashMap<>();
 
   /**
    * {@inheritDoc}
@@ -28,26 +35,45 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
   }
 
   /**
-   * @return an unmodifiable {@link List} with the {@link ParameterDeclaration declarations}
-   * registered through {@link #addParameter(ParameterDeclaration)}
+   * @return an unmodifiable {@link List} with the {@link ParameterGroupDeclaration declarations}
+   * registered through {@link #addParameterGroup(ParameterGroupDeclaration)}
    */
-  public List<ParameterDeclaration> getParameters() {
-    return parameters;
+  public List<ParameterGroupDeclaration> getParameterGroups() {
+    return unmodifiableList(new ArrayList<>(parameterGroups.values()));
+  }
+
+  /**
+   * @param groupName the name of the group which declaration you seek
+   * @return the {@link ParameterGroupDeclaration} of the given {@code groupName}.
+   */
+  public ParameterGroupDeclaration getParameterGroup(String groupName) {
+    checkArgument(!isBlank(groupName), "groupName cannot be blank");
+
+    return parameterGroups.computeIfAbsent(groupName, ParameterGroupDeclaration::new);
   }
 
   /**
    * Adds a {@link ParameterDeclaration}
    *
-   * @param parameter a not {@code null} {@link ParameterDeclaration}
+   * @param parameterGroup a not {@code null} {@link ParameterDeclaration}
    * @return this declaration
    * @throws {@link IllegalArgumentException} if {@code parameter} is {@code null}
    */
-  public T addParameter(ParameterDeclaration parameter) {
-    if (parameter == null) {
-      throw new IllegalArgumentException("Can't add a null parameter");
+  public T addParameterGroup(ParameterGroupDeclaration parameterGroup) {
+    if (parameterGroup == null) {
+      throw new IllegalArgumentException("Can't add a null parameter group");
     }
 
-    parameters.add(parameter);
+    parameterGroups.put(parameterGroup.getName(), parameterGroup);
     return (T) this;
+  }
+
+  /**
+   * Returns all the parameter declarations declared on all groups.
+   *
+   * @return a flattened list of all the parameters in this declaration
+   */
+  public List<ParameterDeclaration> getAllParameters() {
+    return parameterGroups.values().stream().flatMap(g -> g.getParameters().stream()).collect(toList());
   }
 }

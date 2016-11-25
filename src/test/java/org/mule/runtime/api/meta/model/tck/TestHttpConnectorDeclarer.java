@@ -47,6 +47,7 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
   public static final String LISTENER_CONFIG_DESCRIPTION = "http listener";
   public static final String LISTEN_MESSAGE_SOURCE = "listen";
   public static final String PORT = "port";
+  public static final String PARAMETER_GROUP = "parameters";
   public static final int DEFAULT_PORT = 8080;
   public static final String VERSION = "1.0";
   public static final String STATIC_RESOURCE_OPERATION_NAME = "staticResource";
@@ -68,13 +69,13 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
         .withXmlDsl(XmlDslModel.builder().build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
     staticResource.withOutput().ofType(getBinaryType());
-    staticResource.withRequiredParameter(PATH).ofType(getStringType());
+    staticResource.withParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     ConfigurationDeclarer requesterConfig =
         extensionDeclarer.withConfig(REQUESTER_CONFIG_NAME).describedAs(REQUESTER_CONFIG_DESCRIPTION);
     OperationDeclarer request = requesterConfig.withOperation(REQUEST_OPERATION_NAME);
     request.withOutput().ofType(getBinaryType());
-    request.withRequiredParameter(PATH).ofType(getStringType());
+    request.withParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     requesterConfig.withConnectionProvider(REQUESTER_PROVIDER).withConnectionManagementType(NONE);
 
@@ -84,7 +85,7 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
     listen.withOutput().ofType(getBinaryType());
     listen.withOutputAttributes()
         .ofType(typeBuilder.objectType().with(new TypeIdAnnotation(Serializable.class.getName())).build());
-    listen.withOptionalParameter(PORT).ofType(getNumberType()).defaultingTo(DEFAULT_PORT);
+    listen.withParameterGroup(PARAMETER_GROUP).withOptionalParameter(PORT).ofType(getNumberType()).defaultingTo(DEFAULT_PORT);
   }
 
   public ExtensionDeclarer getExtensionDeclarer() {

@@ -17,10 +17,9 @@ import org.mule.runtime.api.meta.model.ElementDslModel;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
-import org.mule.runtime.api.meta.model.display.LayoutModel;
+import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -33,7 +32,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel {
+public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
 
   Set<String> RESERVED_NAMES = unmodifiableSet(new HashSet<>(singletonList("name")));
 
@@ -71,12 +70,6 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
    * allows configuring this parameter
    */
   ElementDslModel getDslModel();
-
-  /**
-   * @return An {@link Optional} {@link LayoutModel} which contains directives
-   * about how this parameter should be shown in the UI
-   */
-  Optional<LayoutModel> getLayoutModel();
 
   /**
    * @return this parameter's role

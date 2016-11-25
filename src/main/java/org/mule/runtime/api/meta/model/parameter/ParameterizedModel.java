@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 
@@ -20,11 +22,18 @@ import java.util.List;
 public interface ParameterizedModel extends NamedObject, DescribedObject {
 
   /**
-   * Returns the {@link ParameterModel parameterModels}
-   * available for {@code this} model
-   *
-   * @return a immutable {@link java.util.List} with {@link ParameterModel}
-   * instances. It might be empty but it will never be {@code null}
+   * @return a {@Link List} of {@link ParameterGroupModel groups}
    */
-  List<ParameterModel> getParameterModels();
+  List<ParameterGroupModel> getParameterGroupModels();
+
+  /**
+   * Returns all the {@link ParameterModel parameters} on all groups.
+   *
+   * @return a flattened list of all the parameters in this model
+   */
+  default List<ParameterModel> getAllParameterModels() {
+    return unmodifiableList(getParameterGroupModels().stream()
+        .flatMap(g -> g.getParameterModels().stream())
+        .collect(toList()));
+  }
 }

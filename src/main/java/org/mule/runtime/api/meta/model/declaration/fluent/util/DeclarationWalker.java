@@ -12,6 +12,7 @@ import org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDecl
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.WithOperationsDeclaration;
@@ -26,7 +27,7 @@ import org.mule.runtime.api.meta.model.declaration.fluent.WithSourcesDeclaration
  * {@link #onOperation(WithOperationsDeclaration, OperationDeclaration)}
  * method allows handling operations without requiring to know that they can exist
  * at global or configuration level. Something similar can be said
- * about the {@link #onParameter(ParameterizedDeclaration, ParameterDeclaration)},
+ * about the {@link #onParameter(ParameterizedDeclaration, ParameterGroupDeclaration, ParameterDeclaration)},
  * etc.
  *
  * @since 1.0
@@ -94,13 +95,24 @@ public abstract class DeclarationWalker {
   public void onSource(WithSourcesDeclaration owner, SourceDeclaration declaration) {}
 
   /**
-   * Invoked when an {@link ParameterDeclaration} is found in the
+   * Invoked when an {@link ParameterGroupDeclaration} is found in the
    * traversed {@code extensionDeclaration}
    *
    * @param owner       The declaration that owns the parameter
-   * @param declaration the {@link ParameterDeclaration}
+   * @param declaration the {@link ParameterGroupDeclaration}
    */
-  public void onParameter(ParameterizedDeclaration owner, ParameterDeclaration declaration) {}
+  public void onParameterGroup(ParameterizedDeclaration owner, ParameterGroupDeclaration declaration) {}
+
+  /**
+   * Invoked when an {@link ParameterDeclaration} is found in the
+   * traversed {@code extensionDeclaration}
+   *
+   * @param owner          The declaration that owns the parameter
+   * @param parameterGroup the group to which the declaration belongs
+   * @param declaration    the {@link ParameterDeclaration}
+   */
+  public void onParameter(ParameterizedDeclaration owner, ParameterGroupDeclaration parameterGroup,
+                          ParameterDeclaration declaration) {}
 
   private void walkSources(WithSourcesDeclaration declaration) {
     declaration.getMessageSources().forEach(source -> {
@@ -111,7 +123,11 @@ public abstract class DeclarationWalker {
   }
 
   private void walkParameters(ParameterizedDeclaration declaration) {
-    declaration.getParameters().forEach(parameter -> onParameter(declaration, (ParameterDeclaration) parameter));
+    declaration.getParameterGroups().forEach(g -> {
+      ParameterGroupDeclaration group = (ParameterGroupDeclaration) g;
+      onParameterGroup(declaration, group);
+      group.getParameters().forEach(p -> onParameter(declaration, group, p));
+    });
   }
 
   private void walkConnectionProviders(ConnectedDeclaration declaration) {
