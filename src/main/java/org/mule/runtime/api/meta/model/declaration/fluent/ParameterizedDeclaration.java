@@ -49,12 +49,7 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
   public ParameterGroupDeclaration getParameterGroup(String groupName) {
     checkArgument(!isBlank(groupName), "groupName cannot be blank");
 
-    return parameterGroups.computeIfAbsent(groupName, k -> {
-      ParameterGroupDeclaration declaration = new ParameterGroupDeclaration(groupName);
-      addParameterGroup(declaration);
-
-      return declaration;
-    });
+    return parameterGroups.computeIfAbsent(groupName, ParameterGroupDeclaration::new);
   }
 
   /**
