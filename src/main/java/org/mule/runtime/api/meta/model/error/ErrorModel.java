@@ -6,21 +6,14 @@
  */
 package org.mule.runtime.api.meta.model.error;
 
-import org.mule.runtime.api.error.Errors;
+import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 import java.util.Optional;
 
 /**
- * A model which represents a error possible error that could be thrown
- * by the Operation represented by the {@link OperationModel}.
- * </p>
- * This model declares:
- * <ul>
- * <li><b>Type</b>: The kind of the error to thrown</li>
- * <li><b>Namespace</b>: The origin of this error type</li>
- * <li><b>Parent</b>: The error from which the current error inherits</li>
- * </ul>
+ * A model which represents a possible error that could be thrown
+ * by the component represented by the {@link ComponentModel}.
  *
  * @since 1.0
  */
@@ -28,15 +21,14 @@ public interface ErrorModel {
 
   /**
    * Gets the type of the error.
-   * This error could be one of the {@link Errors}
-   *
    * @return The type of the error
    */
   String getType();
 
   /**
    * Gets the namespace of error.
-   * This namespace represent the origin or how declares this error.
+   * This namespace represent the origin or who declares this error, so it could be the namespace of an
+   * extension or the {@code MULE} namespace.
    *
    * @return The namespace of the error
    */

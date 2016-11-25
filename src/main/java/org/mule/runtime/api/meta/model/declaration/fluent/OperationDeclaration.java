@@ -29,11 +29,11 @@ public class OperationDeclaration extends ComponentDeclaration<OperationDeclarat
     super(name);
   }
 
-  public void addErrorType(ErrorModel errorModel) {
+  public void addError(ErrorModel errorModel) {
     errorModels.add(errorModel);
   }
 
-  public Set<ErrorModel> getErrorTypes() {
+  public Set<ErrorModel> getErrorModels() {
     return errorModels;
   }
 }

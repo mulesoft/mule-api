@@ -29,7 +29,7 @@ public class OperationDeclarer extends ComponentDeclarer<OperationDeclarer, Oper
    *
    * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
    */
-  public void withErrorType(ErrorModel error) {
-    declaration.addErrorType(error);
+  public void withError(ErrorModel error) {
+    declaration.addError(error);
   }
 }

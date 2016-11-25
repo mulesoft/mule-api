@@ -20,5 +20,5 @@ public interface ThrowsErrors {
    * component could throw.
    * @see ErrorModel
    */
-  Set<ErrorModel> getErrorTypes();
+  Set<ErrorModel> getErrorModels();
 }
