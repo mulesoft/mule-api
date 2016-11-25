@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 
@@ -48,9 +49,7 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
    * @throws {@link IllegalArgumentException} if {@code parameter} is {@code null}
    */
   public ParameterGroupDeclaration addParameter(ParameterDeclaration parameter) {
-    if (parameter == null) {
-      throw new IllegalArgumentException("Can't add a null parameter");
-    }
+    checkArgument(parameter != null, "Can't add a null parameter");
 
     parameters.add(parameter);
     return this;
