@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ExecutionType;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
@@ -21,11 +22,13 @@ import java.util.Set;
 public class OperationDeclaration extends ComponentDeclaration<OperationDeclaration> {
 
   private Set<ErrorModel> errorModels = new HashSet<>();
+  private boolean blocking = true;
+  private ExecutionType executionType = null;
 
   /**
    * {@inheritDoc}
    */
-  OperationDeclaration(String name) {
+  public OperationDeclaration(String name) {
     super(name);
   }
 
@@ -35,5 +38,21 @@ public class OperationDeclaration extends ComponentDeclaration<OperationDeclarat
 
   public Set<ErrorModel> getErrorModels() {
     return errorModels;
+  }
+
+  public boolean isBlocking() {
+    return blocking;
+  }
+
+  public void setBlocking(boolean blocking) {
+    this.blocking = blocking;
+  }
+
+  public ExecutionType getExecutionType() {
+    return executionType;
+  }
+
+  public void setExecutionType(ExecutionType executionType) {
+    this.executionType = executionType;
   }
 }

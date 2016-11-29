@@ -40,4 +40,14 @@ public interface ComponentModel
    * @return a {@link MetadataType} representing the attribute types for the output messages
    */
   OutputModel getOutputAttributes();
+
+  /**
+   * @return whether this component has the ability to execute while joining a transaction
+   */
+  boolean isTransactional();
+
+  /**
+   * @return whether this component requires a connection in order to perform its task
+   */
+  boolean requiresConnection();
 }
