@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * See {@link ScheduledExecutorService} and {@link ExecutorService} for documentation on the provided methods.
  * 
- * @since 4.0
+ * @since 1.0
  */
 public interface Scheduler extends ScheduledExecutorService {
 
