@@ -67,6 +67,7 @@ public interface Scheduler extends ScheduledExecutorService {
    * @param gracefulShutdownTimeout the maximum time to wait for the running tasks to gracefully complete.
    * @param unit the time unit of the {@code timeout} argument
    */
+  // TODO MULE-11115 Add a stop() method.
   void stop(long gracefulShutdownTimeout, TimeUnit unit);
 
   /**
