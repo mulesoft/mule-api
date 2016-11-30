@@ -60,11 +60,6 @@ public interface Scheduler extends ScheduledExecutorService {
   public ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression, TimeZone timeZone);
 
   /**
-   * @return The {@link ThreadType} that matches with the {@link Thread}s managed by this {@link Scheduler}.
-   */
-  ThreadType getThreadType();
-
-  /**
    * Tries to do a graceful shutdown.
    * <p>
    * If this hasn't terminated after a configured time, a forceful shutdown takes place.
