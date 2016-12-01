@@ -30,7 +30,7 @@ public abstract class ParameterizedDeclarer<D extends ParameterizedDeclaration> 
    * @param name the name of the group to declare
    * @return a {@link ParameterGroupDeclarer}
    */
-  public ParameterGroupDeclarer withParameterGroup(String name) {
+  public ParameterGroupDeclarer onParameterGroup(String name) {
     return new ParameterGroupDeclarer(declaration.getParameterGroup(name));
   }
 
@@ -41,6 +41,6 @@ public abstract class ParameterizedDeclarer<D extends ParameterizedDeclaration> 
    * @return a {@link ParameterGroupDeclarer}
    */
   public ParameterGroupDeclarer onDefaultParameterGroup() {
-    return withParameterGroup(DEFAULT_GROUP_NAME);
+    return onParameterGroup(DEFAULT_GROUP_NAME);
   }
 }

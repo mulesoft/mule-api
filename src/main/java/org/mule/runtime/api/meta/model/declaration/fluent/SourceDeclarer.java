@@ -33,4 +33,30 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
     declaration.setHasResponse(hasResponse);
     return this;
   }
+
+  /**
+   * Allows to declare a callback which will listen for the value produced
+   * by the source owner when each generated message is processed correctly
+   *
+   * @return a {@link SourceCallbackDeclarer}
+   */
+  public SourceCallbackDeclarer onSuccess() {
+    SourceCallbackDeclaration callback = new SourceCallbackDeclaration("onSuccess");
+    declaration.setSuccessCallback(callback);
+
+    return new SourceCallbackDeclarer(callback);
+  }
+
+  /**
+   * Allows to declare a callback which will listen for errors thrown by
+   * by the source owner when it fails to process any of the generated messages
+   *
+   * @return a {@link SourceCallbackDeclarer}
+   */
+  public SourceCallbackDeclarer onError() {
+    SourceCallbackDeclaration callback = new SourceCallbackDeclaration("onError");
+    declaration.setErrorCallback(callback);
+
+    return new SourceCallbackDeclarer(callback);
+  }
 }
