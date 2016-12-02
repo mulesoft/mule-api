@@ -7,9 +7,16 @@
 package org.mule.runtime.api.meta.model.source;
 
 
+import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
 import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.display.HasDisplayModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterModel;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * A definition of a message source in an {@link ExtensionModel}.
@@ -29,4 +36,40 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
    * @return Whether the declared source emits a response
    */
   boolean hasResponse();
+
+  /**
+   * Optionally returns a {@link SourceCallbackModel} which will listen
+   * for the values produced by the source owner each time it successfully
+   * processes any of the generated messages.
+   *
+   * @return an {@link Optional} {@link SourceCallbackModel}
+   */
+  Optional<SourceCallbackModel> getSuccessCallback();
+
+  /**
+   * Optionally returns a {@link SourceCallbackModel} which will listen
+   * for erros thrown by the source owner each time it fails to process
+   * any of the generated messages
+   *
+   * @return an {@link Optional} {@link SourceCallbackModel}
+   */
+  Optional<SourceCallbackModel> getErrorCallback();
+
+  /**
+   * Returns all the {@link ParameterModel} on all groups, including
+   * the ones declared on the success and error callbacks
+   *
+   * @return a flattened list of all the parameters in this model
+   */
+  @Override
+  default List<ParameterModel> getAllParameterModels() {
+    List<ParameterModel> all = new LinkedList<>();
+    all.addAll(getParameterGroupModels().stream()
+        .flatMap(g -> g.getParameterModels().stream())
+        .collect(toList()));
+    getSuccessCallback().ifPresent(callback -> all.addAll(callback.getAllParameterModels()));
+    getErrorCallback().ifPresent(callback -> all.addAll(callback.getAllParameterModels()));
+
+    return unmodifiableList(all);
+  }
 }

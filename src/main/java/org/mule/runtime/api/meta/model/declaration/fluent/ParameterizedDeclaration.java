@@ -36,7 +36,6 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
 
   /**
    * @return an unmodifiable {@link List} with the {@link ParameterGroupDeclaration declarations}
-   * registered through {@link #addParameterGroup(ParameterGroupDeclaration)}
    */
   public List<ParameterGroupDeclaration> getParameterGroups() {
     return unmodifiableList(new ArrayList<>(parameterGroups.values()));
@@ -50,22 +49,6 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
     checkArgument(!isBlank(groupName), "groupName cannot be blank");
 
     return parameterGroups.computeIfAbsent(groupName, ParameterGroupDeclaration::new);
-  }
-
-  /**
-   * Adds a {@link ParameterDeclaration}
-   *
-   * @param parameterGroup a not {@code null} {@link ParameterDeclaration}
-   * @return this declaration
-   * @throws {@link IllegalArgumentException} if {@code parameter} is {@code null}
-   */
-  public T addParameterGroup(ParameterGroupDeclaration parameterGroup) {
-    if (parameterGroup == null) {
-      throw new IllegalArgumentException("Can't add a null parameter group");
-    }
-
-    parameterGroups.put(parameterGroup.getName(), parameterGroup);
-    return (T) this;
   }
 
   /**

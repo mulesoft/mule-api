@@ -108,7 +108,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     ConfigurationDeclarer config =
         extensionDeclarer.withConfig(CONFIG_NAME).describedAs(CONFIG_DESCRIPTION).withModelProperty(CONFIGURATION_MODEL_PROPERTY);
 
-    ParameterGroupDeclarer parameterGroup = config.withParameterGroup(CONFIG_PARAMETER_GROUP);
+    ParameterGroupDeclarer parameterGroup = config.onParameterGroup(CONFIG_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(ADDRESS).describedAs(SERVICE_ADDRESS).ofType(getStringType());
     parameterGroup.withRequiredParameter(PORT).describedAs(SERVICE_PORT).ofType(getStringType());
     parameterGroup.withRequiredParameter(SERVICE).describedAs(SERVICE_NAME).ofType(getStringType());
@@ -122,13 +122,13 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     operation.withOutput().ofType(getBinaryType());
     operation.withOutputAttributes().ofType(getStringType());
 
-    parameterGroup = operation.withParameterGroup(OPERATION_PARAMETER_GROUP);
+    parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(OPERATION).describedAs(THE_OPERATION_TO_USE).ofType(getStringType());
     parameterGroup.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType()).defaultingTo(true);
 
     operation = extensionDeclarer.withOperation(BROADCAST).describedAs(BROADCAST_DESCRIPTION);
     operation.withOutput().ofType(typeBuilder.voidType().build());
-    parameterGroup = operation.withParameterGroup(OPERATION_PARAMETER_GROUP);
+    parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(COLLECTION_PARAMETER).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
         .id(List.class.getName())
         .of(typeBuilder.stringType()
@@ -146,7 +146,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
         extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME).describedAs(CONNECTION_PROVIDER_DESCRIPTION)
             .withConnectionManagementType(NONE);
 
-    parameterGroup = connectionProvider.withParameterGroup(CONNECTION_PROVIDER_PARAMETER_GROUP);
+    parameterGroup = connectionProvider.onParameterGroup(CONNECTION_PROVIDER_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(USERNAME).describedAs(USERNAME_DESCRIPTION).ofType(getStringType());
     parameterGroup.withRequiredParameter(PASSWORD).describedAs(PASSWORD_DESCRIPTION).ofType(getStringType());
 
@@ -156,7 +156,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     sourceDeclarer.withOutput().ofType(getBinaryType());
     sourceDeclarer.withOutputAttributes().ofType(getObjectType(Serializable.class));
 
-    parameterGroup = sourceDeclarer.withParameterGroup(SOURCE_PARAMETER_GROUP);
+    parameterGroup = sourceDeclarer.onParameterGroup(SOURCE_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
     parameterGroup.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
         .defaultingTo(DEFAULT_PORT);
