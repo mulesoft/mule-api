@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  *
  * @param <T> The class of the values referenced in the map.
  *
- * @since 3.6.0
+ * @since 1.0
  */
 public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializable {
 
