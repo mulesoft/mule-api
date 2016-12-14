@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.util;
 
 import static java.util.Arrays.asList;
+import static java.util.Optional.of;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
@@ -21,6 +22,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
+import org.mule.runtime.api.meta.model.source.SourceCallbackModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -55,8 +57,15 @@ public class ExtensionWalkerTestCase {
   @Mock
   private SourceModel source;
 
+  @Mock
+  private SourceCallbackModel sourceCallback;
+
   @Before
   public void before() {
+
+    when(source.getErrorCallback()).thenReturn(of(sourceCallback));
+    when(source.getSuccessCallback()).thenReturn(of(sourceCallback));
+
     when(extension.getConfigurationModels()).thenReturn(asList(configuration));
     when(extension.getOperationModels()).thenReturn(asList(operation));
     when(extension.getSourceModels()).thenReturn(asList(source));
@@ -67,7 +76,7 @@ public class ExtensionWalkerTestCase {
     when(configuration.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
     when(groupModel.getParameterModels()).thenReturn(asList(parameterModel));
-    addParameter(configuration, operation, connectionProvider, source);
+    addParameter(configuration, operation, connectionProvider, source, sourceCallback);
   }
 
   private void addParameter(ParameterizedModel... models) {
@@ -123,8 +132,8 @@ public class ExtensionWalkerTestCase {
     assertCount(operations, 2);
     assertCount(sources, 2);
     assertCount(providers, 2);
-    assertCount(parameterGroups, 7);
-    assertCount(parameters, 7);
+    assertCount(parameterGroups, 11);
+    assertCount(parameters, 11);
   }
 
   private void assertCount(AtomicInteger actual, int expected) {
