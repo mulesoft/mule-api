@@ -57,7 +57,8 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
 
   /**
    * Returns all the {@link ParameterModel} on all groups, including
-   * the ones declared on the success and error callbacks
+   * the ones declared on the success and error callbacks.
+   * Parameters repeated among callbacks will be deduplicated.
    *
    * @return a flattened list of all the parameters in this model
    */
@@ -67,8 +68,11 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
     all.addAll(getParameterGroupModels().stream()
         .flatMap(g -> g.getParameterModels().stream())
         .collect(toList()));
-    getSuccessCallback().ifPresent(callback -> all.addAll(callback.getAllParameterModels()));
-    getErrorCallback().ifPresent(callback -> all.addAll(callback.getAllParameterModels()));
+
+    List<ParameterModel> callbackParameters = new LinkedList<>();
+    getSuccessCallback().ifPresent(callback -> callbackParameters.addAll(callback.getAllParameterModels()));
+    getErrorCallback().ifPresent(callback -> callbackParameters.addAll(callback.getAllParameterModels()));
+    all.addAll(callbackParameters.stream().distinct().collect(toList()));
 
     return unmodifiableList(all);
   }
