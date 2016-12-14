@@ -117,6 +117,8 @@ public abstract class ExtensionWalker {
     model.getSourceModels().forEach(source -> {
       onSource(model, source);
       walkParameters(source);
+      source.getSuccessCallback().ifPresent(this::walkParameters);
+      source.getErrorCallback().ifPresent(this::walkParameters);
     });
   }
 
