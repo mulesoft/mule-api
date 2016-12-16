@@ -18,6 +18,8 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
 
   private OutputDeclaration outputContent;
   private OutputDeclaration outputAttributes;
+  private boolean transactional = false;
+  private boolean requiresConnection = false;
 
   /**
    * {@inheritDoc}
@@ -40,5 +42,21 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
 
   public void setOutputAttributes(OutputDeclaration attributes) {
     this.outputAttributes = attributes;
+  }
+
+  public boolean isTransactional() {
+    return transactional;
+  }
+
+  public void setTransactional(boolean transactional) {
+    this.transactional = transactional;
+  }
+
+  public boolean isRequiresConnection() {
+    return requiresConnection;
+  }
+
+  public void setRequiresConnection(boolean requiresConnection) {
+    this.requiresConnection = requiresConnection;
   }
 }

@@ -37,6 +37,28 @@ abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends Componen
   }
 
   /**
+   * Specifies if this component has the ability to execute while joining a transaction
+   *
+   * @param transactional whether the component is transactional or not
+   * @return {@code this} declarer
+   */
+  public T transactional(boolean transactional) {
+    declaration.setTransactional(transactional);
+    return (T) this;
+  }
+
+  /**
+   * Specifies if this component requires a connection in order to perform its task
+   *
+   * @param requiresConnection whether the component requirest a connection or not
+   * @return {@code this} declarer
+   */
+  public T requiresConnection(boolean requiresConnection) {
+    declaration.setRequiresConnection(requiresConnection);
+    return (T) this;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

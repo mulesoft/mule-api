@@ -18,8 +18,10 @@ import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
+import org.mule.runtime.api.meta.model.display.LayoutModel;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -75,4 +77,12 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
    * @return this parameter's role
    */
   ParameterRole getRole();
+
+  /**
+   * {@inheritDoc}
+   * The value of {@link LayoutModel#getOrder()} is to be consider relative to the owning
+   * {@link ParameterGroupModel}
+   */
+  @Override
+  Optional<LayoutModel> getLayoutModel();
 }

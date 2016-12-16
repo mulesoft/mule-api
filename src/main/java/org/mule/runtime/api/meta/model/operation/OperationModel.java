@@ -12,6 +12,7 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.OutputModel;
+import org.mule.runtime.api.meta.model.ExecutionType;
 
 /**
  * A definition of an operation in a {@link ExtensionModel}.
@@ -40,4 +41,14 @@ public interface OperationModel extends ComponentModel {
    */
   @Override
   OutputModel getOutputAttributes();
+
+  /**
+   * @return Whether this operation is blocking or non blocking execution is supported
+   */
+  boolean isBlocking();
+
+  /**
+   * @return this operation's {@link ExecutionType}
+   */
+  ExecutionType getExecutionType();
 }
