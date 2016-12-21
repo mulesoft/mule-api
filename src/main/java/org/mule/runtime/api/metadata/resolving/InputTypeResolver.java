@@ -20,6 +20,14 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
 public interface InputTypeResolver<K> extends NamedTypeResolver {
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  default String getResolverName() {
+    return "input";
+  }
+
+  /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType} which represents the type structure. This
    * {@link MetadataType} will be considered as the main input of an Operation for their parameter marked as Content.
    *

@@ -20,6 +20,14 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
 public interface OutputTypeResolver<K> extends NamedTypeResolver {
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  default String getResolverName() {
+    return "output";
+  }
+
+  /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType}, which represents the type structure. This
    * {@link MetadataType} will be considered as the output or result of the Component
    *

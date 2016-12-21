@@ -32,4 +32,11 @@ public interface AttributesTypeResolver<K> extends NamedTypeResolver {
    * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataType getAttributesType(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
+
+  /**
+   * {@inheritDoc}
+   */
+  default String getResolverName() {
+    return "attributes";
+  }
 }
