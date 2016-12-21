@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
-import org.mule.runtime.api.metadata.resolving.MetadataResult;
-
 /**
  * Immutable concrete implementation of {@link ComponentMetadataDescriptor}
  *
@@ -16,11 +14,10 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
 public final class ImmutableComponentMetadataDescriptor implements ComponentMetadataDescriptor {
 
   private final String name;
-  private final MetadataResult<InputMetadataDescriptor> input;
-  private final MetadataResult<OutputMetadataDescriptor> output;
+  private final InputMetadataDescriptor input;
+  private final OutputMetadataDescriptor output;
 
-  public ImmutableComponentMetadataDescriptor(String name, MetadataResult<InputMetadataDescriptor> input,
-                                              MetadataResult<OutputMetadataDescriptor> output) {
+  public ImmutableComponentMetadataDescriptor(String name, InputMetadataDescriptor input, OutputMetadataDescriptor output) {
     this.name = name;
     this.input = input;
     this.output = output;
@@ -30,7 +27,7 @@ public final class ImmutableComponentMetadataDescriptor implements ComponentMeta
    * {@inheritDoc}
    */
   @Override
-  public MetadataResult<InputMetadataDescriptor> getInputMetadata() {
+  public InputMetadataDescriptor getInputMetadata() {
     return this.input;
   }
 
@@ -38,7 +35,7 @@ public final class ImmutableComponentMetadataDescriptor implements ComponentMeta
    * {@inheritDoc}
    */
   @Override
-  public MetadataResult<OutputMetadataDescriptor> getOutputMetadata() {
+  public OutputMetadataDescriptor getOutputMetadata() {
     return this.output;
   }
 
