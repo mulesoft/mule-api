@@ -58,6 +58,10 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 
   public TestHttpConnectorDeclarer() {
+    declareOn(extensionDeclarer);
+  }
+
+  public ExtensionDeclarer declareOn(ExtensionDeclarer extensionDeclarer) {
     extensionDeclarer.named(EXTENSION_NAME)
         .describedAs(EXTENSION_DESCRIPTION)
         .fromVendor(VENDOR)
@@ -69,12 +73,14 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
         .withXmlDsl(XmlDslModel.builder().build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
     staticResource.withOutput().ofType(getBinaryType());
+    staticResource.withOutputAttributes().ofType(getAttributesType());
     staticResource.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     ConfigurationDeclarer requesterConfig =
         extensionDeclarer.withConfig(REQUESTER_CONFIG_NAME).describedAs(REQUESTER_CONFIG_DESCRIPTION);
     OperationDeclarer request = requesterConfig.withOperation(REQUEST_OPERATION_NAME);
     request.withOutput().ofType(getBinaryType());
+    request.withOutputAttributes().ofType(getAttributesType());
     request.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     requesterConfig.withConnectionProvider(REQUESTER_PROVIDER).withConnectionManagementType(NONE);
@@ -86,6 +92,8 @@ public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
     listen.withOutputAttributes()
         .ofType(typeBuilder.objectType().with(new TypeIdAnnotation(Serializable.class.getName())).build());
     listen.onParameterGroup(PARAMETER_GROUP).withOptionalParameter(PORT).ofType(getNumberType()).defaultingTo(DEFAULT_PORT);
+
+    return extensionDeclarer;
   }
 
   public ExtensionDeclarer getExtensionDeclarer() {

@@ -43,10 +43,14 @@ public interface ModelProperty extends NamedObject, Serializable {
    * holds information which is proprietary to the runtime and should not
    * communicated.
    * <p>
-   * Non externalizable properties should be skipped by serializers and any
+   * Non public properties should be skipped by serializers and any
    * other kind of sharing mechanisms.
+   * <p>
+   * <b>BEWARE:</b> Non public model properties are not to be considered API
+   * and thus nobody (or anything) should depend on it. Backwards compatibility
+   * will not be guaranteed on non public properties.
    *
    * @return whether this property should be communicated or not
    */
-  boolean isExternalizable();
+  boolean isPublic();
 }
