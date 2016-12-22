@@ -30,7 +30,6 @@ public final class FailureMetadataResult<T> implements MetadataResult<T> {
 
   /**
    * {@inheritDoc}
-   *
    */
   @Override
   public T get() {

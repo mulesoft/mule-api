@@ -28,12 +28,15 @@ public class InputMetadataDescriptorBuilder {
   /**
    * Creates a new instance of {@link InputMetadataDescriptorBuilder}
    */
-  InputMetadataDescriptorBuilder() {}
+  InputMetadataDescriptorBuilder() {
+  }
 
   /**
-   * @param name         asdasda
-   * @param parameterResult   asdasdasd complete
-   * @return
+   * Ads a parameter to the resulting {@link InputMetadataDescriptor}.
+   *
+   * @param name            the name of the parameter
+   * @param parameterResult the {@link ParameterMetadataDescriptor} representing this parameter type.
+   * @return this {@link InputMetadataDescriptorBuilder}.
    */
   public InputMetadataDescriptorBuilder withParameter(String name, ParameterMetadataDescriptor parameterResult) {
     if (parameterResult == null) {
@@ -45,9 +48,9 @@ public class InputMetadataDescriptorBuilder {
 
   /**
    * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
-   *         {@link MetadataProvider} component
+   * {@link MetadataProvider} component
    * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set
-   *         during building
+   *                                  during building
    */
   public InputMetadataDescriptor build() {
     return new ImmutableInputMetadataDescriptor(parameters);
