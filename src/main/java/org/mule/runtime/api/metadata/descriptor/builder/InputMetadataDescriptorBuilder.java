@@ -12,7 +12,6 @@ import org.mule.runtime.api.metadata.descriptor.ImmutableInputMetadataDescriptor
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor;
-import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +23,7 @@ import java.util.Map;
  */
 public class InputMetadataDescriptorBuilder {
 
-  private Map<String, MetadataResult<ParameterMetadataDescriptor>> parameters = new HashMap<>();
+  private Map<String, ParameterMetadataDescriptor> parameters = new HashMap<>();
 
   /**
    * Creates a new instance of {@link InputMetadataDescriptorBuilder}
@@ -32,11 +31,13 @@ public class InputMetadataDescriptorBuilder {
   InputMetadataDescriptorBuilder() {}
 
   /**
-   * @param name
-   * @param parameterResult
-   * @return
+   * Ads a parameter to the resulting {@link InputMetadataDescriptor}.
+   *
+   * @param name            the name of the parameter
+   * @param parameterResult the {@link ParameterMetadataDescriptor} representing this parameter type.
+   * @return this {@link InputMetadataDescriptorBuilder}.
    */
-  public InputMetadataDescriptorBuilder withParameter(String name, MetadataResult<ParameterMetadataDescriptor> parameterResult) {
+  public InputMetadataDescriptorBuilder withParameter(String name, ParameterMetadataDescriptor parameterResult) {
     if (parameterResult == null) {
       throw new IllegalArgumentException("A null ParameterMetadataDescriptor is not valid for the InputMetadataDescriptor");
     }
@@ -46,9 +47,9 @@ public class InputMetadataDescriptorBuilder {
 
   /**
    * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
-   *         {@link MetadataProvider} component
+   * {@link MetadataProvider} component
    * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set
-   *         during building
+   *                                  during building
    */
   public InputMetadataDescriptor build() {
     return new ImmutableInputMetadataDescriptor(parameters);

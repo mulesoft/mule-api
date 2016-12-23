@@ -7,7 +7,6 @@
 package org.mule.runtime.api.metadata.descriptor.builder;
 
 import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.typeDescriptor;
-import static org.mule.runtime.api.metadata.resolving.MetadataResult.success;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.MetadataProvider;
@@ -23,8 +22,8 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  */
 public class OutputMetadataDescriptorBuilder {
 
-  private MetadataResult<TypeMetadataDescriptor> returnTypeResult;
-  private MetadataResult<TypeMetadataDescriptor> attributes;
+  private TypeMetadataDescriptor returnTypeResult;
+  private TypeMetadataDescriptor attributes;
 
   /**
    * Creates a new instance of {@link OutputMetadataDescriptorBuilder}
@@ -39,7 +38,7 @@ public class OutputMetadataDescriptorBuilder {
    *        type
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
    */
-  public OutputMetadataDescriptorBuilder withReturnType(MetadataResult<TypeMetadataDescriptor> returnTypeResult) {
+  public OutputMetadataDescriptorBuilder withReturnType(TypeMetadataDescriptor returnTypeResult) {
     this.returnTypeResult = returnTypeResult;
     return this;
   }
@@ -52,7 +51,7 @@ public class OutputMetadataDescriptorBuilder {
    *        attributes type.
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
    */
-  public OutputMetadataDescriptorBuilder withAttributesType(MetadataResult<TypeMetadataDescriptor> attributesTypeResult) {
+  public OutputMetadataDescriptorBuilder withAttributesType(TypeMetadataDescriptor attributesTypeResult) {
     this.attributes = attributesTypeResult;
     return this;
   }
@@ -64,7 +63,7 @@ public class OutputMetadataDescriptorBuilder {
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
    */
   public OutputMetadataDescriptorBuilder withReturnType(MetadataType returnType) {
-    this.returnTypeResult = success(typeDescriptor().withType(returnType).build());
+    this.returnTypeResult = typeDescriptor().withType(returnType).build();
     return this;
   }
 
@@ -76,7 +75,7 @@ public class OutputMetadataDescriptorBuilder {
    * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
    */
   public OutputMetadataDescriptorBuilder withAttributesType(MetadataType attributesType) {
-    this.attributes = success(typeDescriptor().withType(attributesType).build());
+    this.attributes = typeDescriptor().withType(attributesType).build();
     return this;
   }
 

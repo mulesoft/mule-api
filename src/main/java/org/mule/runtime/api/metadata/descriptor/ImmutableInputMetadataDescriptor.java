@@ -8,7 +8,6 @@ package org.mule.runtime.api.metadata.descriptor;
 
 import static java.lang.String.format;
 import static java.util.Collections.unmodifiableMap;
-import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 import java.util.Map;
 
@@ -19,24 +18,29 @@ import java.util.Map;
  */
 public class ImmutableInputMetadataDescriptor implements InputMetadataDescriptor {
 
-  private final Map<String, MetadataResult<ParameterMetadataDescriptor>> parameters;
+  private final Map<String, ParameterMetadataDescriptor> parameters;
 
-  public ImmutableInputMetadataDescriptor(Map<String, MetadataResult<ParameterMetadataDescriptor>> parameters) {
+  public ImmutableInputMetadataDescriptor(Map<String, ParameterMetadataDescriptor> parameters) {
     this.parameters = parameters;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public MetadataResult<ParameterMetadataDescriptor> getParameterMetadata(String paramName) {
-    MetadataResult<ParameterMetadataDescriptor> result = parameters.get(paramName);
+  public ParameterMetadataDescriptor getParameterMetadata(String paramName) {
+    ParameterMetadataDescriptor result = parameters.get(paramName);
     if (result == null) {
       throw new IllegalArgumentException(format("The parameter [%s] does not belong to the described component", paramName));
     }
-
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
-  public Map<String, MetadataResult<ParameterMetadataDescriptor>> getAllParameters() {
+  public Map<String, ParameterMetadataDescriptor> getAllParameters() {
     return unmodifiableMap(parameters);
   }
 }

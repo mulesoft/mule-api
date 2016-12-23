@@ -7,7 +7,6 @@
 package org.mule.runtime.api.metadata.descriptor;
 
 import org.mule.runtime.api.message.Message;
-import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 import java.util.Map;
 
@@ -20,15 +19,13 @@ import java.util.Map;
 public interface InputMetadataDescriptor {
 
   /**
-   * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
-   * output {@link Message#getPayload}
+   * @return a {@link TypeMetadataDescriptor} that describes the Component's output {@link Message#getPayload}
    */
-  MetadataResult<ParameterMetadataDescriptor> getParameterMetadata(String paramName);
+  ParameterMetadataDescriptor getParameterMetadata(String paramName);
 
   /**
-   * @return a {@link MetadataResult} with the {@link TypeMetadataDescriptor} of the Component's
-   * output {@link Message#getAttributes}
+   * @return a {@link TypeMetadataDescriptor} that describes the Component's output {@link Message#getAttributes}
    */
-  Map<String, MetadataResult<ParameterMetadataDescriptor>> getAllParameters();
+  Map<String, ParameterMetadataDescriptor> getAllParameters();
 
 }

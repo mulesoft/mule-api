@@ -6,10 +6,6 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
-import org.mule.runtime.api.metadata.resolving.MetadataResult;
-
-import java.util.List;
-
 /**
  * Represents the view of all Metadata associated to an Operation
  *
@@ -23,13 +19,12 @@ public interface ComponentMetadataDescriptor {
   String getName();
 
   /**
-   * @return a {@link List} of {@link MetadataResult} of {@link ParameterMetadataDescriptor}
-   * containing one result for each parameter that the operation has.
+   * @return a {@link InputMetadataDescriptor} that describes the input metadata for all the input parameters.
    */
-  MetadataResult<InputMetadataDescriptor> getInputMetadata();
+  InputMetadataDescriptor getInputMetadata();
 
   /**
-   * @return a {@link MetadataResult} with the {@link OutputMetadataDescriptor} of the Operation's output
+   * @return a {@link OutputMetadataDescriptor} describing the Operation's output.
    */
-  MetadataResult<OutputMetadataDescriptor> getOutputMetadata();
+  OutputMetadataDescriptor getOutputMetadata();
 }

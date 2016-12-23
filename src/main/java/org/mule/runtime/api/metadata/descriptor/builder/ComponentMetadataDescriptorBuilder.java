@@ -8,20 +8,14 @@ package org.mule.runtime.api.metadata.descriptor.builder;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.metadata.descriptor.builder.MetadataDescriptorBuilder.inputDescriptor;
-import static org.mule.runtime.api.metadata.resolving.MetadataResult.success;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.ImmutableComponentMetadataDescriptor;
-import org.mule.runtime.api.metadata.descriptor.ImmutableInputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
-import org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
-import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * Implementation of the builder design pattern to create instances of {@link ComponentMetadataDescriptor}
@@ -31,8 +25,8 @@ import org.apache.commons.lang3.StringUtils;
 public class ComponentMetadataDescriptorBuilder {
 
   private final String name;
-  private MetadataResult<InputMetadataDescriptor> input;
-  private MetadataResult<OutputMetadataDescriptor> output;
+  private InputMetadataDescriptor input;
+  private OutputMetadataDescriptor output;
 
   /**
    * Creates a new instance of {@link ComponentMetadataDescriptorBuilder} with the name of the component to describe
@@ -53,7 +47,7 @@ public class ComponentMetadataDescriptorBuilder {
    *                   of the component described.
    * @return the contributed descriptor builder
    */
-  public ComponentMetadataDescriptorBuilder withInputDescriptor(MetadataResult<InputMetadataDescriptor> input) {
+  public ComponentMetadataDescriptorBuilder withInputDescriptor(InputMetadataDescriptor input) {
     this.input = input;
     return this;
   }
@@ -62,7 +56,7 @@ public class ComponentMetadataDescriptorBuilder {
    * @param output a {@link MetadataResult} of {@link OutputMetadataDescriptor} that describes the output of the component
    * @return the contributed descriptor builder contributed with the {@link OutputMetadataDescriptor}
    */
-  public ComponentMetadataDescriptorBuilder withOutputDescriptor(MetadataResult<OutputMetadataDescriptor> output) {
+  public ComponentMetadataDescriptorBuilder withOutputDescriptor(OutputMetadataDescriptor output) {
     this.output = output;
     return this;
   }
@@ -78,7 +72,7 @@ public class ComponentMetadataDescriptorBuilder {
     }
 
     if (input == null) {
-      input = success(inputDescriptor().build());
+      input = inputDescriptor().build();
     }
 
     return new ImmutableComponentMetadataDescriptor(name, input, output);

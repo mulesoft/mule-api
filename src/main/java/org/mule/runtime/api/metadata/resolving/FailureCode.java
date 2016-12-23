@@ -26,7 +26,6 @@ public final class FailureCode {
   public static final FailureCode APPLICATION_NOT_FOUND = new FailureCode("APPLICATION_NOT_FOUND");
   public static final FailureCode UNKNOWN = new FailureCode("UNKNOWN");
   public static final FailureCode NONE = new FailureCode("NO_ERROR");
-  public static final FailureCode MULTIPLE = new FailureCode("MULTIPLE_ERRORS");
   public static final FailureCode NO_DYNAMIC_METADATA_AVAILABLE = new FailureCode("NO_DYNAMIC_METADATA_AVAILABLE");
 
   private String name;
@@ -51,6 +50,6 @@ public final class FailureCode {
 
   @Override
   public String toString() {
-    return "Failure Code: " + getName();
+    return getName();
   }
 }
