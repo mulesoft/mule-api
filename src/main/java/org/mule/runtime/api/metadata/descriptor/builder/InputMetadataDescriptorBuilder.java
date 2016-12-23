@@ -28,8 +28,7 @@ public class InputMetadataDescriptorBuilder {
   /**
    * Creates a new instance of {@link InputMetadataDescriptorBuilder}
    */
-  InputMetadataDescriptorBuilder() {
-  }
+  InputMetadataDescriptorBuilder() {}
 
   /**
    * Ads a parameter to the resulting {@link InputMetadataDescriptor}.
