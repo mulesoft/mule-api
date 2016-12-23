@@ -8,11 +8,12 @@ package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
 
-import org.mule.runtime.api.message.Message;
-
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
+
+import org.mule.runtime.api.el.ExpressionFunction;
+import org.mule.runtime.api.message.Message;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME
@@ -72,6 +73,19 @@ public interface DataType extends Serializable {
    */
   static DataType fromObject(Object value) {
     return getDefaultFactory().create().fromObject(value).build();
+  }
+
+  /**
+   * Shortcut to create the {@link DataType} from an {@link ExpressionFunction} instance.
+   * <p>
+   * This behaves in the same way as {@link #fromObject(Object)} but automatically populates the {@code returnType} and
+   * {@code parameters} based on the function.
+   *
+   * @param function the function to determine the {@link DataType} of.
+   * @return a new {@link DataType} for the given {@code value}.
+   */
+  static DataType fromFunction(ExpressionFunction function) {
+    return getDefaultFactory().create().fromFunction(function).build();
   }
 
 
