@@ -24,7 +24,7 @@ public interface InputTypeResolver<K> extends NamedTypeResolver {
    */
   @Override
   default String getResolverName() {
-    return "input";
+    return MetadataComponent.INPUT.name();
   }
 
   /**

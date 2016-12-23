@@ -24,7 +24,7 @@ public interface OutputTypeResolver<K> extends NamedTypeResolver {
    */
   @Override
   default String getResolverName() {
-    return "output";
+    return MetadataComponent.OUTPUT_PAYLOAD.name();
   }
 
   /**

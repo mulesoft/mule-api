@@ -21,6 +21,14 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
 public interface AttributesTypeResolver<K> extends NamedTypeResolver {
 
   /**
+   * {@inheritDoc}
+   */
+  @Override
+  default String getResolverName() {
+    return MetadataComponent.OUTPUT_ATTRIBUTES.name();
+  }
+
+  /**
    * Given an instance of type {@code K}, resolves their {@link MetadataType}, which represents the type structure. This
    * {@link MetadataType} will be considered as the resulting {@link Message} attributes type of the associated Component's output
    *
@@ -32,11 +40,4 @@ public interface AttributesTypeResolver<K> extends NamedTypeResolver {
    * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataType getAttributesType(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
-
-  /**
-   * {@inheritDoc}
-   */
-  default String getResolverName() {
-    return "attributes";
-  }
 }
