@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.lang.System.identityHashCode;
+
 /**
  * An object which holds a reference to a given {@link #value}.
  * <p>
@@ -23,7 +25,14 @@ package org.mule.runtime.api.util;
  */
 public class Reference<T> {
 
-  private final T value;
+  private T value;
+
+  /**
+   * Creates a new instance which references {@code null}
+   */
+  public Reference() {
+    this(null);
+  }
 
   /**
    * Creates a new instance
@@ -31,7 +40,7 @@ public class Reference<T> {
    * @param value the referenced value
    */
   public Reference(T value) {
-    this.value = value;
+    set(value);
   }
 
   /**
@@ -39,6 +48,13 @@ public class Reference<T> {
    */
   public T get() {
     return value;
+  }
+
+  public T set(T value) {
+    T oldValue = this.value;
+    this.value = value;
+
+    return oldValue;
   }
 
   /**
@@ -55,6 +71,6 @@ public class Reference<T> {
    */
   @Override
   public int hashCode() {
-    return System.identityHashCode(value);
+    return identityHashCode(value);
   }
 }

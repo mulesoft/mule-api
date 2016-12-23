@@ -168,6 +168,18 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
+   * Adds the given {@code resourcePath} to the list of resources
+   * declared by the extension being built
+   *
+   * @param resourcePath the relative path to the extension's resource
+   * @return {@code this} declarer
+   */
+  public ExtensionDeclarer withResource(String resourcePath) {
+    declaration.addResource(resourcePath);
+    return this;
+  }
+
+  /**
    * Declares that the extension is importing a type from another
    * extension
    *

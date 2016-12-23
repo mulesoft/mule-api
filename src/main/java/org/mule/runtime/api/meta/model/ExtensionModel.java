@@ -148,6 +148,11 @@ public interface ExtensionModel
   Set<ObjectType> getTypes();
 
   /**
+   * @return an immutable {@link Set} with the paths to all the resources exposed by this extension
+   */
+  Set<String> getResources();
+
+  /**
    * Returns the name of the extension's vendor
    * This name is used to:
    * <ul>

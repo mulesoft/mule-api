@@ -95,7 +95,10 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
   private final ExtensionDeclarer extensionDeclarer;
 
   public TestWebServiceConsumerDeclarer() {
-    extensionDeclarer = new ExtensionDeclarer();
+    extensionDeclarer = declareOn(new ExtensionDeclarer());
+  }
+
+  public ExtensionDeclarer declareOn(ExtensionDeclarer extensionDeclarer) {
     extensionDeclarer.named(WS_CONSUMER)
         .describedAs(WS_CONSUMER_DESCRIPTION)
         .onVersion(VERSION)
@@ -128,6 +131,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
 
     operation = extensionDeclarer.withOperation(BROADCAST).describedAs(BROADCAST_DESCRIPTION);
     operation.withOutput().ofType(typeBuilder.voidType().build());
+    operation.withOutputAttributes().ofType(getStringType());
     parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(COLLECTION_PARAMETER).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
         .id(List.class.getName())
@@ -140,7 +144,9 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     parameterGroup.withRequiredParameter(CALLBACK).describedAs(CALLBACK_DESCRIPTION).ofType(getObjectType(OperationModel.class))
         .withExpressionSupport(REQUIRED);
 
-    extensionDeclarer.withOperation(ARG_LESS).describedAs(HAS_NO_ARGS).withOutput().ofType(getNumberType());
+    operation = extensionDeclarer.withOperation(ARG_LESS).describedAs(HAS_NO_ARGS);
+    operation.withOutput().ofType(getNumberType());
+    operation.withOutputAttributes().ofType(getStringType());
 
     ConnectionProviderDeclarer connectionProvider =
         extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME).describedAs(CONNECTION_PROVIDER_DESCRIPTION)
@@ -160,6 +166,8 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     parameterGroup.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
     parameterGroup.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
         .defaultingTo(DEFAULT_PORT);
+
+    return extensionDeclarer;
   }
 
   public ExtensionDeclarer getExtensionDeclarer() {
@@ -180,7 +188,7 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     }
 
     @Override
-    public boolean isExternalizable() {
+    public boolean isPublic() {
       return true;
     }
 

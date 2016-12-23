@@ -26,10 +26,38 @@ public class ReferenceTestCase {
   }
 
   @Test
+  public void set() {
+    Reference<Object> ref = new Reference<>(new Object());
+    Object value = new Object();
+    ref.set(value);
+    assertThat(ref.get(), is(sameInstance(value)));
+  }
+
+  @Test
+  public void setNull() {
+    Reference<Object> ref = new Reference<>(new Object());
+    ref.set(null);
+    assertThat(ref.get(), is(nullValue()));
+  }
+
+  @Test
+  public void setAndGet() {
+    String value = "Hello";
+    Reference<String> reference = new Reference<>();
+    assertThat(reference.set(value), is(nullValue()));
+    assertThat(reference.get(), is(value));
+  }
+
+  @Test
   public void valueHashCode() {
     final Object value = new Object();
     Reference<Object> ref = new Reference<>(value);
     assertThat(ref.hashCode(), is(value.hashCode()));
+  }
+
+  @Test
+  public void defaultsToNull() {
+    assertThat(new Reference().get(), is(nullValue()));
   }
 
   @Test

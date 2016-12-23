@@ -47,6 +47,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private XmlDslModel xmlDslModel;
   private Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
   private Set<ImportedTypeModel> importedTypes = new LinkedHashSet<>();
+  private Set<String> resources = new LinkedHashSet<>();
   private Set<ErrorModel> errorModels = new LinkedHashSet<>();
 
   /**
@@ -154,6 +155,14 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
+   * @return an immutable {@link Set} with the paths to all of the resources exposed by the
+   * declared extension
+   */
+  public Set<String> getResources() {
+    return unmodifiableSet(resources);
+  }
+
+  /**
    * Declares that this extension defined the given {@code objectType}
    *
    * @param objectType an {@link ObjectType}
@@ -161,6 +170,18 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   public ExtensionDeclaration addType(ObjectType objectType) {
     types.add(objectType);
+    return this;
+  }
+
+  /**
+   * Declares that this extension contains a resource which can be found
+   * at the relative {@code resourcePath}
+   *
+   * @param resourcePath the relative path to the extension's resource
+   * @return {@code this} declaration
+   */
+  public ExtensionDeclaration addResource(String resourcePath) {
+    resources.add(resourcePath);
     return this;
   }
 

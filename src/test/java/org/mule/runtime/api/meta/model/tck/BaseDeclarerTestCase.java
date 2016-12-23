@@ -12,9 +12,11 @@ import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.metadata.api.builder.WithAnnotation;
 import org.mule.metadata.api.model.BinaryType;
 import org.mule.metadata.api.model.BooleanType;
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.NumberType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.metadata.api.model.StringType;
+import org.mule.runtime.api.message.Attributes;
 
 import java.io.InputStream;
 
@@ -32,6 +34,10 @@ public abstract class BaseDeclarerTestCase {
 
   protected BinaryType getBinaryType() {
     return withType(typeBuilder.binaryType(), InputStream.class).build();
+  }
+
+  protected MetadataType getAttributesType() {
+    return withType(typeBuilder.objectType(), Attributes.class).build();
   }
 
   protected BooleanType getBooleanType() {
