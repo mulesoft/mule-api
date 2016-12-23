@@ -140,6 +140,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   interface DataTypeFunctionTypeBuilder extends DataTypeParamsBuilder {
 
     /**
+     * Sets the return type of the function, {@code null} indicates there's none and is the default value.
      *
      * @param returnType the {@link DataType} of the functions return type
      * @return this builder.
