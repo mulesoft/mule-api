@@ -31,4 +31,11 @@ public interface TypeKeysResolver extends NamedTypeResolver {
    * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   Set<MetadataKey> getKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
+
+  /**
+   * {@inheritDoc}
+   */
+  default String getResolverName() {
+    return "keys";
+  }
 }
