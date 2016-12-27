@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata;
 import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.runtime.api.connection.ConnectionException;
+import org.mule.runtime.api.lifecycle.Disposable;
 
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface MetadataContext {
+public interface MetadataContext extends Disposable {
 
   /**
    * @param <C> Configuration type
