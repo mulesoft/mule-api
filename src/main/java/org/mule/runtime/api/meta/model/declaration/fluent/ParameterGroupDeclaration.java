@@ -25,6 +25,7 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
   private final List<ParameterDeclaration> parameters = new LinkedList<>();
   private List<ExclusiveParametersDeclaration> exclusiveParameters = new LinkedList<>();
   private LayoutModel layoutModel;
+  private boolean showInline = false;
 
   /**
    * {@inheritDoc}
@@ -70,5 +71,13 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
 
   public void setLayoutModel(LayoutModel layoutModel) {
     this.layoutModel = layoutModel;
+  }
+
+  public void showInline(boolean showInline) {
+    this.showInline = showInline;
+  }
+
+  public boolean isShowInline() {
+    return showInline;
   }
 }

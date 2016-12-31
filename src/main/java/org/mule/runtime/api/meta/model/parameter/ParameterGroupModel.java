@@ -52,4 +52,10 @@ public interface ParameterGroupModel extends NamedObject, HasDisplayModel, HasLa
    * @return a {@link List} of {@link ExclusiveParametersModel}
    */
   List<ExclusiveParametersModel> getExclusiveParametersModels();
+
+  /**
+   *
+   * @return
+   */
+  boolean isShowInline();
 }

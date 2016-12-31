@@ -52,6 +52,11 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
     return this;
   }
 
+  public ParameterGroupDeclarer<D> withInlineDefinition(boolean showInline) {
+    declaration.showInline(showInline);
+    return this;
+  }
+
   /**
    * Sets the given {@code layoutModel}
    *
