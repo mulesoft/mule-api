@@ -52,8 +52,16 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
     return this;
   }
 
-  public ParameterGroupDeclarer<D> withInlineDefinition(boolean showInline) {
-    declaration.showInline(showInline);
+  /**
+   * Sets the DSL representation type to be either inline, where the group
+   * is represented as a child element, or implicit, where the group
+   * is shown as a set of attributes in the element.
+   *
+   * @param showInDsl {@code true} if the group is shown in the DSL
+   * @return {@code this} {@link ParameterGroupDeclarer}
+   */
+  public ParameterGroupDeclarer<D> withDslInlineRepresentation(boolean showInDsl) {
+    declaration.showInDsl(showInDsl);
     return this;
   }
 
