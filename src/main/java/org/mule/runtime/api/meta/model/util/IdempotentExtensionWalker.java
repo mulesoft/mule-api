@@ -6,17 +6,18 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
-import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
-import org.mule.runtime.api.util.Reference;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
 import org.mule.runtime.api.meta.model.source.SourceModel;
+import org.mule.runtime.api.util.Reference;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -43,27 +44,27 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   }
 
   @Override
-  public final void onSource(HasSourceModels owner, SourceModel model) {
+  protected final void onSource(HasSourceModels owner, SourceModel model) {
     doOnce(sources, model, this::onSource);
   }
 
   @Override
-  public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+  protected void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
     doOnce(parameterGroups, model, group -> onParameterGroup(owner, group));
   }
 
   @Override
-  public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+  protected void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
     doOnce(parameters, model, p -> onParameter(groupModel, p));
   }
 
   @Override
-  public final void onOperation(HasOperationModels owner, OperationModel model) {
+  protected final void onOperation(HasOperationModels owner, OperationModel model) {
     doOnce(operations, model, this::onOperation);
   }
 
   @Override
-  public final void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+  protected final void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
     doOnce(connectionProviders, model, this::onConnectionProvider);
   }
 

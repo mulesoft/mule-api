@@ -136,6 +136,319 @@ public class ExtensionWalkerTestCase {
     assertCount(parameters, 11);
   }
 
+  @Test
+  public void stopOnConfig() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+        stop();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 0);
+    assertCount(sources, 0);
+    assertCount(providers, 0);
+    assertCount(parameterGroups, 0);
+    assertCount(parameters, 0);
+  }
+
+  @Test
+  public void stopOnOperation() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+        stop();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 1);
+    assertCount(sources, 1);
+    assertCount(providers, 1);
+    assertCount(parameterGroups, 5);
+    assertCount(parameters, 5);
+  }
+
+  @Test
+  public void stopOnConnection() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+        stop();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 0);
+    assertCount(sources, 0);
+    assertCount(providers, 1);
+    assertCount(parameterGroups, 0);
+    assertCount(parameters, 0);
+  }
+
+  @Test
+  public void stopOnSource() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+        stop();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 0);
+    assertCount(sources, 1);
+    assertCount(providers, 1);
+    assertCount(parameterGroups, 2);
+    assertCount(parameters, 2);
+  }
+
+  @Test
+  public void stopOnGroup() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+        stop();
+
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 0);
+    assertCount(sources, 0);
+    assertCount(providers, 1);
+    assertCount(parameterGroups, 1);
+    assertCount(parameters, 0);
+  }
+
+  @Test
+  public void stopOnParameter() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+        stop();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 0);
+    assertCount(sources, 0);
+    assertCount(providers, 1);
+    assertCount(parameterGroups, 1);
+    assertCount(parameters, 1);
+  }
+
   private void assertCount(AtomicInteger actual, int expected) {
     assertThat(actual.get(), is(expected));
   }
