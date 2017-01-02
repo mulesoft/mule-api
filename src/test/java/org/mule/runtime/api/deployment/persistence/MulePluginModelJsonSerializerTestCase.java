@@ -12,20 +12,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import org.mule.runtime.api.deployment.meta.MulePluginLoaderDescriptor;
+import org.mule.runtime.api.deployment.meta.MulePluginModel;
+import org.mule.runtime.api.deployment.meta.MulePluginModel.MulePluginModelBuilder;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.apache.commons.io.IOUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.mule.runtime.api.deployment.meta.MulePluginLoaderDescriptor;
-import org.mule.runtime.api.deployment.meta.MulePluginModel;
-import org.mule.runtime.api.deployment.meta.MulePluginModelBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.io.IOUtils;
+import org.junit.Before;
+import org.junit.Test;
 
 
 public class MulePluginModelJsonSerializerTestCase {

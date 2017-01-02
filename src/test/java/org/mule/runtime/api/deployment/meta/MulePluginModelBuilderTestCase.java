@@ -9,6 +9,8 @@ package org.mule.runtime.api.deployment.meta;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.mule.runtime.api.deployment.meta.MulePluginModel.MulePluginModelBuilder;
+
 import org.junit.Before;
 import org.junit.Test;
 
