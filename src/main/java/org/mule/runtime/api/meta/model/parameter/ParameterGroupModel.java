@@ -35,7 +35,7 @@ public interface ParameterGroupModel extends NamedObject, HasDisplayModel, HasLa
   /**
    * Group name for parameters that are for controling the opertion's output
    */
-  String OUTPUT = "Advanced";
+  String OUTPUT = "Output";
 
   /**
    * Group name for parameters that are considered to be part of a connection configuration.
