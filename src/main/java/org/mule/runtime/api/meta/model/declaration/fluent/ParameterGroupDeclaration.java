@@ -25,6 +25,7 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
   private final List<ParameterDeclaration> parameters = new LinkedList<>();
   private List<ExclusiveParametersDeclaration> exclusiveParameters = new LinkedList<>();
   private LayoutModel layoutModel;
+  private boolean showInDsl = false;
 
   /**
    * {@inheritDoc}
@@ -70,5 +71,23 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
 
   public void setLayoutModel(LayoutModel layoutModel) {
     this.layoutModel = layoutModel;
+  }
+
+  /**
+   * Sets the declaration of whether this {@link ParameterDeclaration} represents
+   * a {@link ParameterGroupModel} that will be shown inline in the DSL or instead
+   * is represented as a set of standalone attributes.
+   *
+   * @param showInDsl {@code true} if the group should be shown explicitly inline in the DSL
+   */
+  public void showInDsl(boolean showInDsl) {
+    this.showInDsl = showInDsl;
+  }
+
+  /**
+   * @return {@code true} if the {@link ParameterGroupModel} has to be shown inline in the DSL
+   */
+  public boolean isShowInDsl() {
+    return showInDsl;
   }
 }
