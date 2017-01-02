@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent.util;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConnectedDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclaration;
@@ -34,6 +35,8 @@ import org.mule.runtime.api.meta.model.declaration.fluent.WithSourcesDeclaration
  */
 public abstract class DeclarationWalker {
 
+  private boolean stopped = false;
+
   /**
    * Navigates the given {@code extensionDeclaration} and invokes the
    * other public method's in this class as the navigation
@@ -42,21 +45,33 @@ public abstract class DeclarationWalker {
    * @param extensionDeclaration the model to navigate
    */
   public final void walk(ExtensionDeclaration extensionDeclaration) {
-    if (extensionDeclaration == null) {
-      throw new IllegalArgumentException("Cannot walk a null declaration");
+    checkArgument(extensionDeclaration != null, "Cannot walk a null declaration");
+    this.stopped = false;
+
+    for (ConfigurationDeclaration configuration : extensionDeclaration.getConfigurations()) {
+      if (stopped) {
+        return;
+      }
+      onConfiguration(configuration);
+      ifContinue(() -> walkConnectionProviders(configuration));
+      ifContinue(() -> walkParameters(configuration));
+      ifContinue(() -> walkSources(configuration));
+      ifContinue(() -> walkOperations(configuration));
     }
 
-    extensionDeclaration.getConfigurations().forEach(configuration -> {
-      onConfiguration(configuration);
-      walkConnectionProviders(configuration);
-      walkParameters(configuration);
-      walkSources(configuration);
-      walkOperations(configuration);
-    });
+    ifContinue(() -> walkConnectionProviders(extensionDeclaration));
+    ifContinue(() -> walkSources(extensionDeclaration));
+    ifContinue(() -> walkOperations(extensionDeclaration));
+  }
 
-    walkConnectionProviders(extensionDeclaration);
-    walkSources(extensionDeclaration);
-    walkOperations(extensionDeclaration);
+  /**
+   * When invoked, the traversal of the {@link ExtensionDeclaration} will
+   * stop once the current visit is completed.
+   * This will not break the execution within the invoking method,
+   * but instead avoid further traversal of the model from that point on.
+   */
+  protected final void stop() {
+    stopped = true;
   }
 
   /**
@@ -65,84 +80,106 @@ public abstract class DeclarationWalker {
    *
    * @param declaration a {@link ConfigurationDeclaration}
    */
-  public void onConfiguration(ConfigurationDeclaration declaration) {}
+  protected void onConfiguration(ConfigurationDeclaration declaration) {}
 
   /**
    * Invoked when an {@link OperationDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *
-   * @param owner       The declaration that owns the operation
+   *  @param owner       The declaration that owns the operation
    * @param declaration the {@link WithOperationsDeclaration}
    */
-  public void onOperation(WithOperationsDeclaration owner, OperationDeclaration declaration) {}
+  protected void onOperation(WithOperationsDeclaration owner, OperationDeclaration declaration) {}
 
   /**
    * Invoked when an {@link ConnectedDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *
-   * @param owner       The declaration that owns the provider
+   *  @param owner       The declaration that owns the provider
    * @param declaration the {@link ConnectionProviderDeclaration}
    */
-  public void onConnectionProvider(ConnectedDeclaration owner, ConnectionProviderDeclaration declaration) {}
+  protected void onConnectionProvider(ConnectedDeclaration owner, ConnectionProviderDeclaration declaration) {}
 
   /**
    * Invoked when an {@link SourceDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *
-   * @param owner       The declaration that owns the source
+   *  @param owner       The declaration that owns the source
    * @param declaration the {@link SourceDeclaration}
    */
-  public void onSource(WithSourcesDeclaration owner, SourceDeclaration declaration) {}
+  protected void onSource(WithSourcesDeclaration owner, SourceDeclaration declaration) {}
 
   /**
    * Invoked when an {@link ParameterGroupDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *
-   * @param owner       The declaration that owns the parameter
+   *  @param owner       The declaration that owns the parameter
    * @param declaration the {@link ParameterGroupDeclaration}
    */
-  public void onParameterGroup(ParameterizedDeclaration owner, ParameterGroupDeclaration declaration) {}
+  protected void onParameterGroup(ParameterizedDeclaration owner, ParameterGroupDeclaration declaration) {}
 
   /**
    * Invoked when an {@link ParameterDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *
-   * @param owner          The declaration that owns the parameter
+   *  @param owner          The declaration that owns the parameter
    * @param parameterGroup the group to which the declaration belongs
    * @param declaration    the {@link ParameterDeclaration}
    */
-  public void onParameter(ParameterizedDeclaration owner, ParameterGroupDeclaration parameterGroup,
-                          ParameterDeclaration declaration) {}
+  protected void onParameter(ParameterizedDeclaration owner, ParameterGroupDeclaration parameterGroup,
+                             ParameterDeclaration declaration) {}
 
   private void walkSources(WithSourcesDeclaration declaration) {
-    declaration.getMessageSources().forEach(source -> {
+    for (Object source : declaration.getMessageSources()) {
+      if (stopped) {
+        return;
+      }
       SourceDeclaration sourceDeclaration = (SourceDeclaration) source;
       onSource(declaration, sourceDeclaration);
-      walkParameters(sourceDeclaration);
-    });
+      ifContinue(() -> walkParameters(sourceDeclaration));
+    }
   }
 
   private void walkParameters(ParameterizedDeclaration declaration) {
-    declaration.getParameterGroups().forEach(g -> {
+    for (Object g : declaration.getParameterGroups()) {
+      if (stopped) {
+        return;
+      }
       ParameterGroupDeclaration group = (ParameterGroupDeclaration) g;
       onParameterGroup(declaration, group);
-      group.getParameters().forEach(p -> onParameter(declaration, group, p));
-    });
+      ifContinue(() -> walkGroupParameters(declaration, group));
+    }
+  }
+
+  private void walkGroupParameters(ParameterizedDeclaration declaration, ParameterGroupDeclaration group) {
+    for (ParameterDeclaration p : group.getParameters()) {
+      if (stopped) {
+        return;
+      }
+      onParameter(declaration, group, p);
+    }
   }
 
   private void walkConnectionProviders(ConnectedDeclaration declaration) {
-    declaration.getConnectionProviders().stream().forEach(provider -> {
+    for (Object provider : declaration.getConnectionProviders()) {
+      if (stopped) {
+        return;
+      }
       final ConnectionProviderDeclaration providerDeclaration = (ConnectionProviderDeclaration) provider;
       onConnectionProvider(declaration, providerDeclaration);
-      walkParameters(providerDeclaration);
-    });
+      ifContinue(() -> walkParameters(providerDeclaration));
+    }
   }
 
   private void walkOperations(WithOperationsDeclaration model) {
-    model.getOperations().stream().forEach(operation -> {
+    for (Object operation : model.getOperations()) {
+      if (stopped) {
+        return;
+      }
       final OperationDeclaration operationDeclaration = (OperationDeclaration) operation;
       onOperation(model, operationDeclaration);
-      walkParameters(operationDeclaration);
-    });
+      ifContinue(() -> walkParameters(operationDeclaration));
+    }
+  }
+
+  private void ifContinue(Runnable action) {
+    if (!stopped) {
+      action.run();
+    }
   }
 }

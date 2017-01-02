@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
@@ -34,6 +35,8 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  */
 public abstract class ExtensionWalker {
 
+  private boolean stopped;
+
   /**
    * Navigates the given {@code extensionModel} and invokes the
    * other public method's in this class as the navigation
@@ -42,21 +45,33 @@ public abstract class ExtensionWalker {
    * @param extensionModel the model to navigate
    */
   public final void walk(ExtensionModel extensionModel) {
-    if (extensionModel == null) {
-      throw new IllegalArgumentException("Cannot walk a null model");
+    checkArgument(extensionModel != null, "Cannot walk a null model");
+    this.stopped = false;
+
+    for (ConfigurationModel model : extensionModel.getConfigurationModels()) {
+      if (stopped) {
+        return;
+      }
+      onConfiguration(model);
+      ifContinue(() -> walkConnectionProviders(model));
+      ifContinue(() -> walkParameters(model));
+      ifContinue(() -> walkSources(model));
+      ifContinue(() -> walkOperations(model));
     }
 
-    extensionModel.getConfigurationModels().forEach(model -> {
-      onConfiguration(model);
-      walkConnectionProviders(model);
-      walkParameters(model);
-      walkSources(model);
-      walkOperations(model);
-    });
+    ifContinue(() -> walkConnectionProviders(extensionModel));
+    ifContinue(() -> walkSources(extensionModel));
+    ifContinue(() -> walkOperations(extensionModel));
+  }
 
-    walkConnectionProviders(extensionModel);
-    walkSources(extensionModel);
-    walkOperations(extensionModel);
+  /**
+   * When invoked, the traversal of the {@link ExtensionModel} will
+   * stop once the current visit is completed.
+   * This will not break the execution within the invoking method,
+   * but instead avoid further traversal of the model from that point on.
+   */
+  protected final void stop() {
+    stopped = true;
   }
 
   /**
@@ -65,81 +80,104 @@ public abstract class ExtensionWalker {
    *
    * @param model a {@link ConfigurationModel}
    */
-  public void onConfiguration(ConfigurationModel model) {}
+  protected void onConfiguration(ConfigurationModel model) {}
 
   /**
    * Invoked when an {@link OperationModel} is found in the
    * traversed {@code extensionModel}
-   *
-   * @param owner The component that owns the operation
+   *  @param owner The component that owns the operation
    * @param model the {@link OperationModel}
    */
-  public void onOperation(HasOperationModels owner, OperationModel model) {}
+  protected void onOperation(HasOperationModels owner, OperationModel model) {}
 
   /**
    * Invoked when an {@link ConnectionProviderModel} is found in the
    * traversed {@code extensionModel}
-   *
-   * @param owner The component that owns the provider
+   *  @param owner The component that owns the provider
    * @param model the {@link ConnectionProviderModel}
    */
-  public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {}
+  protected void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {}
 
   /**
    * Invoked when an {@link SourceModel} is found in the
    * traversed {@code extensionModel}
-   *
-   * @param owner The component that owns the source
+   *  @param owner The component that owns the source
    * @param model the {@link SourceModel}
    */
-  public void onSource(HasSourceModels owner, SourceModel model) {}
+  protected void onSource(HasSourceModels owner, SourceModel model) {}
 
   /**
    * Invoked when an {@link ParameterGroupModel} is found in the
    * traversed {@code extensionModel}
-   *
-   * @param owner The component that owns the source
+   *  @param owner The component that owns the source
    * @param model the {@link ParameterGroupModel}
    */
-  public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {}
+  protected void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {}
 
   /**
    * Invoked when an {@link ParameterModel} is found in the
    * traversed {@code extensionModel}
-   *
-   * @param owner      The component that owns the parameter
+   *  @param owner      The component that owns the parameter
    * @param groupModel the {@link ParameterGroupModel} in which the {@code model} is contained
    * @param model      the {@link ParameterModel}
    */
-  public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {}
+  protected void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {}
 
   private void walkSources(HasSourceModels model) {
-    model.getSourceModels().forEach(source -> {
+    for (SourceModel source : model.getSourceModels()) {
+      if (stopped) {
+        return;
+      }
       onSource(model, source);
-      walkParameters(source);
-      source.getSuccessCallback().ifPresent(this::walkParameters);
-      source.getErrorCallback().ifPresent(this::walkParameters);
-    });
+      ifContinue(() -> walkParameters(source));
+      ifContinue(() -> source.getSuccessCallback().ifPresent(this::walkParameters));
+      ifContinue(() -> source.getErrorCallback().ifPresent(this::walkParameters));
+    }
   }
 
   private void walkParameters(ParameterizedModel model) {
-    model.getParameterGroupModels().forEach(group -> {
+    for (ParameterGroupModel group : model.getParameterGroupModels()) {
+      if (stopped) {
+        return;
+      }
       onParameterGroup(model, group);
-      group.getParameterModels().forEach(p -> onParameter(model, group, p));
-    });
+      ifContinue(() -> walkGroupParameters(model, group));
+    }
+  }
+
+  private void walkGroupParameters(ParameterizedModel model, ParameterGroupModel group) {
+    for (ParameterModel p : group.getParameterModels()) {
+      if (stopped) {
+        return;
+      }
+      onParameter(model, group, p);
+    }
   }
 
   private void walkConnectionProviders(HasConnectionProviderModels model) {
-    model.getConnectionProviders().stream().forEach(provider -> {
+    for (ConnectionProviderModel provider : model.getConnectionProviders()) {
+      if (stopped) {
+        return;
+      }
       onConnectionProvider(model, provider);
-      walkParameters(provider);
-    });
+      ifContinue(() -> walkParameters(provider));
+    }
   }
 
   private void walkOperations(HasOperationModels model) {
-    model.getOperationModels().stream().forEach(operation -> {
+    for (OperationModel operation : model.getOperationModels()) {
+      if (stopped) {
+        return;
+      }
       onOperation(model, operation);
-      walkParameters(operation);
-    });
+      ifContinue(() -> walkParameters(operation));
+    }
   }
+
+  private void ifContinue(Runnable action) {
+    if (!stopped) {
+      action.run();
+    }
+  }
+
 }
