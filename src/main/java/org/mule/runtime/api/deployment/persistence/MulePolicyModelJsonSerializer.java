@@ -6,18 +6,18 @@
  */
 package org.mule.runtime.api.deployment.persistence;
 
-import org.mule.runtime.api.deployment.meta.MulePluginModel;
+import org.mule.runtime.api.deployment.meta.MulePolicyModel;
 
 /**
- * Serializer capable of marshalling an {@link MulePluginModel} instance
+ * Serializer capable of marshalling an {@link MulePolicyModel} instance
  * to {@code JSON} format and back
  *
  * @since 1.0
  */
-public class MulePluginModelJsonSerializer extends AbstractMuleArtifactModelJsonSerializer<MulePluginModel> {
+public class MulePolicyModelJsonSerializer extends AbstractMuleArtifactModelJsonSerializer<MulePolicyModel> {
 
   @Override
-  protected Class<MulePluginModel> getParameterizedClass() {
-    return MulePluginModel.class;
+  protected Class getParameterizedClass() {
+    return MulePolicyModel.class;
   }
 }
