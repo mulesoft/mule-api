@@ -12,7 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
-import org.mule.runtime.api.deployment.meta.MulePluginLoaderDescriptor;
+import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor;
 import org.mule.runtime.api.deployment.meta.MulePluginModel;
 import org.mule.runtime.api.deployment.meta.MulePluginModel.MulePluginModelBuilder;
 
@@ -132,7 +132,7 @@ public class MulePluginModelJsonSerializerTestCase {
 
   private void assertExtensionModel(MulePluginModel deserialize) {
     assertThat(deserialize.getExtensionModelLoaderDescriptor().isPresent(), is(true));
-    final MulePluginLoaderDescriptor extensionModelDescriptor = deserialize.getExtensionModelLoaderDescriptor().get();
+    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getExtensionModelLoaderDescriptor().get();
     assertThat(extensionModelDescriptor.getId(), is("annotations"));
     assertThat(extensionModelDescriptor.getAttributes().size(), is(1));
     assertThat(extensionModelDescriptor.getAttributes().get("class"),
@@ -141,7 +141,7 @@ public class MulePluginModelJsonSerializerTestCase {
 
   private void assertClassLoaderModel(MulePluginModel deserialize) {
     assertThat(deserialize.getClassLoaderModelLoaderDescriptor().isPresent(), is(true));
-    final MulePluginLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor().get();
+    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor().get();
     assertThat(extensionModelDescriptor.getId(), is("maven"));
     assertThat(extensionModelDescriptor.getAttributes().size(), is(2));
     final Object exportedPackages = extensionModelDescriptor.getAttributes().get("exportedPackages");
