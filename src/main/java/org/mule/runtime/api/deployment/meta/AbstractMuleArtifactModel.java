@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import java.util.Optional;
 
 /**
- * Base class for creating models for Mule artifacts from json describer files.
+ * Base class for creating models for Mule artifacts from JSON describer files.
  * <p/>
  * The idea behind this object is to just load some bits of information that later each "loader" will consume to
  * generate things like {@link ClassLoader}, {@link ExtensionModel}, etc.
