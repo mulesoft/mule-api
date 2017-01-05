@@ -1,4 +1,11 @@
 {
   "name": "plugin-name",
-  "minMuleVersion": "4.2.3"
+  "minMuleVersion": "4.2.3",
+  "bundleDescriptorLoader": {
+    "id": "bundleLoaderDescriptorID",
+    "attributes": {
+      "bundleDescriptorLoaderKey1": "bundleDescriptorLoaderValue1",
+      "bundleDescriptorLoaderKey2": "bundleDescriptorLoaderValue2"
+    }
+  }
 }

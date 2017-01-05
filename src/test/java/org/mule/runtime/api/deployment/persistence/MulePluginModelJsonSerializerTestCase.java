@@ -10,6 +10,7 @@ package org.mule.runtime.api.deployment.persistence;
 import static java.util.Arrays.asList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor;
@@ -23,17 +24,16 @@ import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
 
-public class MulePluginModelJsonSerializerTestCase {
-
-  private static final String ID = "id";
-  private static final String ATTRIBUTES = "attributes";
+public class MulePluginModelJsonSerializerTestCase extends AbstractMuleArtifactModelJsonSerializerTestCase {
 
   private MulePluginModelJsonSerializer mulePluginModelJsonSerializer;
 
@@ -52,9 +52,14 @@ public class MulePluginModelJsonSerializerTestCase {
     final String describerClassLoaderModelId = "annotations";
     final String exportedPackagesKey = "exportedPackages";
     final List<String> exportedPackagesAttributeValue = asList("org.mule.extension.api", "org.mule.extension.api.exception");
+    Map<String, Object> bundleDescriptorAttributes = new HashMap<>();
+    bundleDescriptorAttributes.put(BUNDLE_DESCRIPTOR_LOADER_KEY_1, BUNDLE_DESCRIPTOR_LOADER_VALUE_1);
+    bundleDescriptorAttributes.put(BUNDLE_DESCRIPTOR_LOADER_KEY_2, BUNDLE_DESCRIPTOR_LOADER_VALUE_2);
 
     final MulePluginModelBuilder mulePluginModelBuilder =
-        new MulePluginModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion);
+        new MulePluginModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion)
+            .withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID,
+                                                                         bundleDescriptorAttributes));
     mulePluginModelBuilder.withExtensionModelDescriber().setId(describerExtensionModelId).addProperty(classAttributeKey,
                                                                                                       classAttributeValue);
     mulePluginModelBuilder.withClassLoaderModelDescriber().setId(describerClassLoaderModelId).addProperty(exportedPackagesKey,
@@ -77,28 +82,38 @@ public class MulePluginModelJsonSerializerTestCase {
     List<String> list = new ArrayList<>();
     attributes.iterator().forEachRemaining(jsonElement -> list.add(jsonElement.getAsString()));
     assertThat(list, containsInAnyOrder(exportedPackagesAttributeValue.toArray()));
+
+    JsonObject bundleDescriptor = actualElement.get("bundleDescriptorLoader").getAsJsonObject();
+    assertThat(bundleDescriptor.get("id").getAsString(), is(BUNDLE_DESCRIPTOR_LOADER_ID));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().entrySet().size(), equalTo(2));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_1).getAsString(),
+               equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_1));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_2).getAsString(),
+               equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_2));
   }
 
   @Test
   public void deserializeWithExtensionModel() throws IOException {
     InputStream resource = getClass().getResourceAsStream("/descriptor/plugin-descriptor-with-ext-model.json");
 
-    MulePluginModel deserialize = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
+    MulePluginModel deserialized = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
 
-    assertNameAndMinMuleVersion(deserialize);
-    assertThat(deserialize.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
-    assertExtensionModel(deserialize);
+    assertNameAndMinMuleVersion(deserialized);
+    assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
+    assertThat(deserialized.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
+    assertExtensionModel(deserialized);
   }
 
   @Test
   public void deserializeWithClassLoaderModel() throws IOException {
     InputStream resource = getClass().getResourceAsStream("/descriptor/plugin-descriptor-with-classloader-model.json");
 
-    MulePluginModel deserialize = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
+    MulePluginModel deserialized = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
 
-    assertNameAndMinMuleVersion(deserialize);
-    assertThat(deserialize.getExtensionModelLoaderDescriptor().isPresent(), is(false));
-    assertClassLoaderModel(deserialize);
+    assertNameAndMinMuleVersion(deserialized);
+    assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
+    assertThat(deserialized.getExtensionModelLoaderDescriptor().isPresent(), is(false));
+    assertClassLoaderModel(deserialized);
   }
 
   @Test
@@ -106,11 +121,12 @@ public class MulePluginModelJsonSerializerTestCase {
     InputStream resource =
         getClass().getResourceAsStream("/descriptor/plugin-descriptor-with-ext-model-and-classloader-model.json");
 
-    MulePluginModel deserialize = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
+    MulePluginModel deserialized = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
 
-    assertNameAndMinMuleVersion(deserialize);
-    assertExtensionModel(deserialize);
-    assertClassLoaderModel(deserialize);
+    assertNameAndMinMuleVersion(deserialized);
+    assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
+    assertExtensionModel(deserialized);
+    assertClassLoaderModel(deserialized);
   }
 
   @Test
@@ -118,11 +134,12 @@ public class MulePluginModelJsonSerializerTestCase {
     InputStream resource =
         getClass().getResourceAsStream("/descriptor/plugin-descriptor-clean.json");
 
-    MulePluginModel deserialize = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
+    MulePluginModel deserialized = mulePluginModelJsonSerializer.deserialize(IOUtils.toString(resource));
 
-    assertNameAndMinMuleVersion(deserialize);
-    assertThat(deserialize.getExtensionModelLoaderDescriptor().isPresent(), is(false));
-    assertThat(deserialize.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
+    assertNameAndMinMuleVersion(deserialized);
+    assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
+    assertThat(deserialized.getExtensionModelLoaderDescriptor().isPresent(), is(false));
+    assertThat(deserialized.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
   }
 
   private void assertNameAndMinMuleVersion(MulePluginModel deserialize) {
@@ -151,5 +168,4 @@ public class MulePluginModelJsonSerializerTestCase {
     assertThat(exportedResources, is(instanceOf(List.class)));
     assertThat((List<String>) exportedResources, containsInAnyOrder("/META-INF/some.file", "/META-INF/other.file"));
   }
-
 }
