@@ -15,16 +15,16 @@ package org.mule.runtime.api.meta.model;
  *
  * @since 1.0
  */
-public final class ElementDslModel {
+public final class ParameterDslConfiguration {
 
   /**
-   * A builder which allows creating instance of {@link ElementDslModel}
+   * A builder which allows creating instance of {@link ParameterDslConfiguration}
    *
    * @since 1.0
    */
   public static final class ElementDslModelBuilder {
 
-    private ElementDslModel product = new ElementDslModel();
+    private ParameterDslConfiguration product = new ParameterDslConfiguration();
 
     private ElementDslModelBuilder() {}
 
@@ -64,7 +64,7 @@ public final class ElementDslModel {
     /**
      * @return the generated model
      */
-    public ElementDslModel build() {
+    public ParameterDslConfiguration build() {
       return product;
     }
   }
@@ -72,7 +72,7 @@ public final class ElementDslModel {
   /**
    * @return a new instance set with default values
    */
-  public static ElementDslModel getDefaultInstance() {
+  public static ParameterDslConfiguration getDefaultInstance() {
     return builder().build();
   }
 
@@ -84,10 +84,10 @@ public final class ElementDslModel {
   }
 
   /**
-   * @param prototype a prototype {@link ElementDslModel}
+   * @param prototype a prototype {@link ParameterDslConfiguration}
    * @return a new builder initialised to match the state of the given {@code prototype}
    */
-  public static ElementDslModelBuilder builder(ElementDslModel prototype) {
+  public static ElementDslModelBuilder builder(ParameterDslConfiguration prototype) {
     return builder()
         .allowsInlineDefinition(prototype.allowsInlineDefinition())
         .allowsReferences(prototype.allowsReferences())

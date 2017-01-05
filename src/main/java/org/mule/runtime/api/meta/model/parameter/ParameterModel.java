@@ -13,7 +13,7 @@ import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.Typed;
 import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.ElementDslModel;
+import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
@@ -68,10 +68,10 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
   Object getDefaultValue();
 
   /**
-   * @return A {@link ElementDslModel }which describes the language which
+   * @return A {@link ParameterDslConfiguration }which describes the language which
    * allows configuring this parameter
    */
-  ElementDslModel getDslModel();
+  ParameterDslConfiguration getDslConfiguration();
 
   /**
    * @return this parameter's role
