@@ -132,6 +132,8 @@ public abstract class DeclarationWalker {
       SourceDeclaration sourceDeclaration = (SourceDeclaration) source;
       onSource(declaration, sourceDeclaration);
       ifContinue(() -> walkParameters(sourceDeclaration));
+      ifContinue(() -> sourceDeclaration.getSuccessCallback().ifPresent(this::walkParameters));
+      ifContinue(() -> sourceDeclaration.getErrorCallback().ifPresent(this::walkParameters));
     }
   }
 
