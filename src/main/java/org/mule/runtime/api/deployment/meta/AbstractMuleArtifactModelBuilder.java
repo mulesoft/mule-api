@@ -7,6 +7,12 @@
 
 package org.mule.runtime.api.deployment.meta;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import java.util.Optional;
+
 /**
  * A builder to create instances of {@link AbstractMuleArtifactModel} implementations.
  *
@@ -19,6 +25,8 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
 
   private String name;
   private String minMuleVersion;
+  private MuleArtifactLoaderDescriptor bundleDescriptorLoader;
+  private Optional<MuleArtifactLoaderDescriptorBuilder> classLoaderDescriptorBuilder = empty();
 
   /**
    * Sets the describer's name
@@ -54,6 +62,39 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
 
   public String getMinMuleVersion() {
     return minMuleVersion;
+  }
+
+  public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
+    return classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null;
+  }
+
+  /**
+   * Sets the bundle descriptor loader for the artifact
+   *
+   * @param bundleDescriptorLoader describes the loader for the bundle descriptor. Non null
+   * @return a {@link MuleArtifactLoaderDescriptor} to populate the {@link ClassLoader} describer with the ID and any additional
+   *         attributes
+   */
+  public T withBundleDescriptorLoader(MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
+    checkArgument(bundleDescriptorLoader != null, "bundleDescriptorLoader cannot be null");
+    this.bundleDescriptorLoader = bundleDescriptorLoader;
+
+    return getThis();
+  }
+
+  /**
+   * @return a {@link MuleArtifactLoaderDescriptorBuilder} to populate the {@link ClassLoader} describer with the ID and
+   * any additional attributes
+   */
+  public MuleArtifactLoaderDescriptorBuilder withClassLoaderModelDescriber() {
+    if (!classLoaderDescriptorBuilder.isPresent()) {
+      classLoaderDescriptorBuilder = of(new MuleArtifactLoaderDescriptorBuilder());
+    }
+    return classLoaderDescriptorBuilder.get();
+  }
+
+  public MuleArtifactLoaderDescriptor getBundleDescriptorLoader() {
+    return bundleDescriptorLoader;
   }
 
   /**

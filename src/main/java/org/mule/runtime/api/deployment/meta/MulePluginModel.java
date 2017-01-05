@@ -28,8 +28,9 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
 
   private MulePluginModel(String name, String minMuleVersion,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                          MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor);
+                          MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor,
+                          MuleArtifactLoaderDescriptor bundleDescriptor) {
+    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor);
     this.extensionModelLoaderDescriptor = extensionModelLoaderDescriptor;
   }
 
@@ -44,23 +45,11 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
    */
   public static class MulePluginModelBuilder extends AbstractMuleArtifactModelBuilder<MulePluginModelBuilder, MulePluginModel> {
 
-    private Optional<MuleArtifactLoaderDescriptorBuilder> classLoaderDescriptorBuilder = empty();
     private Optional<MuleArtifactLoaderDescriptorBuilder> extensionModelDescriptorBuilder = empty();
 
     @Override
     protected MulePluginModelBuilder getThis() {
       return this;
-    }
-
-    /**
-     * @return a {@link MuleArtifactLoaderDescriptorBuilder} to populate the {@link ClassLoader} describer with the ID and
-     * any additional attributes
-     */
-    public MuleArtifactLoaderDescriptorBuilder withClassLoaderModelDescriber() {
-      if (!classLoaderDescriptorBuilder.isPresent()) {
-        classLoaderDescriptorBuilder = of(new MuleArtifactLoaderDescriptorBuilder());
-      }
-      return classLoaderDescriptorBuilder.get();
     }
 
     /**
@@ -80,10 +69,13 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
     public MulePluginModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
+      checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
+
       return new MulePluginModel(getName(), getMinMuleVersion(),
-                                 classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null,
+                                 getClassLoaderModelDescriptorLoader(),
                                  extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
-                                     : null);
+                                     : null,
+                                 getBundleDescriptorLoader());
     }
   }
 }

@@ -6,20 +6,29 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static java.util.Collections.emptyMap;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-
+import static org.junit.rules.ExpectedException.none;
 import org.mule.runtime.api.deployment.meta.MulePluginModel.MulePluginModelBuilder;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class MulePluginModelBuilderTestCase {
 
   private static final String ARTIFACT_NAME = "artifact-name";
   private static final String MULE_VERSION = "4.0.0";
   private static final String DESCRIBER_ID = "ID-1";
+  private static final String BUNDLE_DESCRIPTOR_LOADER_ID = "descriptorLoaderId";
+
   private MulePluginModelBuilder builder;
+
+  @Rule
+  public ExpectedException expectedException = none();
 
   @Before
   public void before() {
@@ -30,6 +39,7 @@ public class MulePluginModelBuilderTestCase {
   public void buildWithExtensionModelDescriptor() {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
     builder.withExtensionModelDescriber().setId(DESCRIBER_ID);
+    builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));
@@ -37,39 +47,59 @@ public class MulePluginModelBuilderTestCase {
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().isPresent(), is(true));
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().get().getId(), is(DESCRIBER_ID));
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().get().getAttributes().size(), is(0));
+    assertThat(mulePluginModel.getBundleDescriptorLoader().getId(), equalTo(BUNDLE_DESCRIPTOR_LOADER_ID));
+    assertThat(mulePluginModel.getBundleDescriptorLoader().getAttributes(), is(emptyMap()));
   }
 
   @Test
   public void buildWithoutExtensionModelDescriptor() {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
+    builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));
     assertThat(mulePluginModel.getMinMuleVersion(), is(MULE_VERSION));
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().isPresent(), is(false));
+    assertThat(mulePluginModel.getBundleDescriptorLoader().getId(), equalTo(BUNDLE_DESCRIPTOR_LOADER_ID));
+    assertThat(mulePluginModel.getBundleDescriptorLoader().getAttributes(), is(emptyMap()));
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
+  public void buildWithoutBundleDescriptorLoader() {
+    builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
+    builder.withExtensionModelDescriber().setId(DESCRIBER_ID);
+
+    expectedException.expect(IllegalArgumentException.class);
+    builder.build();
+  }
+
+  @Test
   public void blankName() {
     builder.setName(null);
+
+    expectedException.expect(IllegalArgumentException.class);
     builder.build();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void blankVersion() {
     builder.setMinMuleVersion(null);
+
+    expectedException.expect(IllegalArgumentException.class);
     builder.build();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void blankExtensionModelDescriberId() {
     builder.withExtensionModelDescriber().setId(null);
+
+    expectedException.expect(IllegalArgumentException.class);
     builder.build();
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void blankExtensionModelDescriberAttribute() {
+    expectedException.expect(IllegalArgumentException.class);
     builder.withExtensionModelDescriber().setId("id").addProperty(null, "a value");
-    builder.build();
   }
 }

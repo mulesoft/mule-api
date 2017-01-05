@@ -8,7 +8,6 @@
 package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Optional.ofNullable;
-
 import org.mule.runtime.api.meta.model.ExtensionModel;
 
 import java.util.Optional;
@@ -26,6 +25,7 @@ public abstract class AbstractMuleArtifactModel {
   private final String name;
   private final String minMuleVersion;
   private final MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor;
+  private final MuleArtifactLoaderDescriptor bundleDescriptorLoader;
 
   /**
    * Creates a new model
@@ -33,13 +33,16 @@ public abstract class AbstractMuleArtifactModel {
    * @param name name of the artifact
    * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
+   * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
    */
   protected AbstractMuleArtifactModel(
                                       String name, String minMuleVersion,
-                                      MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor) {
+                                      MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
+                                      MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
     this.minMuleVersion = minMuleVersion;
-    this.classLoaderModelLoaderDescriptor = classLoaderModelLoaderDescriptor;
     this.name = name;
+    this.classLoaderModelLoaderDescriptor = classLoaderModelLoaderDescriptor;
+    this.bundleDescriptorLoader = bundleDescriptorLoader;
   }
 
   public String getName() {
@@ -48,6 +51,10 @@ public abstract class AbstractMuleArtifactModel {
 
   public String getMinMuleVersion() {
     return minMuleVersion;
+  }
+
+  public MuleArtifactLoaderDescriptor getBundleDescriptorLoader() {
+    return bundleDescriptorLoader;
   }
 
   public Optional<MuleArtifactLoaderDescriptor> getClassLoaderModelLoaderDescriptor() {

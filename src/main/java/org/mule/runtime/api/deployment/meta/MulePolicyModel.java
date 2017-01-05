@@ -18,8 +18,9 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 public class MulePolicyModel extends AbstractMuleArtifactModel {
 
   private MulePolicyModel(String name, String minMuleVersion,
-                          MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor);
+                          MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
+                          MuleArtifactLoaderDescriptor bundleDescriptor) {
+    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor);
   }
 
   /**
@@ -30,21 +31,8 @@ public class MulePolicyModel extends AbstractMuleArtifactModel {
   public static class MulePolicyModelBuilder extends AbstractMuleArtifactModelBuilder<MulePolicyModelBuilder, MulePolicyModel> {
 
 
-    private MuleArtifactLoaderDescriptor classLoaderDescriptorBuilder;
-
     @Override
     protected MulePolicyModelBuilder getThis() {
-      return this;
-    }
-
-    /**
-     * @return a {@link MuleArtifactLoaderDescriptor} to populate the {@link ClassLoader} describer with the ID and any additional
-     *         attributes
-     */
-    public MulePolicyModelBuilder withClassLoaderModelDescriber(MuleArtifactLoaderDescriptor policyClassLoaderModelDescriber) {
-      checkArgument(policyClassLoaderModelDescriber != null, "policyClassLoaderModelDescriber cannot be null");
-      classLoaderDescriptorBuilder = policyClassLoaderModelDescriber;
-
       return this;
     }
 
@@ -54,8 +42,10 @@ public class MulePolicyModel extends AbstractMuleArtifactModel {
     public MulePolicyModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
+      checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MulePolicyModel(getName(), getMinMuleVersion(), classLoaderDescriptorBuilder);
+      return new MulePolicyModel(getName(), getMinMuleVersion(), getClassLoaderModelDescriptorLoader(),
+                                 getBundleDescriptorLoader());
     }
   }
 }

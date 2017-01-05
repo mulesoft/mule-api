@@ -10,10 +10,10 @@ package org.mule.runtime.api.deployment.persistence;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor;
-import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptorBuilder;
 import org.mule.runtime.api.deployment.meta.MulePolicyModel;
 import org.mule.runtime.api.deployment.meta.MulePolicyModel.MulePolicyModelBuilder;
 
@@ -22,17 +22,15 @@ import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-
-public class MulePolicyModelJsonSerializerTestCase {
-
-  private static final String ID = "id";
-  private static final String ATTRIBUTES = "attributes";
+public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactModelJsonSerializerTestCase {
 
   private MulePolicyModelJsonSerializer mulePolicyModelJsonSerializer;
 
@@ -47,13 +45,16 @@ public class MulePolicyModelJsonSerializerTestCase {
     final String describerMinMuleVersion = "4.2.3";
     final String describerClassLoaderModelId = "classLoaderModelLoaderID";
 
+    Map<String, Object> bundleDescriptorAttributes = new HashMap<>();
+    bundleDescriptorAttributes.put(BUNDLE_DESCRIPTOR_LOADER_KEY_1, BUNDLE_DESCRIPTOR_LOADER_VALUE_1);
+    bundleDescriptorAttributes.put(BUNDLE_DESCRIPTOR_LOADER_KEY_2, BUNDLE_DESCRIPTOR_LOADER_VALUE_2);
+
     final MulePolicyModelBuilder mulePolicyModelBuilder =
-        new MulePolicyModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion);
+        new MulePolicyModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion)
+            .withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID,
+                                                                         bundleDescriptorAttributes));
 
-
-    mulePolicyModelBuilder.withClassLoaderModelDescriber(
-                                                         new MuleArtifactLoaderDescriptorBuilder()
-                                                             .setId(describerClassLoaderModelId).build());
+    mulePolicyModelBuilder.withClassLoaderModelDescriber().setId(describerClassLoaderModelId);
 
     String actual = mulePolicyModelJsonSerializer.serialize(mulePolicyModelBuilder.build());
     final JsonObject actualElement = new JsonParser().parse(actual).getAsJsonObject();
@@ -63,16 +64,25 @@ public class MulePolicyModelJsonSerializerTestCase {
     JsonObject classLoaderModelDescriptor = actualElement.get("classLoaderModelLoaderDescriptor").getAsJsonObject();
     assertThat(classLoaderModelDescriptor.get(ID).getAsString(), is(describerClassLoaderModelId));
     assertThat(classLoaderModelDescriptor.get(ATTRIBUTES).getAsJsonObject().entrySet(), is(empty()));
+
+    JsonObject bundleDescriptor = actualElement.get("bundleDescriptorLoader").getAsJsonObject();
+    assertThat(bundleDescriptor.get("id").getAsString(), is(BUNDLE_DESCRIPTOR_LOADER_ID));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().entrySet().size(), equalTo(2));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_1).getAsString(),
+               equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_1));
+    assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_2).getAsString(),
+               equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_2));
   }
 
   @Test
   public void deserializesModel() throws IOException {
-    InputStream resource = getClass().getResourceAsStream("/descriptor/plugin-descriptor-with-classloader-model.json");
+    InputStream resource = getClass().getResourceAsStream("/descriptor/policy-descriptor-with-classloader-model.json");
 
-    MulePolicyModel deserialize = mulePolicyModelJsonSerializer.deserialize(IOUtils.toString(resource));
+    MulePolicyModel deserialized = mulePolicyModelJsonSerializer.deserialize(IOUtils.toString(resource));
 
-    assertNameAndMinMuleVersion(deserialize);
-    assertClassLoaderModel(deserialize);
+    assertNameAndMinMuleVersion(deserialized);
+    assertClassLoaderModel(deserialized);
+    assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
   }
 
   private void assertNameAndMinMuleVersion(MulePolicyModel deserialize) {
