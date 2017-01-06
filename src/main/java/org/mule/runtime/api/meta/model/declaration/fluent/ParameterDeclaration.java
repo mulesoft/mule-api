@@ -32,7 +32,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private MetadataType type;
   private boolean hasDynamicType;
   private Object defaultValue = null;
-  private ParameterDslConfiguration dslModel = getDefaultInstance();
+  private ParameterDslConfiguration dslConfiguration = getDefaultInstance();
   private LayoutModel layoutModel;
   private ParameterRole parameterRole = BEHAVIOUR;
 
@@ -92,12 +92,12 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
     return hasDynamicType;
   }
 
-  public ParameterDslConfiguration getDslModel() {
-    return dslModel;
+  public ParameterDslConfiguration getDslConfiguration() {
+    return dslConfiguration;
   }
 
-  public void setDslModel(ParameterDslConfiguration dslModel) {
-    this.dslModel = dslModel;
+  public void setDslConfiguration(ParameterDslConfiguration dslConfiguration) {
+    this.dslConfiguration = dslConfiguration;
   }
 
   public LayoutModel getLayoutModel() {

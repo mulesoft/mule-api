@@ -75,7 +75,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    * @return {@code this} declarer
    */
   public T withDsl(ParameterDslConfiguration dslModel) {
-    declaration.setDslModel(dslModel);
+    declaration.setDslConfiguration(dslModel);
     return (T) this;
   }
 

@@ -57,7 +57,13 @@ public class ApplicationElement {
   }
 
   /**
-   * @return content of the configuration element.
+   * Provides the text value of the node represented by {@code this} {@link ApplicationElement}.
+   * If {@code this} {@link ApplicationElement} represents an attribute in the DSL,
+   * then the return of this method will be the string value set on the attribute.
+   * For the case of nested elements we can have no value (this represents a node that has child elements)
+   * or the value of the node's textContent.
+   *
+   * @return the string content of the represented element, if one is present.
    */
   public Optional<String> getValue() {
     return ofNullable(value);

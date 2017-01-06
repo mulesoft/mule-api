@@ -61,8 +61,10 @@ public class ApplicationElementIdentifier {
     }
 
     public ApplicationElementIdentifier build() {
-      checkState(identifier.namespaceUri != null && !identifier.namespaceUri.isEmpty(), "Namespace URI must be not blank");
-      checkState(identifier.name != null && !identifier.name.isEmpty(), "Name must be not blank");
+      checkState(identifier.namespaceUri != null && !identifier.namespaceUri.trim().isEmpty(),
+                 "Namespace URI must be not blank");
+      checkState(identifier.name != null && !identifier.name.trim().isEmpty(),
+                 "Name must be not blank");
       return identifier;
     }
 

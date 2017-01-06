@@ -22,11 +22,11 @@ public final class ParameterDslConfiguration {
    *
    * @since 1.0
    */
-  public static final class ElementDslModelBuilder {
+  public static final class Builder {
 
     private ParameterDslConfiguration product = new ParameterDslConfiguration();
 
-    private ElementDslModelBuilder() {}
+    private Builder() {}
 
     /**
      * Specifies whether the associated element should support inline definition as child element
@@ -34,7 +34,7 @@ public final class ParameterDslConfiguration {
      * @param allowsInlineDefinition the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowsInlineDefinition(boolean allowsInlineDefinition) {
+    public Builder allowsInlineDefinition(boolean allowsInlineDefinition) {
       product.allowInlineDefinition = allowsInlineDefinition;
       return this;
     }
@@ -45,7 +45,7 @@ public final class ParameterDslConfiguration {
      * @param allowTopLevelDefinition the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowTopLevelDefinition(boolean allowTopLevelDefinition) {
+    public Builder allowTopLevelDefinition(boolean allowTopLevelDefinition) {
       product.allowTopLevelDefinition = allowTopLevelDefinition;
       return this;
     }
@@ -56,7 +56,7 @@ public final class ParameterDslConfiguration {
      * @param allowsReferences the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowsReferences(boolean allowsReferences) {
+    public Builder allowsReferences(boolean allowsReferences) {
       product.allowReferences = allowsReferences;
       return this;
     }
@@ -77,17 +77,17 @@ public final class ParameterDslConfiguration {
   }
 
   /**
-   * @return a new {@link ElementDslModelBuilder}
+   * @return a new {@link Builder}
    */
-  public static ElementDslModelBuilder builder() {
-    return new ElementDslModelBuilder();
+  public static Builder builder() {
+    return new Builder();
   }
 
   /**
    * @param prototype a prototype {@link ParameterDslConfiguration}
    * @return a new builder initialised to match the state of the given {@code prototype}
    */
-  public static ElementDslModelBuilder builder(ParameterDslConfiguration prototype) {
+  public static Builder builder(ParameterDslConfiguration prototype) {
     return builder()
         .allowsInlineDefinition(prototype.allowsInlineDefinition())
         .allowsReferences(prototype.allowsReferences())
