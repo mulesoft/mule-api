@@ -7,12 +7,12 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
-import static org.mule.runtime.api.meta.model.ElementDslModel.getDefaultInstance;
+import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
-import org.mule.runtime.api.meta.model.ElementDslModel;
+import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
@@ -32,7 +32,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private MetadataType type;
   private boolean hasDynamicType;
   private Object defaultValue = null;
-  private ElementDslModel dslModel = getDefaultInstance();
+  private ParameterDslConfiguration dslConfiguration = getDefaultInstance();
   private LayoutModel layoutModel;
   private ParameterRole parameterRole = BEHAVIOUR;
 
@@ -92,12 +92,12 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
     return hasDynamicType;
   }
 
-  public ElementDslModel getDslModel() {
-    return dslModel;
+  public ParameterDslConfiguration getDslConfiguration() {
+    return dslConfiguration;
   }
 
-  public void setDslModel(ElementDslModel dslModel) {
-    this.dslModel = dslModel;
+  public void setDslConfiguration(ParameterDslConfiguration dslConfiguration) {
+    this.dslConfiguration = dslConfiguration;
   }
 
   public LayoutModel getLayoutModel() {

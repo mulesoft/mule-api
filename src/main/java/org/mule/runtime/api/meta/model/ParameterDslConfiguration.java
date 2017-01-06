@@ -15,18 +15,18 @@ package org.mule.runtime.api.meta.model;
  *
  * @since 1.0
  */
-public final class ElementDslModel {
+public final class ParameterDslConfiguration {
 
   /**
-   * A builder which allows creating instance of {@link ElementDslModel}
+   * A builder which allows creating instance of {@link ParameterDslConfiguration}
    *
    * @since 1.0
    */
-  public static final class ElementDslModelBuilder {
+  public static final class Builder {
 
-    private ElementDslModel product = new ElementDslModel();
+    private ParameterDslConfiguration product = new ParameterDslConfiguration();
 
-    private ElementDslModelBuilder() {}
+    private Builder() {}
 
     /**
      * Specifies whether the associated element should support inline definition as child element
@@ -34,7 +34,7 @@ public final class ElementDslModel {
      * @param allowsInlineDefinition the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowsInlineDefinition(boolean allowsInlineDefinition) {
+    public Builder allowsInlineDefinition(boolean allowsInlineDefinition) {
       product.allowInlineDefinition = allowsInlineDefinition;
       return this;
     }
@@ -45,7 +45,7 @@ public final class ElementDslModel {
      * @param allowTopLevelDefinition the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowTopLevelDefinition(boolean allowTopLevelDefinition) {
+    public Builder allowTopLevelDefinition(boolean allowTopLevelDefinition) {
       product.allowTopLevelDefinition = allowTopLevelDefinition;
       return this;
     }
@@ -56,7 +56,7 @@ public final class ElementDslModel {
      * @param allowsReferences the value
      * @return {@code this} builder
      */
-    public ElementDslModelBuilder allowsReferences(boolean allowsReferences) {
+    public Builder allowsReferences(boolean allowsReferences) {
       product.allowReferences = allowsReferences;
       return this;
     }
@@ -64,7 +64,7 @@ public final class ElementDslModel {
     /**
      * @return the generated model
      */
-    public ElementDslModel build() {
+    public ParameterDslConfiguration build() {
       return product;
     }
   }
@@ -72,22 +72,22 @@ public final class ElementDslModel {
   /**
    * @return a new instance set with default values
    */
-  public static ElementDslModel getDefaultInstance() {
+  public static ParameterDslConfiguration getDefaultInstance() {
     return builder().build();
   }
 
   /**
-   * @return a new {@link ElementDslModelBuilder}
+   * @return a new {@link Builder}
    */
-  public static ElementDslModelBuilder builder() {
-    return new ElementDslModelBuilder();
+  public static Builder builder() {
+    return new Builder();
   }
 
   /**
-   * @param prototype a prototype {@link ElementDslModel}
+   * @param prototype a prototype {@link ParameterDslConfiguration}
    * @return a new builder initialised to match the state of the given {@code prototype}
    */
-  public static ElementDslModelBuilder builder(ElementDslModel prototype) {
+  public static Builder builder(ParameterDslConfiguration prototype) {
     return builder()
         .allowsInlineDefinition(prototype.allowsInlineDefinition())
         .allowsReferences(prototype.allowsReferences())
