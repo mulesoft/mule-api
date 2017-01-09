@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.metadata.DataType.fromObject;
+
 import java.io.Serializable;
 
 /**
@@ -30,7 +32,7 @@ public final class TypedValue<T> implements Serializable {
   public TypedValue(T value, DataType dataType) {
     this.value = value;
     if (dataType == null) {
-      this.dataType = DataType.fromObject(value);
+      this.dataType = fromObject(value);
     } else {
       this.dataType = dataType;
     }
