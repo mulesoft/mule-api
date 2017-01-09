@@ -6,24 +6,50 @@
  */
 package org.mule.runtime.api.metadata;
 
+import java.io.Serializable;
+
 /**
  * Maintains a value that has an associated {@link DataType}.
  * 
  * @param <T> the content type.
  * @since 1.0
  */
-public interface TypedValue<T> {
+public final class TypedValue<T> implements Serializable {
+
+  private static final long serialVersionUID = -2533879516750283994L;
+
+  private final T value;
+  private final DataType dataType;
+
+  /**
+   * Constructs a new {@link TypedValue} with the given parameters.
+   * 
+   * @param value this object's content.
+   * @param dataType the {@link DataType} for this object's content.
+   */
+  public TypedValue(T value, DataType dataType) {
+    this.value = value;
+    if (dataType == null) {
+      this.dataType = DataType.fromObject(value);
+    } else {
+      this.dataType = dataType;
+    }
+  }
 
   /**
    * Returns the data type (if any) associated with this {@link TypedValue}'s content.
    *
    * @return the {@link DataType} for this object's content.
    */
-  DataType getDataType();
+  public DataType getDataType() {
+    return dataType;
+  }
 
   /**
    * @return this object's content.
    */
-  T getValue();
+  public T getValue() {
+    return value;
+  }
 
 }
