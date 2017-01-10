@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.mule.metadata.internal.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
