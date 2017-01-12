@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
+import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
@@ -19,7 +20,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public interface MetadataProvider {
+public interface MetadataProvider<T extends ComponentModel<T>> {
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the current component using only the static types of the Component's
@@ -30,7 +31,7 @@ public interface MetadataProvider {
    *         retrieval of any element fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    */
-  MetadataResult<ComponentMetadataDescriptor> getMetadata() throws MetadataResolvingException;
+  MetadataResult<ComponentMetadataDescriptor<T>> getMetadata() throws MetadataResolvingException;
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the current component using both static and dynamic resolving of the
@@ -49,6 +50,6 @@ public interface MetadataProvider {
    *         fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    */
-  MetadataResult<ComponentMetadataDescriptor> getMetadata(MetadataKey key) throws MetadataResolvingException;
+  MetadataResult<ComponentMetadataDescriptor<T>> getMetadata(MetadataKey key) throws MetadataResolvingException;
 }
 

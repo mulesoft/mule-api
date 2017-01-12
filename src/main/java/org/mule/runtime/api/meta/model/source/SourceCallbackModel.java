@@ -6,8 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.source;
 
+import org.mule.runtime.api.meta.model.EnrichableModel;
+import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
-public interface SourceCallbackModel extends ParameterizedModel {
+public interface SourceCallbackModel extends ParameterizedModel, HasDisplayModel, EnrichableModel {
 
 }

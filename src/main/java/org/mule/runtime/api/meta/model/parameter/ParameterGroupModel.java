@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @since 1.0
  */
-public interface ParameterGroupModel extends NamedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
+public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
 
   /**
    * Group name for parameters that are considered for general purposes and shouldn't belong to a particular

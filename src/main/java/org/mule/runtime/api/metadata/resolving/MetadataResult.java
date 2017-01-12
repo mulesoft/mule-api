@@ -63,6 +63,16 @@ public interface MetadataResult<T> {
   }
 
   /**
+   * Creates a failure {@link MetadataResult} with a list of associated {@link MetadataFailure}s.
+   *
+   * @param failures a list of {@link MetadataFailure}s that contains the failure information.
+   * @return a {@link FailureMetadataResult} instance.
+   */
+  static <T> MetadataResult<T> failure(List<MetadataFailure> failures) {
+    return new FailureMetadataResult<>(null, failures);
+  }
+
+  /**
    * @return the object returned by the invoked Metadata operation
    */
   T get();
