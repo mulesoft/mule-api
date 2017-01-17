@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 
@@ -15,7 +16,7 @@ import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
  * @since 1.0
  */
 public final class ConnectionProviderDeclarer extends ParameterizedDeclarer<ConnectionProviderDeclaration>
-    implements HasModelProperties<ConnectionProviderDeclarer> {
+    implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer> {
 
   /**
    * Creates a new instance
@@ -53,6 +54,15 @@ public final class ConnectionProviderDeclarer extends ParameterizedDeclarer<Conn
   @Override
   public ConnectionProviderDeclarer withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConnectionProviderDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
+    declaration.addExternalLibrary(externalLibrary);
     return this;
   }
 }

@@ -7,6 +7,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 
 /**
@@ -15,7 +16,8 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  * @since 1.0
  */
 public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclaration> implements
-    HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer> {
+    HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
+    DeclaresExternalLibraries<ConfigurationDeclarer> {
 
   /**
    * Creates a new instance
@@ -106,6 +108,15 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
   @Override
   public ConfigurationDeclarer withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConfigurationDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
+    declaration.addExternalLibrary(externalLibrary);
     return this;
   }
 

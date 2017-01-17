@@ -11,6 +11,7 @@ import static org.mule.runtime.api.meta.ExpressionSupport.REQUIRED;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer;
@@ -92,6 +93,14 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
   public static final String CONNECTION_PROVIDER_NAME = "connectionProvider";
   public static final String CONNECTION_PROVIDER_DESCRIPTION = "my connection provider";
 
+  public static ExternalLibraryModel EXTERNAL_LIBRARY_MODEL = ExternalLibraryModel.builder()
+      .withName("wss")
+      .withDescription("WSS native library")
+      .withFileName("*.jar")
+      .withRequiredClassName("org.my.Library")
+      .build();
+
+
   private final ExtensionDeclarer extensionDeclarer;
 
   public TestWebServiceConsumerDeclarer() {
@@ -106,10 +115,14 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
         .withCategory(Category.SELECT)
         .withMinMuleVersion(MIN_MULE_VERSION)
         .withModelProperty(EXTENSION_MODEL_PROPERTY)
-        .withXmlDsl(XmlDslModel.builder().build());
+        .withXmlDsl(XmlDslModel.builder().build())
+        .withExternalLibrary(EXTERNAL_LIBRARY_MODEL);
 
     ConfigurationDeclarer config =
-        extensionDeclarer.withConfig(CONFIG_NAME).describedAs(CONFIG_DESCRIPTION).withModelProperty(CONFIGURATION_MODEL_PROPERTY);
+        extensionDeclarer.withConfig(CONFIG_NAME)
+            .describedAs(CONFIG_DESCRIPTION)
+            .withExternalLibrary(EXTERNAL_LIBRARY_MODEL)
+            .withModelProperty(CONFIGURATION_MODEL_PROPERTY);
 
     ParameterGroupDeclarer parameterGroup = config.onParameterGroup(CONFIG_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(ADDRESS).describedAs(SERVICE_ADDRESS).ofType(getStringType());
@@ -134,9 +147,12 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     operation.withOutputAttributes().ofType(getStringType());
     parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(COLLECTION_PARAMETER).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
-        .id(List.class.getName())
-        .of(typeBuilder.stringType()
-            .id(String.class.getName()))
+        .id(List.class
+            .getName())
+        .of(typeBuilder
+            .stringType()
+            .id(String.class
+                .getName()))
         .build());
 
     parameterGroup.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType())
@@ -149,8 +165,10 @@ public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
     operation.withOutputAttributes().ofType(getStringType());
 
     ConnectionProviderDeclarer connectionProvider =
-        extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME).describedAs(CONNECTION_PROVIDER_DESCRIPTION)
-            .withConnectionManagementType(NONE);
+        extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME)
+            .describedAs(CONNECTION_PROVIDER_DESCRIPTION)
+            .withConnectionManagementType(NONE)
+            .withExternalLibrary(EXTERNAL_LIBRARY_MODEL);
 
     parameterGroup = connectionProvider.onParameterGroup(CONNECTION_PROVIDER_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(USERNAME).describedAs(USERNAME_DESCRIPTION).ofType(getStringType());

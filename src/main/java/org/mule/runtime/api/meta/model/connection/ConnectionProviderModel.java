@@ -11,6 +11,7 @@ import org.mule.runtime.api.connection.ConnectionProvider;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
+import org.mule.runtime.api.meta.model.HasExternalLibraries;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
@@ -27,7 +28,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
  * @since 1.0
  */
 public interface ConnectionProviderModel
-    extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel {
+    extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel, HasExternalLibraries {
 
   /**
    * @return the type of connection management that the provider performs

@@ -48,7 +48,7 @@ import java.util.Set;
  */
 public interface ExtensionModel
     extends NamedObject, DescribedObject, EnrichableModel, HasOperationModels, HasSourceModels, HasConnectionProviderModels,
-    HasDisplayModel {
+    HasDisplayModel, HasExternalLibraries {
 
   /**
    * A simple name for this extension. Usually one or two simple words that describes

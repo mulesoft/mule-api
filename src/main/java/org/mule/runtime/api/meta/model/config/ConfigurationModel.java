@@ -10,6 +10,7 @@ import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.HasExternalLibraries;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
@@ -39,6 +40,6 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  * @since 1.0
  */
 public interface ConfigurationModel extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
-    HasOperationModels, HasSourceModels, HasConnectionProviderModels, HasDisplayModel {
+    HasOperationModels, HasSourceModels, HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries {
 
 }
