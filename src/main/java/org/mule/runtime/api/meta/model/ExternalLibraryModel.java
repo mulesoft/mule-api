@@ -43,7 +43,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
      * @throws IllegalArgumentException if {@code name} is {@code null}
      */
     public ExternalLibraryModelBuilder withName(String name) {
-      checkArgument(name != null && name.trim().length() > 0, "name cannot be blank");
+      checkArgument(name != null && !name.trim().isEmpty(), "name cannot be blank");
       product.name = name;
       return this;
     }
