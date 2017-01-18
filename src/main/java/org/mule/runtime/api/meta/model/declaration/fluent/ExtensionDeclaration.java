@@ -12,11 +12,12 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
-import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.XmlDslModel;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -49,6 +50,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private Set<ImportedTypeModel> importedTypes = new LinkedHashSet<>();
   private Set<String> resources = new LinkedHashSet<>();
   private Set<ErrorModel> errorModels = new LinkedHashSet<>();
+  private Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
 
   /**
    * Creates a new instance
@@ -198,6 +200,17 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
+   * Adds an {@link ExternalLibraryModel}
+   *
+   * @param externalLibraryModel the model of the external library to be referenced
+   * @return {@code this} declarer
+   */
+  public ExtensionDeclaration addExternalLibrary(ExternalLibraryModel externalLibraryModel) {
+    externalLibraryModels.add(externalLibraryModel);
+    return this;
+  }
+
+  /**
    * Registers the given {@code subType} as an implementation of the {@code baseType}
    *
    * @param baseType a base type
@@ -226,6 +239,13 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   public Set<SubTypesModel> getSubTypes() {
     return subTypes.entrySet().stream().map(entry -> new SubTypesModel(entry.getKey(), entry.getValue()))
         .collect(toCollection(LinkedHashSet::new));
+  }
+
+  /**
+   * @return A {@link Set} of {@link ExternalLibraryModel} which represent the extension's external libraries
+   */
+  public Set<ExternalLibraryModel> getExternalLibraryModels() {
+    return externalLibraryModels;
   }
 
   /**

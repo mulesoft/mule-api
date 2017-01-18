@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A declaration object for a {@link ConfigurationModel}. It contains raw, unvalidated
@@ -21,6 +24,8 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
     WithOperationsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
+  private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
+
 
   /**
    * {@inheritDoc}
@@ -52,6 +57,13 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
   @Override
   public List<SourceDeclaration> getMessageSources() {
     return subDeclarations.getMessageSources();
+  }
+
+  /**
+   * @return A {@link Set} of {@link ExternalLibraryModel} which represent the extension's external libraries
+   */
+  public Set<ExternalLibraryModel> getExternalLibraryModels() {
+    return externalLibraryModels;
   }
 
   /**
@@ -90,6 +102,17 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
   @Override
   public ConfigurationDeclaration addMessageSource(SourceDeclaration sourceDeclaration) {
     subDeclarations.addMessageSource(sourceDeclaration);
+    return this;
+  }
+
+  /**
+   * Adds an {@link ExternalLibraryModel}
+   *
+   * @param externalLibraryModel the model of the external library to be referenced
+   * @return {@code this} declarer
+   */
+  public ConfigurationDeclaration addExternalLibrary(ExternalLibraryModel externalLibraryModel) {
+    externalLibraryModels.add(externalLibraryModel);
     return this;
   }
 }

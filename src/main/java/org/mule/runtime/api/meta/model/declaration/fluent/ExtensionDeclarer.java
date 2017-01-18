@@ -11,6 +11,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
@@ -26,7 +27,7 @@ import java.util.Collection;
  */
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer,
-    HasConnectionProviderDeclarer, HasSourceDeclarer {
+    HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer> {
 
   /**
    * Constructor for this descriptor
@@ -280,6 +281,15 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   public ExtensionDeclarer withErrorModel(ErrorModel errorModel) {
     declaration.addErrorModel(errorModel);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ExtensionDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
+    declaration.addExternalLibrary(externalLibrary);
     return this;
   }
 }
