@@ -30,9 +30,9 @@ public abstract class AbstractMuleMessageBuilderFactory {
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
-    } catch (Exception e) {
-      LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", e);
-      throw e;
+    } catch (Throwable t) {
+      LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", t);
+      throw t;
     }
   }
 
