@@ -28,9 +28,9 @@ public abstract class AbstractBindingContextBuilderFactory {
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
-    } catch (Exception e) {
-      LOGGER.error("Error loading BindingContextBuilderFactory implementation.", e);
-      throw e;
+    } catch (Throwable t) {
+      LOGGER.error("Error loading BindingContextBuilderFactory implementation.", t);
+      throw t;
     }
   }
 

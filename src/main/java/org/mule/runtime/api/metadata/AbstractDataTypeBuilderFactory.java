@@ -28,9 +28,9 @@ public abstract class AbstractDataTypeBuilderFactory {
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
-    } catch (Exception e) {
-      LOGGER.error("Error loading AbstractDataTypeBuilderFactory implementation.", e);
-      throw e;
+    } catch (Throwable t) {
+      LOGGER.error("Error loading AbstractDataTypeBuilderFactory implementation.", t);
+      throw t;
     }
   }
 
