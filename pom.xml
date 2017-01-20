@@ -101,6 +101,7 @@
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
+        <formatterGoal>validate</formatterGoal>
         <commonsLangVersion>2.4</commonsLangVersion>
     </properties>
 
@@ -198,7 +199,7 @@
                         <execution>
                             <phase>compile</phase>
                             <goals>
-                                <goal>validate</goal>
+                                <goal>${formatterGoal}</goal>
                             </goals>
                             <configuration>
                                 <skipFormatting>${skipVerifications}</skipFormatting>
