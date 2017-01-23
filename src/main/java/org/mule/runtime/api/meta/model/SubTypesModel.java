@@ -7,9 +7,12 @@
 package org.mule.runtime.api.meta.model;
 
 
-import static java.util.Collections.unmodifiableSet;
+import static java.util.stream.Collectors.toCollection;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.api.model.ObjectType;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -21,8 +24,8 @@ import java.util.Set;
  */
 public final class SubTypesModel {
 
-  private final MetadataType baseType;
-  private final Set<MetadataType> subTypes;
+  private final ObjectType baseType;
+  private final Set<ObjectType> subTypes;
 
   /**
    * Creates a new instance
@@ -32,23 +35,22 @@ public final class SubTypesModel {
    * @throws IllegalArgumentException if baseType is {@code null} or subTypes is {@code null} or empty
    */
   public SubTypesModel(MetadataType baseType, Set<MetadataType> subTypes) {
-    if (baseType == null) {
-      throw new IllegalArgumentException("baseType cannot be null");
-    }
+    checkArgument(baseType != null, "baseType cannot be null");
+    checkArgument(baseType instanceof ObjectType, "Only ObjectTypes can be extended");
 
-    if (subTypes == null || subTypes.isEmpty()) {
-      throw new IllegalArgumentException("subTypes cannot be null nor empty");
-    }
+    checkArgument(subTypes != null && !subTypes.isEmpty(), "subTypes cannot be null nor empty");
+    checkArgument(subTypes.stream().allMatch(s -> s instanceof ObjectType),
+                  "subTypes of an ObjectType can only be instances of ObjectType");
 
-    this.baseType = baseType;
-    this.subTypes = unmodifiableSet(subTypes);
+    this.baseType = (ObjectType) baseType;
+    this.subTypes = subTypes.stream().map(s -> (ObjectType) s).collect(toCollection(LinkedHashSet::new));
   }
 
-  public MetadataType getBaseType() {
+  public ObjectType getBaseType() {
     return baseType;
   }
 
-  public Set<MetadataType> getSubTypes() {
+  public Set<ObjectType> getSubTypes() {
     return subTypes;
   }
 }
