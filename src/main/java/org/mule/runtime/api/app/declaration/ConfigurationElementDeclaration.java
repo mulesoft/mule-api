@@ -58,19 +58,14 @@ public final class ConfigurationElementDeclaration extends ParameterizedElementD
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    if (!super.equals(o)) {
+
+    if (!(o instanceof ConfigurationElementDeclaration) || !super.equals(o)) {
       return false;
     }
 
     ConfigurationElementDeclaration that = (ConfigurationElementDeclaration) o;
-
-    if (connection != null ? !connection.equals(that.connection) : that.connection != null) {
-      return false;
-    }
-    return elementName.equals(that.elementName);
+    return (connection != null ? connection.equals(that.connection) : that.connection == null) &&
+        elementName.equals(that.elementName);
   }
 
   @Override

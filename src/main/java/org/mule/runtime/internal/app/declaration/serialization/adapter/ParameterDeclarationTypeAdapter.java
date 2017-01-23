@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.app.declaration.serialization.adapter;
+package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
@@ -14,7 +14,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
@@ -41,7 +40,7 @@ public class ParameterDeclarationTypeAdapter extends TypeAdapter<ParameterElemen
     if (parameter != null) {
       out.beginObject();
       out.name(parameter.getName());
-      delegate.toJson(parameter.getValue(), new TypeToken<ParameterValue>() {}.getType(), out);
+      delegate.toJson(parameter.getValue(), ParameterValue.class, out);
       out.endObject();
     }
   }

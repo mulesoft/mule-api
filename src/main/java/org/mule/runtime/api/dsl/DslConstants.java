@@ -61,7 +61,7 @@ public interface DslConstants {
   String POOLING_PROFILE_ELEMENT_IDENTIFIER = "pooling-profile";
 
   /**
-   * The identifier name of the {@code poolingProfile} infrastructure parameter
+   * The identifier name of the {@code tls:context} infrastructure parameter
    */
   String TLS_CONTEXT_ELEMENT_IDENTIFIER = "context";
 

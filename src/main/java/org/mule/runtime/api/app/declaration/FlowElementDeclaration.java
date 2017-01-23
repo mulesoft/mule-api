@@ -97,22 +97,15 @@ public final class FlowElementDeclaration implements NamedElementDeclaration {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof FlowElementDeclaration)) {
       return false;
     }
 
     FlowElementDeclaration that = (FlowElementDeclaration) o;
-
-    if (!components.equals(that.components)) {
-      return false;
-    }
-    if (!name.equals(that.name)) {
-      return false;
-    }
-    if (initialState != null ? !initialState.equals(that.initialState) : that.initialState != null) {
-      return false;
-    }
-    return processingStrategy != null ? processingStrategy.equals(that.processingStrategy) : that.processingStrategy == null;
+    return !(!name.equals(that.name) ||
+        (initialState != null ? !initialState.equals(that.initialState) : that.initialState != null) ||
+        !components.equals(that.components)) &&
+        (processingStrategy != null ? processingStrategy.equals(that.processingStrategy) : that.processingStrategy == null);
   }
 
   @Override

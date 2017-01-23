@@ -72,19 +72,12 @@ public final class TopLevelParameterDeclaration extends ElementDeclaration
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    if (!super.equals(o)) {
+    if (!(o instanceof TopLevelParameterDeclaration) || !super.equals(o)) {
       return false;
     }
 
     TopLevelParameterDeclaration that = (TopLevelParameterDeclaration) o;
-
-    if (!declaringExtension.equals(that.declaringExtension)) {
-      return false;
-    }
-    return elementName.equals(that.elementName);
+    return declaringExtension.equals(that.declaringExtension) && elementName.equals(that.elementName);
   }
 
   @Override

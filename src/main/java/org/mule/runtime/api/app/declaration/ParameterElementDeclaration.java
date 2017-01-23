@@ -42,16 +42,12 @@ public final class ParameterElementDeclaration extends ElementDeclaration implem
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof ParameterElementDeclaration)) {
       return false;
     }
 
     ParameterElementDeclaration that = (ParameterElementDeclaration) o;
-
-    if (!name.equals(that.name)) {
-      return false;
-    }
-    return value.equals(that.value);
+    return name.equals(that.name) && value.equals(that.value);
   }
 
   @Override

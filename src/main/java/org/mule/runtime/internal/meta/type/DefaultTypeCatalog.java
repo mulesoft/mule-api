@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.meta.type;
+package org.mule.runtime.internal.meta.type;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
@@ -19,6 +19,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
+import org.mule.runtime.api.meta.type.TypeCatalog;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -34,12 +35,12 @@ import java.util.Set;
  *
  * @since 1.0
  */
-final class DefaultTypeCatalog implements TypeCatalog {
+public final class DefaultTypeCatalog implements TypeCatalog {
 
   private List<SubTypesMappingContainer> mappings = new LinkedList<>();
   private Map<String, ObjectType> types = new LinkedHashMap<>();
 
-  DefaultTypeCatalog(Set<ExtensionModel> extensions) {
+  public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
     extensions.forEach(e -> {
       mappings.add(new SubTypesMappingContainer(e.getSubTypes()));
       e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> types.put(id, t)));

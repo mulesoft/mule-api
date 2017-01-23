@@ -9,6 +9,7 @@ package org.mule.runtime.api.dsl;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
+import org.mule.runtime.internal.dsl.DefaultDslResolvingContext;
 
 import java.util.Collection;
 import java.util.Optional;

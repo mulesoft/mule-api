@@ -58,16 +58,13 @@ public abstract class ElementDeclaration implements IdentifiableElementDeclarati
     if (this == o) {
       return true;
     }
+
     if (!(o instanceof ElementDeclaration)) {
       return false;
     }
 
     ElementDeclaration that = (ElementDeclaration) o;
-
-    if (!name.equals(that.name)) {
-      return false;
-    }
-    return declaringExtension.equals(that.declaringExtension);
+    return name.equals(that.name) && declaringExtension.equals(that.declaringExtension);
   }
 
   @Override

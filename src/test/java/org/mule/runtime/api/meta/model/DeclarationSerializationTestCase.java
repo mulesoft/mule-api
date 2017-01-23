@@ -119,7 +119,7 @@ public class DeclarationSerializationTestCase {
                                    .withParameter("count", "1")
                                    .withParameter("frequency", "0")
                                    .build())
-                .withParameter("responseBuilder",
+                .withParameter("response",
                                newObjectValue()
                                    .withParameter("headers", "#[mel:['content-type' : 'text/plain']]")
                                    .build())

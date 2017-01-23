@@ -11,6 +11,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.dsl.DslResolvingContext;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.internal.meta.type.DefaultTypeCatalog;
 
 import java.util.Collection;
 import java.util.Optional;

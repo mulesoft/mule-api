@@ -44,15 +44,12 @@ public class ParameterizedElementDeclaration extends ElementDeclaration {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof ParameterizedElementDeclaration)) {
-      return false;
-    }
-    if (!super.equals(o)) {
+
+    if (!(o instanceof ParameterizedElementDeclaration) || !super.equals(o)) {
       return false;
     }
 
     ParameterizedElementDeclaration that = (ParameterizedElementDeclaration) o;
-
     return parameters.equals(that.parameters);
   }
 

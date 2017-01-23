@@ -9,8 +9,8 @@ package org.mule.runtime.api.app.declaration.serialization;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
-import org.mule.runtime.api.app.declaration.serialization.adapter.ParameterDeclarationTypeAdapter;
-import org.mule.runtime.api.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
+import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterDeclarationTypeAdapter;
+import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

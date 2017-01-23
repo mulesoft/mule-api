@@ -33,15 +33,11 @@ public class ComponentElementDeclaration extends ParameterizedElementDeclaration
     if (this == o) {
       return true;
     }
-    if (!(o instanceof ComponentElementDeclaration)) {
-      return false;
-    }
-    if (!super.equals(o)) {
+    if (!(o instanceof ComponentElementDeclaration) || !super.equals(o)) {
       return false;
     }
 
     ComponentElementDeclaration that = (ComponentElementDeclaration) o;
-
     return configRef != null ? configRef.equals(that.configRef) : that.configRef == null;
   }
 
