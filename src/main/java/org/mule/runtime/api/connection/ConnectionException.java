@@ -6,12 +6,19 @@
  */
 package org.mule.runtime.api.connection;
 
+import static java.util.Optional.ofNullable;
+import org.mule.runtime.api.message.ErrorType;
+
+import java.util.Optional;
+
 /**
  * Signals that an error occurred while trying to establish a connection
  *
  * @since 1.0
  */
 public class ConnectionException extends Exception {
+
+  private ErrorType errorType;
 
   /**
    * Creates a new instance with the specified detail {@code message}
@@ -20,6 +27,15 @@ public class ConnectionException extends Exception {
    */
   public ConnectionException(String message) {
     super(message);
+  }
+
+  /**
+   * Creates a new instance with the specified {@code cause}
+   *
+   * @param cause the exception's cause
+   */
+  public ConnectionException(Throwable cause) {
+    super(cause);
   }
 
   /**
@@ -33,11 +49,21 @@ public class ConnectionException extends Exception {
   }
 
   /**
-   * Creates a new instance with the specified {@code cause}
+   * Creates a new instance with the specified detail {@code message}, {@code cause} and {@link ErrorType}
    *
-   * @param cause the exception's cause
+   * @param message the detail message
+   * @param cause   the exception's cause
+   * @param errorType the exception's errorType
    */
-  public ConnectionException(Throwable cause) {
-    super(cause);
+  public ConnectionException(String message, Throwable cause, ErrorType errorType) {
+    super(message, cause);
+    this.errorType = errorType;
+  }
+
+  /**
+   * @return The {@link Optional} {@link ErrorType} for this exception
+   */
+  public Optional<ErrorType> getErrorType() {
+    return ofNullable(errorType);
   }
 }

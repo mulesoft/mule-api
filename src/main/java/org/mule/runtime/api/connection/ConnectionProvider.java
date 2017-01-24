@@ -48,7 +48,7 @@ public interface ConnectionProvider<C> {
    *
    * In invalid connection case, the {@link ConnectionValidationResult} should also return a valid
    * message {@link ConnectionValidationResult#getMessage()}, exception {@link ConnectionValidationResult#getException()}
-   * and code {@link ConnectionValidationResult#getCode()}
+   * and code {@link ConnectionValidationResult#getErrorType()}
    *
    * @param connection a non {@code null} {@link C}.
    * @return a {@link ConnectionValidationResult} indicating if the connection

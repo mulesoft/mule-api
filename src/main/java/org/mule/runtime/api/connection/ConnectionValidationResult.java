@@ -6,6 +6,11 @@
  */
 package org.mule.runtime.api.connection;
 
+import static java.util.Optional.ofNullable;
+import org.mule.runtime.api.message.ErrorType;
+
+import java.util.Optional;
+
 /**
  * Represents the result of a Connection Validation.
  *
@@ -15,15 +20,17 @@ public class ConnectionValidationResult {
 
   private boolean validationStatus;
   private String message;
-  private ConnectionExceptionCode code;
+  private ErrorType errorType;
   private Exception exception;
 
-  private ConnectionValidationResult(boolean validationStatus, String message, ConnectionExceptionCode code,
-                                     Exception exception) {
+  private ConnectionValidationResult(boolean validationStatus, String message, Exception exception) {
+    this(validationStatus, message, null, exception);
+  }
 
+  private ConnectionValidationResult(boolean validationStatus, String message, ErrorType errorType, Exception exception) {
     this.validationStatus = validationStatus;
     this.message = message;
-    this.code = code;
+    this.errorType = errorType;
     this.exception = exception;
   }
 
@@ -36,12 +43,21 @@ public class ConnectionValidationResult {
 
   /**
    * @param message   Message in case of a invalid connection
-   * @param code      A {@link ConnectionExceptionCode} that represents the cause of the invalid connection
    * @param exception The exception that causes the connection invalidity
    * @return a {@link ConnectionValidationResult} with a invalid status.
    */
-  public static ConnectionValidationResult failure(String message, ConnectionExceptionCode code, Exception exception) {
-    return new ConnectionValidationResult(false, message, code, exception);
+  public static ConnectionValidationResult failure(String message, Exception exception) {
+    return new ConnectionValidationResult(false, message, exception);
+  }
+
+  /**
+   * @param message   Message in case of a invalid connection
+   * @param errorType An {@link ErrorType} that represents the cause of the invalid connection
+   * @param exception The exception that causes the connection invalidity
+   * @return a {@link ConnectionValidationResult} with a invalid status.
+   */
+  public static ConnectionValidationResult failure(String message, ErrorType errorType, Exception exception) {
+    return new ConnectionValidationResult(false, message, errorType, exception);
   }
 
   /**
@@ -60,11 +76,10 @@ public class ConnectionValidationResult {
   }
 
   /**
-   * @return A {@link ConnectionExceptionCode} indicating the Validation code.
-   * The code should not be null in case of a invalid connection.
+   * @return A {@link ErrorType} indicating the type of the occurred problem.
    */
-  public ConnectionExceptionCode getCode() {
-    return this.code;
+  public Optional<ErrorType> getErrorType() {
+    return ofNullable(errorType);
   }
 
   /**
