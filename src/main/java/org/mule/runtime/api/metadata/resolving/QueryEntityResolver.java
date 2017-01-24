@@ -20,7 +20,15 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface QueryEntityResolver {
+public interface QueryEntityResolver extends NamedTypeResolver {
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  default String getResolverName() {
+    return MetadataComponent.ENTITY.name();
+  }
 
   /**
    * Resolves the {@link Set} of entities that can be queried in the DSQL operation that uses {@code this} resolver,

@@ -15,6 +15,8 @@ import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
+import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 
 /**
  * A definition of an component in a {@link ExtensionModel}. This model groups all the common contracts between extension
@@ -22,7 +24,7 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  *
  * @since 1.0
  */
-public interface ComponentModel
+public interface ComponentModel<T extends ComponentModel>
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel, ThrowsErrors {
 
   /**
@@ -50,4 +52,13 @@ public interface ComponentModel
    * @return whether this component requires a connection in order to perform its task
    */
   boolean requiresConnection();
+
+  /**
+   * Returns a {@link ComponentModel} with its types resolved.
+   * 
+   * @param inputMetadataDescriptor {@link InputMetadataDescriptor} describes the input parameters of the component
+   * @param outputMetadataDescriptor {@link OutputMetadataDescriptor} describes the component output
+   * @return model with its types resolved by the metadata resolution process
+   */
+  T getTypedModel(InputMetadataDescriptor inputMetadataDescriptor, OutputMetadataDescriptor outputMetadataDescriptor);
 }

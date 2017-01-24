@@ -26,7 +26,7 @@ import org.mule.runtime.api.meta.model.ExecutionType;
  *
  * @since 1.0
  */
-public interface OperationModel extends ComponentModel {
+public interface OperationModel extends ComponentModel<OperationModel> {
 
   /**
    * Returns a {@link MetadataType} for the value that this operation sets

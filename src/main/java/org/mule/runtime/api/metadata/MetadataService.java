@@ -7,6 +7,8 @@
 package org.mule.runtime.api.metadata;
 
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
@@ -43,7 +45,7 @@ public interface MetadataService {
    * {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    * retrieval of any element fails for any reason
    */
-  MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId);
+  MetadataResult<ComponentMetadataDescriptor<OperationModel>> getOperationMetadata(ComponentId componentId);
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
@@ -54,7 +56,7 @@ public interface MetadataService {
    * those dynamic types instead of the static types declaration.
    * <p>
    * When neither Content nor Output have dynamic types, then invoking this method is the same as invoking
-   * {@link this#getMetadata}
+   * {@link this#getOperationMetadata}
    *
    * @param componentId the id of the {@link MetadataProvider} component to query for its available keys
    * @param key         {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
@@ -62,7 +64,38 @@ public interface MetadataService {
    * Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element
    * fails for any reason
    */
-  MetadataResult<ComponentMetadataDescriptor> getMetadata(ComponentId componentId, MetadataKey key);
+  MetadataResult<ComponentMetadataDescriptor<OperationModel>> getOperationMetadata(ComponentId componentId, MetadataKey key);
+
+  /**
+   * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
+   * {@link ComponentId} using only the static types of its parameters, attributes and output.
+   *
+   * @param componentId the id of the {@link MetadataProvider} component to query for its available keys
+   * @return An {@link ComponentMetadataDescriptor} with the static Metadata representation of the Component. Successful
+   * {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   * retrieval of any element fails for any reason
+   */
+  MetadataResult<ComponentMetadataDescriptor<SourceModel>> getSourceMetadata(ComponentId componentId);
+
+  /**
+   * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
+   * {@link ComponentId} using both static and dynamic resolving of the parameters, attributes and output types.
+   * <p>
+   * If the component has a {@link InputTypeResolver} or {@link OutputTypeResolver} associated that can be used to
+   * resolve the dynamic {@link MetadataType} for the Content or Output, then the {@link ComponentMetadataDescriptor} will contain
+   * those dynamic types instead of the static types declaration.
+   * <p>
+   * When neither Content nor Output have dynamic types, then invoking this method is the same as invoking
+   * {@link this#getOperationMetadata}
+   *
+   * @param componentId the id of the Message source component to query for its available keys
+   * @param key         {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
+   * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the
+   * Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element
+   * fails for any reason
+   */
+  MetadataResult<ComponentMetadataDescriptor<SourceModel>> getSourceMetadata(ComponentId componentId, MetadataKey key);
+
 
   /**
    * Removes the {@link MetadataCache} with the specified id.
