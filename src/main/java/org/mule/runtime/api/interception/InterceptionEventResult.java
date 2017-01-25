@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Provides access to the attributes of the input event of a processor.
+ * Provides access to the attributes of the input event of a component.
  *
  * @since 1.0
  */

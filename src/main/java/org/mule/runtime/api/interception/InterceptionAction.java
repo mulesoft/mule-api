@@ -16,17 +16,17 @@ package org.mule.runtime.api.interception;
 public interface InterceptionAction {
 
   /**
-   * Only operation processors or similar may be skipped. Routing or intercepting processors may not be intercepted.
+   * Only operation components or similar may be skipped. Routing or intercepting components may not be intercepted.
    * 
-   * @return {@code true} if the intercepted processor may be {@link #skip() skipped}.
+   * @return {@code true} if the intercepted components may be {@link #skip() skipped}.
    */
   boolean isSkippable();
 
   /**
    * Interrupts the current interception chain, effectively skipping the remaining {@link InterceptionHandler handlers} and the
-   * intercepted processor.
+   * intercepted components.
    * <p>
-   * In the case an {@link InterceptionHandler} calls this method, the following handlers in the chain nor the processor will be
+   * In the case an {@link InterceptionHandler} calls this method, the following handlers in the chain nor the components will be
    * run. Only the {@link InterceptionHandler#after(InterceptionEventResult)}s for the calling {@link InterceptionHandler handler}
    * and those for which {@link InterceptionHandler#before(String, java.util.Map, InterceptionEvent, InterceptionAction)} was
    * called will be invoked.
