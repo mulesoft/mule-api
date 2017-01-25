@@ -7,11 +7,11 @@
 
 package org.mule.runtime.api.interception;
 
+import org.mule.runtime.api.component.ComponentIdentifier;
+import org.mule.runtime.api.component.ComponentLocation;
 import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
-
-import javax.xml.namespace.QName;
 
 /**
  * Provides a way to hook behavior around a component. Implementations must implement the
@@ -34,11 +34,11 @@ public interface InterceptionHandler {
   /**
    * Determines if this handler must be applied to a component based on some of its attributes.
    * 
-   * @param flowPath the path of the to-be intercepted component in the mule app configuration.
-   * @param componentAnnotations the annotations of the to-be intercepted component in the mule app configuration.
+   * @param identifier the identification properties of the to-be intercepted component.
+   * @param location the location properties of the to-be intercepted component in the mule app configuration.
    * @return {@code true} if this handler must be applied to the component with the provided parameters, {@code false} otherwise.
    */
-  default boolean intercept(String flowPath, Map<QName, Object> componentAnnotations) {
+  default boolean intercept(ComponentIdentifier identifier, ComponentLocation location) {
     return true;
   }
 
