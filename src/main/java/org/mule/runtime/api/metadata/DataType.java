@@ -7,13 +7,12 @@
 package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
+import org.mule.runtime.api.el.ExpressionFunction;
+import org.mule.runtime.api.message.Message;
 
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
-
-import org.mule.runtime.api.el.ExpressionFunction;
-import org.mule.runtime.api.message.Message;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME
