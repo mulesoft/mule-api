@@ -8,8 +8,8 @@
 package org.mule.runtime.api.interception;
 
 /**
- * Allows the implementations of {@link InterceptionHandler#before(String, java.util.Map, InterceptionEvent, InterceptionAction)}
- * to control the result of the interception.
+ * Allows the implementations of {@link InterceptionHandler#around(java.util.Map, InterceptionEvent, InterceptionAction) around}
+ * to control the execution of the interception chain.
  * 
  * @since 1.0
  */
@@ -17,7 +17,7 @@ public interface InterceptionAction {
 
   /**
    * Indicates that the current interception chain must continue, proceeding with the next {@link InterceptionHandler handlers} in
-   * the chain (if any) and the intercepted compoent.
+   * the chain (if any) and the intercepted component.
    */
   void proceed();
 }
