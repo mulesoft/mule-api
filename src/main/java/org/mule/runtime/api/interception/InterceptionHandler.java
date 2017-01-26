@@ -42,8 +42,18 @@ public interface InterceptionHandler {
   /**
    * This method is called before the intercepted component has run. It may call a method on {@code action} to do anything other
    * than continue with the interception chain, modify the event to be used down in the chain and the component, or both.
-   * <p>
-   * Before returning, it is mandatory that a method on the passed {@code action} is called.
+   * 
+   * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
+   *        be resolved when passed to this method.
+   * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
+   *        mutator methods.
+   */
+  default void before(Map<String, Object> parameters, InterceptionEvent event) {};
+
+  /**
+   * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEventResult)
+   * after}. If implemented, only by calling {@code action.}{@link InterceptionAction#proceed() proceed()} will the interception
+   * chain continue and eventually call the intercepted component.
    * 
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
@@ -52,7 +62,7 @@ public interface InterceptionHandler {
    * @param action when something other than continuing the interception is desired, the corresponding method on this object must
    *        be called.
    */
-  default void before(Map<String, Object> parameters, InterceptionEvent event, InterceptionAction action) {
+  default void around(Map<String, Object> parameters, InterceptionEvent event, InterceptionAction action) {
     action.proceed();
   };
 

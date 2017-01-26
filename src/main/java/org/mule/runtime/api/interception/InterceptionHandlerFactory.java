@@ -17,9 +17,7 @@ package org.mule.runtime.api.interception;
 public interface InterceptionHandlerFactory {
 
   /**
-   * A new {@link InterceptionHandler} will be created with this method for each interception. That means, if 2 components are
-   * being intercepted at the same time, there will be 2 different instances of {@link InterceptionHandler}, one for each
-   * interception.
+   * An {@link InterceptionHandler} will be fetched from this method for each interception.
    * 
    * @return a fresh {@link InterceptionHandler}.
    */
