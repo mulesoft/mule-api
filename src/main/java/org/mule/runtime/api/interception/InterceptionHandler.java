@@ -40,8 +40,8 @@ public interface InterceptionHandler {
   }
 
   /**
-   * This method is called before the intercepted component has run. It may call a method on {@code action} to do anything other
-   * than continue with the interception chain, modify the event to be used down in the chain and the component, or both.
+   * This method is called before the intercepted component has run. It may modify the event to be used down in the chain and the
+   * component via the given {@code event}.
    * 
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
@@ -52,8 +52,10 @@ public interface InterceptionHandler {
 
   /**
    * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEventResult)
-   * after}. If implemented, only by calling {@code action.}{@link InterceptionAction#proceed() proceed()} will the interception
-   * chain continue and eventually call the intercepted component.
+   * after} only for skippable components.
+   * <p>
+   * If implemented, only by calling {@code action.}{@link InterceptionAction#proceed() proceed()} will the interception chain
+   * continue and eventually call the intercepted component.
    * 
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
@@ -67,8 +69,8 @@ public interface InterceptionHandler {
   };
 
   /**
-   * Used only for notification, this method will be called after the intercepted component has run, or after it was skipped in
-   * the {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} method.
+   * Used only for notification, this method will be called after the {@link #around(Map, InterceptionEvent, InterceptionAction)
+   * around} method has been called.
    * <p>
    * If the intercepted component throws an {@link Exception}, the {@link #after(InterceptionEventResult) after} methods will
    * still be called, with the passed {@link InterceptionEventResult} returning the appropriate {@link Error} on
