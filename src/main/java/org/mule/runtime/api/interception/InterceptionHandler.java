@@ -18,14 +18,11 @@ import java.util.Map;
  * {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} method and may or may not implement
  * {@link #after(InterceptionEventResult) after} (by default, {@link #after(InterceptionEventResult) after} does nothing).
  * <p>
- * Interceptable components are those that are defined by a configuration element and have a flowPath.
+ * Interceptable components are those that are defined by a configuration element and have a {@link ComponentLocation}.
  * <p>
  * A component may have more than one interceptor applied. In that case, all will be applied in a predetermined order, calling the
  * {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} methods of each, then the component itself and
  * finally the {@link #after(InterceptionEventResult) after} methods in inverse order.
- * <p>
- * When initialized, all fields in the implementation with @{@link javax.inject.Inject} will be set with an object obtained from
- * the registry by type.
  * 
  * @since 1.0
  */
@@ -45,6 +42,8 @@ public interface InterceptionHandler {
   /**
    * This method is called before the intercepted component has run. It may call a method on {@code action} to do anything other
    * than continue with the interception chain, modify the event to be used down in the chain and the component, or both.
+   * <p>
+   * Before returning, it is mandatory that a method on the passed {@code action} is called.
    * 
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
@@ -53,7 +52,9 @@ public interface InterceptionHandler {
    * @param action when something other than continuing the interception is desired, the corresponding method on this object must
    *        be called.
    */
-  default void before(Map<String, Object> parameters, InterceptionEvent event, InterceptionAction action) {};
+  default void before(Map<String, Object> parameters, InterceptionEvent event, InterceptionAction action) {
+    action.proceed();
+  };
 
   /**
    * Used only for notification, this method will be called after the intercepted component has run, or after it was skipped in

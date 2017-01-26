@@ -16,13 +16,6 @@ package org.mule.runtime.api.interception;
 public interface InterceptionAction {
 
   /**
-   * Only operation components or similar may be skipped. Routing or intercepting components may not be intercepted.
-   * 
-   * @return {@code true} if the intercepted components may be {@link #skip() skipped}.
-   */
-  boolean isSkippable();
-
-  /**
    * Interrupts the current interception chain, effectively skipping the remaining {@link InterceptionHandler handlers} and the
    * intercepted components.
    * <p>
@@ -33,4 +26,9 @@ public interface InterceptionAction {
    */
   void skip();
 
+  /**
+   * Indicates that the current interception chain must continue, proceeding with the next {@link InterceptionHandler handlers} in
+   * the chain (if any) and the intercepted compoent.
+   */
+  void proceed();
 }
