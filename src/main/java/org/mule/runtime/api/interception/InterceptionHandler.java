@@ -52,12 +52,17 @@ public interface InterceptionHandler {
   default void before(Map<String, Object> parameters, InterceptionEvent event) {};
 
   /**
-   * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEvent)
-   * after} only for skippable components.
+   * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEvent) after} only
+   * for skippable components.
    * <p>
    * If implemented, only by calling {@code action} {@link InterceptionAction#proceed() proceed()} will the interception chain
    * continue and eventually call the intercepted component. Otherwise the interception chain execution will be interrupted and
    * {@link #after(InterceptionEvent) after} method called immediately.
+   * <p>
+   * Calling an implementation with this method will be less performant than calling just {@link #before(Map, InterceptionEvent)
+   * before} and {@link #after(InterceptionEvent) after}. So, {@link #around(Map, InterceptionEvent, InterceptionAction) around}
+   * should only be implemented for cases that cannot be done just with {@link #before(Map, InterceptionEvent) before} and/or
+   * {@link #after(InterceptionEvent) after}.
    *
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
