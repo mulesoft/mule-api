@@ -49,7 +49,6 @@ public interface InterceptionEvent extends InterceptionEventResult {
    *
    * @param key the key of the variable to add.
    * @param value the value of the variable to add.
-   * @param mediaType the variable media this
    * @return the builder instance
    */
   InterceptionEvent addVariable(String key, Object value);

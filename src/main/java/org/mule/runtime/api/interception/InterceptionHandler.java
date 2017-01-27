@@ -14,16 +14,17 @@ import org.mule.runtime.api.message.Error;
 import java.util.Map;
 
 /**
- * Provides a way to hook behavior around a component. Implementations must implement the
- * {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} method and may or may not implement
- * {@link #after(InterceptionEventResult) after} (by default, {@link #after(InterceptionEventResult) after} does nothing).
+ * Provides a way to hook behavior around a component. Implementations may implement the
+ * {@link #before(Map, InterceptionEvent) before} method, the {@link #around(Map, InterceptionEvent, InterceptionAction) around} method
+ * and the {@link #after(InterceptionEvent) after} method (by default, {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEvent) after}
+ * do nothing and {@link #around(Map, InterceptionEvent, InterceptionAction) around} just calls {@link InterceptionAction#proceed() proceed}).
  * <p>
  * Interceptable components are those that are defined by a configuration element and have a {@link ComponentLocation}.
  * <p>
  * A component may have more than one interceptor applied. In that case, all will be applied in a predetermined order, calling the
- * {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} methods of each, then the component itself and
- * finally the {@link #after(InterceptionEventResult) after} methods in inverse order.
- * 
+ * {@link #before(Map, InterceptionEvent) before} methods of each, {@link #around(Map, InterceptionEvent, InterceptionAction) around} methods which
+ * may proceed to the next interceptor or the component itself and finally the {@link #after(InterceptionEvent) after} methods.
+ *
  * @since 1.0
  */
 public interface InterceptionHandler {
@@ -51,12 +52,13 @@ public interface InterceptionHandler {
   default void before(Map<String, Object> parameters, InterceptionEvent event) {};
 
   /**
-   * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEventResult)
+   * This method is called between {@link #before(Map, InterceptionEvent) before} and {@link #after(InterceptionEvent)
    * after} only for skippable components.
    * <p>
-   * If implemented, only by calling {@code action.}{@link InterceptionAction#proceed() proceed()} will the interception chain
-   * continue and eventually call the intercepted component.
-   * 
+   * If implemented, only by calling {@code action} {@link InterceptionAction#proceed() proceed()} will the interception chain
+   * continue and eventually call the intercepted component. Otherwise the interception chain execution will be interrupted and
+   * {@link #after(InterceptionEvent) after} method called immediately.
+   *
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.
    * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
@@ -69,18 +71,20 @@ public interface InterceptionHandler {
   };
 
   /**
-   * Used only for notification, this method will be called after the {@link #around(Map, InterceptionEvent, InterceptionAction)
-   * around} method has been called.
+   * This method is called after the intercepted component has run. It may modify the event to be used down in the chain and the
+   * component via the given {@code event}.
    * <p>
-   * If the intercepted component throws an {@link Exception}, the {@link #after(InterceptionEventResult) after} methods will
-   * still be called, with the passed {@link InterceptionEventResult} returning the appropriate {@link Error} on
+   * This method will be called after the {@link #around(Map, InterceptionEvent, InterceptionAction) around} method has been called.
+   * <p>
+   * If the intercepted component throws an {@link Exception}, the {@link #after(InterceptionEvent) after} methods will
+   * still be called, with the passed {@link InterceptionEvent} returning the appropriate {@link Error} on
    * {@link InterceptionEventResult#getError()}.
    * <p>
-   * If {@link #before(String, Map, InterceptionEvent, InterceptionAction) before} throws an {@link Exception}, the interception
-   * will be called there, but the {@link #after(InterceptionEventResult) afters} of the already called handlers will still be
+   * If {@link #before(Map, InterceptionEvent) before} throws an {@link Exception}, the interception
+   * will be called there, but the {@link #after(InterceptionEvent) afters} of the already called handlers will still be
    * called.
    * 
    * @param event the result of the component.
    */
-  default void after(InterceptionEventResult event) {}
+  default void after(InterceptionEvent event) {}
 }
