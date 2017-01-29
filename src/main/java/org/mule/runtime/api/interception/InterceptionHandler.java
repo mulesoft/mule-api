@@ -12,6 +12,7 @@ import org.mule.runtime.api.component.ComponentLocation;
 import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Provides a way to hook behavior around a component. Implementations may implement the
@@ -71,8 +72,9 @@ public interface InterceptionHandler {
    * @param action when something other than continuing the interception is desired, the corresponding method on this object must
    *        be called.
    */
-  default void around(Map<String, Object> parameters, InterceptionEvent event, InterceptionAction action) {
-    action.proceed();
+  default CompletableFuture<InterceptionEvent> around(Map<String, Object> parameters, InterceptionEvent event,
+                                                      InterceptionAction action) {
+    return action.proceed();
   };
 
   /**

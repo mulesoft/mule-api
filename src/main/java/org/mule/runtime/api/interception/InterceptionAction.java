@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.interception;
 
+import java.util.concurrent.CompletableFuture;
+
 /**
  * Allows the implementations of {@link InterceptionHandler#around(java.util.Map, InterceptionEvent, InterceptionAction) around}
  * to control the execution of the interception chain.
@@ -19,5 +21,7 @@ public interface InterceptionAction {
    * Indicates that the current interception chain must continue, proceeding with the next {@link InterceptionHandler handlers} in
    * the chain (if any) and the intercepted component.
    */
-  void proceed();
+  CompletableFuture<InterceptionEvent> proceed();
+
+  CompletableFuture<InterceptionEvent> skip();
 }
