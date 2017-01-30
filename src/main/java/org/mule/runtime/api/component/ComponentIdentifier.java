@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.component;
 
+import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 
 /**
@@ -23,7 +24,7 @@ public interface ComponentIdentifier {
    */
   public enum ComponentType {
     /**
-     * Receives something from an external system, transforms it into a {@link Message} and vice-versa.  
+     * Receives something from an external system, transforms it into a {@link Message} and vice-versa.
      */
     SOURCE,
 
@@ -31,21 +32,26 @@ public interface ComponentIdentifier {
      * Executes an operation defined in an extension.
      */
     OPERATION,
-    
+
     /**
-     * Executes one or many nested component chains. 
+     * Executes one or many nested component chains.
      */
     ROUTER,
-    
+
     /**
      * Wraps the next defined component, controlling its invocation.
      */
     INTERCEPTING,
-    
+
     /**
      * Regular component that doesn't match any of the other criterias.
      */
-    PROCESSOR;
+    PROCESSOR,
+
+    /**
+     * Identifies an {@link Error} thrown by another component.
+     */
+    ERROR;
   }
 
   /**
@@ -59,7 +65,7 @@ public interface ComponentIdentifier {
    * @return the unique identifier configuration name
    */
   String getName();
-  
+
   /**
    * @return the type that represents the kind of the identified component.
    */
