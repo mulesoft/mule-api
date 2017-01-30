@@ -9,9 +9,11 @@ package org.mule.runtime.api.exception;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * <code>MuleRuntimeException</code> Is the base runtime exception type for the Mule Server any other runtimes exceptions thrown
+ * {@code MuleRuntimeException} Is the base runtime exception type for the Mule Server any other runtimes exceptions thrown
  * by Mule code will use or be based on this exception. Runtime exceptions in mule are only ever thrown where the method is not
  * declared to throw an exception and the exception is serious.
+ *
+ * @since 1.0
  */
 public class MuleRuntimeException extends RuntimeException {
 

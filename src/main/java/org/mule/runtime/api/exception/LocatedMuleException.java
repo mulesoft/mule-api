@@ -14,8 +14,10 @@ import org.mule.runtime.api.meta.NameableObject;
 import org.mule.runtime.api.meta.NamedObject;
 
 /**
- * <code>LocatedMuleException</code> is a general exception that adds context location about the Exception (i.e.: where it
+ * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it
  * occurred in the application).
+ *
+ * @since 1.0
  */
 
 public class LocatedMuleException extends MuleException {

@@ -20,8 +20,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <code>MuleException</code> is the base exception type for the Mule server any other exceptions thrown by Mule code will be
- * based on this exception,
+ * {@code MuleException} is the base exception type for the Mule server any other exceptions thrown by Mule code will be
+ * based on this exception.
+ *
+ * @since 1.0
  */
 public abstract class MuleException extends Exception {
 
