@@ -18,8 +18,14 @@ public interface ComponentLocation {
    */
   String getPath();
 
+  /**
+   * @return the config file of the application where this component is defined.
+   */
   String getFileName();
 
+  /**
+   * @return the line number in the config file of the application where this component is defined.
+   */
   int getLineInFile();
 
 }
