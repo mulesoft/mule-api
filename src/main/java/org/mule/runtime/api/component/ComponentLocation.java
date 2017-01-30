@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.component;
 
+import java.util.Optional;
+
 /**
  * Provides information about the location of a component within an application.
  *
@@ -19,13 +21,13 @@ public interface ComponentLocation {
   String getPath();
 
   /**
-   * @return the config file of the application where this component is defined.
+   * @return the config file of the application where this component is defined, if it was defined in a config file.
    */
-  String getFileName();
+  Optional<String> getFileName();
 
   /**
-   * @return the line number in the config file of the application where this component is defined.
+   * @return the line number in the config file of the application where this component is defined, if it was defined in a config file.
    */
-  int getLineInFile();
+  Optional<Integer> getLineInFile();
 
 }

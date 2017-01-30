@@ -8,18 +8,20 @@
 package org.mule.runtime.api.interception;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
+import org.mule.runtime.api.component.ComponentIdentifier.ComponentType;
 import org.mule.runtime.api.component.ComponentLocation;
 import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Provides a way to hook behavior around a component. Implementations may implement the {@link #before(Map, InterceptionEvent)
- * before} method, the {@link #around(Map, InterceptionEvent, InterceptionAction) around} method and the
- * {@link #after(InterceptionEvent) after} method (by default, {@link #before(Map, InterceptionEvent) before} and
- * {@link #after(InterceptionEvent) after} do nothing and {@link #around(Map, InterceptionEvent, InterceptionAction) around} just
- * calls {@link InterceptionAction#proceed() proceed}).
+ * Provides a way to hook behavior around a component that is not a {@link ComponentType#SOURCE}. Implementations may implement
+ * the {@link #before(Map, InterceptionEvent) before} method, the {@link #around(Map, InterceptionEvent, InterceptionAction)
+ * around} method and the {@link #after(InterceptionEvent) after} method (by default, {@link #before(Map, InterceptionEvent)
+ * before} and {@link #after(InterceptionEvent) after} do nothing and {@link #around(Map, InterceptionEvent, InterceptionAction)
+ * around} just calls {@link InterceptionAction#proceed() proceed}).
  * <p>
  * Interceptable components are those that are defined by a configuration element and have a {@link ComponentLocation}.
  * <p>
@@ -30,7 +32,7 @@ import java.util.concurrent.CompletableFuture;
  *
  * @since 1.0
  */
-public interface ComponentInterceptor {
+public interface ProcessorInterceptor {
 
   /**
    * Determines if this handler must be applied to a component based on some of its attributes.
@@ -69,7 +71,7 @@ public interface ComponentInterceptor {
    * {@link #after(InterceptionEvent) after}. Some scenarios where implementing this method is needed are:
    * <ul>
    * <li>The rest of the chain and the component have to be skipped.</li>
-   * <li>To perfrom non-blocking operations in the interception.</li>
+   * <li>To perform non-blocking operations in the interception.</li>
    * </ul>
    *
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
@@ -101,6 +103,7 @@ public interface ComponentInterceptor {
    * {@link #after(InterceptionEvent) afters} of the already called handlers will still be called.
    * 
    * @param event the result of the component.
+   * @param thrown the exception thrown by the intercepted component, if any.
    */
-  default void after(InterceptionEvent event) {}
+  default void after(InterceptionEvent event, Optional<Throwable> thrown) {}
 }

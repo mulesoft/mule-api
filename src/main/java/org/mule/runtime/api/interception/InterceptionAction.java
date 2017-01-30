@@ -10,7 +10,7 @@ package org.mule.runtime.api.interception;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Allows the implementations of {@link ComponentInterceptor#around(java.util.Map, InterceptionEvent, InterceptionAction) around}
+ * Allows the implementations of {@link ProcessorInterceptor#around(java.util.Map, InterceptionEvent, InterceptionAction) around}
  * to control the execution of the interception chain.
  * 
  * @since 1.0
@@ -18,16 +18,16 @@ import java.util.concurrent.CompletableFuture;
 public interface InterceptionAction {
 
   /**
-   * Indicates that the current interception chain must continue, proceeding with the next {@link ComponentInterceptor handlers}
+   * Indicates that the current interception chain must continue, proceeding with the next {@link ProcessorInterceptor handlers}
    * in the chain (if any) and the intercepted component.
    * 
    * @return a {@link CompletableFuture} using the {@link InterceptionEvent event} that results of the remaining
-   *         {@link ComponentInterceptor handlers} of the chain and the intercepted processor.
+   *         {@link ProcessorInterceptor handlers} of the chain and the intercepted processor.
    */
   CompletableFuture<InterceptionEvent> proceed();
 
   /**
-   * Interrupts the current interception chain, skipping the next {@link ComponentInterceptor interceptors} in the chain and the
+   * Interrupts the current interception chain, skipping the next {@link ProcessorInterceptor interceptors} in the chain and the
    * intercepted component.
    * <p>
    * If called for a <b>router</b> component, the whole route (and all the components contained in it) will be skipped.
@@ -36,7 +36,7 @@ public interface InterceptionAction {
    * {@code splitter} up to an {@code aggregator}) are skipped as well.
    * 
    * @return a {@link CompletableFuture} using the same {@link InterceptionEvent event} passed to the
-   *         {@link ComponentInterceptor#around(java.util.Map, InterceptionEvent, InterceptionAction) around()} method.
+   *         {@link ProcessorInterceptor#around(java.util.Map, InterceptionEvent, InterceptionAction) around()} method.
    */
   CompletableFuture<InterceptionEvent> skip();
 }
