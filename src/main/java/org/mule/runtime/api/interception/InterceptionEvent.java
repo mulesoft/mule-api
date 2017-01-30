@@ -6,21 +6,61 @@
  */
 package org.mule.runtime.api.interception;
 
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
-
-import java.util.Map;
+import org.mule.runtime.api.metadata.TypedValue;
 
 /**
- * Extends {@link InterceptionEventResult} adding mutator methods.
+ * Provides access to the attributes of the input event of a component and allows to mutate them.
  *
  * @since 1.0
  */
-public interface InterceptionEvent extends InterceptionEventResult {
+public interface InterceptionEvent {
 
   /**
-   * Set the {@link Message} to construct {@link Event} with.
+   * Returns the message payload for this event
+   * 
+   * @return the message payload for this event
+   */
+  Message getMessage();
+
+  /**
+   * Returns an immutable {@link Set} of variable names.
+   *
+   * @return the set of names
+   */
+  Set<String> getVariableNames();
+
+  /**
+   * Returns the variable registered under the given {@code key}
+   *
+   * @param key the name or key of the variable. This must be non-null.
+   * @param <T> the type of the variable value.
+   * @return a {@link TypedValue} containing the variable's value and {@link DataType}
+   * @throws java.util.NoSuchElementException if the flow variable does not exist.
+   */
+  <T> TypedValue<T> getVariable(String key);
+
+  /**
+   * When a mule component throws an error then an {@code Error} object gets generated with all the data associated to the error.
+   *
+   * This field will only contain a value within the error handler defined to handle errors. After the error handler is executed
+   * the event error field will be cleared. If another flow is called from within the error handler the flow will still have
+   * access to the error field.
+   *
+   * To avoid losing the error field after the error handler the user can define a variable pointing to the error field.
+   *
+   * @return an optional of the error associated with the event. Will be empty if there's no error associated with the event.
+   */
+  Optional<Error> getError();
+
+  /**
+   * Set the {@link Message} to construct the target Event with.
    *
    * @param message the message instance.
    * @return the builder instance
@@ -39,7 +79,8 @@ public interface InterceptionEvent extends InterceptionEventResult {
    * Add a variable.
    *
    * @param key the key of the variable to add.
-   * @param value the value of the variable to add.
+   * @param value the value of the variable to add. {@code null} values are supported.
+   * @param mediaType additional metadata about the {@code value} type.
    * @return the builder instance.
    */
   InterceptionEvent addVariable(String key, Object value, DataType mediaType);
@@ -48,7 +89,7 @@ public interface InterceptionEvent extends InterceptionEventResult {
    * Add a variable.
    *
    * @param key the key of the variable to add.
-   * @param value the value of the variable to add.
+   * @param value the value of the variable to add. {@code null} values are supported.
    * @return the builder instance
    */
   InterceptionEvent addVariable(String key, Object value);
@@ -60,13 +101,5 @@ public interface InterceptionEvent extends InterceptionEventResult {
    * @return the builder instance
    */
   InterceptionEvent removeVariable(String key);
-
-  /**
-   * Sets an error related to the produced event.
-   *
-   * @param error the error associated with the produced event
-   * @return the builder instance
-   */
-  InterceptionEvent error(Error error);
 
 }

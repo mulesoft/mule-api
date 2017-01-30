@@ -30,7 +30,7 @@ import java.util.concurrent.CompletableFuture;
  *
  * @since 1.0
  */
-public interface InterceptionHandler {
+public interface ComponentInterceptor {
 
   /**
    * Determines if this handler must be applied to a component based on some of its attributes.
@@ -95,7 +95,7 @@ public interface InterceptionHandler {
    * <p>
    * If the intercepted component throws an {@link Exception}, the {@link #after(InterceptionEvent) after} methods will still be
    * called, with the passed {@link InterceptionEvent} returning the appropriate {@link Error} on
-   * {@link InterceptionEventResult#getError()}.
+   * {@link InterceptionEvent#getError()}.
    * <p>
    * If {@link #before(Map, InterceptionEvent) before} throws an {@link Exception}, the interception will be called there, but the
    * {@link #after(InterceptionEvent) afters} of the already called handlers will still be called.
