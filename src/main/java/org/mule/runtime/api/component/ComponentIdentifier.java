@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.component;
 
-import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 
 /**
@@ -46,12 +45,7 @@ public interface ComponentIdentifier {
     /**
      * Regular component that doesn't match any of the other criterias.
      */
-    PROCESSOR,
-
-    /**
-     * Identifies an {@link Error} thrown by another component.
-     */
-    ERROR;
+    PROCESSOR;
   }
 
   /**
