@@ -66,7 +66,11 @@ public interface InterceptionHandler {
    * Calling an implementation with this method will be less efficient than calling just {@link #before(Map, InterceptionEvent)
    * before} and {@link #after(InterceptionEvent) after}. So, {@link #around(Map, InterceptionEvent, InterceptionAction) around}
    * should only be implemented for cases that cannot be done just with {@link #before(Map, InterceptionEvent) before} and/or
-   * {@link #after(InterceptionEvent) after}.
+   * {@link #after(InterceptionEvent) after}. Some scenarios where implementing this method is needed are:
+   * <ul>
+   * <li>The rest of the chain and the component have to be skipped.</li>
+   * <li>To perfrom non-blocking operations in the interception.</li>
+   * </ul>
    *
    * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
    *        be resolved when passed to this method.

@@ -21,7 +21,8 @@ public interface InterceptionAction {
    * Indicates that the current interception chain must continue, proceeding with the next {@link InterceptionHandler handlers} in
    * the chain (if any) and the intercepted component.
    * 
-   * @return a {@link CompletableFuture} with the {@link InterceptionEvent event} that results of the intercepted processor.
+   * @return a {@link CompletableFuture} using the {@link InterceptionEvent event} that results of the remaining
+   *         {@link InterceptionHandler handlers} of the chain and the intercepted processor.
    */
   CompletableFuture<InterceptionEvent> proceed();
 
@@ -34,8 +35,8 @@ public interface InterceptionAction {
    * If called for an intercepting component (i.e. a {@code splitter}), the listener components (i.e. what follows the
    * {@code splitter} up to an {@code aggregator}) are skipped as well.
    * 
-   * @return a {@link CompletableFuture} with the same {@link InterceptionEvent event} as it was at the time this method was
-   *         called.
+   * @return a {@link CompletableFuture} using the same {@link InterceptionEvent event} passed to the
+   *         {@link InterceptionHandler#around(java.util.Map, InterceptionEvent, InterceptionAction) around()} method.
    */
   CompletableFuture<InterceptionEvent> skip();
 }
