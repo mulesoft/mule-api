@@ -10,8 +10,12 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 import org.mule.runtime.api.exception.LocatedMuleException;
 import org.mule.runtime.api.i18n.I18nMessage;
 
-/** <code>LifecycleException</code> TODO */
-
+/**
+ * {@code LifecycleException} is the base exception thrown when an error occurs
+ * during a {@link Lifecycle} phase.
+ *
+ * @since 1.0
+ */
 public class LifecycleException extends LocatedMuleException {
 
   /** Serial version */

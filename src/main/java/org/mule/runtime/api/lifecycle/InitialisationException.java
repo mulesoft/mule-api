@@ -9,9 +9,11 @@ package org.mule.runtime.api.lifecycle;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * <code>InitialisationException</code> is thrown by the initialise method defined in the
- * <code>org.mule.runtime.core.api.lifecycle.Initialisable</code> interface. IinitialisationExceptions are fatal and will cause
+ * {@code InitialisationException} is thrown by the initialise method defined in the
+ * {@link Initialisable} interface. IinitialisationExceptions are fatal and will cause
  * the current Mule instance to shutdown.
+ *
+ * @since 1.0
  */
 public class InitialisationException extends LifecycleException {
 

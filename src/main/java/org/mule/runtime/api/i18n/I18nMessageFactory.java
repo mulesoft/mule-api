@@ -18,7 +18,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * Base {@code MessageFactory} for I18n supported messages.
+ *
+ * @since 1.0
+ */
 public abstract class I18nMessageFactory {
 
   /**
@@ -60,8 +64,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Computes the bundle's full path (<code>META-INF/services/org/mule/i18n/&lt;bundleName&gt;-messages.properties</code>) from
-   * <code>bundleName</code>.
+   * Computes the bundle's full path ({@code META-INF/services/org/mule/i18n/&lt;bundleName&gt;-messages.properties}) from
+   * {@code bundleName}.
    * 
    * @param bundleName Name of the bundle without the &quot;messages&quot; suffix and without file extension.
    */
@@ -71,7 +75,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * <code>code</code> from the resource bundle <code>bundlePath</code>.
+   * {@code code} from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -84,7 +88,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * <code>code</code> from the resource bundle <code>bundlePath</code>.
+   * {@code code} from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -98,7 +102,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * <code>code</code> from the resource bundle <code>bundlePath</code>.
+   * {@code code} from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -113,9 +117,9 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * <code>code</code> from the resource bundle <code>bundlePath</code>.
+   * {@code code} from the resource bundle {@code bundlePath}.
    * 
-   * <b>Attention:</b> do not confuse this method with <code>createMessage(String, int, Object)</code>.
+   * <b>Attention:</b> do not confuse this method with {@link this#createMessage}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -129,7 +133,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * <code>code</code> from the resource bundle <code>bundlePath</code>.
+   * {@code code} from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -161,7 +165,7 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to read the message with code <code>code</code> from the resource bundle.
+   * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -172,7 +176,7 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to read the message with code <code>code</code> from the resource bundle.
+   * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -185,7 +189,7 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to read the message with code <code>code</code> from the resource bundle.
+   * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message

@@ -48,14 +48,14 @@ public final class BulkOperationResult<T> implements Serializable {
   }
 
   /**
-   * The operation id
+   * @return The operation id
    */
   public Serializable getId() {
     return id;
   }
 
   /**
-   * Whether or not the operation was successful. Should be <code>true</code> if and only if all the child {@link BulkItem}
+   * @return Whether or not the operation was successful. Should be {@code true} if and only if all the child {@link BulkItem}
    * entities were also successful
    */
   public boolean isSuccessful() {
@@ -63,7 +63,7 @@ public final class BulkOperationResult<T> implements Serializable {
   }
 
   /**
-   * An ordered list of {@link BulkItem}, one per each item in the original operation, no matter if the record was successful or
+   * @return An ordered list of {@link BulkItem}, one per each item in the original operation, no matter if the record was successful or
    * not
    */
   public List<BulkItem<T>> getItems() {
