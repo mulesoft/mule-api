@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.component;
 
-import org.mule.runtime.api.message.Message;
+import static org.mule.runtime.api.component.DefaultComponentIdentifier.parseComponentIdentifier;
 
 /**
  * Unique identifier for a configuration option. Every configuration option has a namespace and an identifier.
@@ -17,36 +17,6 @@ import org.mule.runtime.api.message.Message;
  * @since 1.0
  */
 public interface ComponentIdentifier {
-
-  /**
-   * Declares different types of component based on its common characteristics.
-   */
-  public enum ComponentType {
-    /**
-     * Receives something from an external system, transforms it into a {@link Message} and vice-versa.
-     */
-    SOURCE,
-
-    /**
-     * Executes an operation defined in an extension.
-     */
-    OPERATION,
-
-    /**
-     * Executes one or many nested component chains.
-     */
-    ROUTER,
-
-    /**
-     * Wraps the next defined component, controlling its invocation.
-     */
-    INTERCEPTING,
-
-    /**
-     * Regular component that doesn't match any of the other criterias.
-     */
-    PROCESSOR;
-  }
 
   /**
    * The namespace is a short name of the extension that defines the component.
@@ -61,7 +31,48 @@ public interface ComponentIdentifier {
   String getName();
 
   /**
-   * @return the type that represents the kind of the identified component.
+   * @return builder to create an instance of {@link ComponentIdentifier}
    */
-  ComponentType getComponentType();
+  static Builder builder() {
+    return new DefaultComponentIdentifier.Builder();
+  }
+
+  /**
+   * Creates a {@link ComponentIdentifier} from an string representation where the expected format is namespace:name. If the
+   * string doesn't contain the namespace then it just needs to be the name of the component and the namespace will default to the
+   * core namespace.
+   * 
+   * @param componentIdentifier the component identifier represented as a string
+   * @return the {@link ComponentIdentifier} created from it's string representation.
+   */
+  static ComponentIdentifier buildFromStringRepresentation(String componentIdentifier) {
+    return parseComponentIdentifier(componentIdentifier);
+  }
+
+  /**
+   * {@link ComponentIdentifier} builder interface.
+   * 
+   * @since 1.0
+   */
+  interface Builder {
+
+    /**
+     * @param name name of the component
+     * @return {@code this} builder
+     */
+    Builder withName(String name);
+
+    /**
+     * @param namespace namespace owning the component
+     * @return {@code this} builder
+     */
+    Builder withNamespace(String namespace);
+
+    /**
+     * @return a new instance of {@link ComponentIdentifier}
+     */
+    ComponentIdentifier build();
+
+  }
+
 }

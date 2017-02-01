@@ -4,21 +4,30 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.component;
+package org.mule.runtime.api.component.location;
+
+import org.mule.runtime.api.component.TypedComponentIdentifier;
 
 import java.util.Optional;
 
 /**
- * Provides information about the location of a component within an application.
+ * A location part represent an specific location of a component within another component.
  *
  * @since 1.0
  */
-public interface ComponentLocation {
+public interface LocationPart {
 
   /**
-   * @return the unique absolute path of the component in the application.
+   * @return the string representation of the part
    */
-  String getPath();
+  String getPartPath();
+
+  /**
+   * A location part represent an specific location of a component within another component.
+   *
+   * @since 4.0
+   */
+  Optional<TypedComponentIdentifier> getPartIdentifier();
 
   /**
    * @return the config file of the application where this component is defined, if it was defined in a config file.

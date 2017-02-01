@@ -7,9 +7,8 @@
 
 package org.mule.runtime.api.interception;
 
-import org.mule.runtime.api.component.ComponentIdentifier;
-import org.mule.runtime.api.component.ComponentIdentifier.ComponentType;
-import org.mule.runtime.api.component.ComponentLocation;
+import org.mule.runtime.api.component.TypedComponentIdentifier;
+import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
@@ -17,11 +16,12 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Provides a way to hook behavior around a component that is not a {@link ComponentType#SOURCE}. Implementations may implement
- * the {@link #before(Map, InterceptionEvent) before} method, the {@link #around(Map, InterceptionEvent, InterceptionAction)
- * around} method and the {@link #after(InterceptionEvent) after} method (by default, {@link #before(Map, InterceptionEvent)
- * before} and {@link #after(InterceptionEvent) after} do nothing and {@link #around(Map, InterceptionEvent, InterceptionAction)
- * around} just calls {@link InterceptionAction#proceed() proceed}).
+ * Provides a way to hook behavior around a component that is not a
+ * {@link org.mule.runtime.api.component.TypedComponentIdentifier.ComponentType#SOURCE}. Implementations may implement the
+ * {@link #before(Map, InterceptionEvent) before} method, the {@link #around(Map, InterceptionEvent, InterceptionAction) around}
+ * method and the {@link #after(InterceptionEvent) after} method (by default, {@link #before(Map, InterceptionEvent) before} and
+ * {@link #after(InterceptionEvent) after} do nothing and {@link #around(Map, InterceptionEvent, InterceptionAction) around} just
+ * calls {@link InterceptionAction#proceed() proceed}).
  * <p>
  * Interceptable components are those that are defined by a configuration element and have a {@link ComponentLocation}.
  * <p>
@@ -41,7 +41,7 @@ public interface ProcessorInterceptor {
    * @param location the location properties of the to-be intercepted component in the mule app configuration.
    * @return {@code true} if this handler must be applied to the component with the provided parameters, {@code false} otherwise.
    */
-  default boolean intercept(ComponentIdentifier identifier, ComponentLocation location) {
+  default boolean intercept(TypedComponentIdentifier identifier, ComponentLocation location) {
     return true;
   }
 
