@@ -65,4 +65,9 @@ public interface DslConstants {
    */
   String TLS_CONTEXT_ELEMENT_IDENTIFIER = "context";
 
+  /**
+   * The prefix name of the {@code tls:context} infrastructure parameter
+   */
+  String TLS_PREFIX = "tls";
+
 }
