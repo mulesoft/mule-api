@@ -6,18 +6,20 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Arrays.asList;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
-import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * A builder object which allows creating an {@link ExtensionDeclaration}
@@ -28,6 +30,9 @@ import java.util.Collection;
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer> {
+
+  private static final List<String> UNREGISTERED_PACKAGES =
+      asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
 
   /**
    * Constructor for this descriptor
@@ -229,14 +234,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
 
   private boolean isTypeRegistrable(ObjectType objectType) {
     String typeId = getTypeId(objectType).orElse(null);
-    if (typeId != null &&
-        (Object.class.getName().equals(typeId) ||
-            typeId.startsWith("org.mule.runtime.") ||
-            typeId.startsWith("com.mulesoft.mule.runtime."))) {
-      return false;
-    }
-
-    return true;
+    return typeId == null || UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith);
   }
 
   /**
