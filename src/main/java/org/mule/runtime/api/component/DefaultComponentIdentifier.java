@@ -106,7 +106,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
 
   @Override
   public int hashCode() {
-    int result = getNamespace().hashCode();
+    int result = getNamespace().toLowerCase().hashCode();
     result = 31 * result + getName().hashCode();
     return result;
   }
