@@ -61,11 +61,6 @@ public interface TypedComponentIdentifier {
     ON_ERROR,
 
     /**
-     * Component type for errors identifiers.
-     */
-    ERROR,
-
-    /**
      * Component type for components that cannot be categorized in the other component types
      */
     UNKNOWN
