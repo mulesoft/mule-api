@@ -6,8 +6,7 @@
  */
 package org.mule.runtime.api.meta;
 
-import org.mule.runtime.api.component.ComponentIdentifier;
-import org.mule.runtime.api.component.ComponentLocation;
+import org.mule.runtime.api.component.location.ComponentLocation;
 
 import java.util.Map;
 
@@ -42,15 +41,7 @@ public interface AnnotatedObject {
   void setAnnotations(Map<QName, Object> annotations);
 
   /**
-   * @return the identification properties of this component.
-   */
-  ComponentIdentifier getIdentifier();
-
-  /**
-   * TODO MULE-11482 Remove flowPath parameter
-   * 
-   * @param flowPath
    * @return the location properties of this component in the mule app configuration.
    */
-  ComponentLocation getLocation(String flowPath);
+  ComponentLocation getLocation();
 }
