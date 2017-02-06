@@ -6,14 +6,14 @@
  */
 package org.mule.runtime.api.interception;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
+
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * Provides access to the attributes of the input event of a component and allows to mutate them.
