@@ -9,7 +9,7 @@ package org.mule.runtime.api.util;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 /**
- * Represent an amount of information by combining an scalar size with a {@link DataUnit}
+ * Represents an amount of information by combining a scalar size with a {@link DataUnit}
  *
  * @since 1.0
  */

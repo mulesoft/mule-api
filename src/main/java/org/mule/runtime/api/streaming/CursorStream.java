@@ -25,7 +25,7 @@ import java.io.InputStream;
  * resources it has allocated. Once that happens, {@link #isClosed()} will return {@code true}
  * again but no action will move it from that state.
  * <p>
- * This is not thread safe. Should not be used concurrently.
+ * Implementations should not be expected to be thread safe. Should not be used concurrently.
  *
  * @since 1.0
  */

@@ -9,7 +9,7 @@ package org.mule.runtime.api.streaming;
 import java.io.InputStream;
 
 /**
- * Provides instances of {@link CursorStream} which allows concurrent access of a wrapped
+ * Provides instances of {@link CursorStream} which allows concurrent access to a wrapped
  * {@link InputStream}.
  * <p>
  * The provider maintains all the allocated resources necessary to power all the open
