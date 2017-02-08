@@ -18,7 +18,7 @@ import org.mule.runtime.api.metadata.TypedValue;
 public interface ExpressionEvaluator {
 
   /**
-   * Registers the given {@link BindingContext} entries as globals. Notice globals cannot be removed once registered, only
+   * Registers the entries of a {@link BindingContext} as globals. Notice globals cannot be removed once registered, only
    * overwritten by the registration of a binding with the same identifier.
    *
    * @param bindingContext the context to register
