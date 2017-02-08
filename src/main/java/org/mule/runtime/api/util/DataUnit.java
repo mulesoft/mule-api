@@ -7,11 +7,11 @@
 package org.mule.runtime.api.util;
 
 /**
- * Units to messure amounts of bytes and convenience transformation methods
+ * Units to measure amounts of bytes and convenience transformation methods
  *
  * @since 4.0
  */
-public enum ByteUnit {
+public enum DataUnit {
 
   BYTE {
 
@@ -105,18 +105,34 @@ public enum ByteUnit {
     }
   };
 
+  /**
+   * @param value an scalar amount of information
+   * @return the given {@code value} in bytes
+   */
   public int toBytes(int value) {
     throw new AbstractMethodError();
   }
 
+  /**
+   * @param value an scalar amount of information
+   * @return the given {@code value} in KB
+   */
   public int toKB(int value) {
     throw new AbstractMethodError();
   }
 
+  /**
+   * @param value an scalar amount of information
+   * @return the given {@code value} in MB
+   */
   public int toMB(int value) {
     throw new AbstractMethodError();
   }
 
+  /**
+   * @param value an scalar amount of information
+   * @return the given {@code value} in GB
+   */
   public int toGB(int value) {
     throw new AbstractMethodError();
   }
