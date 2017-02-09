@@ -12,7 +12,7 @@ import java.util.concurrent.locks.Lock;
  * Factory for creating Lock instances.
  * <p>
  * All mule components that require synchronization for access shared data must be synchronized using locks from the LockFactory
- * provided by MuleContext
+ * implementation.
  * 
  * @since 1.0
  */
