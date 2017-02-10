@@ -9,10 +9,10 @@ package org.mule.runtime.api.lock;
 import java.util.concurrent.locks.Lock;
 
 /**
- * Factory for creating Lock instances.
+ * Factory for creating {@link Lock} instances.
  * <p>
- * All mule components that require synchronization for access shared data must be synchronized using locks from the LockFactory
- * implementation.
+ * All mule components that require synchronization for access shared data must be synchronized using locks from the
+ * {@link LockFactory} implementation.
  * 
  * @since 1.0
  */
@@ -23,7 +23,7 @@ public interface LockFactory {
    * <p>
    * Always returns the same lock for a certain {@code lockId}
    *
-   * @param lockId Id of the lock
+   * @param lockId Id of the lock. Non null.
    * @return a {@link Lock} instance associated to the {@code lockId}
    */
   Lock createLock(String lockId);
