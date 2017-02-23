@@ -40,24 +40,24 @@ public final class XmlDslModel {
     }
 
     /**
-     * Sets the extension's namespace
+     * Sets the extension's prefix
      *
-     * @param namespace the schema namespace
+     * @param prefix the schema prefix
      * @return {@code this} builder
      */
-    public XmlDslModelBuilder setNamespace(String namespace) {
-      product.namespace = namespace;
+    public XmlDslModelBuilder setPrefix(String prefix) {
+      product.prefix = prefix;
       return this;
     }
 
     /**
-     * Sets the namespace uri
+     * Sets the namespace
      *
-     * @param namespaceUri the namespace uri
+     * @param namespace the namespace
      * @return {@code this} builder
      */
-    public XmlDslModelBuilder setNamespaceUri(String namespaceUri) {
-      product.namespaceUri = namespaceUri;
+    public XmlDslModelBuilder setNamespace(String namespace) {
+      product.namespace = namespace;
       return this;
     }
 
@@ -100,8 +100,8 @@ public final class XmlDslModel {
 
   private String xsdFileName = "";
   private String schemaVersion = "";
+  private String prefix = "";
   private String namespace = "";
-  private String namespaceUri = "";
   private String schemaLocation = "";
 
   /**
@@ -114,15 +114,15 @@ public final class XmlDslModel {
   /**
    * @return The extension's namespace
    */
-  public String getNamespace() {
-    return namespace;
+  public String getPrefix() {
+    return prefix;
   }
 
   /**
    * @return The namespace URI
    */
-  public String getNamespaceUri() {
-    return namespaceUri;
+  public String getNamespace() {
+    return namespace;
   }
 
   /**
