@@ -23,7 +23,8 @@ import java.io.InputStream;
  * <p>
  * Eventually, the runtime (and only the runtime) will dispose of this cursor, releasing the
  * resources it has allocated. Once that happens, {@link #isClosed()} will return {@code true}
- * again but no action will move it from that state.
+ * again but no action will move it from that state. When this happens, {@link #isDisposed()}
+ * will also return {@code true}
  * <p>
  * Implementations should not be expected to be thread safe. Should not be used concurrently.
  *
@@ -47,4 +48,9 @@ public abstract class CursorStream extends InputStream {
    * @return Whether this stream is closed or not.
    */
   public abstract boolean isClosed();
+
+  /**
+   * @return Whether this stream has been disposed by the runtime
+   */
+  public abstract boolean isDisposed();
 }
