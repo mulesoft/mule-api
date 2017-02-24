@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
@@ -20,20 +21,20 @@ import java.util.List;
  */
 public class MuleApplicationModel extends AbstractMuleArtifactModel {
 
-  private List<String> configs = new ArrayList<>();
+  private final List<String> configs;
 
   private MuleApplicationModel(String name, String minMuleVersion,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs) {
     super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor);
-    this.configs = configs;
+    this.configs = configs == null ? new ArrayList<>() : configs;
   }
 
   /**
    * @return the application configuration files
    */
   public List<String> getConfigs() {
-    return configs;
+    return unmodifiableList(configs);
   }
 
   /**

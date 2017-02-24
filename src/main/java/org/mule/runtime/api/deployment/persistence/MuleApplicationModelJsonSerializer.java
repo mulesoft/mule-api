@@ -8,6 +8,11 @@ package org.mule.runtime.api.deployment.persistence;
 
 import org.mule.runtime.api.deployment.meta.MuleApplicationModel;
 
+/**
+ * {@link MuleApplicationModel} json serializer.
+ *
+ * @since 1.0
+ */
 public class MuleApplicationModelJsonSerializer extends AbstractMuleArtifactModelJsonSerializer<MuleApplicationModel> {
 
   @Override
