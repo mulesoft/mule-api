@@ -9,21 +9,21 @@ package org.mule.runtime.api.component;
 import static org.mule.runtime.api.component.DefaultComponentIdentifier.parseComponentIdentifier;
 
 /**
- * Unique identifier for a configuration option. Every configuration option has a namespace and an identifier.
+ * Unique identifier for a configuration option. Every configuration option has a prefix and an identifier.
  * <p>
- * The namespace is a short name of the extension that defines the component. Even core configuration have a namespace even though
- * they have namespace in the declaration in the configuration files.
+ * The prefix is a short name of the extension that defines the component. Even core configuration have a prefix even though
+ * they have prefix in the declaration in the configuration files.
  *
  * @since 1.0
  */
 public interface ComponentIdentifier {
 
   /**
-   * The namespace is a short name of the extension that defines the component.
+   * The prefix is a short name of the extension that defines the component.
    * 
-   * @return the unique identifier namespace
+   * @return the unique identifier prefix
    */
-  String getNamespace();
+  String getPrefix();
 
   /**
    * @return the unique identifier configuration name
@@ -38,9 +38,9 @@ public interface ComponentIdentifier {
   }
 
   /**
-   * Creates a {@link ComponentIdentifier} from an string representation where the expected format is namespace:name. If the
-   * string doesn't contain the namespace then it just needs to be the name of the component and the namespace will default to the
-   * core namespace.
+   * Creates a {@link ComponentIdentifier} from an string representation where the expected format is prefix:name. If the
+   * string doesn't contain the prefix then it just needs to be the name of the component and the prefix will default to the
+   * core prefix.
    * 
    * @param componentIdentifier the component identifier represented as a string
    * @return the {@link ComponentIdentifier} created from it's string representation.
@@ -63,10 +63,10 @@ public interface ComponentIdentifier {
     Builder withName(String name);
 
     /**
-     * @param namespace namespace owning the component
+     * @param prefix prefix owning the component
      * @return {@code this} builder
      */
-    Builder withNamespace(String namespace);
+    Builder withPrefix(String prefix);
 
     /**
      * @return a new instance of {@link ComponentIdentifier}
