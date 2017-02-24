@@ -112,7 +112,7 @@ public final class XmlDslModel {
   }
 
   /**
-   * @return The extension's namespace
+   * @return The extension's prefix
    */
   public String getPrefix() {
     return prefix;
