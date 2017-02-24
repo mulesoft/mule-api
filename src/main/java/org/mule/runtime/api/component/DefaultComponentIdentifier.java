@@ -61,7 +61,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
     private DefaultComponentIdentifier componentIdentifier = new DefaultComponentIdentifier();
 
     /**
-     * @param prefix namespace identifier of the mule language extensions module
+     * @param prefix namespace identifier of the Mule language extensions module
      * @return the builder
      */
     public Builder withPrefix(String prefix) {
