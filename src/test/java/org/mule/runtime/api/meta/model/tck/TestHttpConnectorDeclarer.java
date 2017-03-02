@@ -33,7 +33,7 @@ import java.io.Serializable;
  *
  * @since 1.0
  */
-public class TestHttpConnectorDeclarer extends BaseDeclarerTestCase {
+public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
 
   public static final String EXTENSION_NAME = "http";
   public static final String EXTENSION_DESCRIPTION = "Http Connector";

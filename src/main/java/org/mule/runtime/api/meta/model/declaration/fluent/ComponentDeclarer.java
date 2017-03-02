@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.Stereotype;
 
 /**
  * Allows configuring a {@link ComponentDeclaration} through a fluent API
@@ -64,6 +65,17 @@ abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends Componen
   @Override
   public T withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return (T) this;
+  }
+
+  /**
+   * Adds the given {@code stereotype}
+   *
+   * @param stereotype a {@link Stereotype}
+   * @return {@code this} declarer
+   */
+  public T withStereotype(Stereotype stereotype) {
+    declaration.addStereotype(stereotype);
     return (T) this;
   }
 }

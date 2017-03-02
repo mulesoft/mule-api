@@ -15,8 +15,9 @@ import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
-import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
-import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.meta.model.util.ComponentModelVisitor;
+
+import java.util.Set;
 
 /**
  * A definition of an component in a {@link ExtensionModel}. This model groups all the common contracts between extension
@@ -54,11 +55,14 @@ public interface ComponentModel<T extends ComponentModel>
   boolean requiresConnection();
 
   /**
-   * Returns a {@link ComponentModel} with its types resolved.
-   * 
-   * @param inputMetadataDescriptor {@link InputMetadataDescriptor} describes the input parameters of the component
-   * @param outputMetadataDescriptor {@link OutputMetadataDescriptor} describes the component output
-   * @return model with its types resolved by the metadata resolution process
+   * @return The {@link Stereotype stereotypes} which apply to this model
    */
-  T getTypedModel(InputMetadataDescriptor inputMetadataDescriptor, OutputMetadataDescriptor outputMetadataDescriptor);
+  Set<Stereotype> getStereotypes();
+
+  /**
+   * Accepts a {@link ComponentModelVisitor}
+   *
+   * @param visitor a {@link ComponentModelVisitor}
+   */
+  void accept(ComponentModelVisitor visitor);
 }

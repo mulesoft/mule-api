@@ -10,6 +10,8 @@ import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.operation.RouterModel;
+import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -17,7 +19,6 @@ import org.mule.runtime.api.meta.model.source.HasSourceModels;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.util.Reference;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -64,6 +65,16 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   }
 
   @Override
+  protected void onRouter(HasOperationModels owner, RouterModel model) {
+    doOnce(operations, model, router -> onRouter((RouterModel) router));
+  }
+
+  @Override
+  protected void onScope(HasOperationModels owner, ScopeModel model) {
+    doOnce(operations, model, scope -> onScope((ScopeModel) scope));
+  }
+
+  @Override
   protected final void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
     doOnce(connectionProviders, model, this::onConnectionProvider);
   }
@@ -98,7 +109,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * This method will only be invoked once per each found instance
    *
    * @param groupModel the {@link ParameterGroupModel} on which the {@code model} is contained
-   * @param model the {@link ParameterModel}
+   * @param model      the {@link ParameterModel}
    */
   protected void onParameter(ParameterGroupModel groupModel, ParameterModel model) {}
 
@@ -119,5 +130,31 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * @param model the {@link OperationModel}
    */
   protected void onOperation(OperationModel model) {}
+
+  /**
+   * Invoked when a {@link RouterModel} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance.
+   * <p>
+   * By default this method simply delegates into {@link #onOperation(OperationModel)}
+   *
+   * @param model the {@link OperationModel}
+   */
+  protected void onRouter(RouterModel model) {
+    onOperation(model);
+  }
+
+  /**
+   * Invoked when a {@link ScopeModel} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance.
+   * <p>
+   * By default this method simply delegates into {@link #onOperation(OperationModel)}
+   *
+   * @param model the {@link OperationModel}
+   */
+  protected void onScope(ScopeModel model) {
+    onOperation(model);
+  }
 
 }

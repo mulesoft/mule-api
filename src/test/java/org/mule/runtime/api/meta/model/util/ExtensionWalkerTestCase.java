@@ -12,12 +12,15 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
+import static org.mule.runtime.api.util.ExtensionModelTestUtils.visitableMock;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.operation.RouterModel;
+import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -46,6 +49,12 @@ public class ExtensionWalkerTestCase {
   private OperationModel operation;
 
   @Mock
+  private ScopeModel scope;
+
+  @Mock
+  private RouterModel router;
+
+  @Mock
   private ConnectionProviderModel connectionProvider;
 
   @Mock
@@ -67,7 +76,7 @@ public class ExtensionWalkerTestCase {
     when(source.getSuccessCallback()).thenReturn(of(sourceCallback));
 
     when(extension.getConfigurationModels()).thenReturn(asList(configuration));
-    when(extension.getOperationModels()).thenReturn(asList(operation));
+    when(extension.getOperationModels()).thenReturn(asList(operation, scope, router));
     when(extension.getSourceModels()).thenReturn(asList(source));
     when(extension.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
@@ -76,7 +85,8 @@ public class ExtensionWalkerTestCase {
     when(configuration.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
     when(groupModel.getParameterModels()).thenReturn(asList(parameterModel));
-    addParameter(configuration, operation, connectionProvider, source, sourceCallback);
+    addParameter(configuration, operation, router, scope, connectionProvider, source, sourceCallback);
+    visitableMock(operation, scope, router);
   }
 
   private void addParameter(ParameterizedModel... models) {
@@ -87,6 +97,71 @@ public class ExtensionWalkerTestCase {
 
   @Test
   public void walk() {
+    AtomicInteger configs = new AtomicInteger(0);
+    AtomicInteger operations = new AtomicInteger(0);
+    AtomicInteger scopes = new AtomicInteger(0);
+    AtomicInteger routers = new AtomicInteger(0);
+    AtomicInteger sources = new AtomicInteger(0);
+    AtomicInteger parameterGroups = new AtomicInteger(0);
+    AtomicInteger parameters = new AtomicInteger(0);
+    AtomicInteger providers = new AtomicInteger(0);
+
+    new ExtensionWalker() {
+
+      @Override
+      public void onConfiguration(ConfigurationModel model) {
+        configs.incrementAndGet();
+      }
+
+      @Override
+      public void onOperation(HasOperationModels owner, OperationModel model) {
+        operations.incrementAndGet();
+      }
+
+      @Override
+      protected void onScope(HasOperationModels owner, ScopeModel model) {
+        scopes.incrementAndGet();
+      }
+
+      @Override
+      protected void onRouter(HasOperationModels owner, RouterModel model) {
+        routers.incrementAndGet();
+      }
+
+      @Override
+      public void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
+        providers.incrementAndGet();
+      }
+
+      @Override
+      public void onSource(HasSourceModels owner, SourceModel model) {
+        sources.incrementAndGet();
+      }
+
+      @Override
+      public void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {
+        parameterGroups.incrementAndGet();
+      }
+
+      @Override
+      public void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {
+        assertThat(groupModel, is(sameInstance(ExtensionWalkerTestCase.this.groupModel)));
+        parameters.incrementAndGet();
+      }
+    }.walk(extension);
+
+    assertCount(configs, 1);
+    assertCount(operations, 2);
+    assertCount(routers, 1);
+    assertCount(scopes, 1);
+    assertCount(sources, 2);
+    assertCount(providers, 2);
+    assertCount(parameterGroups, 13);
+    assertCount(parameters, 13);
+  }
+
+  @Test
+  public void defaultOperationWalk() {
     AtomicInteger configs = new AtomicInteger(0);
     AtomicInteger operations = new AtomicInteger(0);
     AtomicInteger sources = new AtomicInteger(0);
@@ -129,11 +204,11 @@ public class ExtensionWalkerTestCase {
     }.walk(extension);
 
     assertCount(configs, 1);
-    assertCount(operations, 2);
+    assertCount(operations, 4);
     assertCount(sources, 2);
     assertCount(providers, 2);
-    assertCount(parameterGroups, 11);
-    assertCount(parameters, 11);
+    assertCount(parameterGroups, 13);
+    assertCount(parameters, 13);
   }
 
   @Test

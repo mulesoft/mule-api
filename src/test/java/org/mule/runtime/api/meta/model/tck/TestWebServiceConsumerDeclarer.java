@@ -38,7 +38,7 @@ import java.util.List;
  *
  * @since 1.0
  */
-public class TestWebServiceConsumerDeclarer extends BaseDeclarerTestCase {
+public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
 
   public static final String CONFIG_NAME = "config";
   public static final String CONFIG_DESCRIPTION = "Default description";
