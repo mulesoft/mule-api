@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -41,7 +42,7 @@ public class MuleApplicationModel extends AbstractMuleArtifactModel {
    * @return the application configuration files
    */
   public List<String> getConfigs() {
-    return unmodifiableList(configs);
+    return configs == null ? emptyList() : unmodifiableList(configs);
   }
 
   /**
