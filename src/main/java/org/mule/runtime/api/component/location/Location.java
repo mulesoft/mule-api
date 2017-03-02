@@ -149,8 +149,7 @@ public interface Location {
     }
 
     @Override
-    public Builder addSourcePart()
-    {
+    public Builder addSourcePart() {
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.add("source");
       return locationBuilder;
