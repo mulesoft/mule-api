@@ -17,11 +17,11 @@ import java.util.List;
 
 /**
  * A location allows to define the position of a certain component in the configuration.
- * 
+ * <p/>
  * Only components contained within global components with name can be referenced using a {@link Location} instance.
- * 
- * It is expected that the string representation of the object defined the serialized for of the location which consist of the
- * global element name and the parts separated by an slash character.
+ * <p/>
+ * The string representation of the implementation of this interface must be the serialized form of the location which consist of
+ * the global element name and the parts separated by an slash character.
  * 
  * @since 1.0
  */
@@ -73,7 +73,7 @@ public interface Location {
     /**
      * Adds a new "processors" part at the end of the location.
      * 
-     * All component that allow nested processors must have the "processors" as attribute for holding the nested processors.
+     * Components that allow nested processors must have the "processors" as part before the nested processors indexes.
      * 
      * @return a new builder with the provided configuration.
      */
@@ -90,7 +90,7 @@ public interface Location {
     Builder addIndexPart(int index);
 
     /**
-     * @return a location build with the provided configuration.
+     * @return a location built with the provided configuration.
      */
     Location build();
 
@@ -148,14 +148,19 @@ public interface Location {
 
     @Override
     public Builder addIndexPart(int index) {
-      verifyPreviousPartIsNotIndex();
+      verifyNextPartCanBeAnIndex();
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(String.valueOf(index));
       return locationBuilder;
     }
 
-    private void verifyPreviousPartIsNotIndex() {
+    private void verifyNextPartCanBeAnIndex() {
       checkState(!location.parts.isEmpty(), "An index cannot be the first part");
+      checkState(location.parts.size() > 1, "An index cannot follow the global element name");
+      if (location.parts.size() == 1) {
+        // first part is flow name, skip it.
+        return;
+      }
       try {
         parseInt(location.parts.getLast());
         checkState(false, "A location cannot have two consecutive index");
