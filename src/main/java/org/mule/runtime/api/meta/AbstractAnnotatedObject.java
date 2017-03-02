@@ -25,12 +25,12 @@ public abstract class AbstractAnnotatedObject implements AnnotatedObject {
   private final Map<QName, Object> annotations = new ConcurrentHashMap<>();
 
   @Override
-  public final Object getAnnotation(QName qName) {
+  public Object getAnnotation(QName qName) {
     return annotations.get(qName);
   }
 
   @Override
-  public final Map<QName, Object> getAnnotations() {
+  public Map<QName, Object> getAnnotations() {
     return unmodifiableMap(annotations);
   }
 
