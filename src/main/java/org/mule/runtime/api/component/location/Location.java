@@ -71,6 +71,15 @@ public interface Location {
     Builder addPart(String part);
 
     /**
+     * Adds a new "source" part at the end of the location.
+     * 
+     * Message sources within other component must be addressed using a "source" part.
+     *
+     * @return a new builder with the provided configuration.
+     */
+    Builder addSourcePart();
+
+    /**
      * Adds a new "processors" part at the end of the location.
      * 
      * Components that allow nested processors must have the "processors" as part before the nested processors indexes.
@@ -136,6 +145,14 @@ public interface Location {
       verifyPartDoesNotContainsSlash(part);
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(part);
+      return locationBuilder;
+    }
+
+    @Override
+    public Builder addSourcePart()
+    {
+      LocationBuilder locationBuilder = builderCopy();
+      locationBuilder.location.parts.add("source");
       return locationBuilder;
     }
 
