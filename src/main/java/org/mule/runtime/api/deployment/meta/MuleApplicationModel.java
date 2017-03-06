@@ -26,7 +26,7 @@ public class MuleApplicationModel extends AbstractMuleArtifactModel {
 
   private final List<String> configs;
   private final String domain;
-  private boolean redeploymentEnabled = true;
+  private final boolean redeploymentEnabled;
 
   private MuleApplicationModel(String name, String minMuleVersion,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
