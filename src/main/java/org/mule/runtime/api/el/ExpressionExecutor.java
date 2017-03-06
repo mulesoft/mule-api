@@ -7,13 +7,14 @@
 package org.mule.runtime.api.el;
 
 import org.mule.runtime.api.metadata.TypedValue;
+import org.mule.runtime.api.service.Service;
 
 /**
  * Evaluates an expression considering a set of given bindings and a set of global ones.
  *
  * @since 1.0
  */
-public interface ExpressionExecutor {
+public interface ExpressionExecutor extends Service {
 
   /**
    * Includes the bindings in a given {@link BindingContext} as global ones, that should not change often and should be considered
