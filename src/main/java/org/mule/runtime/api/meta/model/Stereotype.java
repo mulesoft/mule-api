@@ -12,7 +12,8 @@ import org.mule.runtime.api.meta.NamedObject;
 import java.util.Objects;
 
 /**
- * A widely held but fixed and oversimplified image or idea of the owning model
+ * A widely held but fixed and oversimplified image or idea of the owning model. Examples would be {@code validator},
+ * {@code outbound}, etc.
  *
  * @since 1.0
  */
