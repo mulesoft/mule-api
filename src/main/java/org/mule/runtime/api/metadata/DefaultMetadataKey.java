@@ -24,7 +24,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public final class DefaultMetadataKey implements MetadataKey {
+public class DefaultMetadataKey implements MetadataKey {
 
   private final String id;
   private final String displayName;
