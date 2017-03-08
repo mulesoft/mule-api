@@ -53,6 +53,7 @@ public final class MediaType implements Serializable {
 
   public static final MediaType JSON = create(TYPE_TEXT, SUBTYPE_JSON);
   public static final MediaType APPLICATION_JSON = create(TYPE_APPLICATION, SUBTYPE_JSON);
+  public static final MediaType APPLICATION_JAVA = create(TYPE_APPLICATION, "java");
   public static final MediaType ATOM = create(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
   public static final MediaType RSS = create(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
   public static final MediaType APPLICATION_XML = create(TYPE_APPLICATION, SUBTYPE_XML);
