@@ -13,6 +13,7 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
+import org.mule.runtime.api.meta.model.util.ComponentModelVisitor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -75,5 +76,13 @@ public interface SourceModel extends ComponentModel<SourceModel>, HasDisplayMode
     all.addAll(callbackParameters.stream().distinct().collect(toList()));
 
     return unmodifiableList(all);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  default void accept(ComponentModelVisitor visitor) {
+    visitor.visit(this);
   }
 }

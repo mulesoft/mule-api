@@ -16,11 +16,12 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.NumberType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.metadata.api.model.StringType;
+import org.mule.metadata.api.model.VoidType;
 import org.mule.runtime.api.message.Attributes;
 
 import java.io.InputStream;
 
-public abstract class BaseDeclarerTestCase {
+public abstract class TestBaseDeclarer {
 
   protected final BaseTypeBuilder typeBuilder = BaseTypeBuilder.create(JAVA);
 
@@ -46,6 +47,10 @@ public abstract class BaseDeclarerTestCase {
 
   protected ObjectType getObjectType(Class<?> type) {
     return withType(typeBuilder.objectType(), type).build();
+  }
+
+  protected VoidType getVoidType() {
+    return typeBuilder.voidType().build();
   }
 
   private <T extends WithAnnotation<?>> T withType(T builder, Class<?> type) {

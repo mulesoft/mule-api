@@ -6,15 +6,12 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.ExecutionType;
-import org.mule.runtime.api.meta.model.error.ErrorModel;
-
 /**
  * Allows configuring a {@link OperationDeclaration} through a fluent API
  *
  * @since 1.0
  */
-public class OperationDeclarer extends ComponentDeclarer<OperationDeclarer, OperationDeclaration> {
+public class OperationDeclarer extends AbstractOperationDeclarer<OperationDeclarer, OperationDeclaration> {
 
   /**
    * Creates a new instance
@@ -23,38 +20,5 @@ public class OperationDeclarer extends ComponentDeclarer<OperationDeclarer, Oper
    */
   OperationDeclarer(OperationDeclaration declaration) {
     super(declaration);
-  }
-
-  /**
-   * Adds an {@link ErrorModel} to indicate that the current operation could throw the added error.
-   *
-   * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
-   * @return {@code this} declarer
-   */
-  public OperationDeclarer withError(ErrorModel error) {
-    declaration.addError(error);
-    return this;
-  }
-
-  /**
-   * Specifies the operation's {@link ExecutionType}
-   *
-   * @param executionType the execution type
-   * @return {@code this} declarer
-   */
-  public OperationDeclarer withExecutionType(ExecutionType executionType) {
-    declaration.setExecutionType(executionType);
-    return this;
-  }
-
-  /**
-   * Specifies if the operation is blocking or it allows non blocking execution
-   *
-   * @param blocking whether the operation is blocking or not
-   * @return {@code this} declarer
-   */
-  public OperationDeclarer blocking(boolean blocking) {
-    declaration.setBlocking(blocking);
-    return this;
   }
 }

@@ -13,6 +13,8 @@ import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+import org.mule.runtime.api.meta.model.operation.RouterModel;
+import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -84,16 +86,50 @@ public abstract class ExtensionWalker {
 
   /**
    * Invoked when an {@link OperationModel} is found in the
-   * traversed {@code extensionModel}
-   *  @param owner The component that owns the operation
+   * traversed {@code extensionModel}.
+   * <p>
+   * This method is also invoked when a {@link ScopeModel} or a
+   * {@link RouterModel} are found, if and only if the
+   * {@link #onScope(HasOperationModels, ScopeModel)}
+   * or {@link #onRouter(HasOperationModels, RouterModel)}
+   * methods were not overridden respectively.
+   *
+   * @param owner The component that owns the operation
    * @param model the {@link OperationModel}
    */
   protected void onOperation(HasOperationModels owner, OperationModel model) {}
 
   /**
+   * Invoked when a {@link ScopeModel} is found in the
+   * traversed {@code extensionModel}.
+   * <p>
+   * By default, this method simply delegates on {@link #onOperation(HasOperationModels, OperationModel)}
+   *
+   * @param owner The component that owns the operation
+   * @param model the {@link OperationModel}
+   */
+  protected void onScope(HasOperationModels owner, ScopeModel model) {
+    onOperation(owner, model);
+  }
+
+  /**
+   * Invoked when a {@link RouterModel} is found in the
+   * traversed {@code extensionModel}.
+   * <p>
+   * By default, this method simply delegates on {@link #onOperation(HasOperationModels, OperationModel)}
+   *
+   * @param owner The component that owns the operation
+   * @param model the {@link OperationModel}
+   */
+  protected void onRouter(HasOperationModels owner, RouterModel model) {
+    onOperation(owner, model);
+  }
+
+  /**
    * Invoked when an {@link ConnectionProviderModel} is found in the
    * traversed {@code extensionModel}
-   *  @param owner The component that owns the provider
+   *
+   * @param owner The component that owns the provider
    * @param model the {@link ConnectionProviderModel}
    */
   protected void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {}
@@ -101,7 +137,8 @@ public abstract class ExtensionWalker {
   /**
    * Invoked when an {@link SourceModel} is found in the
    * traversed {@code extensionModel}
-   *  @param owner The component that owns the source
+   *
+   * @param owner The component that owns the source
    * @param model the {@link SourceModel}
    */
   protected void onSource(HasSourceModels owner, SourceModel model) {}
@@ -109,7 +146,8 @@ public abstract class ExtensionWalker {
   /**
    * Invoked when an {@link ParameterGroupModel} is found in the
    * traversed {@code extensionModel}
-   *  @param owner The component that owns the source
+   *
+   * @param owner The component that owns the source
    * @param model the {@link ParameterGroupModel}
    */
   protected void onParameterGroup(ParameterizedModel owner, ParameterGroupModel model) {}
@@ -117,7 +155,8 @@ public abstract class ExtensionWalker {
   /**
    * Invoked when an {@link ParameterModel} is found in the
    * traversed {@code extensionModel}
-   *  @param owner      The component that owns the parameter
+   *
+   * @param owner      The component that owns the parameter
    * @param groupModel the {@link ParameterGroupModel} in which the {@code model} is contained
    * @param model      the {@link ParameterModel}
    */
@@ -169,7 +208,28 @@ public abstract class ExtensionWalker {
       if (stopped) {
         return;
       }
-      onOperation(model, operation);
+
+      operation.accept(new ComponentModelVisitor() {
+
+        @Override
+        public void visit(OperationModel operationModel) {
+          onOperation(model, operation);
+        }
+
+        @Override
+        public void visit(ScopeModel scopeModel) {
+          onScope(model, scopeModel);
+        }
+
+        @Override
+        public void visit(RouterModel routerModel) {
+          onRouter(model, routerModel);
+        }
+
+        @Override
+        public void visit(SourceModel sourceModel) {}
+      });
+
       ifContinue(() -> walkParameters(operation));
     }
   }

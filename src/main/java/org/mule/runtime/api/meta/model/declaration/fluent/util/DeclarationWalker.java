@@ -15,6 +15,8 @@ import org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.RouterDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ScopeDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.WithOperationsDeclaration;
 import org.mule.runtime.api.meta.model.declaration.fluent.WithSourcesDeclaration;
@@ -84,16 +86,50 @@ public abstract class DeclarationWalker {
 
   /**
    * Invoked when an {@link OperationDeclaration} is found in the
-   * traversed {@code extensionDeclaration}
-   *  @param owner       The declaration that owns the operation
+   * traversed {@code extensionDeclaration}.
+   * <p>
+   * This method is also invoked when a {@link ScopeDeclaration} or a
+   * {@link RouterDeclaration} are found, if and only if the
+   * {@link #onScope(WithOperationsDeclaration, ScopeDeclaration)}
+   * or {@link #onRouter(WithOperationsDeclaration, RouterDeclaration)}
+   * methods were not overridden respectively.
+   *
+   * @param owner       The declaration that owns the operation
    * @param declaration the {@link WithOperationsDeclaration}
    */
   protected void onOperation(WithOperationsDeclaration owner, OperationDeclaration declaration) {}
 
   /**
+   * Invoked when a {@link ScopeDeclaration} is found in the
+   * traversed {@code extensionDeclaration}.
+   * <p>
+   * By default, this method simply delegates on {@link #onOperation(WithOperationsDeclaration, OperationDeclaration)}
+   *
+   * @param owner       The declaration that owns the scope
+   * @param declaration the {@link WithOperationsDeclaration}
+   */
+  protected void onScope(WithOperationsDeclaration owner, ScopeDeclaration declaration) {
+    onOperation(owner, declaration);
+  }
+
+  /**
+   * Invoked when a {@link RouterDeclaration} is found in the
+   * traversed {@code extensionDeclaration}.
+   * <p>
+   * By default, this method simply delegates on {@link #onOperation(WithOperationsDeclaration, OperationDeclaration)}
+   *
+   * @param owner       The declaration that owns the operation
+   * @param declaration the {@link WithOperationsDeclaration}
+   */
+  protected void onRouter(WithOperationsDeclaration owner, RouterDeclaration declaration) {
+    onOperation(owner, declaration);
+  }
+
+  /**
    * Invoked when an {@link ConnectedDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *  @param owner       The declaration that owns the provider
+   *
+   * @param owner       The declaration that owns the provider
    * @param declaration the {@link ConnectionProviderDeclaration}
    */
   protected void onConnectionProvider(ConnectedDeclaration owner, ConnectionProviderDeclaration declaration) {}
@@ -101,7 +137,8 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link SourceDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *  @param owner       The declaration that owns the source
+   *
+   * @param owner       The declaration that owns the source
    * @param declaration the {@link SourceDeclaration}
    */
   protected void onSource(WithSourcesDeclaration owner, SourceDeclaration declaration) {}
@@ -109,7 +146,8 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link ParameterGroupDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *  @param owner       The declaration that owns the parameter
+   *
+   * @param owner       The declaration that owns the parameter
    * @param declaration the {@link ParameterGroupDeclaration}
    */
   protected void onParameterGroup(ParameterizedDeclaration owner, ParameterGroupDeclaration declaration) {}
@@ -117,7 +155,8 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link ParameterDeclaration} is found in the
    * traversed {@code extensionDeclaration}
-   *  @param owner          The declaration that owns the parameter
+   *
+   * @param owner          The declaration that owns the parameter
    * @param parameterGroup the group to which the declaration belongs
    * @param declaration    the {@link ParameterDeclaration}
    */
@@ -173,9 +212,16 @@ public abstract class DeclarationWalker {
       if (stopped) {
         return;
       }
-      final OperationDeclaration operationDeclaration = (OperationDeclaration) operation;
-      onOperation(model, operationDeclaration);
-      ifContinue(() -> walkParameters(operationDeclaration));
+      final OperationDeclaration declaration = (OperationDeclaration) operation;
+      if (declaration instanceof ScopeDeclaration) {
+        onScope(model, (ScopeDeclaration) declaration);
+      } else if (declaration instanceof RouterDeclaration) {
+        onRouter(model, (RouterDeclaration) declaration);
+      } else {
+        onOperation(model, declaration);
+      }
+
+      ifContinue(() -> walkParameters(declaration));
     }
   }
 

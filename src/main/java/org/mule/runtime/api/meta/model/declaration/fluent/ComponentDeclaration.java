@@ -7,6 +7,10 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.Stereotype;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A declaration object for a {@link ComponentModel}. It contains raw, unvalidated
@@ -20,6 +24,7 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
   private OutputDeclaration outputAttributes;
   private boolean transactional = false;
   private boolean requiresConnection = false;
+  private Set<Stereotype> stereotypes = new HashSet<>();
 
   /**
    * {@inheritDoc}
@@ -58,5 +63,13 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
 
   public void setRequiresConnection(boolean requiresConnection) {
     this.requiresConnection = requiresConnection;
+  }
+
+  public Set<Stereotype> getStereotypes() {
+    return stereotypes;
+  }
+
+  public void addStereotype(Stereotype stereotype) {
+    stereotypes.add(stereotype);
   }
 }
