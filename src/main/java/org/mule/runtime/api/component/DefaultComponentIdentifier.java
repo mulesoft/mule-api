@@ -21,7 +21,7 @@ import static org.mule.runtime.api.util.Preconditions.checkState;
  */
 class DefaultComponentIdentifier implements ComponentIdentifier {
 
-  private String prefix;
+  private String namespace;
   private String name;
 
   private DefaultComponentIdentifier() {}
@@ -29,8 +29,8 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
   /**
    * {@inheritDoc}
    */
-  public String getPrefix() {
-    return prefix;
+  public String getNamespace() {
+    return namespace;
   }
 
   /**
@@ -53,7 +53,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
       namespace = CORE_NAMESPACE;
       identifier = values[0];
     }
-    return new DefaultComponentIdentifier.Builder().withPrefix(namespace).withName(identifier).build();
+    return new DefaultComponentIdentifier.Builder().withNamespace(namespace).withName(identifier).build();
   }
 
   public static class Builder implements ComponentIdentifier.Builder {
@@ -61,11 +61,11 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
     private DefaultComponentIdentifier componentIdentifier = new DefaultComponentIdentifier();
 
     /**
-     * @param prefix namespace identifier of the Mule language extensions module
+     * @param namespace namespace identifier of the Mule language extensions module
      * @return the builder
      */
-    public Builder withPrefix(String prefix) {
-      componentIdentifier.prefix = prefix;
+    public Builder withNamespace(String namespace) {
+      componentIdentifier.namespace = namespace;
       return this;
     }
 
@@ -79,7 +79,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
     }
 
     public ComponentIdentifier build() {
-      checkState(componentIdentifier.prefix != null && !componentIdentifier.prefix.trim().isEmpty(),
+      checkState(componentIdentifier.namespace != null && !componentIdentifier.namespace.trim().isEmpty(),
                  "Prefix URI must be not blank");
       checkState(componentIdentifier.name != null && !componentIdentifier.name.trim().isEmpty(),
                  "Name must be not blank");
@@ -98,7 +98,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
 
     DefaultComponentIdentifier that = (DefaultComponentIdentifier) o;
 
-    if (!getPrefix().equalsIgnoreCase(that.getPrefix())) {
+    if (!getNamespace().equalsIgnoreCase(that.getNamespace())) {
       return false;
     }
     return getName().equals(that.getName());
@@ -106,7 +106,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
 
   @Override
   public int hashCode() {
-    int result = getPrefix().toLowerCase().hashCode();
+    int result = getNamespace().toLowerCase().hashCode();
     result = 31 * result + getName().hashCode();
     return result;
   }
@@ -120,7 +120,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
 
   @Override
   public String toString() {
-    return getPrefix().equals("mule") ? getName() : getPrefix() + ":" + getName();
+    return getNamespace().equals("mule") ? getName() : getNamespace() + ":" + getName();
   }
 
 
