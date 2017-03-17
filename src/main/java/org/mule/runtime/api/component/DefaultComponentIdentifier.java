@@ -7,9 +7,9 @@
 package org.mule.runtime.api.component;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.mule.runtime.api.dsl.DslConstants.CORE_NAMESPACE;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
 
 /**
  * Unique identifier for a configuration option. Every configuration option has a namespace and an identifier.
@@ -50,7 +50,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
       namespace = values[0];
       identifier = values[1];
     } else {
-      namespace = CORE_NAMESPACE;
+      namespace = CORE_PREFIX;
       identifier = values[0];
     }
     return new DefaultComponentIdentifier.Builder().withNamespace(namespace).withName(identifier).build();
@@ -120,7 +120,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier {
 
   @Override
   public String toString() {
-    return getNamespace().equals("mule") ? getName() : getNamespace() + ":" + getName();
+    return getNamespace().equals(CORE_PREFIX) ? getName() : getNamespace() + ":" + getName();
   }
 
 

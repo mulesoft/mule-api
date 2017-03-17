@@ -103,7 +103,7 @@ public class DeclarationSerializationTestCase {
                 .getDeclaration())
             .getDeclaration())
         .withFlow(newFlow("testFlow")
-            .withInitialState("stopped")
+            .withParameter("initialState", "stopped")
             .withComponent(http.newSource("listener")
                 .withConfig("httpListener")
                 .withParameter("path", "testBuilder")

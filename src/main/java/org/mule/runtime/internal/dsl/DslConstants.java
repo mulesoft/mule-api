@@ -4,10 +4,14 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.dsl;
+package org.mule.runtime.internal.dsl;
+
+import static java.lang.String.format;
 
 /**
  * Mule DSL constants.
+ *
+ * This is an internal utils class, not to be considered part of the API. Backwards compatibility not guaranteed.
  *
  * @since 1.0
  */
@@ -16,7 +20,22 @@ public interface DslConstants {
   /**
    * This is the namespace prefix for core elements in the configuration.
    */
-  String CORE_NAMESPACE = "mule";
+  String CORE_PREFIX = "mule";
+
+  /**
+   * Format mask for the default location of a schema
+   */
+  String DEFAULT_NAMESPACE_URI_MASK = "http://www.mulesoft.org/schema/mule/%s";
+
+  /**
+   * Location of Mule's core schema
+   */
+  String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
+
+  /**
+   * The identifier name of a {@code flow}
+   */
+  String FLOW_ELEMENT_IDENTIFIER = "flow";
 
   /**
    * The name of the 'name' attribute of a DSL element

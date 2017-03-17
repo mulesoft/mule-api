@@ -16,7 +16,7 @@ import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
  *
  * @since 1.0
  */
-public final class ArtifactDeclarer extends BaseElementDeclarer<ArtifactDeclaration> {
+public final class ArtifactDeclarer extends EnrichableElementDeclarer<ArtifactDeclarer, ArtifactDeclaration> {
 
   ArtifactDeclarer(ArtifactDeclaration declaration) {
     super(declaration);

@@ -51,7 +51,7 @@ public final class ParameterObjectValue implements ParameterValue {
     valueVisitor.visitObjectValue(this);
   }
 
-  public static class Builder {
+  public static class Builder implements ParameterizedBuilder<String, ParameterValue, Builder> {
 
     private ParameterObjectValue objectValue = new ParameterObjectValue();
 

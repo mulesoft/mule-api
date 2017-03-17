@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @since 1.0
  */
-public final class ArtifactDeclaration {
+public final class ArtifactDeclaration extends EnrichableElementDeclaration {
 
   private List<TopLevelParameterDeclaration> globalParameters = new LinkedList<>();
   private List<ConfigurationElementDeclaration> configs = new LinkedList<>();

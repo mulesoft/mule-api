@@ -13,7 +13,8 @@ import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
  *
  * @since 1.0
  */
-public final class TopLevelParameterDeclarer extends BaseElementDeclarer<TopLevelParameterDeclaration> {
+public final class TopLevelParameterDeclarer
+    extends EnrichableElementDeclarer<TopLevelParameterDeclarer, TopLevelParameterDeclaration> {
 
   TopLevelParameterDeclarer(TopLevelParameterDeclaration declaration) {
     super(declaration);

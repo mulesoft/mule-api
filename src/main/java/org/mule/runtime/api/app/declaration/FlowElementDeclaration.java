@@ -7,7 +7,6 @@
 package org.mule.runtime.api.app.declaration;
 
 import static java.util.Collections.unmodifiableList;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,16 +16,14 @@ import java.util.List;
  *
  * @since 1.0
  */
-public final class FlowElementDeclaration implements NamedElementDeclaration {
+public final class FlowElementDeclaration extends ParameterizedElementDeclaration {
 
   private List<ComponentElementDeclaration> components = new LinkedList<>();
-  private String name;
-  private String initialState;
-  private String processingStrategy;
 
   public FlowElementDeclaration() {}
 
   public FlowElementDeclaration(String name) {
+    setDeclaringExtension("Mule Core");
     setName(name);
   }
 
@@ -43,77 +40,23 @@ public final class FlowElementDeclaration implements NamedElementDeclaration {
     return this;
   }
 
-  /**
-   * @return the configured initial state of the flow
-   */
-  public String getInitialState() {
-    return initialState;
-  }
-
-  /**
-   * Configures the initial state of the flow
-   *
-   * @param initialState initial state of {@code this} flow
-   */
-  public void setInitialState(String initialState) {
-    this.initialState = initialState;
-  }
-
-  /**
-   * @return the processingStrategy configured for {@code this} flow
-   */
-  public String getProcessingStrategy() {
-    return processingStrategy;
-  }
-
-  /**
-   * Configures the processingStrategy of the flow
-   *
-   * @param processingStrategy the processingStrategy of {@code this} flow
-   */
-  public void setProcessingStrategy(String processingStrategy) {
-    this.processingStrategy = processingStrategy;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public String getName() {
-    return name;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void setName(String name) {
-    checkArgument(name != null && !name.trim().isEmpty(), "Flow declaration requires a non blank name");
-    this.name = name;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof FlowElementDeclaration)) {
+    if (!(o instanceof FlowElementDeclaration) || !super.equals(o)) {
       return false;
     }
 
     FlowElementDeclaration that = (FlowElementDeclaration) o;
-    return !(!name.equals(that.name) ||
-        (initialState != null ? !initialState.equals(that.initialState) : that.initialState != null) ||
-        !components.equals(that.components)) &&
-        (processingStrategy != null ? processingStrategy.equals(that.processingStrategy) : that.processingStrategy == null);
+    return !components.equals(that.components);
   }
 
   @Override
   public int hashCode() {
-    int result = components.hashCode();
-    result = 31 * result + name.hashCode();
-    result = 31 * result + (initialState != null ? initialState.hashCode() : 0);
-    result = 31 * result + (processingStrategy != null ? processingStrategy.hashCode() : 0);
+    int result = super.hashCode();
+    result = 31 * result + components.hashCode();
     return result;
   }
 }

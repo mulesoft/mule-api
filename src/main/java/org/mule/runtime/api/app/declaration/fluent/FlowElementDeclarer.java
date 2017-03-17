@@ -14,7 +14,7 @@ import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
  *
  * @since 1.0
  */
-public final class FlowElementDeclarer extends BaseElementDeclarer<FlowElementDeclaration> {
+public final class FlowElementDeclarer extends ParameterizedElementDeclarer<FlowElementDeclarer, FlowElementDeclaration> {
 
   FlowElementDeclarer(FlowElementDeclaration declaration) {
     super(declaration);
@@ -31,25 +31,4 @@ public final class FlowElementDeclarer extends BaseElementDeclarer<FlowElementDe
     return this;
   }
 
-  /**
-   * Configures the initial state of the flow
-   *
-   * @param initialState initial state of {@code this} flow
-   * @return {@code this} declarer
-   */
-  public FlowElementDeclarer withInitialState(String initialState) {
-    declaration.setInitialState(initialState);
-    return this;
-  }
-
-  /**
-   * Configures the processingStrategy of the flow
-   *
-   * @param processingStrategy the processingStrategy of {@code this} flow
-   * @return {@code this} declarer
-   */
-  public FlowElementDeclarer withProcessingStrategy(String processingStrategy) {
-    declaration.setProcessingStrategy(processingStrategy);
-    return this;
-  }
 }
