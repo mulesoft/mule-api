@@ -64,7 +64,7 @@ public final class ElementDeclarer {
   public RouteElementDeclarer newRoute(String name) {
     return new RouteElementDeclarer(new RouteElementDeclaration(extension, name));
   }
-  
+
   public static ArtifactDeclarer newArtifact() {
     return new ArtifactDeclarer(new ArtifactDeclaration());
   }

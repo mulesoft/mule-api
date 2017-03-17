@@ -20,7 +20,7 @@ import java.util.List;
 public final class RouteElementDeclaration extends ParameterizedElementDeclaration {
 
   private List<ComponentElementDeclaration> components = new LinkedList<>();
-  
+
   public RouteElementDeclaration(String extension, String name) {
     setDeclaringExtension(extension);
     setName(name);

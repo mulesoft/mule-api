@@ -20,7 +20,6 @@ public abstract class ElementDeclaration implements IdentifiableElementDeclarati
 
   protected String name;
   protected String declaringExtension;
-  private Map<String, Object> properties = new HashMap<>();
 
   /**
    * {@inheritDoc}
@@ -69,15 +68,13 @@ public abstract class ElementDeclaration implements IdentifiableElementDeclarati
 
     ElementDeclaration that = (ElementDeclaration) o;
     return name.equals(that.name) &&
-        declaringExtension.equals(that.declaringExtension) &&
-        properties.equals(that.properties);
+        declaringExtension.equals(that.declaringExtension);
   }
 
   @Override
   public int hashCode() {
     int result = name.hashCode();
     result = 31 * result + declaringExtension.hashCode();
-    result = 31 * result + properties.hashCode();
     return result;
   }
 }

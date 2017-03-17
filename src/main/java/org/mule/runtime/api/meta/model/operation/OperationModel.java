@@ -40,7 +40,8 @@ public interface OperationModel extends ComponentModel<OperationModel> {
    *
    * @return a {@link MetadataType} representing the attribute types for the output messages
    */
-  @Override OutputModel getOutputAttributes();
+  @Override
+  OutputModel getOutputAttributes();
 
   /**
    * @return Whether this operation is blocking or non blocking execution is supported
