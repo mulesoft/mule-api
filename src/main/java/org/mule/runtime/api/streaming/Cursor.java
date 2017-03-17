@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+package org.mule.runtime.api.streaming;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * Provides random access to a stream of data. By stream, you should not assume an {@link InputStream}
+ * (although such implementation exists), but instead consider a conceptual stream, regardless of its nature.
+ * <p>
+ * It works by adding the concept of a zero-based position. Each position
+ * represents one byte in the stream. Each time data is pulled from this stream,
+ * the position advances as many bytes as read. However, the {@link #seek(long)}
+ * method can be used to reset the position.
+ * <p>
+ * Implementations should not be expected to be thread safe. Should not be used concurrently.
+ *
+ * @since 1.0
+ */
+public interface Cursor {
+
+  /**
+   * @return The cursor's current position
+   */
+  long getPosition();
+
+  /**
+   * Updates the cursor's position.
+   *
+   * @param position the new position
+   */
+  void seek(long position) throws IOException;
+
+  /**
+   * @return Whether this stream is either {@link #isReleased() released} or {@link #isFullyConsumed() fully consumed}
+   */
+  boolean canBeReleased();
+
+  /**
+   * Releases all the resources that {@code this} cursor allocated.
+   * <p>
+   * Implementation of this method must be idempotent and thread-safe.
+   * <p>
+   * This method should <b>only</b> be called by the Runtime. Once that happens,
+   * the {@link #isReleased()} method will start to return {@code true}
+   */
+  void release();
+
+  /**
+   * @return Whether the {@link #release()} method has been called on {@code this} instance
+   */
+  boolean isReleased();
+
+  /**
+   * Whether {@code this} cursor has reached the end of the stream. Notice that once the
+   * end has been reached, an invokation to {@link #seek(long)} which moves the cursor back
+   * to a previous position will cause this method return value back to {@code false}
+   */
+  boolean isFullyConsumed();
+
+  /**
+   * @return The {@link CursorProvider} which generated {@code this} cursor
+   */
+  CursorProvider getProvider();
+}
