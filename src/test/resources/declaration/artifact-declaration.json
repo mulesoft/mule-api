@@ -11,11 +11,15 @@
             "create": "true"
           }
         ],
+        "customParameters": [],
+        "properties": {},
         "name": "derby-connection",
         "declaringExtension": "Database"
       },
       "elementName": "dbConfig",
       "parameters": [],
+      "customParameters": [],
+      "properties": {},
       "name": "config",
       "declaringExtension": "Database"
     },
@@ -41,6 +45,8 @@
             "protocol": "HTTPS"
           }
         ],
+        "customParameters": [],
+        "properties": {},
         "name": "listener-connection",
         "declaringExtension": "HTTP"
       },
@@ -50,6 +56,8 @@
           "basePath": "/"
         }
       ],
+      "customParameters": [],
+      "properties": {},
       "name": "listener-config",
       "declaringExtension": "HTTP"
     },
@@ -80,11 +88,15 @@
             }
           }
         ],
+        "customParameters": [],
+        "properties": {},
         "name": "request-connection",
         "declaringExtension": "HTTP"
       },
       "elementName": "httpRequester",
       "parameters": [],
+      "customParameters": [],
+      "properties": {},
       "name": "request-config",
       "declaringExtension": "HTTP"
     }
@@ -118,6 +130,8 @@
               }
             }
           ],
+          "customParameters": [],
+          "properties": {},
           "name": "listener",
           "declaringExtension": "HTTP"
         },
@@ -139,6 +153,8 @@
               ]
             }
           ],
+          "customParameters": [],
+          "properties": {},
           "name": "bulkInsert",
           "declaringExtension": "Database"
         },
@@ -152,12 +168,23 @@
               "method": "POST"
             }
           ],
+          "customParameters": [],
+          "properties": {},
           "name": "request",
           "declaringExtension": "HTTP"
         }
       ],
+      "parameters": [
+        {
+          "initialState": "stopped"
+        }
+      ],
+      "customParameters": [],
+      "properties": {},
       "name": "testFlow",
-      "initialState": "stopped"
+      "declaringExtension": "Mule Core"
     }
-  ]
+  ],
+  "customParameters": [],
+  "properties": {}
 }

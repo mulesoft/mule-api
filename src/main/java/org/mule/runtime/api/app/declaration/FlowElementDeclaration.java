@@ -50,7 +50,7 @@ public final class FlowElementDeclaration extends ParameterizedElementDeclaratio
     }
 
     FlowElementDeclaration that = (FlowElementDeclaration) o;
-    return !components.equals(that.components);
+    return components.equals(that.components);
   }
 
   @Override

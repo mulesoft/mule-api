@@ -48,7 +48,7 @@ public class DeclarationSerializationTestCase {
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
-    assertThat(json, applicationDeclaration, is(equalTo(artifactDeclaration)));
+    assertThat(json, applicationDeclaration.equals(artifactDeclaration), is(true));
   }
 
   private ArtifactDeclaration createArtifact() {
