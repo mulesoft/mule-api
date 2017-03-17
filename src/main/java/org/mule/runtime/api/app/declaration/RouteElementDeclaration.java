@@ -6,7 +6,11 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.util.Collections.unmodifiableList;
 import org.mule.runtime.api.meta.model.operation.RouteModel;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A programmatic descriptor of a {@link RouteModel} configuration.
@@ -15,9 +19,24 @@ import org.mule.runtime.api.meta.model.operation.RouteModel;
  */
 public final class RouteElementDeclaration extends ParameterizedElementDeclaration {
 
+  private List<ComponentElementDeclaration> components = new LinkedList<>();
+  
   public RouteElementDeclaration(String extension, String name) {
     setDeclaringExtension(extension);
     setName(name);
+  }
+
+  /**
+   * @return the {@link List} of {@link ComponentElementDeclaration flows} associated with
+   * {@code this} {@link FlowElementDeclaration}
+   */
+  public List<ComponentElementDeclaration> getComponents() {
+    return unmodifiableList(components);
+  }
+
+  public RouteElementDeclaration addComponent(ComponentElementDeclaration declaration) {
+    components.add(declaration);
+    return this;
   }
 
 }

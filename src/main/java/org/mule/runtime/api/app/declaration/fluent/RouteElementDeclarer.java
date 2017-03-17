@@ -6,7 +6,9 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
+import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
+import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 
 /**
@@ -25,4 +27,14 @@ public final class RouteElementDeclarer
     super(declaration);
   }
 
+  /**
+   * Adds a {@link ComponentElementDeclaration component} to the {@link RouterElementDeclaration}
+   *
+   * @param component the {@link ComponentElementDeclaration component} to add
+   * @return {@code this} declarer
+   */
+  public RouteElementDeclarer withComponent(ComponentElementDeclaration component) {
+    declaration.addComponent(component);
+    return this;
+  }
 }
