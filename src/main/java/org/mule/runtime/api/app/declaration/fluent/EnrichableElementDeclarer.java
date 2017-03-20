@@ -11,7 +11,9 @@ import org.mule.runtime.api.app.declaration.EnrichableElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 
 /**
- * //TODO
+ * Allows configuring an {@link EnrichableElementDeclaration} through a fluent API
+ *
+ * @since 1.0
  */
 class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends EnrichableElementDeclaration>
     extends BaseElementDeclarer<T> {

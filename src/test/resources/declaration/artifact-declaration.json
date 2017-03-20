@@ -126,7 +126,7 @@
             },
             {
               "response": {
-                "headers": "#[mel:[\u0027content-type\u0027 : \u0027text/plain\u0027]]"
+                "headers": "#[{{\u0027content-type\u0027 : \u0027text/plain\u0027}}]"
               }
             }
           ],

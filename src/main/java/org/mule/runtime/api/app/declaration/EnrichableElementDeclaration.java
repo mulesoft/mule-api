@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.app.declaration;
 
-import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,7 +13,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * A programmatic descriptor of a {@link ParameterizedModel} configuration.
+ * A programmatic descriptor of an {@link ElementDeclaration} that can
+ * be enriched with custom properties and parameters.
  *
  * @since 1.0
  */
@@ -87,4 +86,5 @@ public class EnrichableElementDeclaration extends ElementDeclaration {
     result = 31 * result + customParameters.hashCode();
     return result;
   }
+
 }

@@ -24,26 +24,26 @@ public interface ComponentModelVisitor {
    *
    * @param operationModel the visited object
    */
-  default void visit(OperationModel operationModel) {}
+  void visit(OperationModel operationModel);
 
   /**
    * Visits an {@link ScopeModel}
    *
    * @param scopeModel the visited object
    */
-  default void visit(ScopeModel scopeModel) {}
+  void visit(ScopeModel scopeModel);
 
   /**
    * Visits an {@link RouterModel}
    *
    * @param routerModel the visited object
    */
-  default void visit(RouterModel routerModel) {}
+  void visit(RouterModel routerModel);
 
   /**
    * Visits an {@link SourceModel}
    *
    * @param sourceModel the visited object
    */
-  default void visit(SourceModel sourceModel) {}
+  void visit(SourceModel sourceModel);
 }

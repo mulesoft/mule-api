@@ -48,7 +48,7 @@ public class DeclarationSerializationTestCase {
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
-    assertThat(json, applicationDeclaration.equals(artifactDeclaration), is(true));
+    assertThat(json, applicationDeclaration, is(equalTo(artifactDeclaration)));
   }
 
   private ArtifactDeclaration createArtifact() {
@@ -121,7 +121,7 @@ public class DeclarationSerializationTestCase {
                                    .build())
                 .withParameter("response",
                                newObjectValue()
-                                   .withParameter("headers", "#[mel:['content-type' : 'text/plain']]")
+                                   .withParameter("headers", "#[{{'content-type' : 'text/plain'}}]")
                                    .build())
                 .getDeclaration())
             .withComponent(db.newOperation("bulkInsert")
