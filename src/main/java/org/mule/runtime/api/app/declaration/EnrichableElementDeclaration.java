@@ -18,7 +18,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class EnrichableElementDeclaration extends ElementDeclaration {
+public abstract class EnrichableElementDeclaration extends ElementDeclaration {
 
   private List<ParameterElementDeclaration> customParameters = new LinkedList<>();
   private Map<String, Object> properties = new HashMap<>();
