@@ -9,6 +9,7 @@ package org.mule.runtime.api.app.declaration.serialization;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
+import org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationTypeAdapterFactory;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterDeclarationTypeAdapter;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
 
@@ -68,8 +69,10 @@ public class ArtifactDeclarationSerializer {
 
   private Gson createGson() {
     GsonBuilder gsonBuilder = new GsonBuilder()
+        .registerTypeAdapterFactory(new ElementDeclarationTypeAdapterFactory())
         .registerTypeAdapter(ParameterValue.class, new ParameterValueTypeAdapter())
         .registerTypeAdapter(ParameterElementDeclaration.class, new ParameterDeclarationTypeAdapter());
+
     if (prettyPrint) {
       gsonBuilder.setPrettyPrinting();
     }

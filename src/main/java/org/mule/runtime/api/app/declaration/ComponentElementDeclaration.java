@@ -28,13 +28,12 @@ public abstract class ComponentElementDeclaration extends ParameterizedElementDe
     return configRef;
   }
 
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof ComponentElementDeclaration) || !super.equals(o)) {
+    if (o == null || getClass() != o.getClass() || !super.equals(o)) {
       return false;
     }
 

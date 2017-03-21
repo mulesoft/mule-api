@@ -1,9 +1,35 @@
 {
-  "globalParameters": [],
+  "globalParameters": [
+    {
+      "elementName": "selectQuery",
+      "value": {
+        "parameters": {
+          "inputParameters": "#[mel:[\u0027name\u0027 : payload]]",
+          "sql": "select * from PLANET where name \u003d :name"
+        },
+        "typeId": "org.mule.extension.db.api.param.QueryDefinition"
+      },
+      "customParameters": [],
+      "properties": {},
+      "name": "query",
+      "declaringExtension": "Database"
+    }
+  ],
   "configs": [
     {
       "connection": {
         "parameters": [
+          {
+            "poolingProfile": {
+              "maxPoolSize": "10"
+            }
+          },
+          {
+            "connectionProperties": {
+              "first": "propertyOne",
+              "second": "propertyTwo"
+            }
+          },
           {
             "database": "target/muleEmbeddedDB"
           },
@@ -26,6 +52,9 @@
     {
       "connection": {
         "parameters": [
+          {
+            "disableValidation": "true"
+          },
           {
             "tlsContext": {
               "key-store": {
@@ -103,86 +132,205 @@
   ],
   "flows": [
     {
-      "components": [
-        {
-          "configRef": "httpListener",
-          "parameters": [
-            {
-              "path": "testBuilder"
-            },
-            {
-              "redeliveryPolicy": {
-                "useSecureHash": "true",
-                "maxRedeliveryCount": "2"
-              }
-            },
-            {
-              "reconnectionStrategy": {
-                "blocking": "true",
-                "count": "1",
-                "frequency": "0",
-                "typeId": "reconnect"
-              }
-            },
-            {
-              "response": {
-                "headers": "#[{{\u0027content-type\u0027 : \u0027text/plain\u0027}}]"
-              }
-            }
-          ],
-          "customParameters": [],
-          "properties": {},
-          "name": "listener",
-          "declaringExtension": "HTTP"
-        },
-        {
-          "parameters": [
-            {
-              "sql": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"
-            },
-            {
-              "parameterTypes": [
-                {
-                  "type": "VARCHAR",
-                  "key": "name"
-                },
-                {
-                  "type": "INTEGER",
-                  "key": "position"
-                }
-              ]
-            }
-          ],
-          "customParameters": [],
-          "properties": {},
-          "name": "bulkInsert",
-          "declaringExtension": "Database"
-        },
-        {
-          "configRef": "httpRequester",
-          "parameters": [
-            {
-              "path": "/nested"
-            },
-            {
-              "method": "POST"
-            }
-          ],
-          "customParameters": [],
-          "properties": {},
-          "name": "request",
-          "declaringExtension": "HTTP"
-        }
-      ],
+      "name": "testFlow",
+      "declaringExtension": "Mule Core",
+      "kind": "FLOW",
       "parameters": [
-        {
-          "initialState": "stopped"
-        }
-      ],
+  {
+    "initialState": "stopped"
+  }
+],
       "customParameters": [],
       "properties": {},
-      "name": "testFlow",
-      "declaringExtension": "Mule Core"
+      "components": [
+  {
+    "name": "listener",
+    "declaringExtension": "HTTP",
+    "kind": "SOURCE",
+    "parameters": [
+  {
+    "path": "testBuilder"
+  },
+  {
+    "redeliveryPolicy": {
+      "secureHash": "true",
+      "maxRedeliveryCount": "2"
+    }
+  },
+  {
+    "reconnectionStrategy": {
+      "blocking": "true",
+      "count": "1",
+      "frequency": "0",
+      "typeId": "reconnect"
+    }
+  },
+  {
+    "response": {
+      "headers": "#[{{\u0027content-type\u0027 : \u0027text/plain\u0027}}]"
+    }
+  }
+],
+    "customParameters": [],
+    "properties": {},
+    "configRef": "httpListener"
+  },
+  {
+    "name": "choice",
+    "declaringExtension": "Mule Core",
+    "kind": "ROUTER",
+    "parameters": [],
+    "customParameters": [],
+    "properties": {},
+    "routes": [
+      {
+        "name": "when",
+        "declaringExtension": "Mule Core",
+        "kind": "ROUTE",
+        "parameters": [
+  {
+    "expression": "#[true]"
+  }
+],
+        "customParameters": [],
+        "properties": {},
+        "components": [
+  {
+    "name": "bulkInsert",
+    "declaringExtension": "Database",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "sql": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"
+  },
+  {
+    "parameterTypes": [
+      {
+        "type": "VARCHAR",
+        "key": "name"
+      },
+      {
+        "type": "INTEGER",
+        "key": "position"
+      }
+    ]
+  }
+],
+    "customParameters": [],
+    "properties": {}
+  }
+]
+      },
+      {
+        "name": "otherwise",
+        "declaringExtension": "Mule Core",
+        "kind": "ROUTE",
+        "parameters": [],
+        "customParameters": [],
+        "properties": {},
+        "components": [
+  {
+    "name": "logger",
+    "declaringExtension": "Mule Core",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "message": "#[payload]"
+  }
+],
+    "customParameters": [],
+    "properties": {}
+  }
+]
+      }
+    ]
+  },
+  {
+    "name": "bulkInsert",
+    "declaringExtension": "Database",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "sql": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"
+  },
+  {
+    "parameterTypes": [
+      {
+        "type": "VARCHAR",
+        "key": "name"
+      },
+      {
+        "type": "INTEGER",
+        "key": "position"
+      }
+    ]
+  }
+],
+    "customParameters": [],
+    "properties": {}
+  },
+  {
+    "name": "request",
+    "declaringExtension": "HTTP",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "path": "/nested"
+  },
+  {
+    "method": "POST"
+  }
+],
+    "customParameters": [],
+    "properties": {},
+    "configRef": "httpRequester"
+  },
+  {
+    "name": "insert",
+    "declaringExtension": "Database",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "sql": "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, \u0027Pluto\u0027, :description)"
+  },
+  {
+    "parameterTypes": [
+      {
+        "type": "CLOB",
+        "key": "description"
+      }
+    ]
+  },
+  {
+    "inputParameters": "#[{{\u0027description\u0027 : payload}}]"
+  }
+],
+    "customParameters": [],
+    "properties": {},
+    "configRef": "dbConfig"
+  },
+  {
+    "name": "sendAndReceive",
+    "declaringExtension": "Sockets",
+    "kind": "OPERATION",
+    "parameters": [
+  {
+    "target": "myVar"
+  },
+  {
+    "streamingStrategy": {
+      "bufferSizeIncrement": "8",
+      "initialBufferSize": "51",
+      "maxInMemorySize": "1000",
+      "bufferUnit": "KB",
+      "typeId": "repeatable-in-memory-stream"
+    }
+  }
+],
+    "customParameters": [],
+    "properties": {}
+  }
+]
     }
   ],
   "customParameters": [],

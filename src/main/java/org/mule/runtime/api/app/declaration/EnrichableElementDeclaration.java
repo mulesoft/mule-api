@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.util.Collections.unmodifiableMap;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -52,6 +54,14 @@ public abstract class EnrichableElementDeclaration extends ElementDeclaration {
   public Optional<Object> getProperty(String name) {
     return Optional.ofNullable(properties.get(name));
   }
+
+  /**
+   * @return the metadata properties associated to this {@link EnrichableElementDeclaration}
+   */
+  public Map<String, Object> getProperties() {
+    return unmodifiableMap(properties);
+  }
+
 
   /**
    * Adds a property to the {@link ElementDeclaration}.
