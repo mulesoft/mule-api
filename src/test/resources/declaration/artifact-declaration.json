@@ -4,8 +4,8 @@
       "elementName": "selectQuery",
       "value": {
         "parameters": {
-          "inputParameters": "#[mel:[\u0027name\u0027 : payload]]",
-          "sql": "select * from PLANET where name \u003d :name"
+          "sql": "select * from PLANET where name \u003d :name",
+          "inputParameters": "#[mel:[\u0027name\u0027 : payload]]"
         },
         "typeId": "org.mule.extension.db.api.param.QueryDefinition"
       },
@@ -101,19 +101,19 @@
           },
           {
             "authentication": {
-              "password": "pass",
               "username": "user",
+              "password": "pass",
               "typeId": "org.mule.extension.http.api.request.authentication.BasicAuthentication"
             }
           },
           {
             "clientSocketProperties": {
+              "connectionTimeout": "1000",
               "keepAlive": "true",
               "receiveBufferSize": "1024",
-              "linger": "1000",
               "sendBufferSize": "1024",
               "clientTimeout": "1000",
-              "connectionTimeout": "1000"
+              "linger": "1000"
             }
           }
         ],
@@ -153,8 +153,8 @@
   },
   {
     "redeliveryPolicy": {
-      "secureHash": "true",
-      "maxRedeliveryCount": "2"
+      "maxRedeliveryCount": "2",
+      "secureHash": "true"
     }
   },
   {
@@ -206,12 +206,12 @@
   {
     "parameterTypes": [
       {
-        "type": "VARCHAR",
-        "key": "name"
+        "key": "name",
+        "type": "VARCHAR"
       },
       {
-        "type": "INTEGER",
-        "key": "position"
+        "key": "position",
+        "type": "INTEGER"
       }
     ]
   }
@@ -256,12 +256,12 @@
   {
     "parameterTypes": [
       {
-        "type": "VARCHAR",
-        "key": "name"
+        "key": "name",
+        "type": "VARCHAR"
       },
       {
-        "type": "INTEGER",
-        "key": "position"
+        "key": "position",
+        "type": "INTEGER"
       }
     ]
   }
@@ -296,8 +296,8 @@
   {
     "parameterTypes": [
       {
-        "type": "CLOB",
-        "key": "description"
+        "key": "description",
+        "type": "CLOB"
       }
     ]
   },
@@ -320,9 +320,9 @@
   {
     "streamingStrategy": {
       "bufferSizeIncrement": "8",
+      "bufferUnit": "KB",
       "initialBufferSize": "51",
       "maxInMemorySize": "1000",
-      "bufferUnit": "KB",
       "typeId": "repeatable-in-memory-stream"
     }
   }

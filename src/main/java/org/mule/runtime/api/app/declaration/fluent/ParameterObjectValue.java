@@ -11,7 +11,7 @@ import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public final class ParameterObjectValue implements ParameterValue {
 
-  private Map<String, ParameterValue> parameters = new HashMap<>();
+  private Map<String, ParameterValue> parameters = new LinkedHashMap<>();
   private String typeId;
 
   ParameterObjectValue() {}
