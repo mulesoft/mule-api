@@ -26,8 +26,6 @@ import java.util.Map;
  */
 public class ExceptionHelper {
 
-  public static final String SERVICE_ROOT = "META-INF/services/";
-
   private static final String MULE_PACKAGE_REGEXP = "(?:org|com)\\.mule(?:soft)?\\.(?!mvel2)(?!el).*";
 
   public static final String[] DEFAULT_STACKTRACE_FILTER =

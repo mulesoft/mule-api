@@ -64,13 +64,13 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Computes the bundle's full path ({@code META-INF/services/org/mule/i18n/&lt;bundleName&gt;-messages.properties}) from
+   * Computes the bundle's full path ({@code META-INF/org/mule/i18n/&lt;bundleName&gt;-messages.properties}) from
    * {@code bundleName}.
    * 
    * @param bundleName Name of the bundle without the &quot;messages&quot; suffix and without file extension.
    */
   protected static String getBundlePath(String bundleName) {
-    return "META-INF/services/org/mule/runtime/core/i18n/" + bundleName + "-messages";
+    return "META-INF/org/mule/runtime/core/i18n/" + bundleName + "-messages";
   }
 
   /**
