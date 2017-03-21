@@ -7,23 +7,22 @@
 package org.mule.runtime.api.app.declaration;
 
 import static java.util.Collections.unmodifiableList;
+import org.mule.runtime.api.meta.model.operation.RouteModel;
 
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A programmatic descriptor of an application Flow configuration.
+ * A programmatic descriptor of a {@link RouteModel} configuration.
  *
  * @since 1.0
  */
-public final class FlowElementDeclaration extends ParameterizedElementDeclaration {
+public final class RouteElementDeclaration extends ParameterizedElementDeclaration {
 
   private List<ComponentElementDeclaration> components = new LinkedList<>();
 
-  public FlowElementDeclaration() {}
-
-  public FlowElementDeclaration(String name) {
-    setDeclaringExtension("Mule Core");
+  public RouteElementDeclaration(String extension, String name) {
+    setDeclaringExtension(extension);
     setName(name);
   }
 
@@ -35,28 +34,9 @@ public final class FlowElementDeclaration extends ParameterizedElementDeclaratio
     return unmodifiableList(components);
   }
 
-  public FlowElementDeclaration addComponent(ComponentElementDeclaration declaration) {
+  public RouteElementDeclaration addComponent(ComponentElementDeclaration declaration) {
     components.add(declaration);
     return this;
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof FlowElementDeclaration) || !super.equals(o)) {
-      return false;
-    }
-
-    FlowElementDeclaration that = (FlowElementDeclaration) o;
-    return components.equals(that.components);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = super.hashCode();
-    result = 31 * result + components.hashCode();
-    return result;
-  }
 }

@@ -11,11 +11,15 @@ import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
 import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
+import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
+import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
+import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 import org.mule.runtime.api.app.declaration.SourceElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
 
 /**
- * //TODO
+ * // TODO
+ * @since 1.0
  */
 public final class ElementDeclarer {
 
@@ -45,8 +49,20 @@ public final class ElementDeclarer {
     return new SourceElementDeclarer(new SourceElementDeclaration(extension, name));
   }
 
+  public ScopeElementDeclarer newScope(String name) {
+    return new ScopeElementDeclarer(new ScopeElementDeclaration(extension, name));
+  }
+
+  public RouterElementDeclarer newRouter(String name) {
+    return new RouterElementDeclarer(new RouterElementDeclaration(extension, name));
+  }
+
   public TopLevelParameterDeclarer newGlobalParameter(String name) {
     return new TopLevelParameterDeclarer(new TopLevelParameterDeclaration(extension, name));
+  }
+
+  public RouteElementDeclarer newRoute(String name) {
+    return new RouteElementDeclarer(new RouteElementDeclaration(extension, name));
   }
 
   public static ArtifactDeclarer newArtifact() {

@@ -16,7 +16,7 @@ import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
  *
  * @since 1.0
  */
-public final class TopLevelParameterDeclaration extends ElementDeclaration
+public final class TopLevelParameterDeclaration extends EnrichableElementDeclaration
     implements IdentifiableElementDeclaration, ReferableElementDeclaration {
 
   private String elementName;

@@ -17,8 +17,10 @@ import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationSerializer;
 
+import java.io.File;
 import java.io.IOException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,12 +41,13 @@ public class DeclarationSerializationTestCase {
         .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
 
     String json = ArtifactDeclarationSerializer.create().setPrettyPrint().serialize(applicationDeclaration);
-    assertThat(json, json, is(equalTo(expected.trim())));
+
+    assertThat(json, json.trim(), is(equalTo(expected.trim())));
   }
 
   @Test
   public void serializeDeserializeTest() throws IOException {
-    ArtifactDeclarationSerializer serializer = ArtifactDeclarationSerializer.create();
+    ArtifactDeclarationSerializer serializer = ArtifactDeclarationSerializer.create().setPrettyPrint();
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
@@ -54,11 +57,28 @@ public class DeclarationSerializationTestCase {
   private ArtifactDeclaration createArtifact() {
     ElementDeclarer db = ElementDeclarer.forExtension("Database");
     ElementDeclarer http = ElementDeclarer.forExtension("HTTP");
+    ElementDeclarer sockets = ElementDeclarer.forExtension("Sockets");
+    ElementDeclarer core = ElementDeclarer.forExtension("Mule Core");
 
     return newArtifact()
+        .withGlobalParameter(db.newGlobalParameter("query")
+            .withRefName("selectQuery")
+            .withValue(newObjectValue()
+                .ofType("org.mule.extension.db.api.param.QueryDefinition")
+                .withParameter("sql", "select * from PLANET where name = :name")
+                .withParameter("inputParameters", "#[mel:['name' : payload]]")
+                .build())
+            .getDeclaration())
         .withConfig(db.newConfiguration("config")
             .withRefName("dbConfig")
             .withConnection(db.newConnection("derby-connection")
+                .withParameter("poolingProfile", newObjectValue()
+                    .withParameter("maxPoolSize", "10")
+                    .build())
+                .withParameter("connectionProperties", newObjectValue()
+                    .withParameter("first", "propertyOne")
+                    .withParameter("second", "propertyTwo")
+                    .build())
                 .withParameter("database", "target/muleEmbeddedDB")
                 .withParameter("create", "true")
                 .getDeclaration())
@@ -67,6 +87,7 @@ public class DeclarationSerializationTestCase {
             .withRefName("httpListener")
             .withParameter("basePath", "/")
             .withConnection(http.newConnection("listener-connection")
+                .withParameter("disableValidation", "true")
                 .withParameter("tlsContext", newObjectValue()
                     .withParameter("key-store", newObjectValue()
                         .withParameter("path", "ssltest-keystore.jks")
@@ -103,14 +124,14 @@ public class DeclarationSerializationTestCase {
                 .getDeclaration())
             .getDeclaration())
         .withFlow(newFlow("testFlow")
-            .withInitialState("stopped")
+            .withParameter("initialState", "stopped")
             .withComponent(http.newSource("listener")
                 .withConfig("httpListener")
                 .withParameter("path", "testBuilder")
                 .withParameter("redeliveryPolicy",
                                newObjectValue()
                                    .withParameter("maxRedeliveryCount", "2")
-                                   .withParameter("useSecureHash", "true")
+                                   .withParameter("secureHash", "true")
                                    .build())
                 .withParameter("reconnectionStrategy",
                                newObjectValue()
@@ -121,8 +142,33 @@ public class DeclarationSerializationTestCase {
                                    .build())
                 .withParameter("response",
                                newObjectValue()
-                                   .withParameter("headers", "#[mel:['content-type' : 'text/plain']]")
+                                   .withParameter("headers", "#[{{'content-type' : 'text/plain'}}]")
                                    .build())
+                .getDeclaration())
+            .withComponent(core.newRouter("choice")
+                .withRoute(core.newRoute("when")
+                    .withParameter("expression", "#[true]")
+                    .withComponent(db.newOperation("bulkInsert")
+                        .withParameter("sql",
+                                       "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
+                        .withParameter("parameterTypes",
+                                       newListValue()
+                                           .withValue(newObjectValue()
+                                               .withParameter("key", "name")
+                                               .withParameter("type", "VARCHAR")
+                                               .build())
+                                           .withValue(newObjectValue()
+                                               .withParameter("key", "position")
+                                               .withParameter("type", "INTEGER")
+                                               .build())
+                                           .build())
+                        .getDeclaration())
+                    .getDeclaration())
+                .withRoute(core.newRoute("otherwise")
+                    .withComponent(core.newOperation("logger")
+                        .withParameter("message", "#[payload]")
+                        .getDeclaration())
+                    .getDeclaration())
                 .getDeclaration())
             .withComponent(db.newOperation("bulkInsert")
                 .withParameter("sql", "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
@@ -140,6 +186,29 @@ public class DeclarationSerializationTestCase {
                 .withConfig("httpRequester")
                 .withParameter("path", "/nested")
                 .withParameter("method", "POST")
+                .getDeclaration())
+            .withComponent(db.newOperation("insert")
+                .withConfig("dbConfig")
+                .withParameter("sql",
+                               "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)")
+                .withParameter("parameterTypes",
+                               newListValue()
+                                   .withValue(newObjectValue()
+                                       .withParameter("key", "description")
+                                       .withParameter("type", "CLOB").build())
+                                   .build())
+                .withParameter("inputParameters", "#[{{'description' : payload}}]")
+                .getDeclaration())
+            .withComponent(sockets.newOperation("sendAndReceive")
+                .withParameter("target", "myVar")
+                .withParameter("streamingStrategy",
+                               newObjectValue()
+                                   .ofType("repeatable-in-memory-stream")
+                                   .withParameter("bufferSizeIncrement", "8")
+                                   .withParameter("bufferUnit", "KB")
+                                   .withParameter("initialBufferSize", "51")
+                                   .withParameter("maxInMemorySize", "1000")
+                                   .build())
                 .getDeclaration())
             .getDeclaration())
         .getDeclaration();

@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @since 1.0
  */
-public class ParameterizedElementDeclaration extends ElementDeclaration {
+public abstract class ParameterizedElementDeclaration extends EnrichableElementDeclaration {
 
   private List<ParameterElementDeclaration> parameters = new LinkedList<>();
 

@@ -8,6 +8,9 @@ package org.mule.runtime.api.app.declaration;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Base of a programmatic descriptor of the configuration for any element present in a mule application.
  *
@@ -64,7 +67,8 @@ public abstract class ElementDeclaration implements IdentifiableElementDeclarati
     }
 
     ElementDeclaration that = (ElementDeclaration) o;
-    return name.equals(that.name) && declaringExtension.equals(that.declaringExtension);
+    return name.equals(that.name) &&
+        declaringExtension.equals(that.declaringExtension);
   }
 
   @Override
