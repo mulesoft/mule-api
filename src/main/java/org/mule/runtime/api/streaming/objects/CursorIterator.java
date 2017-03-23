@@ -7,6 +7,7 @@
 package org.mule.runtime.api.streaming.objects;
 
 import org.mule.runtime.api.streaming.Cursor;
+import org.mule.runtime.api.streaming.Sized;
 
 import java.util.Iterator;
 
@@ -15,6 +16,6 @@ import java.util.Iterator;
  *
  * @since 1.0
  */
-public interface CursorIterator<T> extends Iterator<T>, Cursor {
+public interface CursorIterator<T> extends Iterator<T>, Cursor, Sized {
 
 }
