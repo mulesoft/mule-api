@@ -16,6 +16,7 @@ import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
  *
  * @since 1.0
  */
+//TODO MULE-12061: delete once RouteModel is removed
 public final class RouteElementDeclarer
     extends ParameterizedElementDeclarer<RouteElementDeclarer, RouteElementDeclaration> {
 

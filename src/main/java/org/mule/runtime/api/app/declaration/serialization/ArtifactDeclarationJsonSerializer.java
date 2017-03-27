@@ -22,19 +22,19 @@ import com.google.gson.GsonBuilder;
  *
  * @since 1.0
  */
-public class ArtifactDeclarationSerializer {
+public class ArtifactDeclarationJsonSerializer {
 
   private boolean prettyPrint;
 
-  private ArtifactDeclarationSerializer() {}
+  private ArtifactDeclarationJsonSerializer() {}
 
   /**
-   * Creates a new instance of the {@link ArtifactDeclarationSerializer}.
+   * Creates a new instance of the {@link ArtifactDeclarationJsonSerializer}.
    * This serializer is capable of serializing and deserializing {@link ArtifactDeclaration}
    * from JSON ({@link #deserialize(String)} and to JSON ( {@link #serialize(ArtifactDeclaration)}
    */
-  public static ArtifactDeclarationSerializer create() {
-    return new ArtifactDeclarationSerializer();
+  public static ArtifactDeclarationJsonSerializer create() {
+    return new ArtifactDeclarationJsonSerializer();
   }
 
   /**
@@ -62,7 +62,7 @@ public class ArtifactDeclarationSerializer {
    *
    * @return this {@code ArtifactDeclarationSerializer}
    */
-  public ArtifactDeclarationSerializer setPrettyPrint() {
+  public ArtifactDeclarationJsonSerializer setPrettyPrint() {
     this.prettyPrint = true;
     return this;
   }

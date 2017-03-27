@@ -17,6 +17,7 @@ import java.util.List;
  *
  * @since 1.0
  */
+//TODO MULE-12061: delete once RouteModel is removed
 public final class RouteElementDeclaration extends ParameterizedElementDeclaration {
 
   private List<ComponentElementDeclaration> components = new LinkedList<>();
