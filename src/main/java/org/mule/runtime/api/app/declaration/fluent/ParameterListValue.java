@@ -7,7 +7,6 @@
 package org.mule.runtime.api.app.declaration.fluent;
 
 import static java.util.Collections.unmodifiableList;
-import static java.util.stream.Collectors.joining;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
@@ -86,8 +85,4 @@ public final class ParameterListValue implements ParameterValue {
     return values.hashCode();
   }
 
-  @Override
-  public String toString() {
-    return "[" + values.stream().map(Object::toString).collect(joining(", ")) + "]";
-  }
 }
