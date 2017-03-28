@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.Stereotype;
  *
  * @since 1.0
  */
-abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
+public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ConfigurableOutputDeclarer<D> implements HasModelProperties<ComponentDeclarer> {
 
   /**
