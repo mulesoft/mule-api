@@ -15,12 +15,10 @@ import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newLis
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newObjectValue;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
-import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationSerializer;
+import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 
-import java.io.File;
 import java.io.IOException;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,14 +38,14 @@ public class DeclarationSerializationTestCase {
     String expected = IOUtils.toString(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
 
-    String json = ArtifactDeclarationSerializer.create().setPrettyPrint().serialize(applicationDeclaration);
+    String json = ArtifactDeclarationJsonSerializer.create().setPrettyPrint().serialize(applicationDeclaration);
 
     assertThat(json, json.trim(), is(equalTo(expected.trim())));
   }
 
   @Test
   public void serializeDeserializeTest() throws IOException {
-    ArtifactDeclarationSerializer serializer = ArtifactDeclarationSerializer.create().setPrettyPrint();
+    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.create().setPrettyPrint();
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);

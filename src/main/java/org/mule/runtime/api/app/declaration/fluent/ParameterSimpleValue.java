@@ -27,6 +27,10 @@ public final class ParameterSimpleValue implements ParameterValue {
     return new ParameterSimpleValue(value);
   }
 
+  public String getValue() {
+    return value;
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -54,7 +58,8 @@ public final class ParameterSimpleValue implements ParameterValue {
     return value != null ? value.hashCode() : 0;
   }
 
-  public String getValue() {
+  @Override
+  public String toString() {
     return value;
   }
 }
