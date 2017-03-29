@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.streaming;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -22,7 +23,7 @@ import java.io.InputStream;
  *
  * @since 1.0
  */
-public interface Cursor {
+public interface Cursor extends Closeable {
 
   /**
    * @return The cursor's current position
@@ -35,11 +36,6 @@ public interface Cursor {
    * @param position the new position
    */
   void seek(long position) throws IOException;
-
-  /**
-   * @return Whether this stream is either {@link #isReleased() released} or {@link #isFullyConsumed() fully consumed}
-   */
-  boolean canBeReleased();
 
   /**
    * Releases all the resources that {@code this} cursor allocated.
@@ -57,14 +53,16 @@ public interface Cursor {
   boolean isReleased();
 
   /**
-   * Whether {@code this} cursor has reached the end of the stream. Notice that once the
-   * end has been reached, an invokation to {@link #seek(long)} which moves the cursor back
-   * to a previous position will cause this method return value back to {@code false}
-   */
-  boolean isFullyConsumed();
-
-  /**
    * @return The {@link CursorProvider} which generated {@code this} cursor
    */
   CursorProvider getProvider();
+
+  /**
+   * For a Cursor, to be closed means that this cursor should not provide any more data. It does
+   * not mean that allocated resources will be released, that's what the {@link #release()} method is for.
+   *
+   * Depending on the concrete cursor type, closed cursors might be re-opened or not.
+   */
+  @Override
+  void close() throws IOException;
 }

@@ -10,10 +10,12 @@ import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDe
 import org.mule.runtime.api.el.ExpressionFunction;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
+import org.mule.runtime.api.streaming.objects.CursorIteratorProvider;
 
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME
@@ -103,7 +105,9 @@ public interface DataType extends Serializable {
   DataType OBJECT = fromType(Object.class);
   DataType BYTE_ARRAY = fromType(byte[].class);
   DataType INPUT_STREAM = fromType(InputStream.class);
+  DataType ITERATOR = fromType(Iterator.class);
   DataType CURSOR_STREAM_PROVIDER = fromType(CursorStreamProvider.class);
+  DataType CURSOR_ITERATOR_PROVIDER = fromType(CursorIteratorProvider.class);
   DataType MULE_MESSAGE = builder().type(Message.class).mediaType(MediaType.ANY).build();
   CollectionDataType MULE_MESSAGE_COLLECTION =
       (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
