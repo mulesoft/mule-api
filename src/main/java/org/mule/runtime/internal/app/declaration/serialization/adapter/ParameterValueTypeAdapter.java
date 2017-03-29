@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.PARAMETERS;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.TYPE_ID;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
 import org.mule.runtime.api.app.declaration.fluent.ParameterListValue;
@@ -29,8 +31,6 @@ import java.util.List;
  * @since 1.0
  */
 public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
-
-  private static final String TYPE_ID = "typeId";
 
   @Override
   public void write(JsonWriter jsonWriter, ParameterValue parameter) throws IOException {
@@ -71,14 +71,9 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
   private void writeObjectValue(ParameterObjectValue objectValue, JsonWriter jsonWriter) {
     try {
       JsonWriter object = jsonWriter.beginObject();
-      objectValue.getParameters().forEach((name, v) -> {
-        try {
-          JsonWriter field = object.name(name);
-          v.accept(getValueVisitor(field));
-        } catch (Exception e) {
-          throw new RuntimeException(e);
-        }
-      });
+
+      writeObjectParameters(objectValue, object);
+
       if (objectValue.getTypeId() != null && !objectValue.getTypeId().trim().isEmpty()) {
         object.name(TYPE_ID).value(objectValue.getTypeId());
       }
@@ -86,6 +81,19 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
+  }
+
+  private void writeObjectParameters(ParameterObjectValue objectValue, JsonWriter object) throws IOException {
+    object.name(PARAMETERS).beginObject();
+    objectValue.getParameters().forEach((name, v) -> {
+      try {
+        JsonWriter field = object.name(name);
+        v.accept(getValueVisitor(field));
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    });
+    object.endObject();
   }
 
   private void writeListValue(ParameterListValue list, JsonWriter jsonWriter) {
@@ -123,13 +131,16 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
     if (jsonElement.isJsonObject()) {
       JsonObject object = jsonElement.getAsJsonObject();
       ParameterObjectValue.Builder objectBuilder = ParameterObjectValue.builder();
-      object.entrySet().forEach(field -> {
-        if (field.getKey().equals(TYPE_ID)) {
-          objectBuilder.ofType(field.getValue().getAsString());
-        } else {
-          objectBuilder.withParameter(field.getKey(), getParameterValue(field.getValue()));
-        }
-      });
+      JsonElement id = object.get(TYPE_ID);
+      if (id != null) {
+        objectBuilder.ofType(id.getAsString());
+      }
+
+      JsonElement parameters = object.get(PARAMETERS);
+      if (parameters != null) {
+        parameters.getAsJsonObject().entrySet()
+            .forEach(field -> objectBuilder.withParameter(field.getKey(), getParameterValue(field.getValue())));
+      }
       return objectBuilder.build();
     }
     return null;

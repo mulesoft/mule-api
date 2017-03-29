@@ -8,7 +8,7 @@ package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.ElementDeclaration;
-import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
+import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
 
 import com.google.gson.Gson;
@@ -25,8 +25,8 @@ public class ElementDeclarationTypeAdapterFactory implements TypeAdapterFactory 
 
   @Override
   public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-    if (FlowElementDeclaration.class.isAssignableFrom(type.getRawType())) {
-      return (TypeAdapter<T>) new FlowElementDeclarationTypeAdapter(gson);
+    if (GlobalElementDeclaration.class.isAssignableFrom(type.getRawType())) {
+      return (TypeAdapter<T>) new GlobalElementDeclarationTypeAdapter(gson);
     } else if (RouteElementDeclaration.class.isAssignableFrom(type.getRawType())) {
       return (TypeAdapter<T>) new RouteElementDeclarationTypeAdapter(gson);
     } else if (ComponentElementDeclaration.class.isAssignableFrom(type.getRawType())) {

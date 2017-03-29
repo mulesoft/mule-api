@@ -15,7 +15,7 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
  * @since 1.0
  */
 public final class ConfigurationElementDeclaration extends ParameterizedElementDeclaration
-    implements ReferableElementDeclaration {
+    implements ReferableElementDeclaration, GlobalElementDeclaration {
 
   private ConnectionElementDeclaration connection;
   private String elementName;
@@ -74,5 +74,10 @@ public final class ConfigurationElementDeclaration extends ParameterizedElementD
     result = 31 * result + (connection != null ? connection.hashCode() : 0);
     result = 31 * result + elementName.hashCode();
     return result;
+  }
+
+  @Override
+  public void accept(GlobalElementDeclarationVisitor visitor) {
+    visitor.visit(this);
   }
 }

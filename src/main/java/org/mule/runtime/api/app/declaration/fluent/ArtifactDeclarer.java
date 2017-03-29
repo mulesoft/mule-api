@@ -7,9 +7,7 @@
 package org.mule.runtime.api.app.declaration.fluent;
 
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
-import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
-import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
-import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
+import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
 
 /**
  * Allows configuring an {@link ArtifactDeclaration} through a fluent API
@@ -23,35 +21,13 @@ public final class ArtifactDeclarer extends EnrichableElementDeclarer<ArtifactDe
   }
 
   /**
-   * Adds a {@link FlowElementDeclaration flow} to the {@link ArtifactDeclaration}
+   * Adds a {@link GlobalElementDeclaration global element} to the {@link ArtifactDeclaration}
    *
-   * @param flow the {@link FlowElementDeclaration flow} to add
+   * @param element the {@link GlobalElementDeclaration global element} to add
    * @return {@code this} declarer
    */
-  public ArtifactDeclarer withFlow(FlowElementDeclaration flow) {
-    declaration.addFlow(flow);
-    return this;
-  }
-
-  /**
-   * Adds a {@link ConfigurationElementDeclaration config} to the {@link ArtifactDeclaration}
-   *
-   * @param config the {@link ConfigurationElementDeclaration config} to add
-   * @return {@code this} declarer
-   */
-  public ArtifactDeclarer withConfig(ConfigurationElementDeclaration config) {
-    declaration.addConfiguration(config);
-    return this;
-  }
-
-  /**
-   * Adds a {@link TopLevelParameterDeclaration parameter} to the {@link ArtifactDeclaration}
-   *
-   * @param parameter the {@link TopLevelParameterDeclaration parameter} to add
-   * @return {@code this} declarer
-   */
-  public ArtifactDeclarer withGlobalParameter(TopLevelParameterDeclaration parameter) {
-    declaration.addGlobalParameter(parameter);
+  public ArtifactDeclarer withGlobalElement(GlobalElementDeclaration element) {
+    declaration.addGlobalElement(element);
     return this;
   }
 }

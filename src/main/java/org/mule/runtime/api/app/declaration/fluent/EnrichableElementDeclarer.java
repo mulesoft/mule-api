@@ -15,7 +15,7 @@ import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
  *
  * @since 1.0
  */
-class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends EnrichableElementDeclaration>
+public abstract class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends EnrichableElementDeclaration>
     extends BaseElementDeclarer<T> {
 
   EnrichableElementDeclarer(T declaration) {

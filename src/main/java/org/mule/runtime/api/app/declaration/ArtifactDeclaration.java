@@ -18,62 +18,26 @@ import java.util.List;
  */
 public final class ArtifactDeclaration extends EnrichableElementDeclaration {
 
-  private List<TopLevelParameterDeclaration> globalParameters = new LinkedList<>();
-  private List<ConfigurationElementDeclaration> configs = new LinkedList<>();
-  private List<FlowElementDeclaration> flows = new LinkedList<>();
+  private List<GlobalElementDeclaration> globalElements = new LinkedList<>();
 
   public ArtifactDeclaration() {}
 
   /**
-   * @return the {@link List} of {@link FlowElementDeclaration flows} associated with
+   * @return the {@link List} of {@link GlobalElementDeclaration global elements} associated with
    * {@code this} {@link ArtifactDeclaration}
    */
-  public List<FlowElementDeclaration> getFlows() {
-    return unmodifiableList(flows);
+  public List<GlobalElementDeclaration> getGlobalElements() {
+    return unmodifiableList(globalElements);
   }
 
   /**
-   * @param declaration
-   * @return
-   */
-  public ArtifactDeclaration addFlow(FlowElementDeclaration declaration) {
-    flows.add(declaration);
-    return this;
-  }
-
-  /**
-   * @return the {@link List} of {@link ConfigurationElementDeclaration configs} associated with
-   * {@code this} {@link ArtifactDeclaration}
-   */
-  public List<ConfigurationElementDeclaration> getConfigs() {
-    return unmodifiableList(configs);
-  }
-
-  /**
+   * Adds a property to the {@link ElementDeclaration}.
+   * This property is meant to hold only metadata of the declaration.
    *
-   * @param declaration
-   * @return
+   * @param declaration the {@link GlobalElementDeclaration} to add.
    */
-  public ArtifactDeclaration addConfiguration(ConfigurationElementDeclaration declaration) {
-    configs.add(declaration);
-    return this;
-  }
-
-  /**
-   * @return the {@link List} of {@link TopLevelParameterDeclaration global parameters} associated with
-   * {@code this} {@link ArtifactDeclaration}
-   */
-  public List<TopLevelParameterDeclaration> getGlobalParameters() {
-    return unmodifiableList(globalParameters);
-  }
-
-  /**
-   *
-   * @param declaration
-   * @return
-   */
-  public ArtifactDeclaration addGlobalParameter(TopLevelParameterDeclaration declaration) {
-    globalParameters.add(declaration);
+  public ArtifactDeclaration addGlobalElement(GlobalElementDeclaration declaration) {
+    globalElements.add(declaration);
     return this;
   }
 
@@ -87,21 +51,11 @@ public final class ArtifactDeclaration extends EnrichableElementDeclaration {
     }
 
     ArtifactDeclaration that = (ArtifactDeclaration) o;
-
-    if (!globalParameters.equals(that.globalParameters)) {
-      return false;
-    }
-    if (!configs.equals(that.configs)) {
-      return false;
-    }
-    return flows.equals(that.flows);
+    return globalElements.equals(that.globalElements);
   }
 
   @Override
   public int hashCode() {
-    int result = globalParameters.hashCode();
-    result = 31 * result + configs.hashCode();
-    result = 31 * result + flows.hashCode();
-    return result;
+    return globalElements.hashCode();
   }
 }

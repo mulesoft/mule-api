@@ -6,7 +6,21 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.COMPONENTS;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONFIG_REF;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.DECLARING_EXTENSION;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FLOW;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.KIND;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.NAME;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.OPERATION;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.ROUTER;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.ROUTES;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.SCOPE;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.SOURCE;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareParameterizedElement;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
+import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
@@ -18,6 +32,7 @@ import org.mule.runtime.api.app.declaration.fluent.RouterElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ScopeElementDeclarer;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -32,32 +47,27 @@ import java.io.IOException;
  *
  * @since 1.0
  */
-class ComponentElementDeclarationTypeAdapter extends ParameterizedElementDeclarationTypeAdapter<ComponentElementDeclaration> {
+class ComponentElementDeclarationTypeAdapter extends TypeAdapter<ComponentElementDeclaration> {
 
-  private static final String OPERATION = "OPERATION";
-  private static final String SOURCE = "SOURCE";
-  private static final String SCOPE = "SCOPE";
-  private static final String ROUTER = "ROUTER";
-  private static final String KIND = "kind";
+  private final Gson delegate;
 
   ComponentElementDeclarationTypeAdapter(Gson delegate) {
-    super(delegate);
+    this.delegate = delegate;
   }
 
   @Override
   public void write(JsonWriter out, ComponentElementDeclaration value) throws IOException {
     out.beginObject();
-    populateParameterizedObject(out, value, getKind(value));
+    populateParameterizedObject(delegate, out, value, getKind(value));
     if (value.getConfigRef() != null && !value.getConfigRef().trim().isEmpty()) {
-      out.name("configRef").value(value.getConfigRef());
+      out.name(CONFIG_REF).value(value.getConfigRef());
     }
     if (value instanceof RouterElementDeclaration) {
-      out.name("routes").beginArray();
+      out.name(ROUTES).beginArray();
       ((RouterElementDeclaration) value).getRoutes().forEach(r -> delegate.toJson(r, RouteElementDeclaration.class, out));
       out.endArray();
     } else if (value instanceof ScopeElementDeclaration) {
-      out.name("route");
-      delegate.toJson(((ScopeElementDeclaration) value).getRoute(), RouteElementDeclaration.class, out);
+      out.name(COMPONENTS).jsonValue(delegate.toJson(((ScopeElementDeclaration) value).getComponents()));
     }
 
     out.endObject();
@@ -69,36 +79,45 @@ class ComponentElementDeclarationTypeAdapter extends ParameterizedElementDeclara
     if (parse.isJsonObject()) {
       JsonObject jsonObject = parse.getAsJsonObject();
       JsonElement elementKind = jsonObject.get(KIND);
-      JsonElement elementExtension = jsonObject.get("declaringExtension");
-      JsonElement elementName = jsonObject.get("name");
+      JsonElement elementExtension = jsonObject.get(DECLARING_EXTENSION);
+      JsonElement elementName = jsonObject.get(NAME);
       if (elementKind != null && elementExtension != null && elementName != null) {
         ComponentElementDeclarer declarer = getDeclarer(ElementDeclarer.forExtension(elementExtension.getAsString()),
                                                         elementKind.getAsString(),
                                                         elementName.getAsString());
 
-        declareParameterizedElement(jsonObject, declarer);
-        JsonElement configRef = jsonObject.get("configRef");
+        declareParameterizedElement(delegate, jsonObject, declarer);
+        JsonElement configRef = jsonObject.get(CONFIG_REF);
         if (configRef != null) {
           declarer.withConfig(configRef.getAsString());
         }
 
         if (elementKind.getAsString().equals(ROUTER)) {
-          JsonElement routes = jsonObject.get("routes");
-          if (routes != null && routes.isJsonArray()) {
-            routes.getAsJsonArray().forEach(route -> ((RouterElementDeclarer) declarer)
-                .withRoute(delegate.fromJson(route, RouteElementDeclaration.class)));
-          }
+          declareRouter(jsonObject, (RouterElementDeclarer) declarer);
         } else if (elementKind.getAsString().equals(SCOPE)) {
-          declareParameterizedElement(jsonObject, declarer);
-          JsonElement route = jsonObject.get("route");
-          if (route != null) {
-            ((ScopeElementDeclarer) declarer).withRoute(delegate.fromJson(route, RouteElementDeclaration.class));
-          }
+          declareScope(jsonObject, declarer);
         }
         return (ComponentElementDeclaration) declarer.getDeclaration();
       }
     }
     return null;
+  }
+
+  private void declareRouter(JsonObject jsonObject, RouterElementDeclarer declarer) {
+    JsonElement routes = jsonObject.get(ROUTES);
+    if (routes != null && routes.isJsonArray()) {
+      routes.getAsJsonArray().forEach(route -> declarer
+          .withRoute(delegate.fromJson(route, RouteElementDeclaration.class)));
+    }
+  }
+
+  private void declareScope(JsonObject jsonObject, ComponentElementDeclarer declarer) {
+    declareParameterizedElement(delegate, jsonObject, declarer);
+    if (jsonObject.get(COMPONENTS) != null) {
+      JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
+      components.forEach(c -> ((ScopeElementDeclarer) declarer)
+          .withComponent(delegate.fromJson(c, ComponentElementDeclaration.class)));
+    }
   }
 
   private <T extends ComponentElementDeclarer> T getDeclarer(ElementDeclarer declarer, String kind, String name) {
@@ -123,6 +142,8 @@ class ComponentElementDeclarationTypeAdapter extends ParameterizedElementDeclara
       return SOURCE;
     } else if (type instanceof RouterElementDeclaration) {
       return ROUTER;
+    } else if (type instanceof FlowElementDeclaration) {
+      return FLOW;
     } else if (type instanceof ScopeElementDeclaration) {
       return SCOPE;
     } else {

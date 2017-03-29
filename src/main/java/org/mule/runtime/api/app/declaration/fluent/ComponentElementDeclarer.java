@@ -13,7 +13,7 @@ import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
  *
  * @since 1.0
  */
-public class ComponentElementDeclarer<D extends ComponentElementDeclarer, T extends ComponentElementDeclaration>
+public abstract class ComponentElementDeclarer<D extends ComponentElementDeclarer, T extends ComponentElementDeclaration>
     extends ParameterizedElementDeclarer<D, T> {
 
   ComponentElementDeclarer(T declaration) {

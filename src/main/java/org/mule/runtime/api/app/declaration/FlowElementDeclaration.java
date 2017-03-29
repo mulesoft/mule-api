@@ -6,57 +6,24 @@
  */
 package org.mule.runtime.api.app.declaration;
 
-import static java.util.Collections.unmodifiableList;
-
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * A programmatic descriptor of an application Flow configuration.
  *
  * @since 1.0
  */
-public final class FlowElementDeclaration extends ParameterizedElementDeclaration {
+public final class FlowElementDeclaration extends ScopeElementDeclaration implements GlobalElementDeclaration {
 
-  private List<ComponentElementDeclaration> components = new LinkedList<>();
+  private static final String CE_EXTENSION_NAME = "Mule Core";
 
   public FlowElementDeclaration() {}
 
   public FlowElementDeclaration(String name) {
-    setDeclaringExtension("Mule Core");
+    setDeclaringExtension(CE_EXTENSION_NAME);
     setName(name);
   }
 
-  /**
-   * @return the {@link List} of {@link ComponentElementDeclaration flows} associated with
-   * {@code this} {@link FlowElementDeclaration}
-   */
-  public List<ComponentElementDeclaration> getComponents() {
-    return unmodifiableList(components);
-  }
-
-  public FlowElementDeclaration addComponent(ComponentElementDeclaration declaration) {
-    components.add(declaration);
-    return this;
-  }
-
   @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof FlowElementDeclaration) || !super.equals(o)) {
-      return false;
-    }
-
-    FlowElementDeclaration that = (FlowElementDeclaration) o;
-    return components.equals(that.components);
-  }
-
-  @Override
-  public int hashCode() {
-    int result = super.hashCode();
-    result = 31 * result + components.hashCode();
-    return result;
+  public void accept(GlobalElementDeclarationVisitor visitor) {
+    visitor.visit(this);
   }
 }

@@ -20,7 +20,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public abstract class EnrichableElementDeclaration extends ElementDeclaration {
+public abstract class EnrichableElementDeclaration extends ElementDeclaration implements EnrichableDeclaration {
 
   private List<ParameterElementDeclaration> customParameters = new LinkedList<>();
   private Map<String, Object> properties = new HashMap<>();
@@ -28,48 +28,35 @@ public abstract class EnrichableElementDeclaration extends ElementDeclaration {
   public EnrichableElementDeclaration() {}
 
   /**
-   * @return the {@link List} of {@link ParameterElementDeclaration parameters} associated with
-   * {@code this} 
+   * {@inheritDoc}
    */
   public List<ParameterElementDeclaration> getCustomParameters() {
     return customParameters;
   }
 
   /**
-   * Adds a {@link ParameterElementDeclaration custom parameter} to {@code this} enrichable element declaration.
-   * This {@code customParameter} represents an additional parameter to the ones exposed by the actual model
-   * associated to this {@link ElementDeclaration element}.
-   * No validation of any kind will be performed over this {@code customParameter} and its value.
-   *
-   * @param customParameter the {@link ParameterElementDeclaration} to associate to {@code this} element declaration
+   * {@inheritDoc}
    */
   public void addCustomParameter(ParameterElementDeclaration customParameter) {
     this.customParameters.add(customParameter);
   }
 
   /**
-   * @param name the name of the property
-   * @return the property for the given name, or {@link Optional#empty()} if none was found.
+   * {@inheritDoc}
    */
   public Optional<Object> getProperty(String name) {
     return Optional.ofNullable(properties.get(name));
   }
 
   /**
-   * @return the metadata properties associated to this {@link EnrichableElementDeclaration}
+   * {@inheritDoc}
    */
   public Map<String, Object> getProperties() {
     return unmodifiableMap(properties);
   }
 
-
   /**
-   * Adds a property to the {@link ElementDeclaration}.
-   * This property is meant to hold only metadata of the declaration.
-   *
-   * @param name custom attribute name.
-   * @param value custom attribute value.
-   * @return the builder.
+   * {@inheritDoc}
    */
   public void addProperty(String name, Object value) {
     properties.put(name, value);

@@ -9,6 +9,7 @@ package org.mule.runtime.api.app.declaration.fluent;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
+import org.mule.runtime.api.app.declaration.ElementDeclaration;
 import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
@@ -18,7 +19,8 @@ import org.mule.runtime.api.app.declaration.SourceElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
 
 /**
- * // TODO
+ * Base declarer for a given {@link ElementDeclaration}
+ *
  * @since 1.0
  */
 public final class ElementDeclarer {

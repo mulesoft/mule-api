@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 
 /**
@@ -14,21 +13,10 @@ import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
  *
  * @since 1.0
  */
-public final class FlowElementDeclarer extends ParameterizedElementDeclarer<FlowElementDeclarer, FlowElementDeclaration> {
+public final class FlowElementDeclarer extends ScopeElementDeclarer<FlowElementDeclarer, FlowElementDeclaration> {
 
   FlowElementDeclarer(FlowElementDeclaration declaration) {
     super(declaration);
-  }
-
-  /**
-   * Adds a {@link ComponentElementDeclaration component} to the {@link FlowElementDeclaration}
-   *
-   * @param component the {@link ComponentElementDeclaration component} to add
-   * @return {@code this} declarer
-   */
-  public FlowElementDeclarer withComponent(ComponentElementDeclaration component) {
-    declaration.addComponent(component);
-    return this;
   }
 
 }
