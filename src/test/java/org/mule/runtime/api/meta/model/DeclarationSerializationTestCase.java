@@ -38,14 +38,14 @@ public class DeclarationSerializationTestCase {
     String expected = IOUtils.toString(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
 
-    String json = ArtifactDeclarationJsonSerializer.create().setPrettyPrint().serialize(applicationDeclaration);
+    String json = ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration);
 
     assertThat(json, json.trim(), is(equalTo(expected.trim())));
   }
 
   @Test
   public void serializeDeserializeTest() throws IOException {
-    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.create().setPrettyPrint();
+    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.getDefault(true);
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
