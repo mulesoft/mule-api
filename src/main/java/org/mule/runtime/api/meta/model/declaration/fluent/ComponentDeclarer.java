@@ -22,7 +22,7 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
    *
    * @param declaration the {@link ComponentDeclaration} which will be configured
    */
-  ComponentDeclarer(D declaration) {
+  public ComponentDeclarer(D declaration) {
     super(declaration);
   }
 
