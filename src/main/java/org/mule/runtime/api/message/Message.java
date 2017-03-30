@@ -63,6 +63,16 @@ public interface Message extends Serializable {
    */
   Attributes getAttributes();
 
+  /**
+   * Create a new {@link Message instance} with the given payload.
+   *
+   * @param payload the message payload
+   * @return new message instance
+   */
+  static Message of(Object payload) {
+    return builder().payload(payload).build();
+  }
+
   interface PayloadBuilder {
 
     /**
