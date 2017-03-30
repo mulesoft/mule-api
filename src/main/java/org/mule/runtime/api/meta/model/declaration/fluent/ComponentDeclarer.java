@@ -51,11 +51,24 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
   /**
    * Specifies if this component requires a connection in order to perform its task
    *
-   * @param requiresConnection whether the component requirest a connection or not
+   * @param requiresConnection whether the component requires a connection or not
    * @return {@code this} declarer
    */
   public T requiresConnection(boolean requiresConnection) {
     declaration.setRequiresConnection(requiresConnection);
+    return (T) this;
+  }
+
+  /**
+   * Specifies if this component supports streaming. Notice that supporting streaming
+   * doesn't necessarily mean that streaming will be performed when the component
+   * is actually executed.
+   *
+   * @param supportsStreaming whether the component supports streaming or not
+   * @return {@code this} declarer
+   */
+  public T supportsStreaming(boolean supportsStreaming) {
+    declaration.setSupportsStreaming(supportsStreaming);
     return (T) this;
   }
 

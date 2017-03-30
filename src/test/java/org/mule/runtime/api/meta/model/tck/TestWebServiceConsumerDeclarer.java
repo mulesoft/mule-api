@@ -135,7 +135,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
     OperationDeclarer operation =
         extensionDeclarer.withOperation(CONSUMER).describedAs(GO_GET_THEM_TIGER)
             .withModelProperty(OPERATION_MODEL_PROPERTY);
-    operation.withOutput().ofType(getBinaryType());
+    operation.supportsStreaming(true).withOutput().ofType(getBinaryType());
     operation.withOutputAttributes().ofType(getStringType());
 
     parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
@@ -177,7 +177,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
     SourceDeclarer sourceDeclarer =
         extensionDeclarer.withMessageSource(LISTENER).describedAs(LISTEN_DESCRIPTION).withModelProperty(SOURCE_MODEL_PROPERTY);
 
-    sourceDeclarer.withOutput().ofType(getBinaryType());
+    sourceDeclarer.supportsStreaming(true).withOutput().ofType(getBinaryType());
     sourceDeclarer.withOutputAttributes().ofType(getObjectType(Serializable.class));
 
     parameterGroup = sourceDeclarer.onParameterGroup(SOURCE_PARAMETER_GROUP);

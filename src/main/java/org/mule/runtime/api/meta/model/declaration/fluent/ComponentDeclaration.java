@@ -24,6 +24,7 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
   private OutputDeclaration outputAttributes;
   private boolean transactional = false;
   private boolean requiresConnection = false;
+  private boolean supportsStreaming = false;
   private Set<Stereotype> stereotypes = new HashSet<>();
 
   /**
@@ -63,6 +64,14 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
 
   public void setRequiresConnection(boolean requiresConnection) {
     this.requiresConnection = requiresConnection;
+  }
+
+  public boolean isSupportsStreaming() {
+    return supportsStreaming;
+  }
+
+  public void setSupportsStreaming(boolean supportsStreaming) {
+    this.supportsStreaming = supportsStreaming;
   }
 
   public Set<Stereotype> getStereotypes() {

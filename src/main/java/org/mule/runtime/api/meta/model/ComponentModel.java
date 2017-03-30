@@ -55,6 +55,16 @@ public interface ComponentModel<T extends ComponentModel>
   boolean requiresConnection();
 
   /**
+   * Indicates if this component supports streaming.
+   * <p>
+   * Notice that supporting streaming doesn't necessarily mean that streaming will be performed
+   * each time the component is executed
+   *
+   * @return whether this component supports streaming or not
+   */
+  boolean supportsStreaming();
+
+  /**
    * @return The {@link Stereotype stereotypes} which apply to this model
    */
   Set<Stereotype> getStereotypes();
