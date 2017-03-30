@@ -31,7 +31,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface SourceModel extends ComponentModel<SourceModel>, HasDisplayModel {
+public interface SourceModel extends ComponentModel, HasDisplayModel {
 
   /**
    * @return Whether the declared source emits a response

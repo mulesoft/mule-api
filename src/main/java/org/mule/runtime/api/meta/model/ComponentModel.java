@@ -25,7 +25,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface ComponentModel<T extends ComponentModel>
+public interface ComponentModel
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel, ThrowsErrors {
 
   /**

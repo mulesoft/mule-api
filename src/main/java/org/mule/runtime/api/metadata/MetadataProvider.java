@@ -20,7 +20,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
-public interface MetadataProvider<T extends ComponentModel<T>> {
+public interface MetadataProvider<T extends ComponentModel> {
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the current component using only the static types of the Component's
