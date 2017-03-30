@@ -72,14 +72,14 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
         .withType(ANOTHER_COMPLEX_TYPE)
         .withXmlDsl(XmlDslModel.builder().build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
-    staticResource.withOutput().ofType(getBinaryType());
+    staticResource.supportsStreaming(true).withOutput().ofType(getBinaryType());
     staticResource.withOutputAttributes().ofType(getAttributesType());
     staticResource.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     ConfigurationDeclarer requesterConfig =
         extensionDeclarer.withConfig(REQUESTER_CONFIG_NAME).describedAs(REQUESTER_CONFIG_DESCRIPTION);
     OperationDeclarer request = requesterConfig.withOperation(REQUEST_OPERATION_NAME);
-    request.withOutput().ofType(getBinaryType());
+    request.supportsStreaming(true).withOutput().ofType(getBinaryType());
     request.withOutputAttributes().ofType(getAttributesType());
     request.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
@@ -88,7 +88,7 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
     ConfigurationDeclarer listenerRequester = extensionDeclarer.withConfig(LISTENER_CONFIG_NAME)
         .describedAs(LISTENER_CONFIG_DESCRIPTION);
     SourceDeclarer listen = listenerRequester.withMessageSource(LISTEN_MESSAGE_SOURCE);
-    listen.withOutput().ofType(getBinaryType());
+    listen.supportsStreaming(true).withOutput().ofType(getBinaryType());
     listen.withOutputAttributes()
         .ofType(typeBuilder.objectType().with(new TypeIdAnnotation(Serializable.class.getName())).build());
     listen.onParameterGroup(PARAMETER_GROUP).withOptionalParameter(PORT).ofType(getNumberType()).defaultingTo(DEFAULT_PORT);
