@@ -22,6 +22,8 @@ import org.mule.runtime.api.lifecycle.Stoppable;
  * scheduling of the flow execution can stop the scheduler message source and call the {@code trigger} method whenever the want.
  * <p>
  * Calling {@code stop} method over a source will not affect any ongoing transaction.
+ *
+ * @since 4.0
  */
 public interface SchedulerMessageSource extends Stoppable, Startable {
 
