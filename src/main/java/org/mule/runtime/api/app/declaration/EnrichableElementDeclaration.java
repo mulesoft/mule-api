@@ -8,6 +8,7 @@ package org.mule.runtime.api.app.declaration;
 
 import static java.util.Collections.unmodifiableMap;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,42 +24,42 @@ import java.util.Optional;
 public abstract class EnrichableElementDeclaration extends ElementDeclaration implements EnrichableDeclaration {
 
   private List<ParameterElementDeclaration> customParameters = new LinkedList<>();
-  private Map<String, Object> properties = new HashMap<>();
+  private Map<String, Serializable> properties = new HashMap<>();
 
   public EnrichableElementDeclaration() {}
 
   /**
    * {@inheritDoc}
    */
-  public List<ParameterElementDeclaration> getCustomParameters() {
+  public List<ParameterElementDeclaration> getCustomConfigurationParameters() {
     return customParameters;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addCustomParameter(ParameterElementDeclaration customParameter) {
+  public void addCustomConfigurationParameter(ParameterElementDeclaration customParameter) {
     this.customParameters.add(customParameter);
   }
 
   /**
    * {@inheritDoc}
    */
-  public Optional<Object> getProperty(String name) {
+  public Optional<Serializable> getMetadataProperty(String name) {
     return Optional.ofNullable(properties.get(name));
   }
 
   /**
    * {@inheritDoc}
    */
-  public Map<String, Object> getProperties() {
+  public Map<String, Serializable> getMetadataProperties() {
     return unmodifiableMap(properties);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addProperty(String name, Object value) {
+  public void addMetadataProperty(String name, Serializable value) {
     properties.put(name, value);
   }
 

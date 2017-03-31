@@ -4,8 +4,8 @@
       "name": "query",
       "declaringExtension": "Database",
       "kind": "GLOBAL_PARAMETER",
-      "customParameters": [],
-      "properties": {},
+      "customConfigurationParameters": [],
+      "metadataProperties": {},
       "refName": "selectQuery",
       "value": {
   "parameters": {
@@ -19,16 +19,16 @@
       "name": "config",
       "declaringExtension": "Database",
       "kind": "CONFIG",
-      "customParameters": [],
-      "properties": {},
+      "customConfigurationParameters": [],
+      "metadataProperties": {},
       "parameters": [],
       "refName": "dbConfig",
       "connection": {
         "name": "derby-connection",
         "declaringExtension": "Database",
         "kind": "CONNECTION",
-        "customParameters": [],
-        "properties": {},
+        "customConfigurationParameters": [],
+        "metadataProperties": {},
         "parameters": [
   {
     "poolingProfile": {
@@ -58,8 +58,8 @@
       "name": "listener-config",
       "declaringExtension": "HTTP",
       "kind": "CONFIG",
-      "customParameters": [],
-      "properties": {},
+      "customConfigurationParameters": [],
+      "metadataProperties": {},
       "parameters": [
   {
     "basePath": "/"
@@ -70,8 +70,8 @@
         "name": "listener-connection",
         "declaringExtension": "HTTP",
         "kind": "CONNECTION",
-        "customParameters": [],
-        "properties": {},
+        "customConfigurationParameters": [],
+        "metadataProperties": {},
         "parameters": [
   {
     "disableValidation": "true"
@@ -105,16 +105,16 @@
       "name": "request-config",
       "declaringExtension": "HTTP",
       "kind": "CONFIG",
-      "customParameters": [],
-      "properties": {},
+      "customConfigurationParameters": [],
+      "metadataProperties": {},
       "parameters": [],
       "refName": "httpRequester",
       "connection": {
         "name": "request-connection",
         "declaringExtension": "HTTP",
         "kind": "CONNECTION",
-        "customParameters": [],
-        "properties": {},
+        "customConfigurationParameters": [],
+        "metadataProperties": {},
         "parameters": [
   {
     "host": "localhost"
@@ -150,8 +150,8 @@
       "name": "testFlow",
       "declaringExtension": "Mule Core",
       "kind": "FLOW",
-      "customParameters": [],
-      "properties": {},
+      "customConfigurationParameters": [],
+      "metadataProperties": {},
       "parameters": [
   {
     "initialState": "stopped"
@@ -162,8 +162,8 @@
     "name": "listener",
     "declaringExtension": "HTTP",
     "kind": "SOURCE",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "path": "testBuilder"
@@ -200,16 +200,16 @@
     "name": "choice",
     "declaringExtension": "Mule Core",
     "kind": "ROUTER",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [],
     "routes": [
       {
         "name": "when",
         "declaringExtension": "Mule Core",
         "kind": "ROUTE",
-        "customParameters": [],
-        "properties": {},
+        "customConfigurationParameters": [],
+        "metadataProperties": {},
         "parameters": [
   {
     "expression": "#[true]"
@@ -220,8 +220,8 @@
     "name": "bulkInsert",
     "declaringExtension": "Database",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "sql": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"
@@ -250,16 +250,16 @@
         "name": "otherwise",
         "declaringExtension": "Mule Core",
         "kind": "ROUTE",
-        "customParameters": [],
-        "properties": {},
+        "customConfigurationParameters": [],
+        "metadataProperties": {},
         "parameters": [],
         "components": [
   {
     "name": "logger",
     "declaringExtension": "Mule Core",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "message": "#[payload]"
@@ -274,8 +274,8 @@
     "name": "bulkInsert",
     "declaringExtension": "Database",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "sql": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"
@@ -302,8 +302,8 @@
     "name": "request",
     "declaringExtension": "HTTP",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "path": "/nested"
@@ -318,8 +318,8 @@
     "name": "insert",
     "declaringExtension": "Database",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "sql": "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, \u0027Pluto\u0027, :description)"
@@ -344,8 +344,8 @@
     "name": "sendAndReceive",
     "declaringExtension": "Sockets",
     "kind": "OPERATION",
-    "customParameters": [],
-    "properties": {},
+    "customConfigurationParameters": [],
+    "metadataProperties": {},
     "parameters": [
   {
     "target": "myVar"

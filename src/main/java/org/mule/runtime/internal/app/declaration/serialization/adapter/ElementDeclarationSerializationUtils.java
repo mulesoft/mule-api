@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonWriter;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -37,8 +38,8 @@ final class ElementDeclarationSerializationUtils {
   static final String SOURCE = "SOURCE";
   static final String ROUTER = "ROUTER";
   static final String CONFIG = "CONFIG";
-  static final String CONNECTION = "CONNECTION";
   static final String OPERATION = "OPERATION";
+  static final String CONNECTION = "CONNECTION";
   static final String GLOBAL_PARAMETER = "GLOBAL_PARAMETER";
 
   static final String NAME = "name";
@@ -48,12 +49,12 @@ final class ElementDeclarationSerializationUtils {
   static final String TYPE_ID = "typeId";
   static final String REF_NAME = "refName";
   static final String CONFIG_REF = "configRef";
-  static final String CONNECTION_FIELD = "connection";
-  static final String PROPERTIES = "properties";
   static final String PARAMETERS = "parameters";
   static final String COMPONENTS = "components";
-  static final String CUSTOM_PARAMETERS = "customParameters";
+  static final String CONNECTION_FIELD = "connection";
+  static final String PROPERTIES = "metadataProperties";
   static final String DECLARING_EXTENSION = "declaringExtension";
+  static final String CUSTOM_PARAMETERS = "customConfigurationParameters";
 
   static JsonWriter populateEnrichableObject(Gson delegate, JsonWriter out,
                                              EnrichableElementDeclaration declaration, String kind)
@@ -62,8 +63,8 @@ final class ElementDeclarationSerializationUtils {
     out.name(NAME).value(declaration.getName());
     out.name(DECLARING_EXTENSION).value(declaration.getDeclaringExtension());
     out.name(KIND).value(kind);
-    out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomParameters()));
-    out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getProperties()));
+    out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomConfigurationParameters()));
+    out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getMetadataProperties()));
 
     return out;
   }
@@ -100,7 +101,7 @@ final class ElementDeclarationSerializationUtils {
       declarer.withCustomParameter(param.getName(), ((ParameterSimpleValue) param.getValue()).getValue());
     });
 
-    Map<String, Object> properties = delegate.fromJson(jsonObject.get(PROPERTIES), new TypeToken<Map<String, String>>() {
+    Map<String, Serializable> properties = delegate.fromJson(jsonObject.get(PROPERTIES), new TypeToken<Map<String, String>>() {
 
     }.getType());
     properties.forEach(declarer::withProperty);

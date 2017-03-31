@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,50 +15,78 @@ import java.util.Optional;
  * A declaration which can be augmented with custom pieces of information
  * that are not part of the actual element model.
  * <p>
- * This is useful for pieces of metadata that might be specific to particular
+ * This is useful for pieces of data that might be specific to particular
  * representations of the declared artifact, like custom XML properties or
  * conventions that are not related to the artifact model but necessary for
  * not loosing information during its serialization/deserialization.
+ * <p>
+ * Metadata 
  *
  * @since 1.0
  */
 public interface EnrichableDeclaration {
 
   /**
+   * The {@code customConfigurationParameters} refer to parameters that are part of a declaration
+   * configuration but do not match to an element in the model, thus being custom of how the
+   * declaration was created.
+   *
+   * An example for this would be having a {@code <ns:identifier doc:name="myCustomName">},
+   * where {@code doc:name} is a custom attribute that enriches the XML representation
+   * of an {@link ElementDeclaration}
+   *
    * @return the {@link List} of {@link ParameterElementDeclaration parameters} associated with
    * {@code this}
    */
-  List<ParameterElementDeclaration> getCustomParameters();
+  List<ParameterElementDeclaration> getCustomConfigurationParameters();
 
   /**
    * Adds a {@link ParameterElementDeclaration custom parameter} to {@code this} enrichable element declaration.
-   * This {@code customParameter} represents an additional parameter to the ones exposed by the actual model
-   * associated to this {@link ElementDeclaration element}.
+   *
+   * The {@code customConfigurationParameters} refer to parameters that are part of a declaration
+   * configuration but do not match to an element in the model, thus being custom of how the
+   * declaration was created.
+   *
+   * An example for this would be having a {@code <ns:identifier doc:name="myCustomName">},
+   * where {@code doc:name} is a custom attribute that enriches the XML representation
+   * of an {@link ElementDeclaration}
+   *
    * No validation of any kind will be performed over this {@code customParameter} and its value.
    *
    * @param customParameter the {@link ParameterElementDeclaration} to associate to {@code this} element declaration
    */
-  void addCustomParameter(ParameterElementDeclaration customParameter);
+  void addCustomConfigurationParameter(ParameterElementDeclaration customParameter);
 
   /**
+   * Retrieves a {@code metadataProperty} to the {@link ElementDeclaration}.
+   * This property is meant to hold only metadata of the declaration,
+   * related to how the declaration has to be represented but not affecting nor containing
+   * information related to the model configured with this declaration.
+   *
    * @param name the name of the property
    * @return the property for the given name, or {@link Optional#empty()} if none was found.
    */
-  Optional<Object> getProperty(String name);
+  Optional<Serializable> getMetadataProperty(String name);
 
   /**
    * @return the metadata properties associated to this {@link EnrichableElementDeclaration}
    */
-  Map<String, Object> getProperties();
+  Map<String, Serializable> getMetadataProperties();
 
 
   /**
-   * Adds a property to the {@link ElementDeclaration}.
-   * This property is meant to hold only metadata of the declaration.
+   * Adds a {@code metadataProperty} to the {@link ElementDeclaration}.
+   * This property is meant to hold only metadata of the declaration,
+   * related to how the declaration has to be represented but not affecting nor containing
+   * information related to the model configured with this declaration.
+   *
+   * This property may contain information regarding things like transformations required for
+   * the persistence of a given element, or propagating particular metadata of how the
+   * declaration was originally declared before deserialization.
    *
    * @param name custom attribute name.
    * @param value custom attribute value.
    */
-  void addProperty(String name, Object value);
+  void addMetadataProperty(String name, Serializable value);
 
 }
