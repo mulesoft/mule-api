@@ -51,8 +51,8 @@ public final class ElementDeclarer {
     return new SourceElementDeclarer(new SourceElementDeclaration(extension, name));
   }
 
-  public ScopeElementDeclarer newScope(String name) {
-    return new ScopeElementDeclarer(new ScopeElementDeclaration(extension, name));
+  public ScopeElementDeclarer<ScopeElementDeclarer, ScopeElementDeclaration> newScope(String name) {
+    return new ScopeElementDeclarer<>(new ScopeElementDeclaration(extension, name));
   }
 
   public RouterElementDeclarer newRouter(String name) {

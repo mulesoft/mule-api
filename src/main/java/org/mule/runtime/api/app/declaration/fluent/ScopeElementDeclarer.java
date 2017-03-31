@@ -35,4 +35,8 @@ public class ScopeElementDeclarer<E extends ScopeElementDeclarer, D extends Scop
     return (E) this;
   }
 
+  @Override
+  public D getDeclaration() {
+    return super.getDeclaration();
+  }
 }

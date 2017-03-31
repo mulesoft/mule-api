@@ -11,7 +11,15 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * //TODO
+ * A declaration which can be augmented with custom pieces of information
+ * that are not part of the actual element model.
+ * <p>
+ * This is useful for pieces of metadata that might be specific to particular
+ * representations of the declared artifact, like custom XML properties or
+ * conventions that are not related to the artifact model but necessary for
+ * not loosing information during its serialization/deserialization.
+ *
+ * @since 1.0
  */
 public interface EnrichableDeclaration {
 
