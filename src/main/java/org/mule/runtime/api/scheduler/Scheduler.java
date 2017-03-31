@@ -39,7 +39,7 @@ public interface Scheduler extends ScheduledExecutorService {
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @throws NullPointerException if command is null
    */
-  public ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression);
+  ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression);
 
   /**
    * Creates and executes a periodic action that becomes enabled according to given {@code cronExpression} in the given
@@ -57,7 +57,7 @@ public interface Scheduler extends ScheduledExecutorService {
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
    * @throws NullPointerException if command is null
    */
-  public ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression, TimeZone timeZone);
+  ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression, TimeZone timeZone);
 
   /**
    * Tries to do a graceful shutdown.
