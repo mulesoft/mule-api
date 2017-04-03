@@ -10,12 +10,14 @@ import org.mule.runtime.api.app.declaration.ElementDeclaration;
 import org.mule.runtime.api.app.declaration.EnrichableElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 
+import java.io.Serializable;
+
 /**
  * Allows configuring an {@link EnrichableElementDeclaration} through a fluent API
  *
  * @since 1.0
  */
-class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends EnrichableElementDeclaration>
+public abstract class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends EnrichableElementDeclaration>
     extends BaseElementDeclarer<T> {
 
   EnrichableElementDeclarer(T declaration) {
@@ -29,8 +31,8 @@ class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends E
    * @param value the {@code value} of the {@code property}
    * @return {@code this} declarer
    */
-  public D withProperty(String name, Object value) {
-    this.declaration.addProperty(name, value);
+  public D withProperty(String name, Serializable value) {
+    this.declaration.addMetadataProperty(name, value);
     return (D) this;
   }
 
@@ -48,7 +50,7 @@ class EnrichableElementDeclarer<D extends EnrichableElementDeclarer, T extends E
     ParameterElementDeclaration parameter = new ParameterElementDeclaration();
     parameter.setName(name);
     parameter.setValue(ParameterSimpleValue.of(value));
-    declaration.addCustomParameter(parameter);
+    declaration.addCustomConfigurationParameter(parameter);
     return (D) this;
   }
 

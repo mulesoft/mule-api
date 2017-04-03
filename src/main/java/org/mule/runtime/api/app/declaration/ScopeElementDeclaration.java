@@ -6,16 +6,20 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.util.Collections.unmodifiableList;
 import org.mule.runtime.api.meta.model.operation.ScopeModel;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * A programmatic descriptor of a {@link ScopeModel} configuration.
  *
  * @since 1.0
  */
-public final class ScopeElementDeclaration extends ComponentElementDeclaration {
+public class ScopeElementDeclaration extends ComponentElementDeclaration {
 
-  private RouteElementDeclaration route;
+  private List<ComponentElementDeclaration> components = new LinkedList<>();
 
   public ScopeElementDeclaration() {}
 
@@ -24,12 +28,22 @@ public final class ScopeElementDeclaration extends ComponentElementDeclaration {
     setName(name);
   }
 
-  public RouteElementDeclaration getRoute() {
-    return route;
+  /**
+   * @return the {@link List} of {@link ComponentElementDeclaration flows} contained by
+   * {@code this} {@link ScopeElementDeclaration}
+   */
+  public List<ComponentElementDeclaration> getComponents() {
+    return unmodifiableList(components);
   }
 
-  public void setRoute(RouteElementDeclaration route) {
-    this.route = route;
+  /**
+   * Adds a {@link ComponentElementDeclaration} as a component contained by {@code this} {@link ScopeElementDeclaration scope}
+   * @param declaration the {@link ComponentElementDeclaration} child of {@code this} {@link ScopeElementDeclaration scope}
+   * @return {@code this} {@link ScopeElementDeclaration scope}
+   */
+  public ScopeElementDeclaration addComponent(ComponentElementDeclaration declaration) {
+    components.add(declaration);
+    return this;
   }
 
   @Override
@@ -37,18 +51,19 @@ public final class ScopeElementDeclaration extends ComponentElementDeclaration {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof ScopeElementDeclaration) || !super.equals(o)) {
+
+    if (o == null || getClass() != o.getClass() || !super.equals(o)) {
       return false;
     }
 
     ScopeElementDeclaration that = (ScopeElementDeclaration) o;
-    return route != null ? route.equals(that.route) : that.route == null;
+    return components.equals(that.components);
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + (route != null ? route.hashCode() : 0);
+    result = 31 * result + components.hashCode();
     return result;
   }
 

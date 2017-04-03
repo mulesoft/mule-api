@@ -6,6 +6,13 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.COMPONENTS;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.DECLARING_EXTENSION;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.KIND;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.NAME;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.ROUTE;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareParameterizedElement;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
@@ -28,18 +35,20 @@ import java.io.IOException;
  *
  * @since 1.0
  */
-class RouteElementDeclarationTypeAdapter extends ParameterizedElementDeclarationTypeAdapter<RouteElementDeclaration> {
+class RouteElementDeclarationTypeAdapter extends TypeAdapter<RouteElementDeclaration> {
 
-  public RouteElementDeclarationTypeAdapter(Gson delegate) {
-    super(delegate);
+  private final Gson delegate;
+
+  RouteElementDeclarationTypeAdapter(Gson delegate) {
+    this.delegate = delegate;
   }
 
   @Override
   public void write(JsonWriter out, RouteElementDeclaration route) throws IOException {
     if (route != null) {
       out.beginObject();
-      populateParameterizedObject(out, route, "ROUTE");
-      out.name("components").jsonValue(delegate.toJson(route.getComponents()));
+      populateParameterizedObject(delegate, out, route, ROUTE);
+      out.name(COMPONENTS).jsonValue(delegate.toJson(route.getComponents()));
       out.endObject();
     }
   }
@@ -50,14 +59,14 @@ class RouteElementDeclarationTypeAdapter extends ParameterizedElementDeclaration
       final JsonElement parse = new JsonParser().parse(in);
       if (parse.isJsonObject()) {
         JsonObject jsonObject = parse.getAsJsonObject();
-        JsonElement elementKind = jsonObject.get("kind");
-        if (elementKind != null && elementKind.getAsString().equals("ROUTE")) {
-          String name = jsonObject.get("name").getAsString();
-          String declaringExtension = jsonObject.get("declaringExtension").getAsString();
-          JsonArray components = jsonObject.get("components").getAsJsonArray();
+        JsonElement elementKind = jsonObject.get(KIND);
+        if (elementKind != null && elementKind.getAsString().equals(ROUTE)) {
+          String name = jsonObject.get(NAME).getAsString();
+          String declaringExtension = jsonObject.get(DECLARING_EXTENSION).getAsString();
+          JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
 
           RouteElementDeclarer declarer = ElementDeclarer.forExtension(declaringExtension).newRoute(name);
-          declareParameterizedElement(jsonObject, declarer);
+          declareParameterizedElement(delegate, jsonObject, declarer);
           components.forEach(c -> declarer.withComponent(delegate.fromJson(c, ComponentElementDeclaration.class)));
 
           return declarer.getDeclaration();

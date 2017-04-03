@@ -15,7 +15,7 @@ import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
  *
  * @since 1.0
  */
-public class ParameterizedElementDeclarer<D extends ParameterizedElementDeclarer, T extends ParameterizedElementDeclaration>
+public abstract class ParameterizedElementDeclarer<D extends ParameterizedElementDeclarer, T extends ParameterizedElementDeclaration>
     extends EnrichableElementDeclarer<D, T>
     implements ParameterizedBuilder<String, ParameterValue, D> {
 

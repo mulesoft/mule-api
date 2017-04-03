@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
-import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
+import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 
 /**
@@ -14,26 +14,29 @@ import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
  *
  * @since 1.0
  */
-public final class ScopeElementDeclarer
-    extends ComponentElementDeclarer<ScopeElementDeclarer, ScopeElementDeclaration> {
+public class ScopeElementDeclarer<E extends ScopeElementDeclarer, D extends ScopeElementDeclaration>
+    extends ComponentElementDeclarer<E, D> {
 
   /**
-   * Creates a new instance
-   *
+   * Creates a new instance of {@link E}
    */
-  ScopeElementDeclarer(ScopeElementDeclaration declaration) {
+  ScopeElementDeclarer(D declaration) {
     super(declaration);
   }
 
   /**
-   * Sets a {@link RouteElementDeclaration component} to the {@link ScopeElementDeclaration}
+   * Adds a {@link ComponentElementDeclaration component} to the declaration being built
    *
-   * @param route the {@link RouteElementDeclaration route} to set
+   * @param component the {@link ComponentElementDeclaration component} to add
    * @return {@code this} declarer
    */
-  public ScopeElementDeclarer withRoute(RouteElementDeclaration route) {
-    declaration.setRoute(route);
-    return this;
+  public E withComponent(ComponentElementDeclaration component) {
+    declaration.addComponent(component);
+    return (E) this;
   }
 
+  @Override
+  public D getDeclaration() {
+    return super.getDeclaration();
+  }
 }

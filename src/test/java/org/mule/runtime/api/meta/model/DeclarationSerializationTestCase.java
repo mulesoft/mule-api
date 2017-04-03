@@ -38,14 +38,14 @@ public class DeclarationSerializationTestCase {
     String expected = IOUtils.toString(Thread.currentThread().getContextClassLoader()
         .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
 
-    String json = ArtifactDeclarationJsonSerializer.create().setPrettyPrint().serialize(applicationDeclaration);
+    String json = ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration);
 
     assertThat(json, json.trim(), is(equalTo(expected.trim())));
   }
 
   @Test
   public void serializeDeserializeTest() throws IOException {
-    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.create().setPrettyPrint();
+    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.getDefault(true);
     String json = serializer.serialize(applicationDeclaration);
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
@@ -59,7 +59,7 @@ public class DeclarationSerializationTestCase {
     ElementDeclarer core = ElementDeclarer.forExtension("Mule Core");
 
     return newArtifact()
-        .withGlobalParameter(db.newGlobalParameter("query")
+        .withGlobalElement(db.newGlobalParameter("query")
             .withRefName("selectQuery")
             .withValue(newObjectValue()
                 .ofType("org.mule.extension.db.api.param.QueryDefinition")
@@ -67,7 +67,7 @@ public class DeclarationSerializationTestCase {
                 .withParameter("inputParameters", "#[mel:['name' : payload]]")
                 .build())
             .getDeclaration())
-        .withConfig(db.newConfiguration("config")
+        .withGlobalElement(db.newConfiguration("config")
             .withRefName("dbConfig")
             .withConnection(db.newConnection("derby-connection")
                 .withParameter("poolingProfile", newObjectValue()
@@ -81,7 +81,7 @@ public class DeclarationSerializationTestCase {
                 .withParameter("create", "true")
                 .getDeclaration())
             .getDeclaration())
-        .withConfig(http.newConfiguration("listener-config")
+        .withGlobalElement(http.newConfiguration("listener-config")
             .withRefName("httpListener")
             .withParameter("basePath", "/")
             .withConnection(http.newConnection("listener-connection")
@@ -98,7 +98,7 @@ public class DeclarationSerializationTestCase {
                 .withParameter("protocol", "HTTPS")
                 .getDeclaration())
             .getDeclaration())
-        .withConfig(http.newConfiguration("request-config")
+        .withGlobalElement(http.newConfiguration("request-config")
             .withRefName("httpRequester")
             .withConnection(http.newConnection("request-connection")
                 .withParameter("host", "localhost")
@@ -121,7 +121,7 @@ public class DeclarationSerializationTestCase {
                                    .build())
                 .getDeclaration())
             .getDeclaration())
-        .withFlow(newFlow("testFlow")
+        .withGlobalElement(newFlow("testFlow")
             .withParameter("initialState", "stopped")
             .withComponent(http.newSource("listener")
                 .withConfig("httpListener")

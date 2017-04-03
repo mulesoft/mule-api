@@ -7,14 +7,7 @@
 package org.mule.runtime.api.app.declaration.serialization;
 
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterValue;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationTypeAdapterFactory;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterDeclarationTypeAdapter;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.mule.runtime.internal.app.declaration.serialization.DefaultArtifactDeclarationJsonSerializer;
 
 /**
  * Serializer that can convert an {@link ArtifactDeclaration} into a readable and processable JSON representation and from a JSON
@@ -22,19 +15,15 @@ import com.google.gson.GsonBuilder;
  *
  * @since 1.0
  */
-public class ArtifactDeclarationJsonSerializer {
-
-  private boolean prettyPrint;
-
-  private ArtifactDeclarationJsonSerializer() {}
+public interface ArtifactDeclarationJsonSerializer {
 
   /**
    * Creates a new instance of the {@link ArtifactDeclarationJsonSerializer}.
    * This serializer is capable of serializing and deserializing {@link ArtifactDeclaration}
    * from JSON ({@link #deserialize(String)} and to JSON ( {@link #serialize(ArtifactDeclaration)}
    */
-  public static ArtifactDeclarationJsonSerializer create() {
-    return new ArtifactDeclarationJsonSerializer();
+  static ArtifactDeclarationJsonSerializer getDefault(boolean prettyPrint) {
+    return new DefaultArtifactDeclarationJsonSerializer(prettyPrint);
   }
 
   /**
@@ -43,9 +32,7 @@ public class ArtifactDeclarationJsonSerializer {
    * @param declaration {@link ArtifactDeclaration} to be serialized
    * @return {@link String} JSON representation of the {@link ArtifactDeclaration}
    */
-  public String serialize(ArtifactDeclaration declaration) {
-    return createGson().toJson(declaration);
-  }
+  String serialize(ArtifactDeclaration declaration);
 
   /**
    * Deserializes a JSON representation of an {@link ArtifactDeclaration}, to an actual instance of it.
@@ -53,32 +40,7 @@ public class ArtifactDeclarationJsonSerializer {
    * @param declaration serialized {@link ArtifactDeclaration}
    * @return an instance of {@link ArtifactDeclaration} based in the JSON
    */
-  public ArtifactDeclaration deserialize(String declaration) {
-    return createGson().fromJson(declaration, ArtifactDeclaration.class);
-  }
-
-  /**
-   * Configures the output Json that fits in a page for pretty printing. This option only affects Json serialization format.
-   *
-   * @return this {@code ArtifactDeclarationSerializer}
-   */
-  public ArtifactDeclarationJsonSerializer setPrettyPrint() {
-    this.prettyPrint = true;
-    return this;
-  }
-
-  private Gson createGson() {
-    GsonBuilder gsonBuilder = new GsonBuilder()
-        .registerTypeAdapterFactory(new ElementDeclarationTypeAdapterFactory())
-        .registerTypeAdapter(ParameterValue.class, new ParameterValueTypeAdapter())
-        .registerTypeAdapter(ParameterElementDeclaration.class, new ParameterDeclarationTypeAdapter());
-
-    if (prettyPrint) {
-      gsonBuilder.setPrettyPrinting();
-    }
-
-    return gsonBuilder.create();
-  }
+  ArtifactDeclaration deserialize(String declaration);
 
 }
 

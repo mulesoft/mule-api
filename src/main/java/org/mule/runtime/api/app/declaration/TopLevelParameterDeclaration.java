@@ -17,7 +17,7 @@ import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
  * @since 1.0
  */
 public final class TopLevelParameterDeclaration extends EnrichableElementDeclaration
-    implements IdentifiableElementDeclaration, ReferableElementDeclaration {
+    implements ReferableElementDeclaration, GlobalElementDeclaration {
 
   private String elementName;
   private ParameterObjectValue value;
@@ -86,5 +86,10 @@ public final class TopLevelParameterDeclaration extends EnrichableElementDeclara
     result = 31 * result + declaringExtension.hashCode();
     result = 31 * result + elementName.hashCode();
     return result;
+  }
+
+  @Override
+  public void accept(GlobalElementDeclarationVisitor visitor) {
+    visitor.visit(this);
   }
 }

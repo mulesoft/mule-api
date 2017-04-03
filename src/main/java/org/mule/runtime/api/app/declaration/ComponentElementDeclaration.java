@@ -13,8 +13,7 @@ import org.mule.runtime.api.meta.model.ComponentModel;
  *
  * @since 1.0
  */
-public abstract class ComponentElementDeclaration extends ParameterizedElementDeclaration
-    implements IdentifiableElementDeclaration {
+public abstract class ComponentElementDeclaration extends ParameterizedElementDeclaration {
 
   private String configRef;
 
