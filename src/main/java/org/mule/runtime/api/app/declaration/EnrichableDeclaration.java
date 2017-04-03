@@ -84,6 +84,13 @@ public interface EnrichableDeclaration {
    * the persistence of a given element, or propagating particular metadata of how the
    * declaration was originally declared before deserialization.
    *
+   * An example for this would be having an {@code xmlns} prefix declared different than
+   * the one declared by the extension. So in order to represent:
+   * {@code <my-http-alias:listener-config>} we will declare an {@code http:listener-config}
+   * adding also a {@code metadataProperty} with the custom prefix {@code my-http-alias}.
+   * This way, we can honour the original {@code XML} representation, but keep
+   * the {@link ElementDeclaration} closer the the model it represents.
+   *
    * @param name custom attribute name.
    * @param value custom attribute value.
    */
