@@ -28,9 +28,19 @@ public interface DslConstants {
   String DEFAULT_NAMESPACE_URI_MASK = "http://www.mulesoft.org/schema/mule/%s";
 
   /**
-   * Location of Mule's core schema
+   * Namespace for Mule core elements
    */
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
+
+  /**
+   * This is the namespace prefix for EE elements in the configuration.
+   */
+  String EE_PREFIX = "ee";
+
+  /**
+   * Namespace for EE elements
+   */
+  String EE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/core");
 
   /**
    * The identifier name of a {@code flow}
