@@ -10,7 +10,7 @@ import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDe
 import org.mule.runtime.api.el.ExpressionFunction;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
-import org.mule.runtime.api.streaming.objects.CursorIteratorProvider;
+import org.mule.runtime.api.streaming.object.CursorIteratorProvider;
 
 import java.io.InputStream;
 import java.io.Serializable;
