@@ -71,7 +71,7 @@ public interface DataType extends Serializable {
    * {@code mimeType} and {@code encoding} values based on this.
    *
    * @param value the object to determine the {@link DataType} of.
-   * @return a new {@link DataType} for the given {@code value}.
+   * @return a new {@link DataType} for the given {@code valuet}.
    */
   static DataType fromObject(Object value) {
     return getDefaultFactory().create().fromObject(value).build();
