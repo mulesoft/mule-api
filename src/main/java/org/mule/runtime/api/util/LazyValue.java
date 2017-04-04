@@ -16,7 +16,8 @@ import java.util.function.Supplier;
  * The value is only computed on the first invokation of {@link #get()}. Subsequent calls to such method
  * will always return the same value.
  * <p>
- * This class is not thread-safe. Concurrently invoking {@link #get()} might result on the value being computed
+ * This class is thread-safe. When invoking {@link #get()}, it is guaranteed that the value will be initialised
+ * only once. However, the provided supplier is not required to be thread safe.
  * several times
  *
  * @param <T> the generic type of the provided value
@@ -25,17 +26,35 @@ import java.util.function.Supplier;
 public class LazyValue<T> {
 
   private T value;
-  private final Supplier<T> supplier;
+  private Supplier<T> valueSupplier;
 
   public LazyValue(Supplier<T> supplier) {
     checkArgument(supplier != null, "supplier cannot be null");
-    this.supplier = supplier;
+    valueSupplier = () -> {
+      synchronized (LazyValue.this) {
+        if (value == null) {
+          value = supplier.get();
+          valueSupplier = () -> value;
+        }
+
+        return value;
+      }
+    };
   }
 
+  /**
+   * Returns the lazy value. If the value has not yet been computed, then it does so
+   *
+   * @return the lazy value
+   */
   public T get() {
-    if (value == null) {
-      value = supplier.get();
-    }
-    return value;
+    return valueSupplier.get();
+  }
+
+  /**
+   * @return Whether {@link #get()} has already been called on {@code this} instance or not
+   */
+  public boolean isInitialised() {
+    return value != null;
   }
 }
