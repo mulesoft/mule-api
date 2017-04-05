@@ -35,7 +35,7 @@ public interface TlsContextFactory {
   }
 
   /**
-   * Allows the creation of an {@link SSLContext} with the configured keystore and trust store. Use {@link #getEnabledProtocols()}
+   * Allows the creation of an {@link SSLContext} with the configured keystore and trust store. You must use {@link #getEnabledProtocols()}
    * and {@link #getEnabledCipherSuites()} to further configure your TLS environment. The resulting {@link SSLContext} should not
    * be used to create {@link SSLSocketFactory} or {@link SSLServerSocketFactory} directly, use {@link #getSocketFactory()} and
    * {@link #getServerSocketFactory()} instead, otherwise protocols and ciphers will not be enforced.

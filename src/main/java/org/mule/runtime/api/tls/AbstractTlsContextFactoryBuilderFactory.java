@@ -30,7 +30,7 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
 
       DEFAULT_FACTORY = factory;
     } catch (Throwable t) {
-      LOGGER.error("Error loading TlsContextFactoryBuilderFactory implementation.", t);
+      LOGGER.error("Error loading TlsContextFactoryBuilderFactory implementation. Seems there's none in the classpath.", t);
       throw t;
     }
   }
