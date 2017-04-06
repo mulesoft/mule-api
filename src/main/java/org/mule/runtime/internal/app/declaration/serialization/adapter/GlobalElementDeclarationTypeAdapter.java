@@ -68,19 +68,16 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
     final String kind = getKind(value);
 
     out.beginObject();
+    out.name(REF_NAME).value(value.getRefName());
     if (value instanceof TopLevelParameterDeclaration) {
       populateEnrichableObject(delegate, out, (EnrichableElementDeclaration) value, kind);
-      out.name(REF_NAME).value(((TopLevelParameterDeclaration) value).getRefName());
       out.name(VALUE).jsonValue(delegate.toJson(((TopLevelParameterDeclaration) value).getValue(), ParameterValue.class));
 
     } else {
       populateParameterizedObject(delegate, out, (ParameterizedElementDeclaration) value, kind);
 
       if (value instanceof ConfigurationElementDeclaration) {
-        ConfigurationElementDeclaration config = (ConfigurationElementDeclaration) value;
-        out.name(REF_NAME).value(config.getRefName());
-        populateConnection(out, config);
-
+        populateConnection(out, (ConfigurationElementDeclaration) value);
       } else if (value instanceof FlowElementDeclaration) {
         out.name(COMPONENTS).jsonValue(delegate.toJson(((FlowElementDeclaration) value).getComponents()));
       }
@@ -127,6 +124,7 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
 
   private void declareFlow(JsonObject jsonObject, FlowElementDeclarer declarer) {
     JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
+    declarer.withRefName(jsonObject.get(REF_NAME).getAsString());
     components.forEach(c -> declarer
         .withComponent(delegate.fromJson(c, ComponentElementDeclaration.class)));
   }
@@ -144,7 +142,7 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
       case GLOBAL_PARAMETER:
         return (T) declarer.newGlobalParameter(name);
       case FLOW:
-        return (T) newFlow(name);
+        return (T) newFlow();
       default:
         throw new IllegalArgumentException("Unknown kind: " + kind);
     }
@@ -163,9 +161,11 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
   }
 
   private void populateConnection(JsonWriter out, ConfigurationElementDeclaration config) throws IOException {
-    out.name(CONNECTION_FIELD).beginObject();
-    populateParameterizedObject(delegate, out, config.getConnection(), CONNECTION);
-    out.endObject();
+    if (config.getConnection().isPresent()) {
+      out.name(CONNECTION_FIELD).beginObject();
+      populateParameterizedObject(delegate, out, config.getConnection().get(), CONNECTION);
+      out.endObject();
+    }
   }
 
 }

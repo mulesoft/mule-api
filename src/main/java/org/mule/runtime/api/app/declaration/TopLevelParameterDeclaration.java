@@ -10,6 +10,9 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
  * A programmatic descriptor of an {@link ObjectType} configuration that will
  * be used as a global element of the mule application.
@@ -91,5 +94,14 @@ public final class TopLevelParameterDeclaration extends EnrichableElementDeclara
   @Override
   public void accept(GlobalElementDeclarationVisitor visitor) {
     visitor.visit(this);
+  }
+
+  @Override
+  public <T extends ElementDeclaration> Optional<T> findElement(List<String> parts) {
+    if (parts.isEmpty()) {
+      return Optional.of((T) this);
+    }
+
+    return Optional.empty();
   }
 }

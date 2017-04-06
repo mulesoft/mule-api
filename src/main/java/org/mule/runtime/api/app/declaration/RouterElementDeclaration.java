@@ -6,10 +6,15 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.lang.Integer.parseInt;
+import static java.util.Optional.empty;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.RouterModel;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A programmatic descriptor of a {@link RouterModel} configuration.
@@ -27,12 +32,47 @@ public final class RouterElementDeclaration extends ComponentElementDeclaration 
     setName(name);
   }
 
+  /**
+   * @return all the {@link RouteElementDeclaration routes} {@code this} {@link RouterElementDeclaration}
+   * can handle.
+   */
   public List<RouteElementDeclaration> getRoutes() {
     return routes;
   }
 
+  /**
+   * Adds a {@link RouteElementDeclaration route} as one of the possible routes
+   * {@code this} {@link RouterElementDeclaration router} can handle.
+   * @param route
+   */
   public void addRoute(RouteElementDeclaration route) {
     this.routes.add(route);
+  }
+
+  /**
+   * Looks for an {@link ElementDeclaration} contained by {@code this} declaration
+   * based on the {@code parts} of a {@link Location}.
+   *
+   * @param parts the {@code parts} of a {@link Location} relative to {@code this} element
+   * @return the {@link ElementDeclaration} located in the path created by the {@code parts}
+   * or {@link Optional#empty()} if no {@link ElementDeclaration} was found in that location.
+   */
+  @Override
+  public <T extends ElementDeclaration> Optional<T> findElement(List<String> parts) {
+    if (parts.isEmpty()) {
+      return Optional.of((T) this);
+    }
+
+    if (routes.isEmpty()) {
+      return empty();
+    }
+
+    String identifier = parts.get(0);
+    if (isNumeric(identifier) && parseInt(identifier) < routes.size()) {
+      return routes.get(parseInt(identifier)).findElement(parts.subList(1, parts.size()));
+    }
+
+    return super.findElement(parts);
   }
 
   @Override

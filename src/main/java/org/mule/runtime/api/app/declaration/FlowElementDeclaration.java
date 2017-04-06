@@ -6,6 +6,15 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.util.Optional.empty;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+import static org.mule.runtime.api.component.location.Location.SOURCE;
+import static org.mule.runtime.internal.dsl.DslConstants.FLOW_ELEMENT_IDENTIFIER;
+import org.mule.runtime.api.component.location.LocationPart;
+
+import java.util.List;
+import java.util.Optional;
+
 /**
  * A programmatic descriptor of an application Flow configuration.
  *
@@ -14,16 +23,56 @@ package org.mule.runtime.api.app.declaration;
 public final class FlowElementDeclaration extends ScopeElementDeclaration implements GlobalElementDeclaration {
 
   private static final String CE_EXTENSION_NAME = "Mule Core";
+  private String elementName;
 
-  public FlowElementDeclaration() {}
-
-  public FlowElementDeclaration(String name) {
+  public FlowElementDeclaration() {
     setDeclaringExtension(CE_EXTENSION_NAME);
-    setName(name);
+    setName(FLOW_ELEMENT_IDENTIFIER);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends ElementDeclaration> Optional<T> findElement(List<String> parts) {
+    if (parts.isEmpty()) {
+      return Optional.of((T) this);
+    }
+
+    if (getComponents().isEmpty()) {
+      return empty();
+    }
+
+    if (parts.get(0).equals(SOURCE)) {
+      ComponentElementDeclaration first = getComponents().get(0);
+      return first instanceof SourceElementDeclaration ? Optional.of((T) first) : empty();
+    }
+
+    return super.findElement(parts);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public void accept(GlobalElementDeclarationVisitor visitor) {
     visitor.visit(this);
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public String getRefName() {
+    return elementName;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setRefName(String referableName) {
+    this.elementName = referableName;
+  }
+
 }

@@ -19,4 +19,9 @@ public final class FlowElementDeclarer extends ScopeElementDeclarer<FlowElementD
     super(declaration);
   }
 
+  public FlowElementDeclarer withRefName(String name) {
+    declaration.setRefName(name);
+    return this;
+  }
+
 }

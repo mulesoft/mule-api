@@ -7,9 +7,11 @@
 package org.mule.runtime.api.app.declaration;
 
 import static java.util.Collections.unmodifiableList;
+import org.mule.runtime.api.component.location.Location;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A programmatic descriptor of a mule artifact configuration.
@@ -39,6 +41,23 @@ public final class ArtifactDeclaration extends EnrichableElementDeclaration {
   public ArtifactDeclaration addGlobalElement(GlobalElementDeclaration declaration) {
     globalElements.add(declaration);
     return this;
+  }
+
+  /**
+   * Looks for an {@link ElementDeclaration} contained by {@code this} declaration
+   * based on the given {@link Location}.
+   *
+   * @param location the absolute {@link Location} of the {@link ElementDeclaration} as part
+   *                of {@code this} {@link ArtifactDeclaration}
+   * @return the {@link ElementDeclaration} located by the given {@link Location}
+   * or {@link Optional#empty()} if no {@link ElementDeclaration} was found in that location.
+   */
+  public <T extends ElementDeclaration> Optional<T> findElement(Location location) {
+
+    return this.getGlobalElements().stream()
+        .filter(g -> g.getRefName().equals(location.getGlobalElementName()))
+        .findFirst()
+        .map(g -> (T) g.findElement(location.getParts()).orElse(null));
   }
 
   @Override
