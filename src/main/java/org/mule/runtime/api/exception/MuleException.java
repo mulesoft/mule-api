@@ -203,10 +203,6 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(LINE_SEPARATOR);
     appendSummaryMessage(buf);
 
-    // print exception stack
-    buf.append(EXCEPTION_MESSAGE_SECTION_DELIMITER);
-    buf.append("Exception stack is:").append(LINE_SEPARATOR);
-    buf.append(ExceptionHelper.getExceptionStack(this));
     buf.append(LINE_SEPARATOR)
         .append("  (set debug level logging or '-Dmule.verbose.exceptions=true' for everything)")
         .append(LINE_SEPARATOR);
