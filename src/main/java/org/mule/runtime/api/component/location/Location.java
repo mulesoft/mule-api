@@ -45,6 +45,22 @@ public interface Location {
   }
 
   /**
+   * Creates a new {@link Builder} with the provided location represented as string as base.
+   * 
+   * @param location a location to use to pre-configured the builder
+   * @return a new builder instance with the provided location as base.
+   */
+  static Builder builderFromStringRepresentation(String location) {
+    String[] parts = location.split("/");
+    Builder builder = Location.builder();
+    builder = builder.globalName(parts[0]);
+    for (int i = 1; i < parts.length; i++) {
+      builder = builder.addPart(parts[i]);
+    }
+    return builder;
+  }
+
+  /**
    * A builder to create a {@link Location} object.
    *
    * All {@link Location} instances must be created using this builder. The builder implementation may not be thread safe but it
