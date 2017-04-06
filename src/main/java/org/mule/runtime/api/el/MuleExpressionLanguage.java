@@ -34,12 +34,4 @@ public interface MuleExpressionLanguage extends ExpressionLanguage {
     return validate(expression).isSuccess();
   }
 
-  /**
-   * Verifies whether an expression is valid or not syntactically.
-   *
-   * @param expression to be validated
-   * @return a {@link ValidationResult} indicating whether the validation was successful or not
-   */
-  ValidationResult validate(String expression);
-
 }
