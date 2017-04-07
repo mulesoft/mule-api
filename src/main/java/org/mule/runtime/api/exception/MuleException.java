@@ -27,6 +27,9 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class MuleException extends Exception {
 
+  public static final String INFO_LOCATION_KEY = "Element";
+  public static final String INFO_SOURCE_XML_KEY = "Element XML";
+
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
 
@@ -203,10 +206,6 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(LINE_SEPARATOR);
     appendSummaryMessage(buf);
 
-    // print exception stack
-    buf.append(EXCEPTION_MESSAGE_SECTION_DELIMITER);
-    buf.append("Exception stack is:").append(LINE_SEPARATOR);
-    buf.append(ExceptionHelper.getExceptionStack(this));
     buf.append(LINE_SEPARATOR)
         .append("  (set debug level logging or '-Dmule.verbose.exceptions=true' for everything)")
         .append(LINE_SEPARATOR);
@@ -216,12 +215,22 @@ public abstract class MuleException extends Exception {
   }
 
   /**
-   * Template method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary.
+   * Template method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary. By
+   * default, the location data will be added.
    *
    * @param builder {@link StringBuilder} to use for appending additional summary info.
    */
   protected void appendSummaryMessage(StringBuilder builder) {
-    // Do nothing
+    Map exceptionInfo = org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo(this);
+    builder.append("Element               : ")
+        .append(exceptionInfo.get(INFO_LOCATION_KEY))
+        .append(LINE_SEPARATOR);
+    Object sourceXml = exceptionInfo.get(INFO_SOURCE_XML_KEY);
+    if (sourceXml != null) {
+      builder.append("Element XML           : ")
+          .append(sourceXml)
+          .append(LINE_SEPARATOR);
+    }
   }
 
   @Override

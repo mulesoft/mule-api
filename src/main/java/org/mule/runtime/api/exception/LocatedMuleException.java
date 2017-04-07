@@ -7,7 +7,6 @@
 
 package org.mule.runtime.api.exception;
 
-import static org.apache.commons.lang3.SystemUtils.LINE_SEPARATOR;
 import static org.mule.runtime.api.util.ComponentLocationProvider.resolveProcessorRepresentation;
 import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.meta.NameableObject;
@@ -21,9 +20,6 @@ import org.mule.runtime.api.meta.NamedObject;
  */
 
 public class LocatedMuleException extends MuleException {
-
-  public static final String INFO_LOCATION_KEY = "Element";
-  public static final String INFO_SOURCE_XML_KEY = "Element XML";
 
   /**
    * Serial version
@@ -95,10 +91,4 @@ public class LocatedMuleException extends MuleException {
     return str;
   }
 
-  @Override
-  protected void appendSummaryMessage(StringBuilder builder) {
-    builder.append("Element               : ")
-        .append(ExceptionHelper.getExceptionInfo(this).get(INFO_LOCATION_KEY))
-        .append(LINE_SEPARATOR);
-  }
 }
