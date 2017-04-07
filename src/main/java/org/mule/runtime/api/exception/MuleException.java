@@ -223,13 +223,13 @@ public abstract class MuleException extends Exception {
   protected void appendSummaryMessage(StringBuilder builder) {
     Map exceptionInfo = org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo(this);
     builder.append("Element               : ")
-      .append(exceptionInfo.get(INFO_LOCATION_KEY))
-      .append(LINE_SEPARATOR);
+        .append(exceptionInfo.get(INFO_LOCATION_KEY))
+        .append(LINE_SEPARATOR);
     Object sourceXml = exceptionInfo.get(INFO_SOURCE_XML_KEY);
     if (sourceXml != null) {
       builder.append("Element XML           : ")
-        .append(sourceXml)
-        .append(LINE_SEPARATOR);
+          .append(sourceXml)
+          .append(LINE_SEPARATOR);
     }
   }
 
