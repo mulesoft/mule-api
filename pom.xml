@@ -69,8 +69,24 @@
             <name>Alejandro Nosenzo</name>
         </developer>
         <developer>
-            <id>asequeira</id>
-            <name>Alejandro Sequeira</name>
+            <id>elrodro83</id>
+            <name>Rodrigo Merino</name>
+        </developer>
+        <developer>
+            <id>estebanwasinger</id>
+            <name>Esteban Wasinger Espro</name>     
+        </developer>
+        <developer>
+            <id>juandesi</id>
+            <name>Juani Desimoni</name>
+        </developer>
+        <developer>
+            <id>pablomusumeci</id>
+            <name>Pablo Musumeci</name>
+        </developer>
+        <developer>
+            <id>alegmarra</id>
+            <name>Alejandro Garcia Marra</name>
         </developer>
     </developers>
     <contributors>
@@ -102,7 +118,7 @@
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <commonsLangVersion>2.4</commonsLangVersion>
+        <commonsLangVersion>3.4</commonsLangVersion>
     </properties>
 
     <dependencies>
@@ -112,6 +128,11 @@
             <version>${metadataModelApiVersion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commonsLangVersion}</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

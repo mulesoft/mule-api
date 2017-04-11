@@ -1,12 +1,12 @@
 {
   "globalElements": [
     {
+      "refName": "selectQuery",
       "name": "query",
       "declaringExtension": "Database",
       "kind": "GLOBAL_PARAMETER",
       "customConfigurationParameters": [],
       "metadataProperties": {},
-      "refName": "selectQuery",
       "value": {
   "parameters": {
     "sql": "select * from PLANET where name \u003d :name",
@@ -16,13 +16,13 @@
 }
     },
     {
+      "refName": "dbConfig",
       "name": "config",
       "declaringExtension": "Database",
       "kind": "CONFIG",
       "customConfigurationParameters": [],
       "metadataProperties": {},
       "parameters": [],
-      "refName": "dbConfig",
       "connection": {
         "name": "derby-connection",
         "declaringExtension": "Database",
@@ -55,6 +55,7 @@
       }
     },
     {
+      "refName": "httpListener",
       "name": "listener-config",
       "declaringExtension": "HTTP",
       "kind": "CONFIG",
@@ -65,7 +66,6 @@
     "basePath": "/"
   }
 ],
-      "refName": "httpListener",
       "connection": {
         "name": "listener-connection",
         "declaringExtension": "HTTP",
@@ -102,13 +102,13 @@
       }
     },
     {
+      "refName": "httpRequester",
       "name": "request-config",
       "declaringExtension": "HTTP",
       "kind": "CONFIG",
       "customConfigurationParameters": [],
       "metadataProperties": {},
       "parameters": [],
-      "refName": "httpRequester",
       "connection": {
         "name": "request-connection",
         "declaringExtension": "HTTP",
@@ -147,7 +147,8 @@
       }
     },
     {
-      "name": "testFlow",
+      "refName": "testFlow",
+      "name": "flow",
       "declaringExtension": "Mule Core",
       "kind": "FLOW",
       "customConfigurationParameters": [],

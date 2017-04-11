@@ -7,9 +7,14 @@
 package org.mule.runtime.api.app.declaration;
 
 /**
- * //TODO
+ * An {@link ElementDeclaration} that can be present as a direct child of an {@link ArtifactDeclaration}.
+ * This implies that the {@link ElementDeclaration} has to be also
+ * {@link IdentifiableElementDeclaration identifiable} and {@link ReferableElementDeclaration referable}.
+ *
+ * @since 1.0
  */
-public interface GlobalElementDeclaration extends EnrichableDeclaration {
+public interface GlobalElementDeclaration
+    extends EnrichableDeclaration, ReferableElementDeclaration, IdentifiableElementDeclaration, ElementDeclarationContainer {
 
   /**
    * Dispatches to the method with prefix "visit" with the specific value type as argument.

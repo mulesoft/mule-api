@@ -6,8 +6,8 @@
  */
 package org.mule.runtime.api.component.location;
 
-import static java.lang.Integer.parseInt;
 import static java.lang.String.join;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.mule.runtime.api.component.location.Location.LocationImpl.PARTS_SEPARATOR;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
@@ -22,18 +22,25 @@ import java.util.List;
  * <p/>
  * The string representation of the implementation of this interface must be the serialized form of the location which consist of
  * the global element name and the parts separated by an slash character.
- * 
+ *
  * @since 1.0
  */
 public interface Location {
 
-  /**
-   * @return the global component name that contains the referenced component.
-   */
-  String getGlobalComponentName();
+  String SOURCE = "source";
+  String CONNECTION = "connection";
+  String PARAMETERS = "parameters";
+  String PROCESSORS = "processors";
+  String ERROR_HANDLER = "errorHandler";
 
   /**
-   * @return the parts within the global component that define the location of the component.
+   * @return the name of the global element that contains the component referenced by {@code this} {@link Location}.
+   */
+  String getGlobalElementName();
+
+  /**
+   * @return the parts within the global element that define the location of the
+   * component referenced by {@code this} {@link Location}.
    */
   List<String> getParts();
 
@@ -62,11 +69,11 @@ public interface Location {
 
   /**
    * A builder to create a {@link Location} object.
-   *
+   * <p>
    * All {@link Location} instances must be created using this builder. The builder implementation may not be thread safe but it
    * is immutable so each method call in the builder returns a new instance so it can be reused.
-   * 
-   * @since 4.0
+   *
+   * @since 1.0
    */
   interface Builder {
 
@@ -80,35 +87,64 @@ public interface Location {
 
     /**
      * Adds a new part at the end of the location.
-     * 
+     *
      * @param part the name of the part
      * @return a new builder with the provided configuration.
      */
     Builder addPart(String part);
 
     /**
-     * Adds a new "source" part at the end of the location.
-     * 
-     * Message sources within other component must be addressed using a "source" part.
+     * Adds a new {@link Location#CONNECTION} part at the end of the location.
+     * <p>
+     * Connection elements within a configuration component must be addressed using a {@link Location#CONNECTION} part.
+     *
+     * @return a new builder with the provided configuration.
+     */
+    Builder addConnectionPart();
+
+    /**
+     * Adds a new {@link Location#SOURCE} part at the end of the location.
+     * <p>
+     * Message sources within other component must be addressed using a {@link Location#SOURCE} part.
      *
      * @return a new builder with the provided configuration.
      */
     Builder addSourcePart();
 
     /**
-     * Adds a new "processors" part at the end of the location.
-     * 
-     * Components that allow nested processors must have the "processors" as part before the nested processors indexes.
-     * 
+     * Adds a new {@link Location#PROCESSORS} part at the end of the location.
+     * <p>
+     * Components that allow nested processors must have {@link Location#PROCESSORS} as part before the nested processors indexes.
+     *
      * @return a new builder with the provided configuration.
      */
     Builder addProcessorsPart();
 
     /**
+     * Adds a new {@link Location#ERROR_HANDLER} part at the end of the location.
+     * <p>
+     * Components that allow nested {@code on-error} components must have {@link Location#ERROR_HANDLER}
+     * as part before the {@code on-error} indexes.
+     *
+     * @return a new builder with the provided configuration.
+     */
+    Builder addErrorHandlerPart();
+
+    /**
+     * Adds a new {@link Location#PARAMETERS} part at the end of the location.
+     * <p>
+     * Components that allow nested parameters must have {@link Location#PARAMETERS}
+     * as part before the {@code parameter} name.
+     *
+     * @return a new builder with the provided configuration.
+     */
+    Builder addParameterPart();
+
+    /**
      * Adds a new index part. The index part is used to reference a component within a collection.
-     * 
+     * <p>
      * There cannot be two index parts consecutively.
-     * 
+     *
      * @param index the index of the component.
      * @return a new builder with the provided configuration.
      */
@@ -121,19 +157,20 @@ public interface Location {
 
   }
 
+
   class LocationImpl implements Location {
 
     protected static final String PARTS_SEPARATOR = "/";
     private LinkedList<String> parts = new LinkedList<>();
 
     @Override
-    public String getGlobalComponentName() {
+    public String getGlobalElementName() {
       return parts.get(0);
     }
 
     @Override
     public List<String> getParts() {
-      return parts.subList(1, parts.size() - 1);
+      return parts.subList(1, parts.size());
     }
 
     @Override
@@ -141,6 +178,7 @@ public interface Location {
       return join(PARTS_SEPARATOR, parts);
     }
   }
+
 
   class LocationBuilder implements Builder {
 
@@ -159,45 +197,67 @@ public interface Location {
     @Override
     public Builder addPart(String part) {
       verifyPartDoesNotContainsSlash(part);
+      verifyIndexPartAfterProcessor(part);
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(part);
       return locationBuilder;
     }
 
     @Override
-    public Builder addSourcePart() {
+    public Builder addConnectionPart() {
+      checkIsNotFirstPart(CONNECTION);
       LocationBuilder locationBuilder = builderCopy();
-      locationBuilder.location.parts.add("source");
+      locationBuilder.location.parts.add(CONNECTION);
+      return locationBuilder;
+    }
+
+    @Override
+    public Builder addSourcePart() {
+      checkIsNotFirstPart(SOURCE);
+      LocationBuilder locationBuilder = builderCopy();
+      locationBuilder.location.parts.add(SOURCE);
       return locationBuilder;
     }
 
     @Override
     public Builder addProcessorsPart() {
+      checkIsNotFirstPart(PROCESSORS);
       LocationBuilder locationBuilder = builderCopy();
-      locationBuilder.location.parts.add("processors");
+      locationBuilder.location.parts.add(PROCESSORS);
       return locationBuilder;
     }
 
     @Override
+    public Builder addErrorHandlerPart() {
+      checkIsNotFirstPart(ERROR_HANDLER);
+      LocationBuilder locationBuilder = builderCopy();
+      locationBuilder.location.parts.add(ERROR_HANDLER);
+      return locationBuilder;
+    }
+
+    @Override
+    public Builder addParameterPart() {
+      checkIsNotFirstPart(PARAMETERS);
+      LocationBuilder locationBuilder = builderCopy();
+      locationBuilder.location.parts.add(PARAMETERS);
+      return locationBuilder;
+    }
+
+    private void checkIsNotFirstPart(String partName) {
+      checkState(!location.parts.isEmpty(), "[" + partName + "] cannot be the first part");
+    }
+
+    @Override
     public Builder addIndexPart(int index) {
-      verifyNextPartCanBeAnIndex();
+      checkState(!location.parts.isEmpty(), "An index cannot be the first part");
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(String.valueOf(index));
       return locationBuilder;
     }
 
-    private void verifyNextPartCanBeAnIndex() {
-      checkState(!location.parts.isEmpty(), "An index cannot be the first part");
-      checkState(location.parts.size() > 1, "An index cannot follow the global element name");
-      if (location.parts.size() == 1) {
-        // first part is flow name, skip it.
-        return;
-      }
-      try {
-        parseInt(location.parts.getLast());
-        checkState(false, "A location cannot have two consecutive index");
-      } catch (NumberFormatException e) {
-        // all good, not an index.
+    private void verifyIndexPartAfterProcessor(String part) {
+      if (location.parts.getLast().equals(PROCESSORS)) {
+        checkState(isNumeric(part), "Only an index part can follow a processors part");
       }
     }
 

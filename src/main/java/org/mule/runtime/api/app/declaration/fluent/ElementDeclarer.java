@@ -71,8 +71,8 @@ public final class ElementDeclarer {
     return new ArtifactDeclarer(new ArtifactDeclaration());
   }
 
-  public static FlowElementDeclarer newFlow(String name) {
-    return new FlowElementDeclarer(new FlowElementDeclaration(name));
+  public static FlowElementDeclarer newFlow() {
+    return new FlowElementDeclarer(new FlowElementDeclaration());
   }
 
   public static ParameterObjectValue.Builder newObjectValue() {

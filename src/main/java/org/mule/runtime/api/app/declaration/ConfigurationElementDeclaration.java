@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static org.mule.runtime.api.component.location.Location.CONNECTION;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * A programmatic descriptor of a {@link ConfigurationModel} configuration.
@@ -15,7 +20,7 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
  * @since 1.0
  */
 public final class ConfigurationElementDeclaration extends ParameterizedElementDeclaration
-    implements ReferableElementDeclaration, GlobalElementDeclaration {
+    implements GlobalElementDeclaration {
 
   private ConnectionElementDeclaration connection;
   private String elementName;
@@ -45,12 +50,36 @@ public final class ConfigurationElementDeclaration extends ParameterizedElementD
     this.elementName = referableName;
   }
 
-  public ConnectionElementDeclaration getConnection() {
-    return connection;
+  /**
+   * @return the {@link ConnectionElementDeclaration} of {@code this} configurat
+   */
+  public Optional<ConnectionElementDeclaration> getConnection() {
+    return Optional.ofNullable(connection);
   }
 
   public void setConnection(ConnectionElementDeclaration connection) {
     this.connection = connection;
+  }
+
+  /**
+   * Looks for a {@link ParameterElementDeclaration} contained by {@code this} declaration
+   * based on the {@code parts} of a {@link Location}.
+   *
+   * @param parts the {@code parts} of a {@link Location} relative to {@code this} element
+   * @return the {@link ElementDeclaration} located in the path created by the {@code parts}
+   * or {@link Optional#empty()} if no {@link ElementDeclaration} was found in that location.
+   */
+  @Override
+  public <T extends ElementDeclaration> Optional<T> findElement(List<String> parts) {
+    if (parts.isEmpty()) {
+      return Optional.of((T) this);
+    }
+
+    if (parts.get(0).equals(CONNECTION)) {
+      return Optional.ofNullable((T) connection);
+    }
+
+    return super.findElement(parts);
   }
 
   @Override

@@ -6,17 +6,24 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.lang.Integer.parseInt;
+import static java.util.Optional.empty;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
+import static org.mule.runtime.api.component.location.Location.PARAMETERS;
+import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A programmatic descriptor of a {@link ParameterizedModel} configuration.
  *
  * @since 1.0
  */
-public abstract class ParameterizedElementDeclaration extends EnrichableElementDeclaration {
+public abstract class ParameterizedElementDeclaration extends EnrichableElementDeclaration
+    implements ElementDeclarationContainer {
 
   private List<ParameterElementDeclaration> parameters = new LinkedList<>();
 
@@ -36,7 +43,38 @@ public abstract class ParameterizedElementDeclaration extends EnrichableElementD
    * @param parameter the {@link ParameterElementDeclaration} to associate to {@code this} element declaration
    */
   public void addParameter(ParameterElementDeclaration parameter) {
+    parameter.setDeclaringExtension(this.declaringExtension);
     this.parameters.add(parameter);
+  }
+
+  /**
+   * Looks for a {@link ParameterElementDeclaration} contained by {@code this} declaration
+   * based on the {@code parts} of a {@link Location}.
+   *
+   * @param parts the {@code parts} of a {@link Location} relative to {@code this} element
+   * @return the {@link ElementDeclaration} located in the path created by the {@code parts}
+   * or {@link Optional#empty()} if no {@link ElementDeclaration} was found in that location.
+   */
+  @Override
+  public <T extends ElementDeclaration> Optional<T> findElement(List<String> parts) {
+    if (parts.isEmpty()) {
+      return Optional.of((T) this);
+    }
+
+    if (isParameterLocation(parts)) {
+      String identifier = parts.get(1);
+      if (isNumeric(identifier) && parseInt(identifier) < parameters.size()) {
+        return Optional.of((T) parameters.get(parseInt(identifier)));
+      } else {
+        return (Optional<T>) parameters.stream().filter(p -> p.getName().equals(identifier)).findFirst();
+      }
+    }
+
+    return empty();
+  }
+
+  private boolean isParameterLocation(List<String> parts) {
+    return parts.get(0).equals(PARAMETERS) && parts.size() == 2;
   }
 
   @Override

@@ -19,10 +19,18 @@ public abstract class ComponentElementDeclaration extends ParameterizedElementDe
 
   public ComponentElementDeclaration() {}
 
+  /**
+   * Sets the {@code config-ref} parameter required for {@code this} component
+   * @param configRef the {@link ReferableElementDeclaration#getRefName()}
+   *                  of a {@link ConfigurationElementDeclaration}
+   */
   public void setConfigRef(String configRef) {
     this.configRef = configRef;
   }
 
+  /**
+   * @return the {@code config-ref} parameter associated to {@code this} component
+   */
   public String getConfigRef() {
     return configRef;
   }

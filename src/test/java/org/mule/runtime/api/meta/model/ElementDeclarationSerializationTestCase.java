@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DeclarationSerializationTestCase {
+public class ElementDeclarationSerializationTestCase {
 
   public static final String EXPECTED_ARTIFACT_DECLARATION_JSON = "declaration/artifact-declaration.json";
   private ArtifactDeclaration applicationDeclaration;
@@ -121,7 +121,8 @@ public class DeclarationSerializationTestCase {
                                    .build())
                 .getDeclaration())
             .getDeclaration())
-        .withGlobalElement(newFlow("testFlow")
+        .withGlobalElement(newFlow()
+            .withRefName("testFlow")
             .withParameter("initialState", "stopped")
             .withComponent(http.newSource("listener")
                 .withConfig("httpListener")
