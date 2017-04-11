@@ -67,7 +67,6 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
     scope.withOutput().ofType(getVoidType());
     scope.withOutputAttributes().ofType(getAttributesType());
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
-    scope.withRoute(FOREACH_ROUTE_NAME).withMinOccurs(1).withMaxOccurs(1).withAllowedStereotypes(FOREACH_STEREOTYPE);
 
     return extensionDeclarer;
   }

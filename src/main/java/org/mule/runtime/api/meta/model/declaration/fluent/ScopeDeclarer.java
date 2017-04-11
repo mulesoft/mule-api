@@ -22,14 +22,4 @@ public final class ScopeDeclarer extends AbstractOperationDeclarer<ScopeDeclarer
     super(declaration);
   }
 
-  /**
-   * Adds a route of the given {@code name}
-   *
-   * @param routeName a non blank name
-   */
-  public RouteDeclarer withRoute(String routeName) {
-    RouteDeclaration route = new RouteDeclaration(routeName);
-    declaration.setRoute(route);
-    return new RouteDeclarer(route);
-  }
 }

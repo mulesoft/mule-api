@@ -12,16 +12,10 @@ import org.mule.runtime.api.meta.model.util.ComponentModelVisitor;
  * An {@link OperationModel} specification which represents the particular case of a
  * scope, such as async or foreach.
  * <p>
- * It adds a {@link #getRouteModel() route} which describe the contained route.
  *
  * @since 1.0
  */
 public interface ScopeModel extends OperationModel {
-
-  /**
-   * @return The model of the owned route
-   */
-  RouteModel getRouteModel();
 
   /**
    * {@inheritDoc}
