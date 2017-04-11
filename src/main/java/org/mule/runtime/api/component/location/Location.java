@@ -177,6 +177,24 @@ public interface Location {
     public String toString() {
       return join(PARTS_SEPARATOR, parts);
     }
+
+    @Override public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (o == null || getClass() != o.getClass()) {
+        return false;
+      }
+
+      LocationImpl location = (LocationImpl) o;
+
+      return parts.equals(location.parts);
+
+    }
+
+    @Override public int hashCode() {
+      return parts.hashCode();
+    }
   }
 
 
