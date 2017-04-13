@@ -24,11 +24,6 @@ import java.util.Iterator;
 public interface Message extends Serializable {
 
   /**
-   * Message with null payload and default values for every other attribute
-   */
-  Message NULL_MESSAGE = of(null);
-
-  /**
    * Provides a builder to create {@link Message} objects.
    *
    * @return a new {@link Builder}.
