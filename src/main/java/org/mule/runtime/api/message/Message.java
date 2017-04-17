@@ -61,7 +61,7 @@ public interface Message extends Serializable {
    *
    * @return attributes associated with the message, or null if none exist.
    */
-  Attributes getAttributes();
+  <T> TypedValue<T> getAttributes();
 
   /**
    * Create a new {@link Message instance} with the given payload.
@@ -94,6 +94,15 @@ public interface Message extends Serializable {
      * @return this builder.
      */
     Builder payload(Object value);
+
+    /**
+     * Sets the {@link MediaType} for the {@link Message} payload to be built. See {@link DataType#getMediaType()}
+     *
+     * @param mediaType the mediaType to set
+     * @return this builder
+     * @throws NullPointerException if the mediaType is null
+     */
+    Builder mediaType(MediaType mediaType);
 
     /**
      * Sets the consumable streaming collection value for the {@link Message}'s payload to be built.
@@ -143,16 +152,14 @@ public interface Message extends Serializable {
 
   }
 
-  interface Builder extends PayloadBuilder {
+  interface AttributesBuilder {
 
     /**
-     * Sets the {@link MediaType} for the {@link Message} to be built. See {@link DataType#getMediaType()}
+     * Sets a {@code #null} value for the {@link Message}'s attributes to be built.
      *
-     * @param mediaType the mediaType to set
      * @return this builder
-     * @throws NullPointerException if the mediaType is null
      */
-    Builder mediaType(MediaType mediaType);
+    Builder nullAttributes();
 
     /**
      * Populates the builder from the given {@code value}.
@@ -164,7 +171,19 @@ public interface Message extends Serializable {
      * @return this builder.
      * @throws NullPointerException if the value is null
      */
-    Builder attributes(Attributes value);
+    Builder attributes(Object value);
+
+    /**
+     * Sets the {@link MediaType} for the {@link Message} attributes to be built. See {@link DataType#getMediaType()}
+     *
+     * @param mediaType the mediaType to set
+     * @return this builder
+     * @throws NullPointerException if the mediaType is null
+     */
+    Builder attributesMediaType(MediaType mediaType);
+  }
+
+  interface Builder extends PayloadBuilder, AttributesBuilder {
 
     /**
      * Builds a new {@link Message} with the values set in this builder.
