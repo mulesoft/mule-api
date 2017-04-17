@@ -23,7 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ElementDeclarationSerializationTestCase {
+public class ArtifactDeclarationJsonSerializerTestCase {
 
   public static final String EXPECTED_ARTIFACT_DECLARATION_JSON = "declaration/artifact-declaration.json";
   private ArtifactDeclaration applicationDeclaration;

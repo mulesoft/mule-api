@@ -11,7 +11,6 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
 import org.mule.runtime.internal.dsl.DefaultDslResolvingContext;
 
-import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
@@ -55,7 +54,7 @@ public interface DslResolvingContext {
    * @return a {@link Set} containing all the {@link ExtensionModel}s available in the
    * current resolving context
    */
-  Collection<ExtensionModel> getExtensions();
+  Set<ExtensionModel> getExtensions();
 
   /**
    * Returns a {@link TypeCatalog} containing all the {@link ObjectType}s available in the

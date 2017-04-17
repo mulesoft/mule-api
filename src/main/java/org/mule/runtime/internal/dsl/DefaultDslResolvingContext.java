@@ -6,14 +6,14 @@
  */
 package org.mule.runtime.internal.dsl;
 
-import static java.util.Collections.unmodifiableCollection;
+import static java.util.Collections.unmodifiableSet;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 import org.mule.runtime.api.dsl.DslResolvingContext;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
 
-import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -26,11 +26,13 @@ import java.util.Set;
  */
 public final class DefaultDslResolvingContext implements DslResolvingContext {
 
-  private final Map<String, ExtensionModel> extensions;
   private final TypeCatalog typeCatalog;
+  private final Set<ExtensionModel> extensions;
+  private final Map<String, ExtensionModel> extensionsByName;
 
   public DefaultDslResolvingContext(Set<ExtensionModel> extensions) {
-    this.extensions = extensions.stream().collect(toMap(ExtensionModel::getName, e -> e));
+    this.extensions = extensions;
+    this.extensionsByName = extensions.stream().collect(toMap(ExtensionModel::getName, e -> e, (u, v) -> v, LinkedHashMap::new));
     this.typeCatalog = TypeCatalog.getDefault(extensions);
   }
 
@@ -39,15 +41,15 @@ public final class DefaultDslResolvingContext implements DslResolvingContext {
    */
   @Override
   public Optional<ExtensionModel> getExtension(String name) {
-    return ofNullable(extensions.get(name));
+    return ofNullable(extensionsByName.get(name));
   }
 
   /**
    * {@inheritDoc}
    */
   @Override
-  public Collection<ExtensionModel> getExtensions() {
-    return unmodifiableCollection(extensions.values());
+  public Set<ExtensionModel> getExtensions() {
+    return unmodifiableSet(extensions);
   }
 
   /**

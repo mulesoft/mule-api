@@ -112,7 +112,6 @@ class ComponentElementDeclarationTypeAdapter extends TypeAdapter<ComponentElemen
   }
 
   private void declareScope(JsonObject jsonObject, ComponentElementDeclarer declarer) {
-    declareParameterizedElement(delegate, jsonObject, declarer);
     if (jsonObject.get(COMPONENTS) != null) {
       JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
       components.forEach(c -> ((ScopeElementDeclarer) declarer)
