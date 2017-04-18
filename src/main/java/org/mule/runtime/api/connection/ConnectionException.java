@@ -7,6 +7,8 @@
 package org.mule.runtime.api.connection;
 
 import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.ErrorType;
 
 import java.util.Optional;
@@ -16,7 +18,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class ConnectionException extends Exception {
+public class ConnectionException extends MuleException {
 
   private ErrorType errorType;
 
@@ -26,7 +28,7 @@ public class ConnectionException extends Exception {
    * @param message the detail message
    */
   public ConnectionException(String message) {
-    super(message);
+    super(createStaticMessage(message));
   }
 
   /**
@@ -45,7 +47,7 @@ public class ConnectionException extends Exception {
    * @param cause   the exception's cause
    */
   public ConnectionException(String message, Throwable cause) {
-    super(message, cause);
+    super(createStaticMessage(message), cause);
   }
 
   /**
@@ -56,7 +58,7 @@ public class ConnectionException extends Exception {
    * @param errorType the exception's errorType
    */
   public ConnectionException(String message, Throwable cause, ErrorType errorType) {
-    super(message, cause);
+    super(createStaticMessage(message), cause);
     this.errorType = errorType;
   }
 
