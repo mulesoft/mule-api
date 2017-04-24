@@ -33,6 +33,16 @@ public interface DslConstants {
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
 
   /**
+   * This is the namespace prefix for core domain elements in the configuration.
+   */
+  String DOMAIN_PREFIX = "domain";
+
+  /**
+   * Namespace for Mule core domain elements
+   */
+  String DOMAIN_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "domain");
+
+  /**
    * This is the namespace prefix for EE elements in the configuration.
    */
   String EE_PREFIX = "ee";
@@ -41,6 +51,16 @@ public interface DslConstants {
    * Namespace for EE elements
    */
   String EE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/core");
+
+  /**
+   * This is the namespace prefix for EE domain elements in the configuration.
+   */
+  String EE_DOMAIN_PREFIX = "ee-domain";
+
+  /**
+   * Namespace for EE domain elements
+   */
+  String EE_DOMAIN_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/domain");
 
   /**
    * The identifier name of a {@code flow}
@@ -68,14 +88,12 @@ public interface DslConstants {
   String VALUE_ATTRIBUTE_NAME = "value";
 
   /**
-   * The identifier name of the {@code reconnectForever} implementation of
-   * {@code reconnectionStrategy} infrastructure parameter
+   * The identifier name of the {@code reconnectForever} implementation of {@code reconnectionStrategy} infrastructure parameter
    */
   String RECONNECT_FOREVER_ELEMENT_IDENTIFIER = "reconnect-forever";
 
   /**
-   * The identifier name of the {@code reconnectForever} implementation of
-   * {@code reconnectionStrategy} infrastructure parameter
+   * The identifier name of the {@code reconnectForever} implementation of {@code reconnectionStrategy} infrastructure parameter
    */
   String RECONNECT_ELEMENT_IDENTIFIER = "reconnect";
 
