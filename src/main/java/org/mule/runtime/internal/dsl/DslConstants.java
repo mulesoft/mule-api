@@ -53,6 +53,16 @@ public interface DslConstants {
   String EE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/core");
 
   /**
+   * This is the namespace prefix for EE domain elements in the configuration.
+   */
+  String EE_DOMAIN_PREFIX = "ee-domain";
+
+  /**
+   * Namespace for EE domain elements
+   */
+  String EE_DOMAIN_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/domain");
+
+  /**
    * The identifier name of a {@code flow}
    */
   String FLOW_ELEMENT_IDENTIFIER = "flow";
