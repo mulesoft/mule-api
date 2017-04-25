@@ -102,6 +102,17 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
+   * Marks the parameter as being a {@link ParameterModel#isOverrideFromConfig() config-override}.
+   *
+   * @return {@code this} declarer
+   */
+  public T asConfigOverride() {
+    declaration.setConfigOverride(true);
+    declaration.setRequired(false);
+    return (T) this;
+  }
+
+  /**
    * {@inheritDoc}
    */
   @Override

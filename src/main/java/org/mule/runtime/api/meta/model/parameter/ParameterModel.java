@@ -49,6 +49,18 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
   boolean isRequired();
 
   /**
+   * Whether or not {@code this} {@link ParameterModel parameter} is bound to a {@link ParameterModel} of the same {@link ParameterModel#getName() name}
+   * and {@link ParameterModel#getType() type} that exists in the {@link ConfigurationModel config} associated to the
+   * {@link ComponentModel container} of {@code this} {@link ParameterModel parameter}.
+   * <br>
+   * When {@code true}, the {@link ParameterModel parameter} will be injected with the same value of the
+   * bound {@link ParameterModel parameter} of the {@link ConfigurationModel config} that's been associated to the execution.
+   *
+   * @return a boolean value saying if this parameter acts as an override for a parameter defined in a config.
+   */
+  boolean isOverrideFromConfig();
+
+  /**
    * The level of support {@code this} parameter has for expressions
    *
    * @return a {@link ExpressionSupport}
