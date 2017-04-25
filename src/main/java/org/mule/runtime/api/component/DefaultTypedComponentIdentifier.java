@@ -8,7 +8,9 @@ package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.util.Preconditions.checkState;
 
-class DefaultTypedComponentIdentifier implements TypedComponentIdentifier {
+import java.io.Serializable;
+
+class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Serializable {
 
   private ComponentIdentifier identifier;
   private TypedComponentIdentifier.ComponentType type;
