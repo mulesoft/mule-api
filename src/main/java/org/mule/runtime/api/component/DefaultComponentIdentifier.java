@@ -23,6 +23,8 @@ import java.io.Serializable;
  */
 class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
+  private static final long serialVersionUID = -7904681927277956932L;
+
   private String namespace;
   private String name;
 

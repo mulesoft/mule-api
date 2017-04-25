@@ -12,6 +12,8 @@ import java.io.Serializable;
 
 class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Serializable {
 
+  private static final long serialVersionUID = -6585884125494525933L;
+
   private ComponentIdentifier identifier;
   private TypedComponentIdentifier.ComponentType type;
 
