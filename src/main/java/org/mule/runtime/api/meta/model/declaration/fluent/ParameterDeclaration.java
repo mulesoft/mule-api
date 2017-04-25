@@ -28,6 +28,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration> implements TypedDeclaration {
 
   private boolean required;
+  private boolean isConfigOverride;
   private ExpressionSupport expressionSupport = SUPPORTED;
   private MetadataType type;
   private boolean hasDynamicType;
@@ -115,5 +116,13 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   public void setParameterRole(ParameterRole parameterRole) {
     checkArgument(parameterRole != null, "parameterPurpose cannot be null");
     this.parameterRole = parameterRole;
+  }
+
+  public boolean isConfigOverride() {
+    return isConfigOverride;
+  }
+
+  public void setConfigOverride(boolean isConfigOverride) {
+    this.isConfigOverride = isConfigOverride;
   }
 }
