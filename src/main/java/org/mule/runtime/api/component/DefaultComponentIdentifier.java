@@ -11,6 +11,8 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
 
+import java.io.Serializable;
+
 /**
  * Unique identifier for a configuration option. Every configuration option has a namespace and an identifier.
  *
@@ -19,7 +21,9 @@ import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
  *
  * @since 4.0
  */
-class DefaultComponentIdentifier implements ComponentIdentifier {
+class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
+
+  private static final long serialVersionUID = -7904681927277956932L;
 
   private String namespace;
   private String name;
