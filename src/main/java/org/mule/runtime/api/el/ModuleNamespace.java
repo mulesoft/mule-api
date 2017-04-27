@@ -41,14 +41,15 @@ public class ModuleNamespace {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
 
     ModuleNamespace that = (ModuleNamespace) o;
 
-    // Probably incorrect - comparing Object[] arrays with Arrays.equals
     return Arrays.equals(elements, that.elements);
   }
 

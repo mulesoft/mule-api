@@ -29,7 +29,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
 
       DEFAULT_FACTORY = factory;
     } catch (Throwable t) {
-      LOGGER.error("Error loading BindingContextBuilderFactory implementation.", t);
+      LOGGER.error("Error loading ExpressionModuleBuilderFactory implementation.", t);
       throw t;
     }
   }
