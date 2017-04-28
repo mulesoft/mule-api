@@ -58,6 +58,12 @@ public interface BindingContext {
    */
   Optional<TypedValue> lookup(String identifier);
 
+  /**
+   * Returns all modules
+   * @return a {@link Collection} af all modules
+   */
+  Collection<ExpressionModule> modules();
+
   interface Builder {
 
     /**
@@ -74,6 +80,12 @@ public interface BindingContext {
      * @param context a context whose bindings to add
      */
     Builder addAll(BindingContext context);
+
+    /**
+     * Will add a new module to this binding
+     * @param expressionModule The module to be added
+     */
+    Builder addModule(ExpressionModule expressionModule);
 
     BindingContext build();
   }
