@@ -108,7 +108,7 @@
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.0.0-SNAPSHOT</metadataModelApiVersion>
         <muleModuleMavenPluginVersion>1.0-SNAPSHOT</muleModuleMavenPluginVersion>
-        <slf4jApiVersion>1.7.7</slf4jApiVersion>
+        <slf4jVersion>1.7.25</slf4jVersion>
         <gsonVersion>2.6.2</gsonVersion>
         <commonsIoVersion>2.4</commonsIoVersion>
         <mockitoVersion>1.9.5</mockitoVersion>
@@ -136,7 +136,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4jApiVersion}</version>
+            <version>${slf4jVersion}</version>
         </dependency>
 
         <dependency>
