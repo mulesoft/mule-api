@@ -6,9 +6,10 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
-import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
+import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -45,4 +46,22 @@ public interface MetadataCache {
    * or {@code Option.empty()} if this map contains no value for the specified key.
    */
   <T extends Serializable> Optional<T> get(Serializable key);
+
+  /**
+   * If the specified key is not already associated with a value,
+   * attempts to compute its value using the given mapping function
+   * and enters it into this map unless {@code null}.
+   *
+   * @param key the key whose associated value is to be returned
+   * @return the current (existing or computed) value associated with
+   *         the specified key, or null if the computed value is null
+   */
+  <T extends Serializable> T computeIfAbsent(Serializable key, MetadataCacheValueResolver mappingFunction)
+      throws MetadataResolvingException, ConnectionException;
+
+  @FunctionalInterface
+  interface MetadataCacheValueResolver {
+
+    Serializable compute(Serializable key) throws MetadataResolvingException, ConnectionException;
+  }
 }
