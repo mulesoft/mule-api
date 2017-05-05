@@ -12,7 +12,7 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaration> extends NamedDeclaration<T> {
 
-  private final Map<String, ParameterGroupDeclaration> parameterGroups = new HashMap<>();
+  private final Map<String, ParameterGroupDeclaration> parameterGroups = new LinkedHashMap<>();
 
   /**
    * {@inheritDoc}
