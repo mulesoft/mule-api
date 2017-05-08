@@ -6,9 +6,18 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
+import static java.util.regex.Pattern.DOTALL;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
+import static org.apache.commons.lang3.StringUtils.removeEnd;
+import static org.apache.commons.lang3.StringUtils.removeStart;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
+
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Represents the configured simple value of a given {@link ParameterElementDeclaration}.
@@ -17,18 +26,38 @@ import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
  */
 public final class ParameterSimpleValue implements ParameterValue {
 
-  private final String value;
+  private static final Pattern CDATA = compile("^<!\\[CDATA\\[(.+)\\]\\]>$", DOTALL | MULTILINE);
+  private final String text;
+  private final boolean isCData;
 
-  private ParameterSimpleValue(String value) {
-    this.value = value;
+  private ParameterSimpleValue(String text, boolean asCData) {
+    this.text = text;
+    this.isCData = asCData;
   }
 
-  public static ParameterValue of(String value) {
-    return new ParameterSimpleValue(value);
+  public static ParameterValue of(String text) {
+    return isCData(text) ? cdata(text) : plain(text);
+  }
+
+  private static boolean isCData(String text) {
+    return CDATA.matcher(text).matches();
+  }
+
+  public static ParameterValue plain(String text) {
+    return new ParameterSimpleValue(text, false);
+  }
+
+  public static ParameterValue cdata(String text) {
+    text = removeEnd(removeStart(text, "<![CDATA["), "]]>");
+    return new ParameterSimpleValue(text, true);
   }
 
   public String getValue() {
-    return value;
+    return text;
+  }
+
+  public boolean isCData() {
+    return isCData;
   }
 
   /**
@@ -36,7 +65,7 @@ public final class ParameterSimpleValue implements ParameterValue {
    */
   @Override
   public void accept(ParameterValueVisitor valueVisitor) {
-    valueVisitor.visitSimpleValue(value);
+    valueVisitor.visitSimpleValue(this);
   }
 
   @Override
@@ -49,17 +78,17 @@ public final class ParameterSimpleValue implements ParameterValue {
     }
 
     ParameterSimpleValue that = (ParameterSimpleValue) o;
-
-    return value != null ? value.equals(that.value) : that.value == null;
+    return isCData ? that.isCData : !that.isCData && StringUtils.equals(text, that.text);
   }
 
   @Override
   public int hashCode() {
-    return value != null ? value.hashCode() : 0;
+    return (isCData ? 31 : 0) + (text != null ? text.hashCode() : 0);
   }
 
   @Override
   public String toString() {
-    return value;
+    return text;
   }
+
 }

@@ -23,12 +23,11 @@ public final class ParameterElementDeclarer extends BaseElementDeclarer<Paramete
   /**
    * Associates the given {@code value} as part of {@code this} parameter configuration declaration
    *
-   * @param value the {@code value} to associate with {@code this} parameter configuration
+   * @param text the {@code text} to associate with {@code this} parameter configuration
    * @return {@code this} declarer
    */
-  public ParameterElementDeclarer withValue(String value) {
-    declaration.setValue(ParameterSimpleValue.of(value));
-    return this;
+  public ParameterElementDeclarer withValue(String text) {
+    return withValue(ParameterSimpleValue.of(text));
   }
 
   /**
