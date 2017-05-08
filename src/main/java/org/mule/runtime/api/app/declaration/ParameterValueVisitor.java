@@ -8,6 +8,7 @@ package org.mule.runtime.api.app.declaration;
 
 import org.mule.runtime.api.app.declaration.fluent.ParameterListValue;
 import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
+import org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue;
 
 /**
  * Used in {@link ParameterValue#accept(ParameterValueVisitor)} as a visitor pattern.
@@ -16,7 +17,7 @@ import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
  */
 public interface ParameterValueVisitor {
 
-  default void visitSimpleValue(String value) {
+  default void visitSimpleValue(ParameterSimpleValue text) {
     // do nothing
   }
 

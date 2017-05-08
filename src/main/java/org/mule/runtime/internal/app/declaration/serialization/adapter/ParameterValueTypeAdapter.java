@@ -52,8 +52,8 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
     return new ParameterValueVisitor() {
 
       @Override
-      public void visitSimpleValue(String value) {
-        writeSimpleValue(value, jsonWriter);
+      public void visitSimpleValue(ParameterSimpleValue text) {
+        writeSimpleValue(text.toString(), jsonWriter);
       }
 
       @Override
