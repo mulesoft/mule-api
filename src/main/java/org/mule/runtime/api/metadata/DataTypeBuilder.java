@@ -6,11 +6,12 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.runtime.api.el.ExpressionFunction;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import org.mule.runtime.api.el.ExpressionFunction;
+import java.util.Map;
 
 /**
  * Provides a way to build immutable {@link DataType} objects.
@@ -74,6 +75,22 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
    * @return this builder.
    */
   DataTypeFunctionTypeBuilder asFunctionTypeBuilder();
+
+  /**
+   * Sets the given type for the {@link MapDataType} to be built.
+   *
+   * @param mapType
+   * @return
+   */
+  DataTypeMapTypeBuilder mapType(Class<? extends Map> mapType);
+
+  /**
+   * Down-casts the builder to {@link DataTypeMapTypeBuilder}, allowing the builder to be used in a fluent way
+   * without having to cast it when dealing with {@link Map}s.
+   *
+   * @return this builder.
+   */
+  DataTypeMapTypeBuilder asMapTypeBuilder();
 
   /**
    * Populates the builder from the given {@code value}.
@@ -154,6 +171,76 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
      * @return this builder.
      */
     DataTypeFunctionTypeBuilder parametersType(List<FunctionParameter> parametersTypes);
+
+  }
+
+  /**
+   * Provides methods to set data associated to the keys and values of a {@link Map}, when the type
+   * is a {@link Map}.
+   */
+  interface DataTypeMapTypeBuilder extends DataTypeParamsBuilder {
+
+    /**
+     * Sets the given {@code keyType} for the {@link DataType} to be built, when the type is an
+     * {@link Map}.
+     *
+     * @param keyType the java type to set.
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder keyType(Class<?> keyType);
+
+    /**
+     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
+     * is an {@link Map}.
+     *
+     * @param keyMediaType the media type string to set
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder keyMediaType(String keyMediaType);
+
+    /**
+     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
+     * is an {@link Map}.
+     * <p>
+     * If the media type for the given string has a {@code charset} parameter, that will be set
+     * as the encoding for the key's {@link DataType} being built, unless it had been
+     * previously set.
+     *
+     * @param keyMediaType the media type to set. If null, the builder is not changed.
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder keyMediaType(MediaType keyMediaType);
+
+    /**
+     * Sets the given {@code valueType} for the {@link DataType} to be built, when the type is an
+     * {@link Map}.
+     *
+     * @param valueType the java type to set.
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder valueType(Class<?> valueType);
+
+    /**
+     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
+     * is an {@link Map}.
+     *
+     * @param valueMediaType the media type string to set
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder valueMediaType(String valueMediaType);
+
+    /**
+     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
+     * is an {@link Map}.
+     * <p>
+     * If the media type for the given string has a {@code charset} parameter, that will be set
+     * as the encoding for the key's {@link DataType} being built, unless it had been
+     * previously set.
+     *
+     * @param valueMediaType the media type to set. If null, the builder is not changed.
+     * @return this builder.
+     */
+    DataTypeMapTypeBuilder valueMediaType(MediaType valueMediaType);
 
   }
 }
