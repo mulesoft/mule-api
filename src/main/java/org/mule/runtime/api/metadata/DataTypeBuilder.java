@@ -63,8 +63,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   /**
    * Sets the given type for the {@link FunctionDataType} to be built.
    *
-   * @param functionType
-   * @return
+   * @param functionType the java {@link ExpressionFunction} type to set
+   * @return this builder
    */
   DataTypeFunctionTypeBuilder functionType(Class<? extends ExpressionFunction> functionType);
 
@@ -79,8 +79,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   /**
    * Sets the given type for the {@link MapDataType} to be built.
    *
-   * @param mapType
-   * @return
+   * @param mapType the java map type to set
+   * @return this builder
    */
   DataTypeMapTypeBuilder mapType(Class<? extends Map> mapType);
 
@@ -181,7 +181,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   interface DataTypeMapTypeBuilder extends DataTypeParamsBuilder {
 
     /**
-     * Sets the given {@code keyType} for the {@link DataType} to be built, when the type is an
+     * Sets the given {@code keyType} for the {@link DataType} to be built, when the type is a
      * {@link Map}.
      *
      * @param keyType the java type to set.
@@ -191,7 +191,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
 
     /**
      * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
-     * is an {@link Map}.
+     * is a {@link Map}.
      *
      * @param keyMediaType the media type string to set
      * @return this builder.
@@ -200,7 +200,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
 
     /**
      * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
-     * is an {@link Map}.
+     * is a {@link Map}.
      * <p>
      * If the media type for the given string has a {@code charset} parameter, that will be set
      * as the encoding for the key's {@link DataType} being built, unless it had been
@@ -212,7 +212,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder keyMediaType(MediaType keyMediaType);
 
     /**
-     * Sets the given {@code valueType} for the {@link DataType} to be built, when the type is an
+     * Sets the given {@code valueType} for the {@link DataType} to be built, when the type is a
      * {@link Map}.
      *
      * @param valueType the java type to set.
@@ -222,7 +222,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
 
     /**
      * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
-     * is an {@link Map}.
+     * is a {@link Map}.
      *
      * @param valueMediaType the media type string to set
      * @return this builder.
@@ -231,7 +231,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
 
     /**
      * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
-     * is an {@link Map}.
+     * is a {@link Map}.
      * <p>
      * If the media type for the given string has a {@code charset} parameter, that will be set
      * as the encoding for the key's {@link DataType} being built, unless it had been
