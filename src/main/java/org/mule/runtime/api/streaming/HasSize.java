@@ -15,7 +15,7 @@ package org.mule.runtime.api.streaming;
  *
  * @since 1.0
  */
-public interface Sized {
+public interface HasSize {
 
   /**
    * Returns {@code this} object's size.
@@ -23,5 +23,5 @@ public interface Sized {
    * In some scenarios, it might not be possible/convenient to actually retrieve this value
    * or it might not be available at this point. {@code -1} is returned in such a case.
    */
-  int size();
+  int getSize();
 }
