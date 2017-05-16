@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.naturalOrder;
 import static java.util.stream.Collectors.toCollection;
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
@@ -19,6 +24,7 @@ import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -26,6 +32,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A declaration object for a {@link ExtensionModel}. It contains raw, unvalidated
@@ -37,20 +44,20 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     implements ConnectedDeclaration<ExtensionDeclaration>, WithSourcesDeclaration<ExtensionDeclaration>,
     WithOperationsDeclaration<ExtensionDeclaration> {
 
-  private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
+  private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
+  private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
+  private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
+  private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
+  private final Set<String> resources = new TreeSet<>(naturalOrder());
+  private final Set<ErrorModel> errorModels = new LinkedHashSet<>();
   private String name;
   private String version;
   private String vendor;
   private Category category;
   private MuleVersion minMuleVersion;
-  private Set<ObjectType> types = new LinkedHashSet<>();
   private XmlDslModel xmlDslModel;
-  private Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
-  private Set<ImportedTypeModel> importedTypes = new LinkedHashSet<>();
-  private Set<String> resources = new LinkedHashSet<>();
-  private Set<ErrorModel> errorModels = new LinkedHashSet<>();
-  private Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
+  private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
 
   /**
    * Creates a new instance
@@ -66,7 +73,9 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return an unmodifiable list. May be empty but will never be {@code null}
    */
   public List<ConfigurationDeclaration> getConfigurations() {
-    return configurations;
+    ArrayList<ConfigurationDeclaration> list = new ArrayList<>(configurations);
+    sort(list, comparing(c -> c.getName()));
+    return unmodifiableList(list);
   }
 
   /**

@@ -6,7 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.tck;
 
-import static org.mockito.Mockito.mock;
+import static org.mule.metadata.api.builder.BaseTypeBuilder.create;
+import static org.mule.metadata.api.model.MetadataFormat.JAVA;
 import static org.mule.runtime.api.meta.Category.COMMUNITY;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
@@ -52,8 +53,8 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
   public static final String VERSION = "1.0";
   public static final String STATIC_RESOURCE_OPERATION_NAME = "staticResource";
   public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
-  public static final ObjectType COMPLEX_TYPE = mock(ObjectType.class);
-  public static final ObjectType ANOTHER_COMPLEX_TYPE = mock(ObjectType.class);
+  public static final ObjectType COMPLEX_TYPE = create(JAVA).objectType().id("COMPLEX_TYPE").build();
+  public static final ObjectType ANOTHER_COMPLEX_TYPE = create(JAVA).objectType().id("ANOTHER_COMPLEX_TYPE").build();
 
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 

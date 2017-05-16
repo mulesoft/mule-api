@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
+import static java.util.Comparator.comparing;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,31 +25,30 @@ import java.util.Set;
  */
 final class SubDeclarationsContainer {
 
-  // TODO: they should all be sets, but these entire piece is going to be re done from scratch in MULE-10634 so screw it
   private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
+  private final Set<SourceDeclaration> messageSources = new LinkedHashSet<>();
   private final List<ConnectionProviderDeclaration> connectionProviders = new LinkedList<>();
-  private final List<SourceDeclaration> messageSources = new LinkedList<>();
 
   /**
    * @return an unmodifiable {@link List} with
    * the available {@link OperationDeclaration}s
    */
   public List<OperationDeclaration> getOperations() {
-    return unmodifiableList(new ArrayList<>(operations));
+    return alphaSorted(operations);
   }
 
   /**
    * @return an unmodifiable {@link List} with the available {@link ConnectionProviderDeclaration}s
    */
   public List<ConnectionProviderDeclaration> getConnectionProviders() {
-    return unmodifiableList(connectionProviders);
+    return alphaSorted(connectionProviders);
   }
 
   /**
    * @return an unmodifiable {@link List} with the available {@link SourceDeclaration}s
    */
   public List<SourceDeclaration> getMessageSources() {
-    return unmodifiableList(messageSources);
+    return alphaSorted(messageSources);
   }
 
   /**
@@ -89,5 +91,11 @@ final class SubDeclarationsContainer {
     }
 
     messageSources.add(sourceDeclaration);
+  }
+
+  private <T extends NamedDeclaration> List<T> alphaSorted(Collection<T> collection) {
+    ArrayList<T> list = new ArrayList<>(collection);
+    sort(list, comparing(NamedDeclaration::getName));
+    return unmodifiableList(list);
   }
 }

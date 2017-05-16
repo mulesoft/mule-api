@@ -11,8 +11,8 @@ import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -27,7 +27,7 @@ import java.util.Set;
  */
 public abstract class BaseDeclaration<T extends BaseDeclaration> implements DescribedObject {
 
-  private final Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new HashMap<>();
+  private final Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new LinkedHashMap<>();
   private String description = "";
   private DisplayModel displayModel;
 
@@ -42,7 +42,7 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
    * @return a {@link Set} with the current model properties. Might be empty but will never by {@code null}
    */
   public Set<ModelProperty> getModelProperties() {
-    return unmodifiableSet(new HashSet<>(modelProperties.values()));
+    return unmodifiableSet(new LinkedHashSet<>(modelProperties.values()));
   }
 
   /**
