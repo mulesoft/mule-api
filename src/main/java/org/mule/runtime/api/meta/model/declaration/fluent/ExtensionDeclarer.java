@@ -274,7 +274,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
 
   private boolean isTypeRegistrable(ObjectType objectType) {
     String typeId = getTypeId(objectType).orElse(null);
-    return typeId == null || UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith);
+    return typeId != null && !typeId.trim().isEmpty() && UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith);
   }
 
   /**

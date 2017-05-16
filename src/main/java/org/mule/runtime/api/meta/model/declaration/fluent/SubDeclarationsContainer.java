@@ -7,12 +7,13 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Collections.unmodifiableList;
+import static java.util.Comparator.comparing;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Utility class which groups operations, connection providers and sources together,
@@ -22,10 +23,9 @@ import java.util.Set;
  */
 final class SubDeclarationsContainer {
 
-  // TODO: they should all be sets, but these entire piece is going to be re done from scratch in MULE-10634 so screw it
-  private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
+  private final Set<OperationDeclaration> operations = new TreeSet<>(comparing(NamedDeclaration::getName));
+  private final Set<SourceDeclaration> messageSources = new TreeSet<>(comparing(NamedDeclaration::getName));
   private final List<ConnectionProviderDeclaration> connectionProviders = new LinkedList<>();
-  private final List<SourceDeclaration> messageSources = new LinkedList<>();
 
   /**
    * @return an unmodifiable {@link List} with
@@ -46,7 +46,7 @@ final class SubDeclarationsContainer {
    * @return an unmodifiable {@link List} with the available {@link SourceDeclaration}s
    */
   public List<SourceDeclaration> getMessageSources() {
-    return unmodifiableList(messageSources);
+    return unmodifiableList(new ArrayList<>(messageSources));
   }
 
   /**

@@ -6,12 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Comparator.comparing;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * A declaration object for a {@link ConfigurationModel}. It contains raw, unvalidated
@@ -24,7 +25,7 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
     WithOperationsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
-  private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
+  private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
 
 
   /**
