@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Comparator.comparing;
@@ -72,7 +73,9 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return an unmodifiable list. May be empty but will never be {@code null}
    */
   public List<ConfigurationDeclaration> getConfigurations() {
-    return unmodifiableList(new ArrayList<>(configurations));
+    ArrayList<ConfigurationDeclaration> list = new ArrayList<>(configurations);
+    sort(list, comparing(NamedDeclaration::getName));
+    return unmodifiableList(list);
   }
 
   /**

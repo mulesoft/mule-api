@@ -6,14 +6,16 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Comparator.comparing;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Utility class which groups operations, connection providers and sources together,
@@ -23,8 +25,8 @@ import java.util.TreeSet;
  */
 final class SubDeclarationsContainer {
 
-  private final Set<OperationDeclaration> operations = new TreeSet<>(comparing(NamedDeclaration::getName));
-  private final Set<SourceDeclaration> messageSources = new TreeSet<>(comparing(NamedDeclaration::getName));
+  private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
+  private final Set<SourceDeclaration> messageSources = new LinkedHashSet<>();
   private final List<ConnectionProviderDeclaration> connectionProviders = new LinkedList<>();
 
   /**
@@ -32,21 +34,21 @@ final class SubDeclarationsContainer {
    * the available {@link OperationDeclaration}s
    */
   public List<OperationDeclaration> getOperations() {
-    return unmodifiableList(new ArrayList<>(operations));
+    return alphaSorted(operations);
   }
 
   /**
    * @return an unmodifiable {@link List} with the available {@link ConnectionProviderDeclaration}s
    */
   public List<ConnectionProviderDeclaration> getConnectionProviders() {
-    return unmodifiableList(connectionProviders);
+    return alphaSorted(connectionProviders);
   }
 
   /**
    * @return an unmodifiable {@link List} with the available {@link SourceDeclaration}s
    */
   public List<SourceDeclaration> getMessageSources() {
-    return unmodifiableList(new ArrayList<>(messageSources));
+    return alphaSorted(messageSources);
   }
 
   /**
@@ -89,5 +91,11 @@ final class SubDeclarationsContainer {
     }
 
     messageSources.add(sourceDeclaration);
+  }
+
+  private <T extends NamedDeclaration> List<T> alphaSorted(Collection<T> collection) {
+    ArrayList<T> list = new ArrayList<>(collection);
+    sort(list, comparing(NamedDeclaration::getName));
+    return unmodifiableList(list);
   }
 }
