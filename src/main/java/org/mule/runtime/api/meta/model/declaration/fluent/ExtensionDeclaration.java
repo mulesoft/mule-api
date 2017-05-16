@@ -74,7 +74,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   public List<ConfigurationDeclaration> getConfigurations() {
     ArrayList<ConfigurationDeclaration> list = new ArrayList<>(configurations);
-    sort(list, comparing(NamedDeclaration::getName));
+    sort(list, comparing(c -> c.getName()));
     return unmodifiableList(list);
   }
 
