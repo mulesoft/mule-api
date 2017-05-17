@@ -110,7 +110,6 @@
         <muleModuleMavenPluginVersion>1.0-SNAPSHOT</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
         <gsonVersion>2.6.2</gsonVersion>
-        <guavaVersion>18.0</guavaVersion>
         <commonsIoVersion>2.4</commonsIoVersion>
         <mockitoVersion>1.9.5</mockitoVersion>
         <junitVersion>4.11</junitVersion>
@@ -145,11 +144,6 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gsonVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guavaVersion}</version>
         </dependency>
 
         <!-- test dependencies -->

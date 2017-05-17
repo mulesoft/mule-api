@@ -20,9 +20,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
 
-import com.google.common.collect.Table;
-import com.google.common.collect.TreeBasedTable;
-
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -40,32 +38,60 @@ import java.util.Set;
 public final class DefaultTypeCatalog implements TypeCatalog {
 
   private List<SubTypesMappingContainer> mappings = new LinkedList<>();
-  private Table<String, String, ObjectType> types = TreeBasedTable.create();
+
+  // Map<ExtensionName, Map<TypeId, ObjectType>
+  private Map<String, Map<String, ObjectType>> types = new LinkedHashMap<>();
+
+  // Map<TypeId, ExtensionName>
+  private Map<String, String> extensionTypesInvertedIndex = new LinkedHashMap<>();
 
 
   public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
     extensions.forEach(e -> {
       mappings.add(new SubTypesMappingContainer(e.getSubTypes()));
-      e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> types.put(e.getName(), id, t)));
+
+      e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> {
+        if (types.containsKey(e.getName())) {
+          types.get(e.getName()).put(id, t);
+        } else {
+          Map<String, ObjectType> extensionTypesMap = new LinkedHashMap<>();
+          extensionTypesMap.put(id, t);
+          types.put(e.getName(), extensionTypesMap);
+        }
+        extensionTypesInvertedIndex.put(id, e.getName());
+      }));
     });
   }
 
   @Override
   public Optional<ObjectType> getType(String typeId) {
-    return types.column(typeId).values().stream().findFirst();
+    String extensionName = extensionTypesInvertedIndex.get(typeId);
+    if (extensionName == null) {
+      return Optional.empty();
+    }
+    return Optional.ofNullable(types.get(extensionName).get(typeId));
   }
 
   @Override
   public Collection<ObjectType> getTypes() {
-    return unmodifiableCollection(types.values());
+    List<ObjectType> values = new ArrayList<>();
+    for (Map<String, ObjectType> extensionTypeMap : types.values()) {
+      extensionTypeMap.values().forEach(values::add);
+    }
+    return unmodifiableCollection(values);
   }
 
+  @Override
   public Collection<ObjectType> getExtensionTypes(String extensionName) {
-    return unmodifiableCollection(types.row(extensionName).values());
+    if (types.containsKey(extensionName)) {
+      return unmodifiableCollection(types.get(extensionName).values());
+    }
+    return emptyList();
   }
 
-  public Optional<String> getExtension(String typeId) {
-    return types.column(typeId).keySet().stream().findFirst();
+  @Override
+  public Optional<String> getDeclaringExtension(String typeId) {
+    return Optional.ofNullable(extensionTypesInvertedIndex.get(typeId));
   }
 
   @Override

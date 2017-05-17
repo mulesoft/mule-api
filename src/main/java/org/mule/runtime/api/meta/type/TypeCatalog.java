@@ -101,6 +101,6 @@ public interface TypeCatalog {
   /**
    * @return an {@link Optional} with the extension name that contributed with this given type
    */
-  Optional<String> getExtension(String typeId);
+  Optional<String> getDeclaringExtension(String typeId);
 
 }
