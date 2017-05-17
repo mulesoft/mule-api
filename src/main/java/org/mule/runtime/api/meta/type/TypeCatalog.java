@@ -93,4 +93,14 @@ public interface TypeCatalog {
    */
   boolean containsBaseType(ObjectType type);
 
+  /**
+   * @return a {@link Collection} with all the types declared by the extension with name {@code extensionName}
+   */
+  Collection<ObjectType> getExtensionTypes(String extensionName);
+
+  /**
+   * @return an {@link Optional} with the extension name that contributed with this given type
+   */
+  Optional<String> getExtension(String typeId);
+
 }

@@ -9,7 +9,6 @@ package org.mule.runtime.internal.meta.type;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableList;
-import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -20,6 +19,9 @@ import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
+
+import com.google.common.collect.Table;
+import com.google.common.collect.TreeBasedTable;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -38,23 +40,32 @@ import java.util.Set;
 public final class DefaultTypeCatalog implements TypeCatalog {
 
   private List<SubTypesMappingContainer> mappings = new LinkedList<>();
-  private Map<String, ObjectType> types = new LinkedHashMap<>();
+  private Table<String, String, ObjectType> types = TreeBasedTable.create();
+
 
   public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
     extensions.forEach(e -> {
       mappings.add(new SubTypesMappingContainer(e.getSubTypes()));
-      e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> types.put(id, t)));
+      e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> types.put(e.getName(), id, t)));
     });
   }
 
   @Override
   public Optional<ObjectType> getType(String typeId) {
-    return ofNullable(types.get(typeId));
+    return types.column(typeId).values().stream().findFirst();
   }
 
   @Override
   public Collection<ObjectType> getTypes() {
     return unmodifiableCollection(types.values());
+  }
+
+  public Collection<ObjectType> getExtensionTypes(String extensionName) {
+    return unmodifiableCollection(types.row(extensionName).values());
+  }
+
+  public Optional<String> getExtension(String typeId) {
+    return types.column(typeId).keySet().stream().findFirst();
   }
 
   @Override
