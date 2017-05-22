@@ -44,10 +44,10 @@ public interface InterceptionAction {
 
 
   /**
-   * Interrupts the current interception chain, skipping the next {@link ProcessorInterceptor interceptors} in the chain and the
-   * intercepted component.
-   * It throws a MessagingException with the provided cause.
-   * The error type is resolved by common mechanisms.
+   * Interrupts the current interception chain, not running the next {@link ProcessorInterceptor interceptors} in the chain and
+   * the intercepted component.
+   * <p>
+   * It throws a MessagingException with the provided cause. The error type is resolved by common mechanisms.
    * <p>
    * If called for a <b>router</b> component, the whole route (and all the components contained in it) will be skipped.
    * <p>
@@ -60,10 +60,10 @@ public interface InterceptionAction {
   CompletableFuture<InterceptionEvent> fail(Throwable cause);
 
   /**
-   * Interrupts the current interception chain, skipping the next {@link ProcessorInterceptor interceptors} in the chain and the
-   * intercepted component.
-   * It throws a MessagingException with RuntimeException.
-   * The error type is the one provided.
+   * Interrupts the current interception chain, not running the next {@link ProcessorInterceptor interceptors} in the chain and
+   * the intercepted component.
+   * <p>
+   * It throws a MessagingException with RuntimeException. The error type is the one provided.
    * <p>
    * If called for a <b>router</b> component, the whole route (and all the components contained in it) will be skipped.
    * <p>

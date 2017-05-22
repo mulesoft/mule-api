@@ -9,7 +9,7 @@ package org.mule.runtime.api.interception;
 /**
  * Default exception thrown when a fail without cause is being called in an interceptionAction.
  *
- * @since 4.0
+ * @since 1.0
  */
 public class InterceptionException extends RuntimeException {
 
