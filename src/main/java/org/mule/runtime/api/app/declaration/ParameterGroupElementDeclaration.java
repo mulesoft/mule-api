@@ -7,17 +7,14 @@
 package org.mule.runtime.api.app.declaration;
 
 import static java.lang.Integer.parseInt;
-import static java.util.Collections.unmodifiableList;
 import static java.util.Optional.empty;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.mule.runtime.api.component.location.Location.PARAMETERS;
 import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -25,41 +22,40 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public abstract class ParameterizedElementDeclaration extends EnrichableElementDeclaration
+public final class ParameterGroupElementDeclaration extends EnrichableElementDeclaration
     implements ElementDeclarationContainer {
 
-  private Map<String, ParameterGroupElementDeclaration> groups = new LinkedHashMap<>();
+  private List<ParameterElementDeclaration> parameters = new LinkedList<>();
 
-  public ParameterizedElementDeclaration() {}
+  public ParameterGroupElementDeclaration() {}
 
-  /**
-   * @return the {@link ParameterElementDeclaration group} with given {@code name}
-   * or {@link Optional#empty()} if none is found.
-   */
-  public Optional<ParameterGroupElementDeclaration> getParameterGroup(String name) {
-    return Optional.ofNullable(groups.get(name));
+  public ParameterGroupElementDeclaration(String name) {
+    setName(name);
   }
 
   /**
-   * @return the {@link List} of {@link ParameterElementDeclaration groups} associated with
+   * @return the {@link List} of {@link ParameterElementDeclaration parameters} associated with
    * {@code this} 
    */
-  public List<ParameterGroupElementDeclaration> getParameterGroups() {
-    return unmodifiableList(new ArrayList<>(groups.values()));
+  public List<ParameterElementDeclaration> getParameters() {
+    return parameters;
   }
 
   /**
-   * Adds a {@link ParameterGroupElementDeclaration group} to {@code this} parametrized element declaration
-   *
-   * @param group the {@link ParameterGroupElementDeclaration} to associate to {@code this} element declaration
+   * @return the {@link ParameterElementDeclaration parameters} associated with the given {@code name}
+   * or {@link Optional#empty()} otherwise
    */
-  public void addParameterGroup(ParameterGroupElementDeclaration group) {
-    group.setDeclaringExtension(this.declaringExtension);
-    if (groups.containsKey(group.getName())) {
-      groups.get(group.getName()).getParameters().addAll(group.getParameters());
-    } else {
-      this.groups.put(group.getName(), group);
-    }
+  public Optional<ParameterElementDeclaration> getParameter(String name) {
+    return parameters.stream().filter(p -> p.getName().equals(name)).findFirst();
+  }
+
+  /**
+   * Adds a {@link ParameterElementDeclaration parameter} to {@code this} parametrized element declaration
+   *
+   * @param parameter the {@link ParameterElementDeclaration} to associate to {@code this} element declaration
+   */
+  public void addParameter(ParameterElementDeclaration parameter) {
+    this.parameters.add(parameter);
   }
 
   /**
@@ -78,16 +74,23 @@ public abstract class ParameterizedElementDeclaration extends EnrichableElementD
 
     if (isParameterLocation(parts)) {
       String identifier = parts.get(1);
-      if (isNumeric(identifier) && parseInt(identifier) < groups.size()) {
-        return Optional.of((T) groups.get(parseInt(identifier)));
+      if (isNumeric(identifier) && parseInt(identifier) < parameters.size()) {
+        return Optional.of((T) parameters.get(parseInt(identifier)));
       } else {
-        return (Optional<T>) groups.values().stream()
-            .flatMap(g -> g.getParameters().stream())
-            .filter(p -> p.getName().equals(identifier)).findFirst();
+        return (Optional<T>) parameters.stream().filter(p -> p.getName().equals(identifier)).findFirst();
       }
     }
 
     return empty();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setDeclaringExtension(String declaringExtension) {
+    super.setDeclaringExtension(declaringExtension);
+    parameters.forEach(p -> p.setDeclaringExtension(declaringExtension));
   }
 
   private boolean isParameterLocation(List<String> parts) {
@@ -100,18 +103,18 @@ public abstract class ParameterizedElementDeclaration extends EnrichableElementD
       return true;
     }
 
-    if (!(o instanceof ParameterizedElementDeclaration) || !super.equals(o)) {
+    if (!(o instanceof ParameterGroupElementDeclaration) || !super.equals(o)) {
       return false;
     }
 
-    ParameterizedElementDeclaration that = (ParameterizedElementDeclaration) o;
-    return groups.equals(that.groups);
+    ParameterGroupElementDeclaration that = (ParameterGroupElementDeclaration) o;
+    return parameters.equals(that.parameters);
   }
 
   @Override
   public int hashCode() {
     int result = super.hashCode();
-    result = 31 * result + groups.hashCode();
+    result = 31 * result + parameters.hashCode();
     return result;
   }
 }

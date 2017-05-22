@@ -7,11 +7,11 @@
 package org.mule.runtime.internal.app.declaration.serialization;
 
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
+import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationTypeAdapterFactory;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterDeclarationTypeAdapter;
+import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterGroupElementDeclarationTypeAdapter;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
 
 import com.google.gson.Gson;
@@ -54,7 +54,7 @@ public class DefaultArtifactDeclarationJsonSerializer implements ArtifactDeclara
     GsonBuilder gsonBuilder = new GsonBuilder()
         .registerTypeAdapterFactory(new ElementDeclarationTypeAdapterFactory())
         .registerTypeAdapter(ParameterValue.class, new ParameterValueTypeAdapter())
-        .registerTypeAdapter(ParameterElementDeclaration.class, new ParameterDeclarationTypeAdapter());
+        .registerTypeAdapter(ParameterGroupElementDeclaration.class, new ParameterGroupElementDeclarationTypeAdapter());
 
     if (prettyPrint) {
       gsonBuilder.setPrettyPrinting();

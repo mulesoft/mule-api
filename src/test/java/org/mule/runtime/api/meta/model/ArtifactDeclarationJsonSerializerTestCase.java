@@ -13,6 +13,8 @@ import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newArt
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newFlow;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newListValue;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newObjectValue;
+import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
+import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.CONNECTION;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
@@ -39,7 +41,6 @@ public class ArtifactDeclarationJsonSerializerTestCase {
         .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
 
     String json = ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration);
-
     assertThat(json, json.trim(), is(equalTo(expected.trim())));
   }
 
@@ -57,159 +58,230 @@ public class ArtifactDeclarationJsonSerializerTestCase {
     ElementDeclarer http = ElementDeclarer.forExtension("HTTP");
     ElementDeclarer sockets = ElementDeclarer.forExtension("Sockets");
     ElementDeclarer core = ElementDeclarer.forExtension("Mule Core");
+    ElementDeclarer wsc = ElementDeclarer.forExtension("Web Service Consumer");
 
     return newArtifact()
-        .withGlobalElement(db.newGlobalParameter("query")
-            .withRefName("selectQuery")
-            .withValue(newObjectValue()
-                .ofType("org.mule.extension.db.api.param.QueryDefinition")
-                .withParameter("sql", "select * from PLANET where name = :name")
-                .withParameter("inputParameters", "#[mel:['name' : payload]]")
-                .build())
-            .getDeclaration())
         .withGlobalElement(db.newConfiguration("config")
             .withRefName("dbConfig")
-            .withConnection(db.newConnection("derby-connection")
-                .withParameter("poolingProfile", newObjectValue()
-                    .withParameter("maxPoolSize", "10")
-                    .build())
-                .withParameter("connectionProperties", newObjectValue()
-                    .withParameter("first", "propertyOne")
-                    .withParameter("second", "propertyTwo")
-                    .build())
-                .withParameter("database", "target/muleEmbeddedDB")
-                .withParameter("create", "true")
-                .getDeclaration())
-            .getDeclaration())
-        .withGlobalElement(http.newConfiguration("listener-config")
-            .withRefName("httpListener")
-            .withParameter("basePath", "/")
-            .withConnection(http.newConnection("listener-connection")
-                .withParameter("disableValidation", "true")
-                .withParameter("tlsContext", newObjectValue()
-                    .withParameter("key-store", newObjectValue()
-                        .withParameter("path", "ssltest-keystore.jks")
-                        .withParameter("password", "changeit")
-                        .withParameter("keyPassword", "changeit")
+            .withConnection(db
+                .newConnection("derby-connection")
+                .withParameterGroup(newParameterGroup(CONNECTION)
+                    .withParameter("poolingProfile", newObjectValue()
+                        .withParameter("maxPoolSize", "10")
                         .build())
-                    .build())
-                .withParameter("host", "localhost")
-                .withParameter("port", "49019")
-                .withParameter("protocol", "HTTPS")
+                    .withParameter("connectionProperties", newObjectValue()
+                        .withParameter("first", "propertyOne")
+                        .withParameter("second", "propertyTwo")
+                        .build())
+                    .withParameter("database", "target/muleEmbeddedDB")
+                    .withParameter("create", "true")
+                    .getDeclaration())
                 .getDeclaration())
             .getDeclaration())
-        .withGlobalElement(http.newConfiguration("request-config")
-            .withRefName("httpRequester")
-            .withConnection(http.newConnection("request-connection")
-                .withParameter("host", "localhost")
-                .withParameter("port", "49020")
-                .withParameter("authentication",
-                               newObjectValue()
-                                   .ofType(
-                                           "org.mule.extension.http.api.request.authentication.BasicAuthentication")
-                                   .withParameter("username", "user")
-                                   .withParameter("password", "pass")
-                                   .build())
-                .withParameter("clientSocketProperties",
-                               newObjectValue()
-                                   .withParameter("connectionTimeout", "1000")
-                                   .withParameter("keepAlive", "true")
-                                   .withParameter("receiveBufferSize", "1024")
-                                   .withParameter("sendBufferSize", "1024")
-                                   .withParameter("clientTimeout", "1000")
-                                   .withParameter("linger", "1000")
-                                   .build())
-                .getDeclaration())
-            .getDeclaration())
-        .withGlobalElement(newFlow()
-            .withRefName("testFlow")
-            .withParameter("initialState", "stopped")
-            .withComponent(http.newSource("listener")
-                .withConfig("httpListener")
-                .withParameter("path", "testBuilder")
-                .withParameter("redeliveryPolicy",
-                               newObjectValue()
-                                   .withParameter("maxRedeliveryCount", "2")
-                                   .withParameter("secureHash", "true")
-                                   .build())
-                .withParameter("reconnectionStrategy",
-                               newObjectValue()
-                                   .ofType("reconnect")
-                                   .withParameter("blocking", "true")
-                                   .withParameter("count", "1")
-                                   .withParameter("frequency", "0")
-                                   .build())
-                .withParameter("response",
-                               newObjectValue()
-                                   .withParameter("headers", "#[{{'content-type' : 'text/plain'}}]")
-                                   .build())
-                .getDeclaration())
-            .withComponent(core.newRouter("choice")
-                .withRoute(core.newRoute("when")
-                    .withParameter("expression", "#[true]")
-                    .withComponent(db.newOperation("bulkInsert")
-                        .withParameter("sql",
-                                       "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
-                        .withParameter("parameterTypes",
-                                       newListValue()
-                                           .withValue(newObjectValue()
-                                               .withParameter("key", "name")
-                                               .withParameter("type", "VARCHAR")
-                                               .build())
-                                           .withValue(newObjectValue()
-                                               .withParameter("key", "position")
-                                               .withParameter("type", "INTEGER")
+        .withGlobalElement(
+                           http.newConfiguration("listener-config")
+                               .withRefName("httpListener")
+                               .withParameterGroup(newParameterGroup()
+                                   .withParameter("basePath", "/")
+                                   .getDeclaration())
+                               .withConnection(http.newConnection("listener-connection")
+                                   .withParameterGroup(newParameterGroup(CONNECTION)
+                                       .withParameter("disableValidation", "true")
+                                       .withParameter("tlsContext", newObjectValue()
+                                           .withParameter("key-store", newObjectValue()
+                                               .withParameter("path", "ssltest-keystore.jks")
+                                               .withParameter("password", "changeit")
+                                               .withParameter("keyPassword", "changeit")
                                                .build())
                                            .build())
-                        .getDeclaration())
-                    .getDeclaration())
-                .withRoute(core.newRoute("otherwise")
-                    .withComponent(core.newOperation("logger")
-                        .withParameter("message", "#[payload]")
-                        .getDeclaration())
-                    .getDeclaration())
-                .getDeclaration())
-            .withComponent(db.newOperation("bulkInsert")
-                .withParameter("sql", "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
-                .withParameter("parameterTypes",
-                               newListValue()
-                                   .withValue(newObjectValue()
-                                       .withParameter("key", "name")
-                                       .withParameter("type", "VARCHAR").build())
-                                   .withValue(newObjectValue()
-                                       .withParameter("key", "position")
-                                       .withParameter("type", "INTEGER").build())
-                                   .build())
-                .getDeclaration())
-            .withComponent(http.newOperation("request")
-                .withConfig("httpRequester")
-                .withParameter("path", "/nested")
-                .withParameter("method", "POST")
-                .getDeclaration())
-            .withComponent(db.newOperation("insert")
-                .withConfig("dbConfig")
-                .withParameter("sql",
-                               "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)")
-                .withParameter("parameterTypes",
-                               newListValue()
-                                   .withValue(newObjectValue()
-                                       .withParameter("key", "description")
-                                       .withParameter("type", "CLOB").build())
-                                   .build())
-                .withParameter("inputParameters", "#[{{'description' : payload}}]")
-                .getDeclaration())
-            .withComponent(sockets.newOperation("sendAndReceive")
-                .withParameter("target", "myVar")
-                .withParameter("streamingStrategy",
-                               newObjectValue()
-                                   .ofType("repeatable-in-memory-stream")
-                                   .withParameter("bufferSizeIncrement", "8")
-                                   .withParameter("bufferUnit", "KB")
-                                   .withParameter("initialBufferSize", "51")
-                                   .withParameter("maxInMemorySize", "1000")
-                                   .build())
-                .getDeclaration())
-            .getDeclaration())
+                                       .getDeclaration())
+                                   .withParameterGroup(newParameterGroup()
+                                       .withParameter("host", "localhost")
+                                       .withParameter("port", "49019")
+                                       .withParameter("protocol", "HTTPS")
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .getDeclaration())
+        .withGlobalElement(
+                           http.newConfiguration("request-config")
+                               .withRefName("httpRequester")
+                               .withConnection(http.newConnection("request-connection")
+                                   .withParameterGroup(newParameterGroup()
+                                       .withParameter("host", "localhost")
+                                       .withParameter("port", "49020")
+                                       .withParameter("authentication",
+                                                      newObjectValue()
+                                                          .ofType(
+                                                                  "org.mule.extension.http.api.request.authentication.BasicAuthentication")
+                                                          .withParameter("username", "user")
+                                                          .withParameter("password", "pass")
+                                                          .build())
+                                       .getDeclaration())
+                                   .withParameterGroup(newParameterGroup(CONNECTION)
+                                       .withParameter("clientSocketProperties",
+                                                      newObjectValue()
+                                                          .withParameter("connectionTimeout", "1000")
+                                                          .withParameter("keepAlive", "true")
+                                                          .withParameter("receiveBufferSize", "1024")
+                                                          .withParameter("sendBufferSize", "1024")
+                                                          .withParameter("clientTimeout", "1000")
+                                                          .withParameter("linger", "1000")
+                                                          .build())
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .getDeclaration())
+        .withGlobalElement(
+                           newFlow().withRefName("testFlow")
+                               .withParameterGroup(newParameterGroup()
+                                   .withParameter("initialState", "stopped")
+                                   .getDeclaration())
+                               .withComponent(http.newSource("listener")
+                                   .withConfig("httpListener")
+                                   .withParameterGroup(newParameterGroup()
+                                       .withParameter("path", "testBuilder")
+                                       .withParameter("redeliveryPolicy",
+                                                      newObjectValue()
+                                                          .withParameter("maxRedeliveryCount", "2")
+                                                          .withParameter("useSecureHash", "true")
+                                                          .build())
+                                       .getDeclaration())
+                                   .withParameterGroup(newParameterGroup(CONNECTION)
+                                       .withParameter("reconnectionStrategy",
+                                                      newObjectValue()
+                                                          .ofType("reconnect")
+                                                          .withParameter("blocking", "true")
+                                                          .withParameter("count", "1")
+                                                          .withParameter("frequency", "0")
+                                                          .build())
+                                       .getDeclaration())
+                                   .withParameterGroup(newParameterGroup("Response")
+                                       .withParameter("headers", "<![CDATA[#[{{'content-type' : 'text/plain'}}]]]>")
+                                       .withParameter("body",
+                                                      "<![CDATA[#[\n"
+                                                          + "                    %dw 1.0\n"
+                                                          + "                    %output application/json\n"
+                                                          + "                    %input payload application/xml\n"
+                                                          + "                    %var baseUrl=\"http://sample.cloudhub.io/api/v1.0/\"\n"
+                                                          + "                    ---\n"
+                                                          + "                    using (pageSize = payload.getItemsResponse.PageInfo.pageSize) {\n"
+                                                          + "                         links: [\n"
+                                                          + "                            {\n"
+                                                          + "                                href: fullUrl,\n"
+                                                          + "                                rel : \"self\"\n"
+                                                          + "                            }\n"
+                                                          + "                         ],\n"
+                                                          + "                         collection: {\n"
+                                                          + "                            size: pageSize,\n"
+                                                          + "                            items: payload.getItemsResponse.*Item map {\n"
+                                                          + "                                id: $.id,\n"
+                                                          + "                                type: $.type,\n"
+                                                          + "                                name: $.name\n"
+                                                          + "                            }\n"
+                                                          + "                         }\n"
+                                                          + "                    }\n"
+                                                          + "                ]]>")
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .withComponent(core.newRouter("choice")
+                                   .withRoute(core.newRoute("when")
+                                       .withParameterGroup(newParameterGroup()
+                                           .withParameter("expression", "#[true]")
+                                           .getDeclaration())
+                                       .withComponent(db.newOperation("bulkInsert")
+                                           .withParameterGroup(newParameterGroup("Query")
+                                               .withParameter("sql",
+                                                              "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
+                                               .withParameter("parameterTypes",
+                                                              newListValue()
+                                                                  .withValue(newObjectValue()
+                                                                      .withParameter("key", "name")
+                                                                      .withParameter("type", "VARCHAR")
+                                                                      .build())
+                                                                  .withValue(newObjectValue()
+                                                                      .withParameter("key", "position")
+                                                                      .withParameter("type", "INTEGER")
+                                                                      .build())
+                                                                  .build())
+                                               .getDeclaration())
+                                           .getDeclaration())
+                                       .getDeclaration())
+                                   .withRoute(core.newRoute("otherwise")
+                                       .withComponent(core.newScope("foreach")
+                                           .withParameterGroup(newParameterGroup()
+                                               .withParameter("collection", "#[myCollection]")
+                                               .getDeclaration())
+                                           .withComponent(core.newOperation("logger")
+                                               .withParameterGroup(newParameterGroup()
+                                                   .withParameter("message", "#[payload]")
+                                                   .getDeclaration())
+                                               .getDeclaration())
+                                           .getDeclaration())
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .withComponent(db.newOperation("bulkInsert")
+                                   .withParameterGroup(newParameterGroup("Query")
+                                       .withParameter("sql", "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
+                                       .withParameter("parameterTypes",
+                                                      newListValue()
+                                                          .withValue(newObjectValue()
+                                                              .withParameter("key", "name")
+                                                              .withParameter("type", "VARCHAR").build())
+                                                          .withValue(newObjectValue()
+                                                              .withParameter("key", "position")
+                                                              .withParameter("type", "INTEGER").build())
+                                                          .build())
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .withComponent(http.newOperation("request")
+                                   .withConfig("httpRequester")
+                                   .withParameterGroup(newParameterGroup("URI Settings")
+                                       .withParameter("path", "/nested")
+                                       .getDeclaration())
+                                   .withParameterGroup(newParameterGroup()
+                                       .withParameter("method", "POST")
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .withComponent(db.newOperation("insert")
+                                   .withConfig("dbConfig")
+                                   .withParameterGroup(newParameterGroup("Query")
+                                       .withParameter("sql",
+                                                      "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)")
+                                       .withParameter("parameterTypes",
+                                                      newListValue()
+                                                          .withValue(newObjectValue()
+                                                              .withParameter("key", "description")
+                                                              .withParameter("type", "CLOB").build())
+                                                          .build())
+                                       .withParameter("inputParameters", "#[{{'description' : payload}}]")
+                                       .getDeclaration())
+                                   .getDeclaration())
+                               .withComponent(
+                                              sockets.newOperation("sendAndReceive")
+                                                  .withParameterGroup(newParameterGroup()
+                                                      .withParameter("target", "myVar")
+                                                      .withParameter("streamingStrategy",
+                                                                     newObjectValue()
+                                                                         .ofType("repeatable-in-memory-stream")
+                                                                         .withParameter("bufferSizeIncrement", "8")
+                                                                         .withParameter("bufferUnit", "KB")
+                                                                         .withParameter("initialBufferSize", "51")
+                                                                         .withParameter("maxBufferSize", "1000")
+                                                                         .build())
+                                                      .getDeclaration())
+                                                  .getDeclaration())
+                               .withComponent(
+                                              wsc.newOperation("consume")
+                                                  .withParameterGroup(newParameterGroup()
+                                                      .withParameter("operation", "GetCitiesByCountry")
+                                                      .getDeclaration())
+                                                  .withParameterGroup(newParameterGroup("Message")
+                                                      .withParameter("attachments", "#[{}]")
+                                                      .withParameter("headers",
+                                                                     "#[{\"headers\": {con#headerIn: \"Header In Value\",con#headerInOut: \"Header In Out Value\"}]")
+                                                      .withParameter("body", "#[payload]")
+                                                      .getDeclaration())
+                                                  .getDeclaration())
+                               .getDeclaration())
         .getDeclaration();
   }
 }

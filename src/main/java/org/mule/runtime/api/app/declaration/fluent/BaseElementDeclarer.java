@@ -14,7 +14,7 @@ import org.mule.runtime.api.app.declaration.ElementDeclaration;
  *
  * @since 1.0
  */
-class BaseElementDeclarer<T> {
+public abstract class BaseElementDeclarer<T> {
 
   protected T declaration;
 

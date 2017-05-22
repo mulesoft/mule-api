@@ -6,7 +6,9 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
-import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.PARAMETERS;
+import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.cdata;
+import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.plain;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FIELDS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.TYPE_ID;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
@@ -32,6 +34,9 @@ import java.util.List;
  */
 public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
 
+  private static final String TEXT = "text";
+  private static final String IS_CDATA = "isCData";
+
   @Override
   public void write(JsonWriter jsonWriter, ParameterValue parameter) throws IOException {
     if (parameter != null) {
@@ -53,7 +58,7 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
 
       @Override
       public void visitSimpleValue(ParameterSimpleValue text) {
-        writeSimpleValue(text.toString(), jsonWriter);
+        writeSimpleValue(text, jsonWriter);
       }
 
       @Override
@@ -84,7 +89,7 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
   }
 
   private void writeObjectParameters(ParameterObjectValue objectValue, JsonWriter object) throws IOException {
-    object.name(PARAMETERS).beginObject();
+    object.name(FIELDS).beginObject();
     objectValue.getParameters().forEach((name, v) -> {
       try {
         JsonWriter field = object.name(name);
@@ -107,42 +112,53 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
     }
   }
 
-  private void writeSimpleValue(String value, JsonWriter jsonWriter) {
+  private void writeSimpleValue(ParameterSimpleValue value, JsonWriter jsonWriter) {
     try {
-      jsonWriter.value(value);
+      jsonWriter.beginObject();
+      jsonWriter.name(TEXT).value(value.getValue());
+      jsonWriter.name(IS_CDATA).value(value.isCData());
+      jsonWriter.endObject();
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
   private ParameterValue getParameterValue(JsonElement jsonElement) {
-    if (jsonElement.isJsonPrimitive()) {
-      String value = jsonElement.getAsString();
-      return ParameterSimpleValue.of(value);
-    }
-
     if (jsonElement.isJsonArray()) {
-      JsonArray array = jsonElement.getAsJsonArray();
-      ParameterListValue.Builder listBuilder = ParameterListValue.builder();
-      array.forEach(e -> listBuilder.withValue(getParameterValue(e)));
-      return listBuilder.build();
+      return loadListValue(jsonElement);
     }
 
     if (jsonElement.isJsonObject()) {
       JsonObject object = jsonElement.getAsJsonObject();
-      ParameterObjectValue.Builder objectBuilder = ParameterObjectValue.builder();
-      JsonElement id = object.get(TYPE_ID);
-      if (id != null) {
-        objectBuilder.ofType(id.getAsString());
+      JsonElement text = object.get(TEXT);
+      if (text != null && object.get(IS_CDATA) != null) {
+        return object.get(IS_CDATA).getAsBoolean() ? cdata(text.getAsString()) : plain(text.getAsString());
+      } else {
+        return loadObjectValue(object);
       }
-
-      JsonElement parameters = object.get(PARAMETERS);
-      if (parameters != null) {
-        parameters.getAsJsonObject().entrySet()
-            .forEach(field -> objectBuilder.withParameter(field.getKey(), getParameterValue(field.getValue())));
-      }
-      return objectBuilder.build();
     }
     return null;
+  }
+
+  private ParameterValue loadListValue(JsonElement jsonElement) {
+    JsonArray array = jsonElement.getAsJsonArray();
+    ParameterListValue.Builder listBuilder = ParameterListValue.builder();
+    array.forEach(e -> listBuilder.withValue(getParameterValue(e)));
+    return listBuilder.build();
+  }
+
+  private ParameterValue loadObjectValue(JsonObject object) {
+    ParameterObjectValue.Builder objectBuilder = ParameterObjectValue.builder();
+    JsonElement id = object.get(TYPE_ID);
+    if (id != null) {
+      objectBuilder.ofType(id.getAsString());
+    }
+
+    JsonElement parameters = object.get(FIELDS);
+    if (parameters != null) {
+      parameters.getAsJsonObject().entrySet()
+          .forEach(field -> objectBuilder.withParameter(field.getKey(), getParameterValue(field.getValue())));
+    }
+    return objectBuilder.build();
   }
 }

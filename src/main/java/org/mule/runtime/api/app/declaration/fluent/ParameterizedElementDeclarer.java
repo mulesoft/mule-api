@@ -6,8 +6,7 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterValue;
+import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 
 /**
@@ -16,37 +15,20 @@ import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
  * @since 1.0
  */
 public abstract class ParameterizedElementDeclarer<D extends ParameterizedElementDeclarer, T extends ParameterizedElementDeclaration>
-    extends EnrichableElementDeclarer<D, T>
-    implements ParameterizedBuilder<String, ParameterValue, D> {
+    extends EnrichableElementDeclarer<D, T> {
 
   ParameterizedElementDeclarer(T declaration) {
     super(declaration);
   }
 
   /**
-   * Adds a {@link ParameterElementDeclaration parameter} to {@code this} parametrized element declaration
+   * Adds a {@link ParameterGroupElementDeclaration parameter group} to {@code this} {@link ParameterizedElementDeclaration}
    *
-   * @param name  the {@code name} of the {@link ParameterElementDeclaration}
-   * @param value the {@code value} of the {@link ParameterElementDeclaration} to associate to {@code this} element declaration
+   * @param group  the {@link ParameterGroupElementDeclarer group} to add in {@code this} {@link ParameterizedElementDeclaration}
    * @return {@code this} declarer
    */
-  public D withParameter(String name, String value) {
-    return withParameter(name, ParameterSimpleValue.of(value));
-  }
-
-  /**
-   * Adds a {@link ParameterElementDeclaration parameter} to {@code this} parametrized element declaration
-   *
-   * @param name  the {@code name} of the {@link ParameterElementDeclaration}
-   * @param value the {@link ParameterValue} of the {@link ParameterElementDeclaration}
-   *              to associate to {@code this} element declaration
-   * @return {@code this} declarer
-   */
-  public D withParameter(String name, ParameterValue value) {
-    ParameterElementDeclaration parameter = new ParameterElementDeclaration();
-    parameter.setName(name);
-    parameter.setValue(value);
-    declaration.addParameter(parameter);
+  public D withParameterGroup(ParameterGroupElementDeclaration group) {
+    declaration.addParameterGroup(group);
     return (D) this;
   }
 
