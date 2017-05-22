@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.forExtension;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newFlow;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.COMPONENTS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONFIG;
@@ -13,25 +14,26 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONNECTION_FIELD;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.DECLARING_EXTENSION;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FLOW;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.GLOBAL_PARAMETER;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.KIND;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.NAME;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.REF_NAME;
-import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.GLOBAL_PARAMETER;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.VALUE;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareEnrichableElement;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareParameterizedElement;
-import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateEnrichableObject;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateCustomizableObject;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateIdentifiableObject;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateMetadataAwareObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
-import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
-import org.mule.runtime.api.app.declaration.EnrichableElementDeclaration;
 import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.ConfigurationElementDeclarer;
+import org.mule.runtime.api.app.declaration.fluent.ConnectionElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.FlowElementDeclarer;
@@ -70,7 +72,9 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
     out.beginObject();
     out.name(REF_NAME).value(value.getRefName());
     if (value instanceof TopLevelParameterDeclaration) {
-      populateEnrichableObject(delegate, out, (EnrichableElementDeclaration) value, kind);
+      populateIdentifiableObject(out, value, kind);
+      populateCustomizableObject(delegate, out, value);
+      populateMetadataAwareObject(delegate, out, value);
       out.name(VALUE).jsonValue(delegate.toJson(((TopLevelParameterDeclaration) value).getValue(), ParameterValue.class));
 
     } else {
@@ -94,12 +98,12 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
       JsonElement elementKind = jsonObject.get(KIND);
       JsonElement elementExtension = jsonObject.get(DECLARING_EXTENSION);
       if (elementKind != null && elementExtension != null && elementName != null) {
-        EnrichableElementDeclarer declarer = getDeclarer(ElementDeclarer.forExtension(elementExtension.getAsString()),
+        EnrichableElementDeclarer declarer = getDeclarer(forExtension(elementExtension.getAsString()),
                                                          elementKind.getAsString(),
                                                          elementName.getAsString());
 
         if (elementKind.getAsString().equals(GLOBAL_PARAMETER)) {
-          declareParameter(jsonObject, declarer);
+          declareGlobalParameter(jsonObject, declarer);
         } else {
           declareParameterizedElement(delegate, jsonObject, (ParameterizedElementDeclarer) declarer);
           if (elementKind.getAsString().equals(CONFIG)) {
@@ -116,7 +120,7 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
     return null;
   }
 
-  private void declareParameter(JsonObject jsonObject, EnrichableElementDeclarer declarer) {
+  private void declareGlobalParameter(JsonObject jsonObject, EnrichableElementDeclarer declarer) {
     declareEnrichableElement(delegate, jsonObject, declarer);
     ((TopLevelParameterDeclarer) declarer).withRefName(jsonObject.get(REF_NAME).getAsString());
     ((TopLevelParameterDeclarer) declarer).withValue(delegate.fromJson(jsonObject.get(VALUE), ParameterObjectValue.class));
@@ -129,10 +133,20 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
         .withComponent(delegate.fromJson(c, ComponentElementDeclaration.class)));
   }
 
-  private void declareConfiguration(JsonObject jsonObject, ConfigurationElementDeclarer declarer) {
-    declarer.withRefName(jsonObject.get(REF_NAME).getAsString());
-    declarer.withConnection(
-                            delegate.fromJson(jsonObject.get(CONNECTION_FIELD), ConnectionElementDeclaration.class));
+  private void declareConfiguration(JsonObject configObject, ConfigurationElementDeclarer configDeclarer) {
+    configDeclarer.withRefName(configObject.get(REF_NAME).getAsString());
+
+    JsonElement connectionElement = configObject.get(CONNECTION_FIELD);
+    if (connectionElement != null && connectionElement.isJsonObject()) {
+      JsonObject connectionObject = connectionElement.getAsJsonObject();
+      JsonElement elementName = connectionObject.get(NAME);
+      JsonElement elementExtension = connectionObject.get(DECLARING_EXTENSION);
+      ConnectionElementDeclarer connectionDeclarer = forExtension(elementExtension.getAsString())
+          .newConnection(elementName.getAsString());
+      declareParameterizedElement(delegate, connectionObject, connectionDeclarer);
+
+      configDeclarer.withConnection(connectionDeclarer.getDeclaration());
+    }
   }
 
   private <T extends EnrichableElementDeclarer> T getDeclarer(ElementDeclarer declarer, String kind, String name) {

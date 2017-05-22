@@ -6,17 +6,20 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
+import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
 import org.mule.runtime.api.app.declaration.ElementDeclaration;
 import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
+import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 import org.mule.runtime.api.app.declaration.SourceElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
+import org.mule.runtime.api.meta.model.ExtensionModel;
 
 /**
  * Base declarer for a given {@link ElementDeclaration}
@@ -31,6 +34,56 @@ public final class ElementDeclarer {
     this.extension = extension;
   }
 
+  /**
+   * @return a new instance of an {@link ArtifactDeclarer}
+   */
+  public static ArtifactDeclarer newArtifact() {
+    return new ArtifactDeclarer(new ArtifactDeclaration());
+  }
+
+  /**
+   * @return a new instance of an {@link FlowElementDeclarer}
+   */
+  public static FlowElementDeclarer newFlow() {
+    return new FlowElementDeclarer(new FlowElementDeclaration());
+  }
+
+  /**
+   * @return a builder for a {@link ParameterObjectValue}
+   */
+  public static ParameterObjectValue.Builder newObjectValue() {
+    return ParameterObjectValue.builder();
+  }
+
+  /**
+   * @return a builder for a {@link ParameterListValue}
+   */
+  public static ParameterListValue.Builder newListValue() {
+    return ParameterListValue.builder();
+  }
+
+  /**
+   * @return a new instance of a {@link ParameterGroupElementDeclarer}
+   */
+  public static ParameterGroupElementDeclarer newParameterGroup() {
+    return newParameterGroup(DEFAULT_GROUP_NAME);
+  }
+
+  /**
+   * @return a new instance of a {@link ParameterGroupElementDeclarer} for a group with the given {@code name}
+   */
+  public static ParameterGroupElementDeclarer newParameterGroup(String name) {
+    return new ParameterGroupElementDeclarer(new ParameterGroupElementDeclaration(name));
+  }
+
+  /**
+   * Creates a new instance of a {@link ElementDeclarer declarer} associated to the {@link ExtensionModel Extension}
+   * with the given {@code name}
+   * @param name the {@link ExtensionModel#getName() name} of the {@link ExtensionModel Extension} to be associated
+   *             to the {@link ElementDeclaration declarations} created with {@code this} {@link ElementDeclarer}
+   * @return Creates a new instance of a {@link ElementDeclarer declarer} associated to the referenced
+   * {@link ExtensionModel Extension}
+   */
   public static ElementDeclarer forExtension(String name) {
     return new ElementDeclarer(name);
   }
@@ -65,22 +118,6 @@ public final class ElementDeclarer {
 
   public RouteElementDeclarer newRoute(String name) {
     return new RouteElementDeclarer(new RouteElementDeclaration(extension, name));
-  }
-
-  public static ArtifactDeclarer newArtifact() {
-    return new ArtifactDeclarer(new ArtifactDeclaration());
-  }
-
-  public static FlowElementDeclarer newFlow() {
-    return new FlowElementDeclarer(new FlowElementDeclaration());
-  }
-
-  public static ParameterObjectValue.Builder newObjectValue() {
-    return ParameterObjectValue.builder();
-  }
-
-  public static ParameterListValue.Builder newListValue() {
-    return ParameterListValue.builder();
   }
 
 }

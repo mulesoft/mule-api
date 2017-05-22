@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
-import org.mule.runtime.api.app.declaration.EnrichableElementDeclaration;
+import org.mule.runtime.api.app.declaration.CustomizableElementDeclaration;
+import org.mule.runtime.api.app.declaration.IdentifiableElementDeclaration;
+import org.mule.runtime.api.app.declaration.MetadataPropertiesAwareElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
+import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue;
@@ -45,10 +48,12 @@ final class ElementDeclarationSerializationUtils {
   static final String NAME = "name";
   static final String KIND = "kind";
   static final String VALUE = "value";
+  static final String FIELDS = "fields";
   static final String ROUTES = "routes";
   static final String TYPE_ID = "typeId";
   static final String REF_NAME = "refName";
   static final String CONFIG_REF = "configRef";
+  static final String PARAMETER_GROUPS = "parameterGroups";
   static final String PARAMETERS = "parameters";
   static final String COMPONENTS = "components";
   static final String CONNECTION_FIELD = "connection";
@@ -56,26 +61,37 @@ final class ElementDeclarationSerializationUtils {
   static final String DECLARING_EXTENSION = "declaringExtension";
   static final String CUSTOM_PARAMETERS = "customConfigurationParameters";
 
-  static JsonWriter populateEnrichableObject(Gson delegate, JsonWriter out,
-                                             EnrichableElementDeclaration declaration, String kind)
+  static void populateIdentifiableObject(JsonWriter out, IdentifiableElementDeclaration declaration, String kind)
       throws IOException {
-
     out.name(NAME).value(declaration.getName());
     out.name(DECLARING_EXTENSION).value(declaration.getDeclaringExtension());
     out.name(KIND).value(kind);
-    out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomConfigurationParameters()));
-    out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getMetadataProperties()));
+  }
 
-    return out;
+  static void populateCustomizableObject(Gson delegate, JsonWriter out, CustomizableElementDeclaration declaration)
+      throws IOException {
+    out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomConfigurationParameters()));
+  }
+
+  static void populateMetadataAwareObject(Gson delegate, JsonWriter out,
+                                          MetadataPropertiesAwareElementDeclaration declaration)
+      throws IOException {
+    out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getMetadataProperties()));
   }
 
   static JsonWriter populateParameterizedObject(Gson delegate, JsonWriter out,
                                                 ParameterizedElementDeclaration declaration, String kind)
       throws IOException {
 
-    populateEnrichableObject(delegate, out, declaration, kind);
-    out.name(PARAMETERS).jsonValue(delegate.toJson(declaration.getParameters()));
+    populateIdentifiableObject(out, declaration, kind);
+    populateCustomizableObject(delegate, out, declaration);
+    populateMetadataAwareObject(delegate, out, declaration);
 
+    out.name(PARAMETER_GROUPS).beginArray();
+    for (ParameterGroupElementDeclaration group : declaration.getParameterGroups()) {
+      out.jsonValue(delegate.toJson(group));
+    }
+    out.endArray();
     return out;
   }
 
@@ -84,11 +100,9 @@ final class ElementDeclarationSerializationUtils {
                                                                                 ParameterizedElementDeclarer declarer) {
     declareEnrichableElement(delegate, jsonObject, declarer);
 
-    JsonArray parameters = jsonObject.get(PARAMETERS).getAsJsonArray();
-    parameters.forEach(p -> {
-      ParameterElementDeclaration param = delegate.fromJson(p, ParameterElementDeclaration.class);
-      declarer.withParameter(param.getName(), param.getValue());
-    });
+    JsonArray groups = jsonObject.get(PARAMETER_GROUPS).getAsJsonArray();
+    groups.forEach(group -> ((ParameterizedElementDeclaration) declarer.getDeclaration())
+        .addParameterGroup(delegate.fromJson(group, ParameterGroupElementDeclaration.class)));
 
     return (T) declarer;
   }

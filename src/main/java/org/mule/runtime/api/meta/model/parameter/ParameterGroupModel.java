@@ -13,6 +13,7 @@ import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A group is a logical way to display one or more parameters together. If no group is specified then
@@ -58,6 +59,15 @@ public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDi
    * @return a {@link List} of {@link ExclusiveParametersModel}
    */
   List<ExclusiveParametersModel> getExclusiveParametersModels();
+
+  /**
+   * Returns the {@link ParameterModel parameterModel} with the given {@code name}
+   * if one is present.
+   *
+   * @return the {@link ParameterModel parameterModel} with the given {@code name}
+   * or {@link Optional#empty()} if none is found.
+   */
+  Optional<ParameterModel> getParameter(String name);
 
   /**
    * @return {@code true} if this group should be represented inline

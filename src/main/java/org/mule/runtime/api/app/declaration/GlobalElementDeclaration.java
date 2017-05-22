@@ -14,7 +14,8 @@ package org.mule.runtime.api.app.declaration;
  * @since 1.0
  */
 public interface GlobalElementDeclaration
-    extends EnrichableDeclaration, ReferableElementDeclaration, IdentifiableElementDeclaration, ElementDeclarationContainer {
+    extends CustomizableElementDeclaration, ReferableElementDeclaration, IdentifiableElementDeclaration,
+    ElementDeclarationContainer, MetadataPropertiesAwareElementDeclaration {
 
   /**
    * Dispatches to the method with prefix "visit" with the specific value type as argument.

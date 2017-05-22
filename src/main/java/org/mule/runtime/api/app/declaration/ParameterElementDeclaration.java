@@ -6,19 +6,30 @@
  */
 package org.mule.runtime.api.app.declaration;
 
+import static java.util.Collections.unmodifiableMap;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * A programmatic descriptor of a {@link ParameterModel} configuration.
  *
  * @since 1.0
  */
-public final class ParameterElementDeclaration extends ElementDeclaration implements NamedElementDeclaration {
+public final class ParameterElementDeclaration extends ElementDeclaration implements MetadataPropertiesAwareElementDeclaration {
 
   private ParameterValue value;
+  private Map<String, Serializable> properties = new HashMap<>();
 
   public ParameterElementDeclaration() {}
+
+  public ParameterElementDeclaration(String name) {
+    setName(name);
+  }
 
   /**
    * Associates a {@link ParameterValue} as part of {@code this} parameter configuration declaration
@@ -57,4 +68,24 @@ public final class ParameterElementDeclaration extends ElementDeclaration implem
     return result;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Optional<Serializable> getMetadataProperty(String name) {
+    return Optional.ofNullable(properties.get(name));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Map<String, Serializable> getMetadataProperties() {
+    return unmodifiableMap(properties);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void addMetadataProperty(String name, Serializable value) {
+    properties.put(name, value);
+  }
 }
