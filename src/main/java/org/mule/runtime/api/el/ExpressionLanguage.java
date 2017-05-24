@@ -61,13 +61,12 @@ public interface ExpressionLanguage {
   ValidationResult validate(String expression);
 
   /**
-   * Splits using the specified expression and group it with the batch size. If batch size is less or equals to zero then no batching is done .
-   * The expression should return a collection of elements.
+   * Splits using the specified expression. The expression should return a collection of elements or an object.
+   * In case of the object it will iterate through the entries
    *
    * @param expression the expression to be used to split
-   * @param bachSize  the batching size.
    * @param context    the current dynamic binding context to consider
    * @return an iterator with the elements that were split
    */
-  Iterator<TypedValue<?>> split(String expression, int bachSize, BindingContext context);
+  Iterator<TypedValue<?>> split(String expression, BindingContext context);
 }
