@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.Stereotype;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,6 +27,7 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
   private boolean requiresConnection = false;
   private boolean supportsStreaming = false;
   private Set<Stereotype> stereotypes = new HashSet<>();
+  private Set<ErrorModel> errorModels = new HashSet<>();
 
   /**
    * {@inheritDoc}
@@ -80,5 +82,13 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
 
   public void addStereotype(Stereotype stereotype) {
     stereotypes.add(stereotype);
+  }
+
+  public void addError(ErrorModel errorModel) {
+    errorModels.add(errorModel);
+  }
+
+  public Set<ErrorModel> getErrorModels() {
+    return errorModels;
   }
 }

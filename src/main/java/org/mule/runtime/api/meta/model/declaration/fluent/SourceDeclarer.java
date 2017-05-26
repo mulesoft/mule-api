@@ -59,4 +59,11 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
 
     return new SourceCallbackDeclarer(callback);
   }
+
+  public ParameterizedDeclarer onTerminate() {
+    SourceCallbackDeclaration callback = new SourceCallbackDeclaration("onTerminate");
+    declaration.setTerminateCallback(callback);
+
+    return new SourceCallbackDeclarer(callback);
+  }
 }

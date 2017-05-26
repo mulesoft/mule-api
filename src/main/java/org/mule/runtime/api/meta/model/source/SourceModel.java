@@ -56,6 +56,8 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
    */
   Optional<SourceCallbackModel> getErrorCallback();
 
+  Optional<SourceCallbackModel> getTerminateCallback();
+
   /**
    * Returns all the {@link ParameterModel} on all groups, including
    * the ones declared on the success and error callbacks.
