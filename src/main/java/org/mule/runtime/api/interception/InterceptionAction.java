@@ -47,7 +47,7 @@ public interface InterceptionAction {
    * Interrupts the current interception chain, not running the next {@link ProcessorInterceptor interceptors} in the chain and
    * the intercepted component.
    * <p>
-   * It throws a MessagingException with the provided cause. The error type is resolved by common mechanisms.
+   * A future is returned which in turn it will fail with an exception wrapping the provided cause
    * <p>
    * If called for a <b>router</b> component, the whole route (and all the components contained in it) will be skipped.
    * <p>
@@ -63,7 +63,7 @@ public interface InterceptionAction {
    * Interrupts the current interception chain, not running the next {@link ProcessorInterceptor interceptors} in the chain and
    * the intercepted component.
    * <p>
-   * It throws a MessagingException with RuntimeException. The error type is the one provided.
+   * A future is returned which in turn it will fail with an exception that maps the provided error type.
    * <p>
    * If called for a <b>router</b> component, the whole route (and all the components contained in it) will be skipped.
    * <p>
