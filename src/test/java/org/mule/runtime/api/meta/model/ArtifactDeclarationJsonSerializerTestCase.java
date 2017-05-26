@@ -159,8 +159,8 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                                        .withParameter("body",
                                                       "<![CDATA[#[\n"
                                                           + "                    %dw 1.0\n"
-                                                          + "                    %output application/json\n"
-                                                          + "                    %input payload application/xml\n"
+                                                          + "                    output application/json\n"
+                                                          + "                    input payload application/xml\n"
                                                           + "                    %var baseUrl=\"http://sample.cloudhub.io/api/v1.0/\"\n"
                                                           + "                    ---\n"
                                                           + "                    using (pageSize = payload.getItemsResponse.PageInfo.pageSize) {\n"
