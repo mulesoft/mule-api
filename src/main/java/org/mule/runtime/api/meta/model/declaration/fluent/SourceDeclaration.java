@@ -97,15 +97,15 @@ public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
   }
 
   /**
-   * @return the error {@link SourceCallbackDeclaration} if provided.
+   * @return the terminate {@link SourceCallbackDeclaration} if provided.
    */
   public Optional<SourceCallbackDeclaration> getTerminateCallback() {
     return ofNullable(terminateCallback);
   }
 
   /**
-   * Sets the error {@link SourceCallbackDeclaration}
-   * @param errorCallback a callback declaration or {@code null}
+   * Sets the terminate {@link SourceCallbackDeclaration}
+   * @param terminateCallback a callback declaration or {@code null}
    */
   public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
     this.terminateCallback = terminateCallback;
