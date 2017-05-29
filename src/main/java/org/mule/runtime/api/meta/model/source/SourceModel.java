@@ -56,8 +56,6 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
    */
   Optional<SourceCallbackModel> getErrorCallback();
 
-  Optional<SourceCallbackModel> getTerminateCallback();
-
   /**
    * Optionally returns a {@link SourceCallbackModel} which will listen
    * for the results of every generated message.
