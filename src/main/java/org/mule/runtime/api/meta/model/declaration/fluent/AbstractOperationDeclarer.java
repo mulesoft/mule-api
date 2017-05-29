@@ -33,7 +33,7 @@ abstract class AbstractOperationDeclarer<T extends AbstractOperationDeclarer, D 
    * @return {@code this} declarer
    */
   public T withError(ErrorModel error) {
-    declaration.addError(error);
+    declaration.addErrorModel(error);
     return (T) this;
   }
 

@@ -84,7 +84,7 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
     stereotypes.add(stereotype);
   }
 
-  public void addError(ErrorModel errorModel) {
+  public void addErrorModel(ErrorModel errorModel) {
     errorModels.add(errorModel);
   }
 

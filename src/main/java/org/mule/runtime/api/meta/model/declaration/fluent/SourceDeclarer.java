@@ -35,7 +35,7 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
   }
 
   /**
-   * Allows to declare a callback which will listen to all the successfully results of the dispatched
+   * Allows to declare a callback which will listen to all the successful results of the dispatched
    * Source messages to the flow.
    *
    * @return a {@link SourceCallbackDeclarer}
