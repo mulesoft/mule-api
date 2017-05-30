@@ -119,6 +119,7 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <commonsLangVersion>3.4</commonsLangVersion>
+        <license.maven.plugin.version>2.11</license.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -231,9 +232,46 @@
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>${license.maven.plugin.version}</version>
                     <configuration>
-                        <header>LICENSE_HEADER.txt</header>
+                        <skip>${skipVerifications}</skip>
+                        <header>com/mycila/maven/plugin/license/templates/CPAL.txt</header>
+                        <properties>
+                            <owner>MuleSoft, Inc</owner>
+                            <project.url>http://www.mulesoft.com</project.url>
+                        </properties>
+                        <excludes>
+                            <exclude>target/**</exclude>
+                            <exclude>**/.gitignore</exclude>
+                            <exclude>**/*.txt</exclude>
+                            <exclude>**/*.groovy</exclude>
+                            <exclude>**/*.sh</exclude>
+                            <exclude>**/*.bat</exclude>
+                            <exclude>**/*.ftl</exclude>
+                            <exclude>**/*.xml</exclude>
+                            <exclude>**/*.properties</exclude>
+                            <exclude>**/*.sample</exclude>
+                            <exclude>**/*.md</exclude>
+                            <exclude>**/*.xsl</exclude>
+                            <exclude>**/*.html</exclude>
+                            <exclude>**/*.css</exclude>
+                            <exclude>**/build-number.txt</exclude>
+
+                            <exclude>**/org/springframework/**</exclude>
+                            <exclude>**/HttpTransactionContext.java</exclude>
+                            <exclude>**/HttpConnection.java</exclude>
+                            <exclude>**/BndMojo.java</exclude>
+                            <exclude>**/BobberArchetype.java</exclude>
+                            <exclude>**/BobberArchetypeMojo.java</exclude>
+                            <exclude>**/DummySSLServerSocketFactory.java</exclude>
+                            <exclude>**/MultipartConfiguration.java</exclude>
+
+                            <exclude>**/ParamReader.java</exclude>
+                            <exclude>**/Part.java</exclude>
+                            <exclude>**/XMLStreamReaderToContentHandler.java</exclude>
+                            <exclude>**/__artifactId__IBean.java</exclude>
+                            <exclude>**/__artifactId__IBeanTestCase.java</exclude>
+                        </excludes>
                         <includes>
                             <include>**/*.java</include>
                         </includes>
