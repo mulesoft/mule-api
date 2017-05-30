@@ -256,21 +256,6 @@
                             <exclude>**/*.html</exclude>
                             <exclude>**/*.css</exclude>
                             <exclude>**/build-number.txt</exclude>
-
-                            <exclude>**/org/springframework/**</exclude>
-                            <exclude>**/HttpTransactionContext.java</exclude>
-                            <exclude>**/HttpConnection.java</exclude>
-                            <exclude>**/BndMojo.java</exclude>
-                            <exclude>**/BobberArchetype.java</exclude>
-                            <exclude>**/BobberArchetypeMojo.java</exclude>
-                            <exclude>**/DummySSLServerSocketFactory.java</exclude>
-                            <exclude>**/MultipartConfiguration.java</exclude>
-
-                            <exclude>**/ParamReader.java</exclude>
-                            <exclude>**/Part.java</exclude>
-                            <exclude>**/XMLStreamReaderToContentHandler.java</exclude>
-                            <exclude>**/__artifactId__IBean.java</exclude>
-                            <exclude>**/__artifactId__IBeanTestCase.java</exclude>
                         </excludes>
                         <includes>
                             <include>**/*.java</include>
