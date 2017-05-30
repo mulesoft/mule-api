@@ -32,7 +32,7 @@ abstract class AbstractOperationDeclarer<T extends AbstractOperationDeclarer, D 
    * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
    * @return {@code this} declarer
    */
-  public T withError(ErrorModel error) {
+  public T withErrorModel(ErrorModel error) {
     declaration.addErrorModel(error);
     return (T) this;
   }
