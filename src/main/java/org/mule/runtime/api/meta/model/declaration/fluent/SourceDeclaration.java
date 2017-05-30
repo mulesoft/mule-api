@@ -23,6 +23,7 @@ public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
   private boolean hasResponse = false;
   private SourceCallbackDeclaration successCallback = null;
   private SourceCallbackDeclaration errorCallback = null;
+  private SourceCallbackDeclaration terminateCallback = null;
 
   /**
    * {@inheritDoc}
@@ -93,5 +94,20 @@ public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
    */
   public void setErrorCallback(SourceCallbackDeclaration errorCallback) {
     this.errorCallback = errorCallback;
+  }
+
+  /**
+   * @return the terminate {@link SourceCallbackDeclaration} if provided.
+   */
+  public Optional<SourceCallbackDeclaration> getTerminateCallback() {
+    return ofNullable(terminateCallback);
+  }
+
+  /**
+   * Sets the terminate {@link SourceCallbackDeclaration}
+   * @param terminateCallback a callback declaration or {@code null}
+   */
+  public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
+    this.terminateCallback = terminateCallback;
   }
 }

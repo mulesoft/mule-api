@@ -49,12 +49,23 @@ public interface SourceModel extends ComponentModel, HasDisplayModel {
 
   /**
    * Optionally returns a {@link SourceCallbackModel} which will listen
-   * for erros thrown by the source owner each time it fails to process
+   * for errors thrown by the source owner each time it fails to process
    * any of the generated messages
    *
    * @return an {@link Optional} {@link SourceCallbackModel}
    */
   Optional<SourceCallbackModel> getErrorCallback();
+
+  /**
+   * Optionally returns a {@link SourceCallbackModel} which will listen
+   * for the results of every generated message.
+   * This callback will be called after the {@link #getErrorCallback()}
+   * and {@link #getSuccessCallback()} as the last step to validate the
+   * result of the flow processing.
+   *
+   * @return an {@link Optional} {@link SourceCallbackModel}
+   */
+  Optional<SourceCallbackModel> getTerminateCallback();
 
   /**
    * Returns all the {@link ParameterModel} on all groups, including

@@ -35,8 +35,8 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
   }
 
   /**
-   * Allows to declare a callback which will listen for the value produced
-   * by the source owner when each generated message is processed correctly
+   * Allows to declare a callback which will listen to all the successful results of the dispatched
+   * Source messages to the flow.
    *
    * @return a {@link SourceCallbackDeclarer}
    */
@@ -48,14 +48,28 @@ public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDecl
   }
 
   /**
-   * Allows to declare a callback which will listen for errors thrown by
-   * by the source owner when it fails to process any of the generated messages
+   * Allows to declare a callback which will listen for errors that occurred in the flow
+   * processing a Source generated message.
    *
    * @return a {@link SourceCallbackDeclarer}
    */
   public SourceCallbackDeclarer onError() {
     SourceCallbackDeclaration callback = new SourceCallbackDeclaration("onError");
     declaration.setErrorCallback(callback);
+
+    return new SourceCallbackDeclarer(callback);
+  }
+
+  /**
+   * Allows to declare a callback which will listen to all the results of the dispatched
+   * Source messages to the flow.
+   * This callback will be called after the {@link #onSuccess()} ()} and {@link #onError()} callbacks.
+   *
+   * @return a {@link SourceCallbackDeclarer}
+   */
+  public SourceCallbackDeclarer onTerminate() {
+    SourceCallbackDeclaration callback = new SourceCallbackDeclaration("onTerminate");
+    declaration.setTerminateCallback(callback);
 
     return new SourceCallbackDeclarer(callback);
   }
