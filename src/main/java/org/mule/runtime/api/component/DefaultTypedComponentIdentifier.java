@@ -73,4 +73,12 @@ class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Seria
     result = 31 * result + getType().hashCode();
     return result;
   }
+
+  @Override
+  public String toString() {
+    return "DefaultTypedComponentIdentifier{" +
+        "identifier=" + identifier +
+        ", type=" + type +
+        '}';
+  }
 }
