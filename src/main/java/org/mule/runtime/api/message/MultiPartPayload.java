@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Represents a payload of a {@link Message} composed of many different parts. Each parts is in itself a {@link Message}, and has
- * {@code attributes} specific to that parts (such as the headers of a single http part).
+ * {@code attributes} specific to those parts (such as the headers of a single HTTP part).
  * 
  * @since 1.0
  */
@@ -38,7 +38,7 @@ public interface MultiPartPayload {
   Message getPart(String partName);
 
   /**
-   * @return the contained parts by their ginven name.
+   * @return the contained parts by their given name.
    */
   Map<String, Message> getNamedParts();
 
