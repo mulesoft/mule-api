@@ -36,8 +36,6 @@ import java.util.Set;
  */
 public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
 
-  Set<String> RESERVED_NAMES = unmodifiableSet(new HashSet<>(singletonList("name")));
-
   /**
    * Whether or not this parameter is required. This method is exclusive with
    * {@link #getDefaultValue()} in the sense that a required parameter cannot have a default
