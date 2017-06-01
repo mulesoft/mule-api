@@ -117,4 +117,8 @@ public interface DslConstants {
    */
   String TLS_PREFIX = "tls";
 
+  /**
+   * The identifier name of the {@code transform} operation
+   */
+  String TRANSFORM_IDENTIFIER = "transform";
 }
