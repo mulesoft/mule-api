@@ -23,5 +23,5 @@ public interface HasDisplayModelDeclarer<T> {
    * @param displayModel a {@link DisplayModel}
    * @return {@code this} declarer
    */
-  T withDisplay(DisplayModel displayModel);
+  T withDisplayModel(DisplayModel displayModel);
 }

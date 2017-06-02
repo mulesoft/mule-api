@@ -127,7 +127,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    * {@inheritDoc}
    */
   @Override
-  public T withDisplay(DisplayModel displayModel) {
+  public T withDisplayModel(DisplayModel displayModel) {
     declaration.setDisplayModel(displayModel);
     return (T) this;
   }
