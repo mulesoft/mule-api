@@ -10,6 +10,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
@@ -20,7 +21,8 @@ import org.mule.runtime.api.meta.model.parameter.ParameterRole;
  * @since 1.0
  */
 public class ParameterDeclarer<T extends ParameterDeclarer>
-    implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>, HasDynamicType<ParameterDeclarer<T>> {
+    implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>,
+    HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>> {
 
   private final ParameterDeclaration declaration;
 
@@ -119,6 +121,15 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   public ParameterDeclarer<T> withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
     return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public T withDisplayModel(DisplayModel displayModel) {
+    declaration.setDisplayModel(displayModel);
+    return (T) this;
   }
 
   /**
