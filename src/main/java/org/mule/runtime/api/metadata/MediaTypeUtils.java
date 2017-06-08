@@ -7,9 +7,9 @@
 package org.mule.runtime.api.metadata;
 
 import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -34,7 +34,7 @@ public final class MediaTypeUtils {
                                                                                    "image/svg+xml",
                                                                                    "text/*")
       .map(MediaType::parse)
-      .collect(Collectors.toList());
+      .collect(toList());
 
 
   private MediaTypeUtils() {}
