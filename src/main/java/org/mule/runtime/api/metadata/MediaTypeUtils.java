@@ -6,9 +6,10 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.Collections.unmodifiableList;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -19,26 +20,41 @@ import java.util.stream.Stream;
  */
 public final class MediaTypeUtils {
 
-  public static final List<MediaType> STRING_REPRESENTABLE_MIME_TYPES = Stream.of(
-                                                                                  "application/json",
-                                                                                  "application/xml",
-                                                                                  "application/javascript",
-                                                                                  "application/rtf",
-                                                                                  "application/csv",
-                                                                                  "application/vnd.mozilla.xul+xml",
-                                                                                  "application/x-csh",
-                                                                                  "application/x-sh",
-                                                                                  "application/xhtml+xml",
-                                                                                  "image/svg+xml",
-                                                                                  "text/calendar",
-                                                                                  "text/css",
-                                                                                  "text/csv",
-                                                                                  "text/json",
-                                                                                  "text/html",
-                                                                                  "text/plain")
+  private static final String TEXT = "text";
+  private static final List<MediaType> STRING_REPRESENTABLE_MIME_TYPES = Stream.of(
+                                                                                   "application/json",
+                                                                                   "application/xml",
+                                                                                   "application/javascript",
+                                                                                   "application/rtf",
+                                                                                   "application/csv",
+                                                                                   "application/vnd.mozilla.xul+xml",
+                                                                                   "application/x-csh",
+                                                                                   "application/x-sh",
+                                                                                   "application/xhtml+xml",
+                                                                                   "image/svg+xml",
+                                                                                   "text/*")
       .map(MediaType::parse)
-      .collect(toList());
+      .collect(Collectors.toList());
 
 
   private MediaTypeUtils() {}
+
+  /**
+   * @return the {@link List} of {@link MediaType} that are considered as {@link String} representable
+   */
+  public static List<MediaType> getStringRepresentableMimeTypes() {
+    return unmodifiableList(STRING_REPRESENTABLE_MIME_TYPES);
+  }
+
+  /**
+   * Utility method which given a {@link MediaType} will verify if this one is {@link String} representable
+   *
+   * @param mediaType to verify
+   * @return boolean indicating whether the {@link MediaType} is String representable or not
+   */
+  public static boolean isStringRepresentable(MediaType mediaType) {
+    return mediaType.getPrimaryType().equals(TEXT) || STRING_REPRESENTABLE_MIME_TYPES
+        .stream()
+        .anyMatch(type -> type.matches(mediaType));
+  }
 }
