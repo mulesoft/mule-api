@@ -52,7 +52,7 @@ public final class MediaTypeUtils {
    * @param mediaType to verify
    * @return boolean indicating whether the {@link MediaType} is {@link String} representable or not
    */
-  private static boolean isStringRepresentable(MediaType mediaType) {
+  public static boolean isStringRepresentable(MediaType mediaType) {
     return mediaType.getPrimaryType().equals(TEXT) || STRING_REPRESENTABLE_MIME_TYPES
         .stream()
         .anyMatch(type -> type.matches(mediaType));
