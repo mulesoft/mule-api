@@ -7,9 +7,10 @@
 package org.mule.runtime.api.metadata;
 
 import static java.util.Collections.unmodifiableList;
+import static java.util.stream.Collectors.toList;
+import static org.mule.runtime.api.util.Preconditions.checkNotNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -34,7 +35,7 @@ public final class MediaTypeUtils {
                                                                                                     "image/svg+xml",
                                                                                                     "text/*")
       .map(MediaType::parse)
-      .collect(Collectors.toList()));
+      .collect(toList()));
 
 
   private MediaTypeUtils() {}
@@ -53,6 +54,7 @@ public final class MediaTypeUtils {
    * @return boolean indicating whether the {@link MediaType} is {@link String} representable or not
    */
   public static boolean isStringRepresentable(MediaType mediaType) {
+    checkNotNull(mediaType, "'mediaType' parameter can not be null");
     return mediaType.getPrimaryType().equals(TEXT) || STRING_REPRESENTABLE_MIME_TYPES
         .stream()
         .anyMatch(type -> type.matches(mediaType));
