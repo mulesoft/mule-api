@@ -6,11 +6,13 @@
  */
 package org.mule.runtime.api.exception;
 
+import static org.mule.runtime.api.exception.MuleException.isVerboseExceptions;
+
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * {@code MuleRuntimeException} Is the base runtime exception type for the Mule Server any other runtimes exceptions thrown
- * by Mule code will use or be based on this exception. Runtime exceptions in mule are only ever thrown where the method is not
+ * {@code MuleRuntimeException} Is the base runtime exception type for the Mule Server any other runtimes exceptions thrown by
+ * Mule code will use or be based on this exception. Runtime exceptions in mule are only ever thrown where the method is not
  * declared to throw an exception and the exception is serious.
  *
  * @since 1.0
@@ -26,7 +28,7 @@ public class MuleRuntimeException extends RuntimeException {
    * @param message the exception message
    */
   public MuleRuntimeException(I18nMessage message) {
-    super(message.getMessage());
+    this(message, null);
   }
 
   /**
@@ -34,13 +36,18 @@ public class MuleRuntimeException extends RuntimeException {
    * @param cause the exception that triggered this exception
    */
   public MuleRuntimeException(I18nMessage message, Throwable cause) {
-    super(message.getMessage(), cause);
+    this(message != null ? message.getMessage() : null, cause);
   }
 
   /**
    * @param cause the exception that triggered this exception
    */
   public MuleRuntimeException(Throwable cause) {
-    super(cause);
+    this(cause.toString(), cause);
   }
+
+  private MuleRuntimeException(String message, Throwable cause) {
+    super(message, cause, true, isVerboseExceptions());
+  }
+
 }

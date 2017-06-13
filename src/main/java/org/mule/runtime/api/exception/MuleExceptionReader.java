@@ -6,9 +6,10 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.util.Collections.emptyMap;
+
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
-import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -16,14 +17,17 @@ import java.util.Map;
  */
 final class MuleExceptionReader implements ExceptionReader {
 
+  @Override
   public String getMessage(Throwable t) {
     return t.getMessage();
   }
 
+  @Override
   public Throwable getCause(Throwable t) {
     return t.getCause();
   }
 
+  @Override
   public Class<?> getExceptionType() {
     return MuleException.class;
   }
@@ -33,8 +37,9 @@ final class MuleExceptionReader implements ExceptionReader {
    * 
    * @return a map of the non-stanard information stored on the exception
    */
-  public Map<?, ?> getInfo(Throwable t) {
-    return (t instanceof MuleException ? ((MuleException) t).getInfo() : Collections.EMPTY_MAP);
+  @Override
+  public Map<String, Object> getInfo(Throwable t) {
+    return (t instanceof MuleException ? ((MuleException) t).getInfo() : emptyMap());
   }
 
 }

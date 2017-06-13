@@ -26,6 +26,6 @@ public interface ExceptionReader {
    * @param t the exception to extract the information from
    * @return a map of the non-standard information stored on the exception
    */
-  Map<?, ?> getInfo(Throwable t);
+  Map<String, Object> getInfo(Throwable t);
 
 }

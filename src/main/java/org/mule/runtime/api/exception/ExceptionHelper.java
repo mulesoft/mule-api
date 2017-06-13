@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.System.lineSeparator;
+
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
 import java.lang.reflect.InvocationTargetException;
@@ -15,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * {@code ExceptionHelper} provides a number of helper functions that can be useful for dealing with Mule exceptions. This
- * class has 3 core functions -
+ * {@code ExceptionHelper} provides a number of helper functions that can be useful for dealing with Mule exceptions. This class
+ * has 3 core functions -
  * <p/>
  * 1. ErrorCode lookup. A corresponding Mule error code can be found using for a given Mule exception 2. Additional Error
  * information such as Java doc url for a given exception can be resolved using this class 3. Error code mappings can be looked up
@@ -31,8 +33,6 @@ public class ExceptionHelper {
   public static final String[] DEFAULT_STACKTRACE_FILTER =
       ("org.mule.runtime.core.processor.AbstractInterceptingMessageProcessor," + "org.mule.runtime.core.processor.chain")
           .split(",");
-
-  static final String LINE_SEPARATOR = System.getProperty("line.separator");
 
   private static final int EXCEPTION_THRESHOLD = 3;
   private static boolean verbose = true;
@@ -140,8 +140,8 @@ public class ExceptionHelper {
     return cause instanceof MuleException ? null : cause;
   }
 
-  public static Map getExceptionInfo(Throwable t) {
-    Map info = new HashMap();
+  public static Map<String, Object> getExceptionInfo(Throwable t) {
+    Map<String, Object> info = new HashMap<>();
     Throwable cause = t;
     while (cause != null) {
       info.putAll(getExceptionReader(cause).getInfo(cause));
@@ -177,7 +177,7 @@ public class ExceptionHelper {
 
     ExceptionReader rootMuleReader = getExceptionReader(rootMule);
     buf.append(rootMuleReader.getMessage(rootMule)).append(" (").append(rootMule.getClass().getName()).append(")")
-        .append(LINE_SEPARATOR);
+        .append(lineSeparator());
 
     if (verbose) {
       int processedElements = 0;
@@ -194,12 +194,12 @@ public class ExceptionHelper {
 
         buf.append("  ").append(stackTraceElement.getClassName()).append(".").append(stackTraceElement.getMethodName())
             .append("(").append(stackTraceElement.getFileName()).append(":").append(stackTraceElement.getLineNumber()).append(")")
-            .append(LINE_SEPARATOR);
+            .append(lineSeparator());
       }
 
       if (root.getStackTrace().length - processedElements > 0) {
         buf.append("  (").append(root.getStackTrace().length - processedElements).append(" more...)")
-            .append(LINE_SEPARATOR);
+            .append(lineSeparator());
       }
     }
 
