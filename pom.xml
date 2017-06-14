@@ -118,7 +118,7 @@
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <commonsLangVersion>3.4</commonsLangVersion>
+        <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
     </properties>
 
