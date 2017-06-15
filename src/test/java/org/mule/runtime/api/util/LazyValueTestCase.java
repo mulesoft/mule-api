@@ -31,9 +31,9 @@ public class LazyValueTestCase {
   @Test
   public void isInitialised() {
     lazy = new LazyValue<>(Object::new);
-    assertThat(lazy.isInitialised(), is(false));
+    assertThat(lazy.isComputed(), is(false));
     lazy.get();
-    assertThat(lazy.isInitialised(), is(true));
+    assertThat(lazy.isComputed(), is(true));
   }
 
   @Test(expected = IllegalArgumentException.class)
