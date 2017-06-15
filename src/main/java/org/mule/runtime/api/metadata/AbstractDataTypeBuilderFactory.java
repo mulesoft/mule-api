@@ -25,7 +25,7 @@ public abstract class AbstractDataTypeBuilderFactory {
     try {
       final AbstractDataTypeBuilderFactory factory = load(AbstractDataTypeBuilderFactory.class).iterator().next();
       LOGGER.debug(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
-                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
     } catch (Throwable t) {
