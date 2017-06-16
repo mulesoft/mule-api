@@ -16,16 +16,19 @@ import java.util.Map;
  */
 final class DefaultExceptionReader implements ExceptionReader {
 
-  private Map<?, ?> info = new HashMap<Object, Object>();
+  private Map<String, Object> info = new HashMap<>();
 
+  @Override
   public String getMessage(Throwable t) {
     return t.getMessage();
   }
 
+  @Override
   public Throwable getCause(Throwable t) {
     return t.getCause();
   }
 
+  @Override
   public Class<?> getExceptionType() {
     return Throwable.class;
   }
@@ -35,7 +38,8 @@ final class DefaultExceptionReader implements ExceptionReader {
    * 
    * @return a map of the non-stanard information stored on the exception
    */
-  public Map<?, ?> getInfo(Throwable t) {
+  @Override
+  public Map<String, Object> getInfo(Throwable t) {
     return info;
   }
 }

@@ -6,9 +6,10 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.util.Collections.emptyMap;
+
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,14 +23,17 @@ class NamingExceptionReader implements ExceptionReader {
    */
   protected static final String MISSING_NAME_DISPLAY_VALUE = "<none>";
 
+  @Override
   public String getMessage(Throwable t) {
     return (t instanceof NamingException ? ((NamingException) t).toString(true) : "<unknown>");
   }
 
+  @Override
   public Throwable getCause(Throwable t) {
     return (t instanceof NamingException ? ((NamingException) t).getCause() : null);
   }
 
+  @Override
   public Class<?> getExceptionType() {
     return NamingException.class;
   }
@@ -40,7 +44,8 @@ class NamingExceptionReader implements ExceptionReader {
    * @param t the exception to extract the information from
    * @return a map of the non-stanard information stored on the exception
    */
-  public Map<?, ?> getInfo(Throwable t) {
+  @Override
+  public Map<String, Object> getInfo(Throwable t) {
     if (t instanceof NamingException) {
       NamingException e = (NamingException) t;
 
@@ -51,7 +56,7 @@ class NamingExceptionReader implements ExceptionReader {
       info.put("Resolved Name", resolvedName == null ? MISSING_NAME_DISPLAY_VALUE : resolvedName.toString());
       return info;
     } else {
-      return Collections.EMPTY_MAP;
+      return emptyMap();
     }
   }
 }
