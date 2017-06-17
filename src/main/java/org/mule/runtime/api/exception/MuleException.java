@@ -52,6 +52,13 @@ public abstract class MuleException extends Exception {
   private I18nMessage i18nMessage;
 
   static {
+    refreshVerboseExceptions();
+  }
+
+  /**
+   * Reads the value of the {@code mule.verbose.exceptions} system property.
+   */
+  public static void refreshVerboseExceptions() {
     String p = System.getProperty(MULE_VERBOSE_EXCEPTIONS);
     if (p != null) {
       verboseExceptions = Boolean.parseBoolean(p);
