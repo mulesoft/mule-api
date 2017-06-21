@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -o nounset
-
 updatePropertiesVersion() {
   VERSION_TO_PROPERTY="$1"
   POM_PROPERTY_PATH="$2"
