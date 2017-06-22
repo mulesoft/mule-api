@@ -113,7 +113,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     if (previousValue == null || previousValue.isEmpty()) {
       return null;
     }
-    return previousValue.getFirst();
+    return previousValue.getLast();
   }
 
   /**
