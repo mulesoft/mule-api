@@ -29,6 +29,8 @@ import java.util.Set;
  *
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
+ *
+ * @since 1.0
  */
 public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
@@ -142,11 +144,11 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public void putAll(Map<? extends K, ? extends V> aMap) {
-    for (K key : aMap.keySet()) {
+    aMap.forEach((key, value) -> {
       LinkedList<V> values = new LinkedList<>();
-      values.add(aMap.get(key));
+      values.add(value);
       paramsMap.put(key, values);
-    }
+    });
   }
 
   @Override
@@ -161,19 +163,15 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public Collection<V> values() {
-    ArrayList<V> values = new ArrayList<>();
-    for (K key : paramsMap.keySet()) {
-      values.add(paramsMap.get(key).getLast());
-    }
+    List<V> values = new ArrayList<>();
+    paramsMap.forEach((key, value) -> values.add(value.getLast()));
     return values;
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    HashSet<Entry<K, V>> entries = new HashSet<>();
-    for (K key : paramsMap.keySet()) {
-      entries.add(new AbstractMap.SimpleEntry<>(key, paramsMap.get(key).getLast()));
-    }
+    Set<Entry<K, V>> entries = new HashSet<>();
+    paramsMap.forEach((key, value) -> entries.add(new AbstractMap.SimpleEntry<>(key, value.getLast())));
     return entries;
   }
 
@@ -185,11 +183,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    */
   public List<Entry<K, V>> entryList() {
     List<Entry<K, V>> entries = new LinkedList<>();
-    for (K key : paramsMap.keySet()) {
-      for (V value : paramsMap.get(key)) {
-        entries.add(new AbstractMap.SimpleEntry<>(key, value));
-      }
-    }
+    paramsMap.forEach((key, values) -> values.forEach(value -> entries.add(new AbstractMap.SimpleEntry<>(key, value))));
     return entries;
   }
 
