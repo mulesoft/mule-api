@@ -9,13 +9,13 @@ package org.mule.runtime.api.util;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
+import static java.util.stream.Collectors.toMap;
 
 import java.io.Serializable;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -39,15 +39,15 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   protected Map<K, LinkedList<V>> paramsMap;
 
   public MultiMap(final Map<K, V> parametersMap) {
-    this.paramsMap = new HashMap<>();
-    parametersMap.forEach((key, value) -> {
-      if (value instanceof Collection) {
-        Collection<V> values = (Collection) value;
-        values.stream().forEach(collectionValue -> this.put(key, collectionValue != null ? collectionValue : null));
+    this.paramsMap = parametersMap.entrySet().stream().collect(toMap(Entry::getKey, e -> {
+      LinkedList<V> values = new LinkedList<>();
+      if (e.getValue() instanceof Collection) {
+        values.addAll((Collection<? extends V>) e.getValue());
       } else {
-        this.put(key, value);
+        values.add(e.getValue());
       }
-    });
+      return values;
+    }));
     this.paramsMap = unmodifiableMap(paramsMap);
   }
 
