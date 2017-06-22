@@ -8,6 +8,8 @@ package org.mule.runtime.api.serialization;
 
 /**
  * Provides access to the different {@link SerializationProtocol} used in the container.
+ *
+ * @since 1.0
  */
 public interface ObjectSerializer {
 

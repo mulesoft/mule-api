@@ -24,6 +24,8 @@ import java.io.Serializable;
  * {@link SerializationProtocol}.
  * <p/>
  * Implementations are required to be thread-safe
+ *
+ * @since 1.0
  */
 public interface SerializationProtocol {
 

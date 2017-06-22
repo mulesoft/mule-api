@@ -21,7 +21,7 @@ import javax.inject.Qualifier;
  * A {@link Qualifier} annotation for injecting the {@link ObjectSerializer} which has been selected as the default in the
  * {@link org.mule.runtime.core.api.config.MuleConfiguration}
  *
- * @since 3.7.0
+ * @since 1.0
  */
 @Qualifier
 @Retention(RUNTIME)
