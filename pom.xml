@@ -116,6 +116,7 @@
         <hamcrestVersion>1.3</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>1.8.0</javaFormatter.plugin.version>
+        <javax.inject.version>1</javax.inject.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <commonsLangVersion>3.6</commonsLangVersion>
@@ -145,6 +146,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>${gsonVersion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
         </dependency>
 
         <!-- test dependencies -->
