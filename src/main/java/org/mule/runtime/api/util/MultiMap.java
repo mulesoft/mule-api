@@ -61,7 +61,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public int size() {
-    return paramsMap.size();
+    return paramsMap.values().stream().reduce(0, (count, list) -> list.size() + count, (count, list) -> count);
   }
 
   @Override
@@ -76,7 +76,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public boolean containsValue(Object value) {
-    return paramsMap.containsValue(value);
+    return paramsMap.values().stream().anyMatch(list -> list.contains(value));
   }
 
   @Override
@@ -189,7 +189,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public boolean equals(Object o) {
-    return paramsMap.equals(o);
+    return o instanceof MultiMap && paramsMap.equals(((MultiMap) o).paramsMap);
   }
 
   @Override
