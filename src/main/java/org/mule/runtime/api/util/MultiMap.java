@@ -53,7 +53,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     this.paramsMap = new LinkedHashMap<>();
   }
 
-  public MultiMap<K, V> toImmutableParameterMap() {
+  public MultiMap<K, V> toImmutableMultiMap() {
     return new MultiMap(this.paramsMap);
   }
 
@@ -209,6 +209,6 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public String toString() {
-    return "ParameterMap{" + Arrays.toString(paramsMap.entrySet().toArray()) + '}';
+    return "MultiMap{" + Arrays.toString(paramsMap.entrySet().toArray()) + '}';
   }
 }
