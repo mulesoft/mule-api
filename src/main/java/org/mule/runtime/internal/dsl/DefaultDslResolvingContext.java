@@ -48,6 +48,14 @@ public final class DefaultDslResolvingContext implements DslResolvingContext {
    * {@inheritDoc}
    */
   @Override
+  public Optional<ExtensionModel> getExtensionForType(String typeId) {
+    return typeCatalog.getDeclaringExtension(typeId).map(extensionsByName::get);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
   public Set<ExtensionModel> getExtensions() {
     return unmodifiableSet(extensions);
   }

@@ -45,6 +45,15 @@ public interface DslResolvingContext {
   Optional<ExtensionModel> getExtension(String name);
 
   /**
+   * Returns an {@link Optional} {@link ExtensionModel} that declared the given type.
+   *
+   * @param typeId that was declared
+   * @return an {@link Optional}. It will be empty if the {@link ExtensionModel} is not
+   * found in the context.
+   */
+  Optional<ExtensionModel> getExtensionForType(String typeId);
+
+  /**
    * Returns a {@link Set} containing all the {@link ExtensionModel}s available in the
    * current resolving context.
    * <p>
