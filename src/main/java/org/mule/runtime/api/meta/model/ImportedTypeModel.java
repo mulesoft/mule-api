@@ -9,7 +9,7 @@ package org.mule.runtime.api.meta.model;
 
 import static java.util.Objects.hash;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
-import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.api.model.ObjectType;
 
 /**
  * A model which describes that an extension is importing an
@@ -19,7 +19,7 @@ import org.mule.metadata.api.model.MetadataType;
  */
 public final class ImportedTypeModel {
 
-  private final MetadataType importedType;
+  private final ObjectType importedType;
 
   /**
    * Creates a new instance
@@ -27,12 +27,12 @@ public final class ImportedTypeModel {
    * @param importedType        the type to be imported
    * @throws IllegalArgumentException if {@code originExtensionName} is blank or {@code importedType} is {@code null}
    */
-  public ImportedTypeModel(MetadataType importedType) {
+  public ImportedTypeModel(ObjectType importedType) {
     checkArgument(importedType != null, "importedType cannot be null");
     this.importedType = importedType;
   }
 
-  public MetadataType getImportedType() {
+  public ObjectType getImportedType() {
     return importedType;
   }
 
