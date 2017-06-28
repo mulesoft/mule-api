@@ -18,6 +18,7 @@ import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.ExternalDependencyModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
@@ -48,6 +49,8 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
+  private final Set<ExternalDependencyModel> externalDependenciesModels =
+      new TreeSet<>(comparing(ExternalDependencyModel::getName));
   private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
   private final Set<String> resources = new TreeSet<>(naturalOrder());
   private final Set<ErrorModel> errorModels = new LinkedHashSet<>();
@@ -220,6 +223,17 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
+   * Adds an {@link ExternalDependencyModel}
+   *
+   * @param externalDependencyModel the model of the external dependency needed
+   * @return {@code this} declarer
+   */
+  public ExtensionDeclaration addExternalDependency(ExternalDependencyModel externalDependencyModel) {
+    externalDependenciesModels.add(externalDependencyModel);
+    return this;
+  }
+
+  /**
    * Registers the given {@code subType} as an implementation of the {@code baseType}
    *
    * @param baseType a base type
@@ -255,6 +269,13 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   public Set<ExternalLibraryModel> getExternalLibraryModels() {
     return externalLibraryModels;
+  }
+
+  /**
+   * @return A {@link Set} of {@link ExternalDependencyModel} which represent the extension's external dependencies
+   */
+  public Set<ExternalDependencyModel> getExternalDependenciesModels() {
+    return externalDependenciesModels;
   }
 
   /**

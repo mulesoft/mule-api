@@ -12,6 +12,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.ExternalDependencyModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
@@ -29,7 +30,8 @@ import java.util.List;
  */
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer,
-    HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer> {
+    HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
+    DeclaresExternalDependencies<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
@@ -328,6 +330,15 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
     declaration.addExternalLibrary(externalLibrary);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ExtensionDeclarer withExternalDependency(ExternalDependencyModel externalDependency) {
+    declaration.addExternalDependency(externalDependency);
     return this;
   }
 }
