@@ -61,6 +61,11 @@ public interface TypedComponentIdentifier {
     ON_ERROR,
 
     /**
+     * Generic global elements component type
+     */
+    GLOBAL,
+
+    /**
      * Component type for components that cannot be categorized in the other component types
      */
     UNKNOWN
