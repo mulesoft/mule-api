@@ -11,6 +11,7 @@ import static org.mule.runtime.api.meta.ExpressionSupport.REQUIRED;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.ExternalDependencyModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
@@ -100,6 +101,14 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
       .withRequiredClassName("org.my.Library")
       .build();
 
+  public static ExternalDependencyModel EXTERNAL_DEPENDENCY_MODEL = ExternalDependencyModel.builder()
+      .withName("javax")
+      .withDescription("Javax dependency")
+      .withGroupId("javax.jms")
+      .withArtifactId("javax.jms-api")
+      .withMinVersion("2.0.1")
+      .withMaxVersion("2.1.0")
+      .build();
 
   private final ExtensionDeclarer extensionDeclarer;
 
