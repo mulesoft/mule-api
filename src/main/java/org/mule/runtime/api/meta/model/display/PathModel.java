@@ -8,9 +8,11 @@
 package org.mule.runtime.api.meta.model.display;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.mule.runtime.api.meta.model.display.PathModel.Type.DIRECTORY;
 
 import java.util.List;
 
@@ -21,11 +23,13 @@ import java.util.List;
  */
 public class PathModel {
 
-  private final boolean isDirectory;
+  private final Type type;
   private final List<String> fileExtensions;
+  private final boolean acceptsUrls;
 
-  public PathModel(boolean isDirectory, boolean acceptsUrls, String[] fileExtensions) {
-    this.isDirectory = isDirectory;
+  public PathModel(Type type, boolean acceptsUrls, String[] fileExtensions) {
+    this.type = type;
+    this.acceptsUrls = acceptsUrls;
     this.fileExtensions = unmodifiableList(asList(fileExtensions));
   }
 
@@ -33,21 +37,21 @@ public class PathModel {
    * @return all the parameter supported file extensions.
    */
   public List<String> getFileExtensions() {
-    return fileExtensions;
+    return type == DIRECTORY ? emptyList() : fileExtensions;
   }
 
   /**
    * @return whether the parameter is a reference to a directory or not.
    */
-  public boolean isDirectory() {
-    return isDirectory;
+  public Type getType() {
+    return type;
   }
 
   /**
    * @return whether the parameter accepts urls values or not.
    */
   public boolean acceptsUrls() {
-    return isDirectory;
+    return acceptsUrls;
   }
 
   @Override
@@ -58,5 +62,23 @@ public class PathModel {
   @Override
   public int hashCode() {
     return reflectionHashCode(this);
+  }
+
+  public enum Type {
+
+    /**
+     * indicates that the path value only accepts directory paths.
+     */
+    DIRECTORY,
+
+    /**
+     * indicates that the path value only accepts specific file paths.
+     */
+    FILE,
+
+    /**
+     * indicates that the path value accepts both file or directory paths.
+     */
+    ANY
   }
 }
