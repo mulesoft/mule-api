@@ -10,7 +10,6 @@ import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.lifecycle.Disposable;
-import org.mule.runtime.api.metadata.MetadataContext;
 
 import java.util.Optional;
 
@@ -32,12 +31,12 @@ public interface ExtensionResolvingContext extends Disposable {
   <C> Optional<C> getConnection() throws ConnectionException;
 
   /**
-   * @return the {@link ClassTypeLoader} for the current {@link MetadataContext}.
+   * @return the {@link ClassTypeLoader} for the current {@link ExtensionResolvingContext}.
    */
   ClassTypeLoader getTypeLoader();
 
   /**
-   * @return the {@link BaseTypeBuilder} for the current {@link MetadataContext}.
+   * @return the {@link BaseTypeBuilder} for the current {@link ExtensionResolvingContext}.
    */
   BaseTypeBuilder getTypeBuilder();
 }

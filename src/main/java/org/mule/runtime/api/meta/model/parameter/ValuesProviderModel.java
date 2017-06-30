@@ -9,6 +9,9 @@ package org.mule.runtime.api.meta.model.parameter;
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
 import org.mule.runtime.api.values.Value;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.List;
 import java.util.Map;
 
@@ -61,5 +64,32 @@ public class ValuesProviderModel {
    */
   public String getCategory() {
     return category;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    ValuesProviderModel that = (ValuesProviderModel) o;
+
+    return new EqualsBuilder()
+        .append(requiredParameters, that.requiredParameters)
+        .append(valueParts, that.valueParts)
+        .append(category, that.category)
+        .isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37)
+        .append(requiredParameters)
+        .append(valueParts)
+        .append(category)
+        .toHashCode();
   }
 }

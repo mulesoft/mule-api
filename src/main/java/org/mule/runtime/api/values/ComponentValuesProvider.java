@@ -16,8 +16,6 @@ import java.util.Set;
 public interface ComponentValuesProvider {
 
   /**
-   *
-   *
    * @param parameterName the name of the parameter for which resolve their possible {@link Value values}
    * @return the resolved {@link Value values}
    */
