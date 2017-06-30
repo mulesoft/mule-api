@@ -24,7 +24,7 @@ public class PathModel {
   private final boolean isDirectory;
   private final List<String> fileExtensions;
 
-  public PathModel(boolean isDirectory, String[] fileExtensions) {
+  public PathModel(boolean isDirectory, boolean acceptsUrls, String[] fileExtensions) {
     this.isDirectory = isDirectory;
     this.fileExtensions = unmodifiableList(asList(fileExtensions));
   }
@@ -40,6 +40,13 @@ public class PathModel {
    * @return whether the parameter is a reference to a directory or not.
    */
   public boolean isDirectory() {
+    return isDirectory;
+  }
+
+  /**
+   * @return whether the parameter accepts urls values or not.
+   */
+  public boolean acceptsUrls() {
     return isDirectory;
   }
 
