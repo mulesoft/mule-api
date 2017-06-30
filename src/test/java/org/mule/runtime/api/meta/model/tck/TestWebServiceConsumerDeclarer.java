@@ -8,7 +8,7 @@ package org.mule.runtime.api.meta.model.tck;
 
 import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
 import static org.mule.runtime.api.meta.ExpressionSupport.REQUIRED;
-import static org.mule.runtime.api.meta.LibraryType.LIBRARY;
+import static org.mule.runtime.api.meta.ExternalLibraryType.JAR;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
@@ -99,7 +99,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
       .withDescription("WSS native library")
       .withRegexpMatcher("*.jar")
       .withRequiredClassName("org.my.Library")
-      .withType(LIBRARY)
+      .withType(JAR)
       .build();
 
 

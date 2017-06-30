@@ -10,7 +10,7 @@ import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import org.mule.runtime.api.meta.DescribedObject;
-import org.mule.runtime.api.meta.LibraryType;
+import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
 
 import java.util.Optional;
@@ -88,7 +88,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
      * @param type the type of the library
      * @return {@code this} builder
      */
-    public ExternalLibraryModelBuilder withType(LibraryType type) {
+    public ExternalLibraryModelBuilder withType(ExternalLibraryType type) {
       product.type = type;
       return this;
     }
@@ -114,7 +114,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   private String description;
   private String regexMatcher;
   private String requiredClassName;
-  private LibraryType type;
+  private ExternalLibraryType type;
 
   private ExternalLibraryModel() {}
 
@@ -155,7 +155,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   /**
    * @return The library's type
    */
-  public LibraryType getType() {
+  public ExternalLibraryType getType() {
     return type;
   }
 }
