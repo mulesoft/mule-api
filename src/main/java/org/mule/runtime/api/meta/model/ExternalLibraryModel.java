@@ -10,6 +10,7 @@ import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import org.mule.runtime.api.meta.DescribedObject;
+import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
 
 import java.util.Optional;
@@ -62,11 +63,11 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
     /**
      * Sets a regexp which must match the name of the library's file.
      *
-     * @param fileName a regexp to match the library's filename
+     * @param regexMatcher a regexp to match the library's filename
      * @return {@code this} builder
      */
-    public ExternalLibraryModelBuilder withFileName(String fileName) {
-      product.fileName = fileName;
+    public ExternalLibraryModelBuilder withRegexpMatcher(String regexMatcher) {
+      product.regexMatcher = regexMatcher;
       return this;
     }
 
@@ -78,6 +79,17 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
      */
     public ExternalLibraryModelBuilder withRequiredClassName(String requiredClassName) {
       product.requiredClassName = requiredClassName;
+      return this;
+    }
+
+    /**
+     * If provided, set the library's type of dependency
+     *
+     * @param type the type of the library
+     * @return {@code this} builder
+     */
+    public ExternalLibraryModelBuilder withType(ExternalLibraryType type) {
+      product.type = type;
       return this;
     }
 
@@ -100,8 +112,9 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
 
   private String name;
   private String description;
-  private String fileName;
+  private String regexMatcher;
   private String requiredClassName;
+  private ExternalLibraryType type;
 
   private ExternalLibraryModel() {}
 
@@ -126,8 +139,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
    *
    * @return An {@link Optional} regexp to match the library's file name
    */
-  public Optional<String> getFileName() {
-    return ofNullable(fileName);
+  public Optional<String> getRegexMatcher() {
+    return ofNullable(regexMatcher);
   }
 
   /**
@@ -139,4 +152,10 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
     return ofNullable(requiredClassName);
   }
 
+  /**
+   * @return The library's type
+   */
+  public ExternalLibraryType getType() {
+    return type;
+  }
 }
