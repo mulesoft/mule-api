@@ -6,23 +6,19 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
-import static java.util.Collections.singletonList;
-import static java.util.Collections.unmodifiableSet;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.Typed;
 import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.EnrichableModel;
+import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 /**
  * A parameter of a {@link ComponentModel Component} or Configuration
@@ -34,7 +30,8 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
+public interface ParameterModel
+    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, HasValuesProviderModel {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with

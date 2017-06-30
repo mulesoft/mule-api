@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
+import org.mule.runtime.api.meta.model.parameter.ValuesProviderModel;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
   private List<ExclusiveParametersDeclaration> exclusiveParameters = new LinkedList<>();
   private LayoutModel layoutModel;
   private boolean showInDsl = false;
+  private ValuesProviderModel valuesProviderModel;
 
   /**
    * {@inheritDoc}
@@ -89,5 +91,13 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
    */
   public boolean isShowInDsl() {
     return showInDsl;
+  }
+
+  public void setValuesProviderModel(ValuesProviderModel valuesProviderModel) {
+    this.valuesProviderModel = valuesProviderModel;
+  }
+
+  public ValuesProviderModel getValuesProviderModel() {
+    return valuesProviderModel;
   }
 }
