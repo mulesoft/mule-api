@@ -13,6 +13,11 @@ import org.mule.runtime.api.lifecycle.Disposable;
 
 import java.util.Optional;
 
+/**
+ * Resolving context, provides access to the Config and Connection
+ *
+ * @since 1.0
+ */
 public interface ExtensionResolvingContext extends Disposable {
 
   /**

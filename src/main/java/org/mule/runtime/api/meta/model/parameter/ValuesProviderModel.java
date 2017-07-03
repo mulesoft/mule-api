@@ -8,41 +8,38 @@ package org.mule.runtime.api.meta.model.parameter;
 
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
 import org.mule.runtime.api.values.Value;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Model for {@link ParameterModel} and {@link ParameterGroupModel} to communicate if one of these are capable of
  * provide {@link Value values}.
  * <p>
- * The element with this model will considered as a one that provides values, and also this model communicates
- * how is the structure of th
+ * The element with this model will considered as a one that provides values.
  * @since 1.0
  */
 public class ValuesProviderModel {
 
   private final List<String> requiredParameters;
-  private final Map<Integer, String> valueParts;
-  private String category;
+  private final Integer partOrder;
+  private final String providerName;
 
   /**
    * Creates a new instance
    *
    * @param requiredParameters the list of parameters that are required to execute the Value Provider resolution
-   * @param valueParts         the parts of the {@link Value}
-   * @param category           the category of the associated value provider for this parameter or parameter group
+   * @param partOrder          the position in the value
+   * @param providerName          the category of the associated value provider for this parameter
    */
-  public ValuesProviderModel(List<String> requiredParameters, Map<Integer, String> valueParts, String category) {
+  public ValuesProviderModel(List<String> requiredParameters, Integer partOrder, String providerName) {
     checkNotNull(requiredParameters, "'requiredParameters' can't be null");
-    checkNotNull(valueParts, "'valueParts' can't be null");
-    checkNotNull(category, "'category' can't be null");
+    checkNotNull(partOrder, "'valueParts' can't be null");
+    checkNotNull(providerName, "'providerName' can't be null");
     this.requiredParameters = requiredParameters;
-    this.valueParts = valueParts;
-    this.category = category;
+    this.partOrder = partOrder;
+    this.providerName = providerName;
   }
 
   /**
@@ -53,19 +50,18 @@ public class ValuesProviderModel {
   }
 
   /**
-   * @return the parts of the {@link Value}.
+   * @return the order of this part in the value
    */
-  public Map<Integer, String> getValueParts() {
-    return valueParts;
+  public Integer getPartOrder() {
+    return partOrder;
   }
 
   /**
-   * @return the category of the associated value provider for this parameter or parameter group
+   * @return The name of the element that provides values
    */
-  public String getCategory() {
-    return category;
+  public String getProviderName() {
+    return providerName;
   }
-
 
   @Override
   public boolean equals(Object o) {
@@ -79,8 +75,8 @@ public class ValuesProviderModel {
 
     return new EqualsBuilder()
         .append(requiredParameters, that.requiredParameters)
-        .append(valueParts, that.valueParts)
-        .append(category, that.category)
+        .append(partOrder, that.partOrder)
+        .append(providerName, that.providerName)
         .isEquals();
   }
 
@@ -88,8 +84,8 @@ public class ValuesProviderModel {
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
         .append(requiredParameters)
-        .append(valueParts)
-        .append(category)
+        .append(partOrder)
+        .append(providerName)
         .toHashCode();
   }
 }
