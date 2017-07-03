@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.interception;
 
+import org.mule.runtime.api.el.BindingContext;
+import org.mule.runtime.api.el.MuleExpressionLanguage;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
@@ -101,5 +103,12 @@ public interface InterceptionEvent {
    * @return the builder instance
    */
   InterceptionEvent removeVariable(String key);
+
+  /**
+   * Creates a {@link BindingContext} for the target event to use with a {@link MuleExpressionLanguage}.
+   * 
+   * @return a {@link BindingContext} representing the data of the target event.
+   */
+  BindingContext asBindingContext();
 
 }
