@@ -27,7 +27,6 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
   private List<ExclusiveParametersDeclaration> exclusiveParameters = new LinkedList<>();
   private LayoutModel layoutModel;
   private boolean showInDsl = false;
-  private ValuesProviderModel valuesProviderModel;
 
   /**
    * {@inheritDoc}
@@ -91,13 +90,5 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
    */
   public boolean isShowInDsl() {
     return showInDsl;
-  }
-
-  public void setValuesProviderModel(ValuesProviderModel valuesProviderModel) {
-    this.valuesProviderModel = valuesProviderModel;
-  }
-
-  public ValuesProviderModel getValuesProviderModel() {
-    return valuesProviderModel;
   }
 }
