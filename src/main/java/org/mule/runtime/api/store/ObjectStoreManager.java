@@ -55,4 +55,28 @@ public interface ObjectStoreManager {
    * Delete all objects from the partition
    */
   void disposeStore(ObjectStore<? extends Serializable> store) throws ObjectStoreException;
+
+  /**
+   * Return the partition of the user in-memory or persistent store with the given name, creating it if necessary.
+   *
+   * @param name the name of the object store
+   * @param isPersistent whether it should be in memory or persistent
+   *
+   * @return an {@link ObjectStore}
+   */
+  <T extends ObjectStore<? extends Serializable>> T getUserObjectStore(String name, boolean isPersistent);
+
+  /**
+   * Return the monitored partition of the user in-memory or persistent store with the given name, creating it if necessary.
+   *
+   * @param name the name of the object store
+   * @param isPersistent whether it should be in memory or persistent
+   * @param maxEntries what's the max number of entries allowed. Exceeding entries will be removed when expiration thread runs
+   * @param entryTTL entry timeout in milliseconds.
+   * @param expirationInterval how frequently should the expiration thread run
+   *
+   * @return an {@link ObjectStore}
+   */
+  <T extends ObjectStore<? extends Serializable>> T getUserObjectStore(String name, boolean isPersistent, int maxEntries,
+                                                                       long entryTTL, long expirationInterval);
 }
