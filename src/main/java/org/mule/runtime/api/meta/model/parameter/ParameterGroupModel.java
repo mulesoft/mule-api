@@ -21,8 +21,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface ParameterGroupModel
-    extends NamedObject, DescribedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
+public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
 
   /**
    * Group name for parameters that are considered for general purposes and shouldn't belong to a particular
