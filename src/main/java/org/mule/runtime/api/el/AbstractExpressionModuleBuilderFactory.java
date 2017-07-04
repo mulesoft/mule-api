@@ -24,8 +24,10 @@ public abstract class AbstractExpressionModuleBuilderFactory {
   static {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class).iterator().next();
-      LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
-                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+      if (LOGGER.isDebugEnabled()) {
+        LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
+                            factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+      }
 
       DEFAULT_FACTORY = factory;
     } catch (Throwable t) {

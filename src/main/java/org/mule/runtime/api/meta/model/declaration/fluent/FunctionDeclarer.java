@@ -38,7 +38,7 @@ public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclaration>
 
       @Override
       public OutputDeclarer ofDynamicType(MetadataType type) {
-        throw new IllegalStateException("TODO");
+        throw new UnsupportedOperationException("Functions do not support dynamic types for their output.");
       }
     };
   }

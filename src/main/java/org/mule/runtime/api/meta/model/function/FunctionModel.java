@@ -15,14 +15,14 @@ import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
 /**
- * A definition of an operation in a {@link ExtensionModel}.
+ * A definition of an function in a {@link ExtensionModel}.
  * <p>
- * Operation models implement the flyweight pattern. This means
- * that a given operation should only be represented by only
- * one instance of this class. Thus, if the same operation is
+ * Function models implement the flyweight pattern. This means
+ * that a given function should only be represented by only
+ * one instance of this class. Thus, if the same function is
  * contained by different {@link HasFunctionModels} instances,
  * then each of those containers should reference the same
- * operation model instance.
+ * function model instance.
  *
  * @since 1.0
  */
