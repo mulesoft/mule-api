@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
-import org.mule.runtime.api.meta.model.parameter.ValuesProviderModel;
 
 import java.util.LinkedList;
 import java.util.List;

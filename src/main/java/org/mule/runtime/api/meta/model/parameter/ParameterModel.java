@@ -31,7 +31,7 @@ import java.util.Optional;
  * @since 1.0
  */
 public interface ParameterModel
-    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, HasValuesProviderModel {
+    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with
@@ -92,4 +92,6 @@ public interface ParameterModel
    */
   @Override
   Optional<LayoutModel> getLayoutModel();
+
+  Optional<ValueProviderModel> getValueProviderModel();
 }

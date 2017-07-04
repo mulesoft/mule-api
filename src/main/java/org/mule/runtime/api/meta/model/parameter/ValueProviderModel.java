@@ -14,30 +14,29 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.util.List;
 
 /**
- * Model for {@link ParameterModel} and {@link ParameterGroupModel} to communicate if one of these are capable of
- * provide {@link Value values}.
+ * Model for {@link ParameterModel} to communicate if one of these are capable to provide {@link Value values}.
  * <p>
  * The element with this model will considered as a one that provides values.
  * @since 1.0
  */
-public class ValuesProviderModel {
+public class ValueProviderModel {
 
-  private final List<String> requiredParameters;
+  private final List<String> actingParameters;
   private final Integer partOrder;
   private final String providerName;
 
   /**
    * Creates a new instance
    *
-   * @param requiredParameters the list of parameters that are required to execute the Value Provider resolution
-   * @param partOrder          the position in the value
-   * @param providerName          the category of the associated value provider for this parameter
+   * @param actingParameters the list of parameters that are required to execute the Value Provider resolution
+   * @param partOrder        the position in the value
+   * @param providerName     the category of the associated value provider for this parameter
    */
-  public ValuesProviderModel(List<String> requiredParameters, Integer partOrder, String providerName) {
-    checkNotNull(requiredParameters, "'requiredParameters' can't be null");
+  public ValueProviderModel(List<String> actingParameters, Integer partOrder, String providerName) {
+    checkNotNull(actingParameters, "'actingParameters' can't be null");
     checkNotNull(partOrder, "'valueParts' can't be null");
     checkNotNull(providerName, "'providerName' can't be null");
-    this.requiredParameters = requiredParameters;
+    this.actingParameters = actingParameters;
     this.partOrder = partOrder;
     this.providerName = providerName;
   }
@@ -45,8 +44,8 @@ public class ValuesProviderModel {
   /**
    * @return the list of parameters that are required to execute the Value Provider resolution.
    */
-  public List<String> getRequiredParameters() {
-    return requiredParameters;
+  public List<String> getActingParameters() {
+    return actingParameters;
   }
 
   /**
@@ -71,10 +70,10 @@ public class ValuesProviderModel {
     if (o == null || getClass() != o.getClass())
       return false;
 
-    ValuesProviderModel that = (ValuesProviderModel) o;
+    ValueProviderModel that = (ValueProviderModel) o;
 
     return new EqualsBuilder()
-        .append(requiredParameters, that.requiredParameters)
+        .append(actingParameters, that.actingParameters)
         .append(partOrder, that.partOrder)
         .append(providerName, that.providerName)
         .isEquals();
@@ -83,7 +82,7 @@ public class ValuesProviderModel {
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
-        .append(requiredParameters)
+        .append(actingParameters)
         .append(partOrder)
         .append(providerName)
         .toHashCode();
