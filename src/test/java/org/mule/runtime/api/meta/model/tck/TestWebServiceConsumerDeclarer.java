@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.tck;
 import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
 import static org.mule.runtime.api.meta.ExpressionSupport.REQUIRED;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
+import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
@@ -17,6 +18,7 @@ import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
+import org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer;
@@ -72,6 +74,8 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
   public static final String PASSWORD_DESCRIPTION = "Authentication password";
   public static final String MULESOFT = "MuleSoft";
   public static final String LISTENER = "listener";
+  public static final String FUNCTION_NAME = "function";
+  public static final String FUNCTION_DESCRIPTION = "sample function";
   public static final String LISTEN_DESCRIPTION = "Listen requests";
   public static final String URL = "url";
   public static final String URL_DESCRIPTION = "Url to listen on";
@@ -163,6 +167,11 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
     operation = extensionDeclarer.withOperation(ARG_LESS).describedAs(HAS_NO_ARGS);
     operation.withOutput().ofType(getNumberType());
     operation.withOutputAttributes().ofType(getStringType());
+
+    FunctionDeclarer function = extensionDeclarer.withFunction(FUNCTION_NAME).describedAs(FUNCTION_DESCRIPTION);
+    function.onParameterGroup(DEFAULT_GROUP_NAME).withRequiredParameter(USERNAME).describedAs(USERNAME_DESCRIPTION)
+        .ofType(getStringType());
+    function.withOutput().ofType(getNumberType());
 
     ConnectionProviderDeclarer connectionProvider =
         extensionDeclarer.withConnectionProvider(CONNECTION_PROVIDER_NAME)
