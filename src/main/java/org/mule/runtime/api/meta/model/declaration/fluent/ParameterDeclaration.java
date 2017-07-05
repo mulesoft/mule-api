@@ -16,6 +16,7 @@ import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
+import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
 
 /**
  * A declaration object for a {@link ParameterModel}. It contains raw,
@@ -36,6 +37,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private ParameterDslConfiguration dslConfiguration = getDefaultInstance();
   private LayoutModel layoutModel;
   private ParameterRole parameterRole = BEHAVIOUR;
+  private ValueProviderModel valueProviderModel;
 
   /**
    * {@inheritDoc}
@@ -124,5 +126,13 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
 
   public void setConfigOverride(boolean isConfigOverride) {
     this.isConfigOverride = isConfigOverride;
+  }
+
+  public ValueProviderModel getValueProviderModel() {
+    return valueProviderModel;
+  }
+
+  public void setValueProviderModel(ValueProviderModel valueProviderModel) {
+    this.valueProviderModel = valueProviderModel;
   }
 }
