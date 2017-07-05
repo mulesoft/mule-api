@@ -17,7 +17,7 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  */
 public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclaration> implements
     HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
-    DeclaresExternalLibraries<ConfigurationDeclarer> {
+    HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer> {
 
   /**
    * Creates a new instance
@@ -158,6 +158,27 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
   public ConfigurationDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
     declaration.addExternalLibrary(externalLibrary);
     return this;
+  }
+
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public FunctionDeclarer withFunction(String name) {
+    FunctionDeclaration function = new FunctionDeclaration(name);
+    final FunctionDeclarer functionDeclarer = new FunctionDeclarer(function);
+    withFunction(functionDeclarer);
+
+    return functionDeclarer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void withFunction(FunctionDeclarer declarer) {
+    declaration.addFunction(declarer.getDeclaration());
   }
 
 }
