@@ -13,6 +13,8 @@ package org.mule.runtime.api.serialization;
  */
 public interface ObjectSerializer {
 
+  String DEFAULT_OBJECT_SERIALIZER_NAME = "_muleDefaultObjectSerializer";
+
   /**
    * Provides access to the serialization protocol used for internal consumption, that is, when objects are serialized
    * on the container to reuse them later inside the container.
