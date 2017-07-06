@@ -44,7 +44,7 @@ public interface ObjectProvider extends AnnotatedObject {
    * 
    * @param objectType the object type.
    * @return the object if there's one, empty otherwise. In case there are many, then it will fail unless there's a preferred one.
-   *         How the preferred one is defined is p to the {@link ObjectProvider} implementation.
+   *         How the preferred one is defined is up to the {@link ObjectProvider} implementation.
    */
   Optional<Object> getObjectByType(Class<?> objectType);
 

@@ -22,7 +22,7 @@ import java.util.Optional;
 public interface ServiceDiscoverer {
 
   /**
-   * Looku ps for a service within the artifact.
+   * Looks up for a service within the artifact.
    * <p>
    * If there are multiple services registered then an exception will be raised. If that could be the case then
    * {@code {@link #lookupAll(Class)}} should be used instead.
