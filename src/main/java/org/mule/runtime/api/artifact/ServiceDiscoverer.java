@@ -35,7 +35,7 @@ public interface ServiceDiscoverer {
   <T> Optional<T> lookup(Class<T> serviceType);
 
   /**
-   * Lookups for a service within the artifact by it's name.
+   * Looks up for a service within the artifact by it's name.
    *
    * @param name the service identifier
    * @param <T> the type of the service
@@ -44,7 +44,7 @@ public interface ServiceDiscoverer {
   <T> Optional<T> lookupByName(String name);
 
   /**
-   * Lookups for a set of service within the artifact.
+   * Looks up for a set of service within the artifact.
    *
    * @param serviceType the service type
    * @param <T> the type of the service
