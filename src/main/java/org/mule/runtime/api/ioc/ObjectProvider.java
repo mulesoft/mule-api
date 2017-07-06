@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.ioc;
 
+import org.mule.runtime.api.lifecycle.Initialisable;
 import org.mule.runtime.api.meta.AnnotatedObject;
 
 import java.util.Map;
@@ -14,7 +15,7 @@ import java.util.Optional;
 /**
  * Interface meant to be implemented by components that will provide objects that may be referenced from mule configuration files.
  * <p/>
- * This interface is may make use of {@link org.mule.runtime.api.lifecycle.Lifecycle} interfaces.
+ * This interface may make use of {@link org.mule.runtime.api.lifecycle.Lifecycle} interfaces.
  * 
  * @since 1.0
  */
@@ -24,8 +25,7 @@ public interface ObjectProvider extends AnnotatedObject {
    * Method to be called to prepare the {@link ObjectProvider}. It is expected that the provider is ready to be used after calling
    * this method.
    * <p/>
-   * This method will be invoke before {@link org.mule.runtime.api.lifecycle.Initialisable} if the implementation implements that
-   * interface.
+   * This method will be invoke before {@link Initialisable#initialise()} if the implementation implements that interface.
    *
    * @param objectProviderConfiguration configuration for the provider.
    */
@@ -44,6 +44,7 @@ public interface ObjectProvider extends AnnotatedObject {
    * 
    * @param objectType the object type.
    * @return the object if there's one, empty otherwise. In case there are many, then it will fail unless there's a preferred one.
+   *         How the preferred one is defined is p to the {@link ObjectProvider} implementation.
    */
   Optional<Object> getObjectByType(Class<?> objectType);
 

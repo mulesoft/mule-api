@@ -22,20 +22,20 @@ import java.util.Optional;
 public interface ServiceDiscoverer {
 
   /**
-   * Lookups for a service within the artifact.
+   * Looku ps for a service within the artifact.
    * <p>
    * If there are multiple services registered then an exception will be raised. If that could be the case then
    * {@code {@link #lookupAll(Class)}} should be used instead.
    * 
    * @param serviceType the service type
    * @param <T> the type of the service
-   * @return the service if a single implementation was found, empty if no implementation was found.
+   * @return the service if a single implementation was found, empty if no implementation was found. If more than one
+   *         implementation is found then it will fail.
    */
   <T> Optional<T> lookup(Class<T> serviceType);
 
   /**
    * Lookups for a service within the artifact by it's name.
-   * <p>
    *
    * @param name the service identifier
    * @param <T> the type of the service
