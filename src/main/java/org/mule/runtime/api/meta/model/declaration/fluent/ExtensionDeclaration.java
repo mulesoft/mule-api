@@ -42,7 +42,7 @@ import java.util.TreeSet;
  */
 public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     implements ConnectedDeclaration<ExtensionDeclaration>, WithSourcesDeclaration<ExtensionDeclaration>,
-    WithOperationsDeclaration<ExtensionDeclaration>, WithFunctionsDeclaration<ExtensionDeclaration> {
+    WithOperationsDeclaration<ExtensionDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
@@ -156,23 +156,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   public ExtensionDeclaration addMessageSource(SourceDeclaration sourceDeclaration) {
     subDeclarations.addMessageSource(sourceDeclaration);
     return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ExtensionDeclaration addFunction(FunctionDeclaration function) {
-    subDeclarations.addFunction(function);
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<FunctionDeclaration> getFunctions() {
-    return subDeclarations.getFunctions();
   }
 
   /**

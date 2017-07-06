@@ -8,6 +8,8 @@ package org.mule.runtime.api.meta.model;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
+import org.mule.runtime.api.meta.DescribedObject;
+import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
@@ -24,7 +26,7 @@ import java.util.Set;
  * @since 1.0
  */
 public interface ComponentModel
-    extends ParameterizedModel, EnrichableModel, HasDisplayModel, ThrowsErrors {
+    extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel, HasDisplayModel, ThrowsErrors {
 
   /**
    * Returns a {@link MetadataType} for the value that this component sets

@@ -8,8 +8,6 @@ package org.mule.runtime.api.meta.model.util;
 
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
-import org.mule.runtime.api.meta.model.function.FunctionModel;
-import org.mule.runtime.api.meta.model.function.HasFunctionModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.operation.RouterModel;
@@ -40,7 +38,6 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   private Set<Reference<ParameterModel>> parameters = new HashSet<>();
   private Set<Reference<ParameterGroupModel>> parameterGroups = new HashSet<>();
   private Set<Reference<OperationModel>> operations = new HashSet<>();
-  private Set<Reference<FunctionModel>> functions = new HashSet<>();
   private Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
 
   private <T> boolean isFirstAppearance(Set<Reference<T>> accumulator, T item) {
@@ -65,11 +62,6 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   @Override
   protected final void onOperation(HasOperationModels owner, OperationModel model) {
     doOnce(operations, model, this::onOperation);
-  }
-
-  @Override
-  protected final void onFunction(HasFunctionModels owner, FunctionModel model) {
-    doOnce(functions, model, this::onFunction);
   }
 
   @Override
@@ -138,15 +130,6 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * @param model the {@link OperationModel}
    */
   protected void onOperation(OperationModel model) {}
-
-  /**
-   * Invoked when an {@link FunctionModel} is found in the traversed {@code extensionModel}.
-   * <p>
-   * This method will only be invoked once per each found instance
-   *
-   * @param model the {@link FunctionModel}
-   */
-  protected void onFunction(FunctionModel model) {}
 
   /**
    * Invoked when a {@link RouterModel} is found in the traversed {@code extensionModel}.

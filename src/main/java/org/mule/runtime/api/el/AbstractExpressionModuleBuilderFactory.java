@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.el;
 
-import static java.lang.String.format;
-import static java.util.ServiceLoader.load;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import static java.lang.String.format;
+import static java.util.ServiceLoader.load;
 
 /**
  * Factory class used to create {@link ExpressionModule.Builder} objects.
@@ -24,10 +24,8 @@ public abstract class AbstractExpressionModuleBuilderFactory {
   static {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class).iterator().next();
-      if (LOGGER.isDebugEnabled()) {
-        LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
-                            factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
-      }
+      LOGGER.info(format("Loaded ExpressionModuleBuilderFactory implementation '%s' form classloader '%s'",
+                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
       DEFAULT_FACTORY = factory;
     } catch (Throwable t) {
