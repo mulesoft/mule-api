@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Comparator.comparing;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,7 +25,6 @@ import java.util.Set;
  */
 final class SubDeclarationsContainer {
 
-  private final Set<FunctionDeclaration> functions = new LinkedHashSet<>();
   private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
   private final Set<SourceDeclaration> messageSources = new LinkedHashSet<>();
   private final List<ConnectionProviderDeclaration> connectionProviders = new LinkedList<>();
@@ -51,13 +49,6 @@ final class SubDeclarationsContainer {
    */
   public List<SourceDeclaration> getMessageSources() {
     return alphaSorted(messageSources);
-  }
-
-  /**
-   * @return an unmodifiable {@link List} with the available {@link FunctionDeclaration}s
-   */
-  public List<FunctionDeclaration> getFunctions() {
-    return alphaSorted(functions);
   }
 
   /**
@@ -86,17 +77,6 @@ final class SubDeclarationsContainer {
     }
 
     operations.add(operation);
-  }
-
-  /**
-   * Adds a {@link OperationDeclaration}
-   *
-   * @param function a not {@code null} {@link FunctionDeclaration}
-   * @throws {@link IllegalArgumentException} if {@code function} is {@code null}
-   */
-  public void addFunction(FunctionDeclaration function) {
-    checkArgument(function != null, "Can't add a null function");
-    functions.add(function);
   }
 
   /**

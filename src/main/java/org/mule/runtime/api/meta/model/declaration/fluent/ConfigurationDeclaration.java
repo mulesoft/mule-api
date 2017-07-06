@@ -22,7 +22,7 @@ import java.util.TreeSet;
  */
 public class ConfigurationDeclaration extends ParameterizedDeclaration<ConfigurationDeclaration>
     implements ConnectedDeclaration<ConfigurationDeclaration>, WithSourcesDeclaration<ConfigurationDeclaration>,
-    WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration> {
+    WithOperationsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
@@ -58,23 +58,6 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
   @Override
   public List<SourceDeclaration> getMessageSources() {
     return subDeclarations.getMessageSources();
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ConfigurationDeclaration addFunction(FunctionDeclaration function) {
-    subDeclarations.addFunction(function);
-    return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public List<FunctionDeclaration> getFunctions() {
-    return subDeclarations.getFunctions();
   }
 
   /**
