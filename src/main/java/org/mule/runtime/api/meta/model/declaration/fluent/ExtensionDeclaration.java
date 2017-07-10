@@ -49,6 +49,8 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
   private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
+  private final Set<String> privilegedPackages = new TreeSet<>(naturalOrder());
+  private final Set<String> privilegedArtifacts = new TreeSet<>(naturalOrder());
   private final Set<String> resources = new TreeSet<>(naturalOrder());
   private final Set<ErrorModel> errorModels = new LinkedHashSet<>();
   private String name;
@@ -174,6 +176,20 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
+   * @return an immutable  {@link Set} with all the Java package name that are registered as privileged API
+   */
+  public Set<String> getPrivilegedPackages() {
+    return unmodifiableSet(privilegedPackages);
+  }
+
+  /**
+   * @return an immutable  {@link Set} with all the artifact IDs that are registered to have access to the privileged API. Each artifact is defined using Maven's groupId:artifactId
+   */
+  public Set<String> getPrivilegedArtifacts() {
+    return privilegedArtifacts;
+  }
+
+  /**
    * Declares that this extension defined the given {@code objectType}
    *
    * @param objectType an {@link ObjectType}
@@ -193,6 +209,28 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   public ExtensionDeclaration addResource(String resourcePath) {
     resources.add(resourcePath);
+    return this;
+  }
+
+  /**
+   * Declares that this extension declares a privileged API exporting a Java package
+   *
+   * @param packageName the Java package name to be exported
+   * @return {@code this} declaration
+   */
+  public ExtensionDeclaration addPrivilegedPackage(String packageName) {
+    privilegedPackages.add(packageName);
+    return this;
+  }
+
+  /**
+   * Declares that this extension declares a privileged API accessible by a given artifact
+   *
+   * @param artifactId the artifactId that the extension provides access to the privileged API
+   * @return {@code this} declaration
+   */
+  public ExtensionDeclaration addPrivilegedArtifact(String artifactId) {
+    privilegedArtifacts.add(artifactId);
     return this;
   }
 

@@ -153,6 +153,16 @@ public interface ExtensionModel
   Set<String> getResources();
 
   /**
+   * @return an immutable {@link Set} with all the Java packages that should be exported as privileged API by this extension
+   */
+  Set<String> getPrivilegedPackages();
+
+  /**
+   * @return an immutable {@link Set} with all the artifact IDs that have access to the privileged API exported by this extension. Each artifact is defined using Maven's groupId:artifactId
+   */
+  Set<String> getPrivilegedArtifacts();
+
+  /**
    * Returns the name of the extension's vendor
    * This name is used to:
    * <ul>
