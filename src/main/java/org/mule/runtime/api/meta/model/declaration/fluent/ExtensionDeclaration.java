@@ -12,7 +12,9 @@ import static java.util.Collections.unmodifiableSet;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
 import static java.util.stream.Collectors.toCollection;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
@@ -186,7 +188,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return an immutable  {@link Set} with all the artifact IDs that are registered to have access to the privileged API. Each artifact is defined using Maven's groupId:artifactId
    */
   public Set<String> getPrivilegedArtifacts() {
-    return privilegedArtifacts;
+    return unmodifiableSet(privilegedArtifacts);
   }
 
   /**
@@ -219,6 +221,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return {@code this} declaration
    */
   public ExtensionDeclaration addPrivilegedPackage(String packageName) {
+    checkArgument(!isBlank(packageName), "packageName cannot be blank");
     privilegedPackages.add(packageName);
     return this;
   }
@@ -230,6 +233,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return {@code this} declaration
    */
   public ExtensionDeclaration addPrivilegedArtifact(String artifactId) {
+    checkArgument(!isBlank(artifactId), "artifactId cannot be blank");
     privilegedArtifacts.add(artifactId);
     return this;
   }
