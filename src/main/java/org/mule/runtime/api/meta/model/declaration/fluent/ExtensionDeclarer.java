@@ -28,7 +28,7 @@ import java.util.List;
  * @since 1.0
  */
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
-    implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer,
+    implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
@@ -329,5 +329,25 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   public ExtensionDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
     declaration.addExternalLibrary(externalLibrary);
     return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public FunctionDeclarer withFunction(String name) {
+    FunctionDeclaration function = new FunctionDeclaration(name);
+    final FunctionDeclarer functionDeclarer = new FunctionDeclarer(function);
+    withFunction(functionDeclarer);
+
+    return functionDeclarer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void withFunction(FunctionDeclarer declarer) {
+    declaration.addFunction(declarer.getDeclaration());
   }
 }

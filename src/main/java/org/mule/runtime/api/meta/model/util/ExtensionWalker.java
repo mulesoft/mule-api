@@ -11,6 +11,8 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
+import org.mule.runtime.api.meta.model.function.FunctionModel;
+import org.mule.runtime.api.meta.model.function.HasFunctionModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.operation.RouterModel;
@@ -64,6 +66,7 @@ public abstract class ExtensionWalker {
     ifContinue(() -> walkConnectionProviders(extensionModel));
     ifContinue(() -> walkSources(extensionModel));
     ifContinue(() -> walkOperations(extensionModel));
+    ifContinue(() -> walkFunctions(extensionModel));
   }
 
   /**
@@ -98,6 +101,16 @@ public abstract class ExtensionWalker {
    * @param model the {@link OperationModel}
    */
   protected void onOperation(HasOperationModels owner, OperationModel model) {}
+
+  /**
+   * Invoked when an {@link FunctionModel} is found in the
+   * traversed {@code extensionModel}.
+   * <p>
+   *
+   * @param owner The component that owns the function
+   * @param model the {@link FunctionModel}
+   */
+  protected void onFunction(HasFunctionModels owner, FunctionModel model) {}
 
   /**
    * Invoked when a {@link ScopeModel} is found in the
@@ -231,6 +244,17 @@ public abstract class ExtensionWalker {
       });
 
       ifContinue(() -> walkParameters(operation));
+    }
+  }
+
+  private void walkFunctions(HasFunctionModels model) {
+    for (FunctionModel function : model.getFunctionModels()) {
+      if (stopped) {
+        return;
+      }
+
+      onFunction(model, function);
+      ifContinue(() -> walkParameters(function));
     }
   }
 
