@@ -17,7 +17,7 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
-import org.mule.runtime.api.values.Value;
+import org.mule.runtime.api.value.Value;
 import java.util.List;
 import java.util.Optional;
 
