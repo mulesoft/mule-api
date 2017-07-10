@@ -17,7 +17,8 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
-
+import org.mule.runtime.api.values.Value;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,8 +31,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface ParameterModel
-    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
+public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with
@@ -81,7 +81,7 @@ public interface ParameterModel
   ParameterDslConfiguration getDslConfiguration();
 
   /**
-   * @return this parameter's role
+   * @return this {@link ParameterModel}'s role
    */
   ParameterRole getRole();
 
@@ -93,5 +93,14 @@ public interface ParameterModel
   @Override
   Optional<LayoutModel> getLayoutModel();
 
+  /**
+   * @return a {@link List} of {@link ElementReference}s that this {@link ParameterModel} should accept values of.
+   */
+  List<ElementReference> getElementReferences();
+
+  /**
+   * @return A {@link ValueProviderModel} to communicate if the this parameter model is capable to provide {@link Value values}.
+   * an {@link Optional#empty()} if there is no model associate to this parameter.
+   */
   Optional<ValueProviderModel> getValueProviderModel();
 }

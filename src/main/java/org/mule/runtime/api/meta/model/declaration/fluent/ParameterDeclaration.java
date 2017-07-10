@@ -10,13 +10,17 @@ import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
+import org.mule.runtime.api.meta.model.parameter.ElementReference;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A declaration object for a {@link ParameterModel}. It contains raw,
@@ -38,6 +42,7 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private LayoutModel layoutModel;
   private ParameterRole parameterRole = BEHAVIOUR;
   private ValueProviderModel valueProviderModel;
+  private List<ElementReference> elementReferences = new ArrayList<>();
 
   /**
    * {@inheritDoc}
@@ -134,5 +139,13 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
 
   public void setValueProviderModel(ValueProviderModel valueProviderModel) {
     this.valueProviderModel = valueProviderModel;
+  }
+
+  public void setElementReferences(List<ElementReference> elementReferences) {
+    this.elementReferences.addAll(elementReferences);
+  }
+
+  public List<ElementReference> getElementReferences() {
+    return elementReferences;
   }
 }
