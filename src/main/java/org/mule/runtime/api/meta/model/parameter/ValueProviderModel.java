@@ -7,7 +7,7 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
-import org.mule.runtime.api.values.Value;
+import org.mule.runtime.api.value.Value;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
