@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This object matches the mule-policy.json element within a policy. The describer holds information that has being picked up from
+ * This object matches the mule-artifact.json element within a policy. The describer holds information that has being picked up from
  * the JSON file (and the pom.xml when implemented).
  *
  * @since 1.0
