@@ -214,6 +214,30 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
+   * Adds the given Java package name to the list of privileged exported packages declared by the extension begin built
+   *
+   * @param packageName package to export on the privileged plugin's API
+   * @return {@code this} declarer
+   */
+  public ExtensionDeclarer withPrivilegedPackage(String packageName) {
+    declaration.addPrivilegedPackage(packageName);
+
+    return this;
+  }
+
+  /**
+   * Adds the given artifact ID to the list of artifacts with access to the privileged API declared by the extension begin built
+   *
+   * @param artifactId artifact ID that will have access to the privileged plugin's API
+   * @return {@code this} declarer
+   */
+  public ExtensionDeclarer withPrivilegedArtifact(String artifactId) {
+    declaration.addPrivilegedArtifact(artifactId);
+
+    return this;
+  }
+
+  /**
    * Adds the given {@code resourcePath} to the list of resources
    * declared by the extension being built
    *
