@@ -16,7 +16,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import java.util.Optional;
 
 /**
- * This object matches the mule-plugin.json element within a plugin. The describer holds information that has being
+ * This object matches the mule-artifact.json element within a plugin. The describer holds information that has being
  * picked up from the JSON file (and the pom.xml when implemented). There's no extra logic, such as calculating the
  * URLs needed to feed a class loader or the {@link ExtensionModel} for the current plugin.
  *
