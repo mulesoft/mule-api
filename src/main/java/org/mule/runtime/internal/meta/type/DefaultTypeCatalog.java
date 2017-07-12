@@ -66,10 +66,24 @@ public final class DefaultTypeCatalog implements TypeCatalog {
   @Override
   public Optional<ObjectType> getType(String typeId) {
     String extensionName = extensionTypesInvertedIndex.get(typeId);
-    if (extensionName == null) {
-      return Optional.empty();
+    if (extensionName != null) {
+      ObjectType objectType = types.get(extensionName).get(typeId);
+      if (objectType != null) {
+        return Optional.of(objectType);
+      }
     }
-    return Optional.ofNullable(types.get(extensionName).get(typeId));
+
+    Optional<ObjectType> type = mappings.stream().flatMap(c -> c.getAllSubTypes().stream())
+        .filter(t -> getTypeId(t).map(id -> id.equals(typeId)).orElse(false))
+        .findFirst();
+
+    if (type.isPresent()) {
+      return type;
+    }
+
+    return mappings.stream().flatMap(c -> c.getAllBaseTypes().stream())
+        .filter(t -> getTypeId(t).map(id -> id.equals(typeId)).orElse(false))
+        .findFirst();
   }
 
   @Override
