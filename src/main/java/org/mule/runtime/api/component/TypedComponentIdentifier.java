@@ -36,7 +36,12 @@ public interface TypedComponentIdentifier {
     OPERATION,
 
     /**
-     * Executes one or many nested component chains.
+     * Executes a single nested component chains adding common behaviour.
+     */
+    SCOPE,
+
+    /**
+     * Contains different routes and executes them based on a routing strategy.
      */
     ROUTER,
 
@@ -59,11 +64,6 @@ public interface TypedComponentIdentifier {
      * Error handler on error child component type
      */
     ON_ERROR,
-
-    /**
-     * Generic global elements component type
-     */
-    GLOBAL,
 
     /**
      * Component type for components that cannot be categorized in the other component types
