@@ -7,13 +7,14 @@
 package org.mule.runtime.api.message;
 
 import java.io.ObjectStreamException;
+import java.io.Serializable;
 
 /**
- * Default implementation of {@link Attributes} to be used when no other connector specific attributes instance is set.
+ * Default implementation of {@link Message#getAttributes()} to be used when no other connector specific attributes instance is set.
  * 
  * @since 1.0
  */
-public final class NullAttributes implements Attributes {
+public final class NullAttributes implements Serializable {
 
   public static NullAttributes NULL_ATTRIBUTES = new NullAttributes();
 

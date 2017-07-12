@@ -16,7 +16,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
- * Represents a message. The Message is comprised of the payload, (a value and its {@link DataType}) and {@link Attributes}
+ * Represents a message. The Message is comprised of the payload, (a value and its {@link DataType}) and {@link Message#getAttributes()}
  * associated with the content.
  *
  * @since 1.0

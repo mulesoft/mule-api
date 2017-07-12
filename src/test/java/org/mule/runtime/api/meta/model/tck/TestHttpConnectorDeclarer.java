@@ -74,14 +74,14 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
         .withXmlDsl(XmlDslModel.builder().build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
     staticResource.supportsStreaming(true).withOutput().ofType(getBinaryType());
-    staticResource.withOutputAttributes().ofType(getAttributesType());
+    staticResource.withOutputAttributes().ofType(getObjectType(Object.class));
     staticResource.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     ConfigurationDeclarer requesterConfig =
         extensionDeclarer.withConfig(REQUESTER_CONFIG_NAME).describedAs(REQUESTER_CONFIG_DESCRIPTION);
     OperationDeclarer request = requesterConfig.withOperation(REQUEST_OPERATION_NAME);
     request.supportsStreaming(true).withOutput().ofType(getBinaryType());
-    request.withOutputAttributes().ofType(getAttributesType());
+    request.withOutputAttributes().ofType(getObjectType(Object.class));
     request.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
     requesterConfig.withConnectionProvider(REQUESTER_PROVIDER).withConnectionManagementType(NONE);
