@@ -69,4 +69,11 @@ public interface ComponentLocation {
    */
   TypedComponentIdentifier getComponentIdentifier();
 
+  /**
+   * Gets the name of the root containing element.
+   *
+   * @return the first part path of {@code this} location. Non-null.
+   */
+  String getRootContainerName();
+
 }
