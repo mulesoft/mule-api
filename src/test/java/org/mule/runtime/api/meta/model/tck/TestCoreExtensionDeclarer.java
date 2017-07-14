@@ -58,14 +58,14 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
 
     RouterDeclarer router = extensionDeclarer.withRouter(CHOICE_OPERATION_NAME);
     router.withOutput().ofType(getVoidType());
-    router.withOutputAttributes().ofType(getAttributesType());
+    router.withOutputAttributes().ofType(getVoidType());
 
     router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1);
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1);
 
     ScopeDeclarer scope = extensionDeclarer.withScope(FOREACH_OPERATION_NAME);
     scope.withOutput().ofType(getVoidType());
-    scope.withOutputAttributes().ofType(getAttributesType());
+    scope.withOutputAttributes().ofType(getVoidType());
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
 
     return extensionDeclarer;
