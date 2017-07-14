@@ -16,31 +16,13 @@ import org.mule.runtime.api.component.location.Location;
 public interface ValueProviderService {
 
   /**
-   * Resolves the {@link Value values} for a component's value provider located in the given {@link Location}.
+   * Resolves the {@link Value values} for a element's value provider located in the given {@link Location}.
    *
-   * @param location     The {@link Location} where the configuration can be found.
+   * @param location     The {@link Location} where the element is found.
    * @param providerName The name of the value provider to resolve the {@link Value values}.
    * @return the {@link ValueResult result} of the resolving of the values.
    * @see ValueResult
    */
-  ValueResult getComponentValues(Location location, String providerName);
+  ValueResult getValues(Location location, String providerName);
 
-  /**
-   * Resolves the {@link Value values} for a component's value provider located in the given {@link Location}.
-   *
-   * @param location     The {@link Location} where the configuration can be found.
-   * @param providerName The name of the value provider to resolve the {@link Value values}.
-   * @return the {@link ValueResult result} of the resolving of the values.
-   * @see ValueResult
-   */
-  ValueResult getConfigurationValues(Location location, String providerName);
-
-  /**
-   * @param location     The {@link Location} where the connection can be found. This location will be one of the
-   *                     configuration that contains it.
-   * @param providerName The name of the value provider to resolve the {@link Value values}.
-   * @return the {@link ValueResult result} of the resolving of the values.
-   * @see ValueResult
-   */
-  ValueResult getConnectionProviderValues(Location location, String providerName);
 }
