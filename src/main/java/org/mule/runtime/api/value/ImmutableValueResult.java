@@ -9,6 +9,9 @@ package org.mule.runtime.api.value;
 import static java.util.Collections.emptySet;
 import static java.util.Optional.ofNullable;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,7 +20,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-final class ImmutableValueResult implements ValueResult {
+final public class ImmutableValueResult implements ValueResult {
 
   private Set<Value> values = emptySet();
   private ResolvingFailure failure;
@@ -56,4 +59,35 @@ final class ImmutableValueResult implements ValueResult {
     return ofNullable(failure);
   }
 
+  @Override
+  public String toString() {
+    return "ImmutableValueResult{" +
+        "values=" + values +
+        ", failure=" + failure +
+        '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+
+    if (o == null || getClass() != o.getClass())
+      return false;
+
+    ImmutableValueResult that = (ImmutableValueResult) o;
+
+    return new EqualsBuilder()
+        .append(values, that.values)
+        .append(failure, that.failure)
+        .isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37)
+        .append(values)
+        .append(failure)
+        .toHashCode();
+  }
 }
