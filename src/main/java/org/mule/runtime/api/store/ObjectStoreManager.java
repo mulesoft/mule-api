@@ -7,76 +7,65 @@
 package org.mule.runtime.api.store;
 
 import java.io.Serializable;
+import java.util.NoSuchElementException;
 
 /**
- * Manages all object stores.
- *
- * Any {@link ObjectStore} required by any component should be obtained through this API
+ * Creates and manages {@link ObjectStore} instances.
+ * <p>
+ * Any component in need to use an {@link ObjectStore} should created it through an implementation of this interface.
+ * <p>
+ * All {@link ObjectStore} instances created through an instance of this interface, should also be destroyed through the
+ * same instance.
+ * <p>
+ * Implementations are required to be thread-safe.
  *
  * @since 1.0
  */
 public interface ObjectStoreManager {
 
-  int UNBOUNDED = 0;
 
   /**
-   * Return the partition of the default in-memory store with the given name, creating it if necessary.
+   * Returns an {@link ObjectStore} previously defined through the {@link #createObjectStore(String, ObjectStoreSettings)}
+   * method.
+   * <p>
+   * If the {@code name} doesn't match with a store previously created through that method, or if the matching
+   * store was disposed through {@link #disposeStore(String)}, then this method will throw {@link NoSuchElementException}.
+   * <p>
+   * Otherwise, invoking this method several times using equivalent names will always result in <b>the same</b> instance
+   * being returned.
    *
    * @param name the name of the object store
+   * @param <T>  the generic type of the items in the store
    * @return an {@link ObjectStore}
+   * @throws NoSuchElementException if the store doesn't exist or has been disposed
    */
   <T extends ObjectStore<? extends Serializable>> T getObjectStore(String name);
 
   /**
-   * Return the partition of the default in-memory or persistent store with the given name, creating it if necessary.
+   * Creates and returns a new {@link ObjectStore}, configured according to the state of the {@code settings} object.
+   * <p>
+   * If is {@link #getObjectStore(String)} after this method with an equivalent {@code name}, it will return the same
+   * instance as this method.
+   * <p>
+   * If this method is invoked with a {@code name} for which an ObjectStore has already been created, it will throw
+   * {@link IllegalArgumentException}, if the {@code settings} of the two objects differ.
    *
-   * @param name the name of the object store
-   * @param isPersistent whether it should be in memory or persistent
-   *
-   * @return an {@link ObjectStore}
+   * @param name     the name of the object store
+   * @param settings the object store configuration
+   * @param <T>      the generic type of the items in the store
+   * @return a new {@link ObjectStore}
+   * @throws IllegalArgumentException if the store already exists
    */
-  <T extends ObjectStore<? extends Serializable>> T getObjectStore(String name, boolean isPersistent);
+  <T extends ObjectStore<? extends Serializable>> T createObjectStore(String name, ObjectStoreSettings settings);
 
   /**
-   * Return the monitored partition of the default in-memory or persistent store with the given name, creating it if necessary.
+   * Clears the object store of the given {@code name} and releases all resources associated to it, including memory,
+   * storage, etc.
+   * <p>
+   * The referenced store needs to have been created through the {@link #createObjectStore(String, ObjectStoreSettings)} method
+   * or a {@link NoSuchElementException} will be thrown.
    *
-   * @param name the name of the object store
-   * @param isPersistent whether it should be in memory or persistent
-   * @param maxEntries what's the max number of entries allowed. Exceeding entries will be removed when expiration thread runs
-   * @param entryTTL entry timeout in milliseconds.
-   * @param expirationInterval how frequently should the expiration thread run
-   *
-   * @return an {@link ObjectStore}
+   * @param name the name of the {@link ObjectStore} to be disposed.
    */
-  <T extends ObjectStore<? extends Serializable>> T getObjectStore(String name, boolean isPersistent, int maxEntries,
-                                                                   long entryTTL, long expirationInterval);
-
-  /**
-   * Delete all objects from the partition
-   */
-  void disposeStore(ObjectStore<? extends Serializable> store) throws ObjectStoreException;
-
-  /**
-   * Return the partition of the user in-memory or persistent store with the given name, creating it if necessary.
-   *
-   * @param name the name of the object store
-   * @param isPersistent whether it should be in memory or persistent
-   *
-   * @return an {@link ObjectStore}
-   */
-  <T extends ObjectStore<? extends Serializable>> T getUserObjectStore(String name, boolean isPersistent);
-
-  /**
-   * Return the monitored partition of the user in-memory or persistent store with the given name, creating it if necessary.
-   *
-   * @param name the name of the object store
-   * @param isPersistent whether it should be in memory or persistent
-   * @param maxEntries what's the max number of entries allowed. Exceeding entries will be removed when expiration thread runs
-   * @param entryTTL entry timeout in milliseconds.
-   * @param expirationInterval how frequently should the expiration thread run
-   *
-   * @return an {@link ObjectStore}
-   */
-  <T extends ObjectStore<? extends Serializable>> T getUserObjectStore(String name, boolean isPersistent, int maxEntries,
-                                                                       long entryTTL, long expirationInterval);
+  void disposeStore(String name) throws ObjectStoreException;
 }
