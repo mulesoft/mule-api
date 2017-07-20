@@ -10,22 +10,14 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * {@code Authentication} represents an authentication request and contains authentication information
- * if the request was successful.
+ * {@code Authentication} represents an authentication request and contains authentication information if the request was
+ * successful.
+ * <p>
+ * Implementations must be immutable.
  *
  * @since 1.0
  */
 public interface Authentication extends Serializable {
-
-  /**
-   * @param authenticated {@code true} if {@code this} {@link Authentication} has been authenticated
-   */
-  void setAuthenticated(boolean authenticated);
-
-  /**
-   * @return {@code true} if {@code this} {@link Authentication} has been authenticated
-   */
-  boolean isAuthenticated();
 
   /**
    * @return a representation of the credentials for {@code this} {@link Authentication}
@@ -43,7 +35,9 @@ public interface Authentication extends Serializable {
   Map<String, Object> getProperties();
 
   /**
-   * @param properties a group of properties available for {@code this} {@link Authentication}
+   * Makes a copy of this {@link Authentication} with the passed properties set.
+   * 
+   * @param properties a group of properties available for the returned {@link Authentication}. MAy be {@code null}
    */
-  void setProperties(Map<String, Object> properties);
+  Authentication setProperties(Map<String, Object> properties);
 }
