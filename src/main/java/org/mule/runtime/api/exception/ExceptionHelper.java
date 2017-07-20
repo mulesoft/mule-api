@@ -30,9 +30,10 @@ public class ExceptionHelper {
 
   private static final String MULE_PACKAGE_REGEXP = "(?:org|com)\\.mule(?:soft)?\\.(?!mvel2)(?!el).*";
 
-  public static final String[] DEFAULT_STACKTRACE_FILTER =
-      ("org.mule.runtime.core.processor.AbstractInterceptingMessageProcessor," + "org.mule.runtime.core.processor.chain")
-          .split(",");
+  public static final String[] DEFAULT_STACKTRACE_FILTER = new String[] {
+      "org.mule.runtime.core.privileged.processor.AbstractInterceptingMessageProcessor",
+      "org.mule.runtime.core.privileged.processor.chain",
+      "org.mule.runtime.core.internal.processor.chain"};
 
   private static final int EXCEPTION_THRESHOLD = 3;
   private static boolean verbose = true;
