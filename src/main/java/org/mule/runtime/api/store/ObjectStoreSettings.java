@@ -74,7 +74,7 @@ public class ObjectStoreSettings {
      * If not set, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}, but will only be used by the runtime
      * if {@link #entryTtl(Long)} or {@link #maxEntries(Integer)} was also invoked.
      * <p>
-     * Setting this to a value lower or equal than zero is also equivalent to disasbling expiration.
+     * Setting this to a value lower or equal than zero is also equivalent to disabling expiration.
      *
      * @param expirationInterval interval in milliseconds. Greater than zero
      * @return {@code this} builder
