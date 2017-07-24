@@ -8,8 +8,6 @@ package org.mule.runtime.api.ioc;
 
 import org.mule.runtime.api.component.ConfigurationProperties;
 
-import java.util.Map;
-
 /**
  * Configuration for the {@link ObjectProvider}
  * 
@@ -18,17 +16,16 @@ import java.util.Map;
 public interface ObjectProviderConfiguration {
 
   /**
-   * Set of objects from the mule artifact that may be made available by the provider for DI.
+   * {@link ObjectProvider} implementation for objects of the mule runtime.
    * 
-   * @return a map where the key are the name for the objects that are the values.
+   * @return {@link ObjectProvider} implementation for objects of the mule runtime.
    */
-  Map<String, Object> getArtifactObjects();
+  ObjectProvider getArtifactObjectProvider();
 
   /**
    * Configuration properties defined by the user in the mule artifact.
    * <p/>
-   * It may be made available to be used in the configuration of the objects defined in
-   * this provider
+   * It may be made available to be used in the configuration of the objects defined in this provider
    *
    * @return the configuration properties of the artifact.
    */
