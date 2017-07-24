@@ -73,16 +73,13 @@ public class ObjectStoreSettings {
      * <p>
      * If not set, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}, but will only be used by the runtime
      * if {@link #entryTtl(Long)} or {@link #maxEntries(Integer)} was also invoked.
+     * <p>
+     * Setting this to a value lower or equal than zero is also equivalent to disabling expiration.
      *
      * @param expirationInterval interval in milliseconds. Greater than zero
      * @return {@code this} builder
-     * @throws IllegalArgumentException if {@code expirationInterval} is lower or equal than zero
      */
     public Builder expirationInterval(Long expirationInterval) {
-      if (expirationInterval <= 0) {
-        throw new IllegalArgumentException("Expiration Interval cannot be lower or equal than zero");
-      }
-
       product.expirationInterval = expirationInterval;
       return this;
     }
