@@ -74,8 +74,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * {@code code} from the resource bundle {@code bundlePath}.
+   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
+   * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -87,8 +87,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * {@code code} from the resource bundle {@code bundlePath}.
+   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
+   * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -101,8 +101,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * {@code code} from the resource bundle {@code bundlePath}.
+   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
+   * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -116,8 +116,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * {@code code} from the resource bundle {@code bundlePath}.
+   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
+   * from the resource bundle {@code bundlePath}.
    * 
    * <b>Attention:</b> do not confuse this method with {@link this#createMessage}.
    * 
@@ -132,8 +132,8 @@ public abstract class I18nMessageFactory {
   }
 
   /**
-   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id
-   * {@code code} from the resource bundle {@code bundlePath}.
+   * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
+   * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code numeric code of the message
@@ -236,9 +236,7 @@ public abstract class I18nMessageFactory {
    * Override this method to return the classloader for the bundle/module which contains the needed resource files.
    */
   protected ClassLoader getClassLoader() {
-    final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
-    // if there's a deployment classloader present, use it for finding resources
-    return ccl == null ? getClass().getClassLoader() : ccl;
+    return getClass().getClassLoader();
   }
 
   /**
