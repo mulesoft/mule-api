@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.store;
 
+import org.mule.runtime.api.config.custom.CustomizationService;
+
 import java.io.Serializable;
 import java.util.NoSuchElementException;
 
@@ -14,8 +16,18 @@ import java.util.NoSuchElementException;
  * <p>
  * Any component in need to use an {@link ObjectStore} should created it through an implementation of this interface.
  * <p>
+ * This manager works under the concept of &quot;Base Object Stores&quot;. This means that all created Object Stores
+ * are actually partitions on these base stores. This manager is in charge of creating and handling such partitions
+ * and exposing them as stand alone stores. There're two base object stores, one for the in memory ones and another for
+ * the transient ones.
+ * <p>
+ * The reason why this manager operates in this way is to allow other services to override the default object store
+ * implementations. A Core Extension can use the {@link CustomizationService} to override those base stores using
+ * the {@link #BASE_IN_MEMORY_OBJECT_STORE_KEY} and {@link #BASE_PERSISTENT_OBJECT_STORE_KEY} keys.
+ * <p>
  * All {@link ObjectStore} instances created through an instance of this interface, should also be destroyed through the
- * same instance.
+ * same instance using the {@link #disposeStore(String)} method. This does not mean that all stores should necessarily be
+ * disposed. If you want that store to endure through time, then you should not dispose it.
  * <p>
  * Implementations are required to be thread-safe.
  *
@@ -23,6 +35,15 @@ import java.util.NoSuchElementException;
  */
 public interface ObjectStoreManager {
 
+  /**
+   * The key of the base in memory object store.
+   */
+  String BASE_IN_MEMORY_OBJECT_STORE_KEY = "_defaultInMemoryObjectStore";
+
+  /**
+   * The key of the base persistent object store.
+   */
+  String BASE_PERSISTENT_OBJECT_STORE_KEY = "_defaultPersistentObjectStore";
 
   /**
    * Returns an {@link ObjectStore} previously defined through the {@link #createObjectStore(String, ObjectStoreSettings)}
