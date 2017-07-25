@@ -80,6 +80,20 @@ public interface ObjectStoreManager {
   <T extends ObjectStore<? extends Serializable>> T createObjectStore(String name, ObjectStoreSettings settings);
 
   /**
+   * Returns the {@link ObjectStore} of {@code name} if it has already been defined. Otherwise, it delegates into
+   * {@link #createObjectStore(String, ObjectStoreSettings)} to create it.
+   * <p>
+   * Notice that if the store does actually exists, then the returned store might not actually match the provided
+   * {@code settings}
+   *
+   * @param name     the name of the object store
+   * @param settings the object store configuration
+   * @param <T>      the generic type of the items in the store
+   * @return an {@link ObjectStore}
+   */
+  <T extends ObjectStore<? extends Serializable>> T getOrCreateObjectStore(String name, ObjectStoreSettings settings);
+
+  /**
    * Clears the object store of the given {@code name} and releases all resources associated to it, including memory,
    * storage, etc.
    * <p>
