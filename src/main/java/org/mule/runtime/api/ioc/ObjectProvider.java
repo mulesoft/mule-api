@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.ioc;
 
-import org.mule.runtime.api.lifecycle.Initialisable;
 import org.mule.runtime.api.meta.AnnotatedObject;
 
 import java.util.Map;
@@ -14,22 +13,10 @@ import java.util.Optional;
 
 /**
  * Interface meant to be implemented by components that will provide objects that may be referenced from mule configuration files.
- * <p/>
- * This interface may make use of {@link org.mule.runtime.api.lifecycle.Lifecycle} interfaces.
- * 
+ *
  * @since 1.0
  */
 public interface ObjectProvider extends AnnotatedObject {
-
-  /**
-   * Method to be called to prepare the {@link ObjectProvider}. It is expected that the provider is ready to be used after calling
-   * this method.
-   * <p/>
-   * This method will be invoke before {@link Initialisable#initialise()} if the implementation implements that interface.
-   *
-   * @param objectProviderConfiguration configuration for the provider.
-   */
-  void configure(ObjectProviderConfiguration objectProviderConfiguration);
 
   /**
    * Finds an object by name
@@ -58,8 +45,14 @@ public interface ObjectProvider extends AnnotatedObject {
   <T> Map<String, T> getObjectsByType(Class<T> type);
 
   /**
-   * @param name bean name
+   * @param name object name
    * @return true if the object is a singleton, false if it's not, empty if there's no an object with that name.
    */
   Optional<Boolean> isObjectSingleton(String name);
+
+  /**
+   * @param name object name
+   * @return true if the provider contains a bean with such name, false otherwise.
+   */
+  boolean containsObject(String name);
 }
