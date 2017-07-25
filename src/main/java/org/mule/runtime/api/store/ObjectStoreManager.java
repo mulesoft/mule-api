@@ -83,7 +83,7 @@ public interface ObjectStoreManager {
    * Returns the {@link ObjectStore} of {@code name} if it has already been defined. Otherwise, it delegates into
    * {@link #createObjectStore(String, ObjectStoreSettings)} to create it.
    * <p>
-   * Notice that if the store does actually exists, then the returned store might not actually match the provided
+   * Notice that if the store does actually exist, then the returned store might not actually match the provided
    * {@code settings}
    *
    * @param name     the name of the object store
