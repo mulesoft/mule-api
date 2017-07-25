@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.nio.charset.Charset.defaultCharset;
+import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.fromObject;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 /**
  * Maintains a value that has an associated {@link DataType}.
@@ -58,6 +61,7 @@ public final class TypedValue<T> implements Serializable {
 
   private final T value;
   private final DataType dataType;
+  private final long length;
 
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
@@ -66,11 +70,31 @@ public final class TypedValue<T> implements Serializable {
    * @param dataType the {@link DataType} for this object's content.
    */
   public TypedValue(T value, DataType dataType) {
+    this(value, dataType, empty());
+  }
+
+  /**
+   * Constructs a new {@link TypedValue} with the given parameters.
+   *
+   * @param value this object's content.
+   * @param dataType the {@link DataType} for this object's content.
+   * @param length the length of the value in bytes.
+   */
+  public TypedValue(T value, DataType dataType, Optional<Long> length) {
     this.value = value;
     if (dataType == null) {
       this.dataType = fromObject(value);
     } else {
       this.dataType = dataType;
+    }
+    if (length.isPresent()) {
+      this.length = length.get();
+    } else if (value instanceof byte[]) {
+      this.length = ((byte[]) value).length;
+    } else if (value instanceof String) {
+      this.length = ((String) value).getBytes(this.dataType.getMediaType().getCharset().orElse(defaultCharset())).length;
+    } else {
+      this.length = -1;
     }
   }
 
@@ -88,6 +112,15 @@ public final class TypedValue<T> implements Serializable {
    */
   public T getValue() {
     return value;
+  }
+
+  /**
+   * If available obtain the length (in bytes) of the valye.
+   * 
+   * @return length of the value in bytes.
+   */
+  public Optional<Long> getLength() {
+    return length >= 0 ? Optional.of(length) : empty();
   }
 
 }
