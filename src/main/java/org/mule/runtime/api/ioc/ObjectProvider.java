@@ -13,8 +13,7 @@ import java.util.Optional;
 
 /**
  * Interface meant to be implemented by components that will provide objects that may be referenced from mule configuration files.
- * <p/>
- * 
+ *
  * @since 1.0
  */
 public interface ObjectProvider extends AnnotatedObject {

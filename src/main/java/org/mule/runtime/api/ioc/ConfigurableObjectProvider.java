@@ -23,7 +23,7 @@ public interface ConfigurableObjectProvider extends ObjectProvider {
    * Method to be called to prepare the {@link ConfigurableObjectProvider}. It is expected that the provider is ready to be used
    * after calling this method.
    * <p/>
-   * This method will be invoke before {@link Initialisable#initialise()} if the implementation implements that interface.
+   * This method will be invoked before {@link Initialisable#initialise()} if the implementation implements that interface.
    *
    * @param objectProviderConfiguration configuration for the provider.
    */
