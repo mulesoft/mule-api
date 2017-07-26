@@ -10,16 +10,14 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Interface to access artifact services.
+ * Interface to access artifact objects.
  * <p>
  * {@link javax.inject.Inject} must should be the preferred option to access artifact services like
- * {@link org.mule.runtime.api.store.ObjectStoreManager}, {@link org.mule.runtime.api.serialization.ObjectSerializer}, etc. but
- * since {@link javax.inject.Inject} fails if there's a dependency that may not always be present then this mechanism is required
- * instead.
+ * {@link org.mule.runtime.api.store.ObjectStoreManager}, {@link org.mule.runtime.api.serialization.ObjectSerializer}, etc.
  * 
  * @since 1.0
  */
-public interface ServiceDiscoverer {
+public interface Registry {
 
   /**
    * Looks up for a service within the artifact.
@@ -27,12 +25,12 @@ public interface ServiceDiscoverer {
    * If there are multiple services registered then an exception will be raised. If that could be the case then
    * {@code {@link #lookupAll(Class)}} should be used instead.
    * 
-   * @param serviceType the service type
+   * @param objectType the service type
    * @param <T> the type of the service
    * @return the service if a single implementation was found, empty if no implementation was found. If more than one
    *         implementation is found then it will fail.
    */
-  <T> Optional<T> lookup(Class<T> serviceType);
+  <T> Optional<T> lookup(Class<T> objectType);
 
   /**
    * Looks up for a service within the artifact by it's name.
