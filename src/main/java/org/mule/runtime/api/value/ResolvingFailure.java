@@ -56,7 +56,7 @@ public final class ResolvingFailure {
 
     private String message;
     private String reason;
-    private String code;
+    private String code = "UNKNOWN";
 
     private Builder() {}
 
@@ -64,7 +64,7 @@ public final class ResolvingFailure {
       return new Builder();
     }
 
-    public static Builder newFailure(Exception e) {
+    public static Builder newFailure(Throwable e) {
       Builder builder = new Builder();
       builder.message = e.getMessage();
       builder.reason = ExceptionUtils.getStackTrace(e);
