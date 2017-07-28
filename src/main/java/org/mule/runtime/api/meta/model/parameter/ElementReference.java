@@ -59,6 +59,11 @@ public class ElementReference {
     /**
      * Represents a mule flow.
      */
-    FLOW
+    FLOW,
+
+    /**
+     * Represent an object store definition
+     */
+    OBJECT_STORE
   }
 }
