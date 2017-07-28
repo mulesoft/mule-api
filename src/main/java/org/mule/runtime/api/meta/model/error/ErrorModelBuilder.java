@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.error;
 
+import org.mule.runtime.api.component.ComponentIdentifier;
+
 /**
  * Builder pattern implementation to build {@link ErrorModel} instances.
  *
@@ -31,6 +33,16 @@ public final class ErrorModelBuilder {
    */
   public static ErrorModelBuilder newError(String typeName, String namespace) {
     return new ErrorModelBuilder(typeName, namespace);
+  }
+
+  /**
+   * Creates a builder to be able to create {@link ErrorModel} instances from an error {@link ComponentIdentifier}
+   *
+   * @param identifier  The identifier of the error to create.
+   * @return An {@link ErrorModelBuilder} initialized with the identifiers name and namespace
+   */
+  public static ErrorModelBuilder newError(ComponentIdentifier identifier) {
+    return newError(identifier.getName(), identifier.getNamespace());
   }
 
   /**
