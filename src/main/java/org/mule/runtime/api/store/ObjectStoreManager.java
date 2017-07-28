@@ -60,7 +60,7 @@ public interface ObjectStoreManager {
    * If the {@code name} doesn't match with a store previously created through that method, or if the matching
    * store was disposed through {@link #disposeStore(String)}, then this method will throw {@link NoSuchElementException}.
    * <p>
-   * The returned store has to already be open. Invokers should not have to call {@link ObjectStore#open()} on the returned
+   * The returned store has to be already open. Invokers should not have to call {@link ObjectStore#open()} on the returned
    * instance.
    * <p>
    * Otherwise, invoking this method several times using equivalent names will always result in <b>the same</b> instance
@@ -79,7 +79,7 @@ public interface ObjectStoreManager {
    * If is {@link #getObjectStore(String)} after this method with an equivalent {@code name}, it will return the same
    * instance as this method.
    * <p>
-   * The returned store has to already be open. Invokers should not have to call {@link ObjectStore#open()} on the returned
+   * The returned store has to be already open. Invokers should not have to call {@link ObjectStore#open()} on the returned
    * instance.
    * <p>
    * If this method is invoked with a {@code name} for which an ObjectStore has already been created, it will throw
