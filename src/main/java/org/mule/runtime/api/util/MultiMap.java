@@ -25,7 +25,7 @@ import java.util.Set;
 
 /**
  * Implementation of a multi-map that allows the aggregation of keys and access to the aggregated list or a single value (the
- * last).
+ * first).
  *
  * @param <K> the type of keys maintained by this map
  * @param <V> the type of mapped values
@@ -83,7 +83,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   public V get(Object key) {
     final LinkedList<V> values = paramsMap.get(key);
     if (values != null) {
-      return values.getLast();
+      return values.getFirst();
     }
     return null;
   }
@@ -113,7 +113,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     if (previousValue == null || previousValue.isEmpty()) {
       return null;
     }
-    return previousValue.getLast();
+    return previousValue.getFirst();
   }
 
   /**
@@ -164,14 +164,14 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   @Override
   public Collection<V> values() {
     List<V> values = new ArrayList<>();
-    paramsMap.forEach((key, value) -> values.add(value.getLast()));
+    paramsMap.forEach((key, value) -> values.add(value.getFirst()));
     return values;
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
     Set<Entry<K, V>> entries = new HashSet<>();
-    paramsMap.forEach((key, value) -> entries.add(new AbstractMap.SimpleEntry<>(key, value.getLast())));
+    paramsMap.forEach((key, value) -> entries.add(new AbstractMap.SimpleEntry<>(key, value.getFirst())));
     return entries;
   }
 
