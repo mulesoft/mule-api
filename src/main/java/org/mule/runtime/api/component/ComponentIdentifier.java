@@ -60,13 +60,13 @@ public interface ComponentIdentifier {
      * @param name name of the component
      * @return {@code this} builder
      */
-    Builder withName(String name);
+    Builder name(String name);
 
     /**
      * @param namespace namespace owning the component
      * @return {@code this} builder
      */
-    Builder withNamespace(String namespace);
+    Builder namespace(String namespace);
 
     /**
      * @return a new instance of {@link ComponentIdentifier}

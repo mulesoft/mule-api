@@ -31,7 +31,7 @@ public interface TlsContextFactoryBuilder {
    * @param name the name of the context
    * @return this builder
    */
-  TlsContextFactoryBuilder setName(String name);
+  TlsContextFactoryBuilder name(String name);
 
   /**
    * Defines the enabled TLS protocols, which must be a subset of the global enabled ones, otherwise a {@link CreateException} will
@@ -40,7 +40,7 @@ public interface TlsContextFactoryBuilder {
    * @param protocols a comma separated {@link String} with the protocols, for example "TLSv1.1,TLSv1.2"
    * @return this builder
    */
-  TlsContextFactoryBuilder setEnabledProtocols(String protocols);
+  TlsContextFactoryBuilder enabledProtocols(String protocols);
 
   /**
    * Defines the enabled TLS cipher suites, which must be a subset of the global enabled ones, otherwise a {@link CreateException}
@@ -49,24 +49,24 @@ public interface TlsContextFactoryBuilder {
    * @param cipherSuites a comma separated {@link String} with the cipher suites, for example "TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA".
    * @return this builder
    */
-  TlsContextFactoryBuilder setEnabledCipherSuites(String cipherSuites);
+  TlsContextFactoryBuilder enabledCipherSuites(String cipherSuites);
 
   /**
    * Defines the location (which will be resolved relative to the current classpath and file system, if possible) where the trust
-   * store to use should be looked for, requires {@link #setTrustStorePassword(String)} too.
+   * store to use should be looked for, requires {@link #trustStorePassword(String)} too.
    *
    * @param path the file path to the trust store
    * @return this builder
    */
-  TlsContextFactoryBuilder setTrustStorePath(String path);
+  TlsContextFactoryBuilder trustStorePath(String path);
 
   /**
-   * Defines the password to access the trust store defined in {@link #setTrustStorePath(String)}.
+   * Defines the password to access the trust store defined in {@link #trustStorePath(String)}.
    *
    * @param password the password
    * @return this builder
    */
-  TlsContextFactoryBuilder setTrustStorePassword(String password);
+  TlsContextFactoryBuilder trustStorePassword(String password);
 
   /**
    * Defines the type of the trust store (such as jks, jceks or pkcs12). By default, {@link KeyStore#getDefaultType()} will be used.
@@ -74,7 +74,7 @@ public interface TlsContextFactoryBuilder {
    * @param type
    * @return this builder
    */
-  TlsContextFactoryBuilder setTrustStoreType(String type);
+  TlsContextFactoryBuilder trustStoreType(String type);
 
   /**
    * Defines whether the trust store should be insecure, meaning no certificate validations should be performed. Default value is
@@ -83,7 +83,7 @@ public interface TlsContextFactoryBuilder {
    * @param insecure
    * @return this builder
    */
-  TlsContextFactoryBuilder setInsecureTrustStore(boolean insecure);
+  TlsContextFactoryBuilder insecureTrustStore(boolean insecure);
 
   /**
    * Defines the trust store algorithm. By default, {@link KeyManagerFactory#getDefaultAlgorithm()} will be used.
@@ -91,24 +91,24 @@ public interface TlsContextFactoryBuilder {
    * @param algorithm the algorithm to use
    * @return this builder
    */
-  TlsContextFactoryBuilder setTrustStoreAlgorithm(String algorithm);
+  TlsContextFactoryBuilder trustStoreAlgorithm(String algorithm);
 
   /**
    * Defines the location (which will be resolved relative to the current classpath and file system, if possible) where the key
-   * store to use should be looked for. Requires {@link #setKeyStorePassword(String)} too.
+   * store to use should be looked for. Requires {@link #keyStorePassword(String)} too.
    *
    * @param path the file path to the key store
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyStorePath(String path);
+  TlsContextFactoryBuilder keyStorePath(String path);
 
   /**
-   * Defines the password to access the key store defined in {@link #setKeyStorePath(String)}.
+   * Defines the password to access the key store defined in {@link #keyStorePath(String)}.
    *
    * @param password the password used to protect the key store
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyStorePassword(String password);
+  TlsContextFactoryBuilder keyStorePassword(String password);
 
   /**
    * Defines the alias of the key to use when the key store contains many private keys. By default, the first key in the file will
@@ -117,7 +117,7 @@ public interface TlsContextFactoryBuilder {
    * @param alias the alias of the key
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyAlias(String alias);
+  TlsContextFactoryBuilder keyAlias(String alias);
 
   /**
    * Defines the password used to protect the private key.
@@ -125,7 +125,7 @@ public interface TlsContextFactoryBuilder {
    * @param password the password
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyPassword(String password);
+  TlsContextFactoryBuilder keyPassword(String password);
 
   /**
    * Defines the type of the key store (such as jks, jceks or pkcs12). By default, {@link KeyStore#getDefaultType()} will be used.
@@ -133,7 +133,7 @@ public interface TlsContextFactoryBuilder {
    * @param type
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyStoreType(String type);
+  TlsContextFactoryBuilder keyStoreType(String type);
 
   /**
    * Defines the key store algorithm. By default, {@link KeyManagerFactory#getDefaultAlgorithm()} will be used.
@@ -141,8 +141,7 @@ public interface TlsContextFactoryBuilder {
    * @param algorithm
    * @return this builder
    */
-  TlsContextFactoryBuilder setKeyStoreAlgorithm(String algorithm);
-
+  TlsContextFactoryBuilder keyStoreAlgorithm(String algorithm);
 
   /**
    * Returns a {@link TlsContextFactory} based on the configured properties.

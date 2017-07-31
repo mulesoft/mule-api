@@ -36,7 +36,7 @@ public interface Location {
   /**
    * @return the name of the global element that contains the component referenced by {@code this} {@link Location}.
    */
-  String getGlobalElementName();
+  String getGlobalName();
 
   /**
    * @return the parts within the global element that define the location of the
@@ -151,6 +151,14 @@ public interface Location {
     Builder addIndexPart(int index);
 
     /**
+     * Adds the parts of this location.
+     *
+     * @param parts the parts of the location
+     * @return a new builder with the provided configuration.
+     */
+    Builder parts(List<String> parts);
+
+    /**
      * @return a location built with the provided configuration.
      */
     Location build();
@@ -164,7 +172,7 @@ public interface Location {
     private LinkedList<String> parts = new LinkedList<>();
 
     @Override
-    public String getGlobalElementName() {
+    public String getGlobalName() {
       return parts.get(0);
     }
 
@@ -273,6 +281,12 @@ public interface Location {
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(String.valueOf(index));
       return locationBuilder;
+    }
+
+    @Override
+    public Builder parts(List<String> parts) {
+      location.parts = new LinkedList<>(parts);
+      return this;
     }
 
     private void verifyIndexPartAfterProcessor(String part) {

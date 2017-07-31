@@ -37,8 +37,8 @@ public interface TlsContextFactory {
   /**
    * Allows the creation of an {@link SSLContext} with the configured keystore and trust store. You must use {@link #getEnabledProtocols()}
    * and {@link #getEnabledCipherSuites()} to further configure your TLS environment. The resulting {@link SSLContext} should not
-   * be used to create {@link SSLSocketFactory} or {@link SSLServerSocketFactory} directly, use {@link #getSocketFactory()} and
-   * {@link #getServerSocketFactory()} instead, otherwise protocols and ciphers will not be enforced.
+   * be used to create {@link SSLSocketFactory} or {@link SSLServerSocketFactory} directly, use {@link #createSocketFactory()} and
+   * {@link #createServerSocketFactory()} instead, otherwise protocols and ciphers will not be enforced.
    *
    * @return a new SSL Context
    * @throws KeyManagementException
@@ -54,7 +54,7 @@ public interface TlsContextFactory {
    * @throws KeyManagementException
    * @throws NoSuchAlgorithmException
    */
-  SSLSocketFactory getSocketFactory() throws KeyManagementException, NoSuchAlgorithmException;
+  SSLSocketFactory createSocketFactory() throws KeyManagementException, NoSuchAlgorithmException;
 
   /**
    * Allows the creation of a {@link SSLServerSocketFactory} that restricts the available protocols and cipher suites in the sockets
@@ -64,7 +64,7 @@ public interface TlsContextFactory {
    * @throws KeyManagementException
    * @throws NoSuchAlgorithmException
    */
-  SSLServerSocketFactory getServerSocketFactory() throws KeyManagementException, NoSuchAlgorithmException;
+  SSLServerSocketFactory createServerSocketFactory() throws KeyManagementException, NoSuchAlgorithmException;
 
   /**
    * The list of ciphers that must be used to restrict the creation of the SSL Sockets

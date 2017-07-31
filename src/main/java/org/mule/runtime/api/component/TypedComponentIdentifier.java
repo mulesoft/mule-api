@@ -96,13 +96,13 @@ public interface TypedComponentIdentifier {
      * @param componentIdentifier the identifier of the component
      * @return {@code this} builder
      */
-    Builder withIdentifier(ComponentIdentifier componentIdentifier);
+    Builder identifier(ComponentIdentifier componentIdentifier);
 
     /**
      * @param componentType the type of the component
      * @return {@code this} builder
      */
-    Builder withType(ComponentType componentType);
+    Builder type(ComponentType componentType);
 
     /**
      * @return a new instance of {@link TypedComponentIdentifier}
