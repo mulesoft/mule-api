@@ -19,7 +19,7 @@ import java.util.List;
 public interface ObjectStore<T extends Serializable> {
 
   /**
-   * Check whether the given Object is already registered with this store.
+   * Check whether this store already contains a value for the given {@code key}
    *
    * @param key the identifier of the object to check
    * @return <code>true</code> if the key is stored or <code>false</code> no value was stored for the key.
@@ -41,7 +41,7 @@ public interface ObjectStore<T extends Serializable> {
   void store(String key, T value) throws ObjectStoreException;
 
   /**
-   * Retrieve the given Object.
+   * * Retrieve the object stored under the given {@code key}
    *
    * @param key the identifier of the object to retrieve.
    * @return the object associated with the given key. If no object for the given key was found this method throws an
@@ -53,7 +53,7 @@ public interface ObjectStore<T extends Serializable> {
   T retrieve(String key) throws ObjectStoreException;
 
   /**
-   * Remove the object with key.
+   * Remove the object with the given {@code key}
    *
    * @param key the identifier of the object to remove.
    * @return the object that was previously stored for the given key
