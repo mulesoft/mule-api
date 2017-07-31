@@ -46,10 +46,10 @@ public class MultiMapTestCase {
   }
 
   @Test
-  public void secondPutReplaceOldValue() {
+  public void secondPutAddsValue() {
     multiMap.put(KEY_1, VALUE_1);
     assertThat(multiMap.put(KEY_1, VALUE_2), is(VALUE_1));
-    assertThat(multiMap.get(KEY_1), is(VALUE_2));
+    assertThat(multiMap.get(KEY_1), is(VALUE_1));
     assertThat(multiMap.getAll(KEY_1), is(asList(VALUE_1, VALUE_2)));
   }
 
@@ -104,7 +104,7 @@ public class MultiMapTestCase {
 
     Collection<String> values = multiMap.values();
     assertThat(values, hasSize(3));
-    assertThat(values, containsInAnyOrder(VALUE_1, VALUE_2, VALUE_2));
+    assertThat(values, containsInAnyOrder(VALUE_1, VALUE_2, VALUE_1));
   }
 
   @Test
