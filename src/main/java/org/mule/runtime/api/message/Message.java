@@ -70,17 +70,27 @@ public interface Message extends Serializable {
    * @return new message instance
    */
   static Message of(Object payload) {
-    return builder().payload(payload).build();
+    return builder().value(payload).build();
   }
 
   interface PayloadBuilder {
+
+    /**
+     * Sets the {@link Message}'s payload to be built.
+     * <p>
+     * If a {@link DataType} has previously been set it will be updated to reflect the type of the new payload.
+     *
+     * @param typedValue the message payload
+     * @return this builder.
+     */
+    Builder payload(TypedValue<?> typedValue);
 
     /**
      * Sets a {@code #null} value for the {@link Message}'s payload to be built.
      *
      * @return this builder
      */
-    Builder nullPayload();
+    Builder nullValue();
 
     /**
      * Sets the value for the {@link Message}'s payload to be built.
@@ -93,7 +103,7 @@ public interface Message extends Serializable {
      * @param value the message content
      * @return this builder.
      */
-    Builder payload(Object value);
+    Builder value(Object value);
 
     /**
      * Sets the {@link MediaType} for the {@link Message} payload to be built. See {@link DataType#getMediaType()}
@@ -112,14 +122,14 @@ public interface Message extends Serializable {
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}.
      * <p>
-     * If you already have a {@link Collection} instance, use {@link #collectionPayload(Collection, Class)} instead.
+     * If you already have a {@link Collection} instance, use {@link #collectionValue(Collection, Class)} instead.
      *
      * @param value the iterator for the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the payload is null
      */
-    Builder streamPayload(Iterator value, Class<?> itemType);
+    Builder streamValue(Iterator value, Class<?> itemType);
 
     /**
      * Sets the collection value for the {@link Message}'s payload to be built.
@@ -134,7 +144,7 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Collection value, Class<?> itemType);
+    Builder collectionValue(Collection value, Class<?> itemType);
 
     /**
      * Sets the collection value for the {@link Message}'s payload to be built.
@@ -148,18 +158,29 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Object[] value);
+    Builder collectionValue(Object[] value);
 
   }
 
   interface AttributesBuilder {
 
     /**
+     * Populates the builder attributes from the given {@code typedValue}.
+     * <p>
+     * This method will update the attributes {@link DataType} according to the new value.
+     *
+     * @param typedValue the attributes desired
+     * @return this builder.
+     * @throws NullPointerException if the value is null
+     */
+    Builder attributes(TypedValue<?> typedValue);
+
+    /**
      * Sets a {@code #null} value for the {@link Message}'s attributes to be built.
      *
      * @return this builder
      */
-    Builder nullAttributes();
+    Builder nullAttributesValue();
 
     /**
      * Populates the builder from the given {@code value}.
@@ -171,7 +192,7 @@ public interface Message extends Serializable {
      * @return this builder.
      * @throws NullPointerException if the value is null
      */
-    Builder attributes(Object value);
+    Builder attributesValue(Object value);
 
     /**
      * Sets the {@link MediaType} for the {@link Message} attributes to be built. See {@link DataType#getMediaType()}
