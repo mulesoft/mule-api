@@ -87,7 +87,7 @@ public interface Message extends Serializable {
      * and mediaType component parts and the builder will generate the {@link TypedValue}.
      * See {@link #value(Object)}, {@link #mediaType(MediaType)}.
      * <p>
-     * If a {@link DataType} has previously been set it will be updated to reflect the type of the new payload.
+     * If a mediaType or value have been previously set then they will be overwritten.
      *
      * @param typedValue the message payload
      * @return this builder.
@@ -185,7 +185,7 @@ public interface Message extends Serializable {
      * value or value and mediaType component parts and the builder will generate the {@link TypedValue}.
      * See {@link #attributesValue(Object)}, {@link #attributesMediaType(MediaType)}.
      * <p>
-     * This method will update the attributes {@link DataType} according to the new value.
+     * If a mediaType or value have been previously set for the attributes then they will be overwritten.
      *
      * @param typedValue the attributes desired
      * @return this builder.
