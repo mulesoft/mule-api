@@ -70,17 +70,36 @@ public interface Message extends Serializable {
    * @return new message instance
    */
   static Message of(Object payload) {
-    return builder().payload(payload).build();
+    return builder().value(payload).build();
   }
 
+  /**
+   * Handles the {@link Message}'s payload creation, either from a provided {@link TypedValue} or constructing it internally from
+   * a given value and {@link MediaType}.
+   *
+   * @see {@link PayloadBuilder#payload(TypedValue)}, {@link PayloadBuilder#value(Object)}, {@link PayloadBuilder#mediaType(MediaType)}
+   */
   interface PayloadBuilder {
+
+    /**
+     * Sets the {@link Message}'s {@link TypedValue} payload to be built, including it's value and media type. This should be used
+     * when you already have a {@link TypedValue}. Alternatively, a {@link Message} can be constructed from just the value or value
+     * and mediaType component parts and the builder will generate the {@link TypedValue}.
+     * See {@link #value(Object)}, {@link #mediaType(MediaType)}.
+     * <p>
+     * If a mediaType or value have been previously set then they will be overwritten.
+     *
+     * @param typedValue the message payload
+     * @return this builder.
+     */
+    Builder payload(TypedValue<?> typedValue);
 
     /**
      * Sets a {@code #null} value for the {@link Message}'s payload to be built.
      *
      * @return this builder
      */
-    Builder nullPayload();
+    Builder nullValue();
 
     /**
      * Sets the value for the {@link Message}'s payload to be built.
@@ -93,7 +112,7 @@ public interface Message extends Serializable {
      * @param value the message content
      * @return this builder.
      */
-    Builder payload(Object value);
+    Builder value(Object value);
 
     /**
      * Sets the {@link MediaType} for the {@link Message} payload to be built. See {@link DataType#getMediaType()}
@@ -112,14 +131,14 @@ public interface Message extends Serializable {
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}.
      * <p>
-     * If you already have a {@link Collection} instance, use {@link #collectionPayload(Collection, Class)} instead.
+     * If you already have a {@link Collection} instance, use {@link #collectionValue(Collection, Class)} instead.
      *
      * @param value the iterator for the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the payload is null
      */
-    Builder streamPayload(Iterator value, Class<?> itemType);
+    Builder streamValue(Iterator value, Class<?> itemType);
 
     /**
      * Sets the collection value for the {@link Message}'s payload to be built.
@@ -134,7 +153,7 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Collection value, Class<?> itemType);
+    Builder collectionValue(Collection value, Class<?> itemType);
 
     /**
      * Sets the collection value for the {@link Message}'s payload to be built.
@@ -148,18 +167,38 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    Builder collectionPayload(Object[] value);
+    Builder collectionValue(Object[] value);
 
   }
 
+  /**
+   * Handles the {@link Message}'s attributes creation, either from a provided {@link TypedValue} or constructing it internally from
+   * a given value and {@link MediaType}.
+   *
+   * @see {@link AttributesBuilder#attributes(TypedValue)}, {@link AttributesBuilder#attributesValue(Object)}, {@link AttributesBuilder#attributesMediaType(MediaType)}
+   */
   interface AttributesBuilder {
+
+    /**
+     * Sets the {@link Message}'s {@link TypedValue} attributes to be built, including their value and media type. This should be
+     * used when you already have a {@link TypedValue}. Alternatively, a {@link Message} can be constructed from just the attributes
+     * value or value and mediaType component parts and the builder will generate the {@link TypedValue}.
+     * See {@link #attributesValue(Object)}, {@link #attributesMediaType(MediaType)}.
+     * <p>
+     * If a mediaType or value have been previously set for the attributes then they will be overwritten.
+     *
+     * @param typedValue the attributes desired
+     * @return this builder.
+     * @throws NullPointerException if the value is null
+     */
+    Builder attributes(TypedValue<?> typedValue);
 
     /**
      * Sets a {@code #null} value for the {@link Message}'s attributes to be built.
      *
      * @return this builder
      */
-    Builder nullAttributes();
+    Builder nullAttributesValue();
 
     /**
      * Populates the builder from the given {@code value}.
@@ -171,7 +210,7 @@ public interface Message extends Serializable {
      * @return this builder.
      * @throws NullPointerException if the value is null
      */
-    Builder attributes(Object value);
+    Builder attributesValue(Object value);
 
     /**
      * Sets the {@link MediaType} for the {@link Message} attributes to be built. See {@link DataType#getMediaType()}

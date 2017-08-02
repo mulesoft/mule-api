@@ -57,7 +57,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
       namespace = CORE_PREFIX;
       identifier = values[0];
     }
-    return new DefaultComponentIdentifier.Builder().withNamespace(namespace).withName(identifier).build();
+    return new DefaultComponentIdentifier.Builder().namespace(namespace).name(identifier).build();
   }
 
   public static class Builder implements ComponentIdentifier.Builder {
@@ -68,7 +68,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
      * @param namespace namespace identifier of the Mule language extensions module
      * @return the builder
      */
-    public Builder withNamespace(String namespace) {
+    public Builder namespace(String namespace) {
       componentIdentifier.namespace = namespace;
       return this;
     }
@@ -77,7 +77,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
      * @param identifier identifier unique identifier within the namespace of the language configuration extension
      * @return the builder
      */
-    public Builder withName(String identifier) {
+    public Builder name(String identifier) {
       componentIdentifier.name = identifier;
       return this;
     }

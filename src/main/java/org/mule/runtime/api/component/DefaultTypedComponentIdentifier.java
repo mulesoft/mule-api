@@ -32,12 +32,12 @@ class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Seria
     private DefaultTypedComponentIdentifier typedComponentIdentifier = new DefaultTypedComponentIdentifier();
 
     @Override
-    public TypedComponentIdentifier.Builder withIdentifier(ComponentIdentifier identifier) {
+    public TypedComponentIdentifier.Builder identifier(ComponentIdentifier identifier) {
       typedComponentIdentifier.identifier = identifier;
       return this;
     }
 
-    public Builder withType(ComponentType type) {
+    public Builder type(ComponentType type) {
       typedComponentIdentifier.type = type;
       return this;
     }

@@ -55,7 +55,7 @@ public final class ArtifactDeclaration extends EnrichableElementDeclaration {
   public <T extends ElementDeclaration> Optional<T> findElement(Location location) {
 
     return this.getGlobalElements().stream()
-        .filter(g -> g.getRefName().equals(location.getGlobalElementName()))
+        .filter(g -> g.getRefName().equals(location.getGlobalName()))
         .findFirst()
         .map(g -> (T) g.findElement(location.getParts()).orElse(null));
   }
