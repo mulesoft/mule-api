@@ -73,10 +73,19 @@ public interface Message extends Serializable {
     return builder().value(payload).build();
   }
 
+  /**
+   * Handles the {@link Message}'s payload creation, either from a provided {@link TypedValue} or constructing it internally from
+   * a given value and {@link MediaType}.
+   *
+   * @see {@link PayloadBuilder#payload(TypedValue)}, {@link PayloadBuilder#value(Object)}, {@link PayloadBuilder#mediaType(MediaType)}
+   */
   interface PayloadBuilder {
 
     /**
-     * Sets the {@link Message}'s payload to be built, including it's value and media type taken from the provided {@link TypedValue}.
+     * Sets the {@link Message}'s {@link TypedValue} payload to be built, including it's value and media type. This should be used
+     * when you already have a {@link TypedValue}. Alternatively, a {@link Message} can be constructed from just the value or value
+     * and mediaType component parts and the builder will generate the {@link TypedValue}.
+     * See {@link #value(Object)}, {@link #mediaType(MediaType)}.
      * <p>
      * If a {@link DataType} has previously been set it will be updated to reflect the type of the new payload.
      *
@@ -162,11 +171,19 @@ public interface Message extends Serializable {
 
   }
 
+  /**
+   * Handles the {@link Message}'s attributes creation, either from a provided {@link TypedValue} or constructing it internally from
+   * a given value and {@link MediaType}.
+   *
+   * @see {@link AttributesBuilder#attributes(TypedValue)}, {@link AttributesBuilder#attributesValue(Object)}, {@link AttributesBuilder#attributesMediaType(MediaType)}
+   */
   interface AttributesBuilder {
 
     /**
-     * Populates the builder attributes from the given {@code typedValue}, including it's value and media type taken from the
-     * provided {@link TypedValue}.
+     * Sets the {@link Message}'s {@link TypedValue} attributes to be built, including their value and media type. This should be
+     * used when you already have a {@link TypedValue}. Alternatively, a {@link Message} can be constructed from just the attributes
+     * value or value and mediaType component parts and the builder will generate the {@link TypedValue}.
+     * See {@link #attributesValue(Object)}, {@link #attributesMediaType(MediaType)}.
      * <p>
      * This method will update the attributes {@link DataType} according to the new value.
      *
