@@ -76,7 +76,7 @@ public interface Message extends Serializable {
   interface PayloadBuilder {
 
     /**
-     * Sets the {@link Message}'s payload to be built.
+     * Sets the {@link Message}'s payload to be built, including it's value and media type taken from the provided {@link TypedValue}.
      * <p>
      * If a {@link DataType} has previously been set it will be updated to reflect the type of the new payload.
      *
@@ -165,7 +165,8 @@ public interface Message extends Serializable {
   interface AttributesBuilder {
 
     /**
-     * Populates the builder attributes from the given {@code typedValue}.
+     * Populates the builder attributes from the given {@code typedValue}, including it's value and media type taken from the
+     * provided {@link TypedValue}.
      * <p>
      * This method will update the attributes {@link DataType} according to the new value.
      *
