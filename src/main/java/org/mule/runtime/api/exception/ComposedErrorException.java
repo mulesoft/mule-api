@@ -19,7 +19,7 @@ import java.util.List;
 public interface ComposedErrorException {
 
   /**
-   *
+   * Provides the list of errors associated to this exception.
    *
    * @return a list of child errors
    */
