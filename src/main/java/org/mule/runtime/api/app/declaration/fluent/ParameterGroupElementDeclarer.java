@@ -29,6 +29,17 @@ public final class ParameterGroupElementDeclarer
   }
 
   /**
+   * Set's the name of the element
+   *
+   * @param name the name of the element
+   * @return {@code this} declarer
+   */
+  public ParameterGroupElementDeclarer withName(String name) {
+    declaration.setName(name);
+    return this;
+  }
+
+  /**
    * Adds a {@link ParameterElementDeclaration parameter} to {@code this} parametrized element declaration
    *
    * @param name  the {@code name} of the {@link ParameterElementDeclaration}
