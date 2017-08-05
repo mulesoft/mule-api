@@ -14,10 +14,10 @@ import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
  *
  * @since 1.0
  */
-public abstract class ParameterizedElementDeclarer<D extends ParameterizedElementDeclarer, T extends ParameterizedElementDeclaration>
-    extends EnrichableElementDeclarer<D, T> {
+public abstract class ParameterizedElementDeclarer<E extends ParameterizedElementDeclarer, D extends ParameterizedElementDeclaration>
+    extends EnrichableElementDeclarer<E, D> {
 
-  ParameterizedElementDeclarer(T declaration) {
+  ParameterizedElementDeclarer(D declaration) {
     super(declaration);
   }
 
@@ -27,9 +27,9 @@ public abstract class ParameterizedElementDeclarer<D extends ParameterizedElemen
    * @param group  the {@link ParameterGroupElementDeclarer group} to add in {@code this} {@link ParameterizedElementDeclaration}
    * @return {@code this} declarer
    */
-  public D withParameterGroup(ParameterGroupElementDeclaration group) {
+  public E withParameterGroup(ParameterGroupElementDeclaration group) {
     declaration.addParameterGroup(group);
-    return (D) this;
+    return (E) this;
   }
 
 }

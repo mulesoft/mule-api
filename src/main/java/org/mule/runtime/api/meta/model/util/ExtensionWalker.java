@@ -11,12 +11,12 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
+import org.mule.runtime.api.meta.model.construct.ConstructModel;
+import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.function.FunctionModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
-import org.mule.runtime.api.meta.model.operation.RouterModel;
-import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -67,6 +67,8 @@ public abstract class ExtensionWalker {
     ifContinue(() -> walkSources(extensionModel));
     ifContinue(() -> walkOperations(extensionModel));
     ifContinue(() -> walkFunctions(extensionModel));
+    ifContinue(() -> walkConstructs(extensionModel));
+
   }
 
   /**
@@ -91,11 +93,6 @@ public abstract class ExtensionWalker {
    * Invoked when an {@link OperationModel} is found in the
    * traversed {@code extensionModel}.
    * <p>
-   * This method is also invoked when a {@link ScopeModel} or a
-   * {@link RouterModel} are found, if and only if the
-   * {@link #onScope(HasOperationModels, ScopeModel)}
-   * or {@link #onRouter(HasOperationModels, RouterModel)}
-   * methods were not overridden respectively.
    *
    * @param owner The component that owns the operation
    * @param model the {@link OperationModel}
@@ -113,30 +110,13 @@ public abstract class ExtensionWalker {
   protected void onFunction(HasFunctionModels owner, FunctionModel model) {}
 
   /**
-   * Invoked when a {@link ScopeModel} is found in the
-   * traversed {@code extensionModel}.
-   * <p>
-   * By default, this method simply delegates on {@link #onOperation(HasOperationModels, OperationModel)}
+   * Invoked when an {@link ConstructModel} is found in the
+   * traversed {@code extensionModel}
    *
-   * @param owner The component that owns the operation
-   * @param model the {@link OperationModel}
+   * @param owner The component that owns the source
+   * @param model the {@link ConstructModel}
    */
-  protected void onScope(HasOperationModels owner, ScopeModel model) {
-    onOperation(owner, model);
-  }
-
-  /**
-   * Invoked when a {@link RouterModel} is found in the
-   * traversed {@code extensionModel}.
-   * <p>
-   * By default, this method simply delegates on {@link #onOperation(HasOperationModels, OperationModel)}
-   *
-   * @param owner The component that owns the operation
-   * @param model the {@link OperationModel}
-   */
-  protected void onRouter(HasOperationModels owner, RouterModel model) {
-    onOperation(owner, model);
-  }
+  protected void onConstruct(HasConstructModels owner, ConstructModel model) {}
 
   /**
    * Invoked when an {@link ConnectionProviderModel} is found in the
@@ -216,33 +196,23 @@ public abstract class ExtensionWalker {
     }
   }
 
+  private void walkConstructs(ExtensionModel model) {
+    for (ConstructModel construct : model.getConstructModels()) {
+      if (stopped) {
+        return;
+      }
+      onConstruct(model, construct);
+      ifContinue(() -> walkParameters(construct));
+    }
+  }
+
   private void walkOperations(HasOperationModels model) {
     for (OperationModel operation : model.getOperationModels()) {
       if (stopped) {
         return;
       }
 
-      operation.accept(new ComponentModelVisitor() {
-
-        @Override
-        public void visit(OperationModel operationModel) {
-          onOperation(model, operation);
-        }
-
-        @Override
-        public void visit(ScopeModel scopeModel) {
-          onScope(model, scopeModel);
-        }
-
-        @Override
-        public void visit(RouterModel routerModel) {
-          onRouter(model, routerModel);
-        }
-
-        @Override
-        public void visit(SourceModel sourceModel) {}
-      });
-
+      onOperation(model, operation);
       ifContinue(() -> walkParameters(operation));
     }
   }

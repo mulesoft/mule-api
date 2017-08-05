@@ -6,14 +6,14 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static java.lang.String.format;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.forExtension;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newFlow;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.COMPONENTS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONFIG;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONNECTION;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONNECTION_FIELD;
+import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.CONSTRUCT;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.DECLARING_EXTENSION;
-import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FLOW;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.GLOBAL_PARAMETER;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.KIND;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.NAME;
@@ -27,16 +27,17 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
-import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
+import org.mule.runtime.api.app.declaration.ConstructElementDeclaration;
 import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
+import org.mule.runtime.api.app.declaration.GlobalElementDeclarationVisitor;
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.ConfigurationElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ConnectionElementDeclarer;
+import org.mule.runtime.api.app.declaration.fluent.ConstructElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.FlowElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
 import org.mule.runtime.api.app.declaration.fluent.ParameterizedElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.TopLevelParameterDeclarer;
@@ -71,22 +72,46 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
 
     out.beginObject();
     out.name(REF_NAME).value(value.getRefName());
-    if (value instanceof TopLevelParameterDeclaration) {
-      populateIdentifiableObject(out, value, kind);
-      populateCustomizableObject(delegate, out, value);
-      populateMetadataAwareObject(delegate, out, value);
-      out.name(VALUE).jsonValue(delegate.toJson(((TopLevelParameterDeclaration) value).getValue(), ParameterValue.class));
+    value.accept(new GlobalElementDeclarationVisitor() {
 
-    } else {
-      populateParameterizedObject(delegate, out, (ParameterizedElementDeclaration) value, kind);
-
-      if (value instanceof ConfigurationElementDeclaration) {
-        populateConnection(out, (ConfigurationElementDeclaration) value);
-      } else if (value instanceof FlowElementDeclaration) {
-        out.name(COMPONENTS).jsonValue(delegate.toJson(((FlowElementDeclaration) value).getComponents()));
+      @Override
+      public void visit(TopLevelParameterDeclaration declaration) {
+        populateIdentifiableObject(out, value, kind);
+        populateCustomizableObject(delegate, out, value);
+        populateMetadataAwareObject(delegate, out, value);
+        try {
+          out.name(VALUE).jsonValue(delegate.toJson(((TopLevelParameterDeclaration) value).getValue(), ParameterValue.class));
+        } catch (IOException e) {
+          throw new RuntimeException(format("An error occurred while serializing the declaration of element [%s] of kind [%s] from extension [%s]",
+                                            declaration.getName(), kind, declaration.getDeclaringExtension()),
+                                     e);
+        }
       }
-    }
+
+      @Override
+      public void visit(ConfigurationElementDeclaration declaration) {
+        populateParameterizedObject(delegate, out, (ParameterizedElementDeclaration) value, kind);
+        populateConnection(out, (ConfigurationElementDeclaration) value);
+      }
+
+      @Override
+      public void visit(ConstructElementDeclaration declaration) {
+        populateParameterizedObject(delegate, out, (ParameterizedElementDeclaration) value, kind);
+        populateComponents(out, (ConstructElementDeclaration) value);
+      }
+    });
+
     out.endObject();
+  }
+
+  private void populateComponents(JsonWriter out, ConstructElementDeclaration value) {
+    try {
+      out.name(COMPONENTS).jsonValue(delegate.toJson(value.getComponents()));
+    } catch (IOException e) {
+      throw new RuntimeException(format("An error occurred while serializing the declaration of components for element [%s] with name [%s] from extension [%s]",
+                                        value.getName(), value.getRefName(), value.getDeclaringExtension()),
+                                 e);
+    }
   }
 
   @Override
@@ -109,7 +134,7 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
           if (elementKind.getAsString().equals(CONFIG)) {
             declareConfiguration(jsonObject, (ConfigurationElementDeclarer) declarer);
           } else {
-            declareFlow(jsonObject, (FlowElementDeclarer) declarer);
+            declareConstruct(jsonObject, (ConstructElementDeclarer) declarer);
           }
         }
 
@@ -126,7 +151,7 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
     ((TopLevelParameterDeclarer) declarer).withValue(delegate.fromJson(jsonObject.get(VALUE), ParameterObjectValue.class));
   }
 
-  private void declareFlow(JsonObject jsonObject, FlowElementDeclarer declarer) {
+  private void declareConstruct(JsonObject jsonObject, ConstructElementDeclarer declarer) {
     JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
     declarer.withRefName(jsonObject.get(REF_NAME).getAsString());
     components.forEach(c -> declarer
@@ -155,8 +180,8 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
         return (T) declarer.newConfiguration(name);
       case GLOBAL_PARAMETER:
         return (T) declarer.newGlobalParameter(name);
-      case FLOW:
-        return (T) newFlow();
+      case CONSTRUCT:
+        return (T) declarer.newConstruct(name);
       default:
         throw new IllegalArgumentException("Unknown kind: " + kind);
     }
@@ -167,18 +192,26 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
       return GLOBAL_PARAMETER;
     } else if (type instanceof ConfigurationElementDeclaration) {
       return CONFIG;
-    } else if (type instanceof FlowElementDeclaration) {
-      return FLOW;
+    } else if (type instanceof ConstructElementDeclaration) {
+      return CONSTRUCT;
     } else {
       throw new IllegalArgumentException("Unknown kind for type: " + type.getClass().getName());
     }
   }
 
-  private void populateConnection(JsonWriter out, ConfigurationElementDeclaration config) throws IOException {
-    if (config.getConnection().isPresent()) {
-      out.name(CONNECTION_FIELD).beginObject();
-      populateParameterizedObject(delegate, out, config.getConnection().get(), CONNECTION);
-      out.endObject();
+  private void populateConnection(JsonWriter out, ConfigurationElementDeclaration config) {
+
+    try {
+      if (config.getConnection().isPresent()) {
+        out.name(CONNECTION_FIELD).beginObject();
+        populateParameterizedObject(delegate, out, config.getConnection().get(), CONNECTION);
+        out.endObject();
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(
+                                 format("An error occurred while serializing the connection provider declaration of element [%s] of kind [%s] from extension [%s]",
+                                        config.getName(), "config", config.getDeclaringExtension()),
+                                 e);
     }
   }
 

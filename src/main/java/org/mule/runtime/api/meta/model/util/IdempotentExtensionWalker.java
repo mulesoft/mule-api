@@ -8,12 +8,12 @@ package org.mule.runtime.api.meta.model.util;
 
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
+import org.mule.runtime.api.meta.model.construct.ConstructModel;
+import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.function.FunctionModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
-import org.mule.runtime.api.meta.model.operation.RouterModel;
-import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -41,6 +41,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   private Set<Reference<ParameterGroupModel>> parameterGroups = new HashSet<>();
   private Set<Reference<OperationModel>> operations = new HashSet<>();
   private Set<Reference<FunctionModel>> functions = new HashSet<>();
+  private Set<Reference<ConstructModel>> constructs = new HashSet<>();
   private Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
 
   private <T> boolean isFirstAppearance(Set<Reference<T>> accumulator, T item) {
@@ -73,13 +74,8 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   }
 
   @Override
-  protected void onRouter(HasOperationModels owner, RouterModel model) {
-    doOnce(operations, model, router -> onRouter((RouterModel) router));
-  }
-
-  @Override
-  protected void onScope(HasOperationModels owner, ScopeModel model) {
-    doOnce(operations, model, scope -> onScope((ScopeModel) scope));
+  protected final void onConstruct(HasConstructModels owner, ConstructModel model) {
+    doOnce(constructs, model, this::onConstruct);
   }
 
   @Override
@@ -110,6 +106,15 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * @param model the {@link SourceModel}
    */
   protected void onSource(SourceModel model) {}
+
+  /**
+   * Invoked when an {@link ConstructModel} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance
+   *
+   * @param model the {@link ConstructModel}
+   */
+  protected void onConstruct(ConstructModel model) {}
 
   /**
    * Invoked when an {@link ParameterModel} is found in the traversed {@code extensionModel}.
@@ -147,31 +152,5 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * @param model the {@link FunctionModel}
    */
   protected void onFunction(FunctionModel model) {}
-
-  /**
-   * Invoked when a {@link RouterModel} is found in the traversed {@code extensionModel}.
-   * <p>
-   * This method will only be invoked once per each found instance.
-   * <p>
-   * By default this method simply delegates into {@link #onOperation(OperationModel)}
-   *
-   * @param model the {@link OperationModel}
-   */
-  protected void onRouter(RouterModel model) {
-    onOperation(model);
-  }
-
-  /**
-   * Invoked when a {@link ScopeModel} is found in the traversed {@code extensionModel}.
-   * <p>
-   * This method will only be invoked once per each found instance.
-   * <p>
-   * By default this method simply delegates into {@link #onOperation(OperationModel)}
-   *
-   * @param model the {@link OperationModel}
-   */
-  protected void onScope(ScopeModel model) {
-    onOperation(model);
-  }
 
 }

@@ -18,7 +18,6 @@ public final class SourceElementDeclarer
 
   /**
    * Creates a new instance
-   *
    */
   SourceElementDeclarer(SourceElementDeclaration declaration) {
     super(declaration);

@@ -44,10 +44,12 @@ import java.util.TreeSet;
  */
 public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     implements ConnectedDeclaration<ExtensionDeclaration>, WithSourcesDeclaration<ExtensionDeclaration>,
-    WithOperationsDeclaration<ExtensionDeclaration>, WithFunctionsDeclaration<ExtensionDeclaration> {
+    WithOperationsDeclaration<ExtensionDeclaration>, WithFunctionsDeclaration<ExtensionDeclaration>,
+    WithConstructsDeclaration<ExtensionDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
+  private final List<ConstructDeclaration> constructs = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
   private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
@@ -95,6 +97,23 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     }
 
     configurations.add(config);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<ConstructDeclaration> getConstructs() {
+    return unmodifiableList(constructs);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ExtensionDeclaration addConstruct(ConstructDeclaration declaration) {
+    constructs.add(declaration);
     return this;
   }
 
@@ -379,4 +398,5 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   public Set<ErrorModel> getErrorModels() {
     return errorModels;
   }
+
 }

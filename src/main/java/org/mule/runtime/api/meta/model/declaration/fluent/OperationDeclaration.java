@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.ExecutionType;
+import org.mule.runtime.api.meta.model.operation.ExecutionType;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 /**
@@ -15,14 +15,11 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
  *
  * @since 1.0
  */
-public class OperationDeclaration extends ComponentDeclaration<OperationDeclaration> {
+public class OperationDeclaration extends ExecutableComponentDeclaration<OperationDeclaration> {
 
   private boolean blocking = true;
   private ExecutionType executionType = null;
 
-  /**
-   * {@inheritDoc}
-   */
   public OperationDeclaration(String name) {
     super(name);
   }

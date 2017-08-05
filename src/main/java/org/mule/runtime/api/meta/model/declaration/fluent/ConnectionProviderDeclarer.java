@@ -15,7 +15,8 @@ import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
  *
  * @since 1.0
  */
-public final class ConnectionProviderDeclarer extends ParameterizedDeclarer<ConnectionProviderDeclaration>
+public final class ConnectionProviderDeclarer
+    extends ParameterizedDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
     implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer> {
 
   /**

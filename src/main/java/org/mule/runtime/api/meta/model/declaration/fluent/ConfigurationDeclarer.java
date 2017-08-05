@@ -15,8 +15,8 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  *
  * @since 1.0
  */
-public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclaration> implements
-    HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
+public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
+    implements HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
     HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer> {
 
   /**
@@ -50,46 +50,6 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
     withOperation(operationDeclarer);
 
     return operationDeclarer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ScopeDeclarer withScope(String name) {
-    ScopeDeclaration scope = new ScopeDeclaration(name);
-    final ScopeDeclarer scopeDeclarer = new ScopeDeclarer(scope);
-    withScope(scopeDeclarer);
-
-    return scopeDeclarer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withScope(ScopeDeclarer declarer) {
-    declaration.addOperation(declarer.getDeclaration());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public RouterDeclarer withRouter(String name) {
-    RouterDeclaration router = new RouterDeclaration(name);
-    final RouterDeclarer routerDeclarer = new RouterDeclarer(router);
-    withRouter(routerDeclarer);
-
-    return routerDeclarer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withRouter(RouterDeclarer declarer) {
-    declaration.addOperation(declarer.getDeclaration());
   }
 
   /**

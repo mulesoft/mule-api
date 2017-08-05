@@ -30,35 +30,4 @@ public interface HasOperationDeclarer {
    */
   void withOperation(OperationDeclarer declarer);
 
-  /**
-   * Adds a scope of the given {@code name}
-   *
-   * @param name a non blank name
-   * @return a {@link ScopeDeclarer} which allows describing the created scope
-   */
-  ScopeDeclarer withScope(String name);
-
-  /**
-   * Adds a {@link ScopeDeclarer} by receiving
-   * a {@code declarer} which describes it
-   *
-   * @param declarer a {@link ScopeDeclarer}
-   */
-  void withScope(ScopeDeclarer declarer);
-
-  /**
-   * Adds a router of the given {@code name}
-   *
-   * @param name a non blank name
-   * @return a {@link RouterDeclarer} which allows describing the created router
-   */
-  RouterDeclarer withRouter(String name);
-
-  /**
-   * Adds a {@link RouterDeclarer} by receiving
-   * a {@code declarer} which describes it
-   *
-   * @param declarer a {@link RouterDeclarer}
-   */
-  void withRouter(RouterDeclarer declarer);
 }

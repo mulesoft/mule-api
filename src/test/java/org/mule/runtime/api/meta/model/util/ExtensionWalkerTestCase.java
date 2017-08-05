@@ -17,10 +17,12 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
+import org.mule.runtime.api.meta.model.construct.ConstructModel;
+import org.mule.runtime.api.meta.model.construct.HasConstructModels;
+import org.mule.runtime.api.meta.model.function.FunctionModel;
+import org.mule.runtime.api.meta.model.function.HasFunctionModels;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
-import org.mule.runtime.api.meta.model.operation.RouterModel;
-import org.mule.runtime.api.meta.model.operation.ScopeModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -49,10 +51,7 @@ public class ExtensionWalkerTestCase {
   private OperationModel operation;
 
   @Mock
-  private ScopeModel scope;
-
-  @Mock
-  private RouterModel router;
+  private ConstructModel construct;
 
   @Mock
   private ConnectionProviderModel connectionProvider;
@@ -67,6 +66,9 @@ public class ExtensionWalkerTestCase {
   private SourceModel source;
 
   @Mock
+  private FunctionModel function;
+
+  @Mock
   private SourceCallbackModel sourceCallback;
 
   @Before
@@ -76,8 +78,10 @@ public class ExtensionWalkerTestCase {
     when(source.getSuccessCallback()).thenReturn(of(sourceCallback));
 
     when(extension.getConfigurationModels()).thenReturn(asList(configuration));
-    when(extension.getOperationModels()).thenReturn(asList(operation, scope, router));
+    when(extension.getOperationModels()).thenReturn(asList(operation));
     when(extension.getSourceModels()).thenReturn(asList(source));
+    when(extension.getConstructModels()).thenReturn(asList(construct));
+    when(extension.getFunctionModels()).thenReturn(asList(function));
     when(extension.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
     when(configuration.getOperationModels()).thenReturn(asList(operation));
@@ -85,8 +89,8 @@ public class ExtensionWalkerTestCase {
     when(configuration.getConnectionProviders()).thenReturn(asList(connectionProvider));
 
     when(groupModel.getParameterModels()).thenReturn(asList(parameterModel));
-    addParameter(configuration, operation, router, scope, connectionProvider, source, sourceCallback);
-    visitableMock(operation, scope, router);
+    addParameter(configuration, operation, construct, connectionProvider, source, sourceCallback);
+    visitableMock(operation, construct, source);
   }
 
   private void addParameter(ParameterizedModel... models) {
@@ -99,8 +103,8 @@ public class ExtensionWalkerTestCase {
   public void walk() {
     AtomicInteger configs = new AtomicInteger(0);
     AtomicInteger operations = new AtomicInteger(0);
-    AtomicInteger scopes = new AtomicInteger(0);
-    AtomicInteger routers = new AtomicInteger(0);
+    AtomicInteger constructs = new AtomicInteger(0);
+    AtomicInteger functions = new AtomicInteger(0);
     AtomicInteger sources = new AtomicInteger(0);
     AtomicInteger parameterGroups = new AtomicInteger(0);
     AtomicInteger parameters = new AtomicInteger(0);
@@ -119,13 +123,13 @@ public class ExtensionWalkerTestCase {
       }
 
       @Override
-      protected void onScope(HasOperationModels owner, ScopeModel model) {
-        scopes.incrementAndGet();
+      protected void onFunction(HasFunctionModels owner, FunctionModel model) {
+        functions.incrementAndGet();
       }
 
       @Override
-      protected void onRouter(HasOperationModels owner, RouterModel model) {
-        routers.incrementAndGet();
+      protected void onConstruct(HasConstructModels owner, ConstructModel model) {
+        constructs.incrementAndGet();
       }
 
       @Override
@@ -152,12 +156,12 @@ public class ExtensionWalkerTestCase {
 
     assertCount(configs, 1);
     assertCount(operations, 2);
-    assertCount(routers, 1);
-    assertCount(scopes, 1);
+    assertCount(functions, 1);
+    assertCount(constructs, 1);
     assertCount(sources, 2);
     assertCount(providers, 2);
-    assertCount(parameterGroups, 13);
-    assertCount(parameters, 13);
+    assertCount(parameterGroups, 12);
+    assertCount(parameters, 12);
   }
 
   @Test
@@ -204,11 +208,11 @@ public class ExtensionWalkerTestCase {
     }.walk(extension);
 
     assertCount(configs, 1);
-    assertCount(operations, 4);
+    assertCount(operations, 2);
     assertCount(sources, 2);
     assertCount(providers, 2);
-    assertCount(parameterGroups, 13);
-    assertCount(parameters, 13);
+    assertCount(parameterGroups, 12);
+    assertCount(parameters, 12);
   }
 
   @Test

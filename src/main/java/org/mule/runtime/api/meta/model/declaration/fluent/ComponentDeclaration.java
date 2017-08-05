@@ -7,10 +7,11 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.Stereotype;
-import org.mule.runtime.api.meta.model.error.ErrorModel;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -19,15 +20,12 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public abstract class ComponentDeclaration<T extends ComponentDeclaration> extends ParameterizedDeclaration<T> {
+public class ComponentDeclaration<T extends ComponentDeclaration> extends ParameterizedDeclaration<T>
+    implements WithNestedComponentsDeclaration<T> {
 
-  private OutputDeclaration outputContent;
-  private OutputDeclaration outputAttributes;
-  private boolean transactional = false;
-  private boolean requiresConnection = false;
-  private boolean supportsStreaming = false;
-  private Set<Stereotype> stereotypes = new HashSet<>();
-  private Set<ErrorModel> errorModels = new HashSet<>();
+
+  private Set<StereotypeModel> stereotypes = new HashSet<>();
+  private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
 
   /**
    * {@inheritDoc}
@@ -36,59 +34,21 @@ public abstract class ComponentDeclaration<T extends ComponentDeclaration> exten
     super(name);
   }
 
-  public OutputDeclaration getOutput() {
-    return outputContent;
+  public List<NestableElementDeclaration> getNestedComponents() {
+    return nestedComponents;
   }
 
-  public void setOutput(OutputDeclaration content) {
-    this.outputContent = content;
+  public T addNestedComponent(NestableElementDeclaration nestedComponentDeclaration) {
+    nestedComponents.add(nestedComponentDeclaration);
+    return (T) this;
   }
 
-  public OutputDeclaration getOutputAttributes() {
-    return outputAttributes;
-  }
-
-  public void setOutputAttributes(OutputDeclaration attributes) {
-    this.outputAttributes = attributes;
-  }
-
-  public boolean isTransactional() {
-    return transactional;
-  }
-
-  public void setTransactional(boolean transactional) {
-    this.transactional = transactional;
-  }
-
-  public boolean isRequiresConnection() {
-    return requiresConnection;
-  }
-
-  public void setRequiresConnection(boolean requiresConnection) {
-    this.requiresConnection = requiresConnection;
-  }
-
-  public boolean isSupportsStreaming() {
-    return supportsStreaming;
-  }
-
-  public void setSupportsStreaming(boolean supportsStreaming) {
-    this.supportsStreaming = supportsStreaming;
-  }
-
-  public Set<Stereotype> getStereotypes() {
+  public Set<StereotypeModel> getStereotypes() {
     return stereotypes;
   }
 
-  public void addStereotype(Stereotype stereotype) {
+  public void addStereotype(StereotypeModel stereotype) {
     stereotypes.add(stereotype);
   }
 
-  public void addErrorModel(ErrorModel errorModel) {
-    errorModels.add(errorModel);
-  }
-
-  public Set<ErrorModel> getErrorModels() {
-    return errorModels;
-  }
 }

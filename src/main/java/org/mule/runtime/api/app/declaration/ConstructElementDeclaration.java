@@ -7,10 +7,7 @@
 package org.mule.runtime.api.app.declaration;
 
 import static java.util.Optional.empty;
-import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.mule.runtime.api.component.location.Location.SOURCE;
-import static org.mule.runtime.internal.dsl.DslConstants.FLOW_ELEMENT_IDENTIFIER;
-import org.mule.runtime.api.component.location.LocationPart;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +17,16 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public final class FlowElementDeclaration extends ScopeElementDeclaration implements GlobalElementDeclaration {
+public final class ConstructElementDeclaration extends ComponentElementDeclaration<ConstructElementDeclaration>
+    implements GlobalElementDeclaration {
 
-  private static final String CE_EXTENSION_NAME = "Mule Core";
   private String elementName;
 
-  public FlowElementDeclaration() {
-    setDeclaringExtension(CE_EXTENSION_NAME);
-    setName(FLOW_ELEMENT_IDENTIFIER);
+  public ConstructElementDeclaration() {}
+
+  public ConstructElementDeclaration(String extension, String name) {
+    setDeclaringExtension(extension);
+    setName(name);
   }
 
   /**

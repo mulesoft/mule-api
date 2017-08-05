@@ -13,7 +13,9 @@ import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFA
  *
  * @since 1.0
  */
-public abstract class ParameterizedDeclarer<D extends ParameterizedDeclaration> extends Declarer<D> {
+public abstract class ParameterizedDeclarer<T extends ParameterizedDeclarer, D extends ParameterizedDeclaration>
+    extends Declarer<D>
+    implements HasParametersDeclarer {
 
   /**
    * {@inheritDoc}
@@ -42,5 +44,16 @@ public abstract class ParameterizedDeclarer<D extends ParameterizedDeclaration> 
    */
   public ParameterGroupDeclarer onDefaultParameterGroup() {
     return onParameterGroup(DEFAULT_GROUP_NAME);
+  }
+
+  /**
+   * Adds a description
+   *
+   * @param description a description
+   * @return {@code this} declarer
+   */
+  public T describedAs(String description) {
+    declaration.setDescription(description);
+    return (T) this;
   }
 }

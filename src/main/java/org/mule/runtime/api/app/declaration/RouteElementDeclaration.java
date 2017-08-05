@@ -6,37 +6,16 @@
  */
 package org.mule.runtime.api.app.declaration;
 
-import static java.util.Collections.unmodifiableList;
-import org.mule.runtime.api.meta.model.operation.RouteModel;
-
-import java.util.LinkedList;
-import java.util.List;
-
 /**
- * A programmatic descriptor of a {@link RouteModel} configuration.
+ * A programmatic descriptor of a {@link org.mule.runtime.api.meta.model.nested.NestedRouteModel} configuration.
  *
  * @since 1.0
  */
-public final class RouteElementDeclaration extends ParameterizedElementDeclaration {
-
-  private List<ComponentElementDeclaration> components = new LinkedList<>();
+public final class RouteElementDeclaration extends ComponentElementDeclaration<RouteElementDeclaration> {
 
   public RouteElementDeclaration(String extension, String name) {
     setDeclaringExtension(extension);
     setName(name);
-  }
-
-  /**
-   * @return the {@link List} of {@link ComponentElementDeclaration flows} associated with
-   * {@code this} {@link FlowElementDeclaration}
-   */
-  public List<ComponentElementDeclaration> getComponents() {
-    return unmodifiableList(components);
-  }
-
-  public RouteElementDeclaration addComponent(ComponentElementDeclaration declaration) {
-    components.add(declaration);
-    return this;
   }
 
 }
