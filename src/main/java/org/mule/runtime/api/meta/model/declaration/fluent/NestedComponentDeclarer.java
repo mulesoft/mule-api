@@ -57,13 +57,4 @@ public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extend
     return (T) this;
   }
 
-  // @Override
-  // public D getDeclaration() {
-  //   if (declaration.getAllowedStereotypes().isEmpty()) {
-  //     declaration.addAllowedStereotype(MuleStereotypes.PROCESSOR);
-  //   }
-  //
-  //   return declaration;
-  // }
-
 }
