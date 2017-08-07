@@ -51,4 +51,11 @@ public interface ConfigurationComponentLocator {
    */
   List<AnnotatedObject> find(ComponentIdentifier componentIdentifier);
 
+  /**
+   * Finds all the components within the artifact.
+   *
+   * @return the list of components within the artifact.
+   */
+  List<AnnotatedObject> findAll();
+
 }

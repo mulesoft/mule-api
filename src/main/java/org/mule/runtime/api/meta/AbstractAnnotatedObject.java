@@ -21,6 +21,7 @@ import javax.xml.namespace.QName;
 public abstract class AbstractAnnotatedObject implements AnnotatedObject {
 
   public static QName LOCATION_KEY = new QName("mule", "COMPONENT_LOCATION");
+  public static QName ROOT_CONTAINER_NAME_KEY = new QName("mule", "ROOT_CONTAINER_NAME");
 
   private final Map<QName, Object> annotations = new ConcurrentHashMap<>();
 
@@ -43,5 +44,14 @@ public abstract class AbstractAnnotatedObject implements AnnotatedObject {
   @Override
   public ComponentLocation getLocation() {
     return (ComponentLocation) getAnnotation(LOCATION_KEY);
+  }
+
+  @Override
+  public String getRootContainerName() {
+    String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
+    if (rootContainerName == null) {
+      rootContainerName = getLocation().getRootContainerName();
+    }
+    return rootContainerName;
   }
 }
