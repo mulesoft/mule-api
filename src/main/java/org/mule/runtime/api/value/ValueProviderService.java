@@ -16,9 +16,14 @@ import org.mule.runtime.api.component.location.Location;
 public interface ValueProviderService {
 
   /**
+   * Key under which the {@link ValueProviderService} can be found in the {@link org.mule.runtime.api.artifact.Registry}
+   */
+  String VALUE_PROVIDER_SERVICE_KEY = "_muleValueProviderService";
+
+  /**
    * Resolves the {@link Value values} for a element's value provider located in the given {@link Location}.
    *
-   * @param location     The {@link Location} where the element is found.
+   * @param location The {@link Location} where the element is found.
    * @param providerName The name of the value provider to resolve the {@link Value values}.
    * @return the {@link ValueResult result} of the resolving of the values.
    * @see ValueResult

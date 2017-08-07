@@ -28,6 +28,11 @@ import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 public interface MetadataService {
 
   /**
+   * Key under which the {@link MetadataService} can be found in the {@link org.mule.runtime.api.artifact.Registry}
+   */
+  String METADATA_SERVICE_KEY = "_muleMetadataService";
+
+  /**
    * Returns the list of types that can be described by the {@link TypeKeysResolver} associated to the {@link MetadataKeyProvider}
    * Component identified by the {@link Location}.
    *
