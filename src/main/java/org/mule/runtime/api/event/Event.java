@@ -91,12 +91,25 @@ public interface Event {
   /**
    * Creates a {@link BindingContext} from the event.
    * 
-   * @return the event context.SourceWithFlowInfoTestCase
+   * @return a {@link BindingContext} created from the event content.
    */
   BindingContext asBindingContext();
 
+  /**
+   * @return an empty builder
+   */
   static Builder builder() {
     return new EventBuilderImplementation();
+  }
+
+  /**
+   * Sets the configuration provided by the {@link org.mule.runtime.api.event.Event} into the builder
+   *
+   * @param event the event to get the data from
+   * @return the builder instance
+   */
+  static Builder builder(Event event) {
+    return new EventBuilderImplementation(event);
   }
 
   /**
@@ -105,14 +118,6 @@ public interface Event {
    * @since 1.0
    */
   interface Builder {
-
-    /**
-     * Sets the configuration provided by the {@link org.mule.runtime.api.event.Event} into the builder
-     *
-     * @param event the event to get the data from
-     * @return the builder instance
-     */
-    Builder from(org.mule.runtime.api.event.Event event);
 
     /**
      * Set the {@link Message} to construct {@link Event} with.
@@ -144,10 +149,10 @@ public interface Event {
      *
      * @param key the key of the variable to add.
      * @param value the value of the variable to add. {@code null} values are supported.
-     * @param mediaType additional metadata about the {@code value} type.
+     * @param dataType additional metadata about the {@code value} type.
      * @return the builder instance
      */
-    Builder addVariable(String key, Object value, DataType mediaType);
+    Builder addVariable(String key, Object value, DataType dataType);
 
     /**
      * Remove a variable.

@@ -10,7 +10,6 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
-
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
@@ -19,13 +18,12 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
  * 
- * @since 4.0
+ * @since 1.0
  */
 public class BindingContextUtils {
 
@@ -34,14 +32,10 @@ public class BindingContextUtils {
   public static final String ATTRIBUTES = "attributes";
   public static final String ERROR = "error";
   public static final String CORRELATION_ID = "correlationId";
-  public static final String VARIABLES = "variables";
+  public static final String VARS = "vars";
   public static final String PROPERTIES = "properties";
   public static final String PARAMETERS = "parameters";
   public static final String AUTHENTICATION = "authentication";
-  public static final String FLOW = "flow";
-  public static final String SERVER = "server";
-  public static final String MULE = "mule";
-  public static final String APP = "app";
 
   public static final BindingContext NULL_BINDING_CONTEXT = BindingContext.builder().build();
 
@@ -64,13 +58,13 @@ public class BindingContextUtils {
 
     BindingContext.Builder contextBuilder = BindingContext.builder(baseContext);
 
-    Map<String, TypedValue> flowVars = new HashMap<>();
-    event.getVariables().forEach((name, value) -> {
-      flowVars.put(name, value);
-      contextBuilder.addBinding(name, value);
-    });
-    contextBuilder.addBinding(VARIABLES,
-                              new TypedValue<>(unmodifiableMap(flowVars), fromType(flowVars.getClass())));
+    Map<String, TypedValue<?>> flowVars = unmodifiableMap(event.getVariables());
+    contextBuilder.addBinding(VARS,
+                              new TypedValue<>(flowVars, DataType.builder()
+                                  .mapType(flowVars.getClass())
+                                  .keyType(String.class)
+                                  .valueType(TypedValue.class)
+                                  .build()));
     contextBuilder.addBinding(PROPERTIES,
                               new TypedValue<>(unmodifiableMap(event.getProperties()),
                                                fromType(event.getProperties().getClass())));

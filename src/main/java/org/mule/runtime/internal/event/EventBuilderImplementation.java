@@ -6,6 +6,11 @@
  */
 package org.mule.runtime.internal.event;
 
+import static java.util.Collections.unmodifiableMap;
+import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.util.Preconditions.checkNotNull;
+import static org.mule.runtime.internal.el.BindingContextUtils.NULL_BINDING_CONTEXT;
+import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.event.EventContext;
 import org.mule.runtime.api.message.Error;
@@ -13,6 +18,7 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.SecurityContext;
+import org.mule.runtime.internal.el.BindingContextUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,16 +34,15 @@ public class EventBuilderImplementation implements Event.Builder {
   private String correlationId;
   private Message message;
   private Map<String, TypedValue<?>> variables = new HashMap<>();
-  private Map<String, TypedValue<?>> parameters = new HashMap<>();;
-  private Map<String, TypedValue<?>> properties = new HashMap<>();;
+  private Map<String, TypedValue<?>> parameters = new HashMap<>();
+  private Map<String, TypedValue<?>> properties = new HashMap<>();
   private Error error;
   private EventContext eventContext;
   private SecurityContext securityContext;
 
   public EventBuilderImplementation() {}
 
-  @Override
-  public Event.Builder from(Event event) {
+  public EventBuilderImplementation(Event event) {
     this.message = event.getMessage();
     this.variables = event.getVariables();
     this.parameters = event.getParameters();
@@ -46,7 +51,6 @@ public class EventBuilderImplementation implements Event.Builder {
     this.eventContext = event.getContext();
     this.securityContext = event.getSecurityContext();
     this.correlationId = event.getCorrelationId();
-    return this;
   }
 
   @Override
@@ -74,8 +78,8 @@ public class EventBuilderImplementation implements Event.Builder {
   }
 
   @Override
-  public Event.Builder addVariable(String key, Object value, DataType mediaType) {
-    variables.put(key, new TypedValue<>(value, mediaType));
+  public Event.Builder addVariable(String key, Object value, DataType dataType) {
+    variables.put(key, new TypedValue<>(value, dataType));
     return this;
   }
 
@@ -125,5 +129,86 @@ public class EventBuilderImplementation implements Event.Builder {
   public Event build() {
     return new EventImplementation(message, variables, parameters, properties, Optional.ofNullable(error), eventContext,
                                    securityContext, correlationId);
+  }
+
+  /**
+   * Internal implementation of {@link Event}
+   *
+   * @since 1.0
+   */
+  private static class EventImplementation implements Event {
+
+    private String correlationId;
+    private Message message;
+    private Map<String, TypedValue<?>> variables;
+    private Map<String, TypedValue<?>> parameters;
+    private Map<String, TypedValue<?>> properties;
+    private Error error;
+    private EventContext eventContext;
+    private SecurityContext securityContext;
+
+    EventImplementation(Message message, Map<String, TypedValue<?>> variables,
+                        Map<String, TypedValue<?>> parameters, Map<String, TypedValue<?>> properties,
+                        Optional<Error> error, EventContext eventContext, SecurityContext securityContext,
+                        String correlationId) {
+      checkNotNull(variables != null, "variables cannot be null");
+      checkNotNull(parameters != null, "parameters cannot be null");
+      checkNotNull(properties != null, "properties cannot be null");
+
+      this.message = message;
+      this.variables = variables;
+      this.parameters = parameters;
+      this.properties = properties;
+      this.error = error.orElse(null);
+      this.eventContext = eventContext;
+      this.securityContext = securityContext;
+      this.correlationId = correlationId;
+    }
+
+    @Override
+    public Map<String, TypedValue<?>> getVariables() {
+      return unmodifiableMap(variables);
+    }
+
+    @Override
+    public Map<String, TypedValue<?>> getParameters() {
+      return unmodifiableMap(parameters);
+    }
+
+    @Override
+    public Map<String, TypedValue<?>> getProperties() {
+      return unmodifiableMap(properties);
+    }
+
+    @Override
+    public Message getMessage() {
+      return message;
+    }
+
+    @Override
+    public Optional<Error> getError() {
+      return ofNullable(error);
+    }
+
+    @Override
+    public EventContext getContext() {
+      return eventContext;
+    }
+
+    @Override
+    public SecurityContext getSecurityContext() {
+      return securityContext;
+    }
+
+    @Override
+    public String getCorrelationId() {
+      return correlationId;
+    }
+
+    @Override
+    public BindingContext asBindingContext() {
+      return BindingContextUtils.addEventBindings(this, NULL_BINDING_CONTEXT);
+    }
+
   }
 }
