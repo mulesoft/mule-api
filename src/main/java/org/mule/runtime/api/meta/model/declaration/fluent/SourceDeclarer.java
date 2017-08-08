@@ -12,7 +12,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
  *
  * @since 1.0
  */
-public class SourceDeclarer extends ComponentDeclarer<SourceDeclarer, SourceDeclaration> {
+public class SourceDeclarer extends ExecutableComponentDeclarer<SourceDeclarer, SourceDeclaration> {
 
   /**
    * Creates a new instance

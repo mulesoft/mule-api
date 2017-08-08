@@ -8,11 +8,9 @@ package org.mule.runtime.api.meta.model.tck;
 
 import static org.mule.runtime.api.meta.Category.COMMUNITY;
 import org.mule.runtime.api.meta.MuleVersion;
-import org.mule.runtime.api.meta.model.Stereotype;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
-import org.mule.runtime.api.meta.model.declaration.fluent.RouterDeclarer;
-import org.mule.runtime.api.meta.model.declaration.fluent.ScopeDeclarer;
 
 /**
  * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
@@ -39,7 +37,6 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
   public static final String FOREACH_EXPRESSION_PARAMETER_NAME = "expression";
   public static final String VERSION = "1.0";
   public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
-  public static final Stereotype FOREACH_STEREOTYPE = new Stereotype("foreacheable");
 
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 
@@ -56,16 +53,11 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
         .withMinMuleVersion(MIN_MULE_VERSION)
         .withXmlDsl(XmlDslModel.builder().build());
 
-    RouterDeclarer router = extensionDeclarer.withRouter(CHOICE_OPERATION_NAME);
-    router.withOutput().ofType(getVoidType());
-    router.withOutputAttributes().ofType(getVoidType());
-
+    ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
     router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1);
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1);
 
-    ScopeDeclarer scope = extensionDeclarer.withScope(FOREACH_OPERATION_NAME);
-    scope.withOutput().ofType(getVoidType());
-    scope.withOutputAttributes().ofType(getVoidType());
+    ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
 
     return extensionDeclarer;

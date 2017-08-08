@@ -11,7 +11,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
  *
  * @since 1.0
  */
-public class SourceCallbackDeclarer extends ParameterizedDeclarer<SourceCallbackDeclaration> {
+public class SourceCallbackDeclarer extends ParameterizedDeclarer<SourceCallbackDeclarer, SourceCallbackDeclaration> {
 
   /**
    * {@inheritDoc}

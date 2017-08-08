@@ -18,7 +18,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
+public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDeclaration> {
 
   private boolean hasResponse = false;
   private SourceCallbackDeclaration successCallback = null;
@@ -110,4 +110,6 @@ public class SourceDeclaration extends ComponentDeclaration<SourceDeclaration> {
   public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
     this.terminateCallback = terminateCallback;
   }
+
+
 }

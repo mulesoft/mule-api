@@ -6,19 +6,19 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
+import static java.lang.String.format;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
-import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 
 /**
- * Allows configuring an {@link ScopeElementDeclaration} through a fluent API
+ * Allows configuring a {@link RouteElementDeclaration} through a fluent API
  *
  * @since 1.0
  */
-//TODO MULE-12061: delete once RouteModel is removed
 public final class RouteElementDeclarer
-    extends ParameterizedElementDeclarer<RouteElementDeclarer, RouteElementDeclaration> {
+    extends ParameterizedElementDeclarer<RouteElementDeclarer, RouteElementDeclaration>
+    implements HasNestedComponentDeclarer<RouteElementDeclarer> {
 
   /**
    * Creates a new instance
@@ -29,12 +29,13 @@ public final class RouteElementDeclarer
   }
 
   /**
-   * Adds a {@link ComponentElementDeclaration component} to the {@link RouterElementDeclaration}
-   *
-   * @param component the {@link ComponentElementDeclaration component} to add
-   * @return {@code this} declarer
+   * {@inheritDoc}
    */
+  @Override
   public RouteElementDeclarer withComponent(ComponentElementDeclaration component) {
+    checkArgument(!(component instanceof RouteElementDeclaration),
+                  format("A route cannot declare inner routes, but route [%s] was declared as child of route [%s] for extension [%s].",
+                         component.getName(), declaration.getName(), declaration.getDeclaringExtension()));
     declaration.addComponent(component);
     return this;
   }

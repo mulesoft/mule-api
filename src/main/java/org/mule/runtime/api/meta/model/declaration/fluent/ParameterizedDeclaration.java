@@ -23,7 +23,8 @@ import java.util.Map;
  * @param <T> the concrete type for {@code this} declaration
  * @since 1.0
  */
-public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaration> extends NamedDeclaration<T> {
+public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaration> extends NamedDeclaration<T>
+    implements WithParametersDeclaration {
 
   private final Map<String, ParameterGroupDeclaration> parameterGroups = new LinkedHashMap<>();
 

@@ -10,13 +10,11 @@ import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFA
 import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
 import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
 import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
+import org.mule.runtime.api.app.declaration.ConstructElementDeclaration;
 import org.mule.runtime.api.app.declaration.ElementDeclaration;
-import org.mule.runtime.api.app.declaration.FlowElementDeclaration;
 import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
-import org.mule.runtime.api.app.declaration.RouterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ScopeElementDeclaration;
 import org.mule.runtime.api.app.declaration.SourceElementDeclaration;
 import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
 import org.mule.runtime.api.meta.model.ExtensionModel;
@@ -39,13 +37,6 @@ public final class ElementDeclarer {
    */
   public static ArtifactDeclarer newArtifact() {
     return new ArtifactDeclarer(new ArtifactDeclaration());
-  }
-
-  /**
-   * @return a new instance of an {@link FlowElementDeclarer}
-   */
-  public static FlowElementDeclarer newFlow() {
-    return new FlowElementDeclarer(new FlowElementDeclaration());
   }
 
   /**
@@ -104,12 +95,8 @@ public final class ElementDeclarer {
     return new SourceElementDeclarer(new SourceElementDeclaration(extension, name));
   }
 
-  public ScopeElementDeclarer<ScopeElementDeclarer, ScopeElementDeclaration> newScope(String name) {
-    return new ScopeElementDeclarer<>(new ScopeElementDeclaration(extension, name));
-  }
-
-  public RouterElementDeclarer newRouter(String name) {
-    return new RouterElementDeclarer(new RouterElementDeclaration(extension, name));
+  public ConstructElementDeclarer newConstruct(String name) {
+    return new ConstructElementDeclarer(new ConstructElementDeclaration(extension, name));
   }
 
   public TopLevelParameterDeclarer newGlobalParameter(String name) {

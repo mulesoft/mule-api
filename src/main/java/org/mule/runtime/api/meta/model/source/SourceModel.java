@@ -9,11 +9,10 @@ package org.mule.runtime.api.meta.model.source;
 
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
-import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.ComponentModelVisitor;
+import org.mule.runtime.api.meta.model.ExecutableComponentModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
-import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
-import org.mule.runtime.api.meta.model.util.ComponentModelVisitor;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -31,7 +30,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface SourceModel extends ComponentModel, HasDisplayModel {
+public interface SourceModel extends ExecutableComponentModel {
 
   /**
    * @return Whether the declared source emits a response

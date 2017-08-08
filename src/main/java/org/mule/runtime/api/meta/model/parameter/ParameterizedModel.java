@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * Base interface for a model which contains {@link ParameterModel parameters}
  *
- * @see DescribedObject
  * @since 1.0
  */
 public interface ParameterizedModel extends NamedObject, DescribedObject {

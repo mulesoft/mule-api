@@ -7,68 +7,84 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
-import org.mule.runtime.api.meta.model.Stereotype;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 /**
  * Allows configuring a {@link ComponentDeclaration} through a fluent API
  *
  * @since 1.0
  */
-public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
-    extends ConfigurableOutputDeclarer<D> implements HasModelProperties<ComponentDeclarer> {
+abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
+    extends ParameterizedDeclarer<T, D>
+    implements HasModelProperties<ComponentDeclarer>, HasNestedComponents, HasNestedRoutes {
 
   /**
    * Creates a new instance
    *
    * @param declaration the {@link ComponentDeclaration} which will be configured
    */
-  public ComponentDeclarer(D declaration) {
+  ComponentDeclarer(D declaration) {
     super(declaration);
   }
 
   /**
-   * Adds a description
-   *
-   * @param description a description
-   * @return {@code this} declarer
+   * {@inheritDoc}
    */
-  public T describedAs(String description) {
-    declaration.setDescription(description);
-    return (T) this;
+  @Override
+  public NestedComponentDeclarer withOptionalComponent(String nestedComponentName) {
+    NestedComponentDeclarer<?, ?> declarer = withComponent(nestedComponentName);
+    declarer.getDeclaration().setRequired(false);
+    return declarer;
   }
 
   /**
-   * Specifies if this component has the ability to execute while joining a transaction
-   *
-   * @param transactional whether the component is transactional or not
-   * @return {@code this} declarer
+   * {@inheritDoc}
    */
-  public T transactional(boolean transactional) {
-    declaration.setTransactional(transactional);
-    return (T) this;
+  @Override
+  public NestedComponentDeclarer withComponent(String nestedComponentName) {
+    NestedComponentDeclaration nested = new NestedComponentDeclaration(nestedComponentName);
+    declaration.addNestedComponent(nested);
+    return new NestedComponentDeclarer(nested);
   }
 
   /**
-   * Specifies if this component requires a connection in order to perform its task
-   *
-   * @param requiresConnection whether the component requires a connection or not
-   * @return {@code this} declarer
+   * {@inheritDoc}
    */
-  public T requiresConnection(boolean requiresConnection) {
-    declaration.setRequiresConnection(requiresConnection);
-    return (T) this;
+  @Override
+  public NestedChainDeclarer withChain() {
+    NestedChainDeclaration nested = new NestedChainDeclaration("main");
+    declaration.addNestedComponent(nested);
+    return new NestedChainDeclarer(nested);
   }
 
   /**
-   * Specifies if this component supports streaming. Notice that supporting streaming
-   * doesn't necessarily mean that streaming will be performed when the component
-   * is actually executed.
+   * {@inheritDoc}
+   */
+  @Override
+  public NestedChainDeclarer withChain(String chainName) {
+    NestedChainDeclaration nested = new NestedChainDeclaration(chainName);
+    declaration.addNestedComponent(nested);
+    return new NestedChainDeclarer(nested);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public NestedRouteDeclarer withRoute(String routeName) {
+    NestedRouteDeclaration nested = new NestedRouteDeclaration(routeName);
+    declaration.addNestedComponent(nested);
+    return new NestedRouteDeclarer(nested);
+  }
+
+  /**
+   * Adds the given {@code stereotype}
    *
-   * @param supportsStreaming whether the component supports streaming or not
+   * @param stereotype a {@link org.mule.runtime.api.meta.model.stereotype.StereotypeModel}
    * @return {@code this} declarer
    */
-  public T supportsStreaming(boolean supportsStreaming) {
-    declaration.setSupportsStreaming(supportsStreaming);
+  public T withStereotype(StereotypeModel stereotype) {
+    declaration.addStereotype(stereotype);
     return (T) this;
   }
 
@@ -81,14 +97,4 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
     return (T) this;
   }
 
-  /**
-   * Adds the given {@code stereotype}
-   *
-   * @param stereotype a {@link Stereotype}
-   * @return {@code this} declarer
-   */
-  public T withStereotype(Stereotype stereotype) {
-    declaration.addStereotype(stereotype);
-    return (T) this;
-  }
 }

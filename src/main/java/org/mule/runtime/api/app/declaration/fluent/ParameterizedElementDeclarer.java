@@ -6,18 +6,21 @@
  */
 package org.mule.runtime.api.app.declaration.fluent;
 
+import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
 import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
+
+import java.util.function.Consumer;
 
 /**
  * Allows configuring a {@link ParameterizedElementDeclaration} through a fluent API
  *
  * @since 1.0
  */
-public abstract class ParameterizedElementDeclarer<D extends ParameterizedElementDeclarer, T extends ParameterizedElementDeclaration>
-    extends EnrichableElementDeclarer<D, T> {
+public abstract class ParameterizedElementDeclarer<E extends ParameterizedElementDeclarer, D extends ParameterizedElementDeclaration>
+    extends EnrichableElementDeclarer<E, D> {
 
-  ParameterizedElementDeclarer(T declaration) {
+  ParameterizedElementDeclarer(D declaration) {
     super(declaration);
   }
 
@@ -27,9 +30,22 @@ public abstract class ParameterizedElementDeclarer<D extends ParameterizedElemen
    * @param group  the {@link ParameterGroupElementDeclarer group} to add in {@code this} {@link ParameterizedElementDeclaration}
    * @return {@code this} declarer
    */
-  public D withParameterGroup(ParameterGroupElementDeclaration group) {
+  public E withParameterGroup(ParameterGroupElementDeclaration group) {
     declaration.addParameterGroup(group);
-    return (D) this;
+    return (E) this;
+  }
+
+  /**
+   * Adds a {@link ParameterGroupElementDeclaration parameter group} to {@code this} {@link ParameterizedElementDeclaration}
+   *
+   * @param groupEnricher  the enricher that will configure the given {@link ParameterGroupElementDeclarer group} to add in
+   * {@code this} {@link ParameterizedElementDeclaration}
+   * @return {@code this} declarer
+   */
+  public E withParameterGroup(Consumer<ParameterGroupElementDeclarer> groupEnricher) {
+    ParameterGroupElementDeclarer group = newParameterGroup();
+    groupEnricher.accept(group);
+    return withParameterGroup(group.getDeclaration());
   }
 
 }

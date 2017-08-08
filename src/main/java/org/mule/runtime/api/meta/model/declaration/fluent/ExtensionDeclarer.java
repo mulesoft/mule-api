@@ -111,6 +111,17 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   /**
    * {@inheritDoc}
    */
+  public ConstructDeclarer withConstruct(String name) {
+    ConstructDeclaration component = new ConstructDeclaration(name);
+    final ConstructDeclarer componentDeclarer = new ConstructDeclarer(component);
+    declaration.addConstruct(component);
+
+    return componentDeclarer;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public OperationDeclarer withOperation(String name) {
     OperationDeclaration operation = new OperationDeclaration(name);
@@ -125,46 +136,6 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   @Override
   public void withOperation(OperationDeclarer declarer) {
-    declaration.addOperation(declarer.getDeclaration());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public ScopeDeclarer withScope(String name) {
-    ScopeDeclaration scope = new ScopeDeclaration(name);
-    final ScopeDeclarer scopeDeclarer = new ScopeDeclarer(scope);
-    withScope(scopeDeclarer);
-
-    return scopeDeclarer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withScope(ScopeDeclarer declarer) {
-    declaration.addOperation(declarer.getDeclaration());
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public RouterDeclarer withRouter(String name) {
-    RouterDeclaration router = new RouterDeclaration(name);
-    final RouterDeclarer routerDeclarer = new RouterDeclarer(router);
-    withRouter(routerDeclarer);
-
-    return routerDeclarer;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withRouter(RouterDeclarer declarer) {
     declaration.addOperation(declarer.getDeclaration());
   }
 

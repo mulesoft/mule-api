@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
+import static java.lang.String.format;
+import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.CustomizableElementDeclaration;
 import org.mule.runtime.api.app.declaration.IdentifiableElementDeclaration;
 import org.mule.runtime.api.app.declaration.MetadataPropertiesAwareElementDeclaration;
@@ -13,6 +15,7 @@ import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
+import org.mule.runtime.api.app.declaration.fluent.HasNestedComponentDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue;
 import org.mule.runtime.api.app.declaration.fluent.ParameterizedElementDeclarer;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
@@ -35,12 +38,14 @@ import java.util.Map;
  */
 final class ElementDeclarationSerializationUtils {
 
-  static final String FLOW = "FLOW";
   static final String SCOPE = "SCOPE";
   static final String ROUTE = "ROUTE";
+  static final String CHAIN = "CHAIN";
   static final String SOURCE = "SOURCE";
   static final String ROUTER = "ROUTER";
   static final String CONFIG = "CONFIG";
+  static final String COMPONENT = "COMPONENT";
+  static final String CONSTRUCT = "CONSTRUCT";
   static final String OPERATION = "OPERATION";
   static final String CONNECTION = "CONNECTION";
   static final String GLOBAL_PARAMETER = "GLOBAL_PARAMETER";
@@ -61,38 +66,57 @@ final class ElementDeclarationSerializationUtils {
   static final String DECLARING_EXTENSION = "declaringExtension";
   static final String CUSTOM_PARAMETERS = "customConfigurationParameters";
 
-  static void populateIdentifiableObject(JsonWriter out, IdentifiableElementDeclaration declaration, String kind)
-      throws IOException {
-    out.name(NAME).value(declaration.getName());
-    out.name(DECLARING_EXTENSION).value(declaration.getDeclaringExtension());
-    out.name(KIND).value(kind);
+  static void populateIdentifiableObject(JsonWriter out, IdentifiableElementDeclaration declaration, String kind) {
+    try {
+      out.name(NAME).value(declaration.getName());
+      out.name(DECLARING_EXTENSION).value(declaration.getDeclaringExtension());
+      out.name(KIND).value(kind);
+    } catch (IOException e) {
+      throw new RuntimeException(
+                                 format("An error occurred while serializing the declaration of element [%s] of kind [%s] from extension [%s]",
+                                        declaration.getName(), kind, declaration.getDeclaringExtension()),
+                                 e);
+    }
   }
 
-  static void populateCustomizableObject(Gson delegate, JsonWriter out, CustomizableElementDeclaration declaration)
-      throws IOException {
-    out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomConfigurationParameters()));
+  static void populateCustomizableObject(Gson delegate, JsonWriter out, CustomizableElementDeclaration declaration) {
+    try {
+      out.name(CUSTOM_PARAMETERS).jsonValue(delegate.toJson(declaration.getCustomConfigurationParameters()));
+    } catch (IOException e) {
+      throw new RuntimeException("An error occurred while serializing the declaration of a customizable element: "
+          + e.getMessage(), e);
+    }
   }
 
   static void populateMetadataAwareObject(Gson delegate, JsonWriter out,
-                                          MetadataPropertiesAwareElementDeclaration declaration)
-      throws IOException {
-    out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getMetadataProperties()));
+                                          MetadataPropertiesAwareElementDeclaration declaration) {
+    try {
+      out.name(PROPERTIES).jsonValue(delegate.toJson(declaration.getMetadataProperties()));
+    } catch (IOException e) {
+      throw new RuntimeException("An error occurred while serializing the declaration of a metadata aware element: "
+          + e.getMessage(), e);
+    }
   }
 
   static JsonWriter populateParameterizedObject(Gson delegate, JsonWriter out,
-                                                ParameterizedElementDeclaration declaration, String kind)
-      throws IOException {
+                                                ParameterizedElementDeclaration declaration, String kind) {
 
     populateIdentifiableObject(out, declaration, kind);
     populateCustomizableObject(delegate, out, declaration);
     populateMetadataAwareObject(delegate, out, declaration);
 
-    out.name(PARAMETER_GROUPS).beginArray();
-    for (ParameterGroupElementDeclaration group : declaration.getParameterGroups()) {
-      out.jsonValue(delegate.toJson(group));
+    try {
+      out.name(PARAMETER_GROUPS).beginArray();
+      for (ParameterGroupElementDeclaration group : declaration.getParameterGroups()) {
+        out.jsonValue(delegate.toJson(group));
+      }
+      out.endArray();
+      return out;
+
+    } catch (IOException e) {
+      throw new RuntimeException("An error occurred while serializing the declaration of a parameterized element: "
+          + e.getMessage(), e);
     }
-    out.endArray();
-    return out;
   }
 
   static <T extends ParameterizedElementDeclarer> T declareParameterizedElement(Gson delegate,
@@ -103,6 +127,15 @@ final class ElementDeclarationSerializationUtils {
     JsonArray groups = jsonObject.get(PARAMETER_GROUPS).getAsJsonArray();
     groups.forEach(group -> ((ParameterizedElementDeclaration) declarer.getDeclaration())
         .addParameterGroup(delegate.fromJson(group, ParameterGroupElementDeclaration.class)));
+
+    return (T) declarer;
+  }
+
+  static <T extends ParameterizedElementDeclarer> T declareComposableElement(Gson delegate,
+                                                                             JsonObject jsonObject,
+                                                                             HasNestedComponentDeclarer declarer) {
+    JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
+    components.forEach(component -> declarer.withComponent(delegate.fromJson(component, ComponentElementDeclaration.class)));
 
     return (T) declarer;
   }

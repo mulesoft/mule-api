@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newArtifact;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newFlow;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newObjectValue;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.CONNECTION;
@@ -121,7 +120,8 @@ public class ElementDeclarationLocationPathTestCase {
             .getDeclaration())
         .getDeclaration())
         .withGlobalElement(
-                           newFlow().withRefName("send-payload")
+                           core.newConstruct("flow")
+                               .withRefName("send-payload")
                                .withComponent(jms.newOperation("publish")
                                    .withConfig("config")
                                    .withParameterGroup(newParameterGroup()
@@ -134,7 +134,7 @@ public class ElementDeclarationLocationPathTestCase {
                                    .getDeclaration())
                                .getDeclaration())
         .withGlobalElement(
-                           newFlow().withRefName("bridge")
+                           core.newConstruct("flow").withRefName("bridge")
                                .withComponent(jms.newOperation("consume")
                                    .withConfig("config")
                                    .withParameterGroup(newParameterGroup()
@@ -143,7 +143,7 @@ public class ElementDeclarationLocationPathTestCase {
                                        .getDeclaration())
                                    .getDeclaration())
                                .withComponent(
-                                              core.newScope("foreach")
+                                              core.newConstruct("foreach")
                                                   .withComponent(jms.newOperation("publish")
                                                       .withConfig("config")
                                                       .withParameterGroup(newParameterGroup()
@@ -165,7 +165,7 @@ public class ElementDeclarationLocationPathTestCase {
                                                       .getDeclaration())
                                                   .getDeclaration())
                                .getDeclaration())
-        .withGlobalElement(newFlow().withRefName("bridge-receiver")
+        .withGlobalElement(core.newConstruct("flow").withRefName("bridge-receiver")
             .withComponent(jms.newOperation("consume")
                 .withConfig("config")
                 .withParameterGroup(newParameterGroup()
@@ -228,7 +228,8 @@ public class ElementDeclarationLocationPathTestCase {
                                    .getDeclaration())
                                .getDeclaration())
         .withGlobalElement(
-                           newFlow().withRefName("testFlow")
+                           core.newConstruct("flow")
+                               .withRefName("testFlow")
                                .withParameterGroup(newParameterGroup()
                                    .withParameter("initialState", "stopped")
                                    .getDeclaration())
@@ -243,7 +244,7 @@ public class ElementDeclarationLocationPathTestCase {
                                        .getDeclaration())
                                    .getDeclaration())
                                .withComponent(
-                                              core.newRouter("choice")
+                                              core.newConstruct("choice")
                                                   .withRoute(core.newRoute("when")
                                                       .withParameterGroup(newParameterGroup()
                                                           .withParameter("expression", "#[true]")
@@ -260,7 +261,7 @@ public class ElementDeclarationLocationPathTestCase {
                                                           .getDeclaration())
                                                       .getDeclaration())
                                                   .withRoute(core.newRoute("otherwise")
-                                                      .withComponent(core.newScope("foreach")
+                                                      .withComponent(core.newConstruct("foreach")
                                                           .withParameterGroup(newParameterGroup()
                                                               .withParameter("collection", "#[myCollection]")
                                                               .getDeclaration())

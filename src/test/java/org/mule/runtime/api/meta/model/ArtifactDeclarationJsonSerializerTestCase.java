@@ -10,7 +10,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newArtifact;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newFlow;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newListValue;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newObjectValue;
 import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
@@ -131,7 +130,7 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                                    .getDeclaration())
                                .getDeclaration())
         .withGlobalElement(
-                           newFlow().withRefName("testFlow")
+                           core.newConstruct("flow").withRefName("testFlow")
                                .withParameterGroup(newParameterGroup()
                                    .withParameter("initialState", "stopped")
                                    .getDeclaration())
@@ -182,7 +181,7 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                                                           + "                ]]>")
                                        .getDeclaration())
                                    .getDeclaration())
-                               .withComponent(core.newRouter("choice")
+                               .withComponent(core.newConstruct("choice")
                                    .withRoute(core.newRoute("when")
                                        .withParameterGroup(newParameterGroup()
                                            .withParameter("expression", "#[true]")
@@ -205,18 +204,16 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                                                .getDeclaration())
                                            .getDeclaration())
                                        .getDeclaration())
-                                   .withRoute(core.newRoute("otherwise")
-                                       .withComponent(core.newScope("foreach")
+                                   .withRoute("otherwise", declarer -> declarer.withComponent(core.newConstruct("foreach")
+                                       .withParameterGroup(newParameterGroup()
+                                           .withParameter("collection", "#[myCollection]")
+                                           .getDeclaration())
+                                       .withComponent(core.newOperation("logger")
                                            .withParameterGroup(newParameterGroup()
-                                               .withParameter("collection", "#[myCollection]")
-                                               .getDeclaration())
-                                           .withComponent(core.newOperation("logger")
-                                               .withParameterGroup(newParameterGroup()
-                                                   .withParameter("message", "#[payload]")
-                                                   .getDeclaration())
+                                               .withParameter("message", "#[payload]")
                                                .getDeclaration())
                                            .getDeclaration())
-                                       .getDeclaration())
+                                       .getDeclaration()))
                                    .getDeclaration())
                                .withComponent(db.newOperation("bulkInsert")
                                    .withParameterGroup(newParameterGroup("Query")

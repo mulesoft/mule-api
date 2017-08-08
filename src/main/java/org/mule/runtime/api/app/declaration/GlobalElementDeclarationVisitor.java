@@ -21,7 +21,7 @@ public interface GlobalElementDeclarationVisitor {
     // do nothing
   }
 
-  default void visit(FlowElementDeclaration declaration) {
+  default void visit(ConstructElementDeclaration declaration) {
     // do nothing
   }
 }

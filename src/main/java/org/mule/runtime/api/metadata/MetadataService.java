@@ -46,7 +46,7 @@ public interface MetadataService {
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
    * {@link Location} using only the static types of its parameters, attributes and output.
    *
-   * @param location the location of the {@link MetadataProvider} component to query for its available keys
+   * @param location the location of the {@link MetadataProvider} component to type dynamically
    * @return An {@link ComponentMetadataDescriptor} with the static Metadata representation of the Component. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval of any element fails for any reason
@@ -64,7 +64,7 @@ public interface MetadataService {
    * When neither Content nor Output have dynamic types, then invoking this method is the same as invoking
    * {@link this#getOperationMetadata}
    *
-   * @param location the location of the {@link MetadataProvider} component to query for its available keys
+   * @param location the location of the {@link MetadataProvider} component to type dynamically
    * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
    * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the
    *         Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element
@@ -76,7 +76,7 @@ public interface MetadataService {
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
    * {@link Location} using only the static types of its parameters, attributes and output.
    *
-   * @param location the location of the {@link MetadataProvider} component to query for its available keys
+   * @param location the location of the {@link MetadataProvider} component to type dynamically
    * @return An {@link ComponentMetadataDescriptor} with the static Metadata representation of the Component. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval of any element fails for any reason
@@ -94,7 +94,7 @@ public interface MetadataService {
    * When neither Content nor Output have dynamic types, then invoking this method is the same as invoking
    * {@link this#getOperationMetadata}
    *
-   * @param location the location of the Message source component to query for its available keys
+   * @param location the location of the {@link MetadataProvider} component to type dynamically
    * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
    * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the
    *         Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element

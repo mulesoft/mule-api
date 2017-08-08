@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  *
  * @since 1.0
  */
-public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclaration>
+public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, FunctionDeclaration>
     implements HasModelProperties<FunctionDeclarer> {
 
   /**
@@ -49,17 +49,6 @@ public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclaration>
   @Override
   public FunctionDeclarer withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
-    return this;
-  }
-
-  /**
-   * Adds a description
-   *
-   * @param description a description
-   * @return {@code this} declarer
-   */
-  public FunctionDeclarer describedAs(String description) {
-    declaration.setDescription(description);
     return this;
   }
 
