@@ -22,11 +22,12 @@ import java.util.Map;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
- * 
+ *
  * @since 1.0
  */
 public class BindingContextUtils {
 
+  public static final String MESSAGE = "message";
   public static final String PAYLOAD = "payload";
   public static final String DATA_TYPE = "dataType";
   public static final String ATTRIBUTES = "attributes";
@@ -46,7 +47,7 @@ public class BindingContextUtils {
   /**
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
-   * 
+   *
    * @param event the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
@@ -75,6 +76,7 @@ public class BindingContextUtils {
     contextBuilder.addBinding(CORRELATION_ID, new TypedValue<>(event.getContext().getCorrelationId(), STRING));
 
     Message message = event.getMessage();
+    contextBuilder.addBinding(MESSAGE, new TypedValue<>(message, fromType(Message.class)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE, new TypedValue<>(message.getPayload().getDataType(), fromType(DataType.class)));
