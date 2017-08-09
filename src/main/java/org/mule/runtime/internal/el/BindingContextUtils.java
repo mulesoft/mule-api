@@ -81,7 +81,7 @@ public class BindingContextUtils {
     Error error = event.getError().isPresent() ? event.getError().get() : null;
     contextBuilder.addBinding(ERROR, new TypedValue<>(error, fromType(Error.class)));
 
-    Authentication authentication = event.getSecurityContext() != null ? event.getSecurityContext().getAuthentication() : null;
+    Authentication authentication = event.getAuthentication().orElse(null);
     contextBuilder.addBinding(AUTHENTICATION, new TypedValue<>(authentication, fromType(Authentication.class)));
 
     return contextBuilder.build();

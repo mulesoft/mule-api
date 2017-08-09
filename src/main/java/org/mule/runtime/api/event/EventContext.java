@@ -42,11 +42,4 @@ public interface EventContext {
    */
   ComponentLocation getOriginatingLocation();
 
-  /**
-   * Returns {@code this} context's parent if it has one
-   *
-   * @return {@code this} context's parent or {@link Optional#empty()} if it doesn't have one
-   */
-  Optional<EventContext> getParentContext();
-
 }
