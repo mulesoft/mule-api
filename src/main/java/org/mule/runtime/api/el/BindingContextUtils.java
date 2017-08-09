@@ -4,13 +4,13 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.internal.el;
+package org.mule.runtime.api.el;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
-import org.mule.runtime.api.el.BindingContext;
+
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
- *
+ * 
  * @since 1.0
  */
 public class BindingContextUtils {
@@ -37,6 +37,7 @@ public class BindingContextUtils {
   public static final String PROPERTIES = "properties";
   public static final String PARAMETERS = "parameters";
   public static final String AUTHENTICATION = "authentication";
+  public static final String FLOW = "flow";
 
   public static final BindingContext NULL_BINDING_CONTEXT = BindingContext.builder().build();
 
@@ -47,7 +48,7 @@ public class BindingContextUtils {
   /**
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
-   *
+   * 
    * @param event the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
