@@ -17,6 +17,8 @@ import java.util.Optional;
 
 /**
  * Interface for defining the content of an event.
+ * <p/>
+ * {@link InputEvent} can be used to trigger the execution of processor chains programmatically.
  * 
  * @since 1.0
  */
@@ -25,7 +27,7 @@ public interface InputEvent {
   /**
    * @return a brand new {@link InputEvent}
    */
-  static InputEvent newInputEvent() {
+  static InputEvent create() {
     return new DefaultInputEvent();
   }
 
@@ -33,7 +35,7 @@ public interface InputEvent {
    * @param event an {@link Event} to use as source of data
    * @return a new {@link InputEvent} with the content of an existent {@link Event}
    */
-  static InputEvent newInputEvent(Event event) {
+  static InputEvent create(Event event) {
     return new DefaultInputEvent(event);
   }
 
@@ -41,7 +43,7 @@ public interface InputEvent {
    * @param inputEvent an {@link InputEvent} to use as source of data
    * @return a new {@link InputEvent} with the content of an existent {@link InputEvent}
    */
-  static InputEvent newInputEvent(InputEvent inputEvent) {
+  static InputEvent create(InputEvent inputEvent) {
     return new DefaultInputEvent(inputEvent);
   }
 
