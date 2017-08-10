@@ -24,14 +24,14 @@ public final class TypedValue<T> implements Serializable {
   private static final long serialVersionUID = -2533879516750283994L;
 
   /**
-   * Utility method to obtain a type value's content, in cases in which you don't know if
-   * the {@ccode value} is a type value at all.
+   * Utility method to obtain a type value's content, in cases in which you don't know if the {@ccode value} is a type value at
+   * all.
    * <p>
-   * If {@code value} is a TypeValue, then {@link #getValue()} is returned. Otherwise,
-   * the {@code value} is returned as is (even if it's {@code null})
+   * If {@code value} is a TypeValue, then {@link #getValue()} is returned. Otherwise, the {@code value} is returned as is (even
+   * if it's {@code null})
    *
    * @param value a value which may or may not be a TypeValue
-   * @param <T>   the output's generic type
+   * @param <T> the output's generic type
    * @return an unwrapped value
    */
   public static <T> T unwrap(Object value) {
@@ -43,12 +43,11 @@ public final class TypedValue<T> implements Serializable {
   }
 
   /**
-   * Creates a new instance for the given {@code value}, using an auto calculated
-   * {@link DataType}. This method is useful when no particular media types or
-   * encoding are required
+   * Creates a new instance for the given {@code value}, using an auto calculated {@link DataType}. This method is useful when no
+   * particular media types or encoding are required
    *
    * @param value this object's content
-   * @param <T>   the value's generic type
+   * @param <T> the value's generic type
    * @return a new {@link TypedValue}
    */
   public static <T> TypedValue<T> of(T value) {
@@ -66,7 +65,7 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value    this object's content.
+   * @param value this object's content.
    * @param dataType the {@link DataType} for this object's content.
    */
   public TypedValue(T value, DataType dataType) {
@@ -123,4 +122,31 @@ public final class TypedValue<T> implements Serializable {
     return length >= 0 ? Optional.of(length) : empty();
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    TypedValue<?> that = (TypedValue<?>) o;
+
+    if (length != that.length) {
+      return false;
+    }
+    if (value != null ? !value.equals(that.value) : that.value != null) {
+      return false;
+    }
+    return dataType.equals(that.dataType);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = value != null ? value.hashCode() : 0;
+    result = 31 * result + dataType.hashCode();
+    result = 31 * result + (int) (length ^ (length >>> 32));
+    return result;
+  }
 }
