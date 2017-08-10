@@ -47,4 +47,16 @@ public interface ConnectionHandler<T> {
    * invoke this method once it's done with the instance
    */
   void release();
+
+  /**
+   * Similar to {@link #release()} but for cases in which the wrapped connection is in an error state and should
+   * not be used anymore.
+   * <p>
+   * Just like with {@link #release()}, the implications of executing
+   * this method are not guaranteed. Depending on the implementation, the effect could be the same as {@link #release()},
+   * pool invalidation, cache eviction, etc.
+   * <p>
+   * It is not to be assumed that any resources allocated by the wrapped connection will be freed after invoking this method.
+   */
+  void invalidate();
 }

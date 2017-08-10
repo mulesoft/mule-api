@@ -93,9 +93,15 @@ public interface DslConstants {
   String RECONNECT_FOREVER_ELEMENT_IDENTIFIER = "reconnect-forever";
 
   /**
-   * The identifier name of the {@code reconnectForever} implementation of {@code reconnectionStrategy} infrastructure parameter
+   * The identifier name of the {@code reconnect} implementation of {@code reconnectionStrategy} infrastructure parameter
    */
+
   String RECONNECT_ELEMENT_IDENTIFIER = "reconnect";
+
+  /**
+   * The identifier name of the {@code reconnection} implementation of {@code reconnectionConfig} infrastructure parameter
+   */
+  String RECONNECTION_ELEMENT_IDENTIFIER = "reconnection";
 
   /**
    * The identifier name of the {@code redeliveryPolicy} infrastructure parameter

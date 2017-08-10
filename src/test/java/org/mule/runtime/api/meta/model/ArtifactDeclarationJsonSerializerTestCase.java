@@ -85,7 +85,6 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                                    .getDeclaration())
                                .withConnection(http.newConnection("listener-connection")
                                    .withParameterGroup(newParameterGroup(CONNECTION)
-                                       .withParameter("disableValidation", "true")
                                        .withParameter("tlsContext", newObjectValue()
                                            .withParameter("key-store", newObjectValue()
                                                .withParameter("path", "ssltest-keystore.jks")

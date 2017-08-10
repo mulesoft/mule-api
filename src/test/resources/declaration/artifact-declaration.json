@@ -50,7 +50,7 @@
   "name": "Connection",
   "customConfigurationParameters": [],
   "metadataProperties": {},
-  "parameters": [{"name":"disableValidation","metadataProperties":{},"value":{"text":"true","isCData":false}},{"name":"tlsContext","metadataProperties":{},"value":{"fields":{"key-store":{"fields":{"path":{"text":"ssltest-keystore.jks","isCData":false},"password":{"text":"changeit","isCData":false},"keyPassword":{"text":"changeit","isCData":false}}}}}}]
+  "parameters": [{"name":"tlsContext","metadataProperties":{},"value":{"fields":{"key-store":{"fields":{"path":{"text":"ssltest-keystore.jks","isCData":false},"password":{"text":"changeit","isCData":false},"keyPassword":{"text":"changeit","isCData":false}}}}}}]
 },
           {
   "name": "General",
