@@ -32,18 +32,28 @@ public class ComponentLocationProvider {
    * @return
    */
   public static String resolveProcessorRepresentation(String appId, String processorPath, Object element) {
+    StringBuilder stringBuilder = new StringBuilder();
+
+    stringBuilder.append(processorPath)
+        .append(" @ ")
+        .append(appId);
+
+    String sourceFile = getSourceFile((AnnotatedObject) element);
+    if (sourceFile != null) {
+      stringBuilder.append(":")
+          .append(sourceFile)
+          .append(":")
+          .append(getSourceFileLine((AnnotatedObject) element));
+    }
+
     String docName = getDocName(element);
     if (docName != null) {
-      return String.format("%s @ %s:%s:%d (%s)", processorPath, appId, getSourceFile((AnnotatedObject) element),
-                           getSourceFileLine((AnnotatedObject) element), docName);
-    } else {
-      if (element instanceof AnnotatedObject) {
-        return String.format("%s @ %s:%s:%d", processorPath, appId, getSourceFile((AnnotatedObject) element),
-                             getSourceFileLine((AnnotatedObject) element));
-      } else {
-        return String.format("%s @ %s", processorPath, appId);
-      }
+      stringBuilder.append(" (")
+          .append(docName)
+          .append(")");
     }
+
+    return stringBuilder.toString();
   }
 
   /**
