@@ -14,7 +14,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import java.util.Optional;
 
 /**
- * This object matches the mule-artifact.json element within a server plugin. The describer holds information that has being
+ * This object matches the mule-artifact.json element within a server plugin. The describer holds information that has been
  * picked up from the JSON file (and the pom.xml when implemented). 
  *
  * @since 1.0
