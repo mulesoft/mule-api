@@ -90,4 +90,15 @@ public class BindingContextUtils {
     return contextBuilder.build();
   }
 
+  /**
+   * Creates a new {@link BindingContext} that only contains the restricted bindings to be used for evaluating the target expression.
+   *
+   * @param message the message to build the bindings for. Not-null.
+   * @return a new {@link BindingContext} that contains the bindings from {@code message}.
+   */
+  public static BindingContext getTargetBindingContext(Message message) {
+    requireNonNull(message);
+    return BindingContext.builder().addBinding(MESSAGE, new TypedValue(message, DataType.fromType(Message.class)))
+        .addBinding(PAYLOAD, message.getPayload()).addBinding(ATTRIBUTES, message.getAttributes()).build();
+  }
 }
