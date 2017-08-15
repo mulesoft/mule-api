@@ -7,6 +7,8 @@
 package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
+import static org.mule.runtime.api.metadata.MediaType.ANY;
+
 import org.mule.runtime.api.el.ExpressionFunction;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
@@ -16,6 +18,8 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME
@@ -108,10 +112,16 @@ public interface DataType extends Serializable {
   DataType ITERATOR = fromType(Iterator.class);
   DataType CURSOR_STREAM_PROVIDER = fromType(CursorStreamProvider.class);
   DataType CURSOR_ITERATOR_PROVIDER = fromType(CursorIteratorProvider.class);
-  DataType MULE_MESSAGE = builder().type(Message.class).mediaType(MediaType.ANY).build();
+  DataType MULE_MESSAGE = builder().type(Message.class).mediaType(ANY).build();
   CollectionDataType MULE_MESSAGE_COLLECTION =
       (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
-          .mediaType(MediaType.ANY).build();
+          .mediaType(ANY).build();
+  CollectionDataType MULE_MESSAGE_LIST =
+      (CollectionDataType) getDefaultFactory().create().collectionType(List.class).itemType(Message.class)
+          .mediaType(ANY).build();
+  MapDataType MULE_MESSAGE_MAP =
+      (MapDataType) getDefaultFactory().create().mapType(Map.class).keyType(String.class).valueType(Message.class)
+          .valueMediaType(ANY).build();
 
   /**
    * The object type of the source object to transform.
