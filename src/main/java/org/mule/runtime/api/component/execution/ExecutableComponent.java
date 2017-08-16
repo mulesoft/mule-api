@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.component;
+package org.mule.runtime.api.component.execution;
 
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.event.InputEvent;
