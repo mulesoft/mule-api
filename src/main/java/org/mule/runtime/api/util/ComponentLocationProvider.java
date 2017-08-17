@@ -18,10 +18,6 @@ import javax.xml.namespace.QName;
 public class ComponentLocationProvider {
 
   protected static final QName NAME_ANNOTATION_KEY = new QName("http://www.mulesoft.org/schema/mule/documentation", "name");
-  protected static final QName SOURCE_FILE_ANNOTATION_KEY =
-      new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceFileName");
-  protected static final QName SOURCE_FILE_LINE_ANNOTATION_KEY =
-      new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceFileLine");
 
   /**
    * Generates a representation of a flow element to be logged in a standard way.
@@ -70,11 +66,11 @@ public class ComponentLocationProvider {
   }
 
   protected static String getSourceFile(AnnotatedObject element) {
-    return (String) element.getAnnotation(SOURCE_FILE_ANNOTATION_KEY);
+    return element.getLocation().getFileName().orElse("unknown");
   }
 
   protected static Integer getSourceFileLine(AnnotatedObject element) {
-    return (Integer) element.getAnnotation(SOURCE_FILE_LINE_ANNOTATION_KEY);
+    return element.getLocation().getLineInFile().orElse(-1);
   }
 
 }
