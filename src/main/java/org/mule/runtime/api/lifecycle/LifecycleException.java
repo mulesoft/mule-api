@@ -6,9 +6,13 @@
  */
 package org.mule.runtime.api.lifecycle;
 
+import static java.lang.String.format;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import org.mule.runtime.api.exception.LocatedMuleException;
 import org.mule.runtime.api.i18n.I18nMessage;
+import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.meta.NamedObject;
 
 /**
  * {@code LifecycleException} is the base exception thrown when an error occurs
@@ -54,4 +58,20 @@ public class LifecycleException extends LocatedMuleException {
   public Object getComponent() {
     return component;
   }
+
+  @Override
+  protected String resolveProcessorPath(Object component) {
+    if (component instanceof AnnotatedObject) {
+      return super.resolveProcessorPath(component);
+    } else {
+      return format("%s @ %s",
+                    (component == null
+                        ? "null"
+                        : (component instanceof NamedObject
+                            ? ((NamedObject) component).getName()
+                            : component.toString())),
+                    "app");
+    }
+  }
+
 }
