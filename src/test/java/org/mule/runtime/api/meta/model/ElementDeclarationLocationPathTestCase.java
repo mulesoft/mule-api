@@ -111,7 +111,6 @@ public class ElementDeclarationLocationPathTestCase {
         .withRefName("config")
         .withConnection(jms.newConnection("active-mq-connection")
             .withParameterGroup(newParameterGroup()
-                .withParameter("disableValidation", "true")
                 .withParameter("cachingStrategy",
                                newObjectValue()
                                    .ofType("org.mule.extensions.jms.api.connection.caching.NoCachingConfiguration")
@@ -183,7 +182,6 @@ public class ElementDeclarationLocationPathTestCase {
                                    .getDeclaration())
                                .withConnection(http.newConnection("listener-connection")
                                    .withParameterGroup(newParameterGroup(CONNECTION)
-                                       .withParameter("disableValidation", "true")
                                        .withParameter("tlsContext", newObjectValue()
                                            .withParameter("key-store", newObjectValue()
                                                .withParameter("path", "ssltest-keystore.jks")
