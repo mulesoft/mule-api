@@ -7,7 +7,9 @@
 
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.format;
 import static org.mule.runtime.api.util.ComponentLocationProvider.resolveProcessorRepresentation;
+
 import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.meta.NameableObject;
 import org.mule.runtime.api.meta.NamedObject;
@@ -86,7 +88,7 @@ public class LocatedMuleException extends MuleException {
 
     String str = obj.getClass().getName();
     if (obj instanceof NameableObject) {
-      str += String.format(" '%s'", ((NameableObject) obj).getName());
+      str += format(" '%s'", ((NameableObject) obj).getName());
     }
     return str;
   }
