@@ -19,6 +19,7 @@ import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
+import org.mule.runtime.api.util.Pair;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+
 
 /**
  * Default implementation of a {@link TypeCatalog}
@@ -138,8 +140,9 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     SubTypesMappingContainer(Collection<SubTypesModel> subTypes) {
       subTypesMapping = toSubTypesMap(subTypes);
       this.subTypesById = subTypesMapping.entrySet().stream()
-          .filter(e -> getTypeId(e.getKey()).isPresent())
-          .collect(toMap(e -> getTypeId(e.getKey()).get(), Map.Entry::getValue, (k, v) -> k, LinkedHashMap::new));
+          .map(entry -> new Pair<>(getTypeId(entry.getKey()).orElse(null), entry.getValue()))
+          .filter(p -> p.getFirst() != null)
+          .collect(toMap(Pair::getFirst, Pair::getSecond, (k, v) -> k, LinkedHashMap::new));
     }
 
     /**
