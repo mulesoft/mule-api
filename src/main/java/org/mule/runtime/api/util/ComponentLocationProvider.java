@@ -66,11 +66,11 @@ public class ComponentLocationProvider {
   }
 
   protected static String getSourceFile(AnnotatedObject element) {
-    return element.getLocation().getFileName().orElse("unknown");
+    return element.getLocation() != null ? element.getLocation().getFileName().orElse("unknown") : "internal";
   }
 
   protected static Integer getSourceFileLine(AnnotatedObject element) {
-    return element.getLocation().getLineInFile().orElse(-1);
+    return element.getLocation() != null ? element.getLocation().getLineInFile().orElse(-1) : -1;
   }
 
 }
