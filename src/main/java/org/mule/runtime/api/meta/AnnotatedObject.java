@@ -44,7 +44,8 @@ public interface AnnotatedObject {
   void setAnnotations(Map<QName, Object> annotations);
 
   /**
-   * @return the location properties of this component in the mule app configuration.
+   * @return the location properties of this component in the mule app configuration, or {@code null} if this object was generated
+   *         programmatically and not from a configuration element.
    */
   ComponentLocation getLocation();
 
