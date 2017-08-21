@@ -48,14 +48,13 @@ public interface ProcessorInterceptor {
   /**
    * This method is called before the intercepted component has run. It may modify the event to be used down in the chain and the
    * component via the given {@code event}.
-   * 
+   *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
-   *        be resolved when passed to this method.
+   * @param parameters the parameters of the component as defined in the configuration.
    * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
    *        mutator methods.
    */
-  default void before(ComponentLocation location, Map<String, Object> parameters, InterceptionEvent event) {};
+  default void before(ComponentLocation location, Map<String, ProcessorParameterValue> parameters, InterceptionEvent event) {};
 
   /**
    * This method is called between {@link #before(ComponentLocation, Map, InterceptionEvent) before} and
@@ -80,8 +79,7 @@ public interface ProcessorInterceptor {
    * </ul>
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param parameters the parameters of the component as defined in the configuration. Parameters that contain expressions will
-   *        be resolved when passed to this method.
+   * @param parameters the parameters of the component as defined in the configuration.
    * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
    *        mutator methods.
    * @param action when something other than continuing the interception is desired, the corresponding method on this object must
@@ -89,7 +87,7 @@ public interface ProcessorInterceptor {
    * @return a non-null {@link CompletableFuture} for modifying the intercepted {@link InterceptionEvent event} after this method
    *         returns.
    */
-  default CompletableFuture<InterceptionEvent> around(ComponentLocation location, Map<String, Object> parameters,
+  default CompletableFuture<InterceptionEvent> around(ComponentLocation location, Map<String, ProcessorParameterValue> parameters,
                                                       InterceptionEvent event, InterceptionAction action) {
     return action.proceed();
   };
@@ -108,7 +106,7 @@ public interface ProcessorInterceptor {
    * If {@link #before(ComponentLocation, Map, InterceptionEvent) before} throws an {@link Exception}, the interception will be
    * called there, but the {@link #after(ComponentLocation, InterceptionEvent, Optional) afters} of the already called handlers
    * will still be called.
-   * 
+   *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
    * @param event the result of the component.
    * @param thrown the exception thrown by the intercepted component, if any.
