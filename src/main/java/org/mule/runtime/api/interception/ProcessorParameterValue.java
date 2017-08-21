@@ -32,7 +32,7 @@ public interface ProcessorParameterValue {
    * Performs any required expression resolution on {@link #providedValue()}.
    *
    * @return if {@link #providedValue()} was an expression, its resolved value. Otherwise, the same as {@link #providedValue()}.
-   * @throws MuleRuntimeException any error that occurs while resolving the value is re-thrown.
+   * @throws MuleRuntimeException if an error occurs while resolving the value.
    */
   Object resolveValue();
 
