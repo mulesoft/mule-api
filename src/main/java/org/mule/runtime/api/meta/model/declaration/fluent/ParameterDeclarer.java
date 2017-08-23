@@ -8,12 +8,13 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
-import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
+import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
 
 /**
  * Allows configuring a {@link ParameterDeclaration} through a fluent API
@@ -129,6 +130,17 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   @Override
   public T withDisplayModel(DisplayModel displayModel) {
     declaration.setDisplayModel(displayModel);
+    return (T) this;
+  }
+
+  /**
+   * Sets the given {@code valueProviderModel}
+   *
+   * @param valueProviderModel a {@link ValueProviderModel}
+   * @return {@code this} declarer
+   */
+  public T withValueProviderModel(ValueProviderModel valueProviderModel) {
+    declaration.setValueProviderModel(valueProviderModel);
     return (T) this;
   }
 
