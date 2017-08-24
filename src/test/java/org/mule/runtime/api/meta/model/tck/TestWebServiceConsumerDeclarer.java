@@ -26,7 +26,6 @@ import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
@@ -153,13 +152,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
     operation.withOutputAttributes().ofType(getStringType());
     parameterGroup = operation.onParameterGroup(OPERATION_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(COLLECTION_PARAMETER).describedAs(THE_OPERATION_TO_USE).ofType(typeBuilder.arrayType()
-        .id(List.class
-            .getName())
-        .of(typeBuilder
-            .stringType()
-            .id(String.class
-                .getName()))
-        .build());
+        .of(typeBuilder.stringType()).build());
 
     parameterGroup.withOptionalParameter(MTOM_ENABLED).describedAs(MTOM_DESCRIPTION).ofType(getBooleanType())
         .defaultingTo(true);
