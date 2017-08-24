@@ -308,7 +308,7 @@ public class ExceptionHelper {
   }
 
   /**
-   * Registers an exception reader with Mule
+   * Unregisters an exception reader with Mule
    *
    * @param reader the reader to register.
    * @return {@code true} if the passed {@code reader} is registered
