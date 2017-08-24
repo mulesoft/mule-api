@@ -42,7 +42,7 @@ public class ExceptionHelper {
   /**
    * A list of the exception readers to use for different types of exceptions
    */
-  private static List<ExceptionReader> exceptionReaders = new ArrayList<ExceptionReader>();
+  private static List<ExceptionReader> exceptionReaders = new ArrayList<>();
 
   /**
    * The default ExceptionReader which will be used for most types of exceptions
@@ -234,7 +234,7 @@ public class ExceptionHelper {
       return null;
     }
     StackTraceElement[] trace = t.getStackTrace();
-    List<StackTraceElement> newTrace = new ArrayList<StackTraceElement>();
+    List<StackTraceElement> newTrace = new ArrayList<>();
     for (StackTraceElement stackTraceElement : trace) {
       if (!isMuleInternalClass(stackTraceElement.getClassName())) {
         newTrace.add(stackTraceElement);
@@ -285,7 +285,7 @@ public class ExceptionHelper {
   }
 
   public static List<Throwable> getExceptionsAsList(Throwable t) {
-    List<Throwable> exceptions = new ArrayList<Throwable>();
+    List<Throwable> exceptions = new ArrayList<>();
     Throwable cause = t;
     while (cause != null) {
       exceptions.add(0, cause);
@@ -299,12 +299,22 @@ public class ExceptionHelper {
   }
 
   /**
-   * Registers an exception reader with Mule
+   * Registers an exception reader on the Mule Runtime
    *
    * @param reader the reader to register.
    */
   public static void registerExceptionReader(ExceptionReader reader) {
     exceptionReaders.add(reader);
+  }
+
+  /**
+   * Unregisters an exception reader from the Mule Runtime
+   *
+   * @param reader the reader to register.
+   * @return {@code true} if the passed {@code reader} is registered
+   */
+  public static boolean unregisterExceptionReader(ExceptionReader reader) {
+    return exceptionReaders.remove(reader);
   }
 
 }
