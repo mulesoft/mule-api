@@ -11,9 +11,7 @@ import org.mule.runtime.api.bulk.BulkItem.BulkItemBuilder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class is used to provide item level information about a bulk operation. This master entity represents the bulk operation
@@ -31,20 +29,13 @@ public final class BulkOperationResult<T> implements Serializable {
   private final Serializable id;
   private final boolean successful;
   private final List<BulkItem<T>> items;
-  private final Map<String, Serializable> customProperties;
 
   private BulkOperationResult(Serializable id,
                               boolean successful,
-                              List<BulkItem<T>> items,
-                              Map<String, Serializable> customProperties) {
+                              List<BulkItem<T>> items) {
     this.id = id;
     this.successful = successful;
     this.items = items;
-    if (customProperties != null) {
-      this.customProperties = new HashMap<>(customProperties);
-    } else {
-      this.customProperties = null;
-    }
   }
 
   /**
@@ -70,21 +61,11 @@ public final class BulkOperationResult<T> implements Serializable {
     return items;
   }
 
-  /**
-   * A custom property stored under the given key
-   *
-   * @param key the key of the custom property
-   * @return a {@link Serializable} value
-   */
-  public Serializable getCustomProperty(String key) {
-    return this.customProperties != null ? this.customProperties.get(key) : null;
-  }
-
   public static <T> BulkOperationResultBuilder<T> builder() {
     return new BulkOperationResultBuilder<T>();
   }
 
-  public static class BulkOperationResultBuilder<T> extends AbstractBulkBuilder {
+  public static class BulkOperationResultBuilder<T> {
 
     private Serializable id;
     private boolean successful = true;
@@ -107,11 +88,6 @@ public final class BulkOperationResult<T> implements Serializable {
       return this;
     }
 
-    public BulkOperationResultBuilder<T> addCustomProperty(String key, Serializable value) {
-      this.customProperty(key, value);
-      return this;
-    }
-
     public BulkOperationResult<T> build() {
       if (this.items.isEmpty()) {
         throw new IllegalStateException("A BulkOperationResult must have at least one BulkItem. Please add a result an try again");
@@ -126,7 +102,7 @@ public final class BulkOperationResult<T> implements Serializable {
         }
       }
 
-      return new BulkOperationResult<T>(this.id, this.successful, items, this.getCustomProperties());
+      return new BulkOperationResult<>(this.id, this.successful, items);
     }
   }
 }
