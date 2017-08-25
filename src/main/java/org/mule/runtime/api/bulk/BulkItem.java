@@ -8,8 +8,6 @@
 package org.mule.runtime.api.bulk;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents an individual data piece in the context of a bulk operation
@@ -26,26 +24,19 @@ public final class BulkItem<T> implements Serializable {
   private final String statusCode;
   private final Exception exception;
   private final T payload;
-  private final Map<String, Serializable> customProperties;
 
   private BulkItem(Serializable id,
                    boolean successful,
                    String message,
                    String statusCode,
                    Exception exception,
-                   T payload,
-                   Map<String, Serializable> customProperties) {
+                   T payload) {
     this.id = id;
     this.successful = successful;
     this.message = message;
     this.statusCode = statusCode;
     this.exception = exception;
     this.payload = payload;
-    if (customProperties != null) {
-      this.customProperties = new HashMap<>(customProperties);
-    } else {
-      this.customProperties = null;
-    }
   }
 
   /**
@@ -91,21 +82,11 @@ public final class BulkItem<T> implements Serializable {
     return payload;
   }
 
-  /**
-   * A custom property stored under the given key
-   *
-   * @param key the key of the custom property
-   * @return a {@link Serializable} value
-   */
-  public Serializable getCustomProperty(String key) {
-    return this.customProperties != null ? this.customProperties.get(key) : null;
-  }
-
   public static <T> BulkItemBuilder<T> builder() {
     return new BulkItemBuilder<>();
   }
 
-  public static class BulkItemBuilder<T> extends AbstractBulkBuilder {
+  public static class BulkItemBuilder<T> {
 
     private Serializable id;
     private boolean successful = true;
@@ -145,14 +126,8 @@ public final class BulkItem<T> implements Serializable {
       return this;
     }
 
-    public BulkItemBuilder<T> addCustomProperty(String key, Serializable value) {
-      this.customProperty(key, value);
-      return this;
-    }
-
     protected BulkItem<T> build() {
-      return new BulkItem<T>(id, successful, message, statusCode, exception, payload, this.getCustomProperties());
+      return new BulkItem<T>(id, successful, message, statusCode, exception, payload);
     }
   }
-
 }
