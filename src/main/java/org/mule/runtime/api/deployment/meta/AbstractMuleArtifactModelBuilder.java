@@ -60,10 +60,6 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
     return minMuleVersion;
   }
 
-  //public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
-  //  return classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null;
-  //}
-
   /**
    * Sets the bundle descriptor loader for the artifact
    *
