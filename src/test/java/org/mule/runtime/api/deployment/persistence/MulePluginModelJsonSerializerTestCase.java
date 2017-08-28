@@ -14,6 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor;
+import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptorBuilder;
 import org.mule.runtime.api.deployment.meta.MulePluginModel;
 import org.mule.runtime.api.deployment.meta.MulePluginModel.MulePluginModelBuilder;
 
@@ -62,8 +63,8 @@ public class MulePluginModelJsonSerializerTestCase extends AbstractMuleArtifactM
                                                                          bundleDescriptorAttributes));
     mulePluginModelBuilder.withExtensionModelDescriber().setId(describerExtensionModelId).addProperty(classAttributeKey,
                                                                                                       classAttributeValue);
-    mulePluginModelBuilder.withClassLoaderModelDescriber().setId(describerClassLoaderModelId).addProperty(exportedPackagesKey,
-                                                                                                          exportedPackagesAttributeValue);
+    mulePluginModelBuilder.withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptorBuilder()
+        .setId(describerClassLoaderModelId).addProperty(exportedPackagesKey, exportedPackagesAttributeValue).build());
 
     String actual = mulePluginModelJsonSerializer.serialize(mulePluginModelBuilder.build());
     final JsonObject actualElement = new JsonParser().parse(actual).getAsJsonObject();
@@ -100,7 +101,6 @@ public class MulePluginModelJsonSerializerTestCase extends AbstractMuleArtifactM
 
     assertNameAndMinMuleVersion(deserialized);
     assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
-    assertThat(deserialized.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
     assertExtensionModel(deserialized);
   }
 
@@ -139,7 +139,6 @@ public class MulePluginModelJsonSerializerTestCase extends AbstractMuleArtifactM
     assertNameAndMinMuleVersion(deserialized);
     assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
     assertThat(deserialized.getExtensionModelLoaderDescriptor().isPresent(), is(false));
-    assertThat(deserialized.getClassLoaderModelLoaderDescriptor().isPresent(), is(false));
   }
 
   private void assertNameAndMinMuleVersion(MulePluginModel deserialize) {
@@ -157,8 +156,7 @@ public class MulePluginModelJsonSerializerTestCase extends AbstractMuleArtifactM
   }
 
   private void assertClassLoaderModel(MulePluginModel deserialize) {
-    assertThat(deserialize.getClassLoaderModelLoaderDescriptor().isPresent(), is(true));
-    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor().get();
+    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor();
     assertThat(extensionModelDescriptor.getId(), is("maven"));
     assertThat(extensionModelDescriptor.getAttributes().size(), is(2));
     final Object exportedPackages = extensionModelDescriptor.getAttributes().get("exportedPackages");

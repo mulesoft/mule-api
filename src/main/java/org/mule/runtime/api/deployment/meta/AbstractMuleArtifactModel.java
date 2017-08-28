@@ -7,10 +7,8 @@
 
 package org.mule.runtime.api.deployment.meta;
 
-import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.runtime.api.meta.model.ExtensionModel;
-
-import java.util.Optional;
 
 /**
  * Base class for creating models for Mule artifacts from JSON describer files.
@@ -39,6 +37,8 @@ public abstract class AbstractMuleArtifactModel {
                                       String name, String minMuleVersion,
                                       MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                       MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
+    checkArgument(classLoaderModelLoaderDescriptor != null, "classLoaderModelLoaderDescriptor cannot be null");
+    checkArgument(bundleDescriptorLoader != null, "bundleDescriptorLoader cannot be null");
     this.minMuleVersion = minMuleVersion;
     this.name = name;
     this.classLoaderModelLoaderDescriptor = classLoaderModelLoaderDescriptor;
@@ -57,7 +57,7 @@ public abstract class AbstractMuleArtifactModel {
     return bundleDescriptorLoader;
   }
 
-  public Optional<MuleArtifactLoaderDescriptor> getClassLoaderModelLoaderDescriptor() {
-    return ofNullable(classLoaderModelLoaderDescriptor);
+  public MuleArtifactLoaderDescriptor getClassLoaderModelLoaderDescriptor() {
+    return classLoaderModelLoaderDescriptor;
   }
 }

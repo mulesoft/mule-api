@@ -24,6 +24,7 @@ public class MulePluginModelBuilderTestCase {
   private static final String MULE_VERSION = "4.0.0";
   private static final String DESCRIBER_ID = "ID-1";
   private static final String BUNDLE_DESCRIPTOR_LOADER_ID = "descriptorLoaderId";
+  private static final String CLASSLOADER_DESCRIPTOR_LOADER_ID = "classLoaderLoaderId";
 
   private MulePluginModelBuilder builder;
 
@@ -40,6 +41,7 @@ public class MulePluginModelBuilderTestCase {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
     builder.withExtensionModelDescriber().setId(DESCRIBER_ID);
     builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
+    builder.withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor(CLASSLOADER_DESCRIPTOR_LOADER_ID, emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));
@@ -49,12 +51,15 @@ public class MulePluginModelBuilderTestCase {
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().get().getAttributes().size(), is(0));
     assertThat(mulePluginModel.getBundleDescriptorLoader().getId(), equalTo(BUNDLE_DESCRIPTOR_LOADER_ID));
     assertThat(mulePluginModel.getBundleDescriptorLoader().getAttributes(), is(emptyMap()));
+    assertThat(mulePluginModel.getClassLoaderModelLoaderDescriptor().getId(), equalTo(CLASSLOADER_DESCRIPTOR_LOADER_ID));
+    assertThat(mulePluginModel.getClassLoaderModelLoaderDescriptor().getAttributes(), is(emptyMap()));
   }
 
   @Test
   public void buildWithoutExtensionModelDescriptor() {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
     builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
+    builder.withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor(CLASSLOADER_DESCRIPTOR_LOADER_ID, emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));
@@ -62,6 +67,8 @@ public class MulePluginModelBuilderTestCase {
     assertThat(mulePluginModel.getExtensionModelLoaderDescriptor().isPresent(), is(false));
     assertThat(mulePluginModel.getBundleDescriptorLoader().getId(), equalTo(BUNDLE_DESCRIPTOR_LOADER_ID));
     assertThat(mulePluginModel.getBundleDescriptorLoader().getAttributes(), is(emptyMap()));
+    assertThat(mulePluginModel.getClassLoaderModelLoaderDescriptor().getId(), equalTo(CLASSLOADER_DESCRIPTOR_LOADER_ID));
+    assertThat(mulePluginModel.getClassLoaderModelLoaderDescriptor().getAttributes(), is(emptyMap()));
   }
 
   @Test
