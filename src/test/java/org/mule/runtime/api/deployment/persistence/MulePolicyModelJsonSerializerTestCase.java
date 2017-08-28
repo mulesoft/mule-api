@@ -7,6 +7,7 @@
 package org.mule.runtime.api.deployment.persistence;
 
 
+import static java.util.Collections.emptyMap;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
@@ -53,8 +54,8 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
         new MulePolicyModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion)
             .withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID,
                                                                          bundleDescriptorAttributes));
-
-    mulePolicyModelBuilder.withClassLoaderModelDescriber().setId(describerClassLoaderModelId);
+    mulePolicyModelBuilder
+        .withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor(describerClassLoaderModelId, emptyMap()));
 
     String actual = mulePolicyModelJsonSerializer.serialize(mulePolicyModelBuilder.build());
     final JsonObject actualElement = new JsonParser().parse(actual).getAsJsonObject();
@@ -91,8 +92,7 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
   }
 
   private void assertClassLoaderModel(MulePolicyModel deserialize) {
-    assertThat(deserialize.getClassLoaderModelLoaderDescriptor().isPresent(), is(true));
-    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor().get();
+    final MuleArtifactLoaderDescriptor extensionModelDescriptor = deserialize.getClassLoaderModelLoaderDescriptor();
     assertThat(extensionModelDescriptor.getId(), is("maven"));
     assertThat(extensionModelDescriptor.getAttributes().size(), is(2));
     final Object exportedPackages = extensionModelDescriptor.getAttributes().get("exportedPackages");

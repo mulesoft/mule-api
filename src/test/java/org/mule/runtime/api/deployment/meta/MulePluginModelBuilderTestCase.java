@@ -40,6 +40,8 @@ public class MulePluginModelBuilderTestCase {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
     builder.withExtensionModelDescriber().setId(DESCRIBER_ID);
     builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
+    // TODO(pablo.kraan): loader - check this
+    builder.withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor("", emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));
@@ -55,6 +57,8 @@ public class MulePluginModelBuilderTestCase {
   public void buildWithoutExtensionModelDescriptor() {
     builder.setName(ARTIFACT_NAME).setMinMuleVersion(MULE_VERSION);
     builder.withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID, emptyMap()));
+    // TODO(pablo.kraan): loader - check this
+    builder.withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor("", emptyMap()));
     MulePluginModel mulePluginModel = builder.build();
 
     assertThat(mulePluginModel.getName(), is(ARTIFACT_NAME));

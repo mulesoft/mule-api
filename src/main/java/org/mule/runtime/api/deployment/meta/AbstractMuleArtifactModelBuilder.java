@@ -7,11 +7,7 @@
 
 package org.mule.runtime.api.deployment.meta;
 
-import static java.util.Optional.empty;
-import static java.util.Optional.of;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
-
-import java.util.Optional;
 
 /**
  * A builder to create instances of {@link AbstractMuleArtifactModel} implementations.
@@ -26,7 +22,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
   private String name;
   private String minMuleVersion;
   private MuleArtifactLoaderDescriptor bundleDescriptorLoader;
-  private Optional<MuleArtifactLoaderDescriptorBuilder> classLoaderDescriptorBuilder = empty();
+  private MuleArtifactLoaderDescriptor classLoaderModelDescriptorLoader;
 
   /**
    * Sets the describer's name
@@ -64,9 +60,9 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
     return minMuleVersion;
   }
 
-  public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
-    return classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null;
-  }
+  //public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
+  //  return classLoaderDescriptorBuilder.isPresent() ? classLoaderDescriptorBuilder.get().build() : null;
+  //}
 
   /**
    * Sets the bundle descriptor loader for the artifact
@@ -83,18 +79,26 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
   }
 
   /**
-   * @return a {@link MuleArtifactLoaderDescriptorBuilder} to populate the {@link ClassLoader} describer with the ID and
-   * any additional attributes
+   * Sets the bundle descriptor loader for the artifact
+   *
+   * @param classLoaderModelDescriptorLoader describes the loader for the classloader model descriptor. Non null
+   * @return a {@link MuleArtifactLoaderDescriptor} to populate the {@link ClassLoader} describer with the ID and any additional
+   *         attributes
    */
-  public MuleArtifactLoaderDescriptorBuilder withClassLoaderModelDescriber() {
-    if (!classLoaderDescriptorBuilder.isPresent()) {
-      classLoaderDescriptorBuilder = of(new MuleArtifactLoaderDescriptorBuilder());
-    }
-    return classLoaderDescriptorBuilder.get();
+  public T withClassLoaderModelDescriptorLoader(MuleArtifactLoaderDescriptor classLoaderModelDescriptorLoader) {
+    checkArgument(classLoaderModelDescriptorLoader != null, "classLoaderModelDescriptorLoader cannot be null");
+    this.classLoaderModelDescriptorLoader = classLoaderModelDescriptorLoader;
+
+    return getThis();
   }
 
   public MuleArtifactLoaderDescriptor getBundleDescriptorLoader() {
     return bundleDescriptorLoader;
+  }
+
+
+  public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
+    return classLoaderModelDescriptorLoader;
   }
 
   /**
