@@ -7,6 +7,7 @@
 package org.mule.runtime.api.exception;
 
 import static java.lang.System.lineSeparator;
+import static java.lang.Thread.currentThread;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
@@ -40,7 +41,7 @@ public class ExceptionHelper {
   private static boolean initialised = false;
 
   /**
-   * A list of the exception readers to use for different types of exceptions
+   * A list of the exception readers and the classloader that loaded it to use for different types of exceptions
    */
   private static List<ExceptionReader> exceptionReaders = new ArrayList<>();
 
@@ -84,14 +85,26 @@ public class ExceptionHelper {
   }
 
   /**
-   * Gets an exception reader for the exception
+   * Gets an exception reader for the exception. The currentThread's {@link ClassLoader} is used to determine the appropriate
+   * reader, querying only those registered by the same or an ancestor classloader.
    *
    * @param t the exception to get a reader for
    * @return either a specific reader or an instance of DefaultExceptionReader. This method never returns null;
    */
   public static ExceptionReader getExceptionReader(Throwable t) {
+    ClassLoader tccl = currentThread().getContextClassLoader();
+
     for (ExceptionReader exceptionReader : exceptionReaders) {
-      if (exceptionReader.getExceptionType().isInstance(t)) {
+      ClassLoader currentCl = tccl;
+
+      // The ExceptionReader is registered with its plugin classloader, but the TCCL when looking it up is the one for the
+      // application.
+      while (currentCl != null && currentCl != ExceptionHelper.class.getClassLoader()
+          && currentCl != exceptionReader.getClass().getClassLoader()) {
+        currentCl = currentCl.getParent();
+      }
+
+      if (currentCl == exceptionReader.getClass().getClassLoader() && exceptionReader.getExceptionType().isInstance(t)) {
         return exceptionReader;
       }
     }
