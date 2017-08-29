@@ -20,6 +20,7 @@ import java.util.Optional;
  */
 public class ConnectionException extends MuleException {
 
+  private Object connection;
   private ErrorType errorType;
 
   /**
@@ -53,8 +54,8 @@ public class ConnectionException extends MuleException {
   /**
    * Creates a new instance with the specified detail {@code message}, {@code cause} and {@link ErrorType}
    *
-   * @param message the detail message
-   * @param cause   the exception's cause
+   * @param message   the detail message
+   * @param cause     the exception's cause
    * @param errorType the exception's errorType
    */
   public ConnectionException(String message, Throwable cause, ErrorType errorType) {
@@ -63,9 +64,42 @@ public class ConnectionException extends MuleException {
   }
 
   /**
+   * Creates a new instance with the specified detail {@code cause} and {@code failed connection}
+   *
+   * @param cause      the exception's cause
+   * @param connection the failed connection
+   */
+  public ConnectionException(Throwable cause, Object connection) {
+    super(cause);
+    this.connection = connection;
+  }
+
+  /**
+   * Creates a new instance with the specified detail {@code message}, {@code cause}, {@link ErrorType} and
+   * {@code failed connection}
+   *
+   * @param message    the detail message
+   * @param cause      the exception's cause
+   * @param errorType  the exception's errorType
+   * @param connection the failed connection
+   */
+  public ConnectionException(String message, Throwable cause, ErrorType errorType, Object connection) {
+    super(createStaticMessage(message), cause);
+    this.errorType = errorType;
+    this.connection = connection;
+  }
+
+  /**
    * @return The {@link Optional} {@link ErrorType} for this exception
    */
   public Optional<ErrorType> getErrorType() {
     return ofNullable(errorType);
+  }
+
+  /**
+   * @return The {@link Optional} connection. This connection is the one that failed.
+   */
+  public Optional<Object> getConnection() {
+    return ofNullable(connection);
   }
 }
