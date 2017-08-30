@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
 
@@ -39,6 +40,11 @@ public class ExceptionHelper {
   private static final int EXCEPTION_THRESHOLD = 3;
   private static boolean verbose = true;
   private static boolean initialised = false;
+
+  /**
+   * A list of the exception readers to use for different types of exceptions
+   */
+  private static List<ExceptionReader> globalExceptionReaders = new ArrayList<>();
 
   /**
    * A list of the exception readers and the classloader that loaded it to use for different types of exceptions
@@ -92,6 +98,12 @@ public class ExceptionHelper {
    * @return either a specific reader or an instance of DefaultExceptionReader. This method never returns null;
    */
   public static ExceptionReader getExceptionReader(Throwable t) {
+    for (ExceptionReader exceptionReader : globalExceptionReaders) {
+      if (exceptionReader.getExceptionType().isInstance(t)) {
+        return exceptionReader;
+      }
+    }
+
     ClassLoader tccl = currentThread().getContextClassLoader();
 
     for (ExceptionReader exceptionReader : exceptionReaders) {
@@ -104,7 +116,8 @@ public class ExceptionHelper {
         currentCl = currentCl.getParent();
       }
 
-      if (currentCl == exceptionReader.getClass().getClassLoader() && exceptionReader.getExceptionType().isInstance(t)) {
+      if (currentCl == exceptionReader.getClass().getClassLoader()
+          && exceptionReader.getExceptionType().isInstance(t)) {
         return exceptionReader;
       }
     }
@@ -234,8 +247,8 @@ public class ExceptionHelper {
       stackTraceFilter = stackTraceFilterString.split(",");
     }
 
-    registerExceptionReader(new MuleExceptionReader());
-    registerExceptionReader(new NamingExceptionReader());
+    registerGlobalExceptionReader(new MuleExceptionReader());
+    registerGlobalExceptionReader(new NamingExceptionReader());
     initialised = true;
   }
 
@@ -312,11 +325,32 @@ public class ExceptionHelper {
   }
 
   /**
-   * Registers an exception reader on the Mule Runtime
+   * Registers an exception reader on the Mule Runtime.
+   * <p>
+   * Only the Runtime itself may register global readers.
+   *
+   * @param reader the reader to register.
+   */
+  public static void registerGlobalExceptionReader(ExceptionReader reader) {
+    if (reader.getClass().getClassLoader() != ExceptionHelper.class.getClassLoader()) {
+      throw new IllegalArgumentException("Only the Runtime itself may register global readers.");
+    }
+    globalExceptionReaders.add(reader);
+  }
+
+  /**
+   * Registers an exception reader on the Mule Runtime to be used only by the artifact it belongs to
    *
    * @param reader the reader to register.
    */
   public static void registerExceptionReader(ExceptionReader reader) {
+    for (ExceptionReader exceptionReader : globalExceptionReaders) {
+      if (exceptionReader.getExceptionType().equals(reader.getExceptionType())) {
+        throw new IllegalArgumentException(format("There's a globalExceptionReader already registerd for '%s': %s",
+                                                  reader.getExceptionType(), reader.toString()));
+      }
+    }
+
     exceptionReaders.add(reader);
   }
 

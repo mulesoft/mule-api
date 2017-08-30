@@ -12,19 +12,26 @@ import static org.apache.commons.io.IOUtils.toByteArray;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.registerExceptionReader;
+import static org.mule.runtime.api.exception.ExceptionHelper.registerGlobalExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.unregisterExceptionReader;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.Map;
 
 public class ExceptionHelperTestCase {
+
+  @Rule
+  public ExpectedException expected = none();
 
   private ClassLoader originalTccl;
 
@@ -77,6 +84,32 @@ public class ExceptionHelperTestCase {
     assertThat(getExceptionReader(new Exception()), is(cl2Reader));
   }
 
+  @Test
+  public void registerOverridesGlobal() throws Exception {
+    registerGlobalExceptionReader(new TestAbstractExceptionReader() {
+
+      @Override
+      public Class<?> getExceptionType() {
+        return TestException.class;
+      }
+    });
+
+    expected.expect(IllegalArgumentException.class);
+    registerExceptionReader(new TestAbstractExceptionReader() {
+
+      @Override
+      public Class<?> getExceptionType() {
+        return TestException.class;
+      }
+    });
+  }
+
+  @Test
+  public void registerGlobalNotFromRuntime() throws Exception {
+    expected.expect(IllegalArgumentException.class);
+    registerGlobalExceptionReader(cl1Reader);
+  }
+
   private static final class TestChildClassLoader extends ClassLoader {
 
     private TestChildClassLoader(ClassLoader parent) {
@@ -99,7 +132,7 @@ public class ExceptionHelperTestCase {
     }
   }
 
-  public static class TestExceptionReader implements ExceptionReader {
+  public static abstract class TestAbstractExceptionReader implements ExceptionReader {
 
     @Override
     public String getMessage(Throwable t) {
@@ -112,14 +145,22 @@ public class ExceptionHelperTestCase {
     }
 
     @Override
+    public Map<String, Object> getInfo(Throwable t) {
+      return emptyMap();
+    }
+
+  }
+
+  public static class TestExceptionReader extends TestAbstractExceptionReader {
+
+    @Override
     public Class<?> getExceptionType() {
       return Exception.class;
     }
 
-    @Override
-    public Map<String, Object> getInfo(Throwable t) {
-      return emptyMap();
-    }
+  }
+
+  public static class TestException extends Exception {
 
   }
 }
