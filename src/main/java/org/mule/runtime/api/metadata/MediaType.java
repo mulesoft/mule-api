@@ -47,6 +47,7 @@ public final class MediaType implements Serializable {
   private static final String SUBTYPE_HTML = "html";
   private static final String SUBTYPE_OCTET_STREAM = "octet-stream";
   private static final String SUBTYPE_MIXED = "mixed";
+  private static final String SUBTYPE_FORM_DATA = "form-data";
   private static final String SUBTYPE_RELATED = "related";
 
   public static final MediaType ANY = create("*", "*");
@@ -64,6 +65,7 @@ public final class MediaType implements Serializable {
   public static final MediaType BINARY = create(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
   public static final MediaType UNKNOWN = create("content", "unknown");
   public static final MediaType MULTIPART_MIXED = create(TYPE_MULTIPART, SUBTYPE_MIXED);
+  public static final MediaType MULTIPART_FORM_DATA = create(TYPE_MULTIPART, SUBTYPE_FORM_DATA);
   public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
   public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
