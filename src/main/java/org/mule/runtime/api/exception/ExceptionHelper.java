@@ -31,6 +31,7 @@ import java.util.Map;
 public class ExceptionHelper {
 
   private static final String MULE_PACKAGE_REGEXP = "(?:org|com)\\.mule(?:soft)?\\.(?!mvel2)(?!el).*";
+  public static final String LOGGING_SUMMARY_APPEND_KEY = "SUMMARY";
 
   public static final String[] DEFAULT_STACKTRACE_FILTER = new String[] {
       "org.mule.runtime.core.privileged.processor.AbstractInterceptingMessageProcessor",
@@ -130,9 +131,16 @@ public class ExceptionHelper {
     // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
     // properly logged.
     Map muleExceptionInfo = new HashMap<>();
+
+    //Summary hash is added for logging info from inner mule exceptions
+    Map<String,String> summary = new HashMap<>();
+    muleExceptionInfo.put(LOGGING_SUMMARY_APPEND_KEY,new HashMap<String,String>());
+
     while (cause != null) {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
+        //Inner exceptions override outer ones
+        summary.put(exception.getClass().getName(), exception.getSummaryMessageAdditionalInfo());
         muleExceptionInfo.putAll(exception.getInfo());
       }
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
@@ -147,6 +155,7 @@ public class ExceptionHelper {
       }
     }
     if (exception != null) {
+      muleExceptionInfo.put(LOGGING_SUMMARY_APPEND_KEY, summary);
       exception.getInfo().putAll(muleExceptionInfo);
     }
     return exception;

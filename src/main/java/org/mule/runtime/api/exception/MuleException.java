@@ -7,6 +7,7 @@
 package org.mule.runtime.api.exception;
 
 import static java.lang.System.lineSeparator;
+import static org.mule.runtime.api.exception.ExceptionHelper.LOGGING_SUMMARY_APPEND_KEY;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
@@ -194,7 +195,8 @@ public abstract class MuleException extends Exception {
     StringBuilder buf = new StringBuilder(1024);
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
-    appendSummaryMessage(buf);
+
+    ((Map<String,String>)info.get(LOGGING_SUMMARY_APPEND_KEY)).values().stream().map((value) -> buf.append(value));
 
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
@@ -205,12 +207,11 @@ public abstract class MuleException extends Exception {
   }
 
   /**
-   * Template method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary. By
+   * Method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary. By
    * default, the location data will be added.
-   *
-   * @param builder {@link StringBuilder} to use for appending additional summary info.
    */
-  protected void appendSummaryMessage(StringBuilder builder) {
+  protected String getSummaryMessageAdditionalInfo() {
+    StringBuilder builder = new StringBuilder();
     Map<String, Object> exceptionInfo = getExceptionInfo(this);
     builder.append("Element               : ")
         .append(exceptionInfo.get(INFO_LOCATION_KEY))
@@ -221,6 +222,7 @@ public abstract class MuleException extends Exception {
           .append(sourceXml)
           .append(lineSeparator());
     }
+    return builder.toString();
   }
 
   @Override
