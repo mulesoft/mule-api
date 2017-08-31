@@ -141,8 +141,7 @@ public class ExceptionHelper {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
         //Inner exceptions override outer ones
-        Pair<String,String> summaryInfoPair = exception.getSummaryMessageAdditionalInfo();
-        summary.put(summaryInfoPair.getFirst(), summaryInfoPair.getSecond());
+        exception.appendSummaryMessage(summary);
         muleExceptionInfo.putAll(exception.getInfo());
       }
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
