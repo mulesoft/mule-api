@@ -133,8 +133,8 @@ public class ExceptionHelper {
     Map muleExceptionInfo = new HashMap<>();
 
     //Summary hash is added for logging info from inner mule exceptions
-    Map<String,String> summary = new HashMap<>();
-    muleExceptionInfo.put(LOGGING_SUMMARY_APPEND_KEY,new HashMap<String,String>());
+    Map<String, String> summary = new HashMap<>();
+    muleExceptionInfo.put(LOGGING_SUMMARY_APPEND_KEY, new HashMap<String, String>());
 
     while (cause != null) {
       if (cause instanceof MuleException) {
@@ -155,7 +155,7 @@ public class ExceptionHelper {
       }
     }
     if (exception != null) {
-      muleExceptionInfo.put(LOGGING_SUMMARY_APPEND_KEY, summary);
+      ((Map<String,String>)muleExceptionInfo.get(LOGGING_SUMMARY_APPEND_KEY)).putAll(summary);
       exception.getInfo().putAll(muleExceptionInfo);
     }
     return exception;
