@@ -156,7 +156,7 @@ public class ExceptionHelper {
       }
     }
     if (exception != null) {
-      ((Map<String,String>)muleExceptionInfo.get(LOGGING_SUMMARY_APPEND_KEY)).putAll(summary);
+      ((Map<String, String>) muleExceptionInfo.get(LOGGING_SUMMARY_APPEND_KEY)).putAll(summary);
       exception.getInfo().putAll(muleExceptionInfo);
     }
     return exception;

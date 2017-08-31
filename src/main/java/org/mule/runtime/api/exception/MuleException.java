@@ -198,7 +198,7 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    ((Map<String,String>)info.get(LOGGING_SUMMARY_APPEND_KEY)).forEach((key, value) -> buf.append(value));
+    ((Map<String, String>) info.get(LOGGING_SUMMARY_APPEND_KEY)).forEach((key, value) -> buf.append(value));
 
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
@@ -214,7 +214,7 @@ public abstract class MuleException extends Exception {
    *
    * @param summary {@link Map} to use for appending additional summary info.
    */
-  protected void appendSummaryMessage(Map<String,String> summary) {
+  protected void appendSummaryMessage(Map<String, String> summary) {
     StringBuilder builder = new StringBuilder();
     Map<String, Object> exceptionInfo = getExceptionInfo(this);
     builder.append("Element               : ")
