@@ -26,7 +26,7 @@
     },
     {
       "refName": "httpListener",
-      "name": "listener-config",
+      "name": "listenerConfig",
       "declaringExtension": "HTTP",
       "kind": "CONFIG",
       "customConfigurationParameters": [],

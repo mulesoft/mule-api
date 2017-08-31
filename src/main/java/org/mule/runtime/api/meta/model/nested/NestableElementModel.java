@@ -28,9 +28,9 @@ public interface NestableElementModel extends NamedObject, EnrichableModel, Desc
   boolean isRequired();
 
   /**
-   * Accepts a {@link NestableElementModelVisistor}
+   * Accepts a {@link NestableElementModelVisitor}
    *
-   * @param visitor a {@link NestableElementModelVisistor}
+   * @param visitor a {@link NestableElementModelVisitor}
    */
-  void accept(NestableElementModelVisistor visitor);
+  void accept(NestableElementModelVisitor visitor);
 }

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model;
 
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
+import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
@@ -18,7 +19,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypedModel;
  *
  * @since 1.0
  */
-public interface ComponentModel extends ParameterizedModel, ComposableModel, StereotypedModel, EnrichableModel, HasDisplayModel {
+public interface ComponentModel
+    extends ParameterizedModel, ComposableModel, StereotypedModel, EnrichableModel, HasDisplayModel, ThrowsErrors {
 
   /**
    * Accepts a {@link ComponentModelVisitor}

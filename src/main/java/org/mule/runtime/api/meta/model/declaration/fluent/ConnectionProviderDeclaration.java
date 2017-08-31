@@ -33,14 +33,6 @@ public class ConnectionProviderDeclaration extends ParameterizedDeclaration<Conn
     super(name);
   }
 
-  public Class<?> getConnectionType() {
-    return connectionType;
-  }
-
-  void setConnectionType(Class<?> connectionType) {
-    this.connectionType = connectionType;
-  }
-
   /**
    * @return the {@link ConnectionManagementType} that will be applied to the produced connections
    */

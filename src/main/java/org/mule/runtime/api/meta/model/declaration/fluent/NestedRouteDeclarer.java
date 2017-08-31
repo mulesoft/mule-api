@@ -15,7 +15,7 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  * @since 1.0
  */
 public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
-    implements HasModelProperties<NestedRouteDeclarer>, HasNestedComponents, HasParametersDeclarer {
+    implements HasModelProperties<NestedRouteDeclarer>, HasNestedComponentsDeclarer, HasParametersDeclarer {
 
   /**
    * Creates a new instance

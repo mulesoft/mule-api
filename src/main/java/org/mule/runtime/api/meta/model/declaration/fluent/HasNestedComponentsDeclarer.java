@@ -13,7 +13,7 @@ import org.mule.runtime.api.meta.model.nested.NestableElementModel;
  *
  * @since 1.0
  */
-public interface HasNestedComponents {
+public interface HasNestedComponentsDeclarer {
 
   /**
    * Adds a component of the given {@code name}

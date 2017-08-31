@@ -13,7 +13,7 @@ import org.mule.runtime.api.meta.model.nested.NestedRouteModel;
  *
  * @since 1.0
  */
-public interface HasNestedRoutes {
+public interface HasNestedRoutesDeclarer {
 
   /**
    * Adds a component of the given {@code name}
