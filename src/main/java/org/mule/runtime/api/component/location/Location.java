@@ -8,9 +8,8 @@ package org.mule.runtime.api.component.location;
 
 import static java.lang.String.join;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
-import static org.mule.runtime.api.component.location.Location.LocationImpl.PARTS_SEPARATOR;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+import static org.mule.runtime.internal.util.NameValidationUtil.verifyStringDoesNotContainsReservedCharacters;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +38,8 @@ public interface Location {
   String getGlobalName();
 
   /**
-   * @return the parts within the global element that define the location of the
-   * component referenced by {@code this} {@link Location}.
+   * @return the parts within the global element that define the location of the component referenced by {@code this}
+   *         {@link Location}.
    */
   List<String> getParts();
 
@@ -123,8 +122,8 @@ public interface Location {
     /**
      * Adds a new {@link Location#ERROR_HANDLER} part at the end of the location.
      * <p>
-     * Components that allow nested {@code on-error} components must have {@link Location#ERROR_HANDLER}
-     * as part before the {@code on-error} indexes.
+     * Components that allow nested {@code on-error} components must have {@link Location#ERROR_HANDLER} as part before the
+     * {@code on-error} indexes.
      *
      * @return a new builder with the provided configuration.
      */
@@ -133,8 +132,7 @@ public interface Location {
     /**
      * Adds a new {@link Location#PARAMETERS} part at the end of the location.
      * <p>
-     * Components that allow nested parameters must have {@link Location#PARAMETERS}
-     * as part before the {@code parameter} name.
+     * Components that allow nested parameters must have {@link Location#PARAMETERS} as part before the {@code parameter} name.
      *
      * @return a new builder with the provided configuration.
      */
@@ -216,7 +214,7 @@ public interface Location {
     @Override
     public Builder globalName(String globalName) {
       globalNameAlreadySet = true;
-      verifyPartDoesNotContainsSlash(globalName);
+      verifyStringDoesNotContainsReservedCharacters(globalName);
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.add(0, globalName);
       return locationBuilder;
@@ -224,7 +222,7 @@ public interface Location {
 
     @Override
     public Builder addPart(String part) {
-      verifyPartDoesNotContainsSlash(part);
+      verifyStringDoesNotContainsReservedCharacters(part);
       verifyIndexPartAfterProcessor(part);
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.addLast(part);
@@ -300,10 +298,6 @@ public interface Location {
       locationBuilder.globalNameAlreadySet = this.globalNameAlreadySet;
       locationBuilder.location.parts.addAll(this.location.parts);
       return locationBuilder;
-    }
-
-    private void verifyPartDoesNotContainsSlash(String globalName) {
-      checkArgument(!globalName.contains(PARTS_SEPARATOR), "Slash cannot be part of the global name or part");
     }
 
     @Override
