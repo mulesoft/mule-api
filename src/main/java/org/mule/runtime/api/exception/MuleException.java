@@ -14,6 +14,7 @@ import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleExceptio
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
+import org.mule.runtime.api.util.Pair;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -35,6 +36,7 @@ public abstract class MuleException extends Exception {
 
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
+  private static final String SUMMARY_KEY = MuleException.class.getName();
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
@@ -210,7 +212,7 @@ public abstract class MuleException extends Exception {
    * Method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary. By
    * default, the location data will be added.
    */
-  protected String getSummaryMessageAdditionalInfo() {
+  protected Pair<String,String> getSummaryMessageAdditionalInfo() {
     StringBuilder builder = new StringBuilder();
     Map<String, Object> exceptionInfo = getExceptionInfo(this);
     builder.append("Element               : ")
@@ -222,7 +224,7 @@ public abstract class MuleException extends Exception {
           .append(sourceXml)
           .append(lineSeparator());
     }
-    return builder.toString();
+    return new Pair<>(SUMMARY_KEY, builder.toString());
   }
 
   @Override

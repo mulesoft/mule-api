@@ -11,6 +11,7 @@ import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
+import org.mule.runtime.api.util.Pair;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -140,7 +141,8 @@ public class ExceptionHelper {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
         //Inner exceptions override outer ones
-        summary.put(exception.getClass().getName(), exception.getSummaryMessageAdditionalInfo());
+        Pair<String,String> summaryInfoPair = exception.getSummaryMessageAdditionalInfo();
+        summary.put(summaryInfoPair.getFirst(), summaryInfoPair.getSecond());
         muleExceptionInfo.putAll(exception.getInfo());
       }
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
