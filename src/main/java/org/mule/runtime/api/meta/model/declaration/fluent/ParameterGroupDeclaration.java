@@ -6,13 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
-import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 /**
  * A declaration object for a {@link ParameterGroupModel}. It contains raw,
@@ -20,11 +20,10 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDeclaration> {
+public class ParameterGroupDeclaration extends AbstractParameterDeclaration<ParameterGroupDeclaration> {
 
   private final List<ParameterDeclaration> parameters = new LinkedList<>();
   private List<ExclusiveParametersDeclaration> exclusiveParameters = new LinkedList<>();
-  private LayoutModel layoutModel;
   private boolean showInDsl = false;
 
   /**
@@ -63,14 +62,6 @@ public class ParameterGroupDeclaration extends NamedDeclaration<ParameterGroupDe
 
   public List<ExclusiveParametersDeclaration> getExclusiveParameters() {
     return exclusiveParameters;
-  }
-
-  public LayoutModel getLayoutModel() {
-    return layoutModel;
-  }
-
-  public void setLayoutModel(LayoutModel layoutModel) {
-    this.layoutModel = layoutModel;
   }
 
   /**
