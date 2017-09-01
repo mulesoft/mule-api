@@ -24,19 +24,30 @@ public class ValueProviderModel {
   private final List<String> actingParameters;
   private final Integer partOrder;
   private final String providerName;
+  private final boolean requiresConfiguration;
+  private final boolean requiresConnection;
+  private final boolean isOpen;
 
   /**
    * Creates a new instance
    *
-   * @param actingParameters the list of parameters that are required to execute the Value Provider resolution
-   * @param partOrder        the position in the value
-   * @param providerName     the category of the associated value provider for this parameter
+   * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
+   * @param requiresConfiguration indicates if the configuration is required to resolve the values
+   * @param requiresConnection    indicates if the connection is required to resolve the values
+   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
+   * @param partOrder             the position in the value
+   * @param providerName          the category of the associated value provider for this parameter
    */
-  public ValueProviderModel(List<String> actingParameters, Integer partOrder, String providerName) {
+  public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
+                            boolean isOpen,
+                            Integer partOrder, String providerName) {
     checkNotNull(actingParameters, "'actingParameters' can't be null");
     checkNotNull(partOrder, "'valueParts' can't be null");
     checkNotNull(providerName, "'providerName' can't be null");
+    this.isOpen = isOpen;
     this.actingParameters = actingParameters;
+    this.requiresConfiguration = requiresConfiguration;
+    this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
     this.providerName = providerName;
   }
@@ -62,6 +73,27 @@ public class ValueProviderModel {
     return providerName;
   }
 
+  /**
+   * @return a boolean indicating if the configuration is required to resolve the values
+   */
+  public boolean requiresConfiguration() {
+    return requiresConfiguration;
+  }
+
+  /**
+   * @return a boolean indicating if the connection is required to resolve the values
+   */
+  public boolean requiresConnection() {
+    return requiresConnection;
+  }
+
+  /**
+   * @return a boolean indicating if the calculated values should be considered as an open or closed set
+   */
+  public boolean isOpen() {
+    return isOpen;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o)
@@ -76,6 +108,9 @@ public class ValueProviderModel {
         .append(actingParameters, that.actingParameters)
         .append(partOrder, that.partOrder)
         .append(providerName, that.providerName)
+        .append(requiresConnection, that.requiresConnection)
+        .append(requiresConfiguration, that.requiresConfiguration)
+        .append(isOpen, that.isOpen)
         .isEquals();
   }
 
@@ -85,6 +120,9 @@ public class ValueProviderModel {
         .append(actingParameters)
         .append(partOrder)
         .append(providerName)
+        .append(requiresConnection)
+        .append(requiresConfiguration)
+        .append(isOpen)
         .toHashCode();
   }
 }
