@@ -6,21 +6,21 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
-import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
-import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
-
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
-import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ElementReference;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
+import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
+import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 /**
  * A declaration object for a {@link ParameterModel}. It contains raw,
@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @since 1.0
  */
-public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration> implements TypedDeclaration {
+public class ParameterDeclaration extends AbstractParameterDeclaration<ParameterDeclaration> implements TypedDeclaration {
 
   private boolean required;
   private boolean isConfigOverride;
@@ -39,7 +39,6 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
   private boolean hasDynamicType;
   private Object defaultValue = null;
   private ParameterDslConfiguration dslConfiguration = getDefaultInstance();
-  private LayoutModel layoutModel;
   private ParameterRole parameterRole = BEHAVIOUR;
   private ValueProviderModel valueProviderModel;
   private List<ElementReference> elementReferences = new ArrayList<>();
@@ -106,14 +105,6 @@ public class ParameterDeclaration extends NamedDeclaration<ParameterDeclaration>
 
   public void setDslConfiguration(ParameterDslConfiguration dslConfiguration) {
     this.dslConfiguration = dslConfiguration;
-  }
-
-  public LayoutModel getLayoutModel() {
-    return layoutModel;
-  }
-
-  public void setLayoutModel(LayoutModel layoutModel) {
-    this.layoutModel = layoutModel;
   }
 
   public ParameterRole getRole() {
