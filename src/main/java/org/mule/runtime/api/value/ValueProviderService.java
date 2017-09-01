@@ -23,11 +23,10 @@ public interface ValueProviderService {
   /**
    * Resolves the {@link Value values} for a element's value provider located in the given {@link Location}.
    *
-   * @param location The {@link Location} where the element is found.
+   * @param location     The {@link Location} where the element is found.
    * @param providerName The name of the value provider to resolve the {@link Value values}.
    * @return the {@link ValueResult result} of the resolving of the values.
    * @see ValueResult
    */
   ValueResult getValues(Location location, String providerName);
-
 }
