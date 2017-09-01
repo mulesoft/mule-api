@@ -24,11 +24,4 @@ public interface ErrorMessageAwareException {
    */
   Message getErrorMessage();
 
-  /**
-   * Retrieves the real exception to be used in the error creation.
-   *
-   * @return the actual exception that occurred
-   */
-  Throwable getRootCause();
-
 }
