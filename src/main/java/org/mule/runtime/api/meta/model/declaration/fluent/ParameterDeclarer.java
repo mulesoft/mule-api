@@ -12,9 +12,12 @@ import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
+import org.mule.runtime.api.meta.model.parameter.ElementReference;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
+
+import java.util.List;
 
 /**
  * Allows configuring a {@link ParameterDeclaration} through a fluent API
@@ -141,6 +144,16 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    */
   public T withValueProviderModel(ValueProviderModel valueProviderModel) {
     declaration.setValueProviderModel(valueProviderModel);
+    return (T) this;
+  }
+
+  /**
+   * Sets the given {@link List} of {@link ElementReference}
+   * @param elementReferences a {@link List} of {@link ElementReference}
+   * @return {@code this} declarer
+   */
+  public T withElementReferences(List<ElementReference> elementReferences) {
+    declaration.setElementReferences(elementReferences);
     return (T) this;
   }
 
