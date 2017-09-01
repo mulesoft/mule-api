@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.deployment.management;
 
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 
 /**
  * Manages the initial state of components within a mule artifact (application, domain, policy, etc).
@@ -32,7 +32,7 @@ public interface ComponentInitialStateManager {
    * @param component the source component to be started
    * @return true if the source must be started, false otherise.
    */
-  default boolean mustStartMessageSource(AnnotatedObject component) {
+  default boolean mustStartMessageSource(Component component) {
     return true;
   }
 

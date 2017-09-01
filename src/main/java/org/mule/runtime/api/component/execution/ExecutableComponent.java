@@ -8,7 +8,7 @@ package org.mule.runtime.api.component.execution;
 
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.event.InputEvent;
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -17,7 +17,7 @@ import java.util.concurrent.CompletableFuture;
  * 
  * @since 1.0
  */
-public interface ExecutableComponent extends AnnotatedObject {
+public interface ExecutableComponent extends Component {
 
   /**
    * Executes the component based on a {@link InputEvent} created programmatically be the user.

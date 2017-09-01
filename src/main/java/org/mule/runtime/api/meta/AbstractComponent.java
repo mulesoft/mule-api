@@ -8,6 +8,7 @@
 package org.mule.runtime.api.meta;
 
 import static java.util.Collections.unmodifiableMap;
+import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.component.location.ComponentLocation;
 
 import java.util.Map;
@@ -16,9 +17,9 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.xml.namespace.QName;
 
 /**
- * Base implementation for {@link AnnotatedObject}
+ * Base implementation for {@link Component}
  */
-public abstract class AbstractAnnotatedObject implements AnnotatedObject {
+public abstract class AbstractComponent implements Component {
 
   public static QName LOCATION_KEY = new QName("mule", "COMPONENT_LOCATION");
   public static QName ROOT_CONTAINER_NAME_KEY = new QName("mule", "ROOT_CONTAINER_NAME");
