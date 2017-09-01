@@ -7,9 +7,6 @@
 package org.mule.runtime.api.value;
 
 import org.mule.runtime.api.component.location.Location;
-import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
-
-import java.util.Optional;
 
 /**
  * Provides the capability of resolve the {@link Value values} for any Value Provider capable element in a Mule App.
@@ -32,14 +29,4 @@ public interface ValueProviderService {
    * @see ValueResult
    */
   ValueResult getValues(Location location, String providerName);
-
-  /**
-   * Retrieves the {@link ValueProviderModel} associated with the given provider name and {@link Location}
-   *
-   * @param location     The {@link Location} where the element is found.
-   * @param providerName The name of the value provider
-   * @return The {@link Optional} {@link ValueProviderModel} associated with the given provider name and {@link Location}
-   */
-  Optional<ValueProviderModel> getModel(Location location, String providerName);
-
 }
