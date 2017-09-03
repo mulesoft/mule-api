@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 /**
@@ -14,9 +15,9 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  *
  * @since 1.0
  */
-abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
+public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
-    implements HasModelProperties<ComponentDeclarer>, HasNestedComponents, HasNestedRoutes {
+    implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer, HasNestedRoutesDeclarer {
 
   /**
    * Creates a new instance
@@ -84,7 +85,7 @@ abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends Componen
    * @return {@code this} declarer
    */
   public T withStereotype(StereotypeModel stereotype) {
-    declaration.addStereotype(stereotype);
+    declaration.withStereotype(stereotype);
     return (T) this;
   }
 
@@ -94,6 +95,17 @@ abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends Componen
   @Override
   public T withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return (T) this;
+  }
+
+  /**
+   * Adds an {@link ErrorModel} to indicate that the current operation could throw the added error.
+   *
+   * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
+   * @return {@code this} declarer
+   */
+  public T withErrorModel(ErrorModel error) {
+    declaration.addErrorModel(error);
     return (T) this;
   }
 

@@ -22,7 +22,6 @@ import java.util.Set;
  */
 public class ConnectionProviderDeclaration extends ParameterizedDeclaration<ConnectionProviderDeclaration> {
 
-  private Class<?> connectionType;
   private ConnectionManagementType connectionManagementType;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
 
@@ -31,14 +30,6 @@ public class ConnectionProviderDeclaration extends ParameterizedDeclaration<Conn
    */
   ConnectionProviderDeclaration(String name) {
     super(name);
-  }
-
-  public Class<?> getConnectionType() {
-    return connectionType;
-  }
-
-  void setConnectionType(Class<?> connectionType) {
-    this.connectionType = connectionType;
   }
 
   /**

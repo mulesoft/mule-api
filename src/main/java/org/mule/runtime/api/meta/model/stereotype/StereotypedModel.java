@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.meta.model.stereotype;
 
-import java.util.Set;
-
 /**
  * A model which can be qualified with a set of {@link StereotypeModel}s that correspond
  * to {@code this} model definition.
@@ -19,6 +17,6 @@ public interface StereotypedModel {
   /**
    * @return The {@link StereotypeModel stereotypes} which apply to this model
    */
-  Set<StereotypeModel> getStereotypes();
+  StereotypeModel getStereotype();
 
 }

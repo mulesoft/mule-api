@@ -11,7 +11,7 @@ package org.mule.runtime.api.meta.model.nested;
  *
  * @since 1.0
  */
-public interface NestableElementModelVisistor {
+public interface NestableElementModelVisitor {
 
   void visit(NestedComponentModel component);
 

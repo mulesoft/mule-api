@@ -6,8 +6,6 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.error.ErrorModel;
-
 /**
  * Base class for {@link Declarer declarers} which allow to construct an {@link OperationDeclaration}
  *
@@ -45,17 +43,6 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
     OutputDeclaration outputAttributes = new OutputDeclaration();
     declaration.setOutputAttributes(outputAttributes);
     return new OutputDeclarer<>(outputAttributes);
-  }
-
-  /**
-   * Adds an {@link ErrorModel} to indicate that the current operation could throw the added error.
-   *
-   * @param error {@link ErrorModel} to add to the {@link OperationDeclaration}
-   * @return {@code this} declarer
-   */
-  public T withErrorModel(ErrorModel error) {
-    declaration.addErrorModel(error);
-    return (T) this;
   }
 
   /**

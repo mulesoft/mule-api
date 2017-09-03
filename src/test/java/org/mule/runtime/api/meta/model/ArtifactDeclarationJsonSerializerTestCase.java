@@ -78,7 +78,7 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .getDeclaration())
             .getDeclaration())
         .withGlobalElement(
-                           http.newConfiguration("listener-config")
+                           http.newConfiguration("listenerConfig")
                                .withRefName("httpListener")
                                .withParameterGroup(newParameterGroup()
                                    .withParameter("basePath", "/")

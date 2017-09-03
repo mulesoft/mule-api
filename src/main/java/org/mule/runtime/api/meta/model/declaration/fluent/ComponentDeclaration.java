@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.HashSet;
@@ -24,8 +25,9 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Parame
     implements WithNestedComponentsDeclaration<T> {
 
 
-  private Set<StereotypeModel> stereotypes = new HashSet<>();
+  private StereotypeModel stereotype;
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
+  private Set<ErrorModel> errorModels = new HashSet<>();
 
   /**
    * {@inheritDoc}
@@ -43,12 +45,20 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Parame
     return (T) this;
   }
 
-  public Set<StereotypeModel> getStereotypes() {
-    return stereotypes;
+  public StereotypeModel getStereotype() {
+    return stereotype;
   }
 
-  public void addStereotype(StereotypeModel stereotype) {
-    stereotypes.add(stereotype);
+  public void withStereotype(StereotypeModel stereotype) {
+    this.stereotype = stereotype;
+  }
+
+  public void addErrorModel(ErrorModel errorModel) {
+    errorModels.add(errorModel);
+  }
+
+  public Set<ErrorModel> getErrorModels() {
+    return errorModels;
   }
 
 }

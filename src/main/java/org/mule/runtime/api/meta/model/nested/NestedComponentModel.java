@@ -24,9 +24,9 @@ public interface NestedComponentModel extends NestableElementModel {
   Set<StereotypeModel> getAllowedStereotypes();
 
   /**
-   * Accepts a {@link NestableElementModelVisistor}
+   * Accepts a {@link NestableElementModelVisitor}
    *
-   * @param visitor a {@link NestableElementModelVisistor}
+   * @param visitor a {@link NestableElementModelVisitor}
    */
-  void accept(NestableElementModelVisistor visitor);
+  void accept(NestableElementModelVisitor visitor);
 }
