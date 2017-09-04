@@ -19,7 +19,7 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
 import org.mule.runtime.api.meta.model.source.SourceModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypedModel;
+import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 
 /**
  * A named configuration for an extension
@@ -42,6 +42,6 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypedModel;
  */
 public interface ConfigurationModel extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
     HasOperationModels, HasSourceModels, HasConnectionProviderModels, HasDisplayModel,
-    HasExternalLibraries, StereotypedModel {
+    HasExternalLibraries, HasStereotypeModel {
 
 }

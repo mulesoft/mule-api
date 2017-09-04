@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static java.util.Comparator.comparing;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.List;
 import java.util.Set;
@@ -21,14 +20,12 @@ import java.util.TreeSet;
  *
  * @since 1.0
  */
-public class ConfigurationDeclaration extends ParameterizedDeclaration<ConfigurationDeclaration>
+public class ConfigurationDeclaration extends StereotypedDeclaration<ConfigurationDeclaration>
     implements ConnectedDeclaration<ConfigurationDeclaration>, WithSourcesDeclaration<ConfigurationDeclaration>,
-    WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration>,
-    WithStereotypesDeclaration {
+    WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
-  private StereotypeModel stereotype;
 
   /**
    * {@inheritDoc}
@@ -136,11 +133,4 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
     return this;
   }
 
-  public StereotypeModel getStereotype() {
-    return stereotype;
-  }
-
-  public void withStereotype(StereotypeModel stereotype) {
-    this.stereotype = stereotype;
-  }
 }

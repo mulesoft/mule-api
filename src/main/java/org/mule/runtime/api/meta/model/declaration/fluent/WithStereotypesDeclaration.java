@@ -16,8 +16,14 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  */
 public interface WithStereotypesDeclaration {
 
+  /**
+   * @return {@code this} components {@link StereotypeModel}
+   */
   StereotypeModel getStereotype();
 
+  /**
+   * @param stereotype {@code this} components {@link StereotypeModel}
+   */
   void withStereotype(StereotypeModel stereotype);
 
 }

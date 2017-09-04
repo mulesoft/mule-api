@@ -21,11 +21,10 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public class ConnectionProviderDeclaration extends ParameterizedDeclaration<ConnectionProviderDeclaration>
+public class ConnectionProviderDeclaration extends StereotypedDeclaration<ConnectionProviderDeclaration>
     implements WithStereotypesDeclaration {
 
   private ConnectionManagementType connectionManagementType;
-  private StereotypeModel stereotype;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
 
   /**
@@ -69,11 +68,4 @@ public class ConnectionProviderDeclaration extends ParameterizedDeclaration<Conn
     return this;
   }
 
-  public StereotypeModel getStereotype() {
-    return stereotype;
-  }
-
-  public void withStereotype(StereotypeModel stereotype) {
-    this.stereotype = stereotype;
-  }
 }

@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.HasExternalLibraries;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypedModel;
+import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 
 /**
  * Introspection model for {@link ConnectionProvider} types.
@@ -30,7 +30,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypedModel;
  */
 public interface ConnectionProviderModel
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
-    HasDisplayModel, HasExternalLibraries, StereotypedModel {
+    HasDisplayModel, HasExternalLibraries, HasStereotypeModel {
 
   /**
    * @return the type of connection management that the provider performs

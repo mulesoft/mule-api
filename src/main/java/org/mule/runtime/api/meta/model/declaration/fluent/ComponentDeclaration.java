@@ -21,11 +21,10 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public class ComponentDeclaration<T extends ComponentDeclaration> extends ParameterizedDeclaration<T>
+public class ComponentDeclaration<T extends ComponentDeclaration> extends StereotypedDeclaration<T>
     implements WithNestedComponentsDeclaration<T>, WithStereotypesDeclaration {
 
 
-  private StereotypeModel stereotype;
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
   private Set<ErrorModel> errorModels = new HashSet<>();
 
@@ -43,14 +42,6 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Parame
   public T addNestedComponent(NestableElementDeclaration nestedComponentDeclaration) {
     nestedComponents.add(nestedComponentDeclaration);
     return (T) this;
-  }
-
-  public StereotypeModel getStereotype() {
-    return stereotype;
-  }
-
-  public void withStereotype(StereotypeModel stereotype) {
-    this.stereotype = stereotype;
   }
 
   public void addErrorModel(ErrorModel errorModel) {

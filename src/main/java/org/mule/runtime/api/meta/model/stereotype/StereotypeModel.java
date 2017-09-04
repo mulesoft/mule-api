@@ -9,7 +9,7 @@ package org.mule.runtime.api.meta.model.stereotype;
 import java.util.Optional;
 
 /**
- * A model which represents an stereotype qualifier for the {@link StereotypedModel} that is categorized with this stereotype.
+ * A model which represents an stereotype qualifier for the {@link HasStereotypeModel} that is categorized with this stereotype.
  * An stereotype is a widely held but fixed and oversimplified image or idea of the owning model.
  * Examples would be {@code validator}, {@code source}, {@code processor}, etc.
  *
