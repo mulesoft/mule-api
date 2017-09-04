@@ -36,4 +36,9 @@ public interface StereotypeModel {
    * @return The {@link StereotypeModel} parent of the current {@link StereotypeModel} from which it inherits from.
    */
   Optional<StereotypeModel> getParent();
+
+  /**
+   * @return if {@code this}
+   */
+  boolean isAssignableTo(StereotypeModel other);
 }
