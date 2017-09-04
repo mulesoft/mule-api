@@ -121,6 +121,11 @@
         <formatterGoal>validate</formatterGoal>
         <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
+        <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version>
+        <aspectjVersion>1.8.10</aspectjVersion>
+        <allureJunitVersion>2.0-BETA17</allureJunitVersion>
+        <allureReportVersion>2.3.4</allureReportVersion>
+        <allure.maven.plugin.version>2.8</allure.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -184,6 +189,12 @@
                     <artifactId>hamcrest-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit4</artifactId>
+            <version>${allureJunitVersion}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <!-- TODO MULE-11007: when implemented, delete this dependency -->
@@ -320,6 +331,43 @@
                         </execution>
                     </executions>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+                    <configuration>
+                        <argLine>
+                            -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar
+                        </argLine>
+                        <properties>
+                            <property>
+                                <name>listener</name>
+                                <value>io.qameta.allure.junit4.AllureJunit4</value>
+                            </property>
+                        </properties>
+                        <systemProperties>
+                            <property>
+                                <name>allure.results.directory</name>
+                                <value>${project.build.directory}/allure-results</value>
+                            </property>
+                        </systemProperties>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.aspectj</groupId>
+                            <artifactId>aspectjweaver</artifactId>
+                            <version>${aspectjVersion}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+                <plugin>
+                    <groupId>io.qameta.allure</groupId>
+                    <artifactId>allure-maven</artifactId>
+                    <version>${allure.maven.plugin.version}</version>
+                    <configuration>
+                        <reportVersion>${allureReportVersion}</reportVersion>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -343,6 +391,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
             </plugin>
         </plugins>
     </build>
