@@ -10,6 +10,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -20,9 +21,11 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public class ConnectionProviderDeclaration extends ParameterizedDeclaration<ConnectionProviderDeclaration> {
+public class ConnectionProviderDeclaration extends ParameterizedDeclaration<ConnectionProviderDeclaration>
+    implements WithStereotypesDeclaration {
 
   private ConnectionManagementType connectionManagementType;
+  private StereotypeModel stereotype;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
 
   /**
@@ -64,5 +67,13 @@ public class ConnectionProviderDeclaration extends ParameterizedDeclaration<Conn
   public ConnectionProviderDeclaration addExternalLibrary(ExternalLibraryModel externalLibraryModel) {
     externalLibraryModels.add(externalLibraryModel);
     return this;
+  }
+
+  public StereotypeModel getStereotype() {
+    return stereotype;
+  }
+
+  public void withStereotype(StereotypeModel stereotype) {
+    this.stereotype = stereotype;
   }
 }

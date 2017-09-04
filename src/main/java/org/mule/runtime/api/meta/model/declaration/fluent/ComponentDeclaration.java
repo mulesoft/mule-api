@@ -22,7 +22,7 @@ import java.util.Set;
  * @since 1.0
  */
 public class ComponentDeclaration<T extends ComponentDeclaration> extends ParameterizedDeclaration<T>
-    implements WithNestedComponentsDeclaration<T> {
+    implements WithNestedComponentsDeclaration<T>, WithStereotypesDeclaration {
 
 
   private StereotypeModel stereotype;

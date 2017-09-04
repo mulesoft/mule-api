@@ -17,7 +17,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  */
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
-    implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer, HasNestedRoutesDeclarer {
+    implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer,
+    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T> {
 
   /**
    * Creates a new instance

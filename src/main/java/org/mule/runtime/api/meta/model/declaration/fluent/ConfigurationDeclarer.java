@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 /**
  * Allows configuring a {@link ConfigurationDeclaration} through a fluent API
@@ -17,7 +18,7 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  */
 public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
     implements HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
-    HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer> {
+    HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer>, HasStereotypeDeclarer<ConfigurationDeclarer> {
 
   /**
    * Creates a new instance
@@ -139,6 +140,15 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
   @Override
   public void withFunction(FunctionDeclarer declarer) {
     declaration.addFunction(declarer.getDeclaration());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConfigurationDeclarer withStereotype(StereotypeModel stereotype) {
+    declaration.withStereotype(stereotype);
+    return this;
   }
 
 }
