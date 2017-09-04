@@ -12,10 +12,10 @@ import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
-import org.mule.runtime.api.meta.model.parameter.ElementReference;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.List;
 
@@ -148,12 +148,12 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
-   * Sets the given {@link List} of {@link ElementReference}
-   * @param elementReferences a {@link List} of {@link ElementReference}
+   * Sets the given {@link List} of {@link StereotypeModel}
+   * @param stereotypeModels a {@link List} of {@link StereotypeModel}
    * @return {@code this} declarer
    */
-  public T withElementReferences(List<ElementReference> elementReferences) {
-    declaration.setElementReferences(elementReferences);
+  public T withAllowedStereotypes(List<StereotypeModel> stereotypeModels) {
+    declaration.setAllowedStereotypeModels(stereotypeModels);
     return (T) this;
   }
 
