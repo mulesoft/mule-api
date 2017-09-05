@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 /**
  * Allows configuring a {@link ConnectionProviderDeclaration} through a fluent API
@@ -17,7 +18,8 @@ import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
  */
 public final class ConnectionProviderDeclarer
     extends ParameterizedDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
-    implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer> {
+    implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer>,
+    HasStereotypeDeclarer<ConnectionProviderDeclarer> {
 
   /**
    * Creates a new instance
@@ -64,6 +66,15 @@ public final class ConnectionProviderDeclarer
   @Override
   public ConnectionProviderDeclarer withExternalLibrary(ExternalLibraryModel externalLibrary) {
     declaration.addExternalLibrary(externalLibrary);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConnectionProviderDeclarer withStereotype(StereotypeModel stereotype) {
+    declaration.withStereotype(stereotype);
     return this;
   }
 }

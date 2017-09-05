@@ -12,7 +12,7 @@ package org.mule.runtime.api.meta.model.stereotype;
  *
  * @since 1.0
  */
-public interface StereotypedModel {
+public interface HasStereotypeModel {
 
   /**
    * @return The {@link StereotypeModel stereotypes} which apply to this model

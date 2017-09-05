@@ -60,6 +60,21 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
     return ofNullable(parent);
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isAssignableTo(StereotypeModel other) {
+    checkArgument(other != null, "Null is not a valid stereotype");
+    boolean assignable = this.equals(other);
+
+    if (!assignable && parent != null) {
+      assignable = parent.isAssignableTo(other);
+    }
+
+    return assignable;
+  }
+
   @Override
   public boolean equals(Object o) {
     return reflectionEquals(this, o);

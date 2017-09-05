@@ -17,6 +17,7 @@ import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 import org.mule.runtime.api.value.Value;
 import java.util.List;
 import java.util.Optional;
@@ -94,9 +95,9 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
   Optional<LayoutModel> getLayoutModel();
 
   /**
-   * @return a {@link List} of {@link ElementReference}s that this {@link ParameterModel} should accept values of.
+   * @return a {@link List} of {@link StereotypeModel}s that this {@link ParameterModel} should accept values of.
    */
-  List<ElementReference> getElementReferences();
+  List<StereotypeModel> getAllowedStereotypes();
 
   /**
    * @return A {@link ValueProviderModel} to communicate if the this parameter model is capable to provide {@link Value values}.

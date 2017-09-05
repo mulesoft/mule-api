@@ -20,13 +20,12 @@ import java.util.TreeSet;
  *
  * @since 1.0
  */
-public class ConfigurationDeclaration extends ParameterizedDeclaration<ConfigurationDeclaration>
+public class ConfigurationDeclaration extends StereotypedDeclaration<ConfigurationDeclaration>
     implements ConnectedDeclaration<ConfigurationDeclaration>, WithSourcesDeclaration<ConfigurationDeclaration>,
     WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
-
 
   /**
    * {@inheritDoc}
@@ -133,4 +132,5 @@ public class ConfigurationDeclaration extends ParameterizedDeclaration<Configura
     externalLibraryModels.add(externalLibraryModel);
     return this;
   }
+
 }
