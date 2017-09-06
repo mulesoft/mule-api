@@ -14,7 +14,6 @@ import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleExceptio
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
-import org.mule.runtime.api.util.Pair;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -41,8 +40,8 @@ public abstract class MuleException extends Exception {
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
 
-  private static final String EXCEPTION_MESSAGE_DELIMITER = repeat('*', 80) + lineSeparator();
-  private static final String EXCEPTION_MESSAGE_SECTION_DELIMITER = repeat('-', 80) + lineSeparator();
+  public static final String EXCEPTION_MESSAGE_DELIMITER = repeat('*', 80) + lineSeparator();
+  public static final String EXCEPTION_MESSAGE_SECTION_DELIMITER = repeat('-', 80) + lineSeparator();
 
   /**
    * When false (default), only a summary of the root exception and trail is provided. If this flag is false, full exception
