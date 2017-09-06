@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 
 import javax.xml.namespace.QName;
 
@@ -34,12 +34,12 @@ public class ComponentLocationProvider {
         .append(" @ ")
         .append(appId);
 
-    String sourceFile = getSourceFile((AnnotatedObject) element);
+    String sourceFile = getSourceFile((Component) element);
     if (sourceFile != null) {
       stringBuilder.append(":")
           .append(sourceFile)
           .append(":")
-          .append(getSourceFileLine((AnnotatedObject) element));
+          .append(getSourceFileLine((Component) element));
     }
 
     String docName = getDocName(element);
@@ -57,19 +57,19 @@ public class ComponentLocationProvider {
    * @return the {@code doc:name} attribute value of the element.
    */
   public static String getDocName(Object element) {
-    if (element instanceof AnnotatedObject) {
-      Object docName = ((AnnotatedObject) element).getAnnotation(NAME_ANNOTATION_KEY);
+    if (element instanceof Component) {
+      Object docName = ((Component) element).getAnnotation(NAME_ANNOTATION_KEY);
       return docName != null ? docName.toString() : null;
     } else {
       return null;
     }
   }
 
-  protected static String getSourceFile(AnnotatedObject element) {
+  protected static String getSourceFile(Component element) {
     return element.getLocation() != null ? element.getLocation().getFileName().orElse("unknown") : "internal";
   }
 
-  protected static Integer getSourceFileLine(AnnotatedObject element) {
+  protected static Integer getSourceFileLine(Component element) {
     return element.getLocation() != null ? element.getLocation().getLineInFile().orElse(-1) : -1;
   }
 

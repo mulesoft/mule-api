@@ -11,12 +11,11 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.exception.LocatedMuleException;
 import org.mule.runtime.api.i18n.I18nMessage;
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.meta.NamedObject;
 
 /**
- * {@code LifecycleException} is the base exception thrown when an error occurs
- * during a {@link Lifecycle} phase.
+ * {@code LifecycleException} is the base exception thrown when an error occurs during a {@link Lifecycle} phase.
  *
  * @since 1.0
  */
@@ -61,7 +60,7 @@ public class LifecycleException extends LocatedMuleException {
 
   @Override
   protected String resolveProcessorPath(Object component) {
-    if (component instanceof AnnotatedObject) {
+    if (component instanceof Component) {
       return super.resolveProcessorPath(component);
     } else {
       return format("%s @ %s",

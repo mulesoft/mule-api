@@ -8,7 +8,7 @@
 
 package org.mule.runtime.api.component.location;
 
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 
 /**
  * Interface for all objects that may have a relationship to an element in the configuration.
@@ -23,6 +23,6 @@ public interface ComponentProvider {
   /**
    * @return the element in the configuration.
    */
-  AnnotatedObject getComponent();
+  Component getComponent();
 
 }

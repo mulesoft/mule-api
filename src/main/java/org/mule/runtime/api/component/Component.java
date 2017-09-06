@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.meta;
+package org.mule.runtime.api.component;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 
@@ -13,16 +13,15 @@ import java.util.Map;
 import javax.xml.namespace.QName;
 
 /**
- * Maps annotations defined in an XML element to the corresponding Java object
+ * This interface is the most abstracted representation of a configuration element in a mule artifact. It contains the minimal
+ * required contract for components.
  * <p/>
  * Annotations are handled by the runtime and must not be tampered by custom implementations. The runtime will put values and
  * remove values from the annotations and that behaviour should not be changed by any custom implementation.
  *
  * @since 1.0
  */
-public interface AnnotatedObject {
-
-  String PROPERTY_NAME = "annotations";
+public interface Component {
 
   /**
    * Gets the value of specified annotation.

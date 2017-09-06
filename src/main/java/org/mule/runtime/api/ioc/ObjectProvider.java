@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.ioc;
 
-import org.mule.runtime.api.meta.AnnotatedObject;
+import org.mule.runtime.api.component.Component;
 
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +16,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface ObjectProvider extends AnnotatedObject {
+public interface ObjectProvider extends Component {
 
   /**
    * Finds an object by name
