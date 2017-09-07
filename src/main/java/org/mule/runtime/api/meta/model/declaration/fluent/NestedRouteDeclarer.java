@@ -10,7 +10,10 @@ import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFA
 import org.mule.runtime.api.meta.model.ModelProperty;
 
 /**
- * Allows configuring a {@link NestedComponentDeclaration} through a fluent API
+ * Allows configuring a {@link NestedComponentDeclaration} through a fluent API.
+ * <p>
+ * Keep in mind that Routes are required to have at least one child component,
+ * which translate to almost always having to invoke the {@link NestedRouteDeclarer#withChain} method of this declarer.
  *
  * @since 1.0
  */

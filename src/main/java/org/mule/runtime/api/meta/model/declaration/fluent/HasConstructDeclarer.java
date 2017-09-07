@@ -8,7 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 /**
  * Contract interface for a declarer in which it's possible
- * to add operations
+ * to add constructs
  *
  * @since 1.0
  */
@@ -18,7 +18,7 @@ public interface HasConstructDeclarer<T> {
    * Adds a construct of the given {@code name}
    *
    * @param name a non blank name
-   * @return a {@link ConstructDeclarer} which allows describing the created operation
+   * @return a {@link ConstructDeclarer} which allows describing the created construct
    */
   ConstructDeclarer withConstruct(String name);
 
