@@ -16,7 +16,7 @@ import org.mule.runtime.api.meta.model.nested.NestableElementModel;
  */
 public class NestableElementDeclaration<T extends NestableElementDeclaration> extends NamedDeclaration<T> {
 
-  private boolean isRequired;
+  private boolean isRequired = true;
 
   public boolean isRequired() {
     return isRequired;

@@ -18,7 +18,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  */
 public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
     implements HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
-    HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer>, HasStereotypeDeclarer<ConfigurationDeclarer> {
+    HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer>, HasStereotypeDeclarer<ConfigurationDeclarer>,
+    HasConstructDeclarer<ConfigurationDeclarer> {
 
   /**
    * Creates a new instance
@@ -140,6 +141,25 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
   @Override
   public void withFunction(FunctionDeclarer declarer) {
     declaration.addFunction(declarer.getDeclaration());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConstructDeclarer withConstruct(String name) {
+    ConstructDeclaration component = new ConstructDeclaration(name);
+    declaration.addConstruct(component);
+    return new ConstructDeclarer(component);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConfigurationDeclarer withConstruct(ConstructDeclarer declarer) {
+    declaration.addConstruct(declarer.getDeclaration());
+    return this;
   }
 
   /**

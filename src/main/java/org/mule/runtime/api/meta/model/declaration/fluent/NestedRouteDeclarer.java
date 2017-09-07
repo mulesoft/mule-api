@@ -88,7 +88,7 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
    */
   @Override
   public NestedChainDeclarer withChain() {
-    NestedChainDeclaration nested = new NestedChainDeclaration("main");
+    NestedChainDeclaration nested = new NestedChainDeclaration("processors");
     declaration.addNestedComponent(nested);
     return new NestedChainDeclarer(nested);
   }
