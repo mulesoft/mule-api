@@ -49,7 +49,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
-  private final List<ConstructDeclaration> constructs = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
   private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
@@ -105,7 +104,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   @Override
   public List<ConstructDeclaration> getConstructs() {
-    return unmodifiableList(constructs);
+    return subDeclarations.getConstructs();
   }
 
   /**
@@ -113,7 +112,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   @Override
   public ExtensionDeclaration addConstruct(ConstructDeclaration declaration) {
-    constructs.add(declaration);
+    subDeclarations.addConstruct(declaration);
     return this;
   }
 

@@ -29,7 +29,8 @@ import java.util.List;
  */
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
-    HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer> {
+    HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
+    HasConstructDeclarer<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
@@ -113,10 +114,14 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   public ConstructDeclarer withConstruct(String name) {
     ConstructDeclaration component = new ConstructDeclaration(name);
-    final ConstructDeclarer componentDeclarer = new ConstructDeclarer(component);
     declaration.addConstruct(component);
+    return new ConstructDeclarer(component);
+  }
 
-    return componentDeclarer;
+  @Override
+  public ExtensionDeclarer withConstruct(ConstructDeclarer declarer) {
+    declaration.addConstruct(declarer.getDeclaration());
+    return this;
   }
 
   /**
