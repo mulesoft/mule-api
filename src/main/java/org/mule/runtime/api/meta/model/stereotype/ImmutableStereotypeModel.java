@@ -25,9 +25,7 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
   private String namespace;
   private StereotypeModel parent;
 
-  public ImmutableStereotypeModel() {}
-
-  ImmutableStereotypeModel(String name, String namespace, StereotypeModel parent) {
+  public ImmutableStereotypeModel(String name, String namespace, StereotypeModel parent) {
     checkArgument(isNotBlank(name), "An stereotype name is required");
     checkArgument(isNotBlank(namespace), "An stereotype namespace is required");
 
