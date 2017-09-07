@@ -24,6 +24,11 @@ import javax.xml.namespace.QName;
 public interface Component {
 
   /**
+   * Property name required by implementations of this class for holding annotations.
+   */
+  String ANNOTATIONS_PROPERTY_NAME = "annotations";
+
+  /**
    * Gets the value of specified annotation.
    *
    * @return the value of specified annotation
