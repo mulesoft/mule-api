@@ -10,8 +10,6 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
-import org.mule.runtime.api.meta.model.error.ErrorModel;
-
 import java.util.Optional;
 
 /**
@@ -25,7 +23,7 @@ public final class ImmutableErrorModel implements ErrorModel {
   private final String namespace;
   private final ErrorModel parent;
 
-  ImmutableErrorModel(String type, String namespace, ErrorModel parent) {
+  public ImmutableErrorModel(String type, String namespace, ErrorModel parent) {
     this.type = type;
     this.namespace = namespace;
     this.parent = parent;
