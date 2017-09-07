@@ -8,6 +8,7 @@ package org.mule.runtime.api.store;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * An {@link ObjectStore} which has native support for partitioning. All the methods inherited from the
@@ -81,6 +82,12 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
    * @throws ObjectStoreException if an exception occurred while collecting the list of all keys.
    */
   List<String> allKeys(String partitionName) throws ObjectStoreException;
+
+  /**
+   * @return list containing all the key-value pairs that are currently held for the {@code partitionName}
+   * @throws ObjectStoreException if an exception occurred while collecting the values
+   */
+  Map<String, T> retrieveAll(String partitionName) throws ObjectStoreException;
 
   /**
    * @return list containing the names of all the available partitions
