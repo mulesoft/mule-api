@@ -54,7 +54,7 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
    */
   @Override
   public NestedChainDeclarer withChain() {
-    NestedChainDeclaration nested = new NestedChainDeclaration("main");
+    NestedChainDeclaration nested = new NestedChainDeclaration("processors");
     declaration.addNestedComponent(nested);
     return new NestedChainDeclarer(nested);
   }

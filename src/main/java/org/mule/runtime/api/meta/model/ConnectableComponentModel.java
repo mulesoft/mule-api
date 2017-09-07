@@ -16,7 +16,7 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  *
  * @since 1.0
  */
-public interface ExecutableComponentModel extends ComponentModel, HasOutputModel {
+public interface ConnectableComponentModel extends ComponentModel, HasOutputModel {
 
   /**
    * @return whether this component has the ability to execute while joining a transaction

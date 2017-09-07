@@ -22,7 +22,8 @@ import java.util.TreeSet;
  */
 public class ConfigurationDeclaration extends StereotypedDeclaration<ConfigurationDeclaration>
     implements ConnectedDeclaration<ConfigurationDeclaration>, WithSourcesDeclaration<ConfigurationDeclaration>,
-    WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration> {
+    WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration>,
+    WithConstructsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
@@ -133,4 +134,20 @@ public class ConfigurationDeclaration extends StereotypedDeclaration<Configurati
     return this;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public List<ConstructDeclaration> getConstructs() {
+    return subDeclarations.getConstructs();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConfigurationDeclaration addConstruct(ConstructDeclaration declaration) {
+    subDeclarations.addConstruct(declaration);
+    return this;
+  }
 }

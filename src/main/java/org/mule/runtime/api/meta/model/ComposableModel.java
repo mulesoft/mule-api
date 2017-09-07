@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model;
 
+import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.nested.NestableElementModel;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
  * @see NestableElementModel
  * @since 1.0
  */
-public interface ComposableModel {
+public interface ComposableModel extends NamedObject {
 
   /**
    * @return the {@link List} of {@link NestableElementModel components} contained by

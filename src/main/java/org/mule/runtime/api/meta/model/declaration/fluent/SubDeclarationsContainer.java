@@ -26,6 +26,7 @@ import java.util.Set;
  */
 final class SubDeclarationsContainer {
 
+  private final Set<ConstructDeclaration> constructs = new LinkedHashSet<>();
   private final Set<FunctionDeclaration> functions = new LinkedHashSet<>();
   private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
   private final Set<SourceDeclaration> messageSources = new LinkedHashSet<>();
@@ -58,6 +59,20 @@ final class SubDeclarationsContainer {
    */
   public List<FunctionDeclaration> getFunctions() {
     return alphaSorted(functions);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<ConstructDeclaration> getConstructs() {
+    return alphaSorted(constructs);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void addConstruct(ConstructDeclaration declaration) {
+    constructs.add(declaration);
   }
 
   /**

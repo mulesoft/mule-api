@@ -23,6 +23,7 @@ public class NestedChainDeclaration extends NestedComponentDeclaration<NestedCha
    */
   NestedChainDeclaration(String name) {
     super(name);
+    setRequired(true);
   }
 
 }

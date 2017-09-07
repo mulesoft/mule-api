@@ -19,7 +19,8 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public class NestedComponentDeclaration<T extends NestedComponentDeclaration> extends NestableElementDeclaration<T> {
+public class NestedComponentDeclaration<T extends NestedComponentDeclaration> extends NestableElementDeclaration<T>
+    implements WithAllowedStereotypesDeclaration<T> {
 
   private final Set<StereotypeModel> stereotypes = new HashSet<>();
 
@@ -32,10 +33,12 @@ public class NestedComponentDeclaration<T extends NestedComponentDeclaration> ex
     super(name);
   }
 
+  @Override
   public Set<StereotypeModel> getAllowedStereotypes() {
     return unmodifiableSet(stereotypes);
   }
 
+  @Override
   public T addAllowedStereotype(StereotypeModel stereotype) {
     stereotypes.add(stereotype);
     return (T) this;

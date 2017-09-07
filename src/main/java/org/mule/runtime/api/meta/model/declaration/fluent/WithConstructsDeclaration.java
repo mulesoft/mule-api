@@ -29,6 +29,6 @@ public interface WithConstructsDeclaration<T extends BaseDeclaration> {
    * @param declaration the declaration to be added
    * @return {@code this} declarer
    */
-  ExtensionDeclaration addConstruct(ConstructDeclaration declaration);
+  T addConstruct(ConstructDeclaration declaration);
 
 }

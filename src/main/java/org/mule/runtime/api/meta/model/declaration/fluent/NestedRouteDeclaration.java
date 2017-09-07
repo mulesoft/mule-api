@@ -67,6 +67,11 @@ public class NestedRouteDeclaration extends NestableElementDeclaration<NestedRou
     }
   }
 
+  @Override
+  public boolean isRequired() {
+    return minOccurs > 0;
+  }
+
   public List<ParameterGroupDeclaration> getParameterGroups() {
     return unmodifiableList(new ArrayList<>(parameterGroups.values()));
   }
