@@ -25,7 +25,7 @@ public class ModuleNamespaceTestCase {
 
   @Test
   public void shouldNormalizeNamespaceFromBlanks() throws Exception {
-    assertThat(new ModuleNamespace("my name  with  blanks").toString(), is("MyNameWithBlanks"));
+    assertThat(new ModuleNamespace("my name I18n with  blanks").toString(), is("MyNameI18nWithBlanks"));
   }
 
   @Test
