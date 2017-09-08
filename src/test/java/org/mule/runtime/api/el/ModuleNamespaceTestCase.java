@@ -24,14 +24,20 @@ public class ModuleNamespaceTestCase {
   }
 
   @Test
+  public void shouldNormalizeNamespaceWithNumbers() throws Exception {
+    assertThat(new ModuleNamespace("my 29 name I18n with  num 3 rs or numb3rs").toString(),
+               is("My29NameI18nWithNum3RsOrNumb3rs"));
+  }
+
+  @Test
   public void shouldNormalizeNamespaceFromBlanks() throws Exception {
     assertThat(new ModuleNamespace("my name I18n with  blanks").toString(), is("MyNameI18nWithBlanks"));
   }
 
   @Test
   public void shouldNormalizeNamespace() throws Exception {
-    assertThat(new ModuleNamespace("_prefix", "munit-tools", "myName-with  mixedContent", "suffix").toString(),
-               is("Prefix::MunitTools::MyNameWithMixedContent::Suffix"));
+    assertThat(new ModuleNamespace("_prefix", "munit-tools", "myName-with  mixedContent", "1o", "suffix", "22").toString(),
+               is("Prefix::MunitTools::MyNameWithMixedContent::1o::Suffix::22"));
   }
 
 
