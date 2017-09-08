@@ -17,7 +17,7 @@ import java.util.Optional;
 
 /**
  * Context of information related to the execution of the components.
- * 
+ *
  * @since 1.0
  */
 public interface Event {
@@ -52,7 +52,7 @@ public interface Event {
 
   /**
    * Returns the authentication information for the event
-   * 
+   *
    * @return authentication information for the event, may be {@link Optional#empty()}.
    */
   Optional<Authentication> getAuthentication();
@@ -63,7 +63,7 @@ public interface Event {
    * This field will only contain a value within the error handler defined to handle errors. After the error handler is executed
    * the event error field will be cleared. If another flow is called from within the error handler the flow will still have
    * access to the error field.
-   *
+   * <p>
    * To avoid losing the error field after the error handler the user can define a variable pointing to the error field.
    *
    * @return an optional of the error associated with the event. Will be empty if there's no error associated with the event.
@@ -73,11 +73,11 @@ public interface Event {
   /**
    * @return the context applicable to all events created from the same root {@link Event} from a source.
    */
-  <T extends EventContext> T getContext();
+  EventContext getContext();
 
   /**
    * Creates a {@link BindingContext} from the event.
-   * 
+   *
    * @return a {@link BindingContext} created from the event content.
    */
   BindingContext asBindingContext();
