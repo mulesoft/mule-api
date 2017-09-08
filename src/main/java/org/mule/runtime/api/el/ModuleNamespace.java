@@ -6,9 +6,13 @@
  */
 package org.mule.runtime.api.el;
 
-import java.util.Arrays;
-
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Represents the Namespace for a given module
@@ -20,7 +24,7 @@ public class ModuleNamespace {
   private String[] elements;
 
   public ModuleNamespace(String... elements) {
-    this.elements = elements;
+    this.elements = normalize(elements);
   }
 
   /**
@@ -56,5 +60,23 @@ public class ModuleNamespace {
   @Override
   public int hashCode() {
     return Arrays.hashCode(elements);
+  }
+
+  private String[] normalize(String... parts) {
+    return stream(parts)
+        .filter(StringUtils::isNotBlank)
+        .map(this::normalizePart)
+        .map(StringUtils::capitalize)
+        .collect(toList())
+        .toArray(new String[] {});
+  }
+
+  private String normalizePart(String part) {
+    return stream(part.replaceAll("[^\\w]", " ")
+        .replaceAll("[\\.\\-_\\ ]", " ")
+        .split(" "))
+            .filter(StringUtils::isNotBlank)
+            .map(StringUtils::capitalize)
+            .collect(Collectors.joining());
   }
 }
