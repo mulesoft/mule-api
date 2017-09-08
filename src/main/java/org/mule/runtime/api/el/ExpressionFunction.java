@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.el;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.FunctionParameter;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Representation of a function to be used by an {@link ExpressionLanguage}.
@@ -22,7 +22,7 @@ import org.mule.runtime.api.metadata.FunctionParameter;
 public interface ExpressionFunction {
 
   /**
-   * Function logic to be executed.
+   * Function logic to be executed. Generic errors during execution should result in a {@link FunctionExecutionException}.
    *
    * @param parameters array of parameters that should match the indicated ones in {@link #parameters()}.
    * @param context the current {@link BindingContext} at the time of execution.
