@@ -126,6 +126,9 @@
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.8</allure.maven.plugin.version>
+
+        <!-- Empty argLine added for use by the jacoco prepare-agent goal -->
+        <argLine></argLine>
     </properties>
 
     <dependencies>
@@ -337,7 +340,7 @@
                     <version>${maven.surefire.plugin.version}</version>
                     <configuration>
                         <argLine>
-                            -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar
+                            @{argLine} -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar
                         </argLine>
                         <properties>
                             <property>
