@@ -31,13 +31,13 @@ public class ModuleNamespaceTestCase {
 
   @Test
   public void shouldNormalizeNamespaceFromBlanks() throws Exception {
-    assertThat(new ModuleNamespace("my name I18n with  blanks").toString(), is("MyNameI18nWithBlanks"));
+    assertThat(new ModuleNamespace("my", "name", "I18n with  blanks").toString(), is("my::name::I18nWithBlanks"));
   }
 
   @Test
   public void shouldNormalizeNamespace() throws Exception {
-    assertThat(new ModuleNamespace("_prefix", "munit-tools", "myName-with  mixedContent", "1o", "suffix", "22").toString(),
-               is("Prefix::MunitTools::MyNameWithMixedContent::1o::Suffix::22"));
+    assertThat(new ModuleNamespace("_prefix", "munit-tools", "myName-with  22", "1o", "20", "mixedContent-pascal").toString(),
+               is("prefix::munittools::mynamewith22::1o::20::MixedContentPascal"));
   }
 
 
