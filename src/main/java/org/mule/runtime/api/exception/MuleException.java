@@ -219,26 +219,6 @@ public abstract class MuleException extends Exception {
     return buf.toString();
   }
 
-  /**
-   * Template method so when looking for root cause, specific implementation can add content to the summary. By
-   * default, the location data will be added.
-   *
-   * @param summary {@link Map} to use for appending additional summary info.
-   */
-  protected void appendSummaryMessage(Map<String, String> summary) {
-    StringBuilder builder = new StringBuilder();
-    Map<String, Object> exceptionInfo = getExceptionInfo(this);
-    builder.append("Element               : ")
-        .append(exceptionInfo.get(INFO_LOCATION_KEY))
-        .append(lineSeparator());
-    Object sourceXml = exceptionInfo.get(INFO_SOURCE_XML_KEY);
-    if (sourceXml != null) {
-      builder.append("Element XML           : ")
-          .append(sourceXml)
-          .append(lineSeparator());
-    }
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
