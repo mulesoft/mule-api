@@ -108,6 +108,14 @@ public abstract class MuleException extends Exception {
     }
   }
 
+  private String getColonMatchingPad(String key) {
+    int padSize = 22 - key.length();
+    if (padSize > 0) {
+      return (repeat(' ', padSize));
+    }
+    return "";
+  }
+
   protected MuleException() {
     this(null, null);
   }
@@ -155,14 +163,6 @@ public abstract class MuleException extends Exception {
     } else {
       return getSummaryMessage();
     }
-  }
-
-  private String getColonMatchingPad(String key) {
-    int padSize = 22 - key.length();
-    if (padSize > 0) {
-      return (repeat(' ', padSize));
-    }
-    return "";
   }
 
   public String getVerboseMessage() {
