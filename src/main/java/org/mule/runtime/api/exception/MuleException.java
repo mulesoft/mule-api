@@ -32,9 +32,15 @@ public abstract class MuleException extends Exception {
 
   private static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
+  //Info keys for logging
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
+  public static final String INFO_ERROR_TYPE_KEY = "Error type";
 
+  public static final String MISSING_DEFAULT_VALUE = "(None)";
+
+  //To define the information that will be included if a summary is logged instead of a verbose exception
+  private static final String[] SUMMARY_LOGGING_KEYS = {INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY, INFO_ERROR_TYPE_KEY};
 
 
   private static final long serialVersionUID = -4544199933449632546L;
@@ -151,6 +157,14 @@ public abstract class MuleException extends Exception {
     }
   }
 
+  private String getColonMatchingPad(String key) {
+    int padSize = 22 - key.length();
+    if (padSize > 0) {
+      return (repeat(' ', padSize));
+    }
+    return "";
+  }
+
   public String getVerboseMessage() {
     MuleException e = getRootMuleException(this);
     if (!e.equals(this)) {
@@ -163,11 +177,8 @@ public abstract class MuleException extends Exception {
     Map<String, Object> info = getExceptionInfo(this);
     for (Map.Entry<String, Object> entry : info.entrySet()) {
       String s = entry.getKey();
-      int pad = 22 - s.length();
       buf.append(s);
-      if (pad > 0) {
-        buf.append(repeat(' ', pad));
-      }
+      buf.append(getColonMatchingPad(s));
       buf.append(": ");
       buf.append((entry.getValue() == null ? "null"
           : entry.getValue().toString().replaceAll(lineSeparator(),
@@ -197,10 +208,9 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    for(Map.Entry<String, Object> entry : info.entrySet()) {
-      this was left here!
+    for(String key : SUMMARY_LOGGING_KEYS ) {
+      buf.append(String.format("%s%s: %s\n",key,getColonMatchingPad(key),info.getOrDefault(key,MISSING_DEFAULT_VALUE)));
     }
-
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
         .append(lineSeparator());
