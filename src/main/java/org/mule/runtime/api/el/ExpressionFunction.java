@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.el;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.FunctionParameter;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Representation of a function to be used by an {@link ExpressionLanguage}.
