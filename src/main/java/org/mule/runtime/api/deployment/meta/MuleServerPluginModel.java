@@ -24,11 +24,11 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
   private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
   private final String pluginClassName;
 
-  private MuleServerPluginModel(String name, String minMuleVersion,
+  private MuleServerPluginModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                 MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor,
                                 MuleArtifactLoaderDescriptor bundleDescriptor, String pluginClassName) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor);
     this.extensionModelLoaderDescriptor = extensionModelLoaderDescriptor;
     this.pluginClassName = pluginClassName;
   }
@@ -76,7 +76,7 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MuleServerPluginModel(getName(), getMinMuleVersion(),
+      return new MuleServerPluginModel(getName(), getMinMuleVersion(), getProduct(),
                                        getClassLoaderModelDescriptorLoader(),
                                        extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
                                            : null,

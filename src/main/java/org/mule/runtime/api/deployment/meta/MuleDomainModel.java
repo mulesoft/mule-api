@@ -14,11 +14,11 @@ import java.util.Optional;
 
 public class MuleDomainModel extends MuleDeployableModel {
 
-  private MuleDomainModel(String name, String minMuleVersion,
+  private MuleDomainModel(String name, String minMuleVersion, Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                           MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs,
                           Optional<Boolean> redeploymentEnabled) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
   }
 
   /**
@@ -36,7 +36,7 @@ public class MuleDomainModel extends MuleDeployableModel {
 
     @Override
     protected MuleDomainModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
-      return new MuleDomainModel(getName(), getMinMuleVersion(), getClassLoaderModelDescriptorLoader(),
+      return new MuleDomainModel(getName(), getMinMuleVersion(), getProduct(), getClassLoaderModelDescriptorLoader(),
                                  getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
     }
   }

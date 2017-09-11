@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * This object matches the mule-artifact.json element within a application. The describer holds information that has being picked up from
- * the JSON file (and the pom.xml when implemented).
+ * This object matches the mule-artifact.json element within a application. The describer holds information that has being picked
+ * up from the JSON file (and the pom.xml when implemented).
  *
  * @since 1.0
  */
@@ -21,11 +21,11 @@ public class MuleApplicationModel extends MuleDeployableModel {
 
   private final String domain;
 
-  private MuleApplicationModel(String name, String minMuleVersion,
+  private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs,
                                Optional<String> domain, Optional<Boolean> redeploymentEnabled) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
     this.domain = domain.orElse(null);
   }
 
@@ -63,7 +63,7 @@ public class MuleApplicationModel extends MuleDeployableModel {
 
     @Override
     protected MuleApplicationModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
-      return new MuleApplicationModel(getName(), getMinMuleVersion(), getClassLoaderModelDescriptorLoader(),
+      return new MuleApplicationModel(getName(), getMinMuleVersion(), getProduct(), getClassLoaderModelDescriptorLoader(),
                                       getBundleDescriptorLoader(), configs, ofNullable(domain), ofNullable(redeploymentEnabled));
 
     }

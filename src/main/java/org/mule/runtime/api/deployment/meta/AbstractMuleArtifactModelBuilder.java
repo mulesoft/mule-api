@@ -21,6 +21,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
 
   private String name;
   private String minMuleVersion;
+  private Product product;
   private MuleArtifactLoaderDescriptor bundleDescriptorLoader;
   private MuleArtifactLoaderDescriptor classLoaderModelDescriptorLoader;
 
@@ -36,8 +37,23 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
     return getThis();
   }
 
+  /**
+   * Sets the required product for the artifact.
+   * 
+   * @param product the required product for the artifact.
+   * @return {@code this} builder
+   */
+  public T setProduct(Product product) {
+    this.product = product;
+    return getThis();
+  }
+
   public String getName() {
     return name;
+  }
+
+  public Product getProduct() {
+    return product;
   }
 
   /**

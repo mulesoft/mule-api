@@ -31,16 +31,17 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    * 
    * @param name name of the artifact
    * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
+   * @param product the target product for this artifact
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
    * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
    * @param configs the application configuration files
    * @param redeploymentEnabled indicates if the artifact can be redeployed or not
    */
-  protected MuleDeployableModel(String name, String minMuleVersion,
+  protected MuleDeployableModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                 MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> configs,
                                 Optional<Boolean> redeploymentEnabled) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
     this.configs = configs == null ? new ArrayList<>() : configs;
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
   }

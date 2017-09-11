@@ -17,10 +17,10 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  */
 public class MulePolicyModel extends AbstractMuleArtifactModel {
 
-  private MulePolicyModel(String name, String minMuleVersion,
+  private MulePolicyModel(String name, String minMuleVersion, Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                           MuleArtifactLoaderDescriptor bundleDescriptor) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptor);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor);
   }
 
   /**
@@ -44,7 +44,8 @@ public class MulePolicyModel extends AbstractMuleArtifactModel {
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MulePolicyModel(getName(), getMinMuleVersion(), getClassLoaderModelDescriptorLoader(),
+      return new MulePolicyModel(getName(), getMinMuleVersion(), getProduct(),
+                                 getClassLoaderModelDescriptorLoader(),
                                  getBundleDescriptorLoader());
     }
   }
