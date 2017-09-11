@@ -22,7 +22,7 @@ import java.util.Optional;
 public interface ExpressionFunction {
 
   /**
-   * Function logic to be executed. Generic errors during execution should result in a {@link FunctionExecutionException}.
+   * Function logic to be executed.
    *
    * @param parameters array of parameters that should match the indicated ones in {@link #parameters()}.
    * @param context the current {@link BindingContext} at the time of execution.
