@@ -7,7 +7,6 @@
 package org.mule.runtime.api.exception;
 
 import static java.lang.System.lineSeparator;
-import static org.mule.runtime.api.exception.ExceptionHelper.LOGGING_SUMMARY_APPEND_KEY;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
@@ -35,7 +34,8 @@ public abstract class MuleException extends Exception {
 
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
-  private static final String SUMMARY_KEY = MuleException.class.getName();
+
+
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
@@ -197,7 +197,9 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    ((Map<String, String>) info.get(LOGGING_SUMMARY_APPEND_KEY)).forEach((key, value) -> buf.append(value));
+    for(Map.Entry<String, Object> entry : info.entrySet()) {
+      this was left here!
+    }
 
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
@@ -225,7 +227,6 @@ public abstract class MuleException extends Exception {
           .append(sourceXml)
           .append(lineSeparator());
     }
-    summary.put(SUMMARY_KEY, builder.toString());
   }
 
   @Override
