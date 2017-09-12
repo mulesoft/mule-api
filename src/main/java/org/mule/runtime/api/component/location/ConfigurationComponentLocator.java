@@ -6,31 +6,31 @@
  */
 package org.mule.runtime.api.component.location;
 
-import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.component.Component;
+import org.mule.runtime.api.component.ComponentIdentifier;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Locator to access runtime objects created from the configuration of the artifact.
- *
+ * <p>
  * The location can be composed by many parts, each part separated by an slash.
- *
+ * <p>
  * The first part must be the name of the global element that contains the location. Location "myflow" indicates the global
  * element with name myFlow.
- *
+ * <p>
  * Global elements that do not have a name cannot be referenced.
- *
+ * <p>
  * The following parts must be components contained within the global element. Location "myFlow/processors" indicates the
  * processors part of the global element with name "myFlow"
- *
+ * <p>
  * Each part must be contained in the preceded component in the location. Location "myFlow/errorHandler/onErrors" indicates the
  * onErrors components that are part of the errorHandler component which is also part of the "myFlow" global element.
- *
+ * <p>
  * When a component part has a collection of components, each component can be referenced individually with an index. THe first
  * index is 0. Location "myFlow/processors/4" refers to the fifth processors inside the flow with name "myFlow"
- * 
+ *
  * @since 4.0
  */
 public interface ConfigurationComponentLocator {
@@ -45,17 +45,21 @@ public interface ConfigurationComponentLocator {
 
   /**
    * Finds all the components with the given identifier within the artifact.
-   * 
+   *
    * @param componentIdentifier the component identifier
    * @return the list of found components. If no component is found an empty list will be returned.
    */
   List<Component> find(ComponentIdentifier componentIdentifier);
 
   /**
-   * Finds all the components within the artifact.
+   * Finds the locations of every component within the artifact.
+   * <p>
+   * This method may return locations for which there are no {@link Component} found with {@link #find(ComponentIdentifier)} or
+   * {@link #find(Location)}. This happens in the case when the parser knows a certain location exists but the component in that
+   * location is not available (i.e.: is lazy)
    *
-   * @return the list of components within the artifact.
+   * @return the list of {@link ComponentLocation}s within the artifact.
    */
-  List<Component> findAll();
+  List<ComponentLocation> findAll();
 
 }
