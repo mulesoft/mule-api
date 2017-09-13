@@ -40,7 +40,7 @@ public abstract class MuleException extends Exception {
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
   //To define the information that will be included if a summary is logged instead of a verbose exception
-  private static final String[] SUMMARY_LOGGING_KEYS = {INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY, INFO_ERROR_TYPE_KEY};
+  private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
 
 
   private static final long serialVersionUID = -4544199933449632546L;
@@ -90,7 +90,7 @@ public abstract class MuleException extends Exception {
   }
 
   public MuleException(Throwable cause) {
-    this(cause != null ? createStaticMessage(cause.getMessage() + " (" + cause.getClass().getName() + ")") : null, cause);
+    this(cause != null ? createStaticMessage(cause.getMessage()) : null, cause);
   }
 
   private static String repeat(char c, int len) {
