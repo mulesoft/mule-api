@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
@@ -30,7 +31,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class MuleException extends Exception {
 
-  private static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
+  public static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
   //Info keys for logging
   public static final String INFO_LOCATION_KEY = "Element";
@@ -111,7 +112,7 @@ public abstract class MuleException extends Exception {
   private String getColonMatchingPad(String key) {
     int padSize = 22 - key.length();
     if (padSize > 0) {
-      return (repeat(' ', padSize));
+      return repeat(' ', padSize);
     }
     return "";
   }
@@ -209,7 +210,7 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(lineSeparator());
 
     for (String key : SUMMARY_LOGGING_KEYS) {
-      buf.append(String.format("%s%s: %s\n", key, getColonMatchingPad(key), info.getOrDefault(key, MISSING_DEFAULT_VALUE)));
+      buf.append(format("%s%s: %s\n", key, getColonMatchingPad(key), info.getOrDefault(key, MISSING_DEFAULT_VALUE)));
     }
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
