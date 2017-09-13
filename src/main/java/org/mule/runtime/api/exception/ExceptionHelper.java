@@ -11,7 +11,6 @@ import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
-import org.mule.runtime.api.util.Pair;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -32,7 +31,6 @@ import java.util.Map;
 public class ExceptionHelper {
 
   private static final String MULE_PACKAGE_REGEXP = "(?:org|com)\\.mule(?:soft)?\\.(?!mvel2)(?!el).*";
-  public static final String LOGGING_SUMMARY_APPEND_KEY = "SUMMARY";
 
   public static final String[] DEFAULT_STACKTRACE_FILTER = new String[] {
       "org.mule.runtime.core.privileged.processor.AbstractInterceptingMessageProcessor",
@@ -136,7 +134,6 @@ public class ExceptionHelper {
     while (cause != null) {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
-        //Inner exceptions override outer ones
         muleExceptionInfo.putAll(exception.getInfo());
       }
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
