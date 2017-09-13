@@ -208,8 +208,8 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    for(String key : SUMMARY_LOGGING_KEYS ) {
-      buf.append(String.format("%s%s: %s\n",key,getColonMatchingPad(key),info.getOrDefault(key,MISSING_DEFAULT_VALUE)));
+    for (String key : SUMMARY_LOGGING_KEYS) {
+      buf.append(String.format("%s%s: %s\n", key, getColonMatchingPad(key), info.getOrDefault(key, MISSING_DEFAULT_VALUE)));
     }
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
