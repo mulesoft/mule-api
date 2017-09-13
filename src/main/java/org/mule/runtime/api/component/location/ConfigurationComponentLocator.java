@@ -60,6 +60,6 @@ public interface ConfigurationComponentLocator {
    *
    * @return the list of {@link ComponentLocation}s within the artifact.
    */
-  List<ComponentLocation> findAll();
+  List<ComponentLocation> findAllLocations();
 
 }
