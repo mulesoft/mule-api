@@ -71,6 +71,13 @@ public interface Event {
   Optional<Error> getError();
 
   /**
+   * The returned value will depend on the flow source that created this event, and the flow that is executing the event.
+   *
+   * @return the correlation id to use for this event.
+   */
+  String getCorrelationId();
+
+  /**
    * @return the context applicable to all events created from the same root {@link Event} from a source.
    */
   EventContext getContext();
