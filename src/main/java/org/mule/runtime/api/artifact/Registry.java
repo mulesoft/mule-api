@@ -23,14 +23,14 @@ public interface Registry {
    * Looks up for a service within the artifact.
    * <p>
    * If there are multiple services registered then an exception will be raised. If that could be the case then
-   * {@code {@link #lookupAll(Class)}} should be used instead.
+   * {@code {@link #lookupAllByType(Class)}} should be used instead.
    * 
    * @param objectType the service type
    * @param <T> the type of the service
    * @return the service if a single implementation was found, empty if no implementation was found. If more than one
    *         implementation is found then it will fail.
    */
-  <T> Optional<T> lookup(Class<T> objectType);
+  <T> Optional<T> lookupByType(Class<T> objectType);
 
   /**
    * Looks up for a service within the artifact by it's name.
@@ -48,6 +48,6 @@ public interface Registry {
    * @param <T> the type of the service
    * @return the set of services found, empty collection if no implementation was found.
    */
-  <T> Collection<T> lookupAll(Class<T> serviceType);
+  <T> Collection<T> lookupAllByType(Class<T> serviceType);
 
 }
