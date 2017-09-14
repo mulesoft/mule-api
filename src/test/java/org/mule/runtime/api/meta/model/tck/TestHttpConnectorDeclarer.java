@@ -68,7 +68,6 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
         .fromVendor(VENDOR)
         .onVersion(VERSION)
         .withCategory(COMMUNITY)
-        .withMinMuleVersion(MIN_MULE_VERSION)
         .withType(COMPLEX_TYPE)
         .withType(ANOTHER_COMPLEX_TYPE)
         .withXmlDsl(XmlDslModel.builder().build());

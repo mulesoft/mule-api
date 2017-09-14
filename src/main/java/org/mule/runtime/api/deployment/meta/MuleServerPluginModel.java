@@ -76,7 +76,7 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MuleServerPluginModel(getName(), getMinMuleVersion(), getProduct(),
+      return new MuleServerPluginModel(getName(), getMinMuleVersion(), getRequiredProduct(),
                                        getClassLoaderModelDescriptorLoader(),
                                        extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
                                            : null,

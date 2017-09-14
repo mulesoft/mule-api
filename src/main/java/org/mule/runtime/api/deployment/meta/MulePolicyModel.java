@@ -44,7 +44,7 @@ public class MulePolicyModel extends AbstractMuleArtifactModel {
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MulePolicyModel(getName(), getMinMuleVersion(), getProduct(),
+      return new MulePolicyModel(getName(), getMinMuleVersion(), getRequiredProduct(),
                                  getClassLoaderModelDescriptorLoader(),
                                  getBundleDescriptorLoader());
     }

@@ -36,7 +36,7 @@ public class MuleDomainModel extends MuleDeployableModel {
 
     @Override
     protected MuleDomainModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
-      return new MuleDomainModel(getName(), getMinMuleVersion(), getProduct(), getClassLoaderModelDescriptorLoader(),
+      return new MuleDomainModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
                                  getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
     }
   }

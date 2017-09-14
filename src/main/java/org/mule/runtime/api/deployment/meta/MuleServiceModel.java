@@ -68,7 +68,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
       return new MuleServiceModel(getName(), getMinMuleVersion(),
-                                  getProduct(),
+                                  getRequiredProduct(),
                                   getClassLoaderModelDescriptorLoader(),
                                   getBundleDescriptorLoader(), serviceProviderClassName);
     }

@@ -43,7 +43,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @param product the required product for the artifact.
    * @return {@code this} builder
    */
-  public T setProduct(Product product) {
+  public T setRequiredProduct(Product product) {
     this.product = product;
     return getThis();
   }
@@ -52,7 +52,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
     return name;
   }
 
-  public Product getProduct() {
+  public Product getRequiredProduct() {
     return product;
   }
 

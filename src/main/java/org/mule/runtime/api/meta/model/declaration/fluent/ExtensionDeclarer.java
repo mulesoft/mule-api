@@ -300,17 +300,6 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Adds the extension's minimum Mule Version
-   *
-   * @param minMuleVersion of the extension
-   * @return {@code this} descriptor
-   */
-  public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
-    declaration.setMinMuleVersion(minMuleVersion);
-    return this;
-  }
-
-  /**
    * Registers an {@link ErrorModel} that could be thrown by one their
    * operations
    *

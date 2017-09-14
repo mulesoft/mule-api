@@ -63,7 +63,7 @@ public class MuleApplicationModel extends MuleDeployableModel {
 
     @Override
     protected MuleApplicationModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
-      return new MuleApplicationModel(getName(), getMinMuleVersion(), getProduct(), getClassLoaderModelDescriptorLoader(),
+      return new MuleApplicationModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
                                       getBundleDescriptorLoader(), configs, ofNullable(domain), ofNullable(redeploymentEnabled));
 
     }

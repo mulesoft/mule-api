@@ -60,7 +60,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private String version;
   private String vendor;
   private Category category;
-  private MuleVersion minMuleVersion;
   private XmlDslModel xmlDslModel;
   private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
 
@@ -368,14 +367,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
 
   public void setCategory(Category category) {
     this.category = category;
-  }
-
-  public MuleVersion getMinMuleVersion() {
-    return minMuleVersion;
-  }
-
-  public void setMinMuleVersion(MuleVersion minMuleVersion) {
-    this.minMuleVersion = minMuleVersion;
   }
 
   public XmlDslModel getXmlDslModel() {

@@ -7,7 +7,9 @@
 
 package org.mule.runtime.api.deployment.meta;
 
+import static org.mule.runtime.api.meta.MuleVersion.NO_REVISION;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 
 /**
@@ -22,7 +24,7 @@ public abstract class AbstractMuleArtifactModel {
 
   private final String name;
   private final String minMuleVersion;
-  private final Product product;
+  private final Product requiredProduct;
   private final MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor;
   private final MuleArtifactLoaderDescriptor bundleDescriptorLoader;
 
@@ -31,19 +33,21 @@ public abstract class AbstractMuleArtifactModel {
    * 
    * @param name name of the artifact
    * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
-   * @param product the target product for the artifact
+   * @param requiredProduct the target product for the artifact
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
    * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
    */
   protected AbstractMuleArtifactModel(
                                       String name, String minMuleVersion,
-                                      Product product, MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
+                                      Product requiredProduct, MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                       MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
     checkArgument(classLoaderModelLoaderDescriptor != null, "classLoaderModelLoaderDescriptor cannot be null");
     checkArgument(bundleDescriptorLoader != null, "bundleDescriptorLoader cannot be null");
+    checkArgument(minMuleVersion == null || new MuleVersion(minMuleVersion).getRevision() != NO_REVISION,
+                  "descriptor minMuleVersion must have patch version specified");
     this.minMuleVersion = minMuleVersion;
     this.name = name;
-    this.product = product;
+    this.requiredProduct = requiredProduct;
     this.classLoaderModelLoaderDescriptor = classLoaderModelLoaderDescriptor;
     this.bundleDescriptorLoader = bundleDescriptorLoader;
   }
@@ -56,8 +60,8 @@ public abstract class AbstractMuleArtifactModel {
     return minMuleVersion;
   }
 
-  public Product getProduct() {
-    return product;
+  public Product getRequiredProduct() {
+    return requiredProduct;
   }
 
   public MuleArtifactLoaderDescriptor getBundleDescriptorLoader() {

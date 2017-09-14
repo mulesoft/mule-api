@@ -70,7 +70,7 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
-      return new MulePluginModel(getName(), getMinMuleVersion(), getProduct(),
+      return new MulePluginModel(getName(), getMinMuleVersion(), getRequiredProduct(),
                                  getClassLoaderModelDescriptorLoader(),
                                  extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
                                      : null,
