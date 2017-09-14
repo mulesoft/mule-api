@@ -119,6 +119,7 @@
         <javax.inject.version>1</javax.inject.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
+        <guavaVersion>19.0</guavaVersion>
         <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
         <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version>
@@ -157,6 +158,12 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+              <version>${guavaVersion}</version>
         </dependency>
 
         <!-- test dependencies -->
