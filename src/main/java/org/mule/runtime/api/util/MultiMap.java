@@ -38,6 +38,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   protected Map<K, LinkedList<V>> paramsMap;
 
+  public MultiMap(final MultiMap<K, V> multiMap) {
+    this.paramsMap = new LinkedHashMap<>(multiMap.paramsMap);
+  }
+
   public MultiMap(final Map<K, V> parametersMap) {
     this.paramsMap = parametersMap.entrySet().stream().collect(toMap(Entry::getKey, e -> {
       LinkedList<V> values = new LinkedList<>();

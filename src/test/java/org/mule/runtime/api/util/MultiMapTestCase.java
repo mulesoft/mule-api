@@ -143,6 +143,23 @@ public class MultiMapTestCase {
                                               new EntryMatcher(KEY_2, VALUE_2)));
   }
 
+
+  @Test
+  public void createMultiMapFromMultiMap() {
+    multiMap.put(KEY_1, VALUE_1);
+    multiMap.put(KEY_1, VALUE_2);
+    multiMap.put(KEY_2, VALUE_1);
+    multiMap.put(KEY_2, VALUE_2);
+    assertThat(multiMap.entryList(), hasSize(4));
+    final MultiMap<String, String> map = new MultiMap<>(multiMap);
+    map.remove(KEY_1);
+    assertThat(multiMap.entryList(), hasSize(4));
+    assertThat(map.entryList(), hasSize(2));
+    assertThat(map.entryList(), contains(
+                                         new EntryMatcher(KEY_2, VALUE_1),
+                                         new EntryMatcher(KEY_2, VALUE_2)));
+  }
+
   private class EntryMatcher extends TypeSafeMatcher<Map.Entry<String, String>> {
 
     private String expectedKey;
