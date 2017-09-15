@@ -49,5 +49,4 @@ public interface Registry {
    * @return the set of services found, empty collection if no implementation was found.
    */
   <T> Collection<T> lookupAllByType(Class<T> serviceType);
-
 }

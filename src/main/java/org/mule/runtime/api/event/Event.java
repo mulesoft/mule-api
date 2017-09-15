@@ -88,5 +88,4 @@ public interface Event {
    * @return a {@link BindingContext} created from the event content.
    */
   BindingContext asBindingContext();
-
 }
