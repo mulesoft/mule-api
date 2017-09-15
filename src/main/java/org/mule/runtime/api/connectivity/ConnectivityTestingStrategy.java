@@ -10,9 +10,9 @@ import org.mule.runtime.api.connection.ConnectionValidationResult;
 
 /**
  * An strategy for doing connectivity testing.
- *
+ * <p>
  * Instances of {@code ConnectivityTestingStrategy} will be discovered through SPI.
- *
+ * <p>
  * It's responsible to discover a mule component over the one connectivity testing can be done. Only one mule component for
  * connectivity testing must exists for the strategy to work.
  *
