@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.connectivity;
 
-import org.mule.runtime.api.connectivity.ConnectivityTestingService;
 import org.mule.runtime.api.exception.MuleRuntimeException;
 import org.mule.runtime.api.i18n.I18nMessage;
 
