@@ -130,6 +130,7 @@ public class ExceptionHelper {
     // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
     // properly logged.
     Map muleExceptionInfo = new HashMap<>();
+
     while (cause != null) {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;

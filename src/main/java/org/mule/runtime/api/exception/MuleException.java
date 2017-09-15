@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
@@ -30,16 +31,24 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class MuleException extends Exception {
 
-  private static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
+  public static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
+  //Info keys for logging
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
+  public static final String INFO_ERROR_TYPE_KEY = "Error type";
+
+  public static final String MISSING_DEFAULT_VALUE = "(None)";
+
+  //To define the information that will be included if a summary is logged instead of a verbose exception
+  private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
+
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
 
-  private static final String EXCEPTION_MESSAGE_DELIMITER = repeat('*', 80) + lineSeparator();
-  private static final String EXCEPTION_MESSAGE_SECTION_DELIMITER = repeat('-', 80) + lineSeparator();
+  public static final String EXCEPTION_MESSAGE_DELIMITER = repeat('*', 80) + lineSeparator();
+  public static final String EXCEPTION_MESSAGE_SECTION_DELIMITER = repeat('-', 80) + lineSeparator();
 
   /**
    * When false (default), only a summary of the root exception and trail is provided. If this flag is false, full exception
@@ -82,7 +91,7 @@ public abstract class MuleException extends Exception {
   }
 
   public MuleException(Throwable cause) {
-    this(cause != null ? createStaticMessage(cause.getMessage() + " (" + cause.getClass().getName() + ")") : null, cause);
+    this(cause != null ? createStaticMessage(cause.getMessage()) : null, cause);
   }
 
   private static String repeat(char c, int len) {
@@ -98,6 +107,14 @@ public abstract class MuleException extends Exception {
       }
       return stringBuilder.toString();
     }
+  }
+
+  private String getColonMatchingPad(String key) {
+    int padSize = 22 - key.length();
+    if (padSize > 0) {
+      return repeat(' ', padSize);
+    }
+    return "";
   }
 
   protected MuleException() {
@@ -161,11 +178,8 @@ public abstract class MuleException extends Exception {
     Map<String, Object> info = getExceptionInfo(this);
     for (Map.Entry<String, Object> entry : info.entrySet()) {
       String s = entry.getKey();
-      int pad = 22 - s.length();
       buf.append(s);
-      if (pad > 0) {
-        buf.append(repeat(' ', pad));
-      }
+      buf.append(getColonMatchingPad(s));
       buf.append(": ");
       buf.append((entry.getValue() == null ? "null"
           : entry.getValue().toString().replaceAll(lineSeparator(),
@@ -194,33 +208,16 @@ public abstract class MuleException extends Exception {
     StringBuilder buf = new StringBuilder(1024);
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
-    appendSummaryMessage(buf);
 
+    for (String key : SUMMARY_LOGGING_KEYS) {
+      buf.append(format("%s%s: %s\n", key, getColonMatchingPad(key), info.getOrDefault(key, MISSING_DEFAULT_VALUE)));
+    }
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
         .append(lineSeparator());
     buf.append(EXCEPTION_MESSAGE_DELIMITER);
 
     return buf.toString();
-  }
-
-  /**
-   * Template method so when {@code #getSummaryMessage()} is called, specific implementation can add content to the summary. By
-   * default, the location data will be added.
-   *
-   * @param builder {@link StringBuilder} to use for appending additional summary info.
-   */
-  protected void appendSummaryMessage(StringBuilder builder) {
-    Map<String, Object> exceptionInfo = getExceptionInfo(this);
-    builder.append("Element               : ")
-        .append(exceptionInfo.get(INFO_LOCATION_KEY))
-        .append(lineSeparator());
-    Object sourceXml = exceptionInfo.get(INFO_SOURCE_XML_KEY);
-    if (sourceXml != null) {
-      builder.append("Element XML           : ")
-          .append(sourceXml)
-          .append(lineSeparator());
-    }
   }
 
   @Override
