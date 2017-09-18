@@ -19,14 +19,17 @@ import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 
-import org.apache.commons.io.IOUtils;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ArtifactDeclarationJsonSerializerTestCase {
 
-  public static final String EXPECTED_ARTIFACT_DECLARATION_JSON = "declaration/artifact-declaration.json";
+  private static final String EXPECTED_ARTIFACT_DECLARATION_JSON = "declaration/artifact-declaration.json";
   private ArtifactDeclaration applicationDeclaration;
 
   @Before
@@ -36,11 +39,12 @@ public class ArtifactDeclarationJsonSerializerTestCase {
 
   @Test
   public void serializationTest() throws IOException {
-    String expected = IOUtils.toString(Thread.currentThread().getContextClassLoader()
-        .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON));
-
-    String json = ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration);
-    assertThat(json, json.trim(), is(equalTo(expected.trim())));
+    JsonParser parser = new JsonParser();
+    JsonReader reader = new JsonReader(new InputStreamReader(Thread.currentThread().getContextClassLoader()
+        .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON)));
+    JsonElement expected = parser.parse(reader);
+    JsonElement json = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration));
+    assertThat(json, is(equalTo(expected)));
   }
 
   @Test
