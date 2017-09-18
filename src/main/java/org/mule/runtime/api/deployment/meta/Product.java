@@ -52,7 +52,7 @@ public enum Product {
    * @param coreLibraryName the core library name
    * @return the product represented by the core library name
    */
-  public static Product getProductByCoreLibraryName(String coreLibraryName) {
+  public static Product getProductByName(String coreLibraryName) {
     // this only happens during test cases.
     if (coreLibraryName == null) {
       return MULE_EE;
