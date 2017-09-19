@@ -109,6 +109,11 @@ public interface DslConstants {
   String REDELIVERY_POLICY_ELEMENT_IDENTIFIER = "redelivery-policy";
 
   /**
+   * The identifier name of the {@code expirationPolicy} infrastructure parameter
+   */
+  String EXPIRATION_POLICY_ELEMENT_IDENTIFIER = "expiration-policy";
+
+  /**
    * The identifier name of the {@code poolingProfile} infrastructure parameter
    */
   String POOLING_PROFILE_ELEMENT_IDENTIFIER = "pooling-profile";
