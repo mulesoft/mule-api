@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.store;
 
+import static java.util.Collections.unmodifiableMap;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import java.io.Serializable;
@@ -50,6 +51,11 @@ public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObj
   @Override
   protected T doRemove(String key) {
     return map.remove(key);
+  }
+
+  @Override
+  public Map<String, T> retrieveAll() throws ObjectStoreException {
+    return unmodifiableMap(map);
   }
 
   @Override

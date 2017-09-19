@@ -9,6 +9,7 @@ package org.mule.runtime.api.store;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A generic object key value store
@@ -98,4 +99,9 @@ public interface ObjectStore<T extends Serializable> {
    */
   List<String> allKeys() throws ObjectStoreException;
 
+  /**
+   * @return All the key-value pairs that this object store currently holds
+   * @throws ObjectStoreException if an exception occurred while collecting the values
+   */
+  Map<String, T> retrieveAll() throws ObjectStoreException;
 }
