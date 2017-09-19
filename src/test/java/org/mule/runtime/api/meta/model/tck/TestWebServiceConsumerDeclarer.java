@@ -84,7 +84,6 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
   public static final String OPERATION_PARAMETER_GROUP = "Operation parameters";
   public static final String CONNECTION_PROVIDER_PARAMETER_GROUP = "Connection Provider parameters";
   public static final String SOURCE_PARAMETER_GROUP = "Source parameters";
-  public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
 
   public static final int DEFAULT_PORT = 8080;
 
@@ -118,7 +117,6 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
         .onVersion(VERSION)
         .fromVendor(MULESOFT)
         .withCategory(Category.SELECT)
-        .withMinMuleVersion(MIN_MULE_VERSION)
         .withModelProperty(EXTENSION_MODEL_PROPERTY)
         .withXmlDsl(XmlDslModel.builder().build())
         .withExternalLibrary(EXTERNAL_LIBRARY_MODEL);

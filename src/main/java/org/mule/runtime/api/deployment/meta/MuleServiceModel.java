@@ -20,10 +20,10 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   private final String serviceProviderClassName;
 
-  private MuleServiceModel(String name, String minMuleVersion,
+  private MuleServiceModel(String name, String minMuleVersion, Product product,
                            MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                            MuleArtifactLoaderDescriptor bundleDescriptorLoader, String serviceProviderClassName) {
-    super(name, minMuleVersion, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
     this.serviceProviderClassName = serviceProviderClassName;
   }
 
@@ -68,6 +68,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
       return new MuleServiceModel(getName(), getMinMuleVersion(),
+                                  getRequiredProduct(),
                                   getClassLoaderModelDescriptorLoader(),
                                   getBundleDescriptorLoader(), serviceProviderClassName);
     }

@@ -36,7 +36,6 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
   public static final String FOREACH_OPERATION_NAME = "foreach";
   public static final String FOREACH_EXPRESSION_PARAMETER_NAME = "expression";
   public static final String VERSION = "1.0";
-  public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
 
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 
@@ -50,7 +49,6 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
         .fromVendor(VENDOR)
         .onVersion(VERSION)
         .withCategory(COMMUNITY)
-        .withMinMuleVersion(MIN_MULE_VERSION)
         .withXmlDsl(XmlDslModel.builder().build());
 
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
