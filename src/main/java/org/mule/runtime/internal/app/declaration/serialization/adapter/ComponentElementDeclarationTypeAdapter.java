@@ -19,15 +19,15 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareParameterizedElement;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
-import org.mule.runtime.api.app.declaration.ConstructElementDeclaration;
-import org.mule.runtime.api.app.declaration.OperationElementDeclaration;
-import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
-import org.mule.runtime.api.app.declaration.SourceElementDeclaration;
-import org.mule.runtime.api.app.declaration.fluent.ComponentElementDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.HasNestedComponentDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.ParameterizedElementDeclarer;
+import org.mule.runtime.app.declaration.api.ComponentElementDeclaration;
+import org.mule.runtime.app.declaration.api.ConstructElementDeclaration;
+import org.mule.runtime.app.declaration.api.OperationElementDeclaration;
+import org.mule.runtime.app.declaration.api.RouteElementDeclaration;
+import org.mule.runtime.app.declaration.api.SourceElementDeclaration;
+import org.mule.runtime.app.declaration.api.fluent.ComponentElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.HasNestedComponentDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.ParameterizedElementDeclarer;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;

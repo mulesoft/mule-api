@@ -6,16 +6,16 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
-import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.cdata;
-import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.plain;
+import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.cdata;
+import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.plain;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FIELDS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.TYPE_ID;
 
-import org.mule.runtime.api.app.declaration.ParameterValue;
-import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
-import org.mule.runtime.api.app.declaration.fluent.ParameterListValue;
-import org.mule.runtime.api.app.declaration.fluent.ParameterObjectValue;
-import org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue;
+import org.mule.runtime.app.declaration.api.ParameterValue;
+import org.mule.runtime.app.declaration.api.ParameterValueVisitor;
+import org.mule.runtime.app.declaration.api.fluent.ParameterListValue;
+import org.mule.runtime.app.declaration.api.fluent.ParameterObjectValue;
+import org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

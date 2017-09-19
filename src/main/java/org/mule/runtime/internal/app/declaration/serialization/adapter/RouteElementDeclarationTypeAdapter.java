@@ -14,11 +14,11 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareParameterizedElement;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
 
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
-import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.RouteElementDeclarer;
+import org.mule.runtime.app.declaration.api.ComponentElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterElementDeclaration;
+import org.mule.runtime.app.declaration.api.RouteElementDeclaration;
+import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.RouteElementDeclarer;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

@@ -8,16 +8,16 @@ package org.mule.runtime.api.meta.model;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newArtifact;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newObjectValue;
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
+import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newArtifact;
+import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newObjectValue;
+import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newParameterGroup;
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.CONNECTION;
-import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
-import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
-import org.mule.runtime.api.app.declaration.ConnectionElementDeclaration;
-import org.mule.runtime.api.app.declaration.ElementDeclaration;
-import org.mule.runtime.api.app.declaration.fluent.ElementDeclarer;
-import org.mule.runtime.api.component.location.Location;
+import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
+import org.mule.runtime.app.declaration.api.ConfigurationElementDeclaration;
+import org.mule.runtime.app.declaration.api.ConnectionElementDeclaration;
+import org.mule.runtime.app.declaration.api.ElementDeclaration;
+import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
+import org.mule.runtime.app.declaration.internal.component.location.Location;
 
 import java.util.Optional;
 

@@ -6,16 +6,16 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
-import static org.mule.runtime.api.app.declaration.fluent.ElementDeclarer.newParameterGroup;
+import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newParameterGroup;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.NAME;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.PARAMETERS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.declareEnrichableElement;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateCustomizableObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateMetadataAwareObject;
 
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
-import org.mule.runtime.api.app.declaration.fluent.ParameterGroupElementDeclarer;
+import org.mule.runtime.app.declaration.api.ParameterElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterGroupElementDeclaration;
+import org.mule.runtime.app.declaration.api.fluent.ParameterGroupElementDeclarer;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -6,10 +6,10 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization;
 
-import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
+import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterGroupElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterValue;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationTypeAdapterFactory;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterGroupElementDeclarationTypeAdapter;
 import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
