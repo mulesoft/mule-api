@@ -10,6 +10,7 @@ import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.c
 import static org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue.plain;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FIELDS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.TYPE_ID;
+
 import org.mule.runtime.api.app.declaration.ParameterValue;
 import org.mule.runtime.api.app.declaration.ParameterValueVisitor;
 import org.mule.runtime.api.app.declaration.fluent.ParameterListValue;

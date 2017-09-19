@@ -25,14 +25,8 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateIdentifiableObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateMetadataAwareObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
-import org.mule.runtime.api.app.declaration.ConfigurationElementDeclaration;
-import org.mule.runtime.api.app.declaration.ConstructElementDeclaration;
-import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
-import org.mule.runtime.api.app.declaration.GlobalElementDeclarationVisitor;
-import org.mule.runtime.api.app.declaration.ParameterValue;
-import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
-import org.mule.runtime.api.app.declaration.TopLevelParameterDeclaration;
+
+import org.mule.runtime.api.app.declaration.*;
 import org.mule.runtime.api.app.declaration.fluent.ConfigurationElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ConnectionElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.ConstructElementDeclarer;

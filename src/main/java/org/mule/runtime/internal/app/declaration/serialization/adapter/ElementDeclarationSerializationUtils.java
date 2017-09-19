@@ -7,12 +7,13 @@
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
 import static java.lang.String.format;
+
 import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
 import org.mule.runtime.api.app.declaration.CustomizableElementDeclaration;
 import org.mule.runtime.api.app.declaration.IdentifiableElementDeclaration;
 import org.mule.runtime.api.app.declaration.MetadataPropertiesAwareElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
+import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
 import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
 import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
 import org.mule.runtime.api.app.declaration.fluent.HasNestedComponentDeclarer;
