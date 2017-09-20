@@ -72,7 +72,7 @@ public final class MediaTypeUtils {
     try {
       return Charset.forName(charset);
     } catch (UnsupportedCharsetException e) {
-      throw new IllegalArgumentException("Charset cannot be parsed: " + charset, e);
+      throw new IllegalArgumentException("No support is available for the requested charset: " + charset, e);
     }
   }
 }
