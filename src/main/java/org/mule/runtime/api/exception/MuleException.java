@@ -8,6 +8,8 @@ package org.mule.runtime.api.exception;
 
 import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
+import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.ArrayUtils.toArray;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
@@ -17,6 +19,8 @@ import org.mule.runtime.api.i18n.I18nMessage;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -176,13 +180,12 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(lineSeparator());
 
     Map<String, Object> info = getExceptionInfo(this);
-    for (Map.Entry<String, Object> entry : info.entrySet()) {
-      String s = entry.getKey();
-      buf.append(s);
-      buf.append(getColonMatchingPad(s));
+    for (String key : info.keySet().stream().sorted().collect(toList())){
+      buf.append(key);
+      buf.append(getColonMatchingPad(key));
       buf.append(": ");
-      buf.append((entry.getValue() == null ? "null"
-          : entry.getValue().toString().replaceAll(lineSeparator(),
+      buf.append((info.get(key) == null ? "null"
+          : info.get(key).toString().replaceAll(lineSeparator(),
                                                    lineSeparator() + repeat(' ', 24))))
           .append(lineSeparator());
     }
