@@ -177,13 +177,13 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(lineSeparator());
 
     Map<String, Object> info = getExceptionInfo(this);
-    for (String key : info.keySet().stream().sorted().collect(toList())){
+    for (String key : info.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
       buf.append(": ");
       buf.append((info.get(key) == null ? "null"
           : info.get(key).toString().replaceAll(lineSeparator(),
-                                                   lineSeparator() + repeat(' ', 24))))
+                                                lineSeparator() + repeat(' ', 24))))
           .append(lineSeparator());
     }
 
