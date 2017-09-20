@@ -343,9 +343,8 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.plugin.version}</version>
                     <configuration>
-                        <argLine>
-                            -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar
-                        </argLine>
+                        <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar</argLine>
+                        <argLine>-Dfile.encoding=UTF-8</argLine>
                         <properties>
                             <property>
                                 <name>listener</name>
