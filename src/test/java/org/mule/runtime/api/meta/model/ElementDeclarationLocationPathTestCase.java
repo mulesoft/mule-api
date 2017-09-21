@@ -17,7 +17,7 @@ import org.mule.runtime.app.declaration.api.ConfigurationElementDeclaration;
 import org.mule.runtime.app.declaration.api.ConnectionElementDeclaration;
 import org.mule.runtime.app.declaration.api.ElementDeclaration;
 import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
-import org.mule.runtime.app.declaration.internal.component.location.Location;
+import org.mule.runtime.app.declaration.api.component.location.Location;
 
 import java.util.Optional;
 
