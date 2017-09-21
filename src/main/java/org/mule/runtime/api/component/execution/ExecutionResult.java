@@ -11,8 +11,10 @@ import org.mule.runtime.api.event.InputEvent;
 
 /**
  * The result of executing an {@link ExecutableComponent} using an {@link InputEvent} instance. As well as providing the result
- * {@link Event} a way in which to complete the execution and ensure that the {@link ExecutableComponent} and close all streams
- * and any other resources is provided.
+ * {@link Event} a way in which the execution can be completed is provided. This ensures that the all streams and any other
+ * resources used in the execution are closed or cleaned up.
+ *
+ * @since 1.0
  */
 public interface ExecutionResult {
 
@@ -25,7 +27,7 @@ public interface ExecutionResult {
 
   /**
    * Must be called when the {@link ExecutableComponent} caller no longer needs to read any stream payloads or variables and
-   * resource can be closed.
+   * resources can be closed.
    */
   void complete();
 
