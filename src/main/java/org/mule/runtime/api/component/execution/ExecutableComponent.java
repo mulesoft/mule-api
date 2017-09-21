@@ -21,15 +21,20 @@ public interface ExecutableComponent extends Component {
 
   /**
    * Executes the component based on a {@link InputEvent} created programmatically be the user.
+   * <p>
+   * Streams will be closed and resources cleaned up when the callee invokes {@link ExecutionResult#complete()}.
    *
    * @param inputEvent the input to execute the component
-   * @return a {@link Event} with the content of the result
+   * @return a {@link ExecutionResult} with the content of the result
    */
-  CompletableFuture<Event> execute(InputEvent inputEvent);
+  CompletableFuture<ExecutionResult> execute(InputEvent inputEvent);
 
   /**
    * Executes the component based on a {@link Event} that may have been provided by another component execution.
-   *
+   * <p>
+   * Streams will be closed and resources cleaned up when when the existing root {@link org.mule.runtime.api.event.EventContext}
+   * completes.
+   * 
    * @param event the input to execute the component
    * @return a {@link Event} with the content of the result
    */
