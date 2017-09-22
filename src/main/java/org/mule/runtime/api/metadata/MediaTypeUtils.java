@@ -10,6 +10,8 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
 
+import java.nio.charset.Charset;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -58,5 +60,19 @@ public final class MediaTypeUtils {
     return mediaType.getPrimaryType().equals(TEXT) || STRING_REPRESENTABLE_MIME_TYPES
         .stream()
         .anyMatch(type -> type.matches(mediaType));
+  }
+
+  /**
+   * Parses the {@link String} representation of the {@code charset} into a {@link Charset}
+   *
+   * @param charset to parse
+   * @return a {@link Charset}
+   */
+  public static Charset parseCharset(String charset) {
+    try {
+      return Charset.forName(charset);
+    } catch (UnsupportedCharsetException e) {
+      throw new IllegalArgumentException("No support is available for the requested charset: " + charset, e);
+    }
   }
 }
