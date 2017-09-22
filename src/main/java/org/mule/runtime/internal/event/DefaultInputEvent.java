@@ -9,7 +9,7 @@ package org.mule.runtime.internal.event;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Optional.ofNullable;
 import org.mule.runtime.api.event.Event;
-import org.mule.runtime.api.event.InputEvent;
+import org.mule.runtime.api.component.execution.InputEvent;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
