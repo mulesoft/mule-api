@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
@@ -110,7 +111,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
      * @return {@code this} builder
      */
     public ExternalLibraryModelBuilder withCoordinates(String coordinates) {
-      product.coordinates = coordinates;
+      product.suggestedCoordinates = coordinates;
       return this;
     }
 
@@ -147,7 +148,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   private String regexMatcher;
   private String requiredClassName;
   private ExternalLibraryType type;
-  private String coordinates;
+  private String suggestedCoordinates;
   private boolean optional = false;
 
   private ExternalLibraryModel() {}
@@ -187,7 +188,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   }
 
   /**
-   * If provided, suggests Maven coordinates where the required library can be found. This coordinates should
+   * If provided, suggests Maven coordinates where the required library can be found. These coordinates should
    * follow the Maven convention: {@code groupId:artifactId:packaging:classifier:version}.
    * <p>
    * Keep in mind that not all the values of the coordinates are required, for example:
@@ -201,8 +202,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
    *
    * @return The optional maven coordinates.
    */
-  public Optional<String> getCoordinates() {
-    return ofNullable(coordinates);
+  public Optional<String> getSuggestedCoordinates() {
+    return ofNullable(suggestedCoordinates);
   }
 
   /**
