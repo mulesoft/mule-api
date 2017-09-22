@@ -100,6 +100,14 @@ public class MuleVersion {
     return getBaseVersion().atLeast(baseVersion.getBaseVersion());
   }
 
+  /**
+   * @param otherVersion the other version
+   * @return true if both have the same major and minor version, false otherwise
+   */
+  public boolean sameBaseVersion(MuleVersion otherVersion) {
+    return getBaseVersion().sameAs(otherVersion.getBaseVersion());
+  }
+
   public boolean sameAs(String version) {
     return sameAs(new MuleVersion(version));
   }
