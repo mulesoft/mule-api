@@ -7,7 +7,6 @@
 package org.mule.runtime.api.component.execution;
 
 import org.mule.runtime.api.event.Event;
-import org.mule.runtime.api.event.InputEvent;
 
 /**
  * The result of executing an {@link ExecutableComponent} using an {@link InputEvent} instance. As well as providing the result
