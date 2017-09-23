@@ -35,6 +35,8 @@ import java.util.Optional;
  */
 public interface ConfigurationComponentLocator {
 
+  String REGISTRY_KEY = "_muleConfigurationComponentLocator";
+
   /**
    * Finds a component in the configuration with the specified location. Only simple objects locations are accepted.
    *
