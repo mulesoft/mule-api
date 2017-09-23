@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
@@ -94,6 +95,38 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
     }
 
     /**
+     * Suggests Maven coordinates where the required library can be found. This coordinates should
+     * follow the Maven convention: {@code groupId:artifactId:packaging:classifier:version}.
+     * <p>
+     * Keep in mind that not all the values of the coordinates are required, for example:
+     * {@code org.mule.modules:a-required-lib:1.0.0} are valid coordinates, which communicates the {@code groupId},
+     * {@code artifactId} and {@code version} of the external library.
+     * <p>
+     * By default, the packaging is {@code jar}, so if is required to use a native library, like a .DLL, you will provide:
+     * {@code org.mule.module:a-native-lib:dll:1.0.0} where {@code dll} is the packaging of the library.
+     * <p>
+     * More information in: <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
+     *
+     * @param coordinates The library coordinates
+     * @return {@code this} builder
+     */
+    public ExternalLibraryModelBuilder withCoordinates(String coordinates) {
+      product.suggestedCoordinates = coordinates;
+      return this;
+    }
+
+    /**
+     * Indicates if the library is optional or not.
+     *
+     * @param optional boolean indicating the optionality of the library
+     * @return {@code this} builder
+     */
+    public ExternalLibraryModelBuilder isOptional(boolean optional) {
+      product.optional = optional;
+      return this;
+    }
+
+    /**
      * @return a new {@link ExternalLibraryModel} instance
      * @throws IllegalStateException if {@link #withName(String)} was not provided
      */
@@ -115,6 +148,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   private String regexMatcher;
   private String requiredClassName;
   private ExternalLibraryType type;
+  private String suggestedCoordinates;
+  private boolean optional = false;
 
   private ExternalLibraryModel() {}
 
@@ -150,6 +185,32 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
    */
   public Optional<String> getRequiredClassName() {
     return ofNullable(requiredClassName);
+  }
+
+  /**
+   * If provided, suggests Maven coordinates where the required library can be found. These coordinates should
+   * follow the Maven convention: {@code groupId:artifactId:packaging:classifier:version}.
+   * <p>
+   * Keep in mind that not all the values of the coordinates are required, for example:
+   * {@code org.mule.modules:a-required-lib:1.0.0} are valid coordinates, which communicates the {@code groupId},
+   * {@code artifactId} and {@code version} of the external library.
+   * <p>
+   * By default, the packaging is {@code jar}, so if is required to use a native library, like a .DLL, you will provide:
+   * {@code org.mule.module:a-native-lib:dll:1.0.0} where {@code dll} is the packaging of the library.
+   * <p>
+   * More information in: <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
+   *
+   * @return The optional maven coordinates.
+   */
+  public Optional<String> getSuggestedCoordinates() {
+    return ofNullable(suggestedCoordinates);
+  }
+
+  /**
+   * @return A boolean indicating whether the library is required or not to the basic functioning of the connector.
+   */
+  public boolean isOptional() {
+    return optional;
   }
 
   /**
