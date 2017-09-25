@@ -6,15 +6,14 @@
  */
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
-import org.mule.runtime.api.app.declaration.ElementDeclaration;
-import org.mule.runtime.api.app.declaration.GlobalElementDeclaration;
-import org.mule.runtime.api.app.declaration.RouteElementDeclaration;
-
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import org.mule.runtime.app.declaration.api.ComponentElementDeclaration;
+import org.mule.runtime.app.declaration.api.ElementDeclaration;
+import org.mule.runtime.app.declaration.api.GlobalElementDeclaration;
+import org.mule.runtime.app.declaration.api.RouteElementDeclaration;
 
 /**
  * {@link TypeAdapterFactory} implementation for creating {@link ElementDeclaration} {@link TypeAdapter}s

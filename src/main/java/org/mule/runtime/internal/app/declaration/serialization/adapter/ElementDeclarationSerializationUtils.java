@@ -7,17 +7,18 @@
 package org.mule.runtime.internal.app.declaration.serialization.adapter;
 
 import static java.lang.String.format;
-import org.mule.runtime.api.app.declaration.ComponentElementDeclaration;
-import org.mule.runtime.api.app.declaration.CustomizableElementDeclaration;
-import org.mule.runtime.api.app.declaration.IdentifiableElementDeclaration;
-import org.mule.runtime.api.app.declaration.MetadataPropertiesAwareElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterGroupElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterizedElementDeclaration;
-import org.mule.runtime.api.app.declaration.fluent.EnrichableElementDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.HasNestedComponentDeclarer;
-import org.mule.runtime.api.app.declaration.fluent.ParameterSimpleValue;
-import org.mule.runtime.api.app.declaration.fluent.ParameterizedElementDeclarer;
+
+import org.mule.runtime.app.declaration.api.ComponentElementDeclaration;
+import org.mule.runtime.app.declaration.api.CustomizableElementDeclaration;
+import org.mule.runtime.app.declaration.api.IdentifiableElementDeclaration;
+import org.mule.runtime.app.declaration.api.MetadataPropertiesAwareElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterGroupElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterizedElementDeclaration;
+import org.mule.runtime.app.declaration.api.fluent.EnrichableElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.HasNestedComponentDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue;
+import org.mule.runtime.app.declaration.api.fluent.ParameterizedElementDeclarer;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 
 import com.google.gson.Gson;

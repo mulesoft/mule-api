@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.app.declaration.serialization;
 
-import org.mule.runtime.api.app.declaration.ArtifactDeclaration;
+import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
 import org.mule.runtime.internal.app.declaration.serialization.DefaultArtifactDeclarationJsonSerializer;
 
 /**

@@ -10,8 +10,9 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.PROPERTIES;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.VALUE;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateMetadataAwareObject;
-import org.mule.runtime.api.app.declaration.ParameterElementDeclaration;
-import org.mule.runtime.api.app.declaration.ParameterValue;
+
+import org.mule.runtime.app.declaration.api.ParameterElementDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterValue;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
