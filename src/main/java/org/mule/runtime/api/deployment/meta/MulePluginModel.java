@@ -25,17 +25,24 @@ import java.util.Optional;
 public class MulePluginModel extends AbstractMuleArtifactModel {
 
   private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
+  private final LicenseModel license;
 
   private MulePluginModel(String name, String minMuleVersion, Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                           MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor,
-                          MuleArtifactLoaderDescriptor bundleDescriptor) {
+                          MuleArtifactLoaderDescriptor bundleDescriptor,
+                          LicenseModel license) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor);
     this.extensionModelLoaderDescriptor = extensionModelLoaderDescriptor;
+    this.license = license;
   }
 
   public Optional<MuleArtifactLoaderDescriptor> getExtensionModelLoaderDescriptor() {
     return ofNullable(extensionModelLoaderDescriptor);
+  }
+
+  public Optional<LicenseModel> getLicense() {
+    return ofNullable(license);
   }
 
   /**
@@ -46,6 +53,7 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
   public static class MulePluginModelBuilder extends AbstractMuleArtifactModelBuilder<MulePluginModelBuilder, MulePluginModel> {
 
     private Optional<MuleArtifactLoaderDescriptorBuilder> extensionModelDescriptorBuilder = empty();
+    private Optional<LicenseModelBuilder> licenseModelBuilder = empty();
 
     @Override
     protected MulePluginModelBuilder getThis() {
@@ -64,6 +72,16 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
     }
 
     /**
+     * @return a {@link LicenseModelBuilder} to define the license attributes
+     */
+    public LicenseModelBuilder withLicenseModel() {
+      if (!licenseModelBuilder.isPresent()) {
+        licenseModelBuilder = of(new LicenseModelBuilder());
+      }
+      return licenseModelBuilder.get();
+    }
+
+    /**
      * @return a well formed {@link MulePluginModel}
      */
     public MulePluginModel build() {
@@ -74,7 +92,8 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
                                  getClassLoaderModelDescriptorLoader(),
                                  extensionModelDescriptorBuilder.isPresent() ? extensionModelDescriptorBuilder.get().build()
                                      : null,
-                                 getBundleDescriptorLoader());
+                                 getBundleDescriptorLoader(),
+                                 licenseModelBuilder.isPresent() ? licenseModelBuilder.get().build() : null);
     }
   }
 }
