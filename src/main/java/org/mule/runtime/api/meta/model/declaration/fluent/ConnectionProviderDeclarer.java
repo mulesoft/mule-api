@@ -77,4 +77,9 @@ public final class ConnectionProviderDeclarer
     declaration.withStereotype(stereotype);
     return this;
   }
+
+  public ConnectionProviderDeclarer supportsConnectivityTesting(boolean supportsConnectivityTesting) {
+    declaration.setSupportsConnectivityTesting(supportsConnectivityTesting);
+    return this;
+  }
 }

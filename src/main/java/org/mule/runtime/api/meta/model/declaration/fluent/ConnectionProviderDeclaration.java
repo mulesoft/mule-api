@@ -10,7 +10,6 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -26,6 +25,7 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
 
   private ConnectionManagementType connectionManagementType;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
+  private boolean supportsConnectivityTesting = true;
 
   /**
    * {@inheritDoc}
@@ -68,4 +68,11 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
     return this;
   }
 
+  public boolean isSupportsConnectivityTesting() {
+    return supportsConnectivityTesting;
+  }
+
+  public void setSupportsConnectivityTesting(boolean supportsConnectivityTesting) {
+    this.supportsConnectivityTesting = supportsConnectivityTesting;
+  }
 }

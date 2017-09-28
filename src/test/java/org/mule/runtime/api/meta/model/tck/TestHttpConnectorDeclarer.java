@@ -83,7 +83,9 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
     request.withOutputAttributes().ofType(getObjectType(Object.class));
     request.onParameterGroup(PARAMETER_GROUP).withRequiredParameter(PATH).ofType(getStringType());
 
-    requesterConfig.withConnectionProvider(REQUESTER_PROVIDER).withConnectionManagementType(NONE);
+    requesterConfig.withConnectionProvider(REQUESTER_PROVIDER)
+        .withConnectionManagementType(NONE)
+        .supportsConnectivityTesting(false);
 
     ConfigurationDeclarer listenerRequester = extensionDeclarer.withConfig(LISTENER_CONFIG_NAME)
         .describedAs(LISTENER_CONFIG_DESCRIPTION);
