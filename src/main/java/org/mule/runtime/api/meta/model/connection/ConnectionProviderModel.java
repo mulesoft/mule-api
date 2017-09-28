@@ -36,4 +36,9 @@ public interface ConnectionProviderModel
    * @return the type of connection management that the provider performs
    */
   ConnectionManagementType getConnectionManagementType();
+
+  /**
+   * @return whether this provider supports connectivity testing or not
+   */
+  boolean supportsConnectivityTesting();
 }
