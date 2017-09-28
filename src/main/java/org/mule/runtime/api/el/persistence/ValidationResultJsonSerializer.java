@@ -15,7 +15,7 @@ public class ValidationResultJsonSerializer {
   private Gson gson;
 
   public ValidationResultJsonSerializer() {
-    gson = new GsonBuilder().registerTypeAdapter(ValidationResult.class, new ValidationResultTypeAdapter()).create();
+    gson = new GsonBuilder().registerTypeAdapterFactory(new ValidationResultTypeAdapterFactory()).create();
   }
 
   public String serialize(ValidationResult validationResult) {

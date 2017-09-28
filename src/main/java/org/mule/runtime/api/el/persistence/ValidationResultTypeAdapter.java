@@ -23,7 +23,11 @@ import java.util.List;
 
 public class ValidationResultTypeAdapter extends TypeAdapter<ValidationResult> {
 
-  private Gson gson = new GsonBuilder().create();
+  private Gson gson;
+
+  public ValidationResultTypeAdapter(Gson gson) {
+    this.gson = gson;
+  }
 
   @Override
   public void write(JsonWriter jsonWriter, ValidationResult validationResult) throws IOException {
