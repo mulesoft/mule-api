@@ -7,6 +7,7 @@
 package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class LicenseModel {
    * @return the required entitlement.
    */
   public Optional<String> getRequiredEntitlement() {
-    return of(requiredEntitlement);
+    return ofNullable(requiredEntitlement);
   }
 
   /**
