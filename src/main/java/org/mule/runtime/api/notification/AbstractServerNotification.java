@@ -51,7 +51,7 @@ public abstract class AbstractServerNotification extends EventObject implements 
   public static final int NULL_ACTION = 0;
   public static final Object NULL_MESSAGE = "";
 
-  public final String EVENT_NAME = getClass().getName();
+  public final String EVENT_NAME = getClass().getSimpleName();
 
   protected String serverId;
 
