@@ -35,7 +35,7 @@ public class BindingContextUtils {
   public static final String CORRELATION_ID = "correlationId";
   public static final String VARS = "vars";
   public static final String PROPERTIES = "properties";
-  public static final String PARAMETERS = "parameters";
+  private static final String PARAMETERS = "parameters";
   public static final String AUTHENTICATION = "authentication";
   public static final String FLOW = "flow";
 
@@ -68,11 +68,17 @@ public class BindingContextUtils {
                                   .valueType(TypedValue.class)
                                   .build()));
     contextBuilder.addBinding(PROPERTIES,
-                              new TypedValue<>(unmodifiableMap(event.getProperties()),
-                                               fromType(event.getProperties().getClass())));
+                              new TypedValue<>(flowVars, DataType.builder()
+                                  .mapType(flowVars.getClass())
+                                  .keyType(String.class)
+                                  .valueType(TypedValue.class)
+                                  .build()));
     contextBuilder.addBinding(PARAMETERS,
-                              new TypedValue<>(unmodifiableMap(event.getParameters()),
-                                               fromType(event.getParameters().getClass())));
+                              new TypedValue<>(flowVars, DataType.builder()
+                                  .mapType(flowVars.getClass())
+                                  .keyType(String.class)
+                                  .valueType(TypedValue.class)
+                                  .build()));
 
     contextBuilder.addBinding(CORRELATION_ID, new TypedValue<>(event.getContext().getCorrelationId(), STRING));
 
