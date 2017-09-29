@@ -30,20 +30,6 @@ public interface Event {
   Map<String, TypedValue<?>> getVariables();
 
   /**
-   * Returns the properties in the event
-   *
-   * @return a map of {@link TypedValue} containing the properties's names and values.
-   */
-  Map<String, TypedValue<?>> getProperties();
-
-  /**
-   * Returns the parameters in the event
-   *
-   * @return a map of {@link TypedValue} containing the parameter's names and values.
-   */
-  Map<String, TypedValue<?>> getParameters();
-
-  /**
    * Returns the message payload for this event
    *
    * @return the message payload for this event

@@ -28,8 +28,6 @@ public class DefaultInputEvent implements InputEvent {
 
   private Message message = Message.builder().nullValue().build();
   private Map<String, TypedValue<?>> variables = new HashMap<>();
-  private Map<String, TypedValue<?>> parameters = new HashMap<>();
-  private Map<String, TypedValue<?>> properties = new HashMap<>();
   private Error error;
 
   public DefaultInputEvent() {}
@@ -37,16 +35,12 @@ public class DefaultInputEvent implements InputEvent {
   public DefaultInputEvent(Event event) {
     this.message = event.getMessage();
     this.variables.putAll(event.getVariables());
-    this.parameters.putAll(event.getParameters());
-    this.properties.putAll(event.getProperties());
     this.error = event.getError().orElse(null);
   }
 
   public DefaultInputEvent(InputEvent inputEvent) {
     this.message = inputEvent.getMessage();
     this.variables.putAll(inputEvent.getVariables());
-    this.parameters.putAll(inputEvent.getParameters());
-    this.properties.putAll(inputEvent.getProperties());
     this.error = inputEvent.getError().orElse(null);
   }
 
@@ -86,40 +80,6 @@ public class DefaultInputEvent implements InputEvent {
   }
 
   @Override
-  public InputEvent properties(Map<String, Object> properties) {
-    DefaultInputEvent inputEvent = new DefaultInputEvent(this);
-    inputEvent.properties.clear();
-    properties.forEach((key, value) -> {
-      this.properties.put(key, valueAsTypedValue(value));
-    });
-    return inputEvent;
-  }
-
-  @Override
-  public InputEvent parameters(Map<String, Object> parameters) {
-    DefaultInputEvent inputEvent = new DefaultInputEvent(this);
-    inputEvent.parameters.clear();
-    parameters.forEach((key, value) -> {
-      this.parameters.put(key, valueAsTypedValue(value));
-    });
-    return inputEvent;
-  }
-
-  @Override
-  public InputEvent addParameter(String key, Object value) {
-    DefaultInputEvent inputEvent = new DefaultInputEvent(this);
-    inputEvent.parameters.put(key, valueAsTypedValue(value));
-    return inputEvent;
-  }
-
-  @Override
-  public InputEvent addParameter(String key, Object value, DataType dataType) {
-    DefaultInputEvent inputEvent = new DefaultInputEvent(this);
-    inputEvent.parameters.put(key, new TypedValue<>(value, dataType));
-    return inputEvent;
-  }
-
-  @Override
   public InputEvent error(Error error) {
     DefaultInputEvent inputEvent = new DefaultInputEvent(this);
     inputEvent.error = error;
@@ -129,16 +89,6 @@ public class DefaultInputEvent implements InputEvent {
   @Override
   public Map<String, TypedValue<?>> getVariables() {
     return unmodifiableMap(variables);
-  }
-
-  @Override
-  public Map<String, TypedValue<?>> getParameters() {
-    return unmodifiableMap(parameters);
-  }
-
-  @Override
-  public Map<String, TypedValue<?>> getProperties() {
-    return unmodifiableMap(properties);
   }
 
   @Override

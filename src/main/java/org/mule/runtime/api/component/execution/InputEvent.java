@@ -84,51 +84,6 @@ public interface InputEvent {
   InputEvent addVariable(String key, Object value, DataType dataType);
 
   /**
-   * Set a map of properties to be consumed within a XML connector operation
-   * <p>
-   * For every module's <operation/> being consumed in a Mule Application, when being macro expanded, these properties will be
-   * feed to it in a new and isolated {@link Event}, so that we can guarantee that for each invocation there's a real variable
-   * scoping for them.
-   *
-   * @param properties properties to be set.
-   * @return the builder instance
-   * @see #parameters(Map)
-   */
-  InputEvent properties(Map<String, Object> properties);
-
-  /**
-   * Set a map of parameters to be consumed within a XML connector operation
-   * <p>
-   * For every module's <operation/> being consumed in a Mule Application, when being macro expanded, these parameters will be
-   * feed to it in a new and isolated {@link Event}, so that we can guarantee that for each invocation there's a real variable
-   * scoping for them.
-   *
-   * @param parameters parameters to be set.
-   * @return the builder instance
-   * @see #properties(Map)
-   */
-  InputEvent parameters(Map<String, Object> parameters);
-
-  /**
-   * Add a parameter.
-   *
-   * @param key the key of the parameter to add.
-   * @param value the value of the variable to add. {@code null} values are supported.
-   * @return the builder instance.
-   */
-  InputEvent addParameter(String key, Object value);
-
-  /**
-   * Add a parameter.
-   *
-   * @param key the key of the parameter to add.
-   * @param value the value of the parameter to add. {@code null} values are supported.
-   * @param dataType additional metadata about the {@code value} type.
-   * @return the builder instance
-   */
-  InputEvent addParameter(String key, Object value, DataType dataType);
-
-  /**
    * Sets an error related to the produced event.
    *
    * @param error the error associated with the produced event
@@ -142,20 +97,6 @@ public interface InputEvent {
    * @return a map of {@link TypedValue} containing the variable's names and values.
    */
   Map<String, TypedValue<?>> getVariables();
-
-  /**
-   * Returns the properties in the event
-   *
-   * @return a map of {@link TypedValue} containing the properties's names and values.
-   */
-  Map<String, TypedValue<?>> getProperties();
-
-  /**
-   * Returns the parameters in the event
-   *
-   * @return a map of {@link TypedValue} containing the parameter's names and values.
-   */
-  Map<String, TypedValue<?>> getParameters();
 
   /**
    * Returns the message payload for this event
