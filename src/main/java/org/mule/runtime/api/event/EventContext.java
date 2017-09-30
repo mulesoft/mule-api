@@ -9,7 +9,6 @@ package org.mule.runtime.api.event;
 import org.mule.runtime.api.component.location.ComponentLocation;
 
 import java.time.OffsetTime;
-import java.util.Optional;
 
 public interface EventContext {
 
