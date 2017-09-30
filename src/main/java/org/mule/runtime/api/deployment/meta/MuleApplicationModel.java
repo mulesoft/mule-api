@@ -19,22 +19,11 @@ import java.util.Optional;
  */
 public class MuleApplicationModel extends MuleDeployableModel {
 
-  private final String domain;
-
   private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs,
-                               Optional<String> domain, Optional<Boolean> redeploymentEnabled) {
+                               Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
-    this.domain = domain.orElse(null);
-  }
-
-
-  /**
-   * @return the domain associated with this application
-   */
-  public Optional<String> getDomain() {
-    return ofNullable(domain);
   }
 
   /**
@@ -45,26 +34,15 @@ public class MuleApplicationModel extends MuleDeployableModel {
   public static class MuleApplicationModelBuilder
       extends MuleDeployableModelBuilder<MuleApplicationModelBuilder, MuleApplicationModel> {
 
-    private String domain;
-
     @Override
     protected MuleApplicationModelBuilder getThis() {
-      return this;
-    }
-
-    /**
-     * @param domain the domain associated with this application
-     * @return the same builder instance.
-     */
-    public MuleApplicationModelBuilder setDomain(String domain) {
-      this.domain = domain;
       return this;
     }
 
     @Override
     protected MuleApplicationModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
       return new MuleApplicationModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
-                                      getBundleDescriptorLoader(), configs, ofNullable(domain), ofNullable(redeploymentEnabled));
+                                      getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
 
     }
   }
