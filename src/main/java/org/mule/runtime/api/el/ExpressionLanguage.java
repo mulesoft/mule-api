@@ -53,6 +53,20 @@ public interface ExpressionLanguage {
       throws ExpressionExecutionException;
 
   /**
+   * Evaluates an expression according to a given {@link BindingContext}, the global one and the {@link DataType} of the expected
+   * result.
+   *
+   * The evaluation of this script will do a best effort to avoid failing when the result value can not be represented in the corresponding format.
+   *
+   * @param expression         the EL expression
+   * @param context            the current dynamic binding context to consider
+   * @return the result of the expression plus its type
+   * @throws ExpressionExecutionException or during transformation or during transformation
+   */
+  TypedValue<?> evaluateLogExpression(String expression, BindingContext context)
+          throws ExpressionExecutionException;
+
+  /**
    * Verifies whether an expression is valid or not syntactically.
    *
    * @param expression to be validated
