@@ -124,6 +124,16 @@ public interface DslConstants {
   String TLS_CONTEXT_ELEMENT_IDENTIFIER = "context";
 
   /**
+   * The identifier name of the {@code tls:key-store} infrastructure parameter
+   */
+  String TLS_KEY_STORE_ELEMENT_IDENTIFIER = "key-store";
+
+  /**
+   * The identifier name of the {@code tls:trust-store} infrastructure parameter
+   */
+  String TLS_TRUST_STORE_ELEMENT_IDENTIFIER = "trust-store";
+
+  /**
    * The prefix name of the {@code tls:context} infrastructure parameter
    */
   String TLS_PREFIX = "tls";
