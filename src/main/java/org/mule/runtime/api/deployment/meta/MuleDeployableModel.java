@@ -24,7 +24,8 @@ import java.util.Optional;
 public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
   private final List<String> configs;
-  private final boolean redeploymentEnabled;
+  // this field must be true by default because it's the default value used when deserializing this class with no content.
+  private boolean redeploymentEnabled = true;
 
   /**
    * Creates a new model
