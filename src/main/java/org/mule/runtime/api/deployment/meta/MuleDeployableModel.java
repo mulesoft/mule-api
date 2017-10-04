@@ -58,7 +58,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    * @return true if the application supports redeployment by changing a configuration file.
    */
   public boolean isRedeploymentEnabled() {
-    return redeploymentEnabled == null ? true : false;
+    return redeploymentEnabled == null ? true : redeploymentEnabled;
   }
 
   /**
