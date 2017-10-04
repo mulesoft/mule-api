@@ -63,7 +63,7 @@ public interface ExpressionLanguage {
    * @throws ExpressionExecutionException when an error occurs during evaluation
    */
   TypedValue<?> evaluateLogExpression(String expression, BindingContext context)
-          throws ExpressionExecutionException;
+      throws ExpressionExecutionException;
 
   /**
    * Verifies whether an expression is valid or not syntactically.
