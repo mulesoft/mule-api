@@ -337,7 +337,7 @@
                     <executions>
                         <execution>
                             <id>analyze</id>
-                            <phase>verify</phase>
+                            <phase>compile</phase>
                             <goals>
                                 <goal>analyze</goal>
                             </goals>
@@ -397,7 +397,7 @@
                 <executions>
                     <execution>
                         <id>analyze</id>
-                        <phase>verify</phase>
+                        <phase>compile</phase>
                         <goals>
                             <goal>analyze</goal>
                         </goals>
