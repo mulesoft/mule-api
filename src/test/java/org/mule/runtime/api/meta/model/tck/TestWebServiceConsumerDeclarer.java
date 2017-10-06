@@ -12,7 +12,6 @@ import static org.mule.runtime.api.meta.ExternalLibraryType.JAR;
 import static org.mule.runtime.api.meta.model.connection.ConnectionManagementType.NONE;
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
 import org.mule.runtime.api.meta.Category;
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
@@ -181,7 +180,8 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
 
     sourceDeclarer.supportsStreaming(true).withOutput().ofType(getBinaryType());
     sourceDeclarer.withOutputAttributes().ofType(getObjectType(Serializable.class));
-
+    sourceDeclarer.requiresConnection(true);
+    
     parameterGroup = sourceDeclarer.onParameterGroup(SOURCE_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
     parameterGroup.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
