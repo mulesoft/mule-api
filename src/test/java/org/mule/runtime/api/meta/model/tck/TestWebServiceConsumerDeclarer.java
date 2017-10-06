@@ -181,7 +181,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
     sourceDeclarer.supportsStreaming(true).withOutput().ofType(getBinaryType());
     sourceDeclarer.withOutputAttributes().ofType(getObjectType(Serializable.class));
     sourceDeclarer.requiresConnection(true);
-    
+
     parameterGroup = sourceDeclarer.onParameterGroup(SOURCE_PARAMETER_GROUP);
     parameterGroup.withRequiredParameter(URL).describedAs(URL_DESCRIPTION).ofType(getStringType());
     parameterGroup.withOptionalParameter(PORT).describedAs(PORT_DESCRIPTION).ofType(getNumberType())
