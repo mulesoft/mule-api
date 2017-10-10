@@ -17,7 +17,7 @@ import java.io.Serializable;
  * might require that condition and throw {@link IllegalArgumentException} if not met.
  * <p/>
  * Implementations are also responsible for the correct initialization of classes implementing the
- * {@link org.mule.runtime.core.util.store.DeserializationPostInitialisable} interface.
+ * {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} interface.
  * <p/>
  * <p/>
  * Unexpected behavior can result of deserializing objects that were generated with a different implementation of
@@ -52,7 +52,7 @@ public interface SerializationProtocol {
    * Deserializes the given bytes. Unexpected behavior can result of deserializing a byte[] that was generated with another
    * implementation.
    * <p/>
-   * If the obtained object implements {@link org.mule.runtime.core.util.store.DeserializationPostInitialisable} then this
+   * If the obtained object implements {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} then this
    * serializer will be responsible for properly initializing the object before returning it.
    * <p/>
    * Implementation will choose the {@link java.lang.ClassLoader} to use for deserialization.
@@ -67,7 +67,7 @@ public interface SerializationProtocol {
   /**
    * Deserializes the given bytes.
    * <p/>
-   * If the obtained object implements {@link org.mule.runtime.core.util.store.DeserializationPostInitialisable} then this
+   * If the obtained object implements {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} then this
    * serializer will be responsible for properly initializing the object before returning it.
    *
    * @param bytes an array of byte that an original object was serialized into
@@ -85,7 +85,7 @@ public interface SerializationProtocol {
    * <p/>
    * Even if deserialization fails, this method will close the {@code inputStream}
    * <p/>
-   * If the obtained object implements {@link org.mule.runtime.core.util.store.DeserializationPostInitialisable} then this
+   * If the obtained object implements {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} then this
    * serializer will be responsible for properly initializing the object before returning it.
    *
    * @param inputStream a stream of bytes that an original object was serialized into
@@ -100,7 +100,7 @@ public interface SerializationProtocol {
    * <p/>
    * Even if deserialization fails, this method will close the {@code inputStream}
    * <p/>
-   * If the obtained object implements {@link org.mule.runtime.core.util.store.DeserializationPostInitialisable} then this
+   * If the obtained object implements {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} then this
    * serializer will be responsible for properly initializing the object before returning it.
    *
    * @param inputStream a stream of bytes that an original object was serialized into
