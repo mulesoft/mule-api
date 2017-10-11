@@ -30,6 +30,9 @@ import java.util.Optional;
  * <p>
  * When a component part has a collection of components, each component can be referenced individually with an index. THe first
  * index is 0. Location "myFlow/processors/4" refers to the fifth processors inside the flow with name "myFlow"
+ * <p>
+ * When working with configuration templates such subflows or global error handlers there's no way to access the message
+ * processors that belong to them through this interface.
  *
  * @since 4.0
  */
