@@ -43,4 +43,9 @@ public interface SchedulerMessageSource extends Stoppable, Startable {
    */
   boolean isStarted();
 
+  /**
+   * @return the source scheduler configuration.
+   */
+  SchedulerConfiguration getConfiguration();
+
 }
