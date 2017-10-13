@@ -33,6 +33,15 @@ public class NameUtils {
     return camelScatterConcat(camelCaseName, '-');
   }
 
+  /**
+   * Transforms a camel case value into an underscorized one.
+   * <p>
+   * For example:
+   * {@code messageProcessor} would be transformed to {@code message_processor}
+   *
+   * @param camelCaseName a {@link String} in camel case form
+   * @return the {@code camelCaseName} in underscorized form
+   */
   public static String underscorize(String camelCaseName) {
     return camelScatterConcat(camelCaseName, '_');
   }
