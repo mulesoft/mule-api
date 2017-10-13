@@ -10,6 +10,8 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.mule.runtime.api.util.NameUtils.sanitizeName;
+import static org.mule.runtime.api.util.NameUtils.underscorize;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.Optional;
@@ -29,8 +31,8 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
     checkArgument(isNotBlank(name), "An stereotype name is required");
     checkArgument(isNotBlank(namespace), "An stereotype namespace is required");
 
-    this.type = name;
-    this.namespace = namespace;
+    this.type = normalize(name);
+    this.namespace = normalize(namespace);
     this.parent = parent;
   }
 
@@ -86,5 +88,9 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
   @Override
   public String toString() {
     return namespace + ":" + type + (parent == null ? "" : "(" + parent.toString() + ")");
+  }
+
+  private String normalize(String name) {
+    return sanitizeName(underscorize(name)).toUpperCase();
   }
 }

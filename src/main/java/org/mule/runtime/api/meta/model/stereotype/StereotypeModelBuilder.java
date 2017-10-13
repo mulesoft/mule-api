@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.stereotype;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 /**
  * Builder pattern implementation to build {@link StereotypeModel} instances.
  *
@@ -48,4 +50,5 @@ public final class StereotypeModelBuilder {
   public StereotypeModel build() {
     return new ImmutableStereotypeModel(name, namespace, parent);
   }
+
 }
