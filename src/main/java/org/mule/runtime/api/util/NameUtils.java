@@ -11,6 +11,11 @@ import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.util.Optional;
 
+/**
+ * Utilities for manipulating names of DSL supported components.
+ *
+ * @since 1.0
+ */
 public class NameUtils {
 
   /**
