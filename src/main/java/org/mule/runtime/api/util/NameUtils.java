@@ -18,6 +18,8 @@ import java.util.Optional;
  */
 public class NameUtils {
 
+  protected NameUtils() {}
+
   /**
    * Transforms a camel case value into a hyphenized one.
    * <p>
@@ -28,6 +30,14 @@ public class NameUtils {
    * @return the {@code camelCaseName} in hypenized form
    */
   public static String hyphenize(String camelCaseName) {
+    return camelScatterConcat(camelCaseName, '-');
+  }
+
+  public static String underscorize(String camelCaseName) {
+    return camelScatterConcat(camelCaseName, '_');
+  }
+
+  private static String camelScatterConcat(String camelCaseName, char concatChar) {
     if (isBlank(camelCaseName)) {
       return camelCaseName;
     }
@@ -38,12 +48,13 @@ public class NameUtils {
     for (int i = 0; i < parts.length; i++) {
       String part = parts[i].trim().toLowerCase();
       result.append(part);
-      if (part.endsWith("_")) {
+      char lastChar = part.charAt(part.length() - 1);
+      if (lastChar == concatChar || lastChar == '_' || lastChar == '-') {
         continue;
       }
 
       if (i < parts.length - 1) {
-        result.append('-');
+        result.append(concatChar);
       }
     }
 

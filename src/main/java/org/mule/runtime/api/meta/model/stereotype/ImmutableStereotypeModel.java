@@ -10,8 +10,8 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
-import static org.mule.runtime.api.util.NameUtils.hyphenize;
 import static org.mule.runtime.api.util.NameUtils.sanitizeName;
+import static org.mule.runtime.api.util.NameUtils.underscorize;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.Optional;
@@ -91,6 +91,6 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
   }
 
   private String normalize(String name) {
-    return sanitizeName(hyphenize(name)).toUpperCase();
+    return sanitizeName(underscorize(name)).toUpperCase();
   }
 }
