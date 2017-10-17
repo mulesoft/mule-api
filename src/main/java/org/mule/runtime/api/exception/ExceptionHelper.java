@@ -6,9 +6,14 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.Math.min;
 import static java.lang.String.format;
+import static java.lang.System.arraycopy;
 import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
@@ -17,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * {@code ExceptionHelper} provides a number of helper functions that can be useful for dealing with Mule exceptions. This class
@@ -31,11 +37,13 @@ import java.util.Map;
 public class ExceptionHelper {
 
   private static final String MULE_PACKAGE_REGEXP = "(?:org|com)\\.mule(?:soft)?\\.(?!mvel2)(?!el).*";
+  private static final int ALREADY_FILTERED_INDICATOR = -3;
 
   public static final String[] DEFAULT_STACKTRACE_FILTER = new String[] {
       "org.mule.runtime.core.privileged.processor.AbstractInterceptingMessageProcessor",
       "org.mule.runtime.core.privileged.processor.chain",
-      "org.mule.runtime.core.internal.processor.chain"};
+      "org.mule.runtime.core.internal.processor.chain",
+      "reactor.core"};
 
   private static final int EXCEPTION_THRESHOLD = 3;
   private static boolean verbose = true;
@@ -63,13 +71,6 @@ public class ExceptionHelper {
    * @see #fullStackTraces
    */
   public static String[] stackTraceFilter = DEFAULT_STACKTRACE_FILTER;
-
-  /**
-   * When false (default), some internal Mule entries are removed from exception stacktraces for readability.
-   *
-   * @see #stackTraceFilter
-   */
-  public static boolean fullStackTraces = false;
 
   static {
     initialise();
@@ -137,7 +138,7 @@ public class ExceptionHelper {
         muleExceptionInfo.putAll(exception.getInfo());
       }
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
-      if (fullStackTraces) {
+      if (verbose) {
         cause = tempCause;
       } else {
         cause = ExceptionHelper.sanitize(tempCause);
@@ -194,7 +195,7 @@ public class ExceptionHelper {
       }
     }
 
-    return fullStackTraces ? root : sanitize(root);
+    return verbose ? root : sanitize(root);
   }
 
   public static String getExceptionStack(Throwable t) {
@@ -239,10 +240,6 @@ public class ExceptionHelper {
       return;
     }
 
-    String fullStackTracesString = System.getProperty("mule.stacktrace.full");
-    if (fullStackTracesString != null) {
-      fullStackTraces = false;
-    }
     String stackTraceFilterString = System.getProperty("mule.stacktrace.filter");
     if (stackTraceFilterString != null) {
       stackTraceFilter = stackTraceFilterString.split(",");
@@ -262,10 +259,32 @@ public class ExceptionHelper {
     }
     StackTraceElement[] trace = t.getStackTrace();
     List<StackTraceElement> newTrace = new ArrayList<>();
+
+    String currentlyMatchedPrefix = null;
+    int currentlyMatchedPrefixCount = 0;
+
     for (StackTraceElement stackTraceElement : trace) {
-      if (!isMuleInternalClass(stackTraceElement.getClassName())) {
+      Optional<String> matchedPrefix = matchedMuleInternalClassPrefix(stackTraceElement);
+      if (!matchedPrefix.isPresent()) {
+        if (currentlyMatchedPrefix != null) {
+          newTrace.add(createFilteredStackEntry(currentlyMatchedPrefix, currentlyMatchedPrefixCount));
+          currentlyMatchedPrefix = null;
+          currentlyMatchedPrefixCount = 0;
+        }
         newTrace.add(stackTraceElement);
+      } else {
+        if (currentlyMatchedPrefix != null) {
+          if (currentlyMatchedPrefix.equals(matchedPrefix.get())) {
+            currentlyMatchedPrefixCount++;
+            continue;
+          }
+
+          newTrace.add(createFilteredStackEntry(currentlyMatchedPrefix, currentlyMatchedPrefixCount));
+        }
+        currentlyMatchedPrefix = matchedPrefix.get();
+        currentlyMatchedPrefixCount = 1;
       }
+
     }
 
     StackTraceElement[] clean = new StackTraceElement[newTrace.size()];
@@ -281,6 +300,13 @@ public class ExceptionHelper {
     return t;
   }
 
+  private static StackTraceElement createFilteredStackEntry(String currentlyMatchedPrefix, int currentlyMatchedPrefixCount) {
+    return new StackTraceElement(currentlyMatchedPrefix,
+                                 format("* (%d elements filtered from stack; set debug level logging or '-D"
+                                     + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)", currentlyMatchedPrefixCount),
+                                 null, ALREADY_FILTERED_INDICATOR);
+  }
+
 
   /**
    * Removes some internal Mule entries from the stacktrace. Modifies the passed-in throwable stacktrace.
@@ -289,26 +315,30 @@ public class ExceptionHelper {
     t = sanitize(t);
     StackTraceElement[] trace = t.getStackTrace();
 
-    int newStackDepth = Math.min(trace.length, depth);
+    int newStackDepth = min(trace.length, depth);
     StackTraceElement[] newTrace = new StackTraceElement[newStackDepth];
 
-    System.arraycopy(trace, 0, newTrace, 0, newStackDepth);
+    arraycopy(trace, 0, newTrace, 0, newStackDepth);
     t.setStackTrace(newTrace);
 
     return t;
   }
 
-  private static boolean isMuleInternalClass(String className) {
+  private static Optional<String> matchedMuleInternalClassPrefix(StackTraceElement stackTraceElement) {
+    if (stackTraceElement.getLineNumber() == ALREADY_FILTERED_INDICATOR) {
+      return empty();
+    }
+
     /*
      * Sacrifice the code quality for the sake of keeping things simple - the alternative would be to pass MuleContext into every
      * exception constructor.
      */
     for (String mulePackage : stackTraceFilter) {
-      if (className.startsWith(mulePackage)) {
-        return true;
+      if (stackTraceElement.getClassName().startsWith(mulePackage)) {
+        return of(mulePackage);
       }
     }
-    return false;
+    return empty();
   }
 
   public static List<Throwable> getExceptionsAsList(Throwable t) {
