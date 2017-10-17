@@ -94,6 +94,19 @@ public interface DataType extends Serializable {
     return getDefaultFactory().create().fromFunction(function).build();
   }
 
+  /**
+   * Static method to evaluate if the {@param superType} is compatible with the {@param subType}.
+   * <p/>
+   * This means that the {@param superType} mime type should match the one in the given {@param subType}
+   * and the {@param superType} JAVA class should be assignable from the {@param subType} one.
+   *
+   * @param superType
+   * @param subType
+   * @return a boolean indicating whether or not the {@param superType} is compatible with the {@param subType}
+   */
+  static boolean areCompatible(DataType superType, DataType subType) {
+    return superType.isCompatibleWith(subType);
+  }
 
   DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
   DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
@@ -140,6 +153,8 @@ public interface DataType extends Serializable {
   /**
    * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime
    * types matches the one in the given dataType and whether the Java types are assignable.
+   * <p/>
+   * Keep in mind that if this mime type is {@link MediaType#ANY} it will match any mime type {@param dataType} could have.
    * <p>
    * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may
    * yield different result.

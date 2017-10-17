@@ -223,8 +223,7 @@ public final class MediaType implements Serializable {
 
   @Override
   public int hashCode() {
-    // TODO MULE-9987 Check if it is actually needed to leave charset and params out.
-    return Objects.hash(primaryType, subType);
+    return Objects.hash(primaryType, subType, charset, params);
   }
 
   @Override
