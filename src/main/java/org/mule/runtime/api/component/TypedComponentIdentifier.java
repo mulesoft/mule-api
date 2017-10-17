@@ -51,11 +51,6 @@ public interface TypedComponentIdentifier {
     INTERCEPTING,
 
     /**
-     * Regular component that doesn't match any of the other criterias.
-     */
-    PROCESSOR,
-
-    /**
      * Error handler component type
      */
     ERROR_HANDLER,
