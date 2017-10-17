@@ -8,13 +8,19 @@
 package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Collections.emptyList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base class for defining models for deployable artifacts.
@@ -23,7 +29,10 @@ import java.util.Optional;
  */
 public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
-  private final List<String> configs;
+  private static final Logger logger = LoggerFactory.getLogger(MuleDeployableModel.class);
+
+  private final Set<String> configs;
+
   // this field must be true by default because it's the default value used when deserializing this class with no content.
   private Boolean redeploymentEnabled = true;
 
@@ -43,15 +52,30 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
                                 MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> configs,
                                 Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
-    this.configs = configs == null ? new ArrayList<>() : configs;
+
+    this.configs = createConfigs(configs);
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
+  }
+
+  private Set<String> createConfigs(List<String> configs) {
+    if (configs == null) {
+      return emptySet();
+    } else {
+      Set<String> tmpSet = new HashSet<>(configs);
+      if (tmpSet.size() != configs.size()) {
+        if (logger.isDebugEnabled()) {
+          logger.debug("Attempting to create an artifact with duplicates in configuration files list");
+        }
+      }
+      return tmpSet;
+    }
   }
 
   /**
    * @return the application configuration files
    */
   public List<String> getConfigs() {
-    return configs == null ? emptyList() : unmodifiableList(configs);
+    return configs == null ? emptyList() : unmodifiableList(new ArrayList<>(this.configs));
   }
 
   /**
