@@ -19,17 +19,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Base class for defining models for deployable artifacts.
  *
  * @since 1.0
  */
 public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
-
-  private static final Logger logger = LoggerFactory.getLogger(MuleDeployableModel.class);
 
   private final Set<String> configs;
 
@@ -52,23 +47,8 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
                                 MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> configs,
                                 Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
-
-    this.configs = createConfigs(configs);
+    this.configs = configs == null ? emptySet() : new HashSet<>(configs);
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
-  }
-
-  private Set<String> createConfigs(List<String> configs) {
-    if (configs == null) {
-      return emptySet();
-    } else {
-      Set<String> tmpSet = new HashSet<>(configs);
-      if (tmpSet.size() != configs.size()) {
-        if (logger.isDebugEnabled()) {
-          logger.debug("Attempting to create an artifact with duplicates in configuration files list");
-        }
-      }
-      return tmpSet;
-    }
   }
 
   /**
