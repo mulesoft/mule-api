@@ -128,6 +128,7 @@
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.8</allure.maven.plugin.version>
+        <jacoco.version>0.7.9</jacoco.version>
     </properties>
 
     <dependencies>
@@ -349,8 +350,7 @@
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven.surefire.plugin.version}</version>
                     <configuration>
-                        <argLine>-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar</argLine>
-                        <argLine>-Dfile.encoding=UTF-8</argLine>
+                        <argLine>-Dfile.encoding=UTF-8 -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile=${project.build.directory}/jacoco.exec</argLine>
                         <properties>
                             <property>
                                 <name>listener</name>
@@ -369,6 +369,11 @@
                             <groupId>org.aspectj</groupId>
                             <artifactId>aspectjweaver</artifactId>
                             <version>${aspectjVersion}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.jacoco</groupId>
+                            <artifactId>org.jacoco.agent</artifactId>
+                            <version>${jacoco.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>
