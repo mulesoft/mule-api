@@ -66,6 +66,7 @@ public class Preconditions {
    * @throws NullPointerException if {@code reference} is null
    * @deprecated Use {@link java.util.Objects#requireNonNull(Object, String)}
    */
+  @Deprecated
   public static <T> T checkNotNull(T reference, String errorMessage) {
     if (reference == null) {
       throw new NullPointerException(errorMessage);
