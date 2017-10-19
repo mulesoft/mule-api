@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util;
 
 import static org.apache.commons.lang3.StringUtils.EMPTY;
+import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.util.Optional;
@@ -21,10 +22,14 @@ public class NameUtils {
   protected NameUtils() {}
 
   /**
+   * the configuration file component name separator.
+   */
+  public static final String COMPONENT_NAME_SEPARATOR = "-";
+
+  /**
    * Transforms a camel case value into a hyphenized one.
    * <p>
-   * For example:
-   * {@code messageProcessor} would be transformed to {@code message-processor}
+   * For example: {@code messageProcessor} would be transformed to {@code message-processor}
    *
    * @param camelCaseName a {@link String} in camel case form
    * @return the {@code camelCaseName} in hypenized form
@@ -36,14 +41,39 @@ public class NameUtils {
   /**
    * Transforms a camel case value into an underscorized one.
    * <p>
-   * For example:
-   * {@code messageProcessor} would be transformed to {@code message_processor}
+   * For example: {@code messageProcessor} would be transformed to {@code message_processor}
    *
    * @param camelCaseName a {@link String} in camel case form
    * @return the {@code camelCaseName} in underscorized form
    */
   public static String underscorize(String camelCaseName) {
     return camelScatterConcat(camelCaseName, '_');
+  }
+
+  /**
+   * Converts an string with multiple parts separated by {@code separator} to another string where each part is concatenated using
+   * camel case for each part expect for the first part which will be all lowercase.
+   * 
+   * @param value the input string
+   * @param separator the string that represents the separator
+   * @return the converted value.
+   */
+  public static String toCamelCase(String value, String separator) {
+    if (isBlank(value)) {
+      return value;
+    }
+    String[] parts = value.split(separator);
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < parts.length; i++) {
+      String part = parts[i].trim().toLowerCase();
+
+      if (i == 0) {
+        result.append(part);
+      } else {
+        result.append(capitalize(part));
+      }
+    }
+    return result.toString();
   }
 
   private static String camelScatterConcat(String camelCaseName, char concatChar) {
