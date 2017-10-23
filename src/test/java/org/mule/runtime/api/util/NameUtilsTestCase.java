@@ -7,8 +7,11 @@
 package org.mule.runtime.api.util;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.util.NameUtils.COMPONENT_NAME_SEPARATOR;
 
+import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 public class NameUtilsTestCase {
@@ -27,6 +30,16 @@ public class NameUtilsTestCase {
     assertThat(NameUtils.underscorize("LISTENER_CONFIG"), is("listener_config"));
     assertThat(NameUtils.underscorize("listener_config"), is("listener_config"));
     assertThat(NameUtils.underscorize("listener-Config"), is("listener-config"));
+  }
+
+  @Test
+  public void toCamelCase() {
+    assertThat(NameUtils.toCamelCase("LISTENER-CONFIG", COMPONENT_NAME_SEPARATOR), is("listenerConfig"));
+    assertThat(NameUtils.toCamelCase("listener_config", "_"), is("listenerConfig"));
+    assertThat(NameUtils.toCamelCase("listener-Config", COMPONENT_NAME_SEPARATOR), is("listenerConfig"));
+    assertThat(NameUtils.toCamelCase("another-CONFIG-StyLE", COMPONENT_NAME_SEPARATOR), is("anotherConfigStyle"));
+    assertThat(NameUtils.toCamelCase("listener", COMPONENT_NAME_SEPARATOR), is("listener"));
+    assertThat(NameUtils.toCamelCase(null, COMPONENT_NAME_SEPARATOR), nullValue());
   }
 
 }
