@@ -7,15 +7,11 @@
 
 package org.mule.runtime.api.deployment.meta;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptySet;
-import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -44,18 +40,18 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    */
   protected MuleDeployableModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                                MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> configs,
+                                MuleArtifactLoaderDescriptor bundleDescriptorLoader, Set<String> configs,
                                 Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
-    this.configs = configs == null ? emptySet() : new HashSet<>(configs);
+    this.configs = configs;
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
   }
 
   /**
    * @return the application configuration files
    */
-  public List<String> getConfigs() {
-    return configs == null ? emptyList() : unmodifiableList(new ArrayList<>(this.configs));
+  public Set<String> getConfigs() {
+    return configs == null ? null : unmodifiableSet(this.configs);
   }
 
   /**
@@ -73,13 +69,13 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   protected static abstract class MuleDeployableModelBuilder<T extends AbstractMuleArtifactModelBuilder, M extends MuleDeployableModel>
       extends AbstractMuleArtifactModelBuilder<T, M> {
 
-    private List<String> configs = new ArrayList<>();
+    private Set<String> configs = new HashSet<>();
     private Boolean redeploymentEnabled;
 
     /**
      * @param configs the set of artifact configuration files
      */
-    public void setConfigs(List<String> configs) {
+    public void setConfigs(Set<String> configs) {
       this.configs = configs;
     }
 
@@ -93,7 +89,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
       return doCreateModel(configs, redeploymentEnabled);
     }
 
-    protected abstract M doCreateModel(List<String> configs, Boolean redeploymentEnabled);
+    protected abstract M doCreateModel(Set<String> configs, Boolean redeploymentEnabled);
 
     /**
      * @param redeploymentEnabled true if the artifact supports redeployment, false otherwise.

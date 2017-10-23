@@ -8,8 +8,8 @@ package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Optional.ofNullable;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * This object matches the mule-artifact.json element within a application. The describer holds information that has being picked
@@ -21,7 +21,7 @@ public class MuleApplicationModel extends MuleDeployableModel {
 
   private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                               MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs,
+                               MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
                                Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
   }
@@ -40,7 +40,7 @@ public class MuleApplicationModel extends MuleDeployableModel {
     }
 
     @Override
-    protected MuleApplicationModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
+    protected MuleApplicationModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled) {
       return new MuleApplicationModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
                                       getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
 

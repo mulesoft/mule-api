@@ -9,14 +9,14 @@ package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Optional.ofNullable;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class MuleDomainModel extends MuleDeployableModel {
 
   private MuleDomainModel(String name, String minMuleVersion, Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                          MuleArtifactLoaderDescriptor bundleDescriptor, List<String> configs,
+                          MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
                           Optional<Boolean> redeploymentEnabled) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
   }
@@ -35,7 +35,7 @@ public class MuleDomainModel extends MuleDeployableModel {
     }
 
     @Override
-    protected MuleDomainModel doCreateModel(List<String> configs, Boolean redeploymentEnabled) {
+    protected MuleDomainModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled) {
       return new MuleDomainModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
                                  getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
     }

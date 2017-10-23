@@ -21,6 +21,8 @@ import java.util.Optional;
  */
 public class MuleServerPluginModel extends AbstractMuleArtifactModel {
 
+  private static final String PLUGIN_CLASS_NAME = "pluginClassName";
+
   private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
   private final String pluginClassName;
 
@@ -39,6 +41,11 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
 
   public String getPluginClassName() {
     return pluginClassName;
+  }
+
+  @Override
+  protected void validateNonGenericFields(String descriptorName) {
+    validateMandatoryFieldIsSet(descriptorName, pluginClassName, PLUGIN_CLASS_NAME);
   }
 
   /**
