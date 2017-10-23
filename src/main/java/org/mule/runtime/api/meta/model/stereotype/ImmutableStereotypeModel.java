@@ -40,7 +40,7 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
    * {@inheritDoc}
    */
   @Override
-  public String getName() {
+  public String getType() {
     return type;
   }
 
