@@ -21,7 +21,7 @@ public interface StereotypeModel {
    * Gets the name of the stereotype.
    * @return The type of the error
    */
-  String getName();
+  String getType();
 
   /**
    * Gets the namespace of error.
