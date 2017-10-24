@@ -28,7 +28,6 @@ public interface Location {
 
   String SOURCE = "source";
   String CONNECTION = "connection";
-  String PARAMETERS = "parameters";
   String PROCESSORS = "processors";
   String ERROR_HANDLER = "errorHandler";
 
@@ -128,15 +127,6 @@ public interface Location {
      * @return a new builder with the provided configuration.
      */
     Builder addErrorHandlerPart();
-
-    /**
-     * Adds a new {@link Location#PARAMETERS} part at the end of the location.
-     * <p>
-     * Components that allow nested parameters must have {@link Location#PARAMETERS} as part before the {@code parameter} name.
-     *
-     * @return a new builder with the provided configuration.
-     */
-    Builder addParameterPart();
 
     /**
      * Adds a new index part. The index part is used to reference a component within a collection.
@@ -258,14 +248,6 @@ public interface Location {
       checkIsNotFirstPart(ERROR_HANDLER);
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.add(ERROR_HANDLER);
-      return locationBuilder;
-    }
-
-    @Override
-    public Builder addParameterPart() {
-      checkIsNotFirstPart(PARAMETERS);
-      LocationBuilder locationBuilder = builderCopy();
-      locationBuilder.location.parts.add(PARAMETERS);
       return locationBuilder;
     }
 
