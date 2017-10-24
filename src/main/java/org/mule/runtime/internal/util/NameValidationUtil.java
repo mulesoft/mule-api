@@ -7,10 +7,14 @@
 package org.mule.runtime.internal.util;
 
 import static java.lang.String.join;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.runtime.api.exception.MuleRuntimeException;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 /**
@@ -22,6 +26,8 @@ public class NameValidationUtil {
 
   private static final List<String> SPECIAL_CHARACTERS = Arrays.asList("/", "[", "]", "{", "}", "#");
   private static final Pattern SPECIAL_CHARACTERS_PATTERN = Pattern.compile("[/\\[\\]{}#]");
+  // cache for identifiers validation to avoid performance impact over regex
+  private static final Cache<String, Boolean> validIdentifiersCache = CacheBuilder.newBuilder().maximumSize(10000).build();
 
   /**
    * Validates that the given {@code string} does not contain any {@link #SPECIAL_CHARACTERS} character
@@ -30,8 +36,15 @@ public class NameValidationUtil {
    * @throws IllegalArgumentException if the string contains an invalid character.
    */
   public static void verifyStringDoesNotContainsReservedCharacters(String string) {
-    checkArgument(!SPECIAL_CHARACTERS_PATTERN.matcher(string).find(),
-                  "Invalid character used in location. Invalid characters are " + join(",", SPECIAL_CHARACTERS));
+    try {
+      Boolean isValidIdentifier = validIdentifiersCache.get(string, () -> !SPECIAL_CHARACTERS_PATTERN.matcher(string).find());
+      if (!isValidIdentifier) {
+        throw new IllegalArgumentException("Invalid character used in location. Invalid characters are "
+            + join(",", SPECIAL_CHARACTERS));
+      }
+    } catch (ExecutionException e) {
+      throw new MuleRuntimeException(e);
+    }
   }
 
 }
