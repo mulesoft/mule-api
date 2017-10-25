@@ -36,6 +36,8 @@ import java.util.stream.Collectors;
  */
 public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializable {
 
+  private static final long serialVersionUID = 8534959274607933747L;
+
   private final Map<CaseInsensitiveMapKey, T> baseMap;
 
   /**
@@ -123,6 +125,8 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
 
   private static class CaseInsensitiveMapKey implements Serializable {
+
+    private static final long serialVersionUID = -4964071931663826261L;
 
     private final String key;
     private final String keyLowerCase;
