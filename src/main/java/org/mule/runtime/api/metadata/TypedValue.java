@@ -10,7 +10,10 @@ import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.fromObject;
 
+import org.mule.runtime.internal.util.StringByteSizeCalculator;
+
 import java.io.Serializable;
+import java.nio.charset.Charset;
 import java.util.Optional;
 
 /**
@@ -91,7 +94,9 @@ public final class TypedValue<T> implements Serializable {
     } else if (value instanceof byte[]) {
       this.length = ((byte[]) value).length;
     } else if (value instanceof String) {
-      this.length = ((String) value).getBytes(this.dataType.getMediaType().getCharset().orElse(defaultCharset())).length;
+      StringByteSizeCalculator stringByteSizeCalculator = new StringByteSizeCalculator();
+      Charset charset = this.dataType.getMediaType().getCharset().orElse(defaultCharset());
+      this.length = stringByteSizeCalculator.count((String) value, charset);
     } else {
       this.length = -1;
     }
