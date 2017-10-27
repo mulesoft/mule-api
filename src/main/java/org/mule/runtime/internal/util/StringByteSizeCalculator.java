@@ -19,7 +19,7 @@ import java.nio.charset.Charset;
  * {@link Charset} dependent byte size. This is essentially the same as the size obtained via {@link String#getBytes(Charset)} but
  * avoids the allocation of the entire byte array.
  *
- * @since 4.0
+ * @since 1.0
  */
 public class StringByteSizeCalculator {
 
