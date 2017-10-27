@@ -19,6 +19,7 @@ import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.ID;
 import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.MIN_MULE_VERSION;
 import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.NAME;
 import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.REQUIRED_PRODUCT;
+import static org.mule.runtime.api.deployment.meta.Product.MULE;
 import org.mule.runtime.api.deployment.meta.MuleDeployableModel;
 import org.mule.runtime.api.deployment.meta.MuleServerPluginModel;
 import org.mule.runtime.api.deployment.meta.MuleServiceModel;
@@ -39,11 +40,13 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class MuleArtifactModelJsonSerializerTestCase {
 
-  private final AbstractMuleArtifactModelJsonSerializer serializer;
+  private final AbstractMuleArtifactModelJsonSerializer<MuleDeployableModel> serializer;
+
   private static final String DESCRIPTOR_NAME = "descriptor";
   private static final JsonObject VALID_JSON = new JsonObject();
   private static final JsonParser parser = new JsonParser();
-  private JsonObject json;
+  private static JsonObject json;
+
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
@@ -51,7 +54,7 @@ public class MuleArtifactModelJsonSerializerTestCase {
   @BeforeClass
   public static void setUp() {
     VALID_JSON.addProperty(NAME, "someName");
-    VALID_JSON.addProperty(REQUIRED_PRODUCT, "MULE");
+    VALID_JSON.addProperty(REQUIRED_PRODUCT, MULE.toString());
     VALID_JSON.addProperty(MIN_MULE_VERSION, "someVersion");
     JsonObject id = new JsonObject();
     id.addProperty(ID, "someId");
@@ -78,78 +81,77 @@ public class MuleArtifactModelJsonSerializerTestCase {
 
   @Test
   public void redeploymentEnabledDefaultIfNotPresentIsTrue() {
-    AbstractMuleArtifactModelJsonSerializer model = this.serializer;
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) model.deserialize("{}");
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{}");
     assertThat(muleArtifactModel.isRedeploymentEnabled(), is(true));
   }
 
   @Test
   public void configsAttributeIsNullIfNotPresent() throws Exception {
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize("{}");
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{}");
     assertThat(muleArtifactModel.getConfigs(), is(nullValue()));
   }
 
   @Test
   public void configsAttributeIsEmptyIfEmptyInSerialization() throws Exception {
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize("{\'configs\':[]}");
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{\'configs\':[]}");
     assertThat(muleArtifactModel.getConfigs(), is(notNullValue()));
     assertThat(muleArtifactModel.getConfigs(), is(empty()));
   }
 
   @Test
   public void mandatoryFieldsCheckIsTrueIfAllPresent() throws Exception {
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfNameNotSet() throws Exception {
     json.remove("name");
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfMinMuleVersionNotSet() throws Exception {
     json.remove("minMuleVersion");
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfClassLoaderModelLoaderDescriptorNotSet() throws Exception {
     json.remove("classLoaderModelLoaderDescriptor");
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfBundleDescriptorLoaderNotSet() throws Exception {
     json.remove("bundleDescriptorLoader");
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfClassLoaderModelLoaderDescriptorWithNoId() throws Exception {
     json.remove("classLoaderModelLoaderDescriptor");
     json.add("classLoaderModelLoaderDescriptor", new JsonObject());
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
   public void mandatoryFieldsCheckIsFalseIfBundleDescriptorWithNoId() throws Exception {
     json.remove("bundleDescriptorLoader");
     json.add("bundleDescriptorLoader", new JsonObject());
-    MuleDeployableModel muleArtifactModel = (MuleDeployableModel) this.serializer.deserialize(json.toString());
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     expectedException.expect(IllegalStateException.class);
-    muleArtifactModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleArtifactModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
@@ -157,14 +159,13 @@ public class MuleArtifactModelJsonSerializerTestCase {
     MuleServerPluginModelJsonSerializer serializer = new MuleServerPluginModelJsonSerializer();
     MuleServerPluginModel muleServerPluginModel = serializer.deserialize(json.toString());
     try {
-      muleServerPluginModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
-      fail();
+      muleServerPluginModel.validateModel(DESCRIPTOR_NAME);
+      fail("Descriptor validation should have failed because of missing pluginClassName");
     } catch (Exception e) {
-      //Do nothing
     }
     json.addProperty("pluginClassName", "somePluginClassName");
     muleServerPluginModel = serializer.deserialize(json.toString());
-    muleServerPluginModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleServerPluginModel.validateModel(DESCRIPTOR_NAME);
   }
 
   @Test
@@ -172,13 +173,13 @@ public class MuleArtifactModelJsonSerializerTestCase {
     MuleServiceModelJsonSerializer serializer = new MuleServiceModelJsonSerializer();
     MuleServiceModel muleServiceModel = serializer.deserialize(json.toString());
     try {
-      muleServiceModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
-    } catch (Exception e) {
-      //Do Nothing
+      muleServiceModel.validateModel(DESCRIPTOR_NAME);
+      fail("Descriptor validation should have failed because of missing serviceProviderClassName");
+    } catch (Exception expected) {
     }
     json.addProperty("serviceProviderClassName", "someServiceProviderClassName");
     muleServiceModel = serializer.deserialize(json.toString());
-    muleServiceModel.validateMandatoryFieldsSet(DESCRIPTOR_NAME);
+    muleServiceModel.validateModel(DESCRIPTOR_NAME);
   }
 
 }

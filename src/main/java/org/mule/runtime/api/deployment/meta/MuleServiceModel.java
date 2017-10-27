@@ -33,7 +33,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
   }
 
   @Override
-  protected void validateNonGenericFields(String descriptorName) {
+  protected void doValidateCustomFields(String descriptorName) {
     validateMandatoryFieldIsSet(descriptorName, serviceProviderClassName, SERVICE_PROVIDER_CLASS_NAME);
   }
 

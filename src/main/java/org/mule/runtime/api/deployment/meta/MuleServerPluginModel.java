@@ -44,7 +44,7 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
   }
 
   @Override
-  protected void validateNonGenericFields(String descriptorName) {
+  protected void doValidateCustomFields(String descriptorName) {
     validateMandatoryFieldIsSet(descriptorName, pluginClassName, PLUGIN_CLASS_NAME);
   }
 

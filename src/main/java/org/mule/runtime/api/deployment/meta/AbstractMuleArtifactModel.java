@@ -28,17 +28,19 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
  */
 public abstract class AbstractMuleArtifactModel {
 
-  private static final String MANDATORY_FIELD_MISSING_MESSAGE =
-      "Invalid artifact descriptor: \"%s\". Mandatory field \"%s\" is missing or value is not allowed. %s";
-
   public static final String NAME = "name";
   public static final String REQUIRED_PRODUCT = "requiredProduct";
   public static final String MIN_MULE_VERSION = "minMuleVersion";
   public static final String ID = "id";
   public static final String CLASS_LOADER_MODEL_LOADER_DESCRIPTOR = "classLoaderModelLoaderDescriptor";
-  private static final String CLASS_LOADER_MODEL_LOADER_DESCRIPTOR_ID = CLASS_LOADER_MODEL_LOADER_DESCRIPTOR + ID;
   public static final String BUNDLE_DESCRIPTOR_LOADER = "bundleDescriptorLoader";
+
+
+  private static final String MANDATORY_FIELD_MISSING_MESSAGE =
+      "Invalid artifact descriptor: \"%s\". Mandatory field \"%s\" is missing or has an invalid value. %s";
+  private static final String CLASS_LOADER_MODEL_LOADER_DESCRIPTOR_ID = CLASS_LOADER_MODEL_LOADER_DESCRIPTOR + ID;
   private static final String BUNDLE_DESCRIPTOR_LOADER_ID = BUNDLE_DESCRIPTOR_LOADER + ID;
+
 
 
   private final String name;
@@ -94,9 +96,10 @@ public abstract class AbstractMuleArtifactModel {
   /**
    * Validates that all the required fields for a valid model are set. It does not check whether or not the fields have valid
    * values, it just checks that they are not null.
-   * This method is useful for when constructing a model from a deserialized Json and we want to check if the Json was ok.
+   * <p/>
+   * This method is useful for when constructing a model from a deserialized JSON and we want to check if the JSON was ok.
    */
-  public void validateMandatoryFieldsSet(String descriptorName) {
+  public void validateModel(String descriptorName) {
     validateMandatoryFieldIsSet(descriptorName, name, NAME);
     validateMandatoryFieldIsSet(descriptorName, requiredProduct, REQUIRED_PRODUCT,
                                 format("Valid values are %s",
@@ -107,18 +110,18 @@ public abstract class AbstractMuleArtifactModel {
                                 CLASS_LOADER_MODEL_LOADER_DESCRIPTOR_ID);
     validateMandatoryFieldIsSet(descriptorName, bundleDescriptorLoader, BUNDLE_DESCRIPTOR_LOADER);
     validateMandatoryFieldIsSet(descriptorName, bundleDescriptorLoader.getId(), BUNDLE_DESCRIPTOR_LOADER_ID);
-    validateNonGenericFields(descriptorName);
+    doValidateCustomFields(descriptorName);
   }
 
-  protected void validateMandatoryFieldIsSet(String descriptorName, Object field, String fieldName, String extraErrorMessage) {
+  private void validateMandatoryFieldIsSet(String descriptorName, Object field, String fieldName, String extraErrorMessage) {
     checkState(field != null, format(MANDATORY_FIELD_MISSING_MESSAGE, descriptorName, fieldName, extraErrorMessage));
   }
 
-  protected void validateMandatoryFieldIsSet(String descriptorName, Object field, String fieldName) {
+  void validateMandatoryFieldIsSet(String descriptorName, Object field, String fieldName) {
     validateMandatoryFieldIsSet(descriptorName, field, fieldName, EMPTY);
   }
 
-  protected void validateNonGenericFields(String descriptorName) {
+  void doValidateCustomFields(String descriptorName) {
     //Do nothing
   }
 }
