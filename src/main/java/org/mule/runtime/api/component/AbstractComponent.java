@@ -7,12 +7,13 @@
 
 package org.mule.runtime.api.component;
 
+import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
-import org.mule.runtime.api.component.Component;
+
 import org.mule.runtime.api.component.location.ComponentLocation;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.namespace.QName;
 
@@ -24,7 +25,10 @@ public abstract class AbstractComponent implements Component {
   public static QName LOCATION_KEY = new QName("mule", "COMPONENT_LOCATION");
   public static QName ROOT_CONTAINER_NAME_KEY = new QName("mule", "ROOT_CONTAINER_NAME");
 
-  private final Map<QName, Object> annotations = new ConcurrentHashMap<>();
+  private volatile Map<QName, Object> annotations = emptyMap();
+
+  private final Object rootContainerNameInitLock = new Object();
+  private volatile String rootContainerName;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -37,9 +41,8 @@ public abstract class AbstractComponent implements Component {
   }
 
   @Override
-  public synchronized void setAnnotations(Map<QName, Object> newAnnotations) {
-    annotations.clear();
-    annotations.putAll(newAnnotations);
+  public void setAnnotations(Map<QName, Object> newAnnotations) {
+    annotations = new HashMap<>(newAnnotations);
   }
 
   @Override
@@ -49,10 +52,18 @@ public abstract class AbstractComponent implements Component {
 
   @Override
   public String getRootContainerName() {
-    String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
     if (rootContainerName == null) {
-      rootContainerName = getLocation().getRootContainerName();
+      synchronized (rootContainerNameInitLock) {
+        if (rootContainerName == null) {
+          String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
+          if (rootContainerName == null) {
+            rootContainerName = getLocation().getRootContainerName();
+          }
+          this.rootContainerName = rootContainerName;
+        }
+      }
     }
     return rootContainerName;
   }
+
 }

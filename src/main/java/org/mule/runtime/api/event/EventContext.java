@@ -8,7 +8,7 @@ package org.mule.runtime.api.event;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 
-import java.time.OffsetTime;
+import java.time.Instant;
 
 public interface EventContext {
 
@@ -33,7 +33,7 @@ public interface EventContext {
   /**
    * @return a timestamp indicating when the message was received by the connector source
    */
-  OffsetTime getReceivedTime();
+  Instant getReceivedTime();
 
   /**
    *
