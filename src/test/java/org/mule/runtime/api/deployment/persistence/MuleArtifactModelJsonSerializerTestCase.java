@@ -40,13 +40,12 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class MuleArtifactModelJsonSerializerTestCase {
 
-  private final AbstractMuleArtifactModelJsonSerializer<MuleDeployableModel> serializer;
-
   private static final String DESCRIPTOR_NAME = "descriptor";
   private static final JsonObject VALID_JSON = new JsonObject();
   private static final JsonParser parser = new JsonParser();
   private static JsonObject json;
 
+  private final AbstractMuleArtifactModelJsonSerializer<MuleDeployableModel> serializer;
 
   @Rule
   public ExpectedException expectedException = ExpectedException.none();
