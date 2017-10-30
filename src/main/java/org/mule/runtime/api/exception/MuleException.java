@@ -16,10 +16,13 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
 
+import com.google.common.collect.ImmutableSet;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,12 +41,13 @@ public abstract class MuleException extends Exception {
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
   public static final String INFO_ERROR_TYPE_KEY = "Error type";
+  public static final String ALREADY_LOGGED_KEY = "Already logged exception";
 
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
   //To define the information that will be included if a summary is logged instead of a verbose exception
   private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
-
+  private static final Set<String> FILTERED_OUT_LOGGING_KEYS = ImmutableSet.of(ALREADY_LOGGED_KEY);
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
@@ -60,7 +64,6 @@ public abstract class MuleException extends Exception {
   private final Map<String, Object> info = new HashMap<>();
   private String message = null;
   private I18nMessage i18nMessage;
-  private boolean logMessageAlreadyGenerated = false;
 
   static {
     refreshVerboseExceptions();
@@ -160,19 +163,15 @@ public abstract class MuleException extends Exception {
     return message;
   }
 
-  public String getDetailedMessage(boolean forceVerbose) {
-    if (isVerboseExceptions() || forceVerbose) {
+  public String getDetailedMessage() {
+    if (isVerboseExceptions()) {
       return getVerboseMessage();
     } else {
       return getSummaryMessage();
     }
   }
 
-  public String getDetailedMessage() {
-    return getDetailedMessage(false);
-  }
-
-  private String getVerboseMessage() {
+  public String getVerboseMessage() {
     MuleException e = getRootMuleException(this);
     if (!e.equals(this)) {
       return getMessage();
@@ -182,7 +181,7 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(lineSeparator());
 
     Map<String, Object> info = getExceptionInfo(this);
-    for (String key : info.keySet().stream().sorted().collect(toList())) {
+    for (String key : info.keySet().stream().filter(key -> !FILTERED_OUT_LOGGING_KEYS.contains(key)).sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
       buf.append(": ");
@@ -205,7 +204,7 @@ public abstract class MuleException extends Exception {
     return buf.toString();
   }
 
-  private String getSummaryMessage() {
+  public String getSummaryMessage() {
     MuleException e = getRootMuleException(this);
     if (!e.equals(this)) {
       return getMessage();
