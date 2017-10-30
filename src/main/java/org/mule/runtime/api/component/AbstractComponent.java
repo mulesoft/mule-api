@@ -28,9 +28,6 @@ public abstract class AbstractComponent implements Component {
 
   private volatile Map<QName, Object> annotations = emptyMap();
 
-  private final Object rootContainerNameInitLock = new Object();
-  private volatile String rootContainerName;
-
   private final Object rootContainerLocationInitLock = new Object();
   private volatile Location rootContainerLocation;
 
@@ -55,27 +52,15 @@ public abstract class AbstractComponent implements Component {
   }
 
   @Override
-  public String getRootContainerName() {
-    if (rootContainerName == null) {
-      synchronized (rootContainerNameInitLock) {
-        if (rootContainerName == null) {
-          String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
-          if (rootContainerName == null) {
-            rootContainerName = getLocation().getRootContainerName();
-          }
-          this.rootContainerName = rootContainerName;
-        }
-      }
-    }
-    return rootContainerName;
-  }
-
-  @Override
   public Location getRootContainerLocation() {
     if (rootContainerLocation == null) {
       synchronized (rootContainerLocationInitLock) {
         if (rootContainerLocation == null) {
-          this.rootContainerLocation = Location.builder().globalName(getRootContainerName()).build();
+          String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
+          if (rootContainerName == null) {
+            rootContainerName = getLocation().getRootContainerName();
+          }
+          this.rootContainerLocation = Location.builder().globalName(rootContainerName).build();
         }
       }
     }
