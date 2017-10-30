@@ -23,4 +23,9 @@ public class ErrorHandlerNotification extends EnrichedServerNotification {
   public ErrorHandlerNotification(EnrichedNotificationInfo notificationInfo, ComponentLocation componentLocation, int action) {
     super(notificationInfo, action, componentLocation);
   }
+
+  @Override
+  public String getEventName() {
+    return "ErrorHandlerNotification";
+  }
 }

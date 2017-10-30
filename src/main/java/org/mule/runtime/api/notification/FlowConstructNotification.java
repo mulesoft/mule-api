@@ -38,4 +38,9 @@ public class FlowConstructNotification extends AbstractServerNotification {
   public boolean isSynchronous() {
     return true;
   }
+
+  @Override
+  public String getEventName() {
+    return "FlowConstructNotification";
+  }
 }

@@ -41,7 +41,7 @@ public class ConnectorMessageNotification extends EnrichedServerNotification {
 
   @Override
   public String toString() {
-    return EVENT_NAME + "{action=" + getActionName(action) + ", endpoint: " + getLocationUri() + ", resourceId="
+    return getEventName() + "{action=" + getActionName(action) + ", endpoint: " + getLocationUri() + ", resourceId="
         + resourceIdentifier
         + ", timestamp=" + timestamp + ", serverId=" + serverId + ", message: " + source + "}";
   }
@@ -54,5 +54,10 @@ public class ConnectorMessageNotification extends EnrichedServerNotification {
   @Override
   public boolean isSynchronous() {
     return true;
+  }
+
+  @Override
+  public String getEventName() {
+    return "ConnectorMessageNotification";
   }
 }

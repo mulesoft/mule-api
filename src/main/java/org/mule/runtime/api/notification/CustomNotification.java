@@ -47,4 +47,9 @@ public class CustomNotification extends AbstractServerNotification {
   protected String[] getActionNames() {
     return new String[] {};
   }
+
+  @Override
+  public String getEventName() {
+    return "CustomNotification";
+  }
 }

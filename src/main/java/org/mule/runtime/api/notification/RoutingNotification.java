@@ -49,4 +49,8 @@ public class RoutingNotification extends AbstractServerNotification {
     }
   }
 
+  @Override
+  public String getEventName() {
+    return "RoutingNotification";
+  }
 }

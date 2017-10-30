@@ -42,4 +42,8 @@ public class ConnectionNotification extends AbstractServerNotification {
     return TYPE_INFO;
   }
 
+  @Override
+  public String getEventName() {
+    return "ConnectionNotification";
+  }
 }

@@ -51,8 +51,8 @@ public abstract class EnrichedServerNotification extends AbstractServerNotificat
 
   @Override
   public String toString() {
-    return EVENT_NAME + "{" + "action=" + getActionName(action) + ", resourceId=" + resourceIdentifier + ", serverId=" + serverId
-        + ", timestamp=" + timestamp + "}";
+    return getEventName() + "{" + "action=" + getActionName(action) + ", resourceId=" + resourceIdentifier
+        + ", serverId=" + serverId + ", timestamp=" + timestamp + "}";
   }
 
   public String getLocationUri() {

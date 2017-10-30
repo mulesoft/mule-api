@@ -35,4 +35,9 @@ public class PipelineMessageNotification extends EnrichedServerNotification {
   public boolean isSynchronous() {
     return true;
   }
+
+  @Override
+  public String getEventName() {
+    return "PipelineMessageNotification";
+  }
 }

@@ -55,8 +55,8 @@ public class TransactionNotification extends EnrichedServerNotification {
 
   @Override
   public String toString() {
-    return EVENT_NAME + "{" + "action=" + getActionName(action) + ", transactionStringId=" + transactionStringId + ", timestamp="
-        + timestamp + "}";
+    return getEventName() + "{" + "action=" + getActionName(action) + ", transactionStringId=" + transactionStringId
+        + ", timestamp=" + timestamp + "}";
   }
 
   private static EnrichedNotificationInfo emptyInfo() {
@@ -66,5 +66,10 @@ public class TransactionNotification extends EnrichedServerNotification {
   @Override
   public boolean isSynchronous() {
     return true;
+  }
+
+  @Override
+  public String getEventName() {
+    return "TransactionNotification";
   }
 }

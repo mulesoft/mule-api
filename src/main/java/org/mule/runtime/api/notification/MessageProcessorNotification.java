@@ -47,7 +47,8 @@ public class MessageProcessorNotification extends EnrichedServerNotification {
 
   @Override
   public String toString() {
-    return EVENT_NAME + "{" + "action=" + getActionName(action) + ", processor=" + getComponent().getLocation().getLocation()
+    return getEventName() + "{" + "action=" + getActionName(action) + ", processor="
+        + getComponent().getLocation().getLocation()
         + ", resourceId="
         + resourceIdentifier + ", serverId=" + serverId + ", timestamp=" + timestamp + "}";
   }
@@ -55,5 +56,10 @@ public class MessageProcessorNotification extends EnrichedServerNotification {
   @Override
   public boolean isSynchronous() {
     return true;
+  }
+
+  @Override
+  public String getEventName() {
+    return "MessageProcessorNotification";
   }
 }
