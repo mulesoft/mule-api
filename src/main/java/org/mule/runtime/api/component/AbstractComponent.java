@@ -11,6 +11,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
+import org.mule.runtime.api.component.location.Location;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +30,9 @@ public abstract class AbstractComponent implements Component {
 
   private final Object rootContainerNameInitLock = new Object();
   private volatile String rootContainerName;
+
+  private final Object rootContainerLocationInitLock = new Object();
+  private volatile Location rootContainerLocation;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -66,4 +70,15 @@ public abstract class AbstractComponent implements Component {
     return rootContainerName;
   }
 
+  @Override
+  public Location getRootContainerLocation() {
+    if (rootContainerLocation == null) {
+      synchronized (rootContainerLocationInitLock) {
+        if (rootContainerLocation == null) {
+          this.rootContainerLocation = Location.builder().globalName(getRootContainerName()).build();
+        }
+      }
+    }
+    return rootContainerLocation;
+  }
 }

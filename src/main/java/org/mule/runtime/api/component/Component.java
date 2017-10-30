@@ -7,6 +7,7 @@
 package org.mule.runtime.api.component;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
+import org.mule.runtime.api.component.location.Location;
 
 import java.util.Map;
 
@@ -57,8 +58,17 @@ public interface Component {
    * The actual root container component name. Some components may belong to a template component in the configuration such as a
    * subflow or a module operation. Since those are template that end up being part of another root container component, like a
    * flow, then the root container name may differ from the one on {@link ComponentLocation#getRootContainerName()}.
-   * 
+   *
    * @return the root container component name.
    */
   String getRootContainerName();
+
+  /**
+   * The actual root container component location. Some components may belong to a template component in the configuration such as
+   * a subflow or a module operation. Since those are template that end up being part of another root container component, like a
+   * flow, then the root container may differ from the one on {@link ComponentLocation#getRootContainerLocation()}.
+   *
+   * @return the root container component location.
+   */
+  Location getRootContainerLocation();
 }
