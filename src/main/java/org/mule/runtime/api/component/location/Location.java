@@ -51,7 +51,7 @@ public interface Location {
 
   /**
    * Creates a new {@link Builder} with the provided location represented as string as base.
-   * 
+   *
    * @param location a location to use to pre-configured the builder
    * @return a new builder instance with the provided location as base.
    */
@@ -159,6 +159,8 @@ public interface Location {
     protected static final String PARTS_SEPARATOR = "/";
     private LinkedList<String> parts = new LinkedList<>();
 
+    private String asString;
+
     @Override
     public String getGlobalName() {
       return parts.get(0);
@@ -171,7 +173,10 @@ public interface Location {
 
     @Override
     public String toString() {
-      return join(PARTS_SEPARATOR, parts);
+      if (asString == null) {
+        asString = join(PARTS_SEPARATOR, parts);
+      }
+      return asString;
     }
 
     @Override
