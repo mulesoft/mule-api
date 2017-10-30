@@ -60,6 +60,7 @@ public abstract class MuleException extends Exception {
   private final Map<String, Object> info = new HashMap<>();
   private String message = null;
   private I18nMessage i18nMessage;
+  private boolean logMessageAlreadyGenerated = false;
 
   static {
     refreshVerboseExceptions();
@@ -159,15 +160,19 @@ public abstract class MuleException extends Exception {
     return message;
   }
 
-  public String getDetailedMessage() {
-    if (isVerboseExceptions()) {
+  public String getDetailedMessage(boolean forceVerbose) {
+    if (isVerboseExceptions() || forceVerbose) {
       return getVerboseMessage();
     } else {
       return getSummaryMessage();
     }
   }
 
-  public String getVerboseMessage() {
+  public String getDetailedMessage() {
+    return getDetailedMessage(false);
+  }
+
+  private String getVerboseMessage() {
     MuleException e = getRootMuleException(this);
     if (!e.equals(this)) {
       return getMessage();
@@ -200,7 +205,7 @@ public abstract class MuleException extends Exception {
     return buf.toString();
   }
 
-  public String getSummaryMessage() {
+  private String getSummaryMessage() {
     MuleException e = getRootMuleException(this);
     if (!e.equals(this)) {
       return getMessage();
