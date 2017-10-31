@@ -16,13 +16,10 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
 
-import com.google.common.collect.ImmutableSet;
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +44,6 @@ public abstract class MuleException extends Exception {
 
   //To define the information that will be included if a summary is logged instead of a verbose exception
   private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
-  private static final Set<String> FILTERED_OUT_LOGGING_KEYS = ImmutableSet.of(ALREADY_LOGGED_KEY);
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
@@ -181,7 +177,7 @@ public abstract class MuleException extends Exception {
     buf.append("Message               : ").append(message).append(lineSeparator());
 
     Map<String, Object> info = getExceptionInfo(this);
-    for (String key : info.keySet().stream().filter(key -> !FILTERED_OUT_LOGGING_KEYS.contains(key)).sorted().collect(toList())) {
+    for (String key : info.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
       buf.append(": ");
