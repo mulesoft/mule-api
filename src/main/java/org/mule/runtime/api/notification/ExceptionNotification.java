@@ -32,4 +32,9 @@ public class ExceptionNotification extends EnrichedServerNotification {
   public String getType() {
     return TYPE_ERROR;
   }
+
+  @Override
+  public String getEventName() {
+    return "ExceptionNotification";
+  }
 }

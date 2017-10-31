@@ -33,4 +33,9 @@ public class SecurityNotification extends AbstractServerNotification {
   public String getType() {
     return TYPE_WARNING;
   }
+
+  @Override
+  public String getEventName() {
+    return "SecurityNotification";
+  }
 }

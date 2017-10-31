@@ -51,8 +51,6 @@ public abstract class AbstractServerNotification extends EventObject implements 
   public static final int NULL_ACTION = 0;
   public static final Object NULL_MESSAGE = "";
 
-  public final String EVENT_NAME = getClass().getSimpleName();
-
   protected String serverId;
 
   protected long timestamp;
@@ -104,8 +102,8 @@ public abstract class AbstractServerNotification extends EventObject implements 
 
   @Override
   public String toString() {
-    return EVENT_NAME + "{" + "action=" + getActionName(action) + ", resourceId=" + resourceIdentifier + ", serverId=" + serverId
-        + ", timestamp=" + timestamp + "}";
+    return getEventName() + "{" + "action=" + getActionName(action) + ", resourceId=" + resourceIdentifier + ", serverId="
+        + serverId + ", timestamp=" + timestamp + "}";
   }
 
   public String getType() {
@@ -149,5 +147,12 @@ public abstract class AbstractServerNotification extends EventObject implements 
       throw new IllegalArgumentException("No action called: " + action);
     }
   }
+
+  /**
+   * The name that identifies this particular notification type.
+   * 
+   * @return the notification event name.
+   */
+  public abstract String getEventName();
 
 }

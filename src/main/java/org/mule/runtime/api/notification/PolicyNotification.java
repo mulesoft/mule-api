@@ -42,4 +42,9 @@ public class PolicyNotification extends EnrichedServerNotification {
   public String getPolicyId() {
     return policyId;
   }
+
+  @Override
+  public String getEventName() {
+    return "PolicyNotification";
+  }
 }

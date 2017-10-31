@@ -29,4 +29,9 @@ public class ManagementNotification extends AbstractServerNotification {
   public ManagementNotification(Object message, int action) {
     super(message, action);
   }
+
+  @Override
+  public String getEventName() {
+    return "ManagementNotification";
+  }
 }

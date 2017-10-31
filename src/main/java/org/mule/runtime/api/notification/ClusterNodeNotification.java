@@ -25,4 +25,9 @@ public class ClusterNodeNotification extends AbstractServerNotification {
   public boolean isSynchronous() {
     return true;
   }
+
+  @Override
+  public String getEventName() {
+    return "ClusterNodeNotification";
+  }
 }
