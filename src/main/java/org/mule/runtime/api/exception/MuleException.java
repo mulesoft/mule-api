@@ -38,7 +38,7 @@ public abstract class MuleException extends Exception {
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
   public static final String INFO_ERROR_TYPE_KEY = "Error type";
-  public static final String ALREADY_LOGGED_KEY = "Already logged exception";
+  public static final String INFO_ALREADY_LOGGED_KEY = "Logged";
 
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
