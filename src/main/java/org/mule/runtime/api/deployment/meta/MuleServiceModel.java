@@ -18,6 +18,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  */
 public class MuleServiceModel extends AbstractMuleArtifactModel {
 
+  private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";
   private final String serviceProviderClassName;
 
   private MuleServiceModel(String name, String minMuleVersion, Product product,
@@ -29,6 +30,11 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   public String getServiceProviderClassName() {
     return serviceProviderClassName;
+  }
+
+  @Override
+  protected void doValidateCustomFields(String descriptorName) {
+    validateMandatoryFieldIsSet(descriptorName, serviceProviderClassName, SERVICE_PROVIDER_CLASS_NAME);
   }
 
   /**
