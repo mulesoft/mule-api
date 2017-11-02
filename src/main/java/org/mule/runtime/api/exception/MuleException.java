@@ -38,12 +38,12 @@ public abstract class MuleException extends Exception {
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_XML_KEY = "Element XML";
   public static final String INFO_ERROR_TYPE_KEY = "Error type";
+  public static final String INFO_ALREADY_LOGGED_KEY = "Logged";
 
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
   //To define the information that will be included if a summary is logged instead of a verbose exception
   private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
-
 
   private static final long serialVersionUID = -4544199933449632546L;
   private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
