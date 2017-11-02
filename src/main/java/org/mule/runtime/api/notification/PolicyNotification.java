@@ -47,4 +47,9 @@ public class PolicyNotification extends EnrichedServerNotification {
   public String getEventName() {
     return "PolicyNotification";
   }
+
+  @Override
+  public boolean isSynchronous() {
+    return true;
+  }
 }
