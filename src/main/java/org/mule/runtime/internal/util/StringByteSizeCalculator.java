@@ -27,9 +27,8 @@ public class StringByteSizeCalculator {
 
   public long count(String payload, Charset charset) {
     CountingOutputStream countingStream = new CountingOutputStream();
-    Writer writer = new OutputStreamWriter(countingStream, charset);
 
-    try {
+    try (Writer writer = new OutputStreamWriter(countingStream, charset)) {
       for (int i = 0; i < payload.length(); i += WRITE_CHUNK) {
         int end = min(payload.length(), i + WRITE_CHUNK);
         writer.write(payload, i, end - i);
