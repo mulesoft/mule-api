@@ -7,9 +7,8 @@
 package org.mule.runtime.api.meta.model.tck;
 
 import static org.mule.runtime.api.meta.Category.COMMUNITY;
-import org.mule.runtime.api.meta.MuleVersion;
-import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.XmlDslModel;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 
 /**
@@ -54,7 +53,6 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
     router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1).withChain();
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain();
-
     ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
 

@@ -23,13 +23,37 @@ import java.util.List;
  */
 public class PathModel {
 
+  /**
+   * Classifies the generic location where the path is allowed to point
+   */
+  public enum Location {
+
+    /**
+     * The path points to a resource embedded into the Mule application
+     */
+    EMBEDDED,
+
+    /**
+     * The path points to a resource outside of the mule application
+     */
+    EXTERNAL,
+
+    /**
+     * The path can be any of the above
+     */
+    ANY
+
+  }
+
   private final Type type;
   private final List<String> fileExtensions;
   private final boolean acceptsUrls;
+  private final Location location;
 
-  public PathModel(Type type, boolean acceptsUrls, String[] fileExtensions) {
+  public PathModel(Type type, boolean acceptsUrls, Location location, String[] fileExtensions) {
     this.type = type;
     this.acceptsUrls = acceptsUrls;
+    this.location = location;
     this.fileExtensions = unmodifiableList(asList(fileExtensions));
   }
 
@@ -52,6 +76,13 @@ public class PathModel {
    */
   public boolean acceptsUrls() {
     return acceptsUrls;
+  }
+
+  /**
+   * @return a classifier for the path's generic {@link Location}
+   */
+  public Location getLocation() {
+    return location;
   }
 
   @Override
