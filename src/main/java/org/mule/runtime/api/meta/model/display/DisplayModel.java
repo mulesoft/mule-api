@@ -27,8 +27,7 @@ public final class DisplayModel {
 
     private final DisplayModel product = new DisplayModel();
 
-    private DisplayModelBuilder() {
-    }
+    private DisplayModelBuilder() {}
 
     /**
      * Sets the name which should be use to show this model
@@ -106,8 +105,7 @@ public final class DisplayModel {
   private PathModel pathModel;
   private ClassValueModel classValueModel;
 
-  private DisplayModel() {
-  }
+  private DisplayModel() {}
 
   /**
    * @return The name which should be use to show this model
