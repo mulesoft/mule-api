@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.display;
 
+import static java.util.Optional.ofNullable;
+
 import java.util.Objects;
 import java.util.Optional;
 
@@ -25,7 +27,8 @@ public final class DisplayModel {
 
     private final DisplayModel product = new DisplayModel();
 
-    private DisplayModelBuilder() {}
+    private DisplayModelBuilder() {
+    }
 
     /**
      * Sets the name which should be use to show this model
@@ -72,6 +75,17 @@ public final class DisplayModel {
     }
 
     /**
+     * A {@link ClassValueModel} with metadata for a parameter which references a class
+     *
+     * @param classValueModel a {@link ClassValueModel} with the metadata associated to the class param
+     * @return {@code this} builder
+     */
+    public DisplayModelBuilder classValue(ClassValueModel classValueModel) {
+      product.classValueModel = classValueModel;
+      return this;
+    }
+
+    /**
      * @return the built {@link DisplayModel}
      */
     public DisplayModel build() {
@@ -90,8 +104,10 @@ public final class DisplayModel {
   private String summary;
   private String example;
   private PathModel pathModel;
+  private ClassValueModel classValueModel;
 
-  private DisplayModel() {}
+  private DisplayModel() {
+  }
 
   /**
    * @return The name which should be use to show this model
@@ -119,7 +135,11 @@ public final class DisplayModel {
    * an {@link Optional#empty()} if its not.
    */
   public Optional<PathModel> getPathModel() {
-    return Optional.ofNullable(pathModel);
+    return ofNullable(pathModel);
+  }
+
+  public Optional<ClassValueModel> getClassValueModel() {
+    return ofNullable(classValueModel);
   }
 
   @Override
@@ -129,7 +149,8 @@ public final class DisplayModel {
       return Objects.equals(other.getDisplayName(), this.getDisplayName()) &&
           Objects.equals(other.getSummary(), this.getSummary()) &&
           Objects.equals(other.getExample(), this.getExample()) &&
-          Objects.equals(other.getPathModel(), this.getPathModel());
+          Objects.equals(other.getPathModel(), this.getPathModel()) &&
+          Objects.equals(other.getClassValueModel(), this.getClassValueModel());
     }
 
     return false;
@@ -137,6 +158,6 @@ public final class DisplayModel {
 
   @Override
   public int hashCode() {
-    return Objects.hash(displayName, summary, example);
+    return Objects.hash(displayName, summary, example, classValueModel);
   }
 }
