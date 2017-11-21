@@ -17,6 +17,8 @@ import java.util.Map;
  */
 public class DefaultMuleAuthentication implements Authentication {
 
+  private static final long serialVersionUID = -8958045048390093902L;
+
   private final char[] credentials;
   private final String user;
   private final Map<String, Object> properties;
