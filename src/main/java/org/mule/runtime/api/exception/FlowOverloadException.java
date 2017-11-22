@@ -8,6 +8,11 @@ package org.mule.runtime.api.exception;
 
 import java.util.concurrent.RejectedExecutionException;
 
+/**
+ * Exception thrown when a {@link RejectedExecutionException} was encountered during the flow.
+ *
+ * @since 1.1
+ */
 public class FlowOverloadException extends RejectedExecutionException {
 
   private static final long serialVersionUID = -1456137134254209436L;
