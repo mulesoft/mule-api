@@ -6,6 +6,11 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 /**
  * Base class for {@link Declarer declarers} which allow to construct an {@link OperationDeclaration}
  *
@@ -15,6 +20,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
  */
 public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentDeclarer, D extends ExecutableComponentDeclaration>
     extends ComponentDeclarer<T, D> {
+
+  private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
@@ -77,6 +84,18 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
    */
   public T supportsStreaming(boolean supportsStreaming) {
     declaration.setSupportsStreaming(supportsStreaming);
+    return (T) this;
+  }
+
+  /**
+   * Adds a {@link NotificationModel} to indicate that the current component fires the added notification.
+   *
+   * @param notification {@link NotificationModel} to add to the {@link OperationDeclaration}
+   * @return {@code this} declarer
+   * @since 1.1
+   */
+  public T withNotificationModel(NotificationModel notification) {
+    declaration.addNotificationModel(notification);
     return (T) this;
   }
 

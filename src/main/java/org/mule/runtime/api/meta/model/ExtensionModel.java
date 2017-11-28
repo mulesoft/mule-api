@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model;
 
+import static java.util.Collections.emptySet;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.DescribedObject;
@@ -17,6 +18,7 @@ import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
@@ -195,4 +197,14 @@ public interface ExtensionModel
    * @return A {@link Set} of {@link ErrorModel} registered in the extension.
    */
   Set<ErrorModel> getErrorModels();
+
+  /**
+   * @return A {@link Set} of {@link NotificationModel} registered in the extension.
+   * @since 1.1
+   */
+  default Set<NotificationModel> getNotificationModels() {
+    return emptySet();
+  }
+
+
 }

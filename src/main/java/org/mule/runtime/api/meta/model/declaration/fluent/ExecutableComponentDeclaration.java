@@ -6,7 +6,11 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A declaration object for a {@link OperationModel}. It contains raw, unvalidated
@@ -22,6 +26,7 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   private boolean supportsStreaming = false;
   private OutputDeclaration outputContent;
   private OutputDeclaration outputAttributes;
+  private Set<NotificationModel> notificationModels = new HashSet<>();
 
   /**
    * {@inheritDoc}
@@ -84,6 +89,14 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
 
   public void setSupportsStreaming(boolean supportsStreaming) {
     this.supportsStreaming = supportsStreaming;
+  }
+
+  public void addNotificationModel(NotificationModel notificationModel) {
+    notificationModels.add(notificationModel);
+  }
+
+  public Set<NotificationModel> getNotificationModels() {
+    return notificationModels;
   }
 
 }

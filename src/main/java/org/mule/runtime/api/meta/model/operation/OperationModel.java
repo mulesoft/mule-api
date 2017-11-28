@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.operation;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ConnectableComponentModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.notification.FiresNotifications;
 
 /**
  * A definition of an operation in a {@link ExtensionModel}.
@@ -25,7 +26,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
  *
  * @since 1.0
  */
-public interface OperationModel extends ConnectableComponentModel {
+public interface OperationModel extends ConnectableComponentModel, FiresNotifications {
 
   /**
    * @return Whether this operation is blocking or non blocking execution is supported
