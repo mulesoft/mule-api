@@ -139,8 +139,27 @@ public interface DslConstants {
   String TLS_TRUST_STORE_ELEMENT_IDENTIFIER = "trust-store";
 
   /**
+   * The identifier name of the {@code tls:revocation-check} infrastructure parameter
+   */
+  String TLS_REVOCATION_CHECK_ELEMENT_IDENTIFIER = "revocation-check";
+
+  /**
+   * The identifier name of the {@code tls:crl-file} infrastructure parameter
+   */
+  String TLS_CRL_FILE_ELEMENT_IDENTIFIER = "crl-file";
+
+  /**
+   * The identifier name of the {@code tls:custom-ocsp-responder} infrastructure parameter
+   */
+  String TLS_CUSTOM_OCSP_RESPONDER_ELEMENT_IDENTIFIER = "custom-ocsp-responder";
+
+  /**
+   * The identifier name of the {@code tls:standard-revocation-check} infrastructure parameter
+   */
+  String TLS_STANDARD_REVOCATION_CHECK_ELEMENT_IDENTIFIER = "standard-revocation-check";
+
+  /**
    * The prefix name of the {@code tls:context} infrastructure parameter
    */
   String TLS_PREFIX = "tls";
-
 }
