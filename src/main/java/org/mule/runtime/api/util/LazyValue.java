@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  * @param <T> the generic type of the provided value
  * @since 1.0
  */
-public class LazyValue<T> {
+public class LazyValue<T> implements Supplier<T> {
 
   private T value;
   private Supplier<T> valueSupplier;
@@ -65,6 +65,7 @@ public class LazyValue<T> {
    *
    * @return the lazy value
    */
+  @Override
   public T get() {
     return valueSupplier.get();
   }

@@ -17,12 +17,13 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
+import org.mule.runtime.api.util.LazyValue;
 
 import java.util.Map;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
- * 
+ *
  * @since 1.0
  */
 public class BindingContextUtils {
@@ -46,50 +47,75 @@ public class BindingContextUtils {
   /**
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
-   * 
+   *
    * @param event the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    *         given {@code event}.
    */
   public static BindingContext addEventBindings(Event event, BindingContext baseContext) {
+    return addEventBuindingsToBuilder(event, baseContext).build();
+  }
+
+  /**
+   * Creates a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
+   * to the given {@code event}.
+   *
+   * @param event the event to build the new bindings for. Not-null.
+   * @param baseContext the context whose copy the event bindings will be added to. Not-null.
+   * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
+   *         to the given {@code event}.
+   */
+  public static BindingContext.Builder addEventBuindingsToBuilder(Event event, BindingContext baseContext) {
     requireNonNull(event);
     requireNonNull(baseContext);
 
     BindingContext.Builder contextBuilder = BindingContext.builder(baseContext);
 
-    Map<String, TypedValue<?>> flowVars = unmodifiableMap(event.getVariables());
-    contextBuilder.addBinding(VARS,
-                              new TypedValue<>(flowVars, DataType.builder()
-                                  .mapType(flowVars.getClass())
-                                  .keyType(String.class)
-                                  .valueType(TypedValue.class)
-                                  .build()));
-    contextBuilder.addBinding(CORRELATION_ID, new TypedValue<>(event.getContext().getCorrelationId(), STRING));
+    contextBuilder.addBinding(VARS, new LazyValue<>(() -> {
+      Map<String, TypedValue<?>> flowVars = unmodifiableMap(event.getVariables());
+      return new TypedValue<>(flowVars, DataType.builder()
+          .mapType(flowVars.getClass())
+          .keyType(String.class)
+          .valueType(TypedValue.class)
+          .build());
+    }));
+
+    contextBuilder.addBinding(CORRELATION_ID,
+                              new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
     Message message = event.getMessage();
-    contextBuilder.addBinding(MESSAGE, new TypedValue<>(message, fromType(Message.class)));
+    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
-    contextBuilder.addBinding(DATA_TYPE, new TypedValue<>(message.getPayload().getDataType(), fromType(DataType.class)));
-    Error error = event.getError().isPresent() ? event.getError().get() : null;
-    contextBuilder.addBinding(ERROR, new TypedValue<>(error, fromType(Error.class)));
+    contextBuilder.addBinding(DATA_TYPE,
+                              new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(),
+                                                                     fromType(DataType.class))));
+    contextBuilder.addBinding(ERROR, new LazyValue<>(() -> {
+      Error error = event.getError().isPresent() ? event.getError().get() : null;
+      return new TypedValue<>(error, fromType(Error.class));
+    }));
 
-    Authentication authentication = event.getAuthentication().orElse(null);
-    contextBuilder.addBinding(AUTHENTICATION, new TypedValue<>(authentication, fromType(Authentication.class)));
-
-    return contextBuilder.build();
+    contextBuilder.addBinding(AUTHENTICATION, new LazyValue<>(() -> {
+      Authentication authentication = event.getAuthentication().orElse(null);
+      return new TypedValue<>(authentication, fromType(Authentication.class));
+    }));
+    return contextBuilder;
   }
 
   /**
-   * Creates a new {@link BindingContext} that only contains the restricted bindings to be used for evaluating the target expression.
+   * Creates a new {@link BindingContext} that only contains the restricted bindings to be used for evaluating the target
+   * expression.
    *
    * @param message the message to build the bindings for. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code message}.
    */
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
-    return BindingContext.builder().addBinding(MESSAGE, new TypedValue(message, DataType.fromType(Message.class)))
-        .addBinding(PAYLOAD, message.getPayload()).addBinding(ATTRIBUTES, message.getAttributes()).build();
+    return BindingContext.builder()
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue(message, DataType.fromType(Message.class))))
+        .addBinding(PAYLOAD, message.getPayload())
+        .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
+
 }
