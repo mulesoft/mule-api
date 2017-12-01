@@ -17,13 +17,13 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
+import org.mule.runtime.api.util.LazyValue;
 
 import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
- * 
+ *
  * @since 1.0
  */
 public class BindingContextUtils {
@@ -47,7 +47,7 @@ public class BindingContextUtils {
   /**
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
-   * 
+   *
    * @param event the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
@@ -60,7 +60,7 @@ public class BindingContextUtils {
   /**
    * Creates a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
    * to the given {@code event}.
-   * 
+   *
    * @param event the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
@@ -72,7 +72,7 @@ public class BindingContextUtils {
 
     BindingContext.Builder contextBuilder = BindingContext.builder(baseContext);
 
-    contextBuilder.addBinding(VARS, memoize(() -> {
+    contextBuilder.addBinding(VARS, new LazyValue<>(() -> {
       Map<String, TypedValue<?>> flowVars = unmodifiableMap(event.getVariables());
       return new TypedValue<>(flowVars, DataType.builder()
           .mapType(flowVars.getClass())
@@ -81,20 +81,22 @@ public class BindingContextUtils {
           .build());
     }));
 
-    contextBuilder.addBinding(CORRELATION_ID, memoize(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
+    contextBuilder.addBinding(CORRELATION_ID,
+                              new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
     Message message = event.getMessage();
-    contextBuilder.addBinding(MESSAGE, memoize(() -> new TypedValue<>(message, fromType(Message.class))));
+    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE,
-                              memoize(() -> new TypedValue<>(message.getPayload().getDataType(), fromType(DataType.class))));
-    contextBuilder.addBinding(ERROR, memoize(() -> {
+                              new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(),
+                                                                     fromType(DataType.class))));
+    contextBuilder.addBinding(ERROR, new LazyValue<>(() -> {
       Error error = event.getError().isPresent() ? event.getError().get() : null;
       return new TypedValue<>(error, fromType(Error.class));
     }));
 
-    contextBuilder.addBinding(AUTHENTICATION, memoize(() -> {
+    contextBuilder.addBinding(AUTHENTICATION, new LazyValue<>(() -> {
       Authentication authentication = event.getAuthentication().orElse(null);
       return new TypedValue<>(authentication, fromType(Authentication.class));
     }));
@@ -111,36 +113,9 @@ public class BindingContextUtils {
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
     return BindingContext.builder()
-        .addBinding(MESSAGE, memoize(() -> new TypedValue(message, DataType.fromType(Message.class))))
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue(message, DataType.fromType(Message.class))))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
-  }
-
-  /**
-   * Wraps the given supplier {@code s} so that results for a given input are cached.
-   * 
-   * @param s the supplier to memoize
-   * @return the memoized supplier
-   */
-  private static <T> Supplier<T> memoize(Supplier<T> s) {
-    return new Supplier<T>() {
-
-      Supplier<T> delegate = this::firstTime;
-      boolean initialized;
-
-      public T get() {
-        return delegate.get();
-      }
-
-      private synchronized T firstTime() {
-        if (!initialized) {
-          T value = s.get();
-          delegate = () -> value;
-          initialized = true;
-        }
-        return delegate.get();
-      }
-    };
   }
 
 }
