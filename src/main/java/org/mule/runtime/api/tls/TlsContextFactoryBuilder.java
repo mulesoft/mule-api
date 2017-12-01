@@ -144,6 +144,13 @@ public interface TlsContextFactoryBuilder {
   TlsContextFactoryBuilder keyStoreAlgorithm(String algorithm);
 
   /**
+   * Defines the certificate revocation checking mechanism. By default no mechanism is selected.
+   *
+   * @return a revocation check builder
+   */
+  TlsRevocationCheckBuilder revocationCheck();
+
+  /**
    * Returns a {@link TlsContextFactory} based on the configured properties.
    *
    * @return a newly built {@link TlsContextFactory}.
