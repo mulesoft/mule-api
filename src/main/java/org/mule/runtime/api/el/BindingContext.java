@@ -10,6 +10,7 @@ import org.mule.runtime.api.metadata.TypedValue;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Contains all the binding definitions required by the EL.
@@ -60,7 +61,7 @@ public interface BindingContext {
 
   /**
    * Returns all modules
-   * @return a {@link Collection} af all modules
+   * @return a {@link Collection} of all modules
    */
   Collection<ExpressionModule> modules();
 
@@ -73,6 +74,18 @@ public interface BindingContext {
      * @param identifier the keyword to use in the EL to access the {@code value}
      */
     Builder addBinding(String identifier, TypedValue value);
+
+    /**
+     * Will create a binding for the specified identifier and lazy value.
+     *
+     * @param value the value to bind
+     * @param identifier the keyword to use in the EL to access the {@code value}
+     * 
+     * @since 1.1
+     */
+    default Builder addBinding(String identifier, Supplier<TypedValue> value) {
+      return addBinding(identifier, value.get());
+    }
 
     /**
      * Will include all bindings in the given {@link BindingContext}.
