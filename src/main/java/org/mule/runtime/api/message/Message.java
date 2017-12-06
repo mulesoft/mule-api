@@ -260,6 +260,11 @@ public interface Message extends Serializable {
   }
 
 
+  /**
+   * {@link Builder} specialization for {@link Map} payloads.
+   *
+   * @since 1.1
+   */
   interface MapBuilder extends Builder {
 
     /**
