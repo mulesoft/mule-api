@@ -8,12 +8,14 @@ package org.mule.runtime.api.message;
 
 import org.mule.runtime.api.metadata.CollectionDataType;
 import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.metadata.MapDataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Represents a message. The Message is comprised of the payload, (a value and its {@link DataType}) and
@@ -139,7 +141,7 @@ public interface Message extends Serializable {
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
      *
-     * @param value the collection content
+     * @param value    the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the content is null
@@ -160,13 +162,26 @@ public interface Message extends Serializable {
      */
     CollectionBuilder collectionValue(Object[] value);
 
+    /**
+     * Sets the map value for the {@link Message}'s payload to be built.
+     *
+     * @param value     the map content
+     * @param keyType   the map's key type
+     * @param valueType the map's value type
+     * @return this builder
+     * @throws NullPointerException if the content is null
+     */
+    MapBuilder mapValue(Map value, Class<?> keyType, Class<?> valueType);
+
   }
 
   /**
    * Handles the {@link Message}'s {@link MediaType} as well as its attributes creation, either from a provided {@link TypedValue}
    * or constructing it internally from a given value and {@link MediaType}.
    *
-   * @see {@link #attributes(TypedValue)}, {@link #attributesValue(Object)}, {@link #attributesMediaType(MediaType)}
+   * @see #attributes(TypedValue)
+   * @see #attributesValue(Object)
+   * @see #attributesMediaType(MediaType)
    */
   interface Builder extends PayloadBuilder {
 
@@ -242,37 +257,35 @@ public interface Message extends Serializable {
      */
     CollectionBuilder itemMediaType(MediaType mediaType);
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    CollectionBuilder mediaType(MediaType mediaType);
+  }
+
+
+  /**
+   * {@link Builder} specialization for {@link Map} payloads.
+   *
+   * @since 1.1
+   */
+  interface MapBuilder extends Builder {
 
     /**
-     * {@inheritDoc}
+     * Sets the {@link MediaType} for the map value items in the {@link Message} to be built. See
+     * {@link MapDataType#getValueDataType()}
+     *
+     * @param mediaType the mediaType to set
+     * @return this builder
+     * @throws NullPointerException if the mediaType is null
      */
-    @Override
-    CollectionBuilder attributes(TypedValue<?> typedValue);
+    MapBuilder valueMediaType(MediaType mediaType);
 
     /**
-     * {@inheritDoc}
+     * Sets the {@link MediaType} for the map value items in the {@link Message} to be built. See
+     * {@link MapDataType#getValueDataType()}
+     *
+     * @param mediaType the mediaType to set
+     * @return this builder
+     * @throws NullPointerException if the mediaType is null
      */
-    @Override
-    CollectionBuilder nullAttributesValue();
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    CollectionBuilder attributesValue(Object value);
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    CollectionBuilder attributesMediaType(MediaType mediaType);
-
-
+    MapBuilder keyMediaType(MediaType mediaType);
   }
 
 }
