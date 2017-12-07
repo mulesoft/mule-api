@@ -31,7 +31,7 @@ public abstract class InputStaticTypeResolver implements InputTypeResolver, Stat
   }
 
   /**
-   * This method resolves the static output type for a {@link ParameterModel} proxing to the
+   * This method resolves the static input type for a {@link ParameterModel} proxing to the
    * {@link StaticResolver#getStaticMetadata()} method.
    * <p>
    * The context and key are not used nor injected.
