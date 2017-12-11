@@ -16,13 +16,13 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * {@code MuleException} is the base exception type for the Mule server any other exceptions thrown by Mule code will be based on
@@ -168,10 +168,6 @@ public abstract class MuleException extends Exception {
   }
 
   public String getVerboseMessage() {
-    MuleException e = getRootMuleException(this);
-    if (!e.equals(this)) {
-      return getMessage();
-    }
     StringBuilder buf = new StringBuilder(1024);
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
