@@ -50,10 +50,4 @@ public interface PartialTypeKeysResolver<T> extends TypeKeysResolver {
    */
   MetadataKey resolveChilds(MetadataContext context, T partial) throws MetadataResolvingException, ConnectionException;
 
-  /**
-   * {@inheritDoc}
-   */
-  default String getResolverName() {
-    return "partial_keys";
-  }
 }
