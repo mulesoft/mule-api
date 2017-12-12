@@ -16,6 +16,8 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
  */
 public class ComponentExecutionException extends MuleRuntimeException {
 
+  private static final long serialVersionUID = 8346554813024241753L;
+
   private final Event event;
 
   /**
@@ -28,6 +30,9 @@ public class ComponentExecutionException extends MuleRuntimeException {
   }
 
   /**
+   * Provides the {@link Event} associated to the exception, including the resulting {@link org.mule.runtime.api.message.Error}
+   * with all the resolved data, such as it's {@link org.mule.runtime.api.message.ErrorType} and cause.
+   *
    * @return the {@link Event} at the moment of the exception.
    */
   public Event getEvent() {
