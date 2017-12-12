@@ -25,6 +25,7 @@ public interface ExecutableComponent extends Component {
    *
    * @param inputEvent the input to execute the component
    * @return a {@link ExecutionResult} with the content of the result
+   * @throws ComponentExecutionException if there is an unhandled error within the execution
    */
   CompletableFuture<ExecutionResult> execute(InputEvent inputEvent);
 
@@ -36,6 +37,7 @@ public interface ExecutableComponent extends Component {
    * 
    * @param event the input to execute the component
    * @return a {@link Event} with the content of the result
+   * @throws ComponentExecutionException if there is an unhandled error within the execution
    */
   CompletableFuture<Event> execute(Event event);
 
