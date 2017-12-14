@@ -11,6 +11,8 @@ import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
+import org.mule.runtime.api.artifact.Registry;
+
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
@@ -23,6 +25,10 @@ import java.util.function.Supplier;
 public class SchedulerConfig {
 
   /**
+   * Whenever possible, use a {@link SchedulerConfig} from the {@link Registry} or inject it rather than building a new one with
+   * this method. {@link SchedulerConfig}s obtained that way are already configured with base configuration based on the artifact
+   * it belongs to.
+   *
    * @return a default configuration, which can be further customized.
    */
   public static SchedulerConfig config() {
@@ -57,7 +63,7 @@ public class SchedulerConfig {
    * <p>
    * This is useful to apply throttling on the target {@link Scheduler}. The way exceeding tasks will be handled is determined by
    * the target {@link Scheduler}.
-   * 
+   *
    * @param maxConcurrentTasks how many tasks can be running at the same time for the target {@link Scheduler}.
    * @return the updated configuration.
    */
@@ -74,7 +80,7 @@ public class SchedulerConfig {
 
   /**
    * Sets the prefix to prepend to the name for the target {@link Scheduler}, which will override the default one.
-   * 
+   *
    * @param schedulerPrefix the prefix for the name for the target {@link Scheduler}.
    * @return the updated configuration.
    */
@@ -84,7 +90,7 @@ public class SchedulerConfig {
 
   /**
    * Sets the name for the target {@link Scheduler}, which will override the default one.
-   * 
+   *
    * @param schedulerName the name for the target {@link Scheduler}.
    * @return the updated configuration.
    */
@@ -111,7 +117,7 @@ public class SchedulerConfig {
    * <p>
    * This is only applicable for <b>custom</b> {@link Scheduler}s. This behaviour cannot be changed for the runtime managed
    * {@link Scheduler}.
-   * 
+   *
    * @return the updated configuration
    */
   public SchedulerConfig withWaitAllowed(boolean waitAllowed) {
@@ -128,7 +134,7 @@ public class SchedulerConfig {
 
   /**
    * Sets the graceful shutdown timeout to use when stopping the target {@link Scheduler}.
-   * 
+   *
    * @param shutdownTimeoutSupplier a supplier of the value of the timeout to use when gracefully stopping the target
    *        {@link Scheduler}, expressed in the provided {@link TimeUnit}.
    * @param shutdownTimeoutUnit the unit of the timeout to use when gracefully stopping the target {@link Scheduler}.
@@ -146,7 +152,7 @@ public class SchedulerConfig {
 
   /**
    * Sets the graceful shutdown timeout to use when stopping the target {@link Scheduler}.
-   * 
+   *
    * @param shutdownTimeout the value of the timeout to use when gracefully stopping the target {@link Scheduler}, expressed in
    *        the provided {@link TimeUnit}.
    * @param shutdownTimeoutUnit the unit of the timeout to use when gracefully stopping the target {@link Scheduler}.

@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledFuture;
  * {@link ExecutorService} will run.
  * <p>
  * See {@link ScheduledExecutorService} and {@link ExecutorService} for documentation on the provided methods.
- * 
+ *
  * @since 1.0
  */
 public interface Scheduler extends ScheduledExecutorService {
@@ -67,8 +67,18 @@ public interface Scheduler extends ScheduledExecutorService {
 
   /**
    * Returns a name that indicates where was this scheduler created.
-   * 
+   *
    * @return the name of this scheduler.
    */
   String getName();
+
+  /**
+   * @return the string to append to the name of the thread that executes a task for this Scheduler, or {@code null} if nothing is
+   *         to be appended.
+   * 
+   * @since 1.1
+   */
+  default String getThreadNameSuffix() {
+    return getName();
+  }
 }
