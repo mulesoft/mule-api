@@ -34,6 +34,11 @@ public class SourceDeclarer extends ExecutableComponentDeclarer<SourceDeclarer, 
     return this;
   }
 
+  public SourceDeclarer runsOnPrimaryNodeOnly(boolean primaryNodeOnly) {
+    declaration.setRunsOnPrimaryNodeOnly(primaryNodeOnly);
+    return this;
+  }
+
   /**
    * Allows to declare a callback which will listen to all the successful results of the dispatched
    * Source messages to the flow.

@@ -21,6 +21,7 @@ import java.util.Optional;
 public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDeclaration> {
 
   private boolean hasResponse = false;
+  private boolean runsOnPrimaryNodeOnly = false;
   private SourceCallbackDeclaration successCallback = null;
   private SourceCallbackDeclaration errorCallback = null;
   private SourceCallbackDeclaration backPressureCallback = null;
@@ -120,6 +121,17 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
     this.terminateCallback = terminateCallback;
   }
 
+  public boolean isHasResponse() {
+    return hasResponse;
+  }
+
+  public boolean isRunsOnPrimaryNodeOnly() {
+    return runsOnPrimaryNodeOnly;
+  }
+
+  public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
+    this.runsOnPrimaryNodeOnly = runsOnPrimaryNodeOnly;
+  }
   /**
    * Sets the back pressure {@link SourceCallbackDeclaration}
    * @param backPressureCallback a callback declaration or {@code null}
