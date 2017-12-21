@@ -2,41 +2,6 @@
   "revapi": {
     "ignore": [
       {
-        "code": "java.method.returnTypeChanged",
-        "old": "method org.mule.runtime.api.message.Message.CollectionBuilder org.mule.runtime.api.message.Message.CollectionBuilder::attributes(org.mule.runtime.api.metadata.TypedValue<?>)",
-        "new": "method org.mule.runtime.api.message.Message.Builder org.mule.runtime.api.message.Message.Builder::attributes(org.mule.runtime.api.metadata.TypedValue<?>) @ org.mule.runtime.api.message.Message.CollectionBuilder",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
-        "code": "java.method.returnTypeChanged",
-        "old": "method org.mule.runtime.api.message.Message.CollectionBuilder org.mule.runtime.api.message.Message.CollectionBuilder::attributesMediaType(org.mule.runtime.api.metadata.MediaType)",
-        "new": "method org.mule.runtime.api.message.Message.Builder org.mule.runtime.api.message.Message.Builder::attributesMediaType(org.mule.runtime.api.metadata.MediaType) @ org.mule.runtime.api.message.Message.CollectionBuilder",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
-        "code": "java.method.returnTypeChanged",
-        "old": "method org.mule.runtime.api.message.Message.CollectionBuilder org.mule.runtime.api.message.Message.CollectionBuilder::attributesValue(java.lang.Object)",
-        "new": "method org.mule.runtime.api.message.Message.Builder org.mule.runtime.api.message.Message.Builder::attributesValue(java.lang.Object) @ org.mule.runtime.api.message.Message.CollectionBuilder",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
-        "code": "java.method.returnTypeChanged",
-        "old": "method org.mule.runtime.api.message.Message.CollectionBuilder org.mule.runtime.api.message.Message.CollectionBuilder::mediaType(org.mule.runtime.api.metadata.MediaType)",
-        "new": "method org.mule.runtime.api.message.Message.Builder org.mule.runtime.api.message.Message.Builder::mediaType(org.mule.runtime.api.metadata.MediaType) @ org.mule.runtime.api.message.Message.CollectionBuilder",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
-        "code": "java.method.returnTypeChanged",
-        "old": "method org.mule.runtime.api.message.Message.CollectionBuilder org.mule.runtime.api.message.Message.CollectionBuilder::nullAttributesValue()",
-        "new": "method org.mule.runtime.api.message.Message.Builder org.mule.runtime.api.message.Message.Builder::nullAttributesValue() @ org.mule.runtime.api.message.Message.CollectionBuilder",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
-        "code": "java.method.addedToInterface",
-        "new": "method org.mule.runtime.api.message.Message.MapBuilder org.mule.runtime.api.message.Message.PayloadBuilder::mapValue(java.util.Map, java.lang.Class<?>, java.lang.Class<?>)",
-        "justification": "MULE-14279: API broken by MULE-14171"
-      },
-      {
         "code": "java.method.addedToInterface",
         "new": "method org.mule.runtime.api.tls.TlsRevocationCheckBuilder org.mule.runtime.api.tls.TlsContextFactoryBuilder::revocationCheck()",
         "justification": "MULE-14280: API broken by MULE-14082"
