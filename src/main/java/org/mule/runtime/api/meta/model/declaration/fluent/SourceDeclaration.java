@@ -23,6 +23,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
   private boolean hasResponse = false;
   private SourceCallbackDeclaration successCallback = null;
   private SourceCallbackDeclaration errorCallback = null;
+  private SourceCallbackDeclaration backPressureCallback = null;
   private SourceCallbackDeclaration terminateCallback = null;
 
   /**
@@ -89,6 +90,14 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
   }
 
   /**
+   * @return the back pressure {@link SourceCallbackDeclaration} if provided
+   * @since 1.1
+   */
+  public Optional<SourceCallbackDeclaration> getBackPressureCallback() {
+    return ofNullable(backPressureCallback);
+  }
+
+  /**
    * Sets the error {@link SourceCallbackDeclaration}
    * @param errorCallback a callback declaration or {@code null}
    */
@@ -111,5 +120,12 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
     this.terminateCallback = terminateCallback;
   }
 
-
+  /**
+   * Sets the back pressure {@link SourceCallbackDeclaration}
+   * @param backPressureCallback a callback declaration or {@code null}
+   *                             @since 1.1
+   */
+  public void setBackPressureCallback(SourceCallbackDeclaration backPressureCallback) {
+    this.backPressureCallback = backPressureCallback;
+  }
 }
