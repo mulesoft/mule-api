@@ -32,6 +32,15 @@ public final class Pair<K, V> implements Serializable {
   private final V second;
 
   /**
+   * Creates a new Pair
+   * 
+   * @return a new instance of {@link Pair} with types K,V
+   */
+  public static <K, V> Pair<K, V> of(K first, V second) {
+    return new Pair<>(first, second);
+  }
+
+  /**
    * Creates a new pair
    *
    * @param first The first element of this pair
