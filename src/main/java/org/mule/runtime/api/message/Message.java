@@ -171,7 +171,9 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the content is null
      */
-    MapBuilder mapValue(Map value, Class<?> keyType, Class<?> valueType);
+    default MapBuilder mapValue(Map value, Class<?> keyType, Class<?> valueType) {
+      throw new UnsupportedOperationException();
+    }
 
   }
 
@@ -179,9 +181,7 @@ public interface Message extends Serializable {
    * Handles the {@link Message}'s {@link MediaType} as well as its attributes creation, either from a provided {@link TypedValue}
    * or constructing it internally from a given value and {@link MediaType}.
    *
-   * @see #attributes(TypedValue)
-   * @see #attributesValue(Object)
-   * @see #attributesMediaType(MediaType)
+   * @see {@link #attributes(TypedValue)}, {@link #attributesValue(Object)}, {@link #attributesMediaType(MediaType)}
    */
   interface Builder extends PayloadBuilder {
 
@@ -257,8 +257,37 @@ public interface Message extends Serializable {
      */
     CollectionBuilder itemMediaType(MediaType mediaType);
 
-  }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    CollectionBuilder mediaType(MediaType mediaType);
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    CollectionBuilder attributes(TypedValue<?> typedValue);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    CollectionBuilder nullAttributesValue();
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    CollectionBuilder attributesValue(Object value);
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    CollectionBuilder attributesMediaType(MediaType mediaType);
+
+  }
 
   /**
    * {@link Builder} specialization for {@link Map} payloads.
@@ -275,7 +304,9 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the mediaType is null
      */
-    MapBuilder valueMediaType(MediaType mediaType);
+    default MapBuilder valueMediaType(MediaType mediaType) {
+      throw new UnsupportedOperationException();
+    }
 
     /**
      * Sets the {@link MediaType} for the map value items in the {@link Message} to be built. See
@@ -285,7 +316,8 @@ public interface Message extends Serializable {
      * @return this builder
      * @throws NullPointerException if the mediaType is null
      */
-    MapBuilder keyMediaType(MediaType mediaType);
+    default MapBuilder keyMediaType(MediaType mediaType) {
+      throw new UnsupportedOperationException();
+    }
   }
-
 }
