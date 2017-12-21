@@ -66,7 +66,9 @@ public interface SourceModel extends ConnectableComponentModel {
    */
   Optional<SourceCallbackModel> getTerminateCallback();
 
-  boolean isRunsOnPrimaryNodeOnly();
+  default boolean isRunsOnPrimaryNodeOnly() {
+    return false;
+  }
 
   /**
    * Returns all the {@link ParameterModel} on all groups, including
