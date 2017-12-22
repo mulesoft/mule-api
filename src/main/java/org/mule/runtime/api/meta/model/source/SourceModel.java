@@ -72,7 +72,7 @@ public interface SourceModel extends ConnectableComponentModel {
   /**
    * @return Whether the declared source should only run in the primary node when in cluster mode
    */
-  boolean isRunsOnPrimaryNodeOnly();
+  boolean runsOnPrimaryNodeOnly();
 
   /**
    * Returns all the {@link ParameterModel} on all groups, including
