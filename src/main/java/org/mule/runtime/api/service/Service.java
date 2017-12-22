@@ -7,9 +7,13 @@
 
 package org.mule.runtime.api.service;
 
+import static java.util.Collections.emptyList;
+
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
 import org.mule.runtime.api.meta.NamedObject;
+
+import java.util.List;
 
 /**
  * Defines a named service which is instantiated at the container level.
@@ -22,8 +26,19 @@ import org.mule.runtime.api.meta.NamedObject;
  * <p>
  * Implementations may overload methods from the Service interface with {@link javax.inject.Inject @Inject} and add any parameters
  * to be resolved from the Mule application context. When such invocation is made, those injected parameters cannot be null.
- * 
+ *
  * @since 1.0
  */
 public interface Service extends NamedObject {
+
+  /**
+   * Provides a list of lines to show in the splash screen of the Mule Runtime when this service is started.
+   *
+   * @return the lines to show in the splash screen
+   *
+   * @since 1.1
+   */
+  default List<String> splashMessageLines() {
+    return emptyList();
+  }
 }
