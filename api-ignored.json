@@ -8,10 +8,10 @@
       },
       {
         "code": "java.method.addedToInterface",
-        "new": "method boolean org.mule.runtime.api.meta.model.source.SourceModel::isRunsOnPrimaryNodeOnly()",
+        "new": "method boolean org.mule.runtime.api.meta.model.source.SourceModel::runsOnPrimaryNodeOnly()",
         "package": "org.mule.runtime.api.meta.model.source",
         "classSimpleName": "SourceModel",
-        "methodName": "isRunsOnPrimaryNodeOnly",
+        "methodName": "runsOnPrimaryNodeOnly",
         "elementKind": "method",
         "justification": "This interface is not meant to be implemented by the user"
       }
