@@ -19,6 +19,9 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
  * contained by different {@link HasOperationModels} instances,
  * then each of those containers should reference the same
  * operation model instance.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

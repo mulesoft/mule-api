@@ -12,8 +12,10 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.ObjectType;
 
 /**
- * A model which describes that an extension is importing an
- * {@link #getImportedType() imported type}.
+ * A model which describes that an extension is importing an {@link #getImportedType() imported type}.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
@@ -24,7 +26,7 @@ public final class ImportedTypeModel {
   /**
    * Creates a new instance
    *
-   * @param importedType        the type to be imported
+   * @param importedType the type to be imported
    * @throws IllegalArgumentException if {@code originExtensionName} is blank or {@code importedType} is {@code null}
    */
   public ImportedTypeModel(ObjectType importedType) {

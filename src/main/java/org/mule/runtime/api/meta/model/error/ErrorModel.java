@@ -7,13 +7,15 @@
 package org.mule.runtime.api.meta.model.error;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 import java.util.Optional;
 
 /**
  * A model which represents a possible error that could be thrown
  * by the component represented by the {@link ComponentModel}.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
@@ -21,6 +23,7 @@ public interface ErrorModel {
 
   /**
    * Gets the type of the error.
+   *
    * @return The type of the error
    */
   String getType();

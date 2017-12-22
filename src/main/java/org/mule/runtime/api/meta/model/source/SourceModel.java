@@ -27,6 +27,9 @@ import java.util.Optional;
  * contained by different {@link HasSourceModels} instances,
  * then each of those containers should reference the same
  * operation model instance.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
@@ -65,6 +68,11 @@ public interface SourceModel extends ConnectableComponentModel {
    * @return an {@link Optional} {@link SourceCallbackModel}
    */
   Optional<SourceCallbackModel> getTerminateCallback();
+
+  /**
+   * @return Whether the declared source should only run in the primary node when in cluster mode
+   */
+  boolean runsOnPrimaryNodeOnly();
 
   /**
    * Returns all the {@link ParameterModel} on all groups, including

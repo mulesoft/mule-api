@@ -12,6 +12,9 @@ import java.util.Optional;
  * A model which represents an stereotype qualifier for the {@link HasStereotypeModel} that is categorized with this stereotype.
  * An stereotype is a widely held but fixed and oversimplified image or idea of the owning model.
  * Examples would be {@code validator}, {@code source}, {@code processor}, etc.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
@@ -19,6 +22,7 @@ public interface StereotypeModel {
 
   /**
    * Gets the name of the stereotype.
+   *
    * @return The type of the error
    */
   String getType();

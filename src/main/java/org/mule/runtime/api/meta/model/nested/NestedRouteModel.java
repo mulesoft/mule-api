@@ -15,6 +15,9 @@ import java.util.Optional;
  * Represents a {@link NestableElementModel} that is itself a {@link ComposableModel} and {@link ParameterizedModel}.
  * A {@link NestedRouteModel route} can be declared as a repeatable element, so multiple declarations of {@code this}
  * {@link NestedRouteModel route} are associated to the same model definition.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

@@ -12,7 +12,10 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 import java.util.Set;
 
 /**
- * Represents a {@link NestableElementModel} that makes reference to a single {@link ComponentModel}
+ * Represents a {@link NestableElementModel} that makes reference to a single {@link ComponentModel}.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

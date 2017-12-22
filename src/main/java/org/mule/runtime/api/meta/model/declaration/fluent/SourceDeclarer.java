@@ -35,6 +35,16 @@ public class SourceDeclarer extends ExecutableComponentDeclarer<SourceDeclarer, 
   }
 
   /**
+   * Allows to specify whether the declared source should only run in the primary node when in cluster mode
+   * @param primaryNodeOnly whether to only run on the primary node or not
+   * @return {@code this} declarer
+   */
+  public SourceDeclarer runsOnPrimaryNodeOnly(boolean primaryNodeOnly) {
+    declaration.setRunsOnPrimaryNodeOnly(primaryNodeOnly);
+    return this;
+  }
+
+  /**
    * Allows to declare a callback which will listen to all the successful results of the dispatched
    * Source messages to the flow.
    *

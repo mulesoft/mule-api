@@ -21,6 +21,7 @@ import java.util.Optional;
 public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDeclaration> {
 
   private boolean hasResponse = false;
+  private boolean runsOnPrimaryNodeOnly = false;
   private SourceCallbackDeclaration successCallback = null;
   private SourceCallbackDeclaration errorCallback = null;
   private SourceCallbackDeclaration backPressureCallback = null;
@@ -118,6 +119,25 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
    */
   public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
     this.terminateCallback = terminateCallback;
+  }
+
+  public boolean isHasResponse() {
+    return hasResponse;
+  }
+
+  /**
+   * @return whether the declared source should only run in the primary node when in cluster mode
+   */
+  public boolean isRunsOnPrimaryNodeOnly() {
+    return runsOnPrimaryNodeOnly;
+  }
+
+  /**
+   * Sets whether the declared source should only run in the primary node when in cluster mode
+   * @param runsOnPrimaryNodeOnly whether to only run on the primary node
+   */
+  public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
+    this.runsOnPrimaryNodeOnly = runsOnPrimaryNodeOnly;
   }
 
   /**

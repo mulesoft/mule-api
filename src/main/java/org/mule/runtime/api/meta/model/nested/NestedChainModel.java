@@ -11,6 +11,9 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 /**
  * Represents a {@link NestableElementModel} that makes reference to a chain of {@link ComponentModel}s.
  * This chain can have any number of components of the allowed stereotypes.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

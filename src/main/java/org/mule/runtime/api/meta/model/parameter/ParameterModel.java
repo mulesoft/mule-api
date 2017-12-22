@@ -19,6 +19,7 @@ import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 import org.mule.runtime.api.value.Value;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,9 @@ import java.util.Optional;
  * </p>
  * It can apply either to a {@link ConfigurationModel} or a
  * {@link ComponentModel}
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
