@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
-
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
@@ -18,6 +17,9 @@ import java.util.Optional;
 
 /**
  * Describes a library that the extension depends on but is not packaged with it.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

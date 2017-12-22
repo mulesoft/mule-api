@@ -8,15 +8,20 @@ package org.mule.runtime.api.meta.model.parameter;
 
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
 import org.mule.runtime.api.value.Value;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import java.util.List;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Model for {@link ParameterModel} to communicate if one of these are capable to provide {@link Value values}.
  * <p>
  * The element with this model will considered as a one that provides values.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
+ *
  * @since 1.0
  */
 public class ValueProviderModel {
@@ -96,11 +101,13 @@ public class ValueProviderModel {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
+    }
 
-    if (o == null || getClass() != o.getClass())
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
 
     ValueProviderModel that = (ValueProviderModel) o;
 

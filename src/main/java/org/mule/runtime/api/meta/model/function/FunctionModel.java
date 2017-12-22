@@ -23,6 +23,9 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
  * contained by different {@link HasFunctionModels} instances,
  * then each of those containers should reference the same
  * function model instance.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

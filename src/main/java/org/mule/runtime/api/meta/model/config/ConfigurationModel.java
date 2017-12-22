@@ -37,6 +37,9 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
  * Although the {@link SourceModel}s, {@link OperationModel}s and {@link ConnectionProviderModel}s
  * defined at the extension level are available to every single config, configs can also
  * define its own set of those which are exclusive to them.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

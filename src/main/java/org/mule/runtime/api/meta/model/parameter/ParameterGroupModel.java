@@ -18,6 +18,9 @@ import java.util.Optional;
 /**
  * A group is a logical way to display one or more parameters together. If no group is specified then
  * {@link #DEFAULT_GROUP_NAME} is used by default.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */
@@ -56,6 +59,7 @@ public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDi
   /**
    * Returns a list of {@link ExclusiveParametersModel} which describe
    * mutual exclusions between the {@link #getParameterModels() parameters}
+   *
    * @return a {@link List} of {@link ExclusiveParametersModel}
    */
   List<ExclusiveParametersModel> getExclusiveParametersModels();

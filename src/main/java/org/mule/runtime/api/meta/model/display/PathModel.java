@@ -18,6 +18,9 @@ import java.util.List;
 
 /**
  * A model which provides directives for parameters that points to a file or directory.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

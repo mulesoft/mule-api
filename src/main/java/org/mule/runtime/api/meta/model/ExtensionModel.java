@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.DescribedObject;
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
@@ -44,6 +43,9 @@ import java.util.Set;
  * <p>
  * An extension doesn't define any predefined syntax, evaluation order or execution paradigm. The operations provided are expected
  * to be used as individual building blocks in a bigger system, hence the name <code>Extension</code>
+ *
+ * Do not create custom implementations of this interface. The Mule Runtime should be the only one providing implementations
+ * of it.
  *
  * @since 1.0
  */

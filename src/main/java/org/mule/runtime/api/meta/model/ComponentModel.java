@@ -16,6 +16,9 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 /**
  * A definition of a component in an {@link ExtensionModel}. This model groups all the common contracts between extension
  * components like {@link OperationModel}, {@link SourceModel}, etc.
+ * <p>
+ * Do not create custom implementations of this interface. The Mule Runtime should be
+ * the only one providing implementations of it.
  *
  * @since 1.0
  */

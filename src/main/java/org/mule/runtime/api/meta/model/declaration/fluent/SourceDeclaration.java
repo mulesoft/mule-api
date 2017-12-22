@@ -125,10 +125,17 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
     return hasResponse;
   }
 
+  /**
+   * @return whether the declared source should only run in the primary node when in cluster mode
+   */
   public boolean isRunsOnPrimaryNodeOnly() {
     return runsOnPrimaryNodeOnly;
   }
 
+  /**
+   * Sets whether the declared source should only run in the primary node when in cluster mode
+   * @param runsOnPrimaryNodeOnly whether to only run on the primary node
+   */
   public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
     this.runsOnPrimaryNodeOnly = runsOnPrimaryNodeOnly;
   }
