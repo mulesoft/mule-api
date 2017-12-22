@@ -132,6 +132,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
   public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
     this.runsOnPrimaryNodeOnly = runsOnPrimaryNodeOnly;
   }
+
   /**
    * Sets the back pressure {@link SourceCallbackDeclaration}
    * @param backPressureCallback a callback declaration or {@code null}
