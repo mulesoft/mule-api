@@ -5,6 +5,15 @@
         "code": "java.method.addedToInterface",
         "new": "method org.mule.runtime.api.tls.TlsRevocationCheckBuilder org.mule.runtime.api.tls.TlsContextFactoryBuilder::revocationCheck()",
         "justification": "MULE-14280: API broken by MULE-14082"
+      },
+      {
+        "code": "java.method.addedToInterface",
+        "new": "method boolean org.mule.runtime.api.meta.model.source.SourceModel::isRunsOnPrimaryNodeOnly()",
+        "package": "org.mule.runtime.api.meta.model.source",
+        "classSimpleName": "SourceModel",
+        "methodName": "isRunsOnPrimaryNodeOnly",
+        "elementKind": "method",
+        "justification": "This interface is not meant to be implemented by the user"
       }
     ]
   }
