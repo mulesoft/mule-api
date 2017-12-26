@@ -28,7 +28,8 @@ import org.mule.runtime.api.meta.NamedObject;
  */
 public interface Service extends NamedObject, SplashMessageProvider {
 
+  @Override
   default String getSplashMessage() {
-    return null;
+    return "";
   }
 }
