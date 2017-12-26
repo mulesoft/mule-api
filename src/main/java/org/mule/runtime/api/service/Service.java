@@ -7,6 +7,7 @@
 
 package org.mule.runtime.api.service;
 
+import org.mule.runtime.api.artifact.SplashMessageProvider;
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
 import org.mule.runtime.api.meta.NamedObject;
@@ -22,8 +23,13 @@ import org.mule.runtime.api.meta.NamedObject;
  * <p>
  * Implementations may overload methods from the Service interface with {@link javax.inject.Inject @Inject} and add any parameters
  * to be resolved from the Mule application context. When such invocation is made, those injected parameters cannot be null.
- * 
+ *
  * @since 1.0
  */
-public interface Service extends NamedObject {
+public interface Service extends NamedObject, SplashMessageProvider {
+
+  @Override
+  default String getSplashMessage() {
+    return "";
+  }
 }
