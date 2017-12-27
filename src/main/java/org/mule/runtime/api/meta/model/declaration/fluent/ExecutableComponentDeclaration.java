@@ -9,7 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -26,7 +26,7 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   private boolean supportsStreaming = false;
   private OutputDeclaration outputContent;
   private OutputDeclaration outputAttributes;
-  private Set<NotificationModel> notificationModels = new HashSet<>();
+  private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}

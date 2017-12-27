@@ -8,9 +8,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 /**
  * Base class for {@link Declarer declarers} which allow to construct an {@link OperationDeclaration}
  *
@@ -20,8 +17,6 @@ import java.util.Set;
  */
 public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentDeclarer, D extends ExecutableComponentDeclaration>
     extends ComponentDeclarer<T, D> {
-
-  private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
