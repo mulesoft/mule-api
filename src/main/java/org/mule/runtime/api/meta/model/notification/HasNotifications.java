@@ -6,23 +6,23 @@
  */
 package org.mule.runtime.api.meta.model.notification;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Indicates that the current model can declare which {@link NotificationModel} it fires.
  *
+ * Do not create custom implementations of this interface. The Mule Runtime should be the only one providing implementations
+ * of it.
+ *
  * @since 1.1
  */
-public interface FiresNotifications {
+public interface HasNotifications {
 
   /**
    * @return a {@link Set} of {@link NotificationModel} with the notifications that the current component fires.
    *
    * @see NotificationModel
    */
-  default Set<NotificationModel> getNotificationModels() {
-    return new HashSet<>();
-  }
+  Set<NotificationModel> getNotificationModels();
 
 }

@@ -14,7 +14,25 @@
         "methodName": "runsOnPrimaryNodeOnly",
         "elementKind": "method",
         "justification": "This interface is not meant to be implemented by the user"
-      }
+      },
+      {
+         "code": "java.method.addedToInterface",
+         "new": "method java.lang.String org.mule.runtime.api.notification.Notification.Action::getIdentifier()",
+         "package": "org.mule.runtime.api.notification",
+         "classSimpleName": "Action",
+         "methodName": "getIdentifier",
+         "elementKind": "method",
+         "justification": "No implementors yet and wrong initial empty interface."
+       },
+       {
+         "code": "java.method.addedToInterface",
+         "new": "method java.lang.String org.mule.runtime.api.notification.Notification.Action::getNamespace()",
+         "package": "org.mule.runtime.api.notification",
+         "classSimpleName": "Action",
+         "methodName": "getNamespace",
+         "elementKind": "method",
+         "justification": "No implementors yet and wrong initial empty interface."
+       }
     ]
   }
 }

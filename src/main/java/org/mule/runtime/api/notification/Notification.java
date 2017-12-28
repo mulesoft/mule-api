@@ -48,16 +48,12 @@ public interface Notification {
     /**
      * @return unique namespace for the action
      */
-    default String getNamespace() {
-      throw new UnsupportedOperationException();
-    }
+    String getNamespace();
 
     /**
      * @return unique ID for this action
      */
-    default String getId() {
-      throw new UnsupportedOperationException();
-    }
+    String getIdentifier();
 
   }
 }

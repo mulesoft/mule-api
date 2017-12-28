@@ -26,7 +26,7 @@ public class IntegerAction implements Action {
   }
 
   /**
-   * @deprecated use {@link #getId()}
+   * @deprecated use {@link #getIdentifier()}
    */
   @Deprecated
   public int getActionId() {
@@ -39,7 +39,7 @@ public class IntegerAction implements Action {
   }
 
   @Override
-  public String getId() {
+  public String getIdentifier() {
     return valueOf(actionId);
   }
 
