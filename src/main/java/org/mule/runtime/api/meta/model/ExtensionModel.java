@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.meta.model;
 
-import static java.util.Collections.emptySet;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.DescribedObject;
@@ -202,9 +201,7 @@ public interface ExtensionModel
    * @return A {@link Set} of {@link NotificationModel} registered in the extension.
    * @since 1.1
    */
-  default Set<NotificationModel> getNotificationModels() {
-    return emptySet();
-  }
+  Set<NotificationModel> getNotificationModels();
 
 
 }
