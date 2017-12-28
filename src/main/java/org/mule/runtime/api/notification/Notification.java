@@ -9,14 +9,14 @@ package org.mule.runtime.api.notification;
 import org.mule.runtime.api.scheduler.Scheduler;
 
 /**
- * Contains information about an event that happenned in the Mule Server. The event may happen in any Mule artifact running on the
+ * Contains information about an event that happened in the Mule Server. The event may happen in any Mule artifact running on the
  * Mule Server (an extension, a plugin, or an inner component of the Runtime).
  * <p>
  * The nature of the event that occurred is identified by the concrete type of the {@link Notification} and its
  * {@link #getAction() action}.
  * <p>
  * The concrete type of the {@link Notification} is an indication of the kind of component that caused the event, and in may
- * onctain additional data describing the event.
+ * contain additional data describing the event.
  * 
  * @since 4.0
  */
@@ -43,7 +43,17 @@ public interface Notification {
   /**
    * Indicates the kind of action that causes a {@link Notification} to be fired.
    */
-  public interface Action {
+  interface Action {
+
+    /**
+     * @return unique namespace for the action
+     */
+    String getNamespace();
+
+    /**
+     * @return unique ID for this action
+     */
+    String getIdentifier();
 
   }
 }

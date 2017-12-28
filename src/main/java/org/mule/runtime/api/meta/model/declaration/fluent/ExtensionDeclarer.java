@@ -11,12 +11,12 @@ import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 import java.util.Collection;
 import java.util.List;
@@ -308,6 +308,18 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   public ExtensionDeclarer withErrorModel(ErrorModel errorModel) {
     declaration.addErrorModel(errorModel);
+    return this;
+  }
+
+  /**
+   * Registers an {@link NotificationModel} that could be fired by its operations and sources.
+   *
+   * @param notificationModel to add
+   * @return {@code this} descriptor
+   * @since 1.1
+   */
+  public ExtensionDeclarer withNotificationModel(NotificationModel notificationModel) {
+    declaration.addNotificationModel(notificationModel);
     return this;
   }
 

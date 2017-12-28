@@ -8,7 +8,7 @@ package org.mule.runtime.api.notification;
 
 /**
  * <code>CustomNotification</code> Custom notifications can be used by components and other objects such as routers, transformers,
- * agents, etc to communicate a change of state to each other. The Action value for the event is abitary. However care should be
+ * agents, etc to communicate a change of state to each other. The Action value for the event is arbitary. However care should be
  * taken not to set the action code to an existing action code. To ensure this doesn't happen always set the action code greater
  * than the CUSTOM_ACTION_START_RANGE.
  * 

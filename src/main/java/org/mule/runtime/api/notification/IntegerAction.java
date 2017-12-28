@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.notification;
 
+import static java.lang.String.valueOf;
+import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
 import org.mule.runtime.api.notification.Notification.Action;
 
 /**
@@ -15,14 +17,30 @@ import org.mule.runtime.api.notification.Notification.Action;
  */
 public class IntegerAction implements Action {
 
+  private static final String CORE_NAMESPACE = CORE_PREFIX.toUpperCase();
+
   private int actionId;
 
   public IntegerAction(int actionId) {
     this.actionId = actionId;
   }
 
+  /**
+   * @deprecated use {@link #getIdentifier()}
+   */
+  @Deprecated
   public int getActionId() {
     return actionId;
+  }
+
+  @Override
+  public String getNamespace() {
+    return CORE_NAMESPACE;
+  }
+
+  @Override
+  public String getIdentifier() {
+    return valueOf(actionId);
   }
 
   @Override

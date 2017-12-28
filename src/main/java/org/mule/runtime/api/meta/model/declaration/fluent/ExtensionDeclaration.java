@@ -18,13 +18,13 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,6 +56,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final Set<String> privilegedArtifacts = new TreeSet<>(naturalOrder());
   private final Set<String> resources = new TreeSet<>(naturalOrder());
   private final Set<ErrorModel> errorModels = new LinkedHashSet<>();
+  private final Set<NotificationModel> notificationModels = new LinkedHashSet<>();
   private String name;
   private String version;
   private String vendor;
@@ -389,4 +390,11 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     return errorModels;
   }
 
+  public void addNotificationModel(NotificationModel notificationModel) {
+    notificationModels.add(notificationModel);
+  }
+
+  public Set<NotificationModel> getNotificationModels() {
+    return notificationModels;
+  }
 }

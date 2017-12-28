@@ -17,6 +17,7 @@ import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
@@ -195,4 +196,12 @@ public interface ExtensionModel
    * @return A {@link Set} of {@link ErrorModel} registered in the extension.
    */
   Set<ErrorModel> getErrorModels();
+
+  /**
+   * @return A {@link Set} of {@link NotificationModel} registered in the extension.
+   * @since 1.1
+   */
+  Set<NotificationModel> getNotificationModels();
+
+
 }

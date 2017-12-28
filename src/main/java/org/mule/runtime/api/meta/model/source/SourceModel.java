@@ -12,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ConnectableComponentModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.notification.HasNotifications;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 
 import java.util.LinkedList;
@@ -33,7 +34,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface SourceModel extends ConnectableComponentModel {
+public interface SourceModel extends ConnectableComponentModel, HasNotifications {
 
   /**
    * @return Whether the declared source emits a response
