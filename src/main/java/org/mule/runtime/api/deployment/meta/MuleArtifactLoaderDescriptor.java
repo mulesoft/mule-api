@@ -34,7 +34,7 @@ public class MuleArtifactLoaderDescriptor {
    */
   public MuleArtifactLoaderDescriptor(String id, Map<String, Object> attributes) {
     this.id = id;
-    this.attributes = Collections.unmodifiableMap(attributes);
+    this.attributes = attributes;
   }
 
   /**
@@ -52,6 +52,19 @@ public class MuleArtifactLoaderDescriptor {
    * That implies each loader must evaluate on the attributes' values to be 100% sure it were formed correctly.
    */
   public Map<String, Object> getAttributes() {
-    return attributes;
+    return Collections.unmodifiableMap(attributes);
   }
+
+  /**
+   * Allows to add an attribute to this class loader model descriptor.
+   *
+   * @param key {@link String} key, not null, if an attribute already existed with the same key the old value is returned.
+   * @param value {@link Object} value to be associated to the class loader model descriptor.
+   *
+   * @since 4.1
+   */
+  public Object addAttribute(String key, Object value) {
+    return attributes.put(key, value);
+  }
+
 }
