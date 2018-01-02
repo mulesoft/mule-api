@@ -1,0 +1,49 @@
+{
+  "1.1.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.tls.TlsRevocationCheckBuilder org.mule.runtime.api.tls.TlsContextFactoryBuilder::revocationCheck()",
+          "justification": "MULE-14280: API broken by MULE-14082"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method boolean org.mule.runtime.api.meta.model.source.SourceModel::runsOnPrimaryNodeOnly()",
+          "package": "org.mule.runtime.api.meta.model.source",
+          "classSimpleName": "SourceModel",
+          "methodName": "runsOnPrimaryNodeOnly",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.util.Set<org.mule.runtime.api.meta.model.notification.NotificationModel> org.mule.runtime.api.meta.model.ExtensionModel::getNotificationModels()",
+          "package": "org.mule.runtime.api.meta.model",
+          "classSimpleName": "ExtensionModel",
+          "methodName": "getNotificationModels",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.notification.Notification.Action::getIdentifier()",
+          "package": "org.mule.runtime.api.notification",
+          "classSimpleName": "Action",
+          "methodName": "getIdentifier",
+          "elementKind": "method",
+          "justification": "No implementors yet and wrong initial empty interface."
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.notification.Notification.Action::getNamespace()",
+          "package": "org.mule.runtime.api.notification",
+          "classSimpleName": "Action",
+          "methodName": "getNamespace",
+          "elementKind": "method",
+          "justification": "No implementors yet and wrong initial empty interface."
+        }
+      ]
+    }
+  }
+}
