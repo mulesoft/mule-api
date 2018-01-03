@@ -38,6 +38,11 @@ public interface ErrorModel {
   String getNamespace();
 
   /**
+   * @return Whether the error can be handled through an error handler or not
+   */
+  boolean isHandleable();
+
+  /**
    * @return The {@link ErrorModel} parent of the current {@link ErrorModel} from which it inherits from.
    */
   Optional<ErrorModel> getParent();
