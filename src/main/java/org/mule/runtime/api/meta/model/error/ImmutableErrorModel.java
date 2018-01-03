@@ -45,6 +45,7 @@ public final class ImmutableErrorModel implements ErrorModel {
    * @param namespace  the error namespace
    * @param handleable whether the error can be handled through an error handler or not
    * @param parent     the error's parent
+   * @since 1.1
    */
   public ImmutableErrorModel(String type, String namespace, boolean handleable, ErrorModel parent) {
     this.type = type;

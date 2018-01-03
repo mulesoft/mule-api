@@ -52,6 +52,7 @@ public final class ErrorModelBuilder {
    *
    * @param handleable whether the error can be handled through an error handler or not.
    * @return the contributed {@link ErrorModelBuilder}
+   * @since 1.1
    */
   public ErrorModelBuilder handleable(boolean handleable) {
     this.handleable = handleable;
