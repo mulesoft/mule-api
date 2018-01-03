@@ -42,6 +42,15 @@
           "methodName": "getNamespace",
           "elementKind": "method",
           "justification": "No implementors yet and wrong initial empty interface."
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method boolean org.mule.runtime.api.meta.model.error.ErrorModel::isHandleable()",
+          "package": "org.mule.runtime.api.meta.model.error",
+          "classSimpleName": "ErrorModel",
+          "methodName": "isHandleable",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be implemented by the user"
         }
       ]
     }

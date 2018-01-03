@@ -17,6 +17,7 @@ public final class ErrorModelBuilder {
 
   private final String name;
   private ErrorModel parent;
+  private boolean handleable = true;
   private String namespace;
 
   private ErrorModelBuilder(String name, String namespace) {
@@ -38,11 +39,24 @@ public final class ErrorModelBuilder {
   /**
    * Creates a builder to be able to create {@link ErrorModel} instances from an error {@link ComponentIdentifier}
    *
-   * @param identifier  The identifier of the error to create.
+   * @param identifier The identifier of the error to create.
    * @return An {@link ErrorModelBuilder} initialized with the identifiers name and namespace
    */
   public static ErrorModelBuilder newError(ComponentIdentifier identifier) {
     return newError(identifier.getName(), identifier.getNamespace());
+  }
+
+  /**
+   * Specifies if the error can be handled through an error handler or not. If not specified, {@code true}
+   * will be assumed
+   *
+   * @param handleable whether the error can be handled through an error handler or not.
+   * @return the contributed {@link ErrorModelBuilder}
+   * @since 1.1
+   */
+  public ErrorModelBuilder handleable(boolean handleable) {
+    this.handleable = handleable;
+    return this;
   }
 
   /**
@@ -58,6 +72,6 @@ public final class ErrorModelBuilder {
    * @return a new {@link ErrorModel} instance
    */
   public ErrorModel build() {
-    return new ImmutableErrorModel(name, namespace, parent);
+    return new ImmutableErrorModel(name, namespace, handleable, parent);
   }
 }

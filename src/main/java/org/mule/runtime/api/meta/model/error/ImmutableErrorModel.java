@@ -21,11 +21,36 @@ public final class ImmutableErrorModel implements ErrorModel {
 
   private final String type;
   private final String namespace;
+  private final boolean handleable;
   private final ErrorModel parent;
 
+  /**
+   * Creates a new handleable error
+   *
+   * @param type      the error type
+   * @param namespace the error namespace
+   * @param parent    the error's parent
+   * @deprecated This constructor is deprecated and will be removed in Mule 5. Use {@link #ImmutableErrorModel(String, String, ErrorModel)}
+   * instead
+   */
+  @Deprecated
   public ImmutableErrorModel(String type, String namespace, ErrorModel parent) {
+    this(type, namespace, true, parent);
+  }
+
+  /**
+   * Creates a new instance
+   *
+   * @param type       the error type
+   * @param namespace  the error namespace
+   * @param handleable whether the error can be handled through an error handler or not
+   * @param parent     the error's parent
+   * @since 1.1
+   */
+  public ImmutableErrorModel(String type, String namespace, boolean handleable, ErrorModel parent) {
     this.type = type;
     this.namespace = namespace;
+    this.handleable = handleable;
     this.parent = parent;
   }
 
@@ -43,6 +68,14 @@ public final class ImmutableErrorModel implements ErrorModel {
   @Override
   public String getNamespace() {
     return namespace;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public boolean isHandleable() {
+    return handleable;
   }
 
   /**
