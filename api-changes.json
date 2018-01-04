@@ -51,6 +51,15 @@
           "methodName": "isHandleable",
           "elementKind": "method",
           "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.util.Optional<org.mule.runtime.api.message.GroupCorrelation> org.mule.runtime.api.event.Event::getGroupCorrelation()",
+          "package": "org.mule.runtime.api.event",
+          "classSimpleName": "Event",
+          "methodName": "getGroupCorrelation",
+          "elementKind": "method",
+          "justification": "Moved from CoreEvent to be able to bind it to DW. No implementors for the CoreEvent version"
         }
       ]
     }
