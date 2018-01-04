@@ -87,7 +87,8 @@ public class BindingContextUtils {
                               new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
     contextBuilder.addBinding(GROUP_CORRELATION_INFO,
-                              new LazyValue<>(() -> new TypedValue<>(event.getGroupCorrelation(), fromType(GroupCorrelation.class))));
+                              new LazyValue<>(() -> new TypedValue<>(event.getGroupCorrelation(),
+                                                                     fromType(GroupCorrelation.class))));
 
     Message message = event.getMessage();
     contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
