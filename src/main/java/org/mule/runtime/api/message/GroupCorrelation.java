@@ -14,7 +14,7 @@ import java.util.OptionalInt;
 /**
  * Immutable container for correlation properties relative to a {@link Message}.
  * 
- * @since 4.0
+ * @since 4.1
  */
 public class GroupCorrelation implements Serializable {
 
