@@ -33,6 +33,11 @@ public interface DslConstants {
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
 
   /**
+   * Namespace for Mule core elements
+   */
+  String CORE_SCHEMA_LOCATION = format("%s/%s/%s.xsd", CORE_NAMESPACE, "current", CORE_PREFIX);
+
+  /**
    * This is the namespace prefix for core domain elements in the configuration.
    */
   String DOMAIN_PREFIX = "domain";
