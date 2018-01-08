@@ -21,35 +21,35 @@ public class ItemSequenceInfo implements Serializable {
   public static final String NOT_SET = "<not set>";
   private static final long serialVersionUID = -2294860079566380331L;
 
-  private final int itemIndex;
+  private final int position;
   private final int sequenceSize;
 
-  public static ItemSequenceInfo of(int itemIndex) {
-    return new ItemSequenceInfo(itemIndex, empty());
+  public static ItemSequenceInfo of(int position) {
+    return new ItemSequenceInfo(position, empty());
   }
 
-  public static ItemSequenceInfo of(int itemIndex, int sequenceSize) {
-    return new ItemSequenceInfo(itemIndex, OptionalInt.of(sequenceSize));
+  public static ItemSequenceInfo of(int position, int sequenceSize) {
+    return new ItemSequenceInfo(position, OptionalInt.of(sequenceSize));
   }
 
   /**
    * Builds a new {@link ItemSequenceInfo} with the given parameters.
    *
-   * @param itemIndex see {@link #getItemIndex()}.
+   * @param position see {@link #getPosition()}.
    * @param sequenceSize see {@link #getSequenceSize()}.
    */
-  private ItemSequenceInfo(int itemIndex, OptionalInt sequenceSize) {
-    this.itemIndex = itemIndex;
+  private ItemSequenceInfo(int position, OptionalInt sequenceSize) {
+    this.position = position;
     this.sequenceSize = sequenceSize.orElse(-1);
   }
 
   /**
-   * Gets the index or ordering number for this event in the the sequence.
+   * Gets the position or ordering number for this event in the the sequence.
    *
-   * @return the index of the item inside the sequence.
+   * @return the position of the item inside the sequence.
    */
-  public int getItemIndex() {
-    return itemIndex;
+  public int getPosition() {
+    return position;
   }
 
   /**
@@ -67,7 +67,7 @@ public class ItemSequenceInfo implements Serializable {
 
     // format message for multi-line output, single-line is not readable
     buf.append("{");
-    buf.append("itemIndex=").append(getItemIndex());
+    buf.append("position=").append(getPosition());
     buf.append("; sequenceSize=").append(getSequenceSize().isPresent() ? getSequenceSize().getAsInt() : NOT_SET);
     buf.append('}');
     return buf.toString();

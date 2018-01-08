@@ -19,8 +19,8 @@ public class ItemSequenceInfoBindingWrapper {
     this.info = info;
   }
 
-  public int getItemIndex() {
-    return info.getItemIndex();
+  public int getPosition() {
+    return info.getPosition();
   }
 
   public Integer getSequenceSize() {
