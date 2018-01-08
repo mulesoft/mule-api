@@ -8,7 +8,6 @@ package org.mule.runtime.api.event;
 
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.message.Error;
-import org.mule.runtime.api.message.GroupCorrelation;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
@@ -43,13 +42,6 @@ public interface Event {
    * @return authentication information for the event, may be {@link Optional#empty()}.
    */
   Optional<Authentication> getAuthentication();
-
-  /**
-   * Returns the correlation metadata of this message. See {@link GroupCorrelation}.
-   *
-   * @return the correlation metadata of this message.
-   */
-  Optional<GroupCorrelation> getGroupCorrelation();
 
   /**
    * When a mule component throws an error then an {@code Error} object gets generated with all the data associated to the error.
