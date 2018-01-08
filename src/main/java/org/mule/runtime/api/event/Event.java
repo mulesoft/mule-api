@@ -66,8 +66,10 @@ public interface Event {
 
   /**
    * Returns the sequence metadata of this event. See {@link ItemSequenceInfo}.
+   * <p/>
+   * The value can be an {@link Optional#empty()} meaning that this event does not belong to any specific sequence.
    *
-   * @return the correlation metadata of this message.
+   * @return the item sequence metadata of this event.
    */
   Optional<ItemSequenceInfo> getItemSequenceInfo();
 

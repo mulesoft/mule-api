@@ -44,7 +44,8 @@ public class ItemSequenceInfo implements Serializable {
   }
 
   /**
-   * Gets the position or ordering number for this event in the the sequence.
+   * Gets the position or ordering number for this event in the the sequence, starting from 0
+   * up to {@link #getSequenceSize()} - 1 in case it's defined
    *
    * @return the position of the item inside the sequence.
    */
@@ -55,7 +56,7 @@ public class ItemSequenceInfo implements Serializable {
   /**
    * Determines how many events are in the sequence
    *
-   * @return total events in this sequence or null value if the size is not known
+   * @return total events in this sequence or {@link OptionalInt#empty()} value if the size is not known
    */
   public OptionalInt getSequenceSize() {
     return sequenceSize > 0 ? OptionalInt.of(sequenceSize) : empty();
