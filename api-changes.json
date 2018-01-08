@@ -51,6 +51,15 @@
           "methodName": "isHandleable",
           "elementKind": "method",
           "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.util.Optional<org.mule.runtime.api.message.ItemSequenceInfo> org.mule.runtime.api.event.Event::getItemSequenceInfo()",
+          "package": "org.mule.runtime.api.event",
+          "classSimpleName": "Event",
+          "methodName": "getItemSequenceInfo",
+          "elementKind": "method",
+          "justification": "Need method to bind information to DW"
         }
       ]
     }

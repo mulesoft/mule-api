@@ -88,7 +88,9 @@ public class BindingContextUtils {
                               new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
     contextBuilder.addBinding(ITEM_SEQUENCE_INFO,
-                              new LazyValue<>(() -> new TypedValue<>(event.getItemSequenceInfo().map(ItemSequenceInfoBindingWrapper::new).orElse(null), fromType(ItemSequenceInfoBindingWrapper.class))));
+                              new LazyValue<>(() -> new TypedValue<>(event.getItemSequenceInfo()
+                                  .map(ItemSequenceInfoBindingWrapper::new).orElse(null),
+                                                                     fromType(ItemSequenceInfoBindingWrapper.class))));
 
     Message message = event.getMessage();
     contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
