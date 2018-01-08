@@ -8,6 +8,7 @@ package org.mule.runtime.api.event;
 
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.message.Error;
+import org.mule.runtime.api.message.ItemSequenceInfo;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
@@ -62,6 +63,13 @@ public interface Event {
    * @return the correlation id to use for this event.
    */
   String getCorrelationId();
+
+  /**
+   * Returns the sequence metadata of this event. See {@link ItemSequenceInfo}.
+   *
+   * @return the correlation metadata of this message.
+   */
+  Optional<ItemSequenceInfo> getItemSequenceInfo();
 
   /**
    * @return the context applicable to all events created from the same root {@link Event} from a source.
