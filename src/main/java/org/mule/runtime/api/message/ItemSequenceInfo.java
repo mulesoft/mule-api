@@ -12,7 +12,7 @@ import java.io.Serializable;
 import java.util.OptionalInt;
 
 /**
- * Immutable container for an {@ling Event} sequence information.
+ * Immutable container for an {@link org.mule.runtime.api.event.Event} sequence information.
  *
  * @since 1.1
  */
