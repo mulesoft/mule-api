@@ -3,9 +3,15 @@
     "revapi": {
       "ignore": [
         {
-          "code": "java.method.addedToInterface",
-          "new": "method org.mule.runtime.api.tls.TlsRevocationCheckBuilder org.mule.runtime.api.tls.TlsContextFactoryBuilder::revocationCheck()",
-          "justification": "MULE-14280: API broken by MULE-14082"
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.tls.TlsContextFactoryBuilder",
+          "new": "interface org.mule.runtime.api.tls.TlsContextFactoryBuilder",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.tls",
+          "classSimpleName": "TlsContextFactoryBuilder",
+          "elementKind": "interface",
+          "justification": "This interface is not meant to be implemented by the user"
         },
         {
           "code": "java.method.addedToInterface",

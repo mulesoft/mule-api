@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.tls;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.lifecycle.CreateException;
 
 import java.security.KeyStore;
@@ -18,6 +19,7 @@ import javax.net.ssl.KeyManagerFactory;
  *
  * @since 1.0
  */
+@NoImplement
 public interface TlsContextFactoryBuilder {
 
   /**
