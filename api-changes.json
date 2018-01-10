@@ -54,12 +54,12 @@
         },
         {
           "code": "java.method.addedToInterface",
-          "new": "method java.util.Optional<org.mule.runtime.api.message.GroupCorrelation> org.mule.runtime.api.event.Event::getGroupCorrelation()",
+          "new": "method java.util.Optional<org.mule.runtime.api.message.ItemSequenceInfo> org.mule.runtime.api.event.Event::getItemSequenceInfo()",
           "package": "org.mule.runtime.api.event",
           "classSimpleName": "Event",
-          "methodName": "getGroupCorrelation",
+          "methodName": "getItemSequenceInfo",
           "elementKind": "method",
-          "justification": "Moved from CoreEvent to be able to bind it to DW. No implementors for the CoreEvent version"
+          "justification": "Need method to bind information to DW"
         }
       ]
     }

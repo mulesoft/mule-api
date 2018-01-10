@@ -13,12 +13,13 @@ import static org.mule.runtime.api.metadata.DataType.fromType;
 
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
-import org.mule.runtime.api.message.GroupCorrelation;
+import org.mule.runtime.api.message.ItemSequenceInfo;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
 import org.mule.runtime.api.util.LazyValue;
+import org.mule.runtime.internal.event.ItemSequenceInfoBindingWrapper;
 
 import java.util.Map;
 
@@ -38,7 +39,7 @@ public class BindingContextUtils {
   public static final String VARS = "vars";
   public static final String AUTHENTICATION = "authentication";
   public static final String FLOW = "flow";
-  public static final String GROUP_CORRELATION_INFO = "groupCorrelationInfo";
+  public static final String ITEM_SEQUENCE_INFO = "itemSequenceInfo";
 
   public static final BindingContext NULL_BINDING_CONTEXT = BindingContext.builder().build();
 
@@ -86,9 +87,10 @@ public class BindingContextUtils {
     contextBuilder.addBinding(CORRELATION_ID,
                               new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
-    contextBuilder.addBinding(GROUP_CORRELATION_INFO,
-                              new LazyValue<>(() -> new TypedValue<>(event.getGroupCorrelation(),
-                                                                     fromType(GroupCorrelation.class))));
+    contextBuilder.addBinding(ITEM_SEQUENCE_INFO,
+                              new LazyValue<>(() -> new TypedValue<>(event.getItemSequenceInfo()
+                                  .map(ItemSequenceInfoBindingWrapper::new).orElse(null),
+                                                                     fromType(ItemSequenceInfoBindingWrapper.class))));
 
     Message message = event.getMessage();
     contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
