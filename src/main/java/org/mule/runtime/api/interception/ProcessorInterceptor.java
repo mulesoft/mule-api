@@ -50,7 +50,8 @@ public interface ProcessorInterceptor {
    * component via the given {@code event}.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param parameters the parameters of the component as defined in the configuration.
+   * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
+   *        they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
    * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
    *        mutator methods.
    */
@@ -79,7 +80,8 @@ public interface ProcessorInterceptor {
    * </ul>
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param parameters the parameters of the component as defined in the configuration.
+   * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
+   *        they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
    * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
    *        mutator methods.
    * @param action when something other than continuing the interception is desired, the corresponding method on this object must
