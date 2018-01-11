@@ -14,16 +14,16 @@ import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.mule.runtime.api.meta.model.display.PathModel.Type.DIRECTORY;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.List;
 
 /**
  * A model which provides directives for parameters that points to a file or directory.
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public class PathModel {
 
   /**

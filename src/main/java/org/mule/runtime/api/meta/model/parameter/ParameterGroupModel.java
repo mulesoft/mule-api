@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
@@ -18,12 +19,10 @@ import java.util.Optional;
 /**
  * A group is a logical way to display one or more parameters together. If no group is specified then
  * {@link #DEFAULT_GROUP_NAME} is used by default.
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
 
   /**

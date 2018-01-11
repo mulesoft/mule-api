@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.NamedObject;
@@ -30,12 +31,10 @@ import java.util.Optional;
  * </p>
  * It can apply either to a {@link ConfigurationModel} or a
  * {@link ComponentModel}
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
 
   /**
