@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.DescribedObject;
@@ -45,11 +46,9 @@ import java.util.Set;
  * An extension doesn't define any predefined syntax, evaluation order or execution paradigm. The operations provided are expected
  * to be used as individual building blocks in a bigger system, hence the name <code>Extension</code>
  *
- * Do not create custom implementations of this interface. The Mule Runtime should be the only one providing implementations
- * of it.
- *
  * @since 1.0
  */
+@NoImplement
 public interface ExtensionModel
     extends NamedObject, DescribedObject, EnrichableModel, HasOperationModels, HasSourceModels, HasFunctionModels,
     HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries, HasConstructModels {

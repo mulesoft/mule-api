@@ -7,28 +7,20 @@
           "old": "interface org.mule.runtime.api.tls.TlsContextFactoryBuilder",
           "new": "interface org.mule.runtime.api.tls.TlsContextFactoryBuilder",
           "annotationType": "org.mule.api.annotation.NoImplement",
-          "annotation": "@org.mule.api.annotation.NoImplement",
-          "package": "org.mule.runtime.api.tls",
-          "classSimpleName": "TlsContextFactoryBuilder",
-          "elementKind": "interface",
           "justification": "This interface is not meant to be implemented by the user"
         },
         {
-          "code": "java.method.addedToInterface",
-          "new": "method boolean org.mule.runtime.api.meta.model.source.SourceModel::runsOnPrimaryNodeOnly()",
-          "package": "org.mule.runtime.api.meta.model.source",
-          "classSimpleName": "SourceModel",
-          "methodName": "runsOnPrimaryNodeOnly",
-          "elementKind": "method",
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.source.SourceModel",
+          "new": "interface org.mule.runtime.api.meta.model.source.SourceModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
           "justification": "This interface is not meant to be implemented by the user"
         },
         {
-          "code": "java.method.addedToInterface",
-          "new": "method java.util.Set<org.mule.runtime.api.meta.model.notification.NotificationModel> org.mule.runtime.api.meta.model.ExtensionModel::getNotificationModels()",
-          "package": "org.mule.runtime.api.meta.model",
-          "classSimpleName": "ExtensionModel",
-          "methodName": "getNotificationModels",
-          "elementKind": "method",
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.ExtensionModel",
+          "new": "interface org.mule.runtime.api.meta.model.ExtensionModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
           "justification": "This interface is not meant to be implemented by the user"
         },
         {
@@ -66,6 +58,132 @@
           "methodName": "getItemSequenceInfo",
           "elementKind": "method",
           "justification": "Need method to bind information to DW"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.ComponentModel",
+          "new": "interface org.mule.runtime.api.meta.model.ComponentModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.ExternalLibraryModel",
+          "new": "class org.mule.runtime.api.meta.model.ExternalLibraryModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.ImportedTypeModel",
+          "new": "class org.mule.runtime.api.meta.model.ImportedTypeModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.config.ConfigurationModel",
+          "new": "interface org.mule.runtime.api.meta.model.config.ConfigurationModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.connection.ConnectionProviderModel",
+          "new": "interface org.mule.runtime.api.meta.model.connection.ConnectionProviderModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.display.PathModel",
+          "new": "class org.mule.runtime.api.meta.model.display.PathModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.error.ErrorModel",
+          "new": "interface org.mule.runtime.api.meta.model.error.ErrorModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.function.FunctionModel",
+          "new": "interface org.mule.runtime.api.meta.model.function.FunctionModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.nested.NestableElementModel",
+          "new": "interface org.mule.runtime.api.meta.model.nested.NestableElementModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.nested.NestedChainModel",
+          "new": "interface org.mule.runtime.api.meta.model.nested.NestedChainModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.nested.NestedComponentModel",
+          "new": "interface org.mule.runtime.api.meta.model.nested.NestedComponentModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.nested.NestedRouteModel",
+          "new": "interface org.mule.runtime.api.meta.model.nested.NestedRouteModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.operation.OperationModel",
+          "new": "interface org.mule.runtime.api.meta.model.operation.OperationModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.parameter.ParameterGroupModel",
+          "new": "interface org.mule.runtime.api.meta.model.parameter.ParameterGroupModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.parameter.ParameterModel",
+          "new": "interface org.mule.runtime.api.meta.model.parameter.ParameterModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.source.SourceCallbackModel",
+          "new": "interface org.mule.runtime.api.meta.model.source.SourceCallbackModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.meta.model.stereotype.StereotypeModel",
+          "new": "interface org.mule.runtime.api.meta.model.stereotype.StereotypeModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "justification": "This interface is not meant to be implemented by the user"
         }
       ]
     }

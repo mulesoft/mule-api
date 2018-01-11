@@ -226,7 +226,7 @@
         </dependency>
         <dependency>
             <groupId>org.mule.runtime</groupId>
-            <artifactId>mule-api-annotations</artifactId>
+            <artifactId>api-annotations</artifactId>
             <version>${muleApiAnnotationsVersion}</version>
         </dependency>
     </dependencies>

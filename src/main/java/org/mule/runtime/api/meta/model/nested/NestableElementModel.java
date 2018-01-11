@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.nested;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.ComposableModel;
@@ -14,14 +15,12 @@ import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 
 /**
  * A definition of an element that can be contained by a {@link ComposableModel}.
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @see NestedComponentModel
  * @see NestedRouteModel
  * @since 1.0
  */
+@NoImplement
 public interface NestableElementModel extends NamedObject, EnrichableModel, DescribedObject, HasDisplayModel {
 
   /**

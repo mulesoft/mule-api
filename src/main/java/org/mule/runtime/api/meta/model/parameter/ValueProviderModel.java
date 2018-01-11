@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
@@ -18,12 +19,10 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * Model for {@link ParameterModel} to communicate if one of these are capable to provide {@link Value values}.
  * <p>
  * The element with this model will considered as a one that provides values.
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public class ValueProviderModel {
 
   private final List<String> actingParameters;

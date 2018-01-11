@@ -9,16 +9,15 @@ package org.mule.runtime.api.meta.model;
 
 import static java.util.Objects.hash;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.ObjectType;
 
 /**
  * A model which describes that an extension is importing an {@link #getImportedType() imported type}.
- * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public final class ImportedTypeModel {
 
   private final ObjectType importedType;

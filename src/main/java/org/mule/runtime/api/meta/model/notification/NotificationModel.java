@@ -6,17 +6,16 @@
  */
 package org.mule.runtime.api.meta.model.notification;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.ComponentModel;
 
 /**
  * A model which represents a notification that could be fired by the component represented by the {@link ComponentModel}.
  *
- * Do not create custom implementations of this interface. The Mule Runtime should be the only one providing implementations
- * of it.
- *
  * @since 1.1
  */
+@NoImplement
 public interface NotificationModel {
 
   /**

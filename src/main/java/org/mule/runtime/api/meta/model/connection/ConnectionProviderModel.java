@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.connection;
 
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionProvider;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
@@ -26,11 +27,10 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
  * then each of those containers should reference the same
  * operation model instance.
  * <p>
- * Do not create custom implementations of this interface. The Mule Runtime should be
- * the only one providing implementations of it.
  *
  * @since 1.0
  */
+@NoImplement
 public interface ConnectionProviderModel
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
     HasDisplayModel, HasExternalLibraries, HasStereotypeModel {
