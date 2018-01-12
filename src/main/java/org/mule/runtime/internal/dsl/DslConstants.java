@@ -167,4 +167,19 @@ public interface DslConstants {
    * The prefix name of the {@code tls:context} infrastructure parameter
    */
   String TLS_PREFIX = "tls";
+
+  /**
+   * The identifier name of the {@code schedulingStrategy} infrastructure parameter
+   */
+  String SCHEDULING_STRATEGY_ELEMENT_IDENTIFIER = "scheduling-strategy";
+
+  /**
+   * The identifier name of the {@code schedulingStrategy} infrastructure parameter
+   */
+  String FIXED_FREQUENCY_STRATEGY_ELEMENT_IDENTIFIER = "fixed-frequency";
+
+  /**
+   * The identifier name of the {@code schedulingStrategy} infrastructure parameter
+   */
+  String CRON_STRATEGY_ELEMENT_IDENTIFIER = "cron";
 }
