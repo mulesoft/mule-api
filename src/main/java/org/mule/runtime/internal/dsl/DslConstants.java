@@ -176,10 +176,10 @@ public interface DslConstants {
   /**
    * The identifier name of the {@code schedulingStrategy} infrastructure parameter
    */
-  String FIXED_FREQUENCY_STRATEGY_ELEMENT_IDENTIFIER = "scheduling-strategy";
+  String FIXED_FREQUENCY_STRATEGY_ELEMENT_IDENTIFIER = "fixed-frequency";
 
   /**
    * The identifier name of the {@code schedulingStrategy} infrastructure parameter
    */
-  String CRON_STRATEGY_ELEMENT_IDENTIFIER = "scheduling-strategy";
+  String CRON_STRATEGY_ELEMENT_IDENTIFIER = "cron";
 }
