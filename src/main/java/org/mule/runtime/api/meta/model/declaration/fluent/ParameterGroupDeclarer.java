@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 
 import java.util.Set;
@@ -17,7 +18,7 @@ import java.util.Set;
  * @since 1.0
  */
 public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends Declarer<D>
-    implements HasModelProperties<ParameterGroupDeclarer<D>> {
+    implements HasModelProperties<ParameterGroupDeclarer<D>>, HasDisplayModelDeclarer<ParameterGroupDeclarer<D>> {
 
   /**
    * Creates a new instance
@@ -82,6 +83,15 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
   @Override
   public ParameterGroupDeclarer<D> withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ParameterGroupDeclarer<D> withDisplayModel(DisplayModel displayModel) {
+    declaration.setDisplayModel(displayModel);
     return this;
   }
 
