@@ -125,6 +125,7 @@ public interface DataType extends Serializable {
   DataType ITERATOR = fromType(Iterator.class);
   DataType CURSOR_STREAM_PROVIDER = fromType(CursorStreamProvider.class);
   DataType CURSOR_ITERATOR_PROVIDER = fromType(CursorIteratorProvider.class);
+  DataType TYPED_VALUE = fromType(TypedValue.class);
   DataType MULE_MESSAGE = builder().type(Message.class).mediaType(ANY).build();
   CollectionDataType MULE_MESSAGE_COLLECTION =
       (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
