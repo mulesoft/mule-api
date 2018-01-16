@@ -148,13 +148,17 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
 
   private void declareGlobalParameter(JsonObject jsonObject, EnrichableElementDeclarer declarer) {
     declareEnrichableElement(delegate, jsonObject, declarer);
-    ((TopLevelParameterDeclarer) declarer).withRefName(jsonObject.get(REF_NAME).getAsString());
+    if (jsonObject.has(REF_NAME)) {
+      ((TopLevelParameterDeclarer) declarer).withRefName(jsonObject.get(REF_NAME).getAsString());
+    }
     ((TopLevelParameterDeclarer) declarer).withValue(delegate.fromJson(jsonObject.get(VALUE), ParameterObjectValue.class));
   }
 
   private void declareConstruct(JsonObject jsonObject, ConstructElementDeclarer declarer) {
     JsonArray components = jsonObject.get(COMPONENTS).getAsJsonArray();
-    declarer.withRefName(jsonObject.get(REF_NAME).getAsString());
+    if (jsonObject.has(REF_NAME)) {
+      declarer.withRefName(jsonObject.get(REF_NAME).getAsString());
+    }
     components.forEach(c -> declarer
         .withComponent(delegate.fromJson(c, ComponentElementDeclaration.class)));
   }
