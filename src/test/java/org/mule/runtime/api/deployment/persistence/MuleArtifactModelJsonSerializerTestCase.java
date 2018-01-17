@@ -7,6 +7,8 @@
 package org.mule.runtime.api.deployment.persistence;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
@@ -28,6 +30,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -101,6 +104,16 @@ public class MuleArtifactModelJsonSerializerTestCase {
   public void mandatoryFieldsCheckIsTrueIfAllPresent() throws Exception {
     MuleDeployableModel muleArtifactModel = this.serializer.deserialize(json.toString());
     muleArtifactModel.validateModel(DESCRIPTOR_NAME);
+  }
+
+  @Test
+  public void securePropertiesDeserialization() {
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{" +
+        "\"secureProperties\": [\"db.username\", \"db.password\"]" +
+        "}");
+    List<String> secretProperties = muleArtifactModel.getSecureProperties();
+    assertThat(secretProperties, hasSize(2));
+    assertThat(secretProperties, contains("db.username", "db.password"));
   }
 
   @Test

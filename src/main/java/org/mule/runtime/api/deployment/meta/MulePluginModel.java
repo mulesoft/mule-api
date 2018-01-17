@@ -11,6 +11,7 @@ import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 
 import java.util.Optional;
@@ -22,6 +23,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoExtend
 public class MulePluginModel extends AbstractMuleArtifactModel {
 
   private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;

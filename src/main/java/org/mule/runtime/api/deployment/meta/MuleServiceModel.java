@@ -9,6 +9,7 @@ package org.mule.runtime.api.deployment.meta;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoExtend;
 
 /**
  * This object matches the mule-artifact.json element within a service. The describer holds information that has been picked up
@@ -16,6 +17,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  *
  * @since 1.0
  */
+@NoExtend
 public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";

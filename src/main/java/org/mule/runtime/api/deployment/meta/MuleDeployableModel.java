@@ -10,8 +10,11 @@ package org.mule.runtime.api.deployment.meta;
 import static java.util.Collections.unmodifiableSet;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoExtend;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,9 +23,11 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
   private final Set<String> configs;
+  private final List<String> secureProperties;
 
   // this field must be true by default because it's the default value used when deserializing this class with no content.
   private Boolean redeploymentEnabled = true;
@@ -37,14 +42,17 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
    * @param configs the application configuration files
    * @param redeploymentEnabled indicates if the artifact can be redeployed or not
+   * @param secureProperties the list of properties names that must be handled as secrets. Those properties names won't be shown
+   *        in the runtime manager UI when looking at the deployment configuration of the artifact.
    */
   protected MuleDeployableModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                 MuleArtifactLoaderDescriptor bundleDescriptorLoader, Set<String> configs,
-                                Optional<Boolean> redeploymentEnabled) {
+                                Optional<Boolean> redeploymentEnabled, List<String> secureProperties) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
     this.configs = configs;
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
+    this.secureProperties = secureProperties;
   }
 
   /**
@@ -62,6 +70,14 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   }
 
   /**
+   * @return the list of properties names that must be handled as secrets. Those properties names won't be shown in the runtime
+   *         manager UI when looking at the deployment configuration of the artifact.
+   */
+  public List<String> getSecureProperties() {
+    return secureProperties;
+  }
+
+  /**
    * A builder to create instances of {@link MuleDeployableModelBuilder}.
    *
    * @since 1.0
@@ -71,6 +87,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
     private Set<String> configs = new HashSet<>();
     private Boolean redeploymentEnabled;
+    private List<String> secretProperties = new ArrayList<>();
 
     /**
      * @param configs the set of artifact configuration files
@@ -86,10 +103,10 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
-      return doCreateModel(configs, redeploymentEnabled);
+      return doCreateModel(configs, redeploymentEnabled, secretProperties);
     }
 
-    protected abstract M doCreateModel(Set<String> configs, Boolean redeploymentEnabled);
+    protected abstract M doCreateModel(Set<String> configs, Boolean redeploymentEnabled, List<String> secureProperties);
 
     /**
      * @param redeploymentEnabled true if the artifact supports redeployment, false otherwise.
