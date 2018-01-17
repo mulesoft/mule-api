@@ -8,6 +8,7 @@ package org.mule.runtime.api.deployment.meta;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoExtend;
 
 /**
  * This object matches the mule-artifact.json element within a policy. The describer holds information that has being picked up from
@@ -15,6 +16,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  *
  * @since 1.0
  */
+@NoExtend
 public class MulePolicyModel extends AbstractMuleArtifactModel {
 
   private MulePolicyModel(String name, String minMuleVersion, Product product,

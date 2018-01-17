@@ -184,6 +184,134 @@
           "new": "interface org.mule.runtime.api.meta.model.stereotype.StereotypeModel",
           "annotationType": "org.mule.api.annotation.NoImplement",
           "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel",
+          "new": "class org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "AbstractMuleArtifactModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method org.mule.runtime.api.deployment.meta.MuleApplicationModel org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean)",
+          "new": "method org.mule.runtime.api.deployment.meta.MuleApplicationModel org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean, java.util.List<java.lang.String>)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleApplicationModelBuilder",
+          "methodName": "doCreateModel",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MuleApplicationModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MuleApplicationModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleApplicationModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method M org.mule.runtime.api.deployment.meta.MuleDeployableModel.MuleDeployableModelBuilder<T extends org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModelBuilder, M extends org.mule.runtime.api.deployment.meta.MuleDeployableModel>::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean)",
+          "new": "method M org.mule.runtime.api.deployment.meta.MuleDeployableModel.MuleDeployableModelBuilder<T extends org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModelBuilder, M extends org.mule.runtime.api.deployment.meta.MuleDeployableModel>::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean, java.util.List<java.lang.String>)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDeployableModelBuilder",
+          "methodName": "doCreateModel",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.mule.runtime.api.deployment.meta.MuleDeployableModel::<init>(java.lang.String, java.lang.String, org.mule.runtime.api.deployment.meta.Product, org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor, org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor, java.util.Set<java.lang.String>, java.util.Optional<java.lang.Boolean>)",
+          "new": "method void org.mule.runtime.api.deployment.meta.MuleDeployableModel::<init>(java.lang.String, java.lang.String, org.mule.runtime.api.deployment.meta.Product, org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor, org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor, java.util.Set<java.lang.String>, java.util.Optional<java.lang.Boolean>, java.util.List<java.lang.String>)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDeployableModel",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MuleDeployableModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MuleDeployableModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDeployableModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method org.mule.runtime.api.deployment.meta.MuleDomainModel org.mule.runtime.api.deployment.meta.MuleDomainModel.MuleDomainModelBuilder::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean)",
+          "new": "method org.mule.runtime.api.deployment.meta.MuleDomainModel org.mule.runtime.api.deployment.meta.MuleDomainModel.MuleDomainModelBuilder::doCreateModel(java.util.Set<java.lang.String>, java.lang.Boolean, java.util.List<java.lang.String>)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDomainModelBuilder",
+          "methodName": "doCreateModel",
+          "elementKind": "method",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MuleDomainModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MuleDomainModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDomainModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MulePluginModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MulePluginModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MulePluginModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MulePolicyModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MulePolicyModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MulePolicyModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MuleServerPluginModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MuleServerPluginModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleServerPluginModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.deployment.meta.MuleServiceModel",
+          "new": "class org.mule.runtime.api.deployment.meta.MuleServiceModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleServiceModel",
+          "elementKind": "class",
+          "justification": "This interface is not meant to be extended by the user"
         }
       ]
     }

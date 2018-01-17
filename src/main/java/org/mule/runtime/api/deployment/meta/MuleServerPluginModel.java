@@ -11,6 +11,8 @@ import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.util.Optional;
 
 /**
@@ -19,6 +21,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoExtend
 public class MuleServerPluginModel extends AbstractMuleArtifactModel {
 
   private static final String PLUGIN_CLASS_NAME = "pluginClassName";

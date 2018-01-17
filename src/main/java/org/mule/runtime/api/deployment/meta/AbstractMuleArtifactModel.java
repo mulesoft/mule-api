@@ -15,6 +15,7 @@ import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.mule.runtime.api.meta.MuleVersion.NO_REVISION;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 
@@ -26,6 +27,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class AbstractMuleArtifactModel {
 
   public static final String NAME = "name";

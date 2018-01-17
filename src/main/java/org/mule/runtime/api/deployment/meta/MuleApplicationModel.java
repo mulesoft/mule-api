@@ -8,6 +8,10 @@ package org.mule.runtime.api.deployment.meta;
 
 import static java.util.Optional.ofNullable;
 
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoImplement;
+
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,13 +21,15 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoExtend
 public class MuleApplicationModel extends MuleDeployableModel {
 
   private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
-                               Optional<Boolean> redeploymentEnabled) {
-    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled);
+                               Optional<Boolean> redeploymentEnabled, List<String> secureProperties) {
+    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled,
+          secureProperties);
   }
 
   /**
@@ -40,9 +46,10 @@ public class MuleApplicationModel extends MuleDeployableModel {
     }
 
     @Override
-    protected MuleApplicationModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled) {
+    protected MuleApplicationModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled,
+                                                 List<String> secureProperties) {
       return new MuleApplicationModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
-                                      getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled));
+                                      getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled), secureProperties);
 
     }
   }
