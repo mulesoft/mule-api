@@ -89,15 +89,15 @@ public class PathModel {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == null || !(obj instanceof PathModel)){
+    if (obj == null || !(obj instanceof PathModel)) {
       return false;
     }
 
     PathModel that = (PathModel) obj;
     return Objects.equals(type, that.type)
-      && Objects.equals(fileExtensions, that.fileExtensions)
-      && Objects.equals(acceptsUrls, that.acceptsUrls)
-      && Objects.equals(location, that.location);
+        && Objects.equals(fileExtensions, that.fileExtensions)
+        && Objects.equals(acceptsUrls, that.acceptsUrls)
+        && Objects.equals(location, that.location);
   }
 
   @Override

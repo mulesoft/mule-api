@@ -10,6 +10,7 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Objects.hash;
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 import java.util.HashSet;
@@ -101,22 +102,23 @@ public final class DefaultMetadataKey implements MetadataKey {
 
     DefaultMetadataKey that = (DefaultMetadataKey) obj;
     return Objects.equals(id, that.id)
-      && Objects.equals(displayName, that.displayName)
-      && Objects.equals(partName, that.partName)
-      && Objects.equals(properties, that.properties)
-      && Objects.equals(childs, that.childs);
+        && Objects.equals(displayName, that.displayName)
+        && Objects.equals(partName, that.partName)
+        && Objects.equals(properties, that.properties)
+        && Objects.equals(childs, that.childs);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     return sb
-      .append("{")
-      .append("id: ").append(id)
-      .append("displayName: ").append(displayName)
-      .append("partName: ").append(partName)
-      .append("childs: ").append(childs)
-      .append("}")
-      .toString();
+        .append("{")
+        .append("id: ").append(id)
+        .append("displayName: ").append(displayName)
+        .append("partName: ").append(partName)
+        .append("childs: ").append(childs)
+        .append("properties: ").append(properties.values().stream().map(MetadataProperty::getName).collect(joining(", ")))
+        .append("}")
+        .toString();
   }
 }

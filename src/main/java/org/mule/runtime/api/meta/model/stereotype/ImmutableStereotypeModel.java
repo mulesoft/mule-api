@@ -76,14 +76,14 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj == null || !obj.getClass().equals(ImmutableStereotypeModel.class)){
+    if (obj == null || !obj.getClass().equals(ImmutableStereotypeModel.class)) {
       return false;
     }
 
     ImmutableStereotypeModel that = (ImmutableStereotypeModel) obj;
     return Objects.equals(parent, that.parent)
-          && Objects.equals(type, that.type)
-          && Objects.equals(namespace, that.namespace);
+        && Objects.equals(type, that.type)
+        && Objects.equals(namespace, that.namespace);
   }
 
   @Override

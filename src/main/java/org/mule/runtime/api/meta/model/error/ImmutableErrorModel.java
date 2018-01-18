@@ -99,9 +99,9 @@ public final class ImmutableErrorModel implements ErrorModel {
 
     ImmutableErrorModel that = (ImmutableErrorModel) obj;
     return Objects.equals(parent, that.parent)
-      && Objects.equals(type, that.type)
-      && Objects.equals(namespace, that.namespace)
-      && Objects.equals(handleable, that.handleable);
+        && Objects.equals(type, that.type)
+        && Objects.equals(namespace, that.namespace)
+        && Objects.equals(handleable, that.handleable);
   }
 
   @Override
