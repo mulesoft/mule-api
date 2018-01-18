@@ -60,7 +60,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   }
 
   public MultiMap<K, V> toImmutableMultiMap() {
-    return new MultiMap(this.paramsMap);
+    if (this instanceof ImmutableMultiMap) {
+      return this;
+    }
+    return new ImmutableMultiMap(this.paramsMap);
   }
 
   @Override
@@ -209,4 +212,14 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   public String toString() {
     return "MultiMap{" + Arrays.toString(paramsMap.entrySet().toArray()) + '}';
   }
+
+  private static class ImmutableMultiMap<K, V> extends MultiMap<K, V> {
+
+    private static final long serialVersionUID = -4581793201929981747L;
+
+    ImmutableMultiMap(final Map<K, V> parametersMap) {
+      super(parametersMap);
+    }
+  }
+
 }
