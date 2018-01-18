@@ -6,10 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.error;
 
+import static java.util.Objects.hash;
 import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -88,12 +88,20 @@ public final class ImmutableErrorModel implements ErrorModel {
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(this);
+    return hash(type, namespace, handleable, parent);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return reflectionEquals(this, obj);
+    if (obj == null || !obj.getClass().equals(ImmutableErrorModel.class)) {
+      return false;
+    }
+
+    ImmutableErrorModel that = (ImmutableErrorModel) obj;
+    return Objects.equals(parent, that.parent)
+      && Objects.equals(type, that.type)
+      && Objects.equals(namespace, that.namespace)
+      && Objects.equals(handleable, that.handleable);
   }
 
   @Override

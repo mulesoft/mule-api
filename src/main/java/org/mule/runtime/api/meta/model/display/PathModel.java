@@ -10,13 +10,12 @@ package org.mule.runtime.api.meta.model.display;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static java.util.Objects.hash;
 import static org.mule.runtime.api.meta.model.display.PathModel.Type.DIRECTORY;
-
 import org.mule.api.annotation.NoImplement;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A model which provides directives for parameters that points to a file or directory.
@@ -90,12 +89,20 @@ public class PathModel {
 
   @Override
   public boolean equals(Object obj) {
-    return reflectionEquals(obj, this);
+    if (obj == null || !(obj instanceof PathModel)){
+      return false;
+    }
+
+    PathModel that = (PathModel) obj;
+    return Objects.equals(type, that.type)
+      && Objects.equals(fileExtensions, that.fileExtensions)
+      && Objects.equals(acceptsUrls, that.acceptsUrls)
+      && Objects.equals(location, that.location);
   }
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(this);
+    return hash(type, fileExtensions, acceptsUrls, location);
   }
 
   public enum Type {

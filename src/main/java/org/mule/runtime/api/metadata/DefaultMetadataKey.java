@@ -8,14 +8,13 @@ package org.mule.runtime.api.metadata;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
+import static java.util.Objects.hash;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -91,16 +90,33 @@ public final class DefaultMetadataKey implements MetadataKey {
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(this);
+    return hash(id, displayName, partName, properties, childs);
   }
 
   @Override
   public boolean equals(Object obj) {
-    return reflectionEquals(this, obj);
+    if (obj == null || !obj.getClass().equals(DefaultMetadataKey.class)) {
+      return false;
+    }
+
+    DefaultMetadataKey that = (DefaultMetadataKey) obj;
+    return Objects.equals(id, that.id)
+      && Objects.equals(displayName, that.displayName)
+      && Objects.equals(partName, that.partName)
+      && Objects.equals(properties, that.properties)
+      && Objects.equals(childs, that.childs);
   }
 
   @Override
   public String toString() {
-    return reflectionToString(this);
+    StringBuilder sb = new StringBuilder();
+    return sb
+      .append("{")
+      .append("id: ").append(id)
+      .append("displayName: ").append(displayName)
+      .append("partName: ").append(partName)
+      .append("childs: ").append(childs)
+      .append("}")
+      .toString();
   }
 }

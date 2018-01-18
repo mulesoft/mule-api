@@ -8,12 +8,11 @@ package org.mule.runtime.api.meta.model.stereotype;
 
 import static java.util.Optional.ofNullable;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.mule.runtime.api.util.NameUtils.sanitizeName;
 import static org.mule.runtime.api.util.NameUtils.underscorize;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -76,13 +75,20 @@ public final class ImmutableStereotypeModel implements StereotypeModel {
   }
 
   @Override
-  public boolean equals(Object o) {
-    return reflectionEquals(this, o);
+  public boolean equals(Object obj) {
+    if (obj == null || !obj.getClass().equals(ImmutableStereotypeModel.class)){
+      return false;
+    }
+
+    ImmutableStereotypeModel that = (ImmutableStereotypeModel) obj;
+    return Objects.equals(parent, that.parent)
+          && Objects.equals(type, that.type)
+          && Objects.equals(namespace, that.namespace);
   }
 
   @Override
   public int hashCode() {
-    return reflectionHashCode(this);
+    return Objects.hash(type, namespace, parent);
   }
 
   @Override
