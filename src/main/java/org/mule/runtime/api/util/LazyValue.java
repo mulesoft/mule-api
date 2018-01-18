@@ -26,6 +26,7 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
+  private volatile boolean initialized = false;
   private T value;
   private Supplier<T> valueSupplier;
 
@@ -38,16 +39,7 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(Supplier<T> supplier) {
     checkArgument(supplier != null, "supplier cannot be null");
-    valueSupplier = () -> {
-      synchronized (LazyValue.this) {
-        if (value == null) {
-          value = supplier.get();
-          valueSupplier = () -> value;
-        }
-
-        return value;
-      }
-    };
+    valueSupplier = supplier;
   }
 
   /**
@@ -57,6 +49,7 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(T value) {
     this.value = value;
+    this.initialized = true;
     valueSupplier = () -> value;
   }
 
@@ -67,14 +60,23 @@ public class LazyValue<T> implements Supplier<T> {
    */
   @Override
   public T get() {
-    return valueSupplier.get();
+    if (!initialized) {
+      synchronized (this) {
+        if (!initialized) {
+          this.value = valueSupplier.get();
+          this.initialized = true;
+        }
+      }
+    }
+
+    return value;
   }
 
   /**
    * @return Whether the value has already been calculated.
    */
   public boolean isComputed() {
-    return value != null;
+    return initialized;
   }
 
   /**
@@ -86,7 +88,7 @@ public class LazyValue<T> implements Supplier<T> {
    * @param consumer a {@link Consumer}
    */
   public void ifComputed(Consumer<T> consumer) {
-    if (value != null) {
+    if (initialized) {
       consumer.accept(value);
     }
   }
