@@ -39,6 +39,7 @@ public class SchedulerConfig {
   private final String schedulerPrefix;
   private final String schedulerName;
   private final Optional<Boolean> waitAllowed;
+  private final Optional<Boolean> runCpuLightWhenTargetBusy;
   private final Supplier<Long> shutdownTimeoutMillis;
 
   private SchedulerConfig() {
@@ -46,15 +47,18 @@ public class SchedulerConfig {
     this.schedulerPrefix = null;
     this.schedulerName = null;
     this.waitAllowed = empty();
+    this.runCpuLightWhenTargetBusy = empty();
     this.shutdownTimeoutMillis = () -> null;
   }
 
   private SchedulerConfig(Integer maxConcurrentTasks, String schedulerPrefix, String schedulerName,
-                          Optional<Boolean> waitAllowed, Supplier<Long> shutdownTimeoutMillis) {
+                          Optional<Boolean> waitAllowed, Optional<Boolean> runCpuLightWhenTargetBusy,
+                          Supplier<Long> shutdownTimeoutMillis) {
     this.maxConcurrentTasks = maxConcurrentTasks;
     this.schedulerPrefix = schedulerPrefix;
     this.schedulerName = schedulerName;
     this.waitAllowed = waitAllowed;
+    this.runCpuLightWhenTargetBusy = runCpuLightWhenTargetBusy;
     this.shutdownTimeoutMillis = shutdownTimeoutMillis;
   }
 
@@ -68,7 +72,8 @@ public class SchedulerConfig {
    * @return the updated configuration.
    */
   public SchedulerConfig withMaxConcurrentTasks(int maxConcurrentTasks) {
-    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, shutdownTimeoutMillis);
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, runCpuLightWhenTargetBusy,
+                               shutdownTimeoutMillis);
   }
 
   /**
@@ -85,7 +90,8 @@ public class SchedulerConfig {
    * @return the updated configuration.
    */
   public SchedulerConfig withPrefix(String schedulerPrefix) {
-    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, shutdownTimeoutMillis);
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, runCpuLightWhenTargetBusy,
+                               shutdownTimeoutMillis);
   }
 
   /**
@@ -95,7 +101,8 @@ public class SchedulerConfig {
    * @return the updated configuration.
    */
   public SchedulerConfig withName(String schedulerName) {
-    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, shutdownTimeoutMillis);
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, runCpuLightWhenTargetBusy,
+                               shutdownTimeoutMillis);
   }
 
   /**
@@ -113,15 +120,49 @@ public class SchedulerConfig {
   }
 
   /**
+   * When {@code true}, if the target custom {@link Scheduler} tries to dispatch a task to the {@code cpu-light} {@link Scheduler}
+   * when it's busy, the task will be run by the target {@link Scheduler} instead of dispatching it to cpu-lite.
+   * <p>
+   * This is only applicable for <b>custom</b> {@link Scheduler}s. This behaviour cannot be changed for the runtime managed
+   * {@link Scheduler}.
+   * <p>
+   * A custom scheduler may have flags set for both {@code runCpuLightWhenTargetBusy} and {@code waitAllowed}. In such case, the
+   * behaviour when the target {@link Scheduler} is busy depends on the type of the target {@link Scheduler}: if it's cpu-light or
+   * the same as the current, the task will run directly, otherwise it will wait.
+   *
+   * @return the updated configuration
+   * @since 1.1
+   */
+  public SchedulerConfig withDirectRunCpuLightWhenTargetBusy(boolean runCpuLightWhenTargetBusy) {
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, of(runCpuLightWhenTargetBusy),
+                               shutdownTimeoutMillis);
+  }
+
+  /**
+   * @return When {@code true}, if the target custom {@link Scheduler} tries to dispatch a task to the {@code cpu-light}
+   *         {@link Scheduler} when it's busy, the task will be run by the target {@link Scheduler} instead of dispatching it to
+   *         cpu-lite.
+   * @since 1.1
+   */
+  public Optional<Boolean> getDirectRunCpuLightWhenTargetBusy() {
+    return runCpuLightWhenTargetBusy;
+  }
+
+  /**
    * Whether the threads of the target custom {@link Scheduler} may block to wait when dispatching to a busy {@link Scheduler}.
    * <p>
    * This is only applicable for <b>custom</b> {@link Scheduler}s. This behaviour cannot be changed for the runtime managed
    * {@link Scheduler}.
+   * <p>
+   * A custom scheduler may have flags set for both {@code runCpuLightWhenTargetBusy} and {@code waitAllowed}. In such case, the
+   * behaviour when the target {@link Scheduler} is busy depends on the type of the target {@link Scheduler}: if it's cpu-light or
+   * the same as the current, the task will run directly, otherwise it will wait.
    *
    * @return the updated configuration
    */
   public SchedulerConfig withWaitAllowed(boolean waitAllowed) {
-    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, of(waitAllowed), shutdownTimeoutMillis);
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, of(waitAllowed), runCpuLightWhenTargetBusy,
+                               shutdownTimeoutMillis);
   }
 
   /**
@@ -143,7 +184,7 @@ public class SchedulerConfig {
   public SchedulerConfig withShutdownTimeout(Supplier<Long> shutdownTimeoutSupplier, TimeUnit shutdownTimeoutUnit) {
     requireNonNull(shutdownTimeoutUnit);
 
-    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, () -> {
+    return new SchedulerConfig(maxConcurrentTasks, schedulerPrefix, schedulerName, waitAllowed, runCpuLightWhenTargetBusy, () -> {
       long shutdownTimeout = shutdownTimeoutSupplier.get();
       validateTimeoutValue(shutdownTimeout);
       return shutdownTimeoutUnit.toMillis(shutdownTimeout);
