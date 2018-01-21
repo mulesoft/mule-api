@@ -6,15 +6,16 @@
  */
 package org.mule.runtime.api.util;
 
+import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.Iterator;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class CaseInsensitiveMapWrapperTestCase {
 
@@ -39,7 +40,7 @@ public class CaseInsensitiveMapWrapperTestCase {
   public void retainKeyCase() {
     map.put("A", 1);
 
-    assertThat(map.keySet().iterator().next(), is("A"));
+    assertThat(map.keySet().iterator().next(), equalToIgnoringCase("A"));
   }
 
   @Test
@@ -67,7 +68,7 @@ public class CaseInsensitiveMapWrapperTestCase {
 
     for (Iterator<String> it = map.keySet().iterator(); it.hasNext();) {
       String key = it.next();
-      if (key.equals("B")) {
+      if (key.equalsIgnoreCase("B")) {
         it.remove();
       }
     }
@@ -87,7 +88,7 @@ public class CaseInsensitiveMapWrapperTestCase {
 
     for (Iterator<Map.Entry<String, Integer>> it = map.entrySet().iterator(); it.hasNext();) {
       String key = it.next().getKey();
-      if (key.equals("B")) {
+      if (key.equalsIgnoreCase("B")) {
         it.remove();
       }
     }
