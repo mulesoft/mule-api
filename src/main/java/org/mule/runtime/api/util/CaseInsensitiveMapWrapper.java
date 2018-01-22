@@ -42,7 +42,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
   /**
    * Creates a new instance using an existing map as backing map. Said map should be empty.
-   * 
+   *
    * @param map existing map
    */
   public CaseInsensitiveMapWrapper(Map map) {
@@ -142,6 +142,10 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
       return key;
     }
 
+    public String getKeyLowerCase() {
+      return keyLowerCase;
+    }
+
     @Override
     public int hashCode() {
       return keyHash;
@@ -208,7 +212,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     @Override
     protected String convert(CaseInsensitiveMapKey next) {
-      return next.getKey();
+      return next.getKeyLowerCase();
     }
   }
 
@@ -220,7 +224,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     @Override
     protected Entry<String, T> convert(Entry<CaseInsensitiveMapKey, T> next) {
-      return new AbstractMap.SimpleEntry<>(next.getKey().getKey(), next.getValue());
+      return new AbstractMap.SimpleEntry<>(next.getKey().getKeyLowerCase(), next.getValue());
     }
   }
 

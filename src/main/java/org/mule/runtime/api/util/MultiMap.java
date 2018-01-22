@@ -103,7 +103,12 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    *         an empty list if this map contains no mappings for the key
    */
   public List<V> getAll(Object key) {
-    return paramsMap.containsKey(key) ? unmodifiableList(paramsMap.get(key)) : emptyList();
+    LinkedList<V> value = paramsMap.get(key);
+    if (value != null) {
+      return unmodifiableList(value);
+    } else {
+      return emptyList();
+    }
   }
 
   @Override
@@ -134,9 +139,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   public void put(K key, Collection<V> values) {
     LinkedList<V> newValue = paramsMap.get(key);
     if (newValue == null) {
-      newValue = new LinkedList<>();
+      newValue = new LinkedList<>(values);
+    } else {
+      newValue.addAll(values);
     }
-    newValue.addAll(values);
     paramsMap.put(key, newValue);
   }
 
