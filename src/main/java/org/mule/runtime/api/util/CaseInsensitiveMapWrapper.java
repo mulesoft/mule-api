@@ -38,7 +38,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
   private static final long serialVersionUID = 8534959274607933747L;
 
-  private final Map<CaseInsensitiveMapKey, T> baseMap;
+  protected final Map<CaseInsensitiveMapKey, T> baseMap;
 
   /**
    * Creates a new instance using an existing map as backing map. Said map should be empty.
@@ -124,7 +124,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
   }
 
 
-  private static class CaseInsensitiveMapKey implements Serializable {
+  protected static class CaseInsensitiveMapKey implements Serializable {
 
     private static final long serialVersionUID = -4964071931663826261L;
 
@@ -182,7 +182,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
     }
   }
 
-  private static abstract class AbstractConverterSet<A, B> extends AbstractSet<B> {
+  protected static abstract class AbstractConverterSet<A, B> extends AbstractSet<B> {
 
     private final Set<A> aSet;
 
@@ -212,7 +212,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     @Override
     protected String convert(CaseInsensitiveMapKey next) {
-      return next.getKeyLowerCase();
+      return next.getKey();
     }
   }
 
@@ -224,7 +224,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     @Override
     protected Entry<String, T> convert(Entry<CaseInsensitiveMapKey, T> next) {
-      return new AbstractMap.SimpleEntry<>(next.getKey().getKeyLowerCase(), next.getValue());
+      return new AbstractMap.SimpleEntry<>(next.getKey().getKey(), next.getValue());
     }
   }
 
