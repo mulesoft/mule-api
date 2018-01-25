@@ -1,4 +1,19 @@
 {
+  "1.1.1": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method java.lang.String org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::getKeyLowerCase()",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "CaseInsensitiveMapKey",
+          "methodName": "getKeyLowerCase",
+          "elementKind": "method",
+          "justification": "-"
+        }
+      ]
+    }
+  },
   "1.1.0": {
     "revapi": {
       "ignore": [
