@@ -9,7 +9,25 @@
           "classSimpleName": "CaseInsensitiveMapKey",
           "methodName": "getKeyLowerCase",
           "elementKind": "method",
-          "justification": "-"
+          "justification": "This enables a performance optimization. It doesn't break the API"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method <K, V> org.mule.runtime.api.util.MultiMap<K, V> org.mule.runtime.api.util.MultiMap<K, V>::emptyMultiMap()",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MultiMap",
+          "methodName": "emptyMultiMap",
+          "elementKind": "method",
+          "justification": "This enables a performance optimization. It doesn't break the API"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.util.MultiMap<K, V>::putAll(org.mule.runtime.api.util.MultiMap<? extends K, ? extends V>)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MultiMap",
+          "methodName": "putAll",
+          "elementKind": "method",
+          "justification": "This enables a performance optimization. It doesn't break the API"
         }
       ]
     }
