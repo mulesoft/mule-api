@@ -36,6 +36,30 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   private static final long serialVersionUID = -4723226524524565104L;
 
+  @SuppressWarnings("rawtypes")
+  private static final MultiMap EMPTY_MAP = new MultiMap<>().toImmutableMultiMap();
+
+  /**
+   * Returns an empty multi-map (immutable). This map is serializable.
+   *
+   * <p>
+   * This example illustrates the type-safe way to obtain an empty map:
+   *
+   * <pre>
+   *
+   * MultiMap&lt;String, Stirng&gt; s = MultiMap.emptyMultiMap();
+   * </pre>
+   *
+   * @param <K> the class of the map keys
+   * @param <V> the class of the map values
+   * @return an empty multi-map
+   * @since 1.1.1
+   */
+  @SuppressWarnings("unchecked")
+  public static <K, V> MultiMap<K, V> emptyMultiMap() {
+    return EMPTY_MAP;
+  }
+
   protected Map<K, LinkedList<V>> paramsMap;
 
   public MultiMap(final MultiMap<K, V> multiMap) {
@@ -162,6 +186,22 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
       values.add(value);
       paramsMap.put(key, values);
     });
+  }
+
+  /**
+   * Similar to {@link #putAll(Map)}, but instead of putting only the first value of each key, all the values are copied for each
+   * key.
+   *
+   * @param aMultiMap mappings to be stored in this map
+   * @throws ClassCastException if the class of a key or value in the specified map prevents it from being stored in this map
+   * @throws NullPointerException if the specified map is null, or if this map does not permit null keys or values, and the
+   *         specified map contains null keys or values
+   * @throws IllegalArgumentException if some property of a key or value in the specified map prevents it from being stored in
+   *         this map
+   * @since 1.1.1
+   */
+  public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
+    aMultiMap.keySet().forEach(key -> put(key, (Collection<V>) aMultiMap.getAll(key)));
   }
 
   @Override
