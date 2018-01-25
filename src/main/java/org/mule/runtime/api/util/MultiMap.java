@@ -36,6 +36,30 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   private static final long serialVersionUID = -4723226524524565104L;
 
+  @SuppressWarnings("rawtypes")
+  private static final MultiMap EMPTY_MAP = new MultiMap<>().toImmutableMultiMap();
+
+  /**
+   * Returns an empty multi-map (immutable). This map is serializable.
+   *
+   * <p>
+   * This example illustrates the type-safe way to obtain an empty map:
+   *
+   * <pre>
+   *
+   * MultiMap&lt;String, Stirng&gt; s = MultiMap.emptyMultiMap();
+   * </pre>
+   *
+   * @param <K> the class of the map keys
+   * @param <V> the class of the map values
+   * @return an empty multi-map
+   * @since 1.1.1
+   */
+  @SuppressWarnings("unchecked")
+  public static <K, V> MultiMap<K, V> emptyMultiMap() {
+    return EMPTY_MAP;
+  }
+
   protected Map<K, LinkedList<V>> paramsMap;
 
   public MultiMap(final MultiMap<K, V> multiMap) {
@@ -244,27 +268,4 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     }
   }
 
-  @SuppressWarnings("rawtypes")
-  private static final MultiMap EMPTY_MAP = new MultiMap<>().toImmutableMultiMap();
-
-  /**
-   * Returns an empty multi-map (immutable). This map is serializable.
-   *
-   * <p>
-   * This example illustrates the type-safe way to obtain an empty map:
-   *
-   * <pre>
-   *
-   * MultiMap&lt;String, Stirng&gt; s = MultiMap.emptyMultiMap();
-   * </pre>
-   *
-   * @param <K> the class of the map keys
-   * @param <V> the class of the map values
-   * @return an empty multi-map
-   * @since 1.1.1
-   */
-  @SuppressWarnings("unchecked")
-  public static <K, V> MultiMap<K, V> emptyMultiMap() {
-    return EMPTY_MAP;
-  }
 }
