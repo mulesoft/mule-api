@@ -28,6 +28,15 @@
           "methodName": "putAll",
           "elementKind": "method",
           "justification": "This enables a performance optimization. It doesn't break the API"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::keyFor(java.lang.Object)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "CaseInsensitiveMapKey",
+          "methodName": "keyFor",
+          "elementKind": "method",
+          "justification": "This enables a performance optimization. It doesn't break the API"
         }
       ]
     }

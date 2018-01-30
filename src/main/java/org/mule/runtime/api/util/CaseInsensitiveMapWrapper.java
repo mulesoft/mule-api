@@ -16,6 +16,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 /**
@@ -69,7 +71,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
   @Override
   public boolean containsKey(Object key) {
-    return baseMap.containsKey(new CaseInsensitiveMapKey(key));
+    return baseMap.containsKey(CaseInsensitiveMapKey.keyFor(key));
   }
 
   @Override
@@ -79,17 +81,17 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
   @Override
   public T get(Object key) {
-    return baseMap.get(new CaseInsensitiveMapKey(key));
+    return baseMap.get(CaseInsensitiveMapKey.keyFor(key));
   }
 
   @Override
   public T put(String key, T value) {
-    return baseMap.put(new CaseInsensitiveMapKey(key), value);
+    return baseMap.put(CaseInsensitiveMapKey.keyFor(key), value);
   }
 
   @Override
   public T remove(Object key) {
-    return baseMap.remove(new CaseInsensitiveMapKey(key));
+    return baseMap.remove(CaseInsensitiveMapKey.keyFor(key));
   }
 
   @Override
@@ -128,11 +130,22 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     private static final long serialVersionUID = -4964071931663826261L;
 
+    private static final ConcurrentMap<Object, CaseInsensitiveMapKey> cache = new ConcurrentHashMap<>();
+
     private final String key;
     private final String keyLowerCase;
     private final int keyHash;
 
-    public CaseInsensitiveMapKey(Object key) {
+    public static CaseInsensitiveMapKey keyFor(Object key) {
+      CaseInsensitiveMapKey value = cache.get(key);
+      if (value == null) {
+        value = new CaseInsensitiveMapKey(key);
+        cache.putIfAbsent(key, value);
+      }
+      return value;
+    }
+
+    private CaseInsensitiveMapKey(Object key) {
       this.key = key.toString();
       keyLowerCase = this.key.toLowerCase();
       keyHash = keyLowerCase.hashCode();
