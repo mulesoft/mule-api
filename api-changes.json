@@ -264,5 +264,23 @@
         }
       ]
     }
+  },
+  "1.2.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.visibilityReduced",
+          "old": "method void org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::<init>(java.lang.Object)",
+          "new": "method void org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::<init>(java.lang.Object)",
+          "oldVisibility": "public",
+          "newVisibility": "private",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "CaseInsensitiveMapKey",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "This class is not meant to be instantiated by the user"
+        }
+      ]
+    }
   }
 }
