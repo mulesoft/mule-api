@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ModelProperty;
 
 /**
@@ -14,6 +15,7 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  * @param <T> the type of the implementing type. Used to allow method chaining
  * @since 1.0
  */
+@NoImplement
 public interface HasModelProperties<T> {
 
   /**

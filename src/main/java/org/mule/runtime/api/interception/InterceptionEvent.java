@@ -6,23 +6,21 @@
  */
 package org.mule.runtime.api.interception;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.el.MuleExpressionLanguage;
 import org.mule.runtime.api.event.Event;
-import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
-import org.mule.runtime.api.metadata.TypedValue;
 
 import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 
 /**
  * Provides access to the attributes of the input event of a component and allows to mutate them.
  *
  * @since 1.0
  */
+@NoImplement
 public interface InterceptionEvent extends Event {
 
   /**

@@ -6,12 +6,15 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoExtend;
+
 /**
  * Base class for a component which can be used to create a {@link BaseDeclaration}
  *
  * @param <T> the generic type of {@link BaseDeclaration} to be created
  * @since 1.0
  */
+@NoExtend
 public abstract class Declarer<T extends BaseDeclaration> {
 
   protected final T declaration;

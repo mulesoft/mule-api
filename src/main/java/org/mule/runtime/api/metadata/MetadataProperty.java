@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * A custom property which augments a {@link MetadataEnrichableModel} with
  * non canonical pieces of information.
@@ -15,6 +17,7 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
+@NoImplement
 public interface MetadataProperty {
 
   /**

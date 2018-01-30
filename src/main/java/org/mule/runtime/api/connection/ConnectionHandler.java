@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.connection;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Represents a connection that is being managed by the runtime.
  * <p>
@@ -17,6 +19,7 @@ package org.mule.runtime.api.connection;
  * @param <T> the generic type of the connection being wrapped by each individual instance
  * @since 1.0
  */
+@NoImplement
 public interface ConnectionHandler<T> {
 
   /**

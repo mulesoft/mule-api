@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @since 1.0
  */
 //TODO: MULE-9047 try to simplify
-public class PoolingProfile {
+public final class PoolingProfile {
 
   /**
    * Tells the object pool not to initialise any components on startup.

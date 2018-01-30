@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.NamedObject;
 
 import java.io.Serializable;
@@ -26,6 +27,7 @@ import java.io.Serializable;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ModelProperty extends NamedObject, Serializable {
 
   /**

@@ -9,6 +9,8 @@ package org.mule.runtime.api.tls;
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
+import org.mule.api.annotation.NoExtend;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class AbstractTlsContextFactoryBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTlsContextFactoryBuilderFactory.class);

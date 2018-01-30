@@ -13,7 +13,7 @@ import org.mule.runtime.api.metadata.TypedValue;
  *
  * @since 1.0
  */
-public class Binding {
+public final class Binding {
 
   private String identifier;
   private TypedValue value;

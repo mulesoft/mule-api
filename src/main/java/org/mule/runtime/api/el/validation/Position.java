@@ -11,7 +11,7 @@ package org.mule.runtime.api.el.validation;
  *
  * @since 1.0
  */
-public class Position {
+public final class Position {
 
   private int line;
   private int column;

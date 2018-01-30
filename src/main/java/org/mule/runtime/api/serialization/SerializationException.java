@@ -15,7 +15,7 @@ import org.mule.runtime.api.i18n.I18nMessageFactory;
  *
  * @since 1.0
  */
-public class SerializationException extends MuleRuntimeException {
+public final class SerializationException extends MuleRuntimeException {
 
   private static final long serialVersionUID = -2550225226351711742L;
 

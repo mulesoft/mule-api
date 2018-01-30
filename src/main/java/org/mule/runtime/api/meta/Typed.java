@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.MetadataService;
 
@@ -14,6 +15,7 @@ import org.mule.runtime.api.metadata.MetadataService;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Typed {
 
   /**

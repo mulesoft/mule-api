@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.cluster;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Clustering service that provides information about the cluster state.
  */
+@NoImplement
 public interface ClusterService {
 
   /**

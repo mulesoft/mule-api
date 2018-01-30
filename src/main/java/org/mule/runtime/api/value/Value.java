@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.value;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.Set;
 
 /**
@@ -16,6 +18,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Value {
 
   /**

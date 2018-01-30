@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.OutputModel;
 import org.mule.runtime.api.metadata.MetadataContext;
@@ -18,6 +19,7 @@ import org.mule.runtime.api.metadata.MetadataContext;
  *
  * @since 1.1
  */
+@NoExtend
 public abstract class AttributesStaticTypeResolver implements AttributesTypeResolver, StaticResolver {
 
   /**

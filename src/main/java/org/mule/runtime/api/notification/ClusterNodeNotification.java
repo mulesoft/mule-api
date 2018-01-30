@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.notification;
 
+import org.mule.api.annotation.NoExtend;
+
 /**
  * Notifies when there are a cluster node event
  */
+@NoExtend
 public class ClusterNodeNotification extends AbstractServerNotification {
 
   public static final int PRIMARY_CLUSTER_NODE_SELECTED = CLUSTER_NODE_EVENT_ACTION_START_RANGE + 1;

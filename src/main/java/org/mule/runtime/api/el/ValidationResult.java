@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.validation.ValidationMessage;
 
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ValidationResult {
 
   static ValidationResult success() {

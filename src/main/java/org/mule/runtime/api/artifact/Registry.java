@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.artifact;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.Collection;
 import java.util.Optional;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface Registry {
 
   /**

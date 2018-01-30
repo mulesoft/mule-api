@@ -13,7 +13,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  *
  * @since 1.0
  */
-public class DataSize {
+public final class DataSize {
 
   private final int size;
   private final DataUnit unit;

@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
  *
  * @since 1.0
  */
-public class MuleVersion {
+public final class MuleVersion {
 
   private static final Pattern pattern = Pattern.compile("([0-9]+)(\\.)([0-9]+)(\\.([0-9]*))?(-(.+))?");
   public static final int NO_REVISION = -1;

@@ -6,12 +6,14 @@
  */
 package org.mule.runtime.api.exception;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.message.ErrorType;
 
 import java.util.Collection;
 import java.util.Optional;
 
+@NoImplement
 public interface ErrorTypeRepository {
 
   /**

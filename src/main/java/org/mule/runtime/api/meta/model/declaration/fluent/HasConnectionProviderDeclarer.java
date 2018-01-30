@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
+
+@NoImplement
 public interface HasConnectionProviderDeclarer {
 
   /**

@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.streaming;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * A generic contract for an object which can be described with a size of some sort.
  * <p>
@@ -15,6 +17,7 @@ package org.mule.runtime.api.streaming;
  *
  * @since 1.0
  */
+@NoImplement
 public interface HasSize {
 
   /**

@@ -13,7 +13,7 @@ import java.util.concurrent.RejectedExecutionException;
  * 
  * @since 1.0
  */
-public class SchedulerBusyException extends RejectedExecutionException {
+public final class SchedulerBusyException extends RejectedExecutionException {
 
   private static final long serialVersionUID = 9047649377760686741L;
 

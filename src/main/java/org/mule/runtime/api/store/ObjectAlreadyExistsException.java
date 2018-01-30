@@ -14,7 +14,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 1.0
  */
-public class ObjectAlreadyExistsException extends ObjectStoreException {
+public final class ObjectAlreadyExistsException extends ObjectStoreException {
 
   public ObjectAlreadyExistsException() {
     super();

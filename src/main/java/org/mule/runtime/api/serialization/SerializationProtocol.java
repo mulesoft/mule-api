@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.serialization;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -27,6 +29,7 @@ import java.io.Serializable;
  *
  * @since 1.0
  */
+@NoImplement
 public interface SerializationProtocol {
 
   /**

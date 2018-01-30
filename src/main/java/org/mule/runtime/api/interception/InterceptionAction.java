@@ -7,6 +7,7 @@
 
 package org.mule.runtime.api.interception;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.ErrorType;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface InterceptionAction {
 
   /**

@@ -7,12 +7,15 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Contract interface for a declarer in which it's possible
  * to add message sources
  *
  * @since 1.0
  */
+@NoImplement
 public interface HasSourceDeclarer {
 
   /**

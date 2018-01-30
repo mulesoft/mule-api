@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
@@ -14,6 +15,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface MetadataKeyProvider {
 
   /**

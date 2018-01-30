@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model.parameter;
 
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
 
@@ -18,6 +19,7 @@ import java.util.List;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ParameterizedModel extends NamedObject, DescribedObject {
 
   /**
