@@ -138,8 +138,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
     public static CaseInsensitiveMapKey keyFor(Object key) {
       CaseInsensitiveMapKey value = cache.get(key);
       if (value == null) {
-        value = new CaseInsensitiveMapKey(key);
-        cache.putIfAbsent(key, value);
+        value = cache.computeIfAbsent(key, k -> new CaseInsensitiveMapKey(k));
       }
       return value;
     }
