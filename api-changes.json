@@ -22,6 +22,15 @@
       "ignore": [
         {
           "code": "java.method.added",
+          "new": "method java.lang.String org.mule.runtime.api.util.NameUtils::titleize(java.lang.String)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "NameUtils",
+          "methodName": "titleize",
+          "elementKind": "method",
+          "justification": "Is a new utility method. It doesn't break the API"
+        },
+        {
+          "code": "java.method.added",
           "new": "method java.lang.String org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::getKeyLowerCase()",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "CaseInsensitiveMapKey",
