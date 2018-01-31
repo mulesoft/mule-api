@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
@@ -69,6 +71,8 @@ public final class MediaType implements Serializable {
   public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
   public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
+  private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
+
   private final String primaryType;
   private final String subType;
   private final Map<String, String> params;
@@ -82,23 +86,37 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    try {
-      MimeType mimeType = new MimeType(mediaType);
+    MediaType value = cache.get(mediaType);
 
-      String charsetParam = mimeType.getParameter(CHARSET_PARAM);
-      Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+    if (value == null) {
+      try {
+        MimeType mimeType = new MimeType(mediaType);
 
-      Map<String, String> params = new HashMap<>();
-      for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
-        if (!CHARSET_PARAM.equals(paramName)) {
-          params.put(paramName, mimeType.getParameter(paramName));
+        String charsetParam = mimeType.getParameter(CHARSET_PARAM);
+        Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+
+        Map<String, String> params = new HashMap<>();
+        for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
+          if (!CHARSET_PARAM.equals(paramName)) {
+            params.put(paramName, mimeType.getParameter(paramName));
+          }
         }
-      }
 
-      return new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
-    } catch (MimeTypeParseException e) {
-      throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
+        value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
+
+        // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
+        // in caching them).
+        // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
+        // determine if the value is cached or not.
+        if (params.isEmpty()) {
+          cache.putIfAbsent(mediaType, value);
+        }
+      } catch (MimeTypeParseException e) {
+        throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
+      }
     }
+
+    return value;
   }
 
   /**
@@ -189,7 +207,7 @@ public final class MediaType implements Serializable {
    * Evaluates the type of this object against the ones of the {@code other} {@link MediaType}.
    * <p>
    * This will ignore any optional parameters, such as the charset.
-   * 
+   *
    * @param other The {@link MediaType} to evaluate against.
    * @return {@code true} if the types are the same.
    */
