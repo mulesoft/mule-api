@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.function;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +16,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface HasFunctionModels {
 
   /**

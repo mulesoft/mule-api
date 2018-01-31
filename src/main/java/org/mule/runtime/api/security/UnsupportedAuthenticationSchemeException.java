@@ -16,7 +16,8 @@ import org.mule.runtime.api.message.Message;
  *
  * @since 1.0
  */
-public class UnsupportedAuthenticationSchemeException extends ServerSecurityException implements ErrorMessageAwareException {
+public final class UnsupportedAuthenticationSchemeException extends ServerSecurityException
+    implements ErrorMessageAwareException {
 
   /**
    * Serial version

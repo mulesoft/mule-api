@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.api.event;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.ComponentLocation;
 
 import java.time.Instant;
 
+@NoImplement
 public interface EventContext {
 
   /**

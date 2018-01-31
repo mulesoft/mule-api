@@ -12,7 +12,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Objects.hash;
 import static org.mule.runtime.api.meta.model.display.PathModel.Type.DIRECTORY;
-import org.mule.api.annotation.NoImplement;
+import org.mule.api.annotation.NoExtend;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +22,7 @@ import java.util.Objects;
  *
  * @since 1.0
  */
-@NoImplement
+@NoExtend
 public class PathModel {
 
   /**

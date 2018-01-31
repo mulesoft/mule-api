@@ -26,7 +26,7 @@ public final class ConnectionProviderDeclarer
    *
    * @param declaration the declaration object to be configured
    */
-  public ConnectionProviderDeclarer(ConnectionProviderDeclaration declaration) {
+  ConnectionProviderDeclarer(ConnectionProviderDeclaration declaration) {
     super(declaration);
   }
 

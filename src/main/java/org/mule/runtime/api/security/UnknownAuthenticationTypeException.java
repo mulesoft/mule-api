@@ -15,7 +15,7 @@ import org.mule.runtime.api.exception.MuleException;
  *
  * @since 1.0
  */
-public class UnknownAuthenticationTypeException extends MuleException {
+public final class UnknownAuthenticationTypeException extends MuleException {
 
   /**
    * Serial version

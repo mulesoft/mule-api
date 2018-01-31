@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.component.execution;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
@@ -23,6 +24,7 @@ import java.util.Optional;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface InputEvent {
 
   /**

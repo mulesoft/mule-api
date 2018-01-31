@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.dsl;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
@@ -20,6 +21,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoImplement
 public interface DslResolvingContext {
 
   /**

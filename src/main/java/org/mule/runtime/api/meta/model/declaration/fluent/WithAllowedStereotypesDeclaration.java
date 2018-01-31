@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.Set;
@@ -16,6 +17,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoImplement
 public interface WithAllowedStereotypesDeclaration<T> {
 
   /**

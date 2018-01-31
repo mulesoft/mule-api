@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.interception;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.exception.MuleRuntimeException;
 
 /**
@@ -13,6 +14,7 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ProcessorParameterValue {
 
   /**

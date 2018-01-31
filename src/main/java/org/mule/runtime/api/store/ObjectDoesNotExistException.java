@@ -14,7 +14,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 1.0
  */
-public class ObjectDoesNotExistException extends ObjectStoreException {
+public final class ObjectDoesNotExistException extends ObjectStoreException {
 
   public ObjectDoesNotExistException() {
     super();

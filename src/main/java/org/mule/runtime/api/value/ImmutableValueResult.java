@@ -9,18 +9,18 @@ package org.mule.runtime.api.value;
 import static java.util.Collections.emptySet;
 import static java.util.Optional.ofNullable;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
 import java.util.Optional;
 import java.util.Set;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * Immutable implementation of {@link ValueResult}
  *
  * @since 1.0
  */
-final public class ImmutableValueResult implements ValueResult {
+public final class ImmutableValueResult implements ValueResult {
 
   private Set<Value> values = emptySet();
   private ResolvingFailure failure;

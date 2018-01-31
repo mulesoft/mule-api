@@ -7,6 +7,7 @@
 package org.mule.runtime.api.el;
 
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.metadata.TypedValue;
 
 import java.util.Collection;
@@ -17,6 +18,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ExpressionModule {
 
   /**

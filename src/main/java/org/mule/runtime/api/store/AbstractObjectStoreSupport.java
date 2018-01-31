@@ -8,6 +8,8 @@ package org.mule.runtime.api.store;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.io.Serializable;
 
 /**
@@ -19,6 +21,7 @@ import java.io.Serializable;
  * @param <T> the generic type of the store's items
  *           @since 1.0
  */
+@NoExtend
 public abstract class AbstractObjectStoreSupport<T extends Serializable> implements ObjectStore<T> {
 
   protected void validateKey(String key) throws ObjectStoreException {

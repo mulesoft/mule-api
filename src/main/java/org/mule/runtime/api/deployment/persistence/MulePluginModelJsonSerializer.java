@@ -14,7 +14,7 @@ import org.mule.runtime.api.deployment.meta.MulePluginModel;
  *
  * @since 1.0
  */
-public class MulePluginModelJsonSerializer extends AbstractMuleArtifactModelJsonSerializer<MulePluginModel> {
+public final class MulePluginModelJsonSerializer extends AbstractMuleArtifactModelJsonSerializer<MulePluginModel> {
 
   @Override
   protected Class<MulePluginModel> getParameterizedClass() {

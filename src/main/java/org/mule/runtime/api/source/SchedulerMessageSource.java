@@ -7,6 +7,7 @@
 package org.mule.runtime.api.source;
 
 import static org.mule.runtime.api.component.ComponentIdentifier.buildFromStringRepresentation;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.lifecycle.Startable;
 import org.mule.runtime.api.lifecycle.Stoppable;
@@ -25,6 +26,7 @@ import org.mule.runtime.api.lifecycle.Stoppable;
  *
  * @since 4.0
  */
+@NoImplement
 public interface SchedulerMessageSource extends Stoppable, Startable {
 
   /**

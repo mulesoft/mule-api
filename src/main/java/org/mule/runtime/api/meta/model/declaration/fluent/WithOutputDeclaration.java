@@ -6,12 +6,15 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Contract interface for a {@link BaseDeclaration} in which it's possible
  * to get/set {@link OutputDeclaration} objects of payload and attributes.
  *
  * @since 1.0
  */
+@NoImplement
 public interface WithOutputDeclaration {
 
   /**

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.component.DefaultComponentIdentifier.parseComponentIdentifier;
+import org.mule.api.annotation.NoImplement;
 
 /**
  * Unique identifier for a configuration option. Every configuration option has a namespace and an identifier.
@@ -16,6 +17,7 @@ import static org.mule.runtime.api.component.DefaultComponentIdentifier.parseCom
  *
  * @since 1.0
  */
+@NoImplement
 public interface ComponentIdentifier {
 
   /**

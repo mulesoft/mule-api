@@ -7,6 +7,7 @@
 
 package org.mule.runtime.api.deployment.persistence;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel;
 
 import com.google.gson.Gson;
@@ -20,6 +21,7 @@ import com.google.gson.GsonBuilder;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class AbstractMuleArtifactModelJsonSerializer<T extends AbstractMuleArtifactModel> {
 
   private final Gson gson;

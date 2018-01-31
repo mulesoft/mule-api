@@ -15,7 +15,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 4.0
  */
-public class UnsupportedConnectivityTestingObjectException extends MuleRuntimeException {
+public final class UnsupportedConnectivityTestingObjectException extends MuleRuntimeException {
 
   /**
    * {@inheritDoc}

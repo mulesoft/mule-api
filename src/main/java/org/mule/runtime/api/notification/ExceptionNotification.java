@@ -12,7 +12,7 @@ import org.mule.runtime.api.component.location.ComponentLocation;
  * This class is from Mule 2.2.5. It is modified so the ExceptionNotification has a resourceId of the exception type. This is only
  * here so we can avoid doing a hot fix of Mule to run MMC. This will be removed in future releases of MMC.
  */
-public class ExceptionNotification extends EnrichedServerNotification {
+public final class ExceptionNotification extends EnrichedServerNotification {
 
   /**
    * Serial version.

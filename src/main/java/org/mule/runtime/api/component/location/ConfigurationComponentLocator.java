@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.component.location;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.component.ComponentIdentifier;
 
@@ -36,6 +37,7 @@ import java.util.Optional;
  *
  * @since 4.0
  */
+@NoImplement
 public interface ConfigurationComponentLocator {
 
   String REGISTRY_KEY = "_muleConfigurationComponentLocator";

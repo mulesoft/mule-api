@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.ExpressionFunction;
 
 import java.util.Collection;
@@ -20,6 +21,7 @@ import java.util.Map;
  *
  * @since 1.0
  */
+@NoImplement
 public interface DataTypeBuilder extends DataTypeParamsBuilder {
 
   /**

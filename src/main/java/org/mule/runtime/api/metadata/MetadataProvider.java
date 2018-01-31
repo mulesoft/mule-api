@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
@@ -20,6 +21,7 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
  *
  * @since 1.0
  */
+@NoImplement
 public interface MetadataProvider<T extends ComponentModel> {
 
   /**

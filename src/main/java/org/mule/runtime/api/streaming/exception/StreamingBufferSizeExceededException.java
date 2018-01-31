@@ -15,7 +15,7 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
  *
  * @since 1.0
  */
-public class StreamingBufferSizeExceededException extends MuleRuntimeException {
+public final class StreamingBufferSizeExceededException extends MuleRuntimeException {
 
   /**
    * Creates a new instance

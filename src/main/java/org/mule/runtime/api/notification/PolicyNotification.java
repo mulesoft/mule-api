@@ -7,13 +7,11 @@
 package org.mule.runtime.api.notification;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
-import org.mule.runtime.api.notification.EnrichedNotificationInfo;
-import org.mule.runtime.api.notification.EnrichedServerNotification;
 
 /**
  * Used to notify that a message was processed by a policy
  */
-public class PolicyNotification extends EnrichedServerNotification {
+public final class PolicyNotification extends EnrichedServerNotification {
 
   // Fired when processing of policy chain starts
   public static final int PROCESS_START = POLICY_MESSAGE_EVENT_ACTION_START_RANGE + 1;

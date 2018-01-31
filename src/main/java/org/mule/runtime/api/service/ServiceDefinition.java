@@ -14,7 +14,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @since 1.0
  */
-public class ServiceDefinition {
+public final class ServiceDefinition {
 
   private final Class<? extends Service> serviceClass;
   private final Service service;

@@ -6,11 +6,13 @@
  */
 package org.mule.runtime.api.deployment.management;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.Component;
 
 /**
  * Manages the initial state of components within a mule artifact (application, domain, policy, etc).
  */
+@NoImplement
 public interface ComponentInitialStateManager {
 
   /**

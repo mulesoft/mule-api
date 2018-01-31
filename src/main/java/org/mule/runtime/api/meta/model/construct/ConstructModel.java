@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.construct;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ConnectableComponentModel;
@@ -16,6 +17,7 @@ import org.mule.runtime.api.meta.model.ConnectableComponentModel;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ConstructModel extends ComponentModel {
 
   /**
