@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.service;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.List;
 
 /**
@@ -14,6 +16,7 @@ import java.util.List;
  *
  * @since 1.1
  */
+@NoImplement
 public interface ServiceRepository {
 
   /**

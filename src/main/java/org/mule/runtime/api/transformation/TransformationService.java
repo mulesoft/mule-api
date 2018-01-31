@@ -6,9 +6,11 @@
  */
 package org.mule.runtime.api.transformation;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 
+@NoImplement
 public interface TransformationService {
 
   /**

@@ -14,7 +14,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 1.0
  */
-public class ExpressionExecutionException extends MuleRuntimeException {
+public final class ExpressionExecutionException extends MuleRuntimeException {
 
   public ExpressionExecutionException(I18nMessage message) {
     super(message);

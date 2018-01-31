@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0
  */
+@NoImplement
 public interface WithFunctionsDeclaration<T extends BaseDeclaration> {
 
   /**

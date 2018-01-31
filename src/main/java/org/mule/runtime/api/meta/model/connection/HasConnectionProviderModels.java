@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.connection;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
@@ -18,6 +19,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface HasConnectionProviderModels {
 
   /**

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.message;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.metadata.CollectionDataType;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MapDataType;
@@ -23,6 +24,7 @@ import java.util.Map;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Message extends Serializable {
 
   /**

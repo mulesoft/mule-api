@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.time;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.function.Supplier;
 
 /**
@@ -13,6 +15,7 @@ import java.util.function.Supplier;
  *
  * @since 4.0
  */
+@NoImplement
 public interface TimeSupplier extends Supplier<Long> {
 
   /**

@@ -74,4 +74,5 @@ public class Preconditions {
     return reference;
   }
 
+  private Preconditions() {}
 }

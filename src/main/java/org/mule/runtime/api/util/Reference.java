@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util;
 
 import static java.lang.System.identityHashCode;
+import org.mule.api.annotation.NoExtend;
 
 /**
  * An object which holds a reference to a given {@link #value}.
@@ -23,6 +24,7 @@ import static java.lang.System.identityHashCode;
  * @param <T> the generic type of the referenced value
  * @since 1.0
  */
+@NoExtend
 public class Reference<T> {
 
   private T value;

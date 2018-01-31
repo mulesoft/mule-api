@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.el.BindingContext;
 
 /**
@@ -13,6 +14,7 @@ import org.mule.runtime.api.el.BindingContext;
  *
  * @since 1.0
  */
+@NoExtend
 public class FunctionParameter {
 
   private String name;

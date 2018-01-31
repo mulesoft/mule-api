@@ -11,7 +11,7 @@ package org.mule.runtime.api.el.validation;
  *
  * @since 1.0
  */
-public class Location {
+public final class Location {
 
   private Position startPosition;
   private Position endPosition;

@@ -24,7 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * @since 1.0
  */
-public class ModuleNamespace {
+public final class ModuleNamespace {
 
   private String[] elements;
 

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.type;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
@@ -27,6 +28,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
+@NoImplement
 public interface TypeCatalog {
 
   static TypeCatalog getDefault(Set<ExtensionModel> extensions) {

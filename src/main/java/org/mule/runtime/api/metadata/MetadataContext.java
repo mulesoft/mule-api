@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.runtime.api.connection.ConnectionException;
@@ -19,6 +20,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface MetadataContext extends Disposable {
 
   /**

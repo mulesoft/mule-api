@@ -6,18 +6,19 @@
  */
 package org.mule.runtime.api.el.persistence;
 
+import org.mule.runtime.api.el.ValidationResult;
+
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
-import org.mule.runtime.api.el.ValidationResult;
 
 /**
  * {@link TypeAdapterFactory} implementation for creating {@link ValidationResult} {@link TypeAdapter}s
  *
  * @since 1.0
  */
-public class ValidationResultTypeAdapterFactory implements TypeAdapterFactory {
+public final class ValidationResultTypeAdapterFactory implements TypeAdapterFactory {
 
   @Override
   public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {

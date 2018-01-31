@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 
 /**
@@ -14,6 +15,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
  *
  * @param <T> the generic type of the {@link Declarer} which implements this interface
  */
+@NoImplement
 public interface DeclaresExternalLibraries<T extends Declarer> {
 
   /**

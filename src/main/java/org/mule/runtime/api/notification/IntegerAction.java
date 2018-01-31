@@ -15,7 +15,7 @@ import org.mule.runtime.api.notification.Notification.Action;
  * 
  * @since 4.0
  */
-public class IntegerAction implements Action {
+public final class IntegerAction implements Action {
 
   private static final String CORE_NAMESPACE = CORE_PREFIX.toUpperCase();
 

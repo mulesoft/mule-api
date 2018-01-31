@@ -15,7 +15,7 @@ import org.mule.runtime.api.exception.MuleException;
  *
  * @since 1.0
  */
-public class SecurityProviderNotFoundException extends MuleException {
+public final class SecurityProviderNotFoundException extends MuleException {
 
   /**
    * Serial version

@@ -15,7 +15,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 1.0
  */
-public class InitialisationException extends LifecycleException {
+public final class InitialisationException extends LifecycleException {
 
   /** Serial version */
   private static final long serialVersionUID = -8402348927606781931L;

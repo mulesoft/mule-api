@@ -12,7 +12,7 @@ import org.mule.runtime.api.event.Event;
 /**
  * This class contains information about an event/exception, to be used in notifications without directly exposing it.
  */
-public class EnrichedNotificationInfo {
+public final class EnrichedNotificationInfo {
 
   private Event event;
   private Component component;

@@ -8,7 +8,7 @@ package org.mule.runtime.api.notification;
 
 // TODO: Shouldn't really be an EnrichedServerNotification as it doesn't know event data,
 // but inherits to be compatible with how mule-agent tracking currently handles them
-public class TransactionNotification extends EnrichedServerNotification {
+public final class TransactionNotification extends EnrichedServerNotification {
 
   /**
    * Serial version

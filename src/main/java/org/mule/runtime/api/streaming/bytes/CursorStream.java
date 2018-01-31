@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.streaming.bytes;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.streaming.Cursor;
 
 import java.io.InputStream;
@@ -15,6 +16,7 @@ import java.io.InputStream;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class CursorStream extends InputStream implements Cursor {
 
 }

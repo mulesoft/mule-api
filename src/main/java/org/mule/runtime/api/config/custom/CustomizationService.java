@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.config.custom;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.lifecycle.Lifecycle;
 
 /**
@@ -19,6 +20,7 @@ import org.mule.runtime.api.lifecycle.Lifecycle;
  *
  * @since 1.0
  */
+@NoImplement
 public interface CustomizationService {
 
   /**

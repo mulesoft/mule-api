@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
@@ -22,6 +23,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface MetadataCache {
 
   /**

@@ -10,7 +10,7 @@ package org.mule.runtime.api.notification;
  * <code>ManagementNotification</code> is fired when monitored resources such as internal queues reach capacity
  * 
  */
-public class ManagementNotification extends AbstractServerNotification {
+public final class ManagementNotification extends AbstractServerNotification {
 
   /**
    * Serial version

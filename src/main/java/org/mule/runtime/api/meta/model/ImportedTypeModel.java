@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 
 import static java.util.Objects.hash;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
-import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.ObjectType;
 
 /**
@@ -17,7 +16,6 @@ import org.mule.metadata.api.model.ObjectType;
  *
  * @since 1.0
  */
-@NoImplement
 public final class ImportedTypeModel {
 
   private final ObjectType importedType;

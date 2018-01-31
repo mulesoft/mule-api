@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata;
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
 import static org.mule.runtime.api.metadata.MediaType.ANY;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.ExpressionFunction;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
@@ -32,6 +33,7 @@ import java.util.Map;
  *
  * @since 1.0
  */
+@NoImplement
 public interface DataType extends Serializable {
 
   /**

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.value;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.Location;
 
 /**
@@ -13,6 +14,7 @@ import org.mule.runtime.api.component.location.Location;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ValueProviderService {
 
   /**

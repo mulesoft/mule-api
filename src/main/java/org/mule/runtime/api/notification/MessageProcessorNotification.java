@@ -13,7 +13,7 @@ import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.event.EventContext;
 
-public class MessageProcessorNotification extends EnrichedServerNotification {
+public final class MessageProcessorNotification extends EnrichedServerNotification {
 
   private static final long serialVersionUID = 1L;
 

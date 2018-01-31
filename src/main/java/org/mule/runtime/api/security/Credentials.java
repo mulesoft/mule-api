@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.security;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * {@code Credentials} holds credentials information for a user.
  *
  * @since 1.0
  */
+@NoImplement
 public interface Credentials {
 
   /**
