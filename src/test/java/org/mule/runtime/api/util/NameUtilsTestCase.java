@@ -11,7 +11,6 @@ import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mule.runtime.api.util.NameUtils.COMPONENT_NAME_SEPARATOR;
 
-import org.hamcrest.core.IsNull;
 import org.junit.Test;
 
 public class NameUtilsTestCase {
@@ -42,4 +41,12 @@ public class NameUtilsTestCase {
     assertThat(NameUtils.toCamelCase(null, COMPONENT_NAME_SEPARATOR), nullValue());
   }
 
+  @Test
+  public void titleize() {
+    assertThat(NameUtils.titleize("this is a service"), is("This Is A Service"));
+    assertThat(NameUtils.titleize("ThisIsAService"), is("This Is A Service"));
+    assertThat(NameUtils.titleize("Route-66-Service"), is("Route 66 Service"));
+    assertThat(NameUtils.titleize("AN_AMAZING_SERVICE"), is("An Amazing Service"));
+    assertThat(NameUtils.titleize("Issue_Management"), is("Issue Management"));
+  }
 }

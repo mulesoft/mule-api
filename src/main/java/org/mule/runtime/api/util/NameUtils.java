@@ -6,11 +6,15 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.capitalize;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utilities for manipulating names of DSL supported components.
@@ -18,6 +22,8 @@ import java.util.Optional;
  * @since 1.0
  */
 public class NameUtils {
+
+  private static final Pattern wordBound = Pattern.compile("\\b(?=\\w)");
 
   protected NameUtils() {}
 
@@ -119,4 +125,23 @@ public class NameUtils {
   public static String sanitizeName(Optional<String> originalName) {
     return originalName.map(name -> sanitizeName(name)).orElse(EMPTY);
   }
+
+  private static String humanize(String name) {
+    return capitalize(name.replace("_", " ")
+        .replace("-", " "));
+  }
+
+  /**
+   * Transforms a name into a title
+   *
+   * @param name Name to transform
+   * @return The titleized name
+   * @since 1.1.1
+   */
+  public static String titleize(final String name) {
+    return wordBound.splitAsStream(humanize(underscorize(name)))
+        .map(StringUtils::capitalize)
+        .collect(joining());
+  }
+
 }
