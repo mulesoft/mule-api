@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.component.Component;
 
 import javax.xml.namespace.QName;
@@ -15,6 +16,7 @@ import javax.xml.namespace.QName;
  *
  * @since 4.0
  */
+@NoExtend
 public class ComponentLocationProvider {
 
   protected static final QName NAME_ANNOTATION_KEY = new QName("http://www.mulesoft.org/schema/mule/documentation", "name");

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.component;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.Message;
 
 /**
@@ -13,6 +14,7 @@ import org.mule.runtime.api.message.Message;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface TypedComponentIdentifier {
 
   /**

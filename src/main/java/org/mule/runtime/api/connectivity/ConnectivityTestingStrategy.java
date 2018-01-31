@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.connectivity;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionValidationResult;
 
 /**
@@ -18,6 +19,7 @@ import org.mule.runtime.api.connection.ConnectionValidationResult;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ConnectivityTestingStrategy {
 
   /**

@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.tls;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 
@@ -23,6 +25,7 @@ import javax.net.ssl.SSLSocketFactory;
  *
  * @since 1.0
  */
+@NoImplement
 public interface TlsContextFactory {
 
   /**

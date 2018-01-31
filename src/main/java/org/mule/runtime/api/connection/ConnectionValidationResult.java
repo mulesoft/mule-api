@@ -16,7 +16,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class ConnectionValidationResult {
+public final class ConnectionValidationResult {
 
   private boolean validationStatus;
   private String message;

@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
-import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExternalLibraryType;
 import org.mule.runtime.api.meta.NamedObject;
@@ -21,7 +20,6 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-@NoImplement
 public final class ExternalLibraryModel implements NamedObject, DescribedObject {
 
   /**

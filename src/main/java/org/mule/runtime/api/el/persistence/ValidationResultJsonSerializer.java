@@ -6,11 +6,12 @@
  */
 package org.mule.runtime.api.el.persistence;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.mule.runtime.api.el.ValidationResult;
 
-public class ValidationResultJsonSerializer {
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public final class ValidationResultJsonSerializer {
 
   private Gson gson;
 

@@ -8,6 +8,7 @@
 package org.mule.runtime.api.deployment.meta;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import org.mule.api.annotation.NoExtend;
 
 /**
  * A builder to create instances of {@link AbstractMuleArtifactModel} implementations.
@@ -17,6 +18,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
  *
  * @since 1.0
  */
+@NoExtend
 public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArtifactModelBuilder, M extends AbstractMuleArtifactModel> {
 
   private String name;

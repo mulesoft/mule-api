@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.api.i18n;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.io.Serializable;
 
+@NoExtend
 public class I18nMessage implements Serializable {
 
   /**

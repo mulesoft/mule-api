@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * A data type that represents a generified map.
  * <p>
@@ -13,6 +15,7 @@ package org.mule.runtime.api.metadata;
  *
  * @since 1.0
  */
+@NoImplement
 public interface MapDataType extends DataType {
 
   /**

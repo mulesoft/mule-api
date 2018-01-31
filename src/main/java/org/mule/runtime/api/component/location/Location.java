@@ -11,6 +11,8 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import static org.mule.runtime.internal.util.NameValidationUtil.verifyStringDoesNotContainsReservedCharacters;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,6 +26,7 @@ import java.util.List;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Location {
 
   String SOURCE = "source";

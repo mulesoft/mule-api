@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.security;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Builder for a {@link Credentials} implementation.
  *
  * @since 1.0
  */
+@NoImplement
 public interface CredentialsBuilder {
 
   /**

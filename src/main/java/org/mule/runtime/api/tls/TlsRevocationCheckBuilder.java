@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.tls;
 
+import org.mule.api.annotation.NoImplement;
+
 /**
  * Factory for creating currently supported certificate revocation mechanisms.
  *
  * @since 4.1
  */
+@NoImplement
 public interface TlsRevocationCheckBuilder {
 
   /**

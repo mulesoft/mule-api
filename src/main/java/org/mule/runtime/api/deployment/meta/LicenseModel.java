@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
-import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class LicenseModel {
+public final class LicenseModel {
 
   private final String requiredEntitlement;
   private final String provider;

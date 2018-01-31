@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @since 1.0
  */
-public class MuleArtifactLoaderDescriptor {
+public final class MuleArtifactLoaderDescriptor {
 
   private final String id;
   private final Map<String, Object> attributes;

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.component.location;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.TypedComponentIdentifier;
 
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface LocationPart {
 
   /**

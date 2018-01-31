@@ -13,7 +13,7 @@ import org.mule.runtime.api.el.validation.ValidationMessage;
 import java.util.List;
 import java.util.Optional;
 
-public class DefaultValidationResult implements ValidationResult {
+public final class DefaultValidationResult implements ValidationResult {
 
   private boolean result;
   private String errorMessage;

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.app.declaration.serialization;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
 import org.mule.runtime.internal.app.declaration.serialization.DefaultArtifactDeclarationJsonSerializer;
 
@@ -15,6 +16,7 @@ import org.mule.runtime.internal.app.declaration.serialization.DefaultArtifactDe
  *
  * @since 1.0
  */
+@NoImplement
 public interface ArtifactDeclarationJsonSerializer {
 
   /**

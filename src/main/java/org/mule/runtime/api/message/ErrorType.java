@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.message;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +23,7 @@ import java.io.Serializable;
  * should return the more general error type. This is used when doing error type matching within error handlers
  * so when selecting the general error type for error handling it will also handle the more specialized error types.
  */
+@NoImplement
 public interface ErrorType extends Serializable {
 
   /**

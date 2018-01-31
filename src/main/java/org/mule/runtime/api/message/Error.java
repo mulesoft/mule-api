@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.message;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.io.Serializable;
 import java.util.List;
 
+@NoImplement
 public interface Error extends Serializable {
 
   /**

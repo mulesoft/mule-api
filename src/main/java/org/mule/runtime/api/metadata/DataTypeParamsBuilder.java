@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
 
@@ -16,6 +18,7 @@ import java.nio.charset.IllegalCharsetNameException;
  *
  * @since 1.0
  */
+@NoImplement
 public interface DataTypeParamsBuilder {
 
   /**

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.streaming;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.streaming.bytes.CursorStream;
 
 /**
@@ -23,6 +24,7 @@ import org.mule.runtime.api.streaming.bytes.CursorStream;
  * @see CursorStream
  * @since 1.0
  */
+@NoImplement
 public interface CursorProvider<T extends Cursor> {
 
 

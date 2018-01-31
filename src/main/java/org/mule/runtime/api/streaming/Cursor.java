@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.streaming;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,6 +25,7 @@ import java.io.InputStream;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Cursor extends Closeable {
 
   /**

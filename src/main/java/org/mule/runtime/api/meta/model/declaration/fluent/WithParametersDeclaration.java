@@ -11,6 +11,8 @@ import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ import java.util.List;
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0
  */
+@NoImplement
 public interface WithParametersDeclaration {
 
   /**

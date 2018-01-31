@@ -9,7 +9,7 @@ package org.mule.runtime.api.notification;
 /**
  * <code>PipelineMessageNotification</code> is fired at key steps in the processing of {@link Pipeline}
  */
-public class PipelineMessageNotification extends EnrichedServerNotification {
+public final class PipelineMessageNotification extends EnrichedServerNotification {
 
   private static final long serialVersionUID = 6065691696506216248L;
 

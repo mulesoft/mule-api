@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Collections.unmodifiableSet;
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
@@ -25,6 +26,7 @@ import java.util.Set;
  * @param <T> the concrete type for {@code this} declaration
  * @since 1.0
  */
+@NoExtend
 public abstract class BaseDeclaration<T extends BaseDeclaration> implements DescribedObject {
 
   private final Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new LinkedHashMap<>();

@@ -8,6 +8,7 @@
 
 package org.mule.runtime.api.component.location;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.Component;
 
 /**
@@ -18,6 +19,7 @@ import org.mule.runtime.api.component.Component;
  *
  * @since 1.0
  */
+@NoImplement
 public interface ComponentProvider {
 
   /**

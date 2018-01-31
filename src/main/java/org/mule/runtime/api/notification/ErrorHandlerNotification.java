@@ -8,7 +8,7 @@ package org.mule.runtime.api.notification;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 
-public class ErrorHandlerNotification extends EnrichedServerNotification {
+public final class ErrorHandlerNotification extends EnrichedServerNotification {
 
   // Fired when processing of exception strategy starts
   public static final int PROCESS_START = EXCEPTION_STRATEGY_MESSAGE_EVENT_ACTION_START_RANGE + 1;

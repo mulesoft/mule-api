@@ -7,14 +7,13 @@
 package org.mule.runtime.api.exception;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
-import org.mule.runtime.api.exception.MuleRuntimeException;
 
 /**
  * Exception type for representing a failure due to object not found.
  *
  * @since 4.0
  */
-public class ObjectNotFoundException extends MuleRuntimeException {
+public final class ObjectNotFoundException extends MuleRuntimeException {
 
   /**
    * {@inheritDoc}

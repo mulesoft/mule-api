@@ -8,6 +8,8 @@ package org.mule.runtime.api.metadata;
 
 import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
  *
  * @since 1.0
  */
+@NoExtend
 public class MetadataKeyBuilder {
 
   private final Set<MetadataProperty> properties = new HashSet<>();

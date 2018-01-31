@@ -14,7 +14,7 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
  * 
  * @since 1.0
  */
-public class ComponentExecutionException extends MuleRuntimeException {
+public final class ComponentExecutionException extends MuleRuntimeException {
 
   private static final long serialVersionUID = 8346554813024241753L;
 

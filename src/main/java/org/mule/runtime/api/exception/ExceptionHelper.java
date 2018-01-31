@@ -77,7 +77,7 @@ public class ExceptionHelper {
   }
 
   /**
-   * Do not instanciate.
+   * Do not instantiate.
    */
   protected ExceptionHelper() {
     // no-op

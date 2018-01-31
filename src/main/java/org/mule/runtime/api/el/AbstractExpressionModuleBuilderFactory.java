@@ -9,6 +9,8 @@ package org.mule.runtime.api.el;
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
+import org.mule.api.annotation.NoImplement;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
  *
  * @since 1.0
  */
+@NoImplement
 public abstract class AbstractExpressionModuleBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractExpressionModuleBuilderFactory.class);

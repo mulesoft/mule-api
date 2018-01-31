@@ -16,7 +16,7 @@ import java.util.OptionalInt;
  *
  * @since 1.1
  */
-public class ItemSequenceInfo implements Serializable {
+public final class ItemSequenceInfo implements Serializable {
 
   public static final String NOT_SET = "<not set>";
   private static final long serialVersionUID = -2294860079566380331L;

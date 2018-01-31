@@ -13,7 +13,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
  *
  * @since 1.0
  */
-public class ObjectStoreNotAvailableException extends ObjectStoreException {
+public final class ObjectStoreNotAvailableException extends ObjectStoreException {
 
   public ObjectStoreNotAvailableException() {
     super();

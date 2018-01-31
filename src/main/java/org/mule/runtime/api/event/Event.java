@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.event;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.BindingContext;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.ItemSequenceInfo;
@@ -21,6 +22,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoImplement
 public interface Event {
 
   /**

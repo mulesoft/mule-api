@@ -10,7 +10,7 @@ package org.mule.runtime.api.notification;
  * Is fired by a connector when a connection is made or disconnected. A disconnection can be caused by network failure, JMX, or
  * the server shutting down.
  */
-public class ConnectionNotification extends AbstractServerNotification {
+public final class ConnectionNotification extends AbstractServerNotification {
 
   /**
    * Serial version

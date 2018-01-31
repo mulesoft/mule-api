@@ -8,6 +8,8 @@ package org.mule.runtime.api.metadata.resolving;
 
 import static java.util.Arrays.asList;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.List;
 
 /**
@@ -18,6 +20,7 @@ import java.util.List;
  * @param <T> return type of the Metadata resolving operation.
  * @since 1.0
  */
+@NoImplement
 public interface MetadataResult<T> {
 
   /**
