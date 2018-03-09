@@ -7,7 +7,6 @@
 package org.mule.runtime.api.metadata;
 
 import static java.nio.charset.Charset.defaultCharset;
-import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.fromObject;
 
 import org.mule.runtime.internal.util.StringByteSizeCalculator;
@@ -15,6 +14,7 @@ import org.mule.runtime.internal.util.StringByteSizeCalculator;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 /**
  * Maintains a value that has an associated {@link DataType}.
@@ -72,7 +72,21 @@ public final class TypedValue<T> implements Serializable {
    * @param dataType the {@link DataType} for this object's content.
    */
   public TypedValue(T value, DataType dataType) {
-    this(value, dataType, empty());
+    this(value, dataType, OptionalLong.empty());
+  }
+
+  /**
+   * Constructs a new {@link TypedValue} with the given parameters.
+   *
+   * @param value this object's content.
+   * @param dataType the {@link DataType} for this object's content.
+   * @param length the length of the value in bytes.
+   *
+   * @deprecated Use {@link #TypedValue(Object, DataType, OptionalLong)} instead.
+   */
+  @Deprecated
+  public TypedValue(T value, DataType dataType, Optional<Long> length) {
+    this(value, dataType, length.map(l -> OptionalLong.of(l)).orElse(OptionalLong.empty()));
   }
 
   /**
@@ -82,7 +96,7 @@ public final class TypedValue<T> implements Serializable {
    * @param dataType the {@link DataType} for this object's content.
    * @param length the length of the value in bytes.
    */
-  public TypedValue(T value, DataType dataType, Optional<Long> length) {
+  public TypedValue(T value, DataType dataType, OptionalLong length) {
     this.value = value;
     if (dataType == null) {
       this.dataType = fromObject(value);
@@ -90,7 +104,7 @@ public final class TypedValue<T> implements Serializable {
       this.dataType = dataType;
     }
     if (length.isPresent()) {
-      this.length = length.get();
+      this.length = length.getAsLong();
     } else if (value instanceof byte[]) {
       this.length = ((byte[]) value).length;
     } else if (value instanceof String) {
@@ -120,11 +134,23 @@ public final class TypedValue<T> implements Serializable {
 
   /**
    * If available obtain the length (in bytes) of the valye.
-   * 
+   *
+   * @return length of the value in bytes.
+   *
+   * @deprecated Use {@link #getByteLength()} instead.
+   */
+  @Deprecated
+  public Optional<Long> getLength() {
+    return length >= 0 ? Optional.of(length) : Optional.empty();
+  }
+
+  /**
+   * If available obtain the length (in bytes) of the valye.
+   *
    * @return length of the value in bytes.
    */
-  public Optional<Long> getLength() {
-    return length >= 0 ? Optional.of(length) : empty();
+  public OptionalLong getByteLength() {
+    return length >= 0 ? OptionalLong.of(length) : OptionalLong.empty();
   }
 
   @Override
