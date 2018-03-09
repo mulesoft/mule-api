@@ -1615,6 +1615,31 @@
           "new": "interface org.mule.runtime.api.value.ValueResult",
           "annotationType": "org.mule.api.annotation.NoImplement",
           "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.parameterTypeChanged",
+          "old": "parameter void org.mule.runtime.api.metadata.TypedValue<T>::<init>(T, org.mule.runtime.api.metadata.DataType, ===java.util.Optional<java.lang.Long>===)",
+          "new": "parameter void org.mule.runtime.api.metadata.TypedValue<T>::<init>(T, org.mule.runtime.api.metadata.DataType, ===java.util.OptionalLong===)",
+          "oldType": "java.util.Optional<java.lang.Long>",
+          "newType": "java.util.OptionalLong",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "TypedValue",
+          "methodName": "<init>",
+          "parameterIndex": "2",
+          "elementKind": "parameter",
+          "justification": "There are no external users of this field yet"
+        },
+        {
+          "code": "java.method.returnTypeChanged",
+          "old": "method java.util.Optional<java.lang.Long> org.mule.runtime.api.metadata.TypedValue<T>::getLength()",
+          "new": "method java.util.OptionalLong org.mule.runtime.api.metadata.TypedValue<T>::getLength()",
+          "oldType": "java.util.Optional<java.lang.Long>",
+          "newType": "java.util.OptionalLong",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "TypedValue",
+          "methodName": "getLength",
+          "elementKind": "method",
+          "justification": "There are no external users of this field yet"
         }
       ]
     }
