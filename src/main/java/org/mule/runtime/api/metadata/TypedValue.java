@@ -13,6 +13,7 @@ import org.mule.runtime.internal.util.StringByteSizeCalculator;
 
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.util.Optional;
 import java.util.OptionalLong;
 
 /**
@@ -80,6 +81,20 @@ public final class TypedValue<T> implements Serializable {
    * @param value this object's content.
    * @param dataType the {@link DataType} for this object's content.
    * @param length the length of the value in bytes.
+   *
+   * @deprecated Use {@link #TypedValue(Object, DataType, OptionalLong)} instead.
+   */
+  @Deprecated
+  public TypedValue(T value, DataType dataType, Optional<Long> length) {
+    this(value, dataType, length.map(l -> OptionalLong.of(l)).orElse(OptionalLong.empty()));
+  }
+
+  /**
+   * Constructs a new {@link TypedValue} with the given parameters.
+   *
+   * @param value this object's content.
+   * @param dataType the {@link DataType} for this object's content.
+   * @param length the length of the value in bytes.
    */
   public TypedValue(T value, DataType dataType, OptionalLong length) {
     this.value = value;
@@ -121,8 +136,20 @@ public final class TypedValue<T> implements Serializable {
    * If available obtain the length (in bytes) of the valye.
    *
    * @return length of the value in bytes.
+   *
+   * @deprecated Use {@link #getByteLength()} instead.
    */
-  public OptionalLong getLength() {
+  @Deprecated
+  public Optional<Long> getLength() {
+    return length >= 0 ? Optional.of(length) : Optional.empty();
+  }
+
+  /**
+   * If available obtain the length (in bytes) of the valye.
+   *
+   * @return length of the value in bytes.
+   */
+  public OptionalLong getByteLength() {
     return length >= 0 ? OptionalLong.of(length) : OptionalLong.empty();
   }
 
