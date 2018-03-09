@@ -1615,6 +1615,24 @@
           "new": "interface org.mule.runtime.api.value.ValueResult",
           "annotationType": "org.mule.api.annotation.NoImplement",
           "justification": "This interface is not meant to be implemented by the user"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.metadata.TypedValue<T>::<init>(T, org.mule.runtime.api.metadata.DataType, java.util.OptionalLong)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "TypedValue",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "Avoid autoboxing/unboxing where possible"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.util.OptionalLong org.mule.runtime.api.metadata.TypedValue<T>::getByteLength()",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "TypedValue",
+          "methodName": "getByteLength",
+          "elementKind": "method",
+          "justification": "Avoid autoboxing/unboxing where possible"
         }
       ]
     }
