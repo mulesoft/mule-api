@@ -25,6 +25,8 @@ public class NameUtils {
 
   private static final Pattern wordBound = Pattern.compile("\\b(?=\\w)");
 
+  private static final Pattern camelScatterConcat = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+
   protected NameUtils() {}
 
   /**
@@ -88,7 +90,7 @@ public class NameUtils {
     }
 
     StringBuilder result = new StringBuilder();
-    String[] parts = camelCaseName.split("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+    String[] parts = camelScatterConcat.split(camelCaseName);
 
     for (int i = 0; i < parts.length; i++) {
       String part = parts[i].trim().toLowerCase();
