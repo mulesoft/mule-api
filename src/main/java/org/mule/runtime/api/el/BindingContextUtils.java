@@ -10,10 +10,8 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
-
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
-import org.mule.runtime.api.message.ItemSequenceInfo;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
@@ -93,7 +91,8 @@ public class BindingContextUtils {
                                                                      fromType(ItemSequenceInfoBindingWrapper.class))));
 
     Message message = event.getMessage();
-    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(message, fromType(Message.class))));
+    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message),
+                                                                              fromType(Message.class))));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE,
@@ -121,9 +120,36 @@ public class BindingContextUtils {
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
     return BindingContext.builder()
-        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue(message, DataType.fromType(Message.class))))
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue(new MessageWrapper(message), DataType.fromType(Message.class))))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
+  }
+
+  private static class MessageWrapper implements Message {
+
+    private static final long serialVersionUID = -8097230480930728693L;
+
+    private Message message;
+
+    public MessageWrapper(Message message) {
+      this.message = message;
+    }
+
+    @Override
+    public <T> TypedValue<T> getPayload() {
+      return message.getPayload();
+    }
+
+    @Override
+    public <T> TypedValue<T> getAttributes() {
+      return message.getAttributes();
+    }
+
+    @Override
+    public String toString() {
+      return message.toString();
+    }
+
   }
 
 }
