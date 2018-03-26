@@ -64,6 +64,8 @@ public class LazyValue<T> implements Supplier<T> {
       synchronized (this) {
         if (!initialized) {
           this.value = valueSupplier.get();
+          // This is needed so the GC may collect all objects referenced by this supplier, eventually.
+          this.valueSupplier = () -> value;
           this.initialized = true;
         }
       }
