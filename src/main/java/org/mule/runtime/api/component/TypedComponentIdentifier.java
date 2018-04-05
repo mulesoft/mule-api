@@ -65,7 +65,12 @@ public interface TypedComponentIdentifier {
     /**
      * Component type for components that cannot be categorized in the other component types
      */
-    UNKNOWN
+    UNKNOWN,
+
+    /**
+     * One of the options to be executed that belong to a {@link ComponentType#ROUTER}
+     */
+    ROUTEcd
   }
 
   /**

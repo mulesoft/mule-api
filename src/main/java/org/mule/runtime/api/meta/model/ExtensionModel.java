@@ -18,6 +18,7 @@ import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.nested.HasNestableElementModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
@@ -51,7 +52,7 @@ import java.util.Set;
 @NoImplement
 public interface ExtensionModel
     extends NamedObject, DescribedObject, EnrichableModel, HasOperationModels, HasSourceModels, HasFunctionModels,
-    HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries, HasConstructModels {
+    HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries, HasConstructModels, HasNestableElementModel {
 
   /**
    * A simple name for this extension. Usually one or two simple words that describes the functionality. For example, for an
