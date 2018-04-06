@@ -4,10 +4,9 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.internal.meta.model.nested;
+package org.mule.runtime.api.meta.model.nested;
 
 import org.mule.api.annotation.NoImplement;
-import org.mule.runtime.api.meta.model.nested.NestableElementModel;
 
 import java.util.List;
 import java.util.Optional;
