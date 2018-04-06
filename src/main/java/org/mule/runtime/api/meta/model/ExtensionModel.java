@@ -18,7 +18,7 @@ import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
-import org.mule.runtime.api.meta.model.nested.HasNestableElementModels;
+import org.mule.runtime.internal.meta.model.nested.HasNestableElementModels;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
