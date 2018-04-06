@@ -70,7 +70,7 @@ public interface TypedComponentIdentifier {
     /**
      * One of the options to be executed that belong to a {@link ComponentType#ROUTER}
      */
-    ROUTEcd
+    ROUTE
   }
 
   /**

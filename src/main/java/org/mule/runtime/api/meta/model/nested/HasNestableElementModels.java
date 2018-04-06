@@ -14,7 +14,7 @@ import java.util.Optional;
  *
  * @since 1.2
  */
-public interface HasNestableElementModel {
+public interface HasNestableElementModels {
 
   /**
    * Returns a {@link List} of {@link NestableElementModel}s defined at the level
