@@ -20,8 +20,7 @@ import java.util.Optional;
 public interface HasNestableElementModels {
 
   /**
-   * Returns a {@link List} of {@link NestableElementModel}s defined at the level
-   * of the component implementing this interface.
+   * Returns a {@link List} of {@link NestableElementModel}s defined inside the component implementing this interface.
    * <p>
    *
    * @return an immutable {@link List} of {@link NestableElementModel}
