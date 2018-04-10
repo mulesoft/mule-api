@@ -67,12 +67,20 @@ public class ComponentLocationProvider {
     }
   }
 
-  protected static String getSourceFile(Component element) {
-    return element.getLocation() != null ? element.getLocation().getFileName().orElse("unknown") : "internal";
+  protected static String getSourceFile(Component component) {
+    return component.getLocation() != null ? component.getLocation().getFileName().orElse("unknown") : "internal";
   }
 
-  protected static Integer getSourceFileLine(Component element) {
-    return element.getLocation() != null ? element.getLocation().getLineInFile().orElse(-1) : -1;
+  protected static Integer getSourceFileLine(Component component) {
+    return component.getLocation() != null ? component.getLocation().getLineInFile().orElse(-1) : -1;
+  }
+
+  /**
+   * @param component the component object from the configuration
+   * @return the source code associated to the component. It may be null if the component was not created from a configuration file.
+   */
+  public static String getSourceCode(Component component) {
+    return (String) component.getAnnotation(new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceElement"));
   }
 
 }
