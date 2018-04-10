@@ -1,4 +1,19 @@
 {
+  "1.1.2": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method java.lang.String org.mule.runtime.api.util.ComponentLocationProvider::getSourceCode(org.mule.runtime.api.component.Component)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "ComponentLocationProvider",
+          "methodName": "getSourceCode",
+          "elementKind": "method",
+          "justification": "Is a new utility method. It doesn't break the API"
+        }
+      ]
+    }
+  },
   "1.1.1": {
     "revapi": {
       "ignore": [
