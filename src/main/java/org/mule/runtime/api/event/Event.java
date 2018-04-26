@@ -33,9 +33,9 @@ public interface Event {
   Map<String, TypedValue<?>> getVariables();
 
   /**
-   * Returns the message payload for this event
+   * Returns the message (payload and attributes) for this event
    *
-   * @return the message payload for this event
+   * @return the message (payload and attributes) for this event
    */
   Message getMessage();
 
