@@ -151,6 +151,11 @@
             <version>${commonsLangVersion}</version>
         </dependency>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commonsIoVersion}</version>
+        </dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4jVersion}</version>
@@ -210,13 +215,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
             <version>${allureJunitVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <!-- TODO MULE-11007: when implemented, delete this dependency -->
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commonsIoVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
