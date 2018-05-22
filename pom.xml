@@ -124,7 +124,7 @@
         <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
         <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
-        <aspectjVersion>1.8.10</aspectjVersion>
+        <aspectjVersion>1.9.1</aspectjVersion>
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
