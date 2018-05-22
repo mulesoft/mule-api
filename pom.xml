@@ -128,7 +128,7 @@
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
-        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.version>0.8.1</jacoco.version>
 
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.1.1-SNAPSHOT</oldMuleArtifactVersion>
