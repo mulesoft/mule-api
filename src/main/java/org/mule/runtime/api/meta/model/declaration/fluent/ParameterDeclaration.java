@@ -33,6 +33,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
 
   private boolean required;
   private boolean isConfigOverride;
+  private boolean isComponentId;
   private ExpressionSupport expressionSupport = SUPPORTED;
   private MetadataType type;
   private boolean hasDynamicType;
@@ -138,4 +139,13 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   public List<StereotypeModel> getAllowedStereotypeModels() {
     return allowedStereotypeModels;
   }
+
+  public boolean isComponentId() {
+    return isComponentId;
+  }
+
+  public void setComponentId(boolean componentId) {
+    isComponentId = componentId;
+  }
+
 }

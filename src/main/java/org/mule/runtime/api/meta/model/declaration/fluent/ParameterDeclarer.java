@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ModelProperty;
@@ -109,12 +110,25 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
 
   /**
    * Marks the parameter as being a {@link ParameterModel#isOverrideFromConfig() config-override}.
+   * This also means this is an optional parameter.
    *
    * @return {@code this} declarer
    */
   public T asConfigOverride() {
     declaration.setConfigOverride(true);
     declaration.setRequired(false);
+    return (T) this;
+  }
+
+  /**
+   * Marks the parameter as being a {@link ParameterModel#isComponentId() component ID}.
+   * This also means this is a {@code required} parameter where expressions are {@link ExpressionSupport::NOT_SUPPORTED}.
+   *
+   * @return {@code this} declarer
+   */
+  public T asComponentId() {
+    declaration.setComponentId(true);
+    declaration.setExpressionSupport(NOT_SUPPORTED);
     return (T) this;
   }
 
