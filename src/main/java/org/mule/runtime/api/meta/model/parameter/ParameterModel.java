@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.metadata.api.model.StringType;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.NamedObject;
@@ -32,7 +33,7 @@ import java.util.Optional;
  * It can apply either to a {@link ConfigurationModel} or a
  * {@link ComponentModel}
  *
- * @since 1.0
+ * @since 1.0.0
  */
 @NoImplement
 public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
@@ -107,4 +108,30 @@ public interface ParameterModel extends NamedObject, DescribedObject, Enrichable
    * an {@link Optional#empty()} if there is no model associate to this parameter.
    */
   Optional<ValueProviderModel> getValueProviderModel();
+
+  /**
+   * Whether or not this {@link ParameterModel} is declared as ID of the owning {@link ComponentModel}.
+   * Being a Component ID means that the value associated to the annotated parameter can be used to reference the
+   * {@link ComponentModel component} in a mule application uniquely across all the instances of the same {@link ComponentModel}.
+   * When used on a global element of the application, then this Component ID serves as a global ID in the application.
+   * <p>
+   * An example of a {@link ComponentModel} ID is the {@code name} parameter of a {@code config} element.
+   * <p>
+   * Restrictions apply in order for a {@link ParameterModel} to be a {@link ComponentModel} ID:
+   * <ul>
+   * <li>Only <b>one</b> {@link ParameterModel parameter} can be component ID for any given {@link ComponentModel}</li>
+   * <li>Only <b>required</b> {@link ParameterModel parameters} serve as Component ID</li>
+   * <li>The parameter's type has to be {@link StringType String}</li>
+   * <li>The parameter's expression support will be {@link ExpressionSupport#NOT_SUPPORTED}, so no dynamic values are allowed</li>
+   * <li>{@link ParameterRole#CONTENT} qualifier is not allowed for a Component ID</li>
+   * <li>{@code Text} qualifier is not allowed for a Component ID</li>
+   * <li>{@code Query} qualifier is not allowed for a Component ID</li>
+   * <li>Defaulting to a {@code ConfigOverride} is not allowed for a Component ID since it describes the ID of each
+   * individual component and no common global value should be used as ID</li>
+   * </ul>
+   *
+   * @return {@code true} if {@code this} {@link ParameterModel} is a {@link ComponentModel} ID.
+   */
+  boolean isComponentId();
+
 }
