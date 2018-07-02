@@ -262,7 +262,9 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
       return aSet.isEmpty();
     }
 
-    protected abstract A keyFor(Object o);
+    protected A keyFor(Object o) {
+      return (A) o;
+    }
 
     protected abstract Iterator<B> createIterator(Set<A> aSet);
   }
