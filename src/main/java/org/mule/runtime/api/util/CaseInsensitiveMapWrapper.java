@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.util.stream.Collectors.toSet;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.io.Serializable;
@@ -179,6 +180,11 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
     protected Iterator<String> createIterator(Set<CaseInsensitiveMapKey> keys) {
       return new KeyIterator(keys);
     }
+
+    @Override
+    protected CaseInsensitiveMapKey keyFor(Object o) {
+      return CaseInsensitiveMapKey.keyFor(o);
+    }
   }
 
   private static class EntrySet<T> extends AbstractConverterSet<Entry<CaseInsensitiveMapKey, T>, Entry<String, T>> {
@@ -190,6 +196,16 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
     @Override
     protected Iterator<Entry<String, T>> createIterator(Set<Entry<CaseInsensitiveMapKey, T>> entries) {
       return new EntryIterator<>(entries);
+    }
+
+    @Override
+    protected Entry<CaseInsensitiveMapKey, T> keyFor(Object o) {
+      if (o instanceof Entry) {
+        Entry<CaseInsensitiveMapKey, T> o2 = (Entry<CaseInsensitiveMapKey, T>) o;
+        return new AbstractMap.SimpleImmutableEntry<>(CaseInsensitiveMapKey.keyFor(o2.getKey()), o2.getValue());
+      }
+
+      return null;
     }
   }
 
@@ -210,6 +226,43 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
     public Iterator<B> iterator() {
       return createIterator(aSet);
     }
+
+    @Override
+    public boolean contains(Object o) {
+      return o != null && aSet.contains(keyFor(o));
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+      return c.stream().map(o -> keyFor(o)).allMatch(o -> o != null && aSet.contains(o));
+    }
+
+    @Override
+    public boolean remove(Object o) {
+      return o != null && aSet.contains(keyFor(o));
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+      return c.stream().map(o -> keyFor(o)).allMatch(o -> o != null && aSet.remove(o));
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+      return aSet.retainAll(c.stream().map(o -> keyFor(o)).collect(toSet()));
+    }
+
+    @Override
+    public void clear() {
+      aSet.clear();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return aSet.isEmpty();
+    }
+
+    protected abstract A keyFor(Object o);
 
     protected abstract Iterator<B> createIterator(Set<A> aSet);
   }
