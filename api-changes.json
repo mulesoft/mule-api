@@ -1,4 +1,19 @@
 {
+  "1.1.3": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method A org.mule.runtime.api.util.CaseInsensitiveMapWrapper.AbstractConverterSet<A, B>::keyFor(java.lang.Object)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "AbstractConverterSet",
+          "methodName": "keyFor",
+          "elementKind": "method",
+          "justification": "Default implementation provided that keeps current behavior"
+        }
+      ]
+    }
+  },
   "1.1.2": {
     "revapi": {
       "ignore": [

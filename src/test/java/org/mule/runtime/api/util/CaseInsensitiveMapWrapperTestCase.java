@@ -37,6 +37,15 @@ public class CaseInsensitiveMapWrapperTestCase {
   }
 
   @Test
+  public void keySetIsCaseInsensitive() {
+    map.put("A", 1);
+
+    assertThat(map.keySet().contains("a"), is(true));
+    assertThat(map.keySet().contains("A"), is(true));
+    assertThat(map.keySet().contains("b"), is(false));
+  }
+
+  @Test
   public void retainKeyCase() {
     map.put("A", 1);
 
