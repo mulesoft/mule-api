@@ -10,6 +10,14 @@
           "methodName": "keyFor",
           "elementKind": "method",
           "justification": "Default implementation provided that keeps current behavior"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.util.LazyLong",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "LazyLong",
+          "elementKind": "class",
+          "justification": "Nothing wrong with this. You're over reacting RevApi..."
         }
       ]
     }
