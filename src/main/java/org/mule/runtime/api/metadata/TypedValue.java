@@ -27,7 +27,7 @@ import java.util.OptionalLong;
  */
 public final class TypedValue<T> implements Serializable {
 
-  private static final long serialVersionUID = -2533879516750283994L;
+  private static final long serialVersionUID = -3428994331968741687L;
 
   /**
    * Utility method to obtain a type value's content, in cases in which you don't know if the {@code value} is a type value at
