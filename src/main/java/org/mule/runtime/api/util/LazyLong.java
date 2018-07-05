@@ -14,6 +14,17 @@ import java.util.function.LongConsumer;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
+/**
+ * Provides a native long which may be lazily computed.
+ * <p>
+ * The value is only computed on the first invokation of {@link #getAsLong()} ()}. Subsequent calls to such method
+ * will always return the same value.
+ * <p>
+ * This class is thread-safe. When invoking {@link #getAsLong()} ()}, it is guaranteed that the value will be computed
+ * only once.
+ *
+ * @since 1.1.3
+ */
 public class LazyLong implements LongSupplier {
 
   private volatile boolean initialized = false;
