@@ -8,9 +8,12 @@ package org.mule.runtime.api.metadata;
 
 import static java.nio.charset.Charset.defaultCharset;
 import static org.mule.runtime.api.metadata.DataType.fromObject;
-
+import org.mule.runtime.api.util.LazyLong;
 import org.mule.runtime.internal.util.StringByteSizeCalculator;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.Optional;
@@ -24,17 +27,17 @@ import java.util.OptionalLong;
  */
 public final class TypedValue<T> implements Serializable {
 
-  private static final long serialVersionUID = -2533879516750283994L;
+  private static final long serialVersionUID = -3428994331968741687L;
 
   /**
-   * Utility method to obtain a type value's content, in cases in which you don't know if the {@ccode value} is a type value at
+   * Utility method to obtain a type value's content, in cases in which you don't know if the {@code value} is a type value at
    * all.
    * <p>
    * If {@code value} is a TypeValue, then {@link #getValue()} is returned. Otherwise, the {@code value} is returned as is (even
    * if it's {@code null})
    *
    * @param value a value which may or may not be a TypeValue
-   * @param <T> the output's generic type
+   * @param <T>   the output's generic type
    * @return an unwrapped value
    */
   public static <T> T unwrap(Object value) {
@@ -50,7 +53,7 @@ public final class TypedValue<T> implements Serializable {
    * particular media types or encoding are required
    *
    * @param value this object's content
-   * @param <T> the value's generic type
+   * @param <T>   the value's generic type
    * @return a new {@link TypedValue}
    */
   public static <T> TypedValue<T> of(T value) {
@@ -63,12 +66,12 @@ public final class TypedValue<T> implements Serializable {
 
   private final T value;
   private final DataType dataType;
-  private final long length;
+  private transient LazyLong length;
 
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value this object's content.
+   * @param value    this object's content.
    * @param dataType the {@link DataType} for this object's content.
    */
   public TypedValue(T value, DataType dataType) {
@@ -78,10 +81,9 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value this object's content.
+   * @param value    this object's content.
    * @param dataType the {@link DataType} for this object's content.
-   * @param length the length of the value in bytes.
-   *
+   * @param length   the length of the value in bytes.
    * @deprecated Use {@link #TypedValue(Object, DataType, OptionalLong)} instead.
    */
   @Deprecated
@@ -92,9 +94,9 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value this object's content.
+   * @param value    this object's content.
    * @param dataType the {@link DataType} for this object's content.
-   * @param length the length of the value in bytes.
+   * @param length   the length of the value in bytes.
    */
   public TypedValue(T value, DataType dataType, OptionalLong length) {
     this.value = value;
@@ -104,15 +106,17 @@ public final class TypedValue<T> implements Serializable {
       this.dataType = dataType;
     }
     if (length.isPresent()) {
-      this.length = length.getAsLong();
+      this.length = new LazyLong(length.getAsLong());
     } else if (value instanceof byte[]) {
-      this.length = ((byte[]) value).length;
+      this.length = new LazyLong(new Long(((byte[]) value).length));
     } else if (value instanceof String) {
-      StringByteSizeCalculator stringByteSizeCalculator = new StringByteSizeCalculator();
-      Charset charset = this.dataType.getMediaType().getCharset().orElse(defaultCharset());
-      this.length = stringByteSizeCalculator.count((String) value, charset);
+      this.length = new LazyLong(() -> {
+        StringByteSizeCalculator stringByteSizeCalculator = new StringByteSizeCalculator();
+        Charset charset = this.dataType.getMediaType().getCharset().orElse(defaultCharset());
+        return stringByteSizeCalculator.count((String) value, charset);
+      });
     } else {
-      this.length = -1;
+      this.length = new LazyLong(-1L);
     }
   }
 
@@ -136,12 +140,12 @@ public final class TypedValue<T> implements Serializable {
    * If available obtain the length (in bytes) of the valye.
    *
    * @return length of the value in bytes.
-   *
    * @deprecated Use {@link #getByteLength()} instead.
    */
   @Deprecated
   public Optional<Long> getLength() {
-    return length >= 0 ? Optional.of(length) : Optional.empty();
+    long len = length.getAsLong();
+    return len >= 0 ? Optional.of(len) : Optional.empty();
   }
 
   /**
@@ -150,7 +154,8 @@ public final class TypedValue<T> implements Serializable {
    * @return length of the value in bytes.
    */
   public OptionalLong getByteLength() {
-    return length >= 0 ? OptionalLong.of(length) : OptionalLong.empty();
+    long len = length.getAsLong();
+    return len >= 0 ? OptionalLong.of(len) : OptionalLong.empty();
   }
 
   @Override
@@ -164,7 +169,7 @@ public final class TypedValue<T> implements Serializable {
 
     TypedValue<?> that = (TypedValue<?>) o;
 
-    if (length != that.length) {
+    if (length.getAsLong() != that.length.getAsLong()) {
       return false;
     }
     if (value != null ? !value.equals(that.value) : that.value != null) {
@@ -177,7 +182,18 @@ public final class TypedValue<T> implements Serializable {
   public int hashCode() {
     int result = value != null ? value.hashCode() : 0;
     result = 31 * result + dataType.hashCode();
-    result = 31 * result + (int) (length ^ (length >>> 32));
+    long len = length.getAsLong();
+    result = 31 * result + (int) (len ^ (len >>> 32));
     return result;
+  }
+
+  private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
+    in.defaultReadObject();
+    length = new LazyLong(in.readLong());
+  }
+
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.defaultWriteObject();
+    out.writeLong(length.getAsLong());
   }
 }
