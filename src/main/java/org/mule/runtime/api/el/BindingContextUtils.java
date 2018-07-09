@@ -6,10 +6,13 @@
  */
 package org.mule.runtime.api.el;
 
-import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 import static java.util.Objects.requireNonNull;
+import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
+
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
@@ -19,7 +22,9 @@ import org.mule.runtime.api.security.Authentication;
 import org.mule.runtime.api.util.LazyValue;
 import org.mule.runtime.internal.event.ItemSequenceInfoBindingWrapper;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
@@ -39,7 +44,42 @@ public class BindingContextUtils {
   public static final String FLOW = "flow";
   public static final String ITEM_SEQUENCE_INFO = "itemSequenceInfo";
 
-  public static final BindingContext NULL_BINDING_CONTEXT = BindingContext.builder().build();
+  public static final BindingContext NULL_BINDING_CONTEXT = new BindingContext() {
+
+    @Override
+    public Collection<ExpressionModule> modules() {
+      return emptySet();
+    }
+
+    @Override
+    public Optional<TypedValue> lookup(String identifier) {
+      return empty();
+    }
+
+    @Override
+    public Collection<String> identifiers() {
+      return emptySet();
+    }
+
+    @Override
+    public Collection<Binding> bindings() {
+      return emptySet();
+    }
+  };
+
+  private static final DataType VARS_DATA_TYPE = DataType.builder()
+      .mapType(Map.class)
+      .keyType(String.class)
+      .valueType(TypedValue.class)
+      .build();
+  private static final DataType ITEM_SEQUENCE_INFO_DATA_TYPE = fromType(ItemSequenceInfoBindingWrapper.class);
+  private static final DataType MESAGE_DATA_TYPE = fromType(Message.class);
+  private static final DataType DATA_TYPE_DATA_TYPE = fromType(DataType.class);
+  private static final DataType ERROR_DATA_TYPE = fromType(Error.class);
+  private static final DataType AUTH_DATA_TYPE = fromType(Authentication.class);
+
+  public final static TypedValue EMPTY_VARS = new TypedValue<>(emptyMap(), VARS_DATA_TYPE);
+  public static final TypedValue NULL_TYPED_VALUE = new TypedValue<>(null, DataType.OBJECT);
 
   private BindingContextUtils() {
     // Nothing to do
@@ -71,42 +111,47 @@ public class BindingContextUtils {
     requireNonNull(event);
     requireNonNull(baseContext);
 
-    BindingContext.Builder contextBuilder = BindingContext.builder(baseContext);
+    BindingContext.Builder contextBuilder =
+        baseContext == NULL_BINDING_CONTEXT ? BindingContext.builder() : BindingContext.builder(baseContext);
 
-    contextBuilder.addBinding(VARS, new LazyValue<>(() -> {
-      Map<String, TypedValue<?>> flowVars = unmodifiableMap(event.getVariables());
-      return new TypedValue<>(flowVars, DataType.builder()
-          .mapType(flowVars.getClass())
-          .keyType(String.class)
-          .valueType(TypedValue.class)
-          .build());
-    }));
+    if (!event.getVariables().isEmpty()) {
+      contextBuilder.addBinding(VARS, new LazyValue<>(() -> new TypedValue<>(event.getVariables(), VARS_DATA_TYPE)));
+    } else {
+      contextBuilder.addBinding(VARS, EMPTY_VARS);
+    }
 
     contextBuilder.addBinding(CORRELATION_ID,
                               new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
-    contextBuilder.addBinding(ITEM_SEQUENCE_INFO,
-                              new LazyValue<>(() -> new TypedValue<>(event.getItemSequenceInfo()
-                                  .map(ItemSequenceInfoBindingWrapper::new).orElse(null),
-                                                                     fromType(ItemSequenceInfoBindingWrapper.class))));
+    if (event.getItemSequenceInfo().isPresent()) {
+      contextBuilder.addBinding(ITEM_SEQUENCE_INFO,
+                                new LazyValue<>(() -> new TypedValue<>(new ItemSequenceInfoBindingWrapper(event
+                                    .getItemSequenceInfo().get()),
+                                                                       ITEM_SEQUENCE_INFO_DATA_TYPE)));
+    } else {
+      contextBuilder.addBinding(ITEM_SEQUENCE_INFO, NULL_TYPED_VALUE);
+    }
 
     Message message = event.getMessage();
-    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message),
-                                                                              fromType(Message.class))));
+    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message), MESAGE_DATA_TYPE)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE,
-                              new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(),
-                                                                     fromType(DataType.class))));
-    contextBuilder.addBinding(ERROR, new LazyValue<>(() -> {
-      Error error = event.getError().isPresent() ? event.getError().get() : null;
-      return new TypedValue<>(error, fromType(Error.class));
-    }));
+                              new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(), DATA_TYPE_DATA_TYPE)));
 
-    contextBuilder.addBinding(AUTHENTICATION, new LazyValue<>(() -> {
-      Authentication authentication = event.getAuthentication().orElse(null);
-      return new TypedValue<>(authentication, fromType(Authentication.class));
-    }));
+    if (event.getError().isPresent()) {
+      contextBuilder.addBinding(ERROR,
+                                new LazyValue<>(() -> new TypedValue<>(event.getError().get(), ERROR_DATA_TYPE)));
+    } else {
+      contextBuilder.addBinding(ERROR, NULL_TYPED_VALUE);
+    }
+    if (event.getAuthentication().isPresent()) {
+      contextBuilder.addBinding(AUTHENTICATION,
+                                new LazyValue<>(() -> new TypedValue<>(event.getAuthentication().get(), AUTH_DATA_TYPE)));
+    } else {
+      contextBuilder.addBinding(AUTHENTICATION, NULL_TYPED_VALUE);
+    }
+
     return contextBuilder;
   }
 
@@ -120,7 +165,7 @@ public class BindingContextUtils {
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
     return BindingContext.builder()
-        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue(new MessageWrapper(message), DataType.fromType(Message.class))))
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message), MESAGE_DATA_TYPE)))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
