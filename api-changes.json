@@ -18,6 +18,24 @@
           "classSimpleName": "LazyLong",
           "elementKind": "class",
           "justification": "Nothing wrong with this. You're over reacting RevApi..."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.el.BindingContextUtils.EMPTY_VARS",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "BindingContextUtils",
+          "fieldName": "EMPTY_VARS",
+          "elementKind": "field",
+          "justification": "Added for performance"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.el.BindingContextUtils.NULL_TYPED_VALUE",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "BindingContextUtils",
+          "fieldName": "NULL_TYPED_VALUE",
+          "elementKind": "field",
+          "justification": "Added for performance"
         }
       ]
     }
