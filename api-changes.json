@@ -36,6 +36,24 @@
           "fieldName": "NULL_TYPED_VALUE",
           "elementKind": "field",
           "justification": "Added for performance"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadForCpuWork()",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadForCpuWork",
+          "elementKind": "method",
+          "justification": "Default implementation provided that keeps current behavior"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadForCpuWork(org.mule.runtime.api.scheduler.SchedulerPoolsConfigFactory)",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadForCpuWork",
+          "elementKind": "method",
+          "justification": "Default implementation provided that keeps current behavior"
         }
       ]
     }
