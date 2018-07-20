@@ -185,6 +185,25 @@ public interface SchedulerService extends Service {
   Scheduler customScheduler(SchedulerConfig config, int queueSize);
 
   /**
+   * Determines if the current thread may be locked.
+   *
+   * @return whether {@link Thread#currentThread()} belongs to a ThreadGroup indication that waiting/blocking is allowed.
+   */
+  default boolean isCurrentThreadForCpuWork() {
+    return true;
+  }
+
+  /**
+   * Determines if the current thread may be locked.
+   *
+   * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
+   * @return whether {@link Thread#currentThread()} belongs to a ThreadGroup indication that waiting/blocking is allowed.
+   */
+  default boolean isCurrentThreadForCpuWork(SchedulerPoolsConfigFactory poolsConfigFactory) {
+    return true;
+  }
+
+  /**
    * Provides a read-only view of all currently active {@link Scheduler}s created through this service.
    *
    * @return a {@link List} of {@link SchedulerView}s for all currently active {@link Scheduler}s.
