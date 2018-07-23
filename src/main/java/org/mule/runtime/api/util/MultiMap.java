@@ -236,6 +236,8 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @return a list view of the mappings contained in this map
    */
   public List<Entry<K, V>> entryList() {
+    // Performance is worse when the initial size is low, so it is only changed when a big list is needed.
+    // Also, account for multiple values of the same header by doubling its expected size.
     List<Entry<K, V>> entries = new ArrayList<>(max(10, paramsMap.size() * 2));
     paramsMap.forEach((key, values) -> values.forEach(value -> entries.add(new AbstractMap.SimpleEntry<>(key, value))));
     return entries;
