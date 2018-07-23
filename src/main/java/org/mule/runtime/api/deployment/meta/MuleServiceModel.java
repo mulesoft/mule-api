@@ -7,6 +7,7 @@
 
 package org.mule.runtime.api.deployment.meta;
 
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
@@ -49,6 +50,10 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
   @Override
   protected void doValidateCustomFields(String descriptorName) {
     validateMandatoryFieldIsSet(descriptorName, serviceProviderClassName, SERVICE_PROVIDER_CLASS_NAME);
+    if (satisfiedServiceClassNames != null && !satisfiedServiceClassNames.isEmpty()) {
+      throw new IllegalStateException(
+          format("Service '%s' has a null or empty value for field 'satisfiedServiceClassNames'", getName()));
+    }
   }
 
   /**
