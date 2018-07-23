@@ -7,9 +7,14 @@
 
 package org.mule.runtime.api.deployment.meta;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.api.annotation.NoExtend;
+
+import java.util.List;
 
 /**
  * This object matches the mule-artifact.json element within a service. The describer holds information that has been picked up
@@ -22,16 +27,23 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";
   private final String serviceProviderClassName;
+  private final List<String> satisfiedServiceClassNames;
 
   private MuleServiceModel(String name, String minMuleVersion, Product product,
                            MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                           MuleArtifactLoaderDescriptor bundleDescriptorLoader, String serviceProviderClassName) {
+                           MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> satisfiedServiceClassNames,
+                           String serviceProviderClassName) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
+    this.satisfiedServiceClassNames = satisfiedServiceClassNames;
     this.serviceProviderClassName = serviceProviderClassName;
   }
 
   public String getServiceProviderClassName() {
     return serviceProviderClassName;
+  }
+
+  public List<String> getSatisfiedServiceClassNames() {
+    return satisfiedServiceClassNames;
   }
 
   @Override
@@ -48,6 +60,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
       extends AbstractMuleArtifactModelBuilder<MuleServiceModelBuilder, MuleServiceModel> {
 
     private String serviceProviderClassName;
+    private List<String> satisfiedServiceClassNames = emptyList();
 
     @Override
     protected MuleServiceModelBuilder getThis() {
@@ -66,6 +79,16 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
       return this;
     }
 
+    public MuleServiceModelBuilder satisfyingServiceClassNames(String... satisfiedServiceClassNames) {
+      if (satisfiedServiceClassNames == null || satisfiedServiceClassNames.length == 0) {
+        this.satisfiedServiceClassNames = emptyList();
+      } else {
+        this.satisfiedServiceClassNames = unmodifiableList(asList(satisfiedServiceClassNames));
+      }
+
+      return this;
+    }
+
     /**
      * @return a well formed {@link MuleServiceModel}
      */
@@ -78,7 +101,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
       return new MuleServiceModel(getName(), getMinMuleVersion(),
                                   getRequiredProduct(),
                                   getClassLoaderModelDescriptorLoader(),
-                                  getBundleDescriptorLoader(), serviceProviderClassName);
+                                  getBundleDescriptorLoader(), satisfiedServiceClassNames, serviceProviderClassName);
     }
   }
 }
