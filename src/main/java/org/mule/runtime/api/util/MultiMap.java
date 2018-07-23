@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.lang.Math.max;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
@@ -164,10 +165,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     LinkedList<V> newValue = paramsMap.get(key);
     if (newValue == null) {
       newValue = new LinkedList<>(values);
+      paramsMap.put(key, newValue);
     } else {
       newValue.addAll(values);
     }
-    paramsMap.put(key, newValue);
   }
 
   @Override
@@ -201,7 +202,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @since 1.1.1
    */
   public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
-    aMultiMap.keySet().forEach(key -> put(key, (Collection<V>) aMultiMap.getAll(key)));
+    aMultiMap.keySet().forEach(key -> put(key, (Collection<V>) aMultiMap.paramsMap.get(key)));
   }
 
   @Override
@@ -235,7 +236,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @return a list view of the mappings contained in this map
    */
   public List<Entry<K, V>> entryList() {
-    List<Entry<K, V>> entries = new LinkedList<>();
+    List<Entry<K, V>> entries = new ArrayList<>(max(10, paramsMap.size() * 2));
     paramsMap.forEach((key, values) -> values.forEach(value -> entries.add(new AbstractMap.SimpleEntry<>(key, value))));
     return entries;
   }
