@@ -7,8 +7,6 @@
 
 package org.mule.runtime.api.deployment.meta;
 
-import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
@@ -26,34 +24,20 @@ import java.util.List;
 @NoExtend
 public class MuleServiceModel extends AbstractMuleArtifactModel {
 
-  private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";
-  private final String serviceProviderClassName;
-  private final List<String> satisfiedServiceClassNames;
+  private final List<MuleServiceContractModel> contracts;
 
   private MuleServiceModel(String name, String minMuleVersion, Product product,
                            MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                           MuleArtifactLoaderDescriptor bundleDescriptorLoader, List<String> satisfiedServiceClassNames,
-                           String serviceProviderClassName) {
+                           MuleArtifactLoaderDescriptor bundleDescriptorLoader,
+                           List<MuleServiceContractModel> contracts) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
-    this.satisfiedServiceClassNames = satisfiedServiceClassNames;
-    this.serviceProviderClassName = serviceProviderClassName;
+    checkArgument(contracts != null && !contracts.isEmpty(), "service must fulfill at least one contract");
+    
+    this.contracts = unmodifiableList(contracts);
   }
 
-  public String getServiceProviderClassName() {
-    return serviceProviderClassName;
-  }
-
-  public List<String> getSatisfiedServiceClassNames() {
-    return satisfiedServiceClassNames;
-  }
-
-  @Override
-  protected void doValidateCustomFields(String descriptorName) {
-    validateMandatoryFieldIsSet(descriptorName, serviceProviderClassName, SERVICE_PROVIDER_CLASS_NAME);
-    if (satisfiedServiceClassNames != null && !satisfiedServiceClassNames.isEmpty()) {
-      throw new IllegalStateException(
-          format("Service '%s' has a null or empty value for field 'satisfiedServiceClassNames'", getName()));
-    }
+  public List<MuleServiceContractModel> getContracts() {
+    return contracts;
   }
 
   /**
@@ -64,33 +48,15 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
   public static class MuleServiceModelBuilder
       extends AbstractMuleArtifactModelBuilder<MuleServiceModelBuilder, MuleServiceModel> {
 
-    private String serviceProviderClassName;
-    private List<String> satisfiedServiceClassNames = emptyList();
+    private List<MuleServiceContractModel> contracts = emptyList();
 
     @Override
     protected MuleServiceModelBuilder getThis() {
       return this;
     }
 
-    /**
-     * Configures the provider for the service
-     *
-     * @param className name of the class providing the service
-     * @return same builder instance
-     */
-    public MuleServiceModelBuilder withServiceProviderClassName(String className) {
-      this.serviceProviderClassName = className;
-
-      return this;
-    }
-
-    public MuleServiceModelBuilder satisfyingServiceClassNames(String... satisfiedServiceClassNames) {
-      if (satisfiedServiceClassNames == null || satisfiedServiceClassNames.length == 0) {
-        this.satisfiedServiceClassNames = emptyList();
-      } else {
-        this.satisfiedServiceClassNames = unmodifiableList(asList(satisfiedServiceClassNames));
-      }
-
+    public MuleServiceModelBuilder withContracts(List<MuleServiceContractModel> contracts) {
+      this.contracts = contracts;
       return this;
     }
 
@@ -99,14 +65,13 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
      */
     public MuleServiceModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
-      checkArgument(!isBlank(serviceProviderClassName), "serviceProviderClassName cannot be blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
 
       return new MuleServiceModel(getName(), getMinMuleVersion(),
                                   getRequiredProduct(),
                                   getClassLoaderModelDescriptorLoader(),
-                                  getBundleDescriptorLoader(), satisfiedServiceClassNames, serviceProviderClassName);
+                                  getBundleDescriptorLoader(), contracts);
     }
   }
 }
