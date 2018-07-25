@@ -15,22 +15,22 @@ import org.apache.commons.lang3.StringUtils;
 public class MuleServiceContractModel {
 
   private final String serviceProviderClassName;
-  private final String satisfiedServiceClassName;
+  private final String contractClassName;
 
-  public MuleServiceContractModel(String serviceProviderClassName, String satisfiedServiceClassName) {
+  public MuleServiceContractModel(String serviceProviderClassName, String contractClassName) {
     checkArgument(!StringUtils.isBlank(serviceProviderClassName), "serviceProviderClassName cannot be blank");
-    checkArgument(!StringUtils.isBlank(satisfiedServiceClassName), "satisfiedServiceClassName cannot be blank");
+    checkArgument(!StringUtils.isBlank(contractClassName), "satisfiedServiceClassName cannot be blank");
 
     this.serviceProviderClassName = serviceProviderClassName;
-    this.satisfiedServiceClassName = satisfiedServiceClassName;
+    this.contractClassName = contractClassName;
   }
 
   public String getServiceProviderClassName() {
     return serviceProviderClassName;
   }
 
-  public String getSatisfiedServiceClassName() {
-    return satisfiedServiceClassName;
+  public String getContractClassName() {
+    return contractClassName;
   }
 
   @Override
@@ -38,7 +38,7 @@ public class MuleServiceContractModel {
     if (obj instanceof MuleServiceContractModel) {
       MuleServiceContractModel other = (MuleServiceContractModel) obj;
       return Objects.equals(serviceProviderClassName, other.getServiceProviderClassName()) &&
-          Objects.equals(satisfiedServiceClassName, other.getSatisfiedServiceClassName());
+          Objects.equals(contractClassName, other.getContractClassName());
     }
 
     return false;
@@ -46,6 +46,6 @@ public class MuleServiceContractModel {
 
   @Override
   public int hashCode() {
-    return serviceProviderClassName.hashCode() * satisfiedServiceClassName.hashCode() * 11;
+    return serviceProviderClassName.hashCode() * contractClassName.hashCode() * 11;
   }
 }

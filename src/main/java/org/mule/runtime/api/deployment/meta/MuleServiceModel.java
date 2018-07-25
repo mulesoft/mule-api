@@ -11,6 +11,7 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import static org.mule.runtime.api.util.Preconditions.checkState;
 import org.mule.api.annotation.NoExtend;
 
 import java.util.List;
@@ -24,6 +25,9 @@ import java.util.List;
 @NoExtend
 public class MuleServiceModel extends AbstractMuleArtifactModel {
 
+  private static final String CONTRACT_CLASS_NAME = "contractClassName";
+  private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";
+
   private final List<MuleServiceContractModel> contracts;
 
   private MuleServiceModel(String name, String minMuleVersion, Product product,
@@ -32,12 +36,22 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
                            List<MuleServiceContractModel> contracts) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
     checkArgument(contracts != null && !contracts.isEmpty(), "service must fulfill at least one contract");
-    
+
     this.contracts = unmodifiableList(contracts);
   }
 
   public List<MuleServiceContractModel> getContracts() {
     return contracts;
+  }
+
+  @Override
+  protected void doValidateCustomFields(String descriptorName) {
+    checkState(contracts != null && !contracts.isEmpty(), "Service must fulfill at least one contract");
+    contracts.forEach(contract -> {
+      validateMandatoryFieldIsSet(CONTRACT_CLASS_NAME, contract.getContractClassName(), CONTRACT_CLASS_NAME);
+      validateMandatoryFieldIsSet(SERVICE_PROVIDER_CLASS_NAME, contract.getServiceProviderClassName(),
+                                  SERVICE_PROVIDER_CLASS_NAME);
+    });
   }
 
   /**
