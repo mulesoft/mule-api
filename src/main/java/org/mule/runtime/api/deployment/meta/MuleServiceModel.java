@@ -42,7 +42,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   /**
    * @return Describes the contracts that are fulfilled by the elements in the described bundle
-   * @since 1.32
+   * @since 1.2
    */
   public List<MuleServiceContractModel> getContracts() {
     return contracts;
