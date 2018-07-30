@@ -17,8 +17,8 @@ import org.mule.api.annotation.NoExtend;
 import java.util.List;
 
 /**
- * This object matches the mule-artifact.json element within a service. The describer holds information that has been picked up
- * from the JSON file (and the pom.xml when implemented).
+ * This object matches the mule-artifact.json element within a service artifact. The describer holds information that has been
+ * picked up from the JSON file (and the pom.xml when implemented).
  *
  * @since 1.0
  */
@@ -40,6 +40,10 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
     this.contracts = unmodifiableList(contracts);
   }
 
+  /**
+   * @return Describes the contracts that are fulfilled by the elements in the described bundle
+   * @since 1.32
+   */
   public List<MuleServiceContractModel> getContracts() {
     return contracts;
   }

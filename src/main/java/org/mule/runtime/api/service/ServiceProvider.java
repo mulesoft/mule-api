@@ -8,9 +8,9 @@
 package org.mule.runtime.api.service;
 
 /**
- * Provides service definitions.
+ * Provides a {@link ServiceDefinition}
  *
- * @since 1.0
+ * @since 1.2
  */
 public interface ServiceProvider {
 
