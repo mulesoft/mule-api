@@ -26,6 +26,7 @@ import org.mule.runtime.api.deployment.meta.MuleDeployableModel;
 import org.mule.runtime.api.deployment.meta.MuleServerPluginModel;
 import org.mule.runtime.api.deployment.meta.MuleServiceModel;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -186,12 +187,31 @@ public class MuleArtifactModelJsonSerializerTestCase {
     MuleServiceModel muleServiceModel = serializer.deserialize(json.toString());
     try {
       muleServiceModel.validateModel(DESCRIPTOR_NAME);
-      fail("Descriptor validation should have failed because of missing serviceProviderClassName");
+      fail("Descriptor validation should have failed because of missing contract");
     } catch (Exception expected) {
     }
-    json.addProperty("serviceProviderClassName", "someServiceProviderClassName");
+    JsonObject contract = new JsonObject();
+    JsonArray contracts = new JsonArray();
+    contracts.add(contract);
+    json.add("contracts", contracts);
+    muleServiceModel = serializer.deserialize(json.toString());
+    try {
+      muleServiceModel.validateModel(DESCRIPTOR_NAME);
+      fail("Descriptor validation should have failed because of contract missing properties");
+    } catch (Exception expected) {
+    }
+
+    contract.addProperty("serviceProviderClassName", "FooProvider");
+    muleServiceModel = serializer.deserialize(json.toString());
+
+    try {
+      muleServiceModel.validateModel(DESCRIPTOR_NAME);
+      fail("Descriptor validation should still have failed because of contract missing properties");
+    } catch (Exception expected) {
+    }
+
+    contract.addProperty("contractClassName", "FooService");
     muleServiceModel = serializer.deserialize(json.toString());
     muleServiceModel.validateModel(DESCRIPTOR_NAME);
   }
-
 }

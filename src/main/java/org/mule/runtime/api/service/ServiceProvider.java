@@ -7,22 +7,20 @@
 
 package org.mule.runtime.api.service;
 
-import java.util.List;
-
 /**
- * Provides service definitions.
+ * Provides a {@link ServiceDefinition}
  *
- * @since 1.0
+ * @since 1.2
  */
 public interface ServiceProvider {
 
   /**
-   * Provides service instances.
+   * Provides a service instance.
    * <p/>
    * A service provider can return different service definitions depending on the execution
    * environment.
    *
-   * @return the service definitions provided by this instance. Non null.
+   * @return the service definition provided by this instance. Non null.
    */
-  List<ServiceDefinition> providedServices();
+  ServiceDefinition getServiceDefinition();
 }
