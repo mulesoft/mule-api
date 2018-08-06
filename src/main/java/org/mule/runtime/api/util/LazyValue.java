@@ -27,8 +27,8 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private final AtomicBoolean initialized = new AtomicBoolean(false);
-  private final AtomicBoolean computed = new AtomicBoolean(false);
+  private final AtomicBoolean initialized;
+  private final AtomicBoolean computed;
   private T value;
   private Supplier<T> valueSupplier;
 
@@ -41,7 +41,19 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(Supplier<T> supplier) {
     checkArgument(supplier != null, "supplier cannot be null");
-    valueSupplier = supplier;
+    initialized = new AtomicBoolean(false);
+    computed = new AtomicBoolean(false);
+    valueSupplier = () -> {
+      synchronized (LazyValue.this) {
+        if (initialized.compareAndSet(false, true)) {
+          this.value = supplier.get();
+          this.valueSupplier = () -> value;
+          computed.set(true);
+        }
+
+        return value;
+      }
+    };
   }
 
   /**
@@ -51,8 +63,9 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(T value) {
     this.value = value;
-    initialized.set(true);
-    computed.set(true);
+    valueSupplier = () -> value;
+    initialized = new AtomicBoolean(true);
+    computed = new AtomicBoolean(true);
   }
 
   /**
@@ -62,13 +75,7 @@ public class LazyValue<T> implements Supplier<T> {
    */
   @Override
   public T get() {
-    if (initialized.compareAndSet(false, true)) {
-      this.value = valueSupplier.get();
-      this.valueSupplier = null;
-      computed.set(true);
-    }
-
-    return value;
+    return valueSupplier.get();
   }
 
   /**
