@@ -8,6 +8,7 @@ package org.mule.runtime.api.util;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -26,7 +27,8 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private volatile boolean initialized = false;
+  private final AtomicBoolean initialized = new AtomicBoolean(false);
+  private final AtomicBoolean computed = new AtomicBoolean(false);
   private T value;
   private Supplier<T> valueSupplier;
 
@@ -49,8 +51,8 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(T value) {
     this.value = value;
-    this.initialized = true;
-    valueSupplier = () -> value;
+    initialized.set(true);
+    computed.set(true);
   }
 
   /**
@@ -60,15 +62,10 @@ public class LazyValue<T> implements Supplier<T> {
    */
   @Override
   public T get() {
-    if (!initialized) {
-      synchronized (this) {
-        if (!initialized) {
-          this.value = valueSupplier.get();
-          // This is needed so the GC may collect all objects referenced by this supplier, eventually.
-          this.valueSupplier = () -> value;
-          this.initialized = true;
-        }
-      }
+    if (initialized.compareAndSet(false, true)) {
+      this.value = valueSupplier.get();
+      this.valueSupplier = null;
+      computed.set(true);
     }
 
     return value;
@@ -78,31 +75,31 @@ public class LazyValue<T> implements Supplier<T> {
    * @return Whether the value has already been calculated.
    */
   public boolean isComputed() {
-    return initialized;
+    return computed.get();
   }
 
   /**
    * If the value has already been computed, if passes it to the given {@code consumer}.
-   *
+   * <p>
    * This method does not perform any synchronization so keep in mind that dirty reads are possible
    * if this method is being called from one thread while another thread is triggering the value's computation
    *
    * @param consumer a {@link Consumer}
    */
   public void ifComputed(Consumer<T> consumer) {
-    if (initialized) {
+    if (computed.get()) {
       consumer.accept(value);
     }
   }
 
   /**
    * Applies the given {@code function} through the output of {@link #get()}.
-   *
+   * <p>
    * If the value has not already been computed, this method will trigger computation.
    * This method is thread-safe.
    *
    * @param function a transformation function
-   * @param <R> the generic type of the function's output
+   * @param <R>      the generic type of the function's output
    * @return a transformed value
    */
   public <R> R flatMap(Function<T, R> function) {
