@@ -8,7 +8,6 @@ package org.mule.runtime.api.util;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -27,8 +26,7 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private final AtomicBoolean initialized;
-  private final AtomicBoolean computed;
+  private volatile boolean initialized;
   private T value;
   private Supplier<T> valueSupplier;
 
@@ -41,14 +39,13 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(Supplier<T> supplier) {
     checkArgument(supplier != null, "supplier cannot be null");
-    initialized = new AtomicBoolean(false);
-    computed = new AtomicBoolean(false);
+    initialized = false;
     valueSupplier = () -> {
       synchronized (LazyValue.this) {
-        if (initialized.compareAndSet(false, true)) {
+        if (!initialized) {
           this.value = supplier.get();
           this.valueSupplier = () -> value;
-          computed.set(true);
+          initialized = true;
         }
 
         return value;
@@ -64,8 +61,7 @@ public class LazyValue<T> implements Supplier<T> {
   public LazyValue(T value) {
     this.value = value;
     valueSupplier = () -> value;
-    initialized = new AtomicBoolean(true);
-    computed = new AtomicBoolean(true);
+    initialized = true;
   }
 
   /**
@@ -82,7 +78,7 @@ public class LazyValue<T> implements Supplier<T> {
    * @return Whether the value has already been calculated.
    */
   public boolean isComputed() {
-    return computed.get();
+    return initialized;
   }
 
   /**
@@ -94,7 +90,7 @@ public class LazyValue<T> implements Supplier<T> {
    * @param consumer a {@link Consumer}
    */
   public void ifComputed(Consumer<T> consumer) {
-    if (computed.get()) {
+    if (initialized) {
       consumer.accept(value);
     }
   }
