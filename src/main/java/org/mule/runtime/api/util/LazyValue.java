@@ -26,7 +26,7 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private volatile boolean initialized = false;
+  private boolean initialized;
   private T value;
   private Supplier<T> valueSupplier;
 
@@ -39,7 +39,18 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(Supplier<T> supplier) {
     checkArgument(supplier != null, "supplier cannot be null");
-    valueSupplier = supplier;
+    initialized = false;
+    valueSupplier = () -> {
+      synchronized (LazyValue.this) {
+        if (!initialized) {
+          this.value = supplier.get();
+          this.valueSupplier = () -> value;
+          initialized = true;
+        }
+
+        return value;
+      }
+    };
   }
 
   /**
@@ -49,8 +60,8 @@ public class LazyValue<T> implements Supplier<T> {
    */
   public LazyValue(T value) {
     this.value = value;
-    this.initialized = true;
     valueSupplier = () -> value;
+    initialized = true;
   }
 
   /**
@@ -60,18 +71,7 @@ public class LazyValue<T> implements Supplier<T> {
    */
   @Override
   public T get() {
-    if (!initialized) {
-      synchronized (this) {
-        if (!initialized) {
-          this.value = valueSupplier.get();
-          // This is needed so the GC may collect all objects referenced by this supplier, eventually.
-          this.valueSupplier = () -> value;
-          this.initialized = true;
-        }
-      }
-    }
-
-    return value;
+    return valueSupplier.get();
   }
 
   /**
@@ -83,7 +83,7 @@ public class LazyValue<T> implements Supplier<T> {
 
   /**
    * If the value has already been computed, if passes it to the given {@code consumer}.
-   *
+   * <p>
    * This method does not perform any synchronization so keep in mind that dirty reads are possible
    * if this method is being called from one thread while another thread is triggering the value's computation
    *
@@ -97,12 +97,12 @@ public class LazyValue<T> implements Supplier<T> {
 
   /**
    * Applies the given {@code function} through the output of {@link #get()}.
-   *
+   * <p>
    * If the value has not already been computed, this method will trigger computation.
    * This method is thread-safe.
    *
    * @param function a transformation function
-   * @param <R> the generic type of the function's output
+   * @param <R>      the generic type of the function's output
    * @return a transformed value
    */
   public <R> R flatMap(Function<T, R> function) {
