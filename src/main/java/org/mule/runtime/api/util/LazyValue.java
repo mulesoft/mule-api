@@ -26,7 +26,7 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private volatile boolean initialized;
+  private boolean initialized;
   private T value;
   private Supplier<T> valueSupplier;
 
