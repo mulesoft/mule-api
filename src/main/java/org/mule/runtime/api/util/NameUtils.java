@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.util.regex.Pattern.compile;
 import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static org.apache.commons.lang3.StringUtils.capitalize;
@@ -23,9 +24,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class NameUtils {
 
-  private static final Pattern wordBound = Pattern.compile("\\b(?=\\w)");
-
-  private static final Pattern camelScatterConcat = Pattern.compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+  private static final Pattern WORD_BOUND = compile("\\b(?=\\w)");
+  private static final Pattern CAMEL_SCATTER_CONCAT = compile("(?<!(^|[A-Z]))(?=[A-Z])|(?<!^)(?=[A-Z][a-z])");
+  private static final Pattern SANITIZE_PATTERN = compile("[^\\w|\\.\\-]");
 
   protected NameUtils() {}
 
@@ -90,7 +91,7 @@ public class NameUtils {
     }
 
     StringBuilder result = new StringBuilder();
-    String[] parts = camelScatterConcat.split(camelCaseName);
+    String[] parts = CAMEL_SCATTER_CONCAT.split(camelCaseName);
 
     for (int i = 0; i < parts.length; i++) {
       String part = parts[i].trim().toLowerCase();
@@ -115,7 +116,7 @@ public class NameUtils {
    * @return name without invalid characters
    */
   public static String sanitizeName(String originalName) {
-    return originalName.replaceAll("[^\\w|\\.\\-]", EMPTY);
+    return SANITIZE_PATTERN.matcher(originalName).replaceAll(EMPTY);
   }
 
   /**
@@ -141,7 +142,7 @@ public class NameUtils {
    * @since 1.1.1
    */
   public static String titleize(final String name) {
-    return wordBound.splitAsStream(humanize(underscorize(name)))
+    return WORD_BOUND.splitAsStream(humanize(underscorize(name)))
         .map(StringUtils::capitalize)
         .collect(joining());
   }
