@@ -13,16 +13,15 @@ import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionInfo;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
-
 import org.mule.runtime.api.i18n.I18nMessage;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * {@code MuleException} is the base exception type for the Mule server any other exceptions thrown by Mule code will be based on
@@ -46,7 +45,7 @@ public abstract class MuleException extends Exception {
   private static final String[] SUMMARY_LOGGING_KEYS = {INFO_ERROR_TYPE_KEY, INFO_LOCATION_KEY, INFO_SOURCE_XML_KEY};
 
   private static final long serialVersionUID = -4544199933449632546L;
-  private static final Logger logger = LoggerFactory.getLogger(MuleException.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(MuleException.class);
 
   public static final String EXCEPTION_MESSAGE_DELIMITER = repeat('*', 80) + lineSeparator();
   public static final String EXCEPTION_MESSAGE_SECTION_DELIMITER = repeat('-', 80) + lineSeparator();
@@ -71,7 +70,7 @@ public abstract class MuleException extends Exception {
   public static void refreshVerboseExceptions() {
     String p = System.getProperty(MULE_VERBOSE_EXCEPTIONS);
     if (p != null) {
-      verboseExceptions = Boolean.parseBoolean(p);
+      verboseExceptions = Boolean.parseBoolean(p) || LOGGER.isDebugEnabled();
     }
   }
 
@@ -250,6 +249,6 @@ public abstract class MuleException extends Exception {
   }
 
   public static boolean isVerboseExceptions() {
-    return verboseExceptions || logger.isDebugEnabled();
+    return verboseExceptions;
   }
 }
