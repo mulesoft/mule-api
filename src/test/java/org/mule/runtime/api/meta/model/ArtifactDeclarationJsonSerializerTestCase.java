@@ -25,8 +25,11 @@ import com.google.gson.stream.JsonReader;
 
 import java.io.InputStreamReader;
 
+import org.json.JSONException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 public class ArtifactDeclarationJsonSerializerTestCase {
 
@@ -55,6 +58,21 @@ public class ArtifactDeclarationJsonSerializerTestCase {
 
     ArtifactDeclaration artifactDeclaration = serializer.deserialize(json);
     assertThat(json, applicationDeclaration, is(equalTo(artifactDeclaration)));
+  }
+
+  @Test
+  @Ignore("See MULE-15599")
+  public void serializeDeserializeSerializeTest() throws JSONException {
+    ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.getDefault(true);
+    String originalJson = serializer.serialize(applicationDeclaration);
+
+    ArtifactDeclaration loadedDeclaration = serializer.deserialize(originalJson);
+
+    JsonParser parser = new JsonParser();
+    JsonElement jsonElement = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(loadedDeclaration));
+    String generatedJson = jsonElement.toString();
+
+    JSONAssert.assertEquals(originalJson, generatedJson, true);
   }
 
   private ArtifactDeclaration createArtifact() {

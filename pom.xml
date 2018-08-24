@@ -129,7 +129,7 @@
         <allureReportVersion>2.6.0</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
         <jacoco.version>0.8.1</jacoco.version>
-
+        <jsonassert.version>1.5.0</jsonassert.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.1.2</oldMuleArtifactVersion>
         <muleRevapiExtensionVersion>1.2.0-SNAPSHOT</muleRevapiExtensionVersion>
@@ -226,6 +226,12 @@
             <groupId>org.mule.runtime</groupId>
             <artifactId>api-annotations</artifactId>
             <version>${muleApiAnnotationsVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
