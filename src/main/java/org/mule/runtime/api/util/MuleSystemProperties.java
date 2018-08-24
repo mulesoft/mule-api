@@ -51,6 +51,13 @@ public final class MuleSystemProperties {
   public static final String MULE_LOGGING_INTERVAL_SCHEDULERS_LATENCY_REPORT =
       SYSTEM_PROPERTY_PREFIX + "schedulers.latency.report.interval";
 
+  /**
+   * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
+   * <p>
+   * Possible values are the enums in {@code ProcessingType}.
+   */
+  public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
+
   private static final boolean TESTING_MODE = getProperty(TESTING_MODE_PROPERTY_NAME) != null;
   private static final boolean FORCE_EXTENSION_VALIDATION = getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
 
