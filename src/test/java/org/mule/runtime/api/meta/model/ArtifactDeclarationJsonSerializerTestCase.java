@@ -66,10 +66,10 @@ public class ArtifactDeclarationJsonSerializerTestCase {
     ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.getDefault(true);
     String originalJson = serializer.serialize(applicationDeclaration);
 
-    ArtifactDeclaration loadDeclaration = serializer.deserialize(originalJson);
+    ArtifactDeclaration loadedDeclaration = serializer.deserialize(originalJson);
 
     JsonParser parser = new JsonParser();
-    JsonElement jsonElement = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(loadDeclaration));
+    JsonElement jsonElement = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(loadedDeclaration));
     String generatedJson = jsonElement.toString();
 
     JSONAssert.assertEquals(originalJson, generatedJson, true);
