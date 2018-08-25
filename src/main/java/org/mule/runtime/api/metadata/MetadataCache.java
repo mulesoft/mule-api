@@ -24,7 +24,7 @@ import java.util.Optional;
  * @since 1.0
  */
 @NoImplement
-public interface MetadataCache {
+public interface MetadataCache extends Serializable {
 
   /**
    * Associates the specified value with the specified key in the cache.
