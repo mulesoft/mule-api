@@ -39,6 +39,8 @@ public interface ResourceLocator {
   Optional<URL> find(String resource, Object caller);
 
   /**
+   * Looks for a resource as in {@link #findIn(String, String, String, Optional, Object)} and returns it's {@link InputStream} if
+   * possible.
    *
    * @param resource the name of the resource to load
    * @param groupId the group ID of the artifact where to look
@@ -50,6 +52,8 @@ public interface ResourceLocator {
   Optional<InputStream> loadFrom(String resource, String groupId, String artifactId, Optional<String> version, Object caller);
 
   /**
+   * Looks for a resource based on the calling class classloader and the current context classloader, specifically within the artifact
+   * specified by it's GAV coordinates.
    *
    * @param resource the name of the resource to load
    * @param groupId the group ID of the artifact where to look
