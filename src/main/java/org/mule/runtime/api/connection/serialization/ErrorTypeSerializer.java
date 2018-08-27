@@ -1,5 +1,3 @@
-package org.mule.runtime.api.connection.serialization;
-
 /*
  * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
  * The software in this package is published under the terms of the CPAL v1.0
@@ -7,14 +5,17 @@ package org.mule.runtime.api.connection.serialization;
  * LICENSE.txt file.
  */
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonWriter;
+package org.mule.runtime.api.connection.serialization;
+
 import org.mule.runtime.api.message.ErrorType;
 
 import java.io.IOException;
 import java.io.StringWriter;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonWriter;
 
 /**
  * Serializer that can convert an {@link ErrorType} into a readable and processable JSON representation and from a JSON
