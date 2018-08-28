@@ -10,6 +10,16 @@
           "fieldName": "ROUTE",
           "elementKind": "enumConstant",
           "justification": "Missing cherry-pick from 1.2.0. Needed for correct datasense resolution in aggregator's module. Should not modify current behaviour"
+        },
+        {
+          "code": "java.class.nowImplementsInterface",
+          "old": "interface org.mule.runtime.api.metadata.MetadataCache",
+          "new": "interface org.mule.runtime.api.metadata.MetadataCache",
+          "interface": "java.io.Serializable",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MetadataCache",
+          "elementKind": "interface",
+          "justification": "All content was already Serializable so we are declaring it so"
         }
       ]
     }
