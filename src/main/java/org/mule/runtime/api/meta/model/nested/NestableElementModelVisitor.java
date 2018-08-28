@@ -13,10 +13,10 @@ package org.mule.runtime.api.meta.model.nested;
  */
 public interface NestableElementModelVisitor {
 
-  default void visit(NestedComponentModel component){}
+  default void visit(NestedComponentModel component) {}
 
-  default void visit(NestedChainModel component){}
+  default void visit(NestedChainModel component) {}
 
-  default void visit(NestedRouteModel component){}
+  default void visit(NestedRouteModel component) {}
 
 }
