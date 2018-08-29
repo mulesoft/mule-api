@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 /**
  * Utilities for functional programming
  *
- * @since 4.0
+ * @since 4.2
  */
 public class FunctionalUtils {
 
