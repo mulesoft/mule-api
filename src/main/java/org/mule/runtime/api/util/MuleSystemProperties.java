@@ -58,21 +58,18 @@ public final class MuleSystemProperties {
    */
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
-  private static final boolean TESTING_MODE = getProperty(TESTING_MODE_PROPERTY_NAME) != null;
-  private static final boolean FORCE_EXTENSION_VALIDATION = getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
-
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
-    return TESTING_MODE;
+    return getProperty(TESTING_MODE_PROPERTY_NAME) != null;
   }
 
   /**
    * @return {@code true} if the {@link #FORCE_EXTENSION_VALIDATION_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isForceExtensionValidation() {
-    return FORCE_EXTENSION_VALIDATION;
+    return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
   }
 
   private MuleSystemProperties() {}
