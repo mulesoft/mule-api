@@ -55,6 +55,8 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
 
   /**
    * @return the default {@link ParameterGroupDeclaration}, "General".
+   *
+   * @since 1.2
    */
   public ParameterGroupDeclaration getDefaultParameterGroup() {
     return parameterGroups.computeIfAbsent(DEFAULT_GROUP_NAME, ParameterGroupDeclaration::new);
