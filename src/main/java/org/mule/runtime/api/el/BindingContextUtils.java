@@ -25,6 +25,7 @@ import org.mule.runtime.internal.event.ItemSequenceInfoBindingWrapper;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
@@ -79,7 +80,9 @@ public class BindingContextUtils {
   private static final DataType AUTH_DATA_TYPE = fromType(Authentication.class);
 
   public final static TypedValue EMPTY_VARS = new TypedValue<>(emptyMap(), VARS_DATA_TYPE);
+  private final static Supplier<TypedValue> EMPTY_VARS_SUPPLIER = () -> EMPTY_VARS;
   public static final TypedValue NULL_TYPED_VALUE = new TypedValue<>(null, DataType.OBJECT);
+  private static final Supplier<TypedValue> NULL_TYPED_VALUE_SUPPLIER = () -> NULL_TYPED_VALUE;
 
   private BindingContextUtils() {
     // Nothing to do
@@ -117,7 +120,7 @@ public class BindingContextUtils {
     if (!event.getVariables().isEmpty()) {
       contextBuilder.addBinding(VARS, new LazyValue<>(() -> new TypedValue<>(event.getVariables(), VARS_DATA_TYPE)));
     } else {
-      contextBuilder.addBinding(VARS, EMPTY_VARS);
+      contextBuilder.addBinding(VARS, EMPTY_VARS_SUPPLIER);
     }
 
     contextBuilder.addBinding(CORRELATION_ID,
@@ -129,7 +132,7 @@ public class BindingContextUtils {
                                     .getItemSequenceInfo().get()),
                                                                        ITEM_SEQUENCE_INFO_DATA_TYPE)));
     } else {
-      contextBuilder.addBinding(ITEM_SEQUENCE_INFO, NULL_TYPED_VALUE);
+      contextBuilder.addBinding(ITEM_SEQUENCE_INFO, NULL_TYPED_VALUE_SUPPLIER);
     }
 
     Message message = event.getMessage();
@@ -143,13 +146,13 @@ public class BindingContextUtils {
       contextBuilder.addBinding(ERROR,
                                 new LazyValue<>(() -> new TypedValue<>(event.getError().get(), ERROR_DATA_TYPE)));
     } else {
-      contextBuilder.addBinding(ERROR, NULL_TYPED_VALUE);
+      contextBuilder.addBinding(ERROR, NULL_TYPED_VALUE_SUPPLIER);
     }
     if (event.getAuthentication().isPresent()) {
       contextBuilder.addBinding(AUTHENTICATION,
                                 new LazyValue<>(() -> new TypedValue<>(event.getAuthentication().get(), AUTH_DATA_TYPE)));
     } else {
-      contextBuilder.addBinding(AUTHENTICATION, NULL_TYPED_VALUE);
+      contextBuilder.addBinding(AUTHENTICATION, NULL_TYPED_VALUE_SUPPLIER);
     }
 
     return contextBuilder;
