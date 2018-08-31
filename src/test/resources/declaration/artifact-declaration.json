@@ -17,7 +17,8 @@
               "metadataProperties": {},
               "value": {
                 "text": "referableHandler",
-                "isCData": false
+                "isCData": false,
+                "type": "STRING"
               }
             }
           ]
@@ -51,7 +52,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "MULE:SOURCE_RESPONSE",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -59,7 +61,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "false",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "BOOLEAN"
                   }
                 },
                 {
@@ -67,7 +70,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "false",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "BOOLEAN"
                   }
                 }
               ]
@@ -91,7 +95,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "TRACE",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     }
                   ]
@@ -114,31 +119,38 @@
         "fields": {
           "entryTtl": {
             "text": "1",
-            "isCData": false
+            "isCData": false,
+            "type": "NUMBER"
           },
           "entryTtlUnit": {
             "text": "HOURS",
-            "isCData": false
+            "isCData": false,
+            "type": "STRING"
           },
           "maxEntries": {
             "text": "10",
-            "isCData": false
+            "isCData": false,
+            "type": "NUMBER"
           },
           "persistent": {
             "text": "true",
-            "isCData": false
+            "isCData": false,
+            "type": "BOOLEAN"
           },
           "expirationInterval": {
             "text": "2",
-            "isCData": false
+            "isCData": false,
+            "type": "NUMBER"
           },
           "expirationIntervalUnit": {
             "text": "HOURS",
-            "isCData": false
+            "isCData": false,
+            "type": "STRING"
           },
           "config-ref": {
             "text": "persistentConfig",
-            "isCData": false
+            "isCData": false,
+            "type": "STRING"
           }
         },
         "typeId": "org.mule.extension.objectstore.api.TopLevelObjectStore"
@@ -190,11 +202,13 @@
                 "fields": {
                   "maxIdleTime": {
                     "text": "1",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "NUMBER"
                   },
                   "timeUnit": {
                     "text": "MINUTES",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 "typeId": "org.mule.runtime.extension.api.ExpirationPolicy"
@@ -220,7 +234,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "SOAP11",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -228,7 +243,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "false",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "BOOLEAN"
                 }
               }
             ]
@@ -243,7 +259,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "http://www.webservicex.com/globalweather.asmx?WSDL",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -251,7 +268,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "http://www.webservicex.com/globalweather.asmx",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -259,7 +277,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "GlobalWeather",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -267,7 +286,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "GlobalWeatherSoap",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               }
             ]
@@ -302,7 +322,8 @@
                   "fields": {
                     "maxPoolSize": {
                       "text": "10",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     }
                   }
                 }
@@ -321,11 +342,13 @@
                   "fields": {
                     "first": {
                       "text": "propertyOne",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "STRING"
                     },
                     "second": {
                       "text": "propertyTwo",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "STRING"
                     }
                   }
                 }
@@ -337,17 +360,20 @@
                   "fields": {
                     "failsDeployment": {
                       "text": "true",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "BOOLEAN"
                     },
                     "reconnectionStrategy": {
                       "fields": {
                         "count": {
                           "text": "1",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "NUMBER"
                         },
                         "frequency": {
                           "text": "0",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "NUMBER"
                         }
                       },
                       "typeId": "reconnect"
@@ -361,7 +387,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "target/muleEmbeddedDB",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -369,7 +396,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "true",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "BOOLEAN"
                 }
               }
             ]
@@ -395,7 +423,8 @@
               "metadataProperties": {},
               "value": {
                 "text": "/",
-                "isCData": false
+                "isCData": false,
+                "type": "STRING"
               }
             }
           ]
@@ -422,15 +451,18 @@
                       "fields": {
                         "path": {
                           "text": "ssltest-keystore.jks",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         },
                         "password": {
                           "text": "changeit",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         },
                         "keyPassword": {
                           "text": "changeit",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         }
                       }
                     },
@@ -438,7 +470,8 @@
                       "fields": {
                         "insecure": {
                           "text": "true",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "BOOLEAN"
                         }
                       }
                     },
@@ -446,7 +479,8 @@
                       "fields": {
                         "onlyEndEntities": {
                           "text": "true",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "BOOLEAN"
                         }
                       },
                       "typeId": "standard-revocation-check"
@@ -466,7 +500,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "localhost",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -474,7 +509,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "49019",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "NUMBER"
                 }
               },
               {
@@ -482,7 +518,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "HTTPS",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               }
             ]
@@ -517,11 +554,13 @@
                   "fields": {
                     "username": {
                       "text": "user",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "STRING"
                     },
                     "password": {
                       "text": "pass",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "STRING"
                     }
                   },
                   "typeId": "org.mule.extension.http.api.request.authentication.BasicAuthentication"
@@ -539,7 +578,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "localhost",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "STRING"
                 }
               },
               {
@@ -547,7 +587,8 @@
                 "metadataProperties": {},
                 "value": {
                   "text": "49020",
-                  "isCData": false
+                  "isCData": false,
+                  "type": "NUMBER"
                 }
               },
               {
@@ -557,27 +598,33 @@
                   "fields": {
                     "connectionTimeout": {
                       "text": "1000",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     },
                     "keepAlive": {
                       "text": "true",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "BOOLEAN"
                     },
                     "receiveBufferSize": {
                       "text": "1024",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     },
                     "sendBufferSize": {
                       "text": "1024",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     },
                     "clientTimeout": {
                       "text": "1000",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     },
                     "linger": {
                       "text": "1000",
-                      "isCData": false
+                      "isCData": false,
+                      "type": "NUMBER"
                     }
                   }
                 }
@@ -614,7 +661,8 @@
               "metadataProperties": {},
               "value": {
                 "text": "stopped",
-                "isCData": false
+                "isCData": false,
+                "type": "STRING"
               }
             }
           ]
@@ -647,7 +695,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "testBuilder",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -657,11 +706,13 @@
                     "fields": {
                       "maxRedeliveryCount": {
                         "text": "2",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "useSecureHash": {
                         "text": "true",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "BOOLEAN"
                       }
                     }
                   }
@@ -680,11 +731,13 @@
                     "fields": {
                       "count": {
                         "text": "1",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "frequency": {
                         "text": "0",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       }
                     },
                     "typeId": "reconnect"
@@ -702,7 +755,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[{{\u0027content-type\u0027 : \u0027text/plain\u0027}}]",
-                    "isCData": true
+                    "isCData": true,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -710,7 +764,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[\n                    %dw 2.0\n                    output application/json\n                    input payload application/xml\n                    var baseUrl\u003d\"http://sample.cloudhub.io/api/v1.0/\"\n                    ---\n                    using (pageSize \u003d payload.getItemsResponse.PageInfo.pageSize) {\n                         links: [\n                            {\n                                href: fullUrl,\n                                rel : \"self\"\n                            }\n                         ],\n                         collection: {\n                            size: pageSize,\n                            items: payload.getItemsResponse.*Item map {\n                                id: $.id,\n                                type: $.type,\n                                name: $.name\n                            }\n                         }\n                    }\n                ",
-                    "isCData": true
+                    "isCData": true,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -744,7 +799,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "#[true]",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     }
                   ]
@@ -768,7 +824,8 @@
                           "metadataProperties": {},
                           "value": {
                             "text": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)",
-                            "isCData": false
+                            "isCData": false,
+                            "type": "STRING"
                           }
                         },
                         {
@@ -779,11 +836,13 @@
                               "fields": {
                                 "key": {
                                   "text": "name",
-                                  "isCData": false
+                                  "isCData": false,
+                                  "type": "STRING"
                                 },
                                 "type": {
                                   "text": "VARCHAR",
-                                  "isCData": false
+                                  "isCData": false,
+                                  "type": "STRING"
                                 }
                               }
                             },
@@ -791,11 +850,13 @@
                               "fields": {
                                 "key": {
                                   "text": "position",
-                                  "isCData": false
+                                  "isCData": false,
+                                  "type": "NUMBER"
                                 },
                                 "type": {
                                   "text": "INTEGER",
-                                  "isCData": false
+                                  "isCData": false,
+                                  "type": "STRING"
                                 }
                               }
                             }
@@ -833,7 +894,8 @@
                           "metadataProperties": {},
                           "value": {
                             "text": "#[myCollection]",
-                            "isCData": false
+                            "isCData": false,
+                            "type": "STRING"
                           }
                         }
                       ]
@@ -857,7 +919,8 @@
                               "metadataProperties": {},
                               "value": {
                                 "text": "#[payload]",
-                                "isCData": false
+                                "isCData": false,
+                                "type": "STRING"
                               }
                             }
                           ]
@@ -888,7 +951,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -899,11 +963,13 @@
                       "fields": {
                         "key": {
                           "text": "name",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         },
                         "type": {
                           "text": "VARCHAR",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         }
                       }
                     },
@@ -911,11 +977,13 @@
                       "fields": {
                         "key": {
                           "text": "position",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         },
                         "type": {
                           "text": "INTEGER",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         }
                       }
                     }
@@ -943,7 +1011,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "/nested",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -958,7 +1027,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "POST",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -984,7 +1054,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, \u0027Pluto\u0027, :description)",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -995,11 +1066,13 @@
                       "fields": {
                         "key": {
                           "text": "description",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         },
                         "type": {
                           "text": "CLOB",
-                          "isCData": false
+                          "isCData": false,
+                          "type": "STRING"
                         }
                       }
                     }
@@ -1010,7 +1083,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[{{\u0027description\u0027 : payload}}]",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -1038,19 +1112,23 @@
                     "fields": {
                       "bufferSizeIncrement": {
                         "text": "8",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "bufferUnit": {
                         "text": "KB",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       },
                       "initialBufferSize": {
                         "text": "51",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "maxBufferSize": {
                         "text": "1000",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       }
                     },
                     "typeId": "repeatable-in-memory-stream"
@@ -1068,7 +1146,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "myVar",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 },
                 {
@@ -1076,7 +1155,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[message]",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -1109,7 +1189,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "GetCitiesByCountry",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     }
                   ]
@@ -1124,7 +1205,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "#[{}]",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     },
                     {
@@ -1132,7 +1214,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "#[{\"headers\": {con#headerIn: \"Header In Value\",con#headerInOut: \"Header In Out Value\"}]",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     },
                     {
@@ -1140,7 +1223,8 @@
                       "metadataProperties": {},
                       "value": {
                         "text": "#[payload]",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     }
                   ]
@@ -1173,7 +1257,8 @@
                           "metadataProperties": {},
                           "value": {
                             "text": "MULE:ANY",
-                            "isCData": false
+                            "isCData": false,
+                            "type": "STRING"
                           }
                         }
                       ]
@@ -1208,7 +1293,8 @@
                           "metadataProperties": {},
                           "value": {
                             "text": "WSC:CONNECTIVITY",
-                            "isCData": false
+                            "isCData": false,
+                            "type": "STRING"
                           }
                         },
                         {
@@ -1216,7 +1302,8 @@
                           "metadataProperties": {},
                           "value": {
                             "text": "#[e.cause \u003d\u003d null]",
-                            "isCData": false
+                            "isCData": false,
+                            "type": "STRING"
                           }
                         }
                       ]
@@ -1258,15 +1345,18 @@
                     "fields": {
                       "frequency": {
                         "text": "50",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "startDelay": {
                         "text": "20",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "NUMBER"
                       },
                       "timeUnit": {
                         "text": "SECONDS",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     },
                     "typeId": "org.mule.runtime.core.api.source.scheduler.FixedFrequencyScheduler"
@@ -1294,7 +1384,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[payload]",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]
@@ -1332,7 +1423,8 @@
                     "fields": {
                       "expression": {
                         "text": "0/1 * * * * ?",
-                        "isCData": false
+                        "isCData": false,
+                        "type": "STRING"
                       }
                     },
                     "typeId": "org.mule.runtime.core.api.source.scheduler.CronScheduler"
@@ -1360,7 +1452,8 @@
                   "metadataProperties": {},
                   "value": {
                     "text": "#[payload]",
-                    "isCData": false
+                    "isCData": false,
+                    "type": "STRING"
                   }
                 }
               ]

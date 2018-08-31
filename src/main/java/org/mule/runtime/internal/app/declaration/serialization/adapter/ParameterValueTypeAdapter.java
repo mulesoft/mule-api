@@ -10,12 +10,12 @@ import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.c
 import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.plain;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.FIELDS;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.TYPE_ID;
-
 import org.mule.runtime.app.declaration.api.ParameterValue;
 import org.mule.runtime.app.declaration.api.ParameterValueVisitor;
 import org.mule.runtime.app.declaration.api.fluent.ParameterListValue;
 import org.mule.runtime.app.declaration.api.fluent.ParameterObjectValue;
 import org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue;
+import org.mule.runtime.app.declaration.api.fluent.SimpleValueType;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -37,6 +37,7 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
 
   private static final String TEXT = "text";
   private static final String IS_CDATA = "isCData";
+  private static final String TYPE = "type";
 
   @Override
   public void write(JsonWriter jsonWriter, ParameterValue parameter) throws IOException {
@@ -118,6 +119,10 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
       jsonWriter.beginObject();
       jsonWriter.name(TEXT).value(value.getValue());
       jsonWriter.name(IS_CDATA).value(value.isCData());
+
+      if (value.getType() != null) {
+        jsonWriter.name(TYPE).value(value.getType().toString());
+      }
       jsonWriter.endObject();
     } catch (Exception e) {
       throw new RuntimeException(e);
@@ -133,7 +138,9 @@ public class ParameterValueTypeAdapter extends TypeAdapter<ParameterValue> {
       JsonObject object = jsonElement.getAsJsonObject();
       JsonElement text = object.get(TEXT);
       if (text != null && object.get(IS_CDATA) != null) {
-        return object.get(IS_CDATA).getAsBoolean() ? cdata(text.getAsString()) : plain(text.getAsString());
+        JsonElement type = object.get(TYPE);
+        SimpleValueType typeValue = type == null ? SimpleValueType.STRING : SimpleValueType.valueOf(type.getAsString());
+        return object.get(IS_CDATA).getAsBoolean() ? cdata(text.getAsString(), typeValue) : plain(text.getAsString(), typeValue);
       } else {
         return loadObjectValue(object);
       }

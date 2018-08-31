@@ -15,9 +15,16 @@ import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newArt
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newListValue;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newObjectValue;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newParameterGroup;
+import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.cdata;
+import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.plain;
+import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.BOOLEAN;
+import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.NUMBER;
+import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.STRING;
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
+import org.mule.runtime.app.declaration.api.ParameterValue;
 import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.SimpleValueType;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -33,7 +40,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 public class ArtifactDeclarationJsonSerializerTestCase {
 
-  private static final String EXPECTED_ARTIFACT_DECLARATION_JSON = "declaration/artifact-declaration.json";
   private ArtifactDeclaration applicationDeclaration;
 
   @Before
@@ -45,7 +51,7 @@ public class ArtifactDeclarationJsonSerializerTestCase {
   public void serializationTest() {
     JsonParser parser = new JsonParser();
     JsonReader reader = new JsonReader(new InputStreamReader(Thread.currentThread().getContextClassLoader()
-        .getResourceAsStream(EXPECTED_ARTIFACT_DECLARATION_JSON)));
+        .getResourceAsStream(getExpectedArtifactDeclarationJson())));
     JsonElement expected = parser.parse(reader);
     JsonElement json = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration));
     assertThat(json, is(equalTo(expected)));
@@ -88,18 +94,19 @@ public class ArtifactDeclarationJsonSerializerTestCase {
     return newArtifact()
         .withCustomParameter("xmlns:doc", "http://www.mulesoft.org/schema/mule/documentation")
         .withGlobalElement(core.newConstruct("configuration")
-            .withParameterGroup(group -> group.withParameter("defaultErrorHandler-ref", "referableHandler"))
+            .withParameterGroup(group -> group.withParameter("defaultErrorHandler-ref",
+                                                             createStringParameter("referableHandler")))
             .getDeclaration())
         .withGlobalElement(core.newConstruct("errorHandler")
             .withRefName("referableHandler")
             .withComponent(core.newRoute("onErrorContinue")
                 .withParameterGroup(group -> group
-                    .withParameter("type", "MULE:SOURCE_RESPONSE")
-                    .withParameter("logException", "false")
-                    .withParameter("enableNotifications", "false"))
+                    .withParameter("type", createStringParameter("MULE:SOURCE_RESPONSE"))
+                    .withParameter("logException", createBooleanParameter("false"))
+                    .withParameter("enableNotifications", createBooleanParameter("false")))
                 .withComponent(core.newOperation("logger")
                     .withParameterGroup(group -> group
-                        .withParameter("level", "TRACE"))
+                        .withParameter("level", createStringParameter("TRACE")))
                     .getDeclaration())
                 .getDeclaration())
             .getDeclaration())
@@ -107,13 +114,13 @@ public class ArtifactDeclarationJsonSerializerTestCase {
             .withRefName("persistentStore")
             .withValue(newObjectValue()
                 .ofType("org.mule.extension.objectstore.api.TopLevelObjectStore")
-                .withParameter("entryTtl", "1")
-                .withParameter("entryTtlUnit", "HOURS")
-                .withParameter("maxEntries", "10")
-                .withParameter("persistent", "true")
-                .withParameter("expirationInterval", "2")
-                .withParameter("expirationIntervalUnit", "HOURS")
-                .withParameter("config-ref", "persistentConfig")
+                .withParameter("entryTtl", createNumberParameter("1"))
+                .withParameter("entryTtlUnit", createStringParameter("HOURS"))
+                .withParameter("maxEntries", createNumberParameter("10"))
+                .withParameter("persistent", createBooleanParameter("true"))
+                .withParameter("expirationInterval", createNumberParameter("2"))
+                .withParameter("expirationIntervalUnit", createStringParameter("HOURS"))
+                .withParameter("config-ref", createStringParameter("persistentConfig"))
                 .build())
             .getDeclaration())
         .withGlobalElement(os.newConfiguration("config")
@@ -128,20 +135,20 @@ public class ArtifactDeclarationJsonSerializerTestCase {
             .withParameterGroup(newParameterGroup()
                 .withParameter("expirationPolicy", newObjectValue()
                     .ofType("org.mule.runtime.extension.api.ExpirationPolicy")
-                    .withParameter("maxIdleTime", "1")
-                    .withParameter("timeUnit", MINUTES.name())
+                    .withParameter("maxIdleTime", createNumberParameter("1"))
+                    .withParameter("timeUnit", createStringParameter(MINUTES.name()))
                     .build())
                 .getDeclaration())
             .withConnection(wsc.newConnection("connection")
                 .withParameterGroup(newParameterGroup()
-                    .withParameter("soapVersion", "SOAP11")
-                    .withParameter("mtomEnabled", "false")
+                    .withParameter("soapVersion", createStringParameter("SOAP11"))
+                    .withParameter("mtomEnabled", createBooleanParameter("false"))
                     .getDeclaration())
                 .withParameterGroup(newParameterGroup("Connection")
-                    .withParameter("wsdlLocation", "http://www.webservicex.com/globalweather.asmx?WSDL")
-                    .withParameter("address", "http://www.webservicex.com/globalweather.asmx")
-                    .withParameter("service", "GlobalWeather")
-                    .withParameter("port", "GlobalWeatherSoap")
+                    .withParameter("wsdlLocation", createStringParameter("http://www.webservicex.com/globalweather.asmx?WSDL"))
+                    .withParameter("address", createStringParameter("http://www.webservicex.com/globalweather.asmx"))
+                    .withParameter("service", createStringParameter("GlobalWeather"))
+                    .withParameter("port", createStringParameter("GlobalWeatherSoap"))
                     .getDeclaration())
                 .getDeclaration())
             .getDeclaration())
@@ -150,55 +157,55 @@ public class ArtifactDeclarationJsonSerializerTestCase {
             .withConnection(db
                 .newConnection("derby").withParameterGroup(newParameterGroup()
                     .withParameter("poolingProfile", newObjectValue()
-                        .withParameter("maxPoolSize", "10")
+                        .withParameter("maxPoolSize", createNumberParameter("10"))
                         .build())
                     .getDeclaration())
                 .withParameterGroup(newParameterGroup(CONNECTION)
                     .withParameter("connectionProperties", newObjectValue()
-                        .withParameter("first", "propertyOne")
-                        .withParameter("second", "propertyTwo")
+                        .withParameter("first", createStringParameter("propertyOne"))
+                        .withParameter("second", createStringParameter("propertyTwo"))
                         .build())
                     .withParameter("reconnection", newObjectValue()
                         .ofType("Reconnection")
-                        .withParameter("failsDeployment", "true")
+                        .withParameter("failsDeployment", createBooleanParameter("true"))
                         .withParameter("reconnectionStrategy", newObjectValue()
                             .ofType("reconnect")
-                            .withParameter("count", "1")
-                            .withParameter("frequency", "0")
+                            .withParameter("count", createNumberParameter("1"))
+                            .withParameter("frequency", createNumberParameter("0"))
                             .build())
                         .build())
-                    .withParameter("database", "target/muleEmbeddedDB")
-                    .withParameter("create", "true")
+                    .withParameter("database", createStringParameter("target/muleEmbeddedDB"))
+                    .withParameter("create", createBooleanParameter("true"))
                     .getDeclaration())
                 .getDeclaration())
             .getDeclaration())
         .withGlobalElement(http.newConfiguration("listenerConfig")
             .withRefName("httpListener")
             .withParameterGroup(newParameterGroup()
-                .withParameter("basePath", "/")
+                .withParameter("basePath", createStringParameter("/"))
                 .getDeclaration())
             .withConnection(http.newConnection("listener")
                 .withParameterGroup(newParameterGroup()
                     .withParameter("tlsContext", newObjectValue()
                         .withParameter("key-store", newObjectValue()
-                            .withParameter("path", "ssltest-keystore.jks")
-                            .withParameter("password", "changeit")
-                            .withParameter("keyPassword", "changeit")
+                            .withParameter("path", createStringParameter("ssltest-keystore.jks"))
+                            .withParameter("password", createStringParameter("changeit"))
+                            .withParameter("keyPassword", createStringParameter("changeit"))
                             .build())
                         .withParameter("trust-store", newObjectValue()
-                            .withParameter("insecure", "true")
+                            .withParameter("insecure", createBooleanParameter("true"))
                             .build())
                         .withParameter("revocation-check",
                                        newObjectValue()
                                            .ofType("standard-revocation-check")
-                                           .withParameter("onlyEndEntities", "true")
+                                           .withParameter("onlyEndEntities", createBooleanParameter("true"))
                                            .build())
                         .build())
                     .getDeclaration())
                 .withParameterGroup(group -> group.withName(CONNECTION)
-                    .withParameter("host", "localhost")
-                    .withParameter("port", "49019")
-                    .withParameter("protocol", "HTTPS"))
+                    .withParameter("host", createStringParameter("localhost"))
+                    .withParameter("port", createNumberParameter("49019"))
+                    .withParameter("protocol", createStringParameter("HTTPS")))
                 .getDeclaration())
             .getDeclaration())
         .withGlobalElement(http.newConfiguration("requestConfig")
@@ -207,20 +214,20 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .withParameterGroup(group -> group.withParameter("authentication",
                                                                  newObjectValue()
                                                                      .ofType("org.mule.extension.http.api.request.authentication.BasicAuthentication")
-                                                                     .withParameter("username", "user")
-                                                                     .withParameter("password", "pass")
+                                                                     .withParameter("username", createStringParameter("user"))
+                                                                     .withParameter("password", createStringParameter("pass"))
                                                                      .build()))
                 .withParameterGroup(newParameterGroup(CONNECTION)
-                    .withParameter("host", "localhost")
-                    .withParameter("port", "49020")
+                    .withParameter("host", createStringParameter("localhost"))
+                    .withParameter("port", createNumberParameter("49020"))
                     .withParameter("clientSocketProperties",
                                    newObjectValue()
-                                       .withParameter("connectionTimeout", "1000")
-                                       .withParameter("keepAlive", "true")
-                                       .withParameter("receiveBufferSize", "1024")
-                                       .withParameter("sendBufferSize", "1024")
-                                       .withParameter("clientTimeout", "1000")
-                                       .withParameter("linger", "1000")
+                                       .withParameter("connectionTimeout", createNumberParameter("1000"))
+                                       .withParameter("keepAlive", createBooleanParameter("true"))
+                                       .withParameter("receiveBufferSize", createNumberParameter("1024"))
+                                       .withParameter("sendBufferSize", createNumberParameter("1024"))
+                                       .withParameter("clientTimeout", createNumberParameter("1000"))
+                                       .withParameter("linger", createNumberParameter("1000"))
                                        .build())
                     .getDeclaration())
                 .getDeclaration())
@@ -228,71 +235,71 @@ public class ArtifactDeclarationJsonSerializerTestCase {
         .withGlobalElement(core.newConstruct("flow")
             .withRefName("testFlow")
             .withCustomParameter("doc:id", "docUUID")
-            .withParameterGroup(group -> group.withParameter("initialState", "stopped"))
+            .withParameterGroup(group -> group.withParameter("initialState", createStringParameter("stopped")))
             .withComponent(http.newSource("listener")
                 .withConfig("httpListener")
                 .withCustomParameter("doc:id", "docUUID")
                 .withParameterGroup(newParameterGroup()
-                    .withParameter("path", "testBuilder")
+                    .withParameter("path", createStringParameter("testBuilder"))
                     .withParameter("redeliveryPolicy",
                                    newObjectValue()
-                                       .withParameter("maxRedeliveryCount", "2")
-                                       .withParameter("useSecureHash", "true")
+                                       .withParameter("maxRedeliveryCount", createNumberParameter("2"))
+                                       .withParameter("useSecureHash", createBooleanParameter("true"))
                                        .build())
                     .getDeclaration())
                 .withParameterGroup(group -> group.withName(CONNECTION)
                     .withParameter("reconnectionStrategy",
                                    newObjectValue()
                                        .ofType("reconnect")
-                                       .withParameter("count", "1")
-                                       .withParameter("frequency", "0")
+                                       .withParameter("count", createNumberParameter("1"))
+                                       .withParameter("frequency", createNumberParameter("0"))
                                        .build()))
                 .withParameterGroup(newParameterGroup("Response")
-                    .withParameter("headers", "<![CDATA[#[{{'content-type' : 'text/plain'}}]]]>")
-                    .withParameter("body",
-                                   "<![CDATA[#[\n"
-                                       + "                    %dw 2.0\n"
-                                       + "                    output application/json\n"
-                                       + "                    input payload application/xml\n"
-                                       + "                    var baseUrl=\"http://sample.cloudhub.io/api/v1.0/\"\n"
-                                       + "                    ---\n"
-                                       + "                    using (pageSize = payload.getItemsResponse.PageInfo.pageSize) {\n"
-                                       + "                         links: [\n"
-                                       + "                            {\n"
-                                       + "                                href: fullUrl,\n"
-                                       + "                                rel : \"self\"\n"
-                                       + "                            }\n"
-                                       + "                         ],\n"
-                                       + "                         collection: {\n"
-                                       + "                            size: pageSize,\n"
-                                       + "                            items: payload.getItemsResponse.*Item map {\n"
-                                       + "                                id: $.id,\n"
-                                       + "                                type: $.type,\n"
-                                       + "                                name: $.name\n"
-                                       + "                            }\n"
-                                       + "                         }\n"
-                                       + "                    }\n"
-                                       + "                ]]>")
+                    .withParameter("headers", createStringCdataParameter("<![CDATA[#[{{'content-type' : 'text/plain'}}]]]>"))
+                    .withParameter("body", createStringCdataParameter(
+                                                                      "<![CDATA[#[\n"
+                                                                          + "                    %dw 2.0\n"
+                                                                          + "                    output application/json\n"
+                                                                          + "                    input payload application/xml\n"
+                                                                          + "                    var baseUrl=\"http://sample.cloudhub.io/api/v1.0/\"\n"
+                                                                          + "                    ---\n"
+                                                                          + "                    using (pageSize = payload.getItemsResponse.PageInfo.pageSize) {\n"
+                                                                          + "                         links: [\n"
+                                                                          + "                            {\n"
+                                                                          + "                                href: fullUrl,\n"
+                                                                          + "                                rel : \"self\"\n"
+                                                                          + "                            }\n"
+                                                                          + "                         ],\n"
+                                                                          + "                         collection: {\n"
+                                                                          + "                            size: pageSize,\n"
+                                                                          + "                            items: payload.getItemsResponse.*Item map {\n"
+                                                                          + "                                id: $.id,\n"
+                                                                          + "                                type: $.type,\n"
+                                                                          + "                                name: $.name\n"
+                                                                          + "                            }\n"
+                                                                          + "                         }\n"
+                                                                          + "                    }\n"
+                                                                          + "                ]]>"))
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(core.newConstruct("choice")
                 .withRoute(core.newRoute("when")
                     .withParameterGroup(newParameterGroup()
-                        .withParameter("expression", "#[true]")
+                        .withParameter("expression", createStringParameter("#[true]"))
                         .getDeclaration())
                     .withComponent(db.newOperation("bulkInsert")
                         .withParameterGroup(newParameterGroup("Query")
                             .withParameter("sql",
-                                           "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
+                                           createStringParameter("INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"))
                             .withParameter("parameterTypes",
                                            newListValue()
                                                .withValue(newObjectValue()
-                                                   .withParameter("key", "name")
-                                                   .withParameter("type", "VARCHAR")
+                                                   .withParameter("key", createStringParameter("name"))
+                                                   .withParameter("type", createStringParameter("VARCHAR"))
                                                    .build())
                                                .withValue(newObjectValue()
-                                                   .withParameter("key", "position")
-                                                   .withParameter("type", "INTEGER")
+                                                   .withParameter("key", createNumberParameter("position"))
+                                                   .withParameter("type", createStringParameter("INTEGER"))
                                                    .build())
                                                .build())
                             .getDeclaration())
@@ -301,11 +308,11 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .withRoute(core.newRoute("otherwise")
                     .withComponent(core.newConstruct("foreach")
                         .withParameterGroup(newParameterGroup()
-                            .withParameter("collection", "#[myCollection]")
+                            .withParameter("collection", createStringParameter("#[myCollection]"))
                             .getDeclaration())
                         .withComponent(core.newOperation("logger")
                             .withParameterGroup(newParameterGroup()
-                                .withParameter("message", "#[payload]")
+                                .withParameter("message", createStringParameter("#[payload]"))
                                 .getDeclaration())
                             .getDeclaration())
                         .getDeclaration())
@@ -313,39 +320,39 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .getDeclaration())
             .withComponent(db.newOperation("bulkInsert")
                 .withParameterGroup(newParameterGroup("Query")
-                    .withParameter("sql", "INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)")
+                    .withParameter("sql", createStringParameter("INSERT INTO PLANET(POSITION, NAME) VALUES (:position, :name)"))
                     .withParameter("parameterTypes",
                                    newListValue()
                                        .withValue(newObjectValue()
-                                           .withParameter("key", "name")
-                                           .withParameter("type", "VARCHAR").build())
+                                           .withParameter("key", createStringParameter("name"))
+                                           .withParameter("type", createStringParameter("VARCHAR")).build())
                                        .withValue(newObjectValue()
-                                           .withParameter("key", "position")
-                                           .withParameter("type", "INTEGER").build())
+                                           .withParameter("key", createStringParameter("position"))
+                                           .withParameter("type", createStringParameter("INTEGER")).build())
                                        .build())
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(http.newOperation("request")
                 .withConfig("httpRequester")
                 .withParameterGroup(newParameterGroup("URI Settings")
-                    .withParameter("path", "/nested")
+                    .withParameter("path", createStringParameter("/nested"))
                     .getDeclaration())
                 .withParameterGroup(newParameterGroup()
-                    .withParameter("method", "POST")
+                    .withParameter("method", createStringParameter("POST"))
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(db.newOperation("insert")
                 .withConfig("dbConfig")
                 .withParameterGroup(newParameterGroup("Query")
                     .withParameter("sql",
-                                   "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)")
+                                   createStringParameter("INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)"))
                     .withParameter("parameterTypes",
                                    newListValue()
                                        .withValue(newObjectValue()
-                                           .withParameter("key", "description")
-                                           .withParameter("type", "CLOB").build())
+                                           .withParameter("key", createStringParameter("description"))
+                                           .withParameter("type", createStringParameter("CLOB")).build())
                                        .build())
-                    .withParameter("inputParameters", "#[{{'description' : payload}}]")
+                    .withParameter("inputParameters", createStringParameter("#[{{'description' : payload}}]"))
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(sockets.newOperation("sendAndReceive")
@@ -353,40 +360,40 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                     .withParameter("streamingStrategy",
                                    newObjectValue()
                                        .ofType("repeatable-in-memory-stream")
-                                       .withParameter("bufferSizeIncrement", "8")
-                                       .withParameter("bufferUnit", "KB")
-                                       .withParameter("initialBufferSize", "51")
-                                       .withParameter("maxBufferSize", "1000")
+                                       .withParameter("bufferSizeIncrement", createNumberParameter("8"))
+                                       .withParameter("bufferUnit", createStringParameter("KB"))
+                                       .withParameter("initialBufferSize", createNumberParameter("51"))
+                                       .withParameter("maxBufferSize", createNumberParameter("1000"))
                                        .build())
                     .getDeclaration())
                 .withParameterGroup(newParameterGroup("Output")
-                    .withParameter("target", "myVar")
-                    .withParameter("targetValue", "#[message]")
+                    .withParameter("target", createStringParameter("myVar"))
+                    .withParameter("targetValue", createStringParameter("#[message]"))
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(core.newConstruct("try")
                 .withComponent(wsc.newOperation("consume")
                     .withParameterGroup(newParameterGroup()
-                        .withParameter("operation", "GetCitiesByCountry")
+                        .withParameter("operation", createStringParameter("GetCitiesByCountry"))
                         .getDeclaration())
                     .withParameterGroup(newParameterGroup("Message")
-                        .withParameter("attachments", "#[{}]")
+                        .withParameter("attachments", createStringParameter("#[{}]"))
                         .withParameter("headers",
-                                       "#[{\"headers\": {con#headerIn: \"Header In Value\",con#headerInOut: \"Header In Out Value\"}]")
-                        .withParameter("body", "#[payload]")
+                                       createStringParameter("#[{\"headers\": {con#headerIn: \"Header In Value\",con#headerInOut: \"Header In Out Value\"}]"))
+                        .withParameter("body", createStringParameter("#[payload]"))
                         .getDeclaration())
                     .getDeclaration())
                 .withComponent(core.newConstruct("errorHandler")
                     .withComponent(core.newRoute("onErrorContinue")
                         .withParameterGroup(newParameterGroup()
-                            .withParameter("type", "MULE:ANY")
+                            .withParameter("type", createStringParameter("MULE:ANY"))
                             .getDeclaration())
                         .withComponent(core.newOperation("logger").getDeclaration())
                         .getDeclaration())
                     .withComponent(core.newRoute("onErrorPropagate")
                         .withParameterGroup(newParameterGroup()
-                            .withParameter("type", "WSC:CONNECTIVITY")
-                            .withParameter("when", "#[e.cause == null]")
+                            .withParameter("type", createStringParameter("WSC:CONNECTIVITY"))
+                            .withParameter("when", createStringParameter("#[e.cause == null]"))
                             .getDeclaration())
                         .getDeclaration())
                     .getDeclaration())
@@ -397,15 +404,15 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .withParameterGroup(newParameterGroup()
                     .withParameter("schedulingStrategy", newObjectValue()
                         .ofType("org.mule.runtime.core.api.source.scheduler.FixedFrequencyScheduler")
-                        .withParameter("frequency", "50")
-                        .withParameter("startDelay", "20")
-                        .withParameter("timeUnit", "SECONDS")
+                        .withParameter("frequency", createNumberParameter("50"))
+                        .withParameter("startDelay", createNumberParameter("20"))
+                        .withParameter("timeUnit", createStringParameter("SECONDS"))
                         .build())
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(core.newOperation("logger")
                 .withParameterGroup(newParameterGroup()
-                    .withParameter("message", "#[payload]").getDeclaration())
+                    .withParameter("message", createStringParameter("#[payload]")).getDeclaration())
                 .getDeclaration())
             .getDeclaration())
         .withGlobalElement(core.newConstruct("flow").withRefName("cronSchedulerFlow")
@@ -413,15 +420,44 @@ public class ArtifactDeclarationJsonSerializerTestCase {
                 .withParameterGroup(newParameterGroup()
                     .withParameter("schedulingStrategy", newObjectValue()
                         .ofType("org.mule.runtime.core.api.source.scheduler.CronScheduler")
-                        .withParameter("expression", "0/1 * * * * ?")
+                        .withParameter("expression", createStringParameter("0/1 * * * * ?"))
                         .build())
                     .getDeclaration())
                 .getDeclaration())
             .withComponent(core.newOperation("logger")
                 .withParameterGroup(newParameterGroup()
-                    .withParameter("message", "#[payload]").getDeclaration())
+                    .withParameter("message", createStringParameter("#[payload]")).getDeclaration())
                 .getDeclaration())
             .getDeclaration())
         .getDeclaration();
+  }
+
+  protected String getExpectedArtifactDeclarationJson() {
+    return "declaration/artifact-declaration.json";
+  }
+
+  private ParameterValue createNumberParameter(String value) {
+    return createPlainParameter(value, NUMBER);
+  }
+
+  private ParameterValue createBooleanParameter(String value) {
+    return createPlainParameter(value, BOOLEAN);
+  }
+
+  private ParameterValue createStringParameter(String value) {
+    SimpleValueType type = STRING;
+    return createPlainParameter(value, type);
+  }
+
+  private ParameterValue createStringCdataParameter(String value) {
+    return createCdataParameter(value, STRING);
+  }
+
+  private ParameterValue createPlainParameter(String value, SimpleValueType type) {
+    return plain(value, type);
+  }
+
+  private ParameterValue createCdataParameter(String value, SimpleValueType type) {
+    return cdata(value, type);
   }
 }
