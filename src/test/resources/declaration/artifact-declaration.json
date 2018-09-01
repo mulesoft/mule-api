@@ -643,7 +643,8 @@
         {
           "value": {
             "text": "docUUID",
-            "isCData": false
+            "isCData": false,
+            "type": "STRING"
           },
           "properties": {},
           "name": "doc:id"
@@ -677,7 +678,8 @@
             {
               "value": {
                 "text": "docUUID",
-                "isCData": false
+                "isCData": false,
+                "type": "STRING"
               },
               "properties": {},
               "name": "doc:id"
@@ -754,7 +756,7 @@
                   "name": "headers",
                   "metadataProperties": {},
                   "value": {
-                    "text": "#[{{\u0027content-type\u0027 : \u0027text/plain\u0027}}]",
+                    "text": "#[{{'content-type' : 'text/plain'}}]",
                     "isCData": true,
                     "type": "STRING"
                   }
@@ -763,7 +765,7 @@
                   "name": "body",
                   "metadataProperties": {},
                   "value": {
-                    "text": "#[\n                    %dw 2.0\n                    output application/json\n                    input payload application/xml\n                    var baseUrl\u003d\"http://sample.cloudhub.io/api/v1.0/\"\n                    ---\n                    using (pageSize \u003d payload.getItemsResponse.PageInfo.pageSize) {\n                         links: [\n                            {\n                                href: fullUrl,\n                                rel : \"self\"\n                            }\n                         ],\n                         collection: {\n                            size: pageSize,\n                            items: payload.getItemsResponse.*Item map {\n                                id: $.id,\n                                type: $.type,\n                                name: $.name\n                            }\n                         }\n                    }\n                ",
+                    "text": "#[\n                    %dw 2.0\n                    output application/json\n                    input payload application/xml\n                    var baseUrl=\"http://sample.cloudhub.io/api/v1.0/\"\n                    ---\n                    using (pageSize = payload.getItemsResponse.PageInfo.pageSize) {\n                         links: [\n                            {\n                                href: fullUrl,\n                                rel : \"self\"\n                            }\n                         ],\n                         collection: {\n                            size: pageSize,\n                            items: payload.getItemsResponse.*Item map {\n                                id: $.id,\n                                type: $.type,\n                                name: $.name\n                            }\n                         }\n                    }\n                ",
                     "isCData": true,
                     "type": "STRING"
                   }
@@ -1053,7 +1055,7 @@
                   "name": "sql",
                   "metadataProperties": {},
                   "value": {
-                    "text": "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, \u0027Pluto\u0027, :description)",
+                    "text": "INSERT INTO PLANET(POSITION, NAME, DESCRIPTION) VALUES (777, 'Pluto', :description)",
                     "isCData": false,
                     "type": "STRING"
                   }
@@ -1082,7 +1084,7 @@
                   "name": "inputParameters",
                   "metadataProperties": {},
                   "value": {
-                    "text": "#[{{\u0027description\u0027 : payload}}]",
+                    "text": "#[{{'description' : payload}}]",
                     "isCData": false,
                     "type": "STRING"
                   }
@@ -1301,7 +1303,7 @@
                           "name": "when",
                           "metadataProperties": {},
                           "value": {
-                            "text": "#[e.cause \u003d\u003d null]",
+                            "text": "#[e.cause == null]",
                             "isCData": false,
                             "type": "STRING"
                           }
@@ -1468,7 +1470,8 @@
     {
       "value": {
         "text": "http://www.mulesoft.org/schema/mule/documentation",
-        "isCData": false
+        "isCData": false,
+        "type": "STRING"
       },
       "properties": {},
       "name": "xmlns:doc"
