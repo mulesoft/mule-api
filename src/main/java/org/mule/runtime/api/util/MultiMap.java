@@ -180,6 +180,16 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     return null;
   }
 
+  /**
+   * Removes all elements associated with the provided {@code key}.
+   * 
+   * @param key the key of the mappings to remove.
+   * @return all values that were associated to the provided {@code key}.
+   */
+  public List<V> removeAll(Object key) {
+    return paramsMap.remove(key);
+  }
+
   @Override
   public void putAll(Map<? extends K, ? extends V> aMap) {
     aMap.forEach((key, value) -> {
