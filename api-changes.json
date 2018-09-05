@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.el.BindingContext.Builder org.mule.runtime.api.el.BindingContextUtils::addFlowNameBindingsToBuilder(org.mule.runtime.api.component.location.ComponentLocation, org.mule.runtime.api.el.BindingContext.Builder)",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "BindingContextUtils",
+          "methodName": "addFlowNameBindingsToBuilder",
+          "elementKind": "method",
+          "justification": "Added for performance"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.util.List<V> org.mule.runtime.api.util.MultiMap<K, V>::removeAll(java.lang.Object)",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MultiMap",
+          "methodName": "removeAll",
+          "elementKind": "method",
+          "justification": "Added for performance"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.component.TypedComponentIdentifier.ComponentType.ROUTE",
           "package": "org.mule.runtime.api.component",
