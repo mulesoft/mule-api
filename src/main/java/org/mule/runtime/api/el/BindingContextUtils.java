@@ -13,6 +13,7 @@ import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
 
+import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
@@ -78,6 +79,7 @@ public class BindingContextUtils {
   private static final DataType DATA_TYPE_DATA_TYPE = fromType(DataType.class);
   private static final DataType ERROR_DATA_TYPE = fromType(Error.class);
   private static final DataType AUTH_DATA_TYPE = fromType(Authentication.class);
+  private static final DataType FLOW_DATA_TYPE = fromType(FlowVariablesAccessor.class);
 
   public final static TypedValue EMPTY_VARS = new TypedValue<>(emptyMap(), VARS_DATA_TYPE);
   private final static Supplier<TypedValue> EMPTY_VARS_SUPPLIER = () -> EMPTY_VARS;
@@ -158,6 +160,12 @@ public class BindingContextUtils {
     return contextBuilder;
   }
 
+  public static BindingContext.Builder addFlowNameBindingsToBuilder(ComponentLocation location,
+                                                                    BindingContext.Builder contextBuilder) {
+    return contextBuilder.addBinding(FLOW, () -> new TypedValue<>(new FlowVariablesAccessor(location.getRootContainerName()),
+                                                                  FLOW_DATA_TYPE));
+  }
+
   /**
    * Creates a new {@link BindingContext} that only contains the restricted bindings to be used for evaluating the target
    * expression.
@@ -171,6 +179,20 @@ public class BindingContextUtils {
         .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message), MESAGE_DATA_TYPE)))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
+  }
+
+  private static class FlowVariablesAccessor {
+
+    private String name;
+
+    public FlowVariablesAccessor(String name) {
+      this.name = name;
+    }
+
+    public String getName() {
+      return name;
+    }
+
   }
 
   private static class MessageWrapper implements Message {
