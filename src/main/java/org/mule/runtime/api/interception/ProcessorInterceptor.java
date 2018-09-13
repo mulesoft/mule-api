@@ -8,7 +8,6 @@
 package org.mule.runtime.api.interception;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
-import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
 import java.util.Optional;
@@ -48,9 +47,6 @@ public interface ProcessorInterceptor {
   /**
    * This method is called before the intercepted component has run. It may modify the event to be used down in the chain and the
    * component via the given {@code event}.
-   * <p>
-   * If the component referred by {@code location} is a source, this method is called after the flow has run, before sending the
-   * response through the intercepted source.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
    * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
@@ -81,8 +77,6 @@ public interface ProcessorInterceptor {
    * <li>The rest of the chain and the component have to be skipped.</li>
    * <li>To perform non-blocking operations in the interception.</li>
    * </ul>
-   * <p>
-   * If the component referred by {@code location} is a source, this method is not used.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
    * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
@@ -107,15 +101,11 @@ public interface ProcessorInterceptor {
    * method has been called.
    * <p>
    * If the intercepted component throws an {@link Exception}, the {@link #after(ComponentLocation, InterceptionEvent, Optional)
-   * after} methods will still be called, with the passed {@link InterceptionEvent} returning the appropriate {@link Error} on
-   * {@link InterceptionEvent#getError()}.
+   * after} methods will still be called, with the thrown exception provided in the {@code thrown} parameter.
    * <p>
    * If {@link #before(ComponentLocation, Map, InterceptionEvent) before} throws an {@link Exception}, the interception will be
    * called there, but the {@link #after(ComponentLocation, InterceptionEvent, Optional) afters} of the already called handlers
    * will still be called.
-   * <p>
-   * If the component referred by {@code location} is a source, this method is called after the response has been sent through the
-   * intercepted source.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
    * @param event the result of the component.
