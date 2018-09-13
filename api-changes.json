@@ -55,6 +55,7 @@
           "elementKind": "interface",
           "justification": "Completing expereince for interception API/debugging"
         }
+      ]
     }
   },
   "1.1.3": {
