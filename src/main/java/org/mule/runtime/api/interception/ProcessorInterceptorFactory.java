@@ -7,6 +7,8 @@
 
 package org.mule.runtime.api.interception;
 
+import static org.mule.runtime.api.component.TypedComponentIdentifier.ComponentType.SOURCE;
+
 import org.mule.runtime.api.artifact.Registry;
 import org.mule.runtime.api.component.location.ComponentLocation;
 
@@ -61,7 +63,9 @@ public interface ProcessorInterceptorFactory extends Supplier<ProcessorIntercept
    * @return {@code true} if this handler must be applied to the component with the provided parameters, {@code false} otherwise.
    */
   default boolean intercept(ComponentLocation location) {
-    return true;
+    // In order to maintain compatibility and not start intercepting sources on a runtime upgrade, which an interceptor may not be
+    // prepared to handle
+    return !SOURCE.equals(location.getComponentIdentifier().getType());
   }
 
   interface ProcessorInterceptorOrder extends Supplier<List<String>> {
