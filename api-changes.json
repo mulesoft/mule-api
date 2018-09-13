@@ -38,8 +38,23 @@
           "classSimpleName": "MetadataCache",
           "elementKind": "interface",
           "justification": "All content was already Serializable so we are declaring it so"
+        },
+        {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.interception.SourceInterceptor",
+          "package": "org.mule.runtime.api.interception",
+          "classSimpleName": "SourceInterceptor",
+          "elementKind": "interface",
+          "justification": "Completing expereince for interception API/debugging"
+        },
+        {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.interception.SourceInterceptorFactory",
+          "package": "org.mule.runtime.api.interception",
+          "classSimpleName": "SourceInterceptorFactory",
+          "elementKind": "interface",
+          "justification": "Completing expereince for interception API/debugging"
         }
-      ]
     }
   },
   "1.1.3": {
