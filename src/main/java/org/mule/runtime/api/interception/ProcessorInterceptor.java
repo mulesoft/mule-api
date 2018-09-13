@@ -8,7 +8,6 @@
 package org.mule.runtime.api.interception;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
-import org.mule.runtime.api.message.Error;
 
 import java.util.Map;
 import java.util.Optional;
@@ -102,8 +101,7 @@ public interface ProcessorInterceptor {
    * method has been called.
    * <p>
    * If the intercepted component throws an {@link Exception}, the {@link #after(ComponentLocation, InterceptionEvent, Optional)
-   * after} methods will still be called, with the passed {@link InterceptionEvent} returning the appropriate {@link Error} on
-   * {@link InterceptionEvent#getError()}.
+   * after} methods will still be called, with the thrown exception provided in the {@code thrown} parameter.
    * <p>
    * If {@link #before(ComponentLocation, Map, InterceptionEvent) before} throws an {@link Exception}, the interception will be
    * called there, but the {@link #after(ComponentLocation, InterceptionEvent, Optional) afters} of the already called handlers
