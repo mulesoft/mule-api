@@ -83,6 +83,24 @@
           "methodName": "removeAll",
           "elementKind": "method",
           "justification": "Added for performance"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.deployment.meta.MuleDeployableModel.MuleDeployableModelBuilder<T extends org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModelBuilder, M extends org.mule.runtime.api.deployment.meta.MuleDeployableModel>::setLogConfigFile(java.lang.String)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDeployableModelBuilder",
+          "methodName": "setLogConfigFile",
+          "elementKind": "method",
+          "justification": "Feature was in Mule 3.x but missing in Mule 4"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.lang.String org.mule.runtime.api.deployment.meta.MuleDeployableModel::getLogConfigFile()",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleDeployableModel",
+          "methodName": "getLogConfigFile",
+          "elementKind": "method",
+          "justification": "Feature was in Mule 3.x but missing in Mule 4"
         }
       ]
     }

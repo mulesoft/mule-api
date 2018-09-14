@@ -10,6 +10,7 @@ package org.mule.runtime.api.deployment.meta;
 import static java.util.Collections.unmodifiableSet;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.api.annotation.NoExtend;
 
 import java.util.ArrayList;
@@ -31,10 +32,11 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
   // this field must be true by default because it's the default value used when deserializing this class with no content.
   private Boolean redeploymentEnabled = true;
+  private String logConfigFile;
 
   /**
    * Creates a new model
-   * 
+   *
    * @param name name of the artifact
    * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
    * @param product the target product for this artifact
@@ -44,15 +46,18 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    * @param redeploymentEnabled indicates if the artifact can be redeployed or not
    * @param secureProperties the list of properties names that must be handled as secrets. Those properties names won't be shown
    *        in the runtime manager UI when looking at the deployment configuration of the artifact.
+   * @param logConfigFile the location of the file to use as the log4j configuration for this artifact instead of the default. May
+   *        be null.
    */
   protected MuleDeployableModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                 MuleArtifactLoaderDescriptor bundleDescriptorLoader, Set<String> configs,
-                                Optional<Boolean> redeploymentEnabled, List<String> secureProperties) {
+                                Optional<Boolean> redeploymentEnabled, List<String> secureProperties, String logConfigFile) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptorLoader);
     this.configs = configs;
     this.redeploymentEnabled = redeploymentEnabled.orElse(true);
     this.secureProperties = secureProperties;
+    this.logConfigFile = logConfigFile;
   }
 
   /**
@@ -78,6 +83,13 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   }
 
   /**
+   * @return the location of the file to use as the log4j configuration for this artifact instead of the default. May be null.
+   */
+  public String getLogConfigFile() {
+    return logConfigFile;
+  }
+
+  /**
    * A builder to create instances of {@link MuleDeployableModelBuilder}.
    *
    * @since 1.0
@@ -88,6 +100,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     private Set<String> configs = new HashSet<>();
     private Boolean redeploymentEnabled;
     private List<String> secureProperties = new ArrayList<>();
+    private String logConfigFile;
 
     /**
      * @param configs the set of artifact configuration files
@@ -99,14 +112,16 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     /**
      * @return a well formed {@link MuleDomainModel}
      */
+    @Override
     public final M build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
-      return doCreateModel(configs, redeploymentEnabled, secureProperties);
+      return doCreateModel(configs, redeploymentEnabled, secureProperties, logConfigFile);
     }
 
-    protected abstract M doCreateModel(Set<String> configs, Boolean redeploymentEnabled, List<String> secureProperties);
+    protected abstract M doCreateModel(Set<String> configs, Boolean redeploymentEnabled, List<String> secureProperties,
+                                       String logConfigFile);
 
     /**
      * @param redeploymentEnabled true if the artifact supports redeployment, false otherwise.
@@ -121,6 +136,13 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
      */
     public void setSecureProperties(List<String> secureProperties) {
       this.secureProperties = secureProperties;
+    }
+
+    /**
+     * @param logConfigFile the location of the file to use as the log4j configuration for this artifact instead of the default.
+     */
+    public void setLogConfigFile(String logConfigFile) {
+      this.logConfigFile = logConfigFile;
     }
   }
 }
