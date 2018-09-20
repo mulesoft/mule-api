@@ -37,8 +37,15 @@ public interface LocationPart {
   Optional<String> getFileName();
 
   /**
-   * @return the line number in the config file of the application where this component is defined, if it was defined in a config file.
+   * @return the line number in the config file of the application where this component is defined, if it was defined in a config
+   *         file.
    */
   Optional<Integer> getLineInFile();
+
+  /**
+   * @return the start column in the config file of the application where this component is defined, if it was defined in a config
+   *         file.
+   */
+  Optional<Integer> getStartColumn();
 
 }
