@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Provides information about the location of a component within an application.
+ * Provides information about the location of a component within an artifact.
  *
  * A component location describes where the component is defined in the configuration of the artifact.
  *
@@ -45,20 +45,26 @@ import java.util.Optional;
 public interface ComponentLocation {
 
   /**
-   * @return the unique absolute path of the component in the application.
+   * @return the unique absolute path of the component in the artifact.
    */
   String getLocation();
 
   /**
-   * @return the config file of the application where this component is defined, if it was defined in a config file.
+   * @return the config file of the artifact where this component is defined, if it was defined in a config file.
    */
   Optional<String> getFileName();
 
   /**
-   * @return the line number in the config file of the application where this component is defined, if it was defined in a config
+   * @return the line number in the config file of the artifact where this component is defined, if it was defined in a config
    *         file.
    */
   Optional<Integer> getLineInFile();
+
+  /**
+   * @return the start column number in the config file of the artifact where this component is defined, is it was defined in a
+   *         config file.
+   */
+  Optional<Integer> getStartColumn();
 
   /**
    * @return the list of parts for the location. The location starts with the global element containing the component and
