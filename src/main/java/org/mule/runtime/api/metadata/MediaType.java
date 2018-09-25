@@ -151,14 +151,7 @@ public final class MediaType implements Serializable {
     this.params = params;
     this.charset = charset;
 
-    final StringBuilder buffer = new StringBuilder();
-    params.forEach((k, v) -> {
-      buffer.append("; " + k + "=\"" + v + "\"");
-    });
-
-    this.rfcString = primaryType + "/" + subType
-        + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "")
-        + (!params.isEmpty() ? buffer.toString() : "");
+    this.rfcString = calculateRfcString();
   }
 
   /**
@@ -274,12 +267,16 @@ public final class MediaType implements Serializable {
       charset = Charset.forName(charsetStr);
     }
 
+    this.rfcString = calculateRfcString();
+  }
+
+  protected String calculateRfcString() {
     final StringBuilder buffer = new StringBuilder();
     params.forEach((k, v) -> {
       buffer.append("; " + k + "=\"" + v + "\"");
     });
 
-    this.rfcString = primaryType + "/" + subType
+    return primaryType + "/" + subType
         + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "")
         + (!params.isEmpty() ? buffer.toString() : "");
   }
