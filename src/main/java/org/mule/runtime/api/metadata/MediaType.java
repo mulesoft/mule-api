@@ -78,7 +78,7 @@ public final class MediaType implements Serializable {
   private final Map<String, String> params;
   private transient Charset charset;
 
-  private final String rfcString;
+  private transient String rfcString;
 
   /**
    * Parses a media type from its string representation.
@@ -273,6 +273,15 @@ public final class MediaType implements Serializable {
     if (charsetStr != null) {
       charset = Charset.forName(charsetStr);
     }
+
+    final StringBuilder buffer = new StringBuilder();
+    params.forEach((k, v) -> {
+      buffer.append("; " + k + "=\"" + v + "\"");
+    });
+
+    this.rfcString = primaryType + "/" + subType
+        + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "")
+        + (!params.isEmpty() ? buffer.toString() : "");
   }
 
   private void writeObject(ObjectOutputStream out) throws Exception {
