@@ -28,6 +28,8 @@ public abstract class AbstractComponent implements Component {
 
   private volatile Map<QName, Object> annotations = emptyMap();
 
+  private final Object locationInitLock = new Object();
+  private volatile ComponentLocation location;
   private final Object rootContainerLocationInitLock = new Object();
   private volatile Location rootContainerLocation;
 
@@ -48,7 +50,14 @@ public abstract class AbstractComponent implements Component {
 
   @Override
   public ComponentLocation getLocation() {
-    return (ComponentLocation) getAnnotation(LOCATION_KEY);
+    if (location == null) {
+      synchronized (locationInitLock) {
+        if (location == null) {
+          this.location = (ComponentLocation) getAnnotation(LOCATION_KEY);
+        }
+      }
+    }
+    return location;
   }
 
   @Override
