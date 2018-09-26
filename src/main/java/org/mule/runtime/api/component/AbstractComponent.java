@@ -28,10 +28,8 @@ public abstract class AbstractComponent implements Component {
 
   private volatile Map<QName, Object> annotations = emptyMap();
 
-  private final Object locationInitLock = new Object();
-  private volatile ComponentLocation location;
-  private final Object rootContainerLocationInitLock = new Object();
-  private volatile Location rootContainerLocation;
+  private ComponentLocation location;
+  private Location rootContainerLocation;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -46,33 +44,26 @@ public abstract class AbstractComponent implements Component {
   @Override
   public void setAnnotations(Map<QName, Object> newAnnotations) {
     annotations = new HashMap<>(newAnnotations);
+    location = (ComponentLocation) getAnnotation(LOCATION_KEY);
+    rootContainerLocation = initRootContainerName();
+  }
+
+  protected Location initRootContainerName() {
+    String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
+    if (rootContainerName == null && getLocation() != null) {
+      rootContainerName = getLocation().getRootContainerName();
+    }
+    return rootContainerName == null ? null : Location.builder().globalName(rootContainerName).build();
   }
 
   @Override
   public ComponentLocation getLocation() {
-    if (location == null) {
-      synchronized (locationInitLock) {
-        if (location == null) {
-          this.location = (ComponentLocation) getAnnotation(LOCATION_KEY);
-        }
-      }
-    }
     return location;
   }
 
   @Override
   public Location getRootContainerLocation() {
-    if (rootContainerLocation == null) {
-      synchronized (rootContainerLocationInitLock) {
-        if (rootContainerLocation == null) {
-          String rootContainerName = (String) getAnnotation(ROOT_CONTAINER_NAME_KEY);
-          if (rootContainerName == null) {
-            rootContainerName = getLocation().getRootContainerName();
-          }
-          this.rootContainerLocation = Location.builder().globalName(rootContainerName).build();
-        }
-      }
-    }
     return rootContainerLocation;
   }
+
 }
