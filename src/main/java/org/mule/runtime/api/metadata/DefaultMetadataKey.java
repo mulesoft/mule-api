@@ -26,6 +26,8 @@ import java.util.Set;
  */
 public final class DefaultMetadataKey implements MetadataKey {
 
+  private static final String LIST_SEPARATOR = ", ";
+
   private final String id;
   private final String displayName;
   private final String partName;
@@ -113,11 +115,12 @@ public final class DefaultMetadataKey implements MetadataKey {
     StringBuilder sb = new StringBuilder();
     return sb
         .append("{")
-        .append("id: ").append(id)
-        .append("displayName: ").append(displayName)
-        .append("partName: ").append(partName)
-        .append("childs: ").append(childs)
-        .append("properties: ").append(properties.values().stream().map(MetadataProperty::getName).collect(joining(", ")))
+        .append("id: ").append(id).append(LIST_SEPARATOR)
+        .append("displayName: ").append(displayName).append(LIST_SEPARATOR)
+        .append("partName: ").append(partName).append(LIST_SEPARATOR)
+        .append("childs: ").append(childs).append(LIST_SEPARATOR)
+        .append("properties: ")
+        .append(properties.values().stream().map(MetadataProperty::getName).collect(joining(LIST_SEPARATOR)))
         .append("}")
         .toString();
   }
