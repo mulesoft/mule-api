@@ -26,9 +26,18 @@ import java.util.function.Supplier;
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  private volatile boolean initialized = false;
-  private T value;
-  private Supplier<T> valueSupplier;
+  transient volatile boolean initialized = false;
+  transient T value;
+  transient Supplier<T> valueSupplier;
+
+  /**
+   * no-arg constructor used to allow serialization of child classes.
+   *
+   * @since 1.2.0
+   */
+  public LazyValue() {
+    this.valueSupplier = () -> null;
+  }
 
   /**
    * Creates a new instance which lazily obtains its value from the given {@code supplier}.
