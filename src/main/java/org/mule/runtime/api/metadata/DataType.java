@@ -14,6 +14,7 @@ import org.mule.runtime.api.el.ExpressionFunction;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.streaming.bytes.CursorStreamProvider;
 import org.mule.runtime.api.streaming.object.CursorIteratorProvider;
+import org.mule.runtime.api.util.MultiMap;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -38,7 +39,7 @@ public interface DataType extends Serializable {
 
   /**
    * Provides a builder to create {@link DataType} objects.
-   * 
+   *
    * @return a new {@link DataTypeBuilder}.
    */
   static DataTypeBuilder builder() {
@@ -58,7 +59,7 @@ public interface DataType extends Serializable {
   /**
    * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType}
    * and {@code encoding}.
-   * 
+   *
    * @param type the Java type to create {@link DataType} for.
    * @return a new {@link DataTypeBuilder} for the given {@code type}.
    */
@@ -138,6 +139,8 @@ public interface DataType extends Serializable {
   MapDataType MULE_MESSAGE_MAP =
       (MapDataType) getDefaultFactory().create().mapType(Map.class).keyType(String.class).valueType(Message.class)
           .valueMediaType(ANY).build();
+  MapDataType MULTI_MAP_STRING_STRING =
+      (MapDataType) getDefaultFactory().create().mapType(MultiMap.class).keyType(String.class).valueType(String.class).build();
 
   /**
    * The object type of the source object to transform.

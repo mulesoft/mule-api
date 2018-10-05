@@ -11,6 +11,10 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.stream.Collectors.toMap;
+import static org.mule.runtime.api.metadata.DataType.MULTI_MAP_STRING_STRING;
+
+import org.mule.runtime.api.el.DataTypeAware;
+import org.mule.runtime.api.metadata.DataType;
 
 import java.io.Serializable;
 import java.util.AbstractMap;
@@ -182,7 +186,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Removes all elements associated with the provided {@code key}.
-   * 
+   *
    * @param key the key of the mappings to remove.
    * @return all values that were associated to the provided {@code key}.
    */
@@ -278,6 +282,51 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
     ImmutableMultiMap(final Map<K, V> parametersMap) {
       super(parametersMap);
+    }
+  }
+
+  public static class StringMultiMap extends MultiMap<String, String> implements DataTypeAware {
+
+    private static final long serialVersionUID = 3153407829619876577L;
+
+    public StringMultiMap() {
+      super();
+    }
+
+    public StringMultiMap(final MultiMap<String, String> parametersMap) {
+      super(parametersMap);
+    }
+
+    public StringMultiMap(final Map<String, String> parametersMap) {
+      super(parametersMap);
+    }
+
+    @Override
+    public DataType getDataType() {
+      return MULTI_MAP_STRING_STRING;
+    }
+
+    @Override
+    public StringMultiMap toImmutableMultiMap() {
+      if (this instanceof ImmutableStringMultiMap) {
+        return this;
+      }
+      return new ImmutableStringMultiMap(this.paramsMap);
+    }
+
+  }
+
+  private static class ImmutableStringMultiMap extends StringMultiMap implements DataTypeAware {
+
+    private static final long serialVersionUID = -4581793201929981747L;
+
+    ImmutableStringMultiMap(final Map parametersMap) {
+      super(parametersMap);
+    }
+
+    @Override
+    public DataType getDataType() {
+      return MULTI_MAP_STRING_STRING;
     }
   }
 
