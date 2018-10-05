@@ -16,14 +16,23 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import org.mule.runtime.api.util.MultiMap.StringMultiMap;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
+@RunWith(Parameterized.class)
 public class MultiMapTestCase {
 
   protected static final String KEY_1 = "key1";
@@ -32,10 +41,26 @@ public class MultiMapTestCase {
   protected static final String VALUE_1 = "value1";
   protected static final String VALUE_2 = "value2";
 
-  protected MultiMap<String, String> multiMap = getMultiMap();
+  @Parameters
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][] {
+        {(Supplier<MultiMap<String, String>>) (() -> new MultiMap<>()),
+            (Function<MultiMap<String, String>, MultiMap<String, String>>) (m -> new MultiMap<>(m))},
+        {(Supplier<MultiMap<String, String>>) (() -> new StringMultiMap()),
+            (Function<MultiMap<String, String>, MultiMap<String, String>>) (m -> new StringMultiMap(m))}
+    });
+  }
 
-  protected MultiMap<String, String> getMultiMap() {
-    return new MultiMap<>();
+  private Supplier<MultiMap<String, String>> mapSupplier;
+  private Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier;
+
+  protected MultiMap<String, String> multiMap;
+
+  public MultiMapTestCase(Supplier<MultiMap<String, String>> mapSupplier,
+                          Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier) {
+    this.mapSupplier = mapSupplier;
+    this.multiMap = mapSupplier.get();
+    this.mapCopier = mapCopier;
   }
 
   @Test
@@ -151,7 +176,7 @@ public class MultiMapTestCase {
     multiMap.put(KEY_2, VALUE_1);
     multiMap.put(KEY_2, VALUE_2);
     assertThat(multiMap.entryList(), hasSize(4));
-    final MultiMap<String, String> map = new MultiMap<>(multiMap);
+    final MultiMap<String, String> map = mapCopier.apply(multiMap);
     map.remove(KEY_1);
     assertThat(multiMap.entryList(), hasSize(4));
     assertThat(map.entryList(), hasSize(2));
