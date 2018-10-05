@@ -22,7 +22,7 @@ import java.util.Map;
 public interface DataTypeAware {
 
   /**
-   * @return the {@link DataType} that bes represents this implementation's data.
+   * @return the {@link DataType} that best represents this implementation's data.
    */
   DataType getDataType();
 }
