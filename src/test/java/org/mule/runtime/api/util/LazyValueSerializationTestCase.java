@@ -27,7 +27,7 @@ public class LazyValueSerializationTestCase {
 
   @Test
   public void serializeUninitialized() throws Exception {
-    LazyValue<Integer> original = new SerializableLazyValue<>(() -> 1);
+    LazyValue<Integer> original = new SerializableLazyValue<Integer>(() -> 1);
     LazyValue processed = deserialize(serialize((Serializable) original));
     assertSerialization(original, processed);
   }
