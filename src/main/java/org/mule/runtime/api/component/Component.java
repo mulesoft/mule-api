@@ -24,6 +24,24 @@ import javax.xml.namespace.QName;
  */
 public interface Component {
 
+
+  /**
+   * Constants related to annotations placed over components in the configuration files.
+   */
+  interface Annotations {
+
+    /**
+     * Annotation placed over source code components so the user can provide a meaningful name.
+     */
+    QName NAME_ANNOTATION_KEY = new QName("http://www.mulesoft.org/schema/mule/documentation", "name");
+
+    /**
+     * Annotation that defines the source code for the element.
+     */
+    QName SOURCE_ELEMENT_ANNOTATION_KEY =
+        new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceElement");
+  }
+
   /**
    * Property name required by implementations of this class for holding annotations.
    */

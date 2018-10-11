@@ -6,10 +6,10 @@
  */
 package org.mule.runtime.api.util;
 
+import static org.mule.runtime.api.component.Component.Annotations.NAME_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.component.Component;
-
-import javax.xml.namespace.QName;
 
 /**
  * Provides a standard way to generate a log entry or message that references an element in a flow.
@@ -18,8 +18,6 @@ import javax.xml.namespace.QName;
  */
 @NoExtend
 public class ComponentLocationProvider {
-
-  protected static final QName NAME_ANNOTATION_KEY = new QName("http://www.mulesoft.org/schema/mule/documentation", "name");
 
   /**
    * Generates a representation of a flow element to be logged in a standard way.
@@ -77,10 +75,11 @@ public class ComponentLocationProvider {
 
   /**
    * @param component the component object from the configuration
-   * @return the source code associated to the component. It may be null if the component was not created from a configuration file.
+   * @return the source code associated to the component. It may be null if the component was not created from a configuration
+   *         file.
    */
   public static String getSourceCode(Component component) {
-    return (String) component.getAnnotation(new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceElement"));
+    return (String) component.getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
 
 }
