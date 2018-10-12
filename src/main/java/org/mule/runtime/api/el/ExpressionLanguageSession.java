@@ -19,7 +19,7 @@ import java.util.Iterator;
 public interface ExpressionLanguageSession extends AutoCloseable {
 
   /**
-   * Evaluates an expression according to a given {@link BindingContext} and the global one.
+   * Evaluates an expression according to the parameters used during construction and the global bindings.
    *
    * @param expression the EL expression
    * @return the result of the expression plus its type
@@ -28,8 +28,8 @@ public interface ExpressionLanguageSession extends AutoCloseable {
   TypedValue<?> evaluate(String expression) throws ExpressionExecutionException;
 
   /**
-   * Evaluates an expression according to a given {@link BindingContext}, the global one and the {@link DataType} of the expected
-   * result.
+   * Evaluates an expression according to the parameters used during construction, the global bindings and the {@link DataType} of
+   * the expected result.
    *
    * @param expression the EL expression
    * @param expectedOutputType the expected output type so that automatic conversion can be performed for the resulting value
