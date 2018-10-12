@@ -8,7 +8,6 @@ package org.mule.runtime.api.el;
 
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
-import org.mule.runtime.api.service.Service;
 
 import java.util.Iterator;
 
@@ -82,4 +81,41 @@ public interface ExpressionLanguage {
    * @return an iterator with the elements that were split
    */
   Iterator<TypedValue<?>> split(String expression, BindingContext context);
+
+  /**
+   * Returns an object that caches computation results. Provides better performance when evaluation multiple expressions on the
+   * same bindings.
+   * <p>
+   * Sessions obtained through this method have to be explicitly {@link ExpressionLanguageSession#close() closed}.
+   *
+   * @since 1.2
+   *
+   * @param context the current dynamic binding context to consider
+   * @return a session associated to the provided {@code context}
+   */
+  default ExpressionLanguageSession openSession(BindingContext context) {
+    ExpressionLanguage expressionLanguage = this;
+    return new ExpressionLanguageSession() {
+
+      @Override
+      public TypedValue<?> evaluate(String expression, DataType expectedOutputType) throws ExpressionExecutionException {
+        return expressionLanguage.evaluate(expression, expectedOutputType, context);
+      }
+
+      @Override
+      public TypedValue<?> evaluate(String expression) throws ExpressionExecutionException {
+        return expressionLanguage.evaluate(expression, context);
+      }
+
+      @Override
+      public Iterator<TypedValue<?>> split(String expression) {
+        return expressionLanguage.split(expression, context);
+      }
+
+      @Override
+      public void close() {
+        // Nothing to do
+      }
+    };
+  }
 }
