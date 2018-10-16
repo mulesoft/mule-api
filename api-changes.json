@@ -1,4 +1,27 @@
 {
+  "1.1.5": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.util.LazyValue<T>::<init>()",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "LazyValue",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "Empty constructor, needed for child classes serialization"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.util.SerializableLazyValue<T extends java.io.Serializable>",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "SerializableLazyValue",
+          "elementKind": "class",
+          "justification": "Has @Experimental annotation. Is not meant to be extended by the user"
+        }
+      ]
+    }
+  },
   "1.1.4": {
     "revapi": {
       "ignore": [

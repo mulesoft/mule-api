@@ -7,6 +7,8 @@
 package org.mule.runtime.api.util;
 
 
+import org.mule.api.annotation.Experimental;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,8 +23,9 @@ import java.util.function.Supplier;
  * While serializing, if the value was not yet resolved, it will be. As a consequence, {@link LazyValue#isComputed()} will
  * return different values before and after serialization.
  *
- * @since 1.2.0
+ * @since 1.1.5
  */
+@Experimental
 public class SerializableLazyValue<T extends Serializable> extends LazyValue<T> implements Serializable {
 
   private static final long serialVersionUID = 8803029647811486550L;
