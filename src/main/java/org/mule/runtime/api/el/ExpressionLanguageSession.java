@@ -52,21 +52,6 @@ public interface ExpressionLanguageSession extends AutoCloseable {
   TypedValue<?> evaluate(String expression, long timeout) throws ExpressionExecutionException;
 
   /**
-   * Evaluates an expression according to the parameters used during construction, the global bindings and the {@link DataType} of
-   * the expected result.
-   *
-   * @param expression the EL expression
-   * @param expectedOutputType the expected output type so that automatic conversion can be performed for the resulting value
-   *        type.
-   * @param timeout how long to wait for the expression to be evaluated, in milliseconds. If the evaluation takes more than this
-   *        time, an {@link ExpressionExecutionException} will be thrown.
-   * @return the result of the expression plus its type
-   * @throws ExpressionExecutionException or during transformation or during transformation
-   */
-  TypedValue<?> evaluate(String expression, DataType expectedOutputType, long timeout)
-      throws ExpressionExecutionException;
-
-  /**
    * Evaluates an expression according to a given {@link BindingContext} and the global one.
    * <p>
    * The evaluation of this script will do a best effort to avoid failing when the result value can not be represented in the
