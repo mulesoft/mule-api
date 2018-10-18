@@ -41,6 +41,30 @@ public interface ExpressionLanguageSession extends AutoCloseable {
       throws ExpressionExecutionException;
 
   /**
+   * Evaluates an expression according to the parameters used during construction and the global bindings.
+   *
+   * @param expression the EL expression
+   * @param timeout how long to wait for the expression to be evaluated, in milliseconds. If the evaluation takes more than this
+   *        time, an {@link ExpressionExecutionException} will be thrown.
+   * @return the result of the expression plus its type
+   * @throws ExpressionExecutionException when an error occurs during evaluation
+   */
+  TypedValue<?> evaluate(String expression, long timeout) throws ExpressionExecutionException;
+
+  /**
+   * Evaluates an expression according to a given {@link BindingContext} and the global one.
+   * <p>
+   * The evaluation of this script will do a best effort to avoid failing when the result value can not be represented in the
+   * corresponding format.
+   *
+   * @param expression the EL expression
+   * @return the result of the expression plus its type
+   * @throws ExpressionExecutionException when an error occurs during evaluation
+   */
+  TypedValue<?> evaluateLogExpression(String expression)
+      throws ExpressionExecutionException;
+
+  /**
    * Splits using the specified expression. The expression should return a collection of elements or an object. In case of the
    * object it will iterate through the entries
    *

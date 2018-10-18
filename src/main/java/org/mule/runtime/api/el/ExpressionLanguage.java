@@ -98,13 +98,23 @@ public interface ExpressionLanguage {
     return new ExpressionLanguageSession() {
 
       @Override
+      public TypedValue<?> evaluate(String expression) throws ExpressionExecutionException {
+        return expressionLanguage.evaluate(expression, context);
+      }
+
+      @Override
       public TypedValue<?> evaluate(String expression, DataType expectedOutputType) throws ExpressionExecutionException {
         return expressionLanguage.evaluate(expression, expectedOutputType, context);
       }
 
       @Override
-      public TypedValue<?> evaluate(String expression) throws ExpressionExecutionException {
+      public TypedValue<?> evaluate(String expression, long timeout) throws ExpressionExecutionException {
         return expressionLanguage.evaluate(expression, context);
+      }
+
+      @Override
+      public TypedValue<?> evaluateLogExpression(String expression) throws ExpressionExecutionException {
+        return expressionLanguage.evaluateLogExpression(expression, context);
       }
 
       @Override
