@@ -16,6 +16,7 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecatableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
@@ -36,7 +37,8 @@ import java.util.Optional;
  * @since 1.0.0
  */
 @NoImplement
-public interface ParameterModel extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel {
+public interface ParameterModel
+    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, DeprecatableModel {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with

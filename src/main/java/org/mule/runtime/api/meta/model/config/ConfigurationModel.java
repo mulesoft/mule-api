@@ -14,6 +14,7 @@ import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.HasExternalLibraries;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
+import org.mule.runtime.api.meta.model.deprecated.DeprecatableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
@@ -44,6 +45,6 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 @NoImplement
 public interface ConfigurationModel extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
     HasOperationModels, HasSourceModels, HasConnectionProviderModels, HasDisplayModel,
-    HasExternalLibraries, HasStereotypeModel {
+    HasExternalLibraries, HasStereotypeModel, DeprecatableModel {
 
 }

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.meta.model.deprecated.DeprecatableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
@@ -22,7 +23,8 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
  */
 @NoImplement
 public interface ComponentModel
-    extends ParameterizedModel, ComposableModel, HasStereotypeModel, EnrichableModel, HasDisplayModel, ThrowsErrors {
+    extends ParameterizedModel, ComposableModel, HasStereotypeModel, EnrichableModel, HasDisplayModel, ThrowsErrors,
+    DeprecatableModel {
 
   /**
    * Accepts a {@link ComponentModelVisitor}

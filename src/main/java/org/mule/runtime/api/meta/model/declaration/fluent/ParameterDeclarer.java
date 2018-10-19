@@ -11,6 +11,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
+import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
@@ -27,7 +28,8 @@ import java.util.List;
  */
 public class ParameterDeclarer<T extends ParameterDeclarer>
     implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>,
-    HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>> {
+    HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>>,
+    HasDeprecatedDeclarer<ParameterDeclarer<T>> {
 
   private final ParameterDeclaration declaration;
 
@@ -109,8 +111,8 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
-   * Marks the parameter as being a {@link ParameterModel#isOverrideFromConfig() config-override}.
-   * This also means this is an optional parameter.
+   * Marks the parameter as being a {@link ParameterModel#isOverrideFromConfig() config-override}. This also means this is an
+   * optional parameter.
    *
    * @return {@code this} declarer
    */
@@ -121,8 +123,8 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
-   * Marks the parameter as being a {@link ParameterModel#isComponentId() component ID}.
-   * This also means this is a {@code required} parameter where expressions are {@link ExpressionSupport::NOT_SUPPORTED}.
+   * Marks the parameter as being a {@link ParameterModel#isComponentId() component ID}. This also means this is a
+   * {@code required} parameter where expressions are {@link ExpressionSupport::NOT_SUPPORTED}.
    *
    * @return {@code this} declarer
    */
@@ -163,6 +165,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
 
   /**
    * Sets the given {@link List} of {@link StereotypeModel}
+   * 
    * @param stereotypeModels a {@link List} of {@link StereotypeModel}
    * @return {@code this} declarer
    */
@@ -178,5 +181,11 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    */
   public ParameterDeclaration getDeclaration() {
     return declaration;
+  }
+
+  @Override
+  public ParameterDeclarer<T> withDeprecation(DeprecatedModel deprecation) {
+    declaration.withDeprecation(deprecation);
+    return this;
   }
 }
