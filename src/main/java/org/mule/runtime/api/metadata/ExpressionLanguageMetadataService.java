@@ -19,6 +19,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This service provides metadata interaction with the underlying expression language.
+ *
+ * @since 1.2.0
+ */
 public interface ExpressionLanguageMetadataService extends Service {
 
   /**
