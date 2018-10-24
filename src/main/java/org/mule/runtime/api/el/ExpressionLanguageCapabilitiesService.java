@@ -9,6 +9,7 @@ package org.mule.runtime.api.el;
 import org.mule.runtime.api.service.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * This service allows to query the expression language for current supported capabilities.
@@ -22,6 +23,6 @@ public interface ExpressionLanguageCapabilitiesService extends Service {
    *
    * @return The list of supported data formats
    */
-  List<DataFormat> getSupportedDataFormats();
+  Set<DataFormat> getSupportedDataFormats();
 
 }
