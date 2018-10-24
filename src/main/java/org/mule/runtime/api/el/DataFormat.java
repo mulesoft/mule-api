@@ -6,73 +6,47 @@
  */
 package org.mule.runtime.api.el;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Describes a supported Data Format (XML, CSV, etc) by the current expression language
  *
  * @since 1.2.0
  */
-public class DataFormat {
-
-  private String defaultMimeType;
-  private List<String> supportedMimeTypes;
-  private List<DataFormatConfigOption> readerOptions;
-  private List<DataFormatConfigOption> writerOptions;
-  private boolean isBinaryFormat;
-
-
-  public DataFormat(String defaultMimeType, List<String> supportedMimeTypes, List<DataFormatConfigOption> readerOptions,
-                    List<DataFormatConfigOption> writerOptions, boolean isBinaryFormat) {
-    this.defaultMimeType = defaultMimeType;
-    this.supportedMimeTypes = supportedMimeTypes;
-    this.readerOptions = readerOptions;
-    this.writerOptions = writerOptions;
-    this.isBinaryFormat = isBinaryFormat;
-  }
+public interface DataFormat {
 
   /**
    * Returns the default mime type
    *
    * @return The mime type
    */
-  public String getDefaultMimeType() {
-    return defaultMimeType;
-  }
+  String getDefaultMimeType();
 
   /**
    * Returns the list of all supported mime types
    *
    * @return The list of supported mime types
    */
-  public List<String> getSupportedMimeTypes() {
-    return supportedMimeTypes;
-  }
+  Set<String> getSupportedMimeTypes();
 
   /**
    * Returns the list of all supported reader options
    *
    * @return The list of reader options
    */
-  public List<DataFormatConfigOption> getReaderOptions() {
-    return readerOptions;
-  }
+  Set<DataFormatConfigOption> getReaderOptions();
 
   /**
    * The list of all supported writer options
    *
    * @return The list of writer options
    */
-  public List<DataFormatConfigOption> getWriterOptions() {
-    return writerOptions;
-  }
+  Set<DataFormatConfigOption> getWriterOptions();
 
   /**
    * Returns true if this is data format is represented in a binary representation instead of text
    *
    * @return true if binary
    */
-  public boolean isBinaryFormat() {
-    return isBinaryFormat;
-  }
+  boolean isBinaryFormat();
 }

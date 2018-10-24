@@ -14,67 +14,42 @@ import java.util.Optional;
  *
  * @since 1.2.0
  */
-public class DataFormatConfigOption {
-
-  private String name;
-  private ConfigOptionType type;
-  private Object defaultValue;
-  private String description;
-  private List<Object> possibleValues;
-
-  public DataFormatConfigOption(String name, ConfigOptionType type, Object defaultValue, String description,
-                                List<Object> possibleValues) {
-    this.name = name;
-    this.type = type;
-    this.defaultValue = defaultValue;
-    this.description = description;
-    this.possibleValues = possibleValues;
-  }
+public interface DataFormatConfigOption {
 
   /**
    * Returns the name of the configuration option
    *
    * @return The name
    */
-  public String getName() {
-    return name;
-  }
+  String getName();
 
   /**
    * Returns the type of this option.
    *
    * @return The type of this option
    */
-  public ConfigOptionType getType() {
-    return type;
-  }
+  ConfigOptionType getType();
 
   /**
    * Returns the default value is any
    *
    * @return The default value
    */
-  public Optional<Object> getDefaultValue() {
-    return Optional.ofNullable(defaultValue);
-  }
+  Optional<Object> getDefaultValue();
 
   /**
    * Retursn the description of this option
    *
    * @return The description
    */
-  public String getDescription() {
-    return description;
-  }
+  String getDescription();
 
   /**
    * The list of possible values for this option. If the list is empty means that no constrain was set.
    *
    * @return The list of possible values
    */
-  public List<Object> getPossibleValues() {
-    return possibleValues;
-  }
+  List<Object> getPossibleValues();
 
   /**
    * The list of available configuration types.
