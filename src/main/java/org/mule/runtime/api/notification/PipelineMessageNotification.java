@@ -27,7 +27,10 @@ public final class PipelineMessageNotification extends EnrichedServerNotificatio
   }
 
   public PipelineMessageNotification(EnrichedNotificationInfo notificationInfo, String name, int action) {
-    super(notificationInfo, action, notificationInfo.getComponent().getLocation());
+    super(notificationInfo, action,
+          notificationInfo.getComponent().getRootContainerLocation() != null
+              ? notificationInfo.getComponent().getRootContainerLocation().getGlobalName()
+              : null);
     this.resourceIdentifier = name;
   }
 
