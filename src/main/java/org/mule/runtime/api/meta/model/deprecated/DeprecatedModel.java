@@ -8,16 +8,14 @@ package org.mule.runtime.api.meta.model.deprecated;
 
 
 /**
- * ADD JAVA DOC
+ * A model that fully describes the deprecation of a part of the extension model that is a {@link DeprecatableModel}.
  * 
  * @since 1.2
  */
 public interface DeprecatedModel {
 
   /**
-   * ADD JAVA DOC
-   * 
-   * @return
+   * @return a {@link String} that describes why something was deprecated, what can be used as substitute, or both.
    */
   String getMessage();
 

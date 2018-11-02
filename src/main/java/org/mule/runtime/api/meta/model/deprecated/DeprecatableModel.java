@@ -9,23 +9,20 @@ package org.mule.runtime.api.meta.model.deprecated;
 import java.util.Optional;
 
 /**
- * ADD JAVA DOC
+ * Interface that indicates that this part of an extension can be deprecated
  * 
  * @since 1.2
  */
 public interface DeprecatableModel {
 
   /**
-   * ADD JAVA DOC
-   * 
-   * @return
+   * @return an {@link Optional} of a {@link DeprecatedModel} that fully describes the deprecation of a {@link DeprecatableModel},
+   *         if the model is not deprecated, it will return {@link Optional#empty()}.
    */
   Optional<DeprecatedModel> getDeprecatedModel();
 
   /**
-   * ADD JAVA DOC
-   * 
-   * @return
+   * @return whether a part of the extension is deprecated or not.
    */
   default boolean isDeprecated() {
     return getDeprecatedModel().isPresent();
