@@ -271,14 +271,31 @@ public final class MediaType implements Serializable {
   }
 
   private String calculateRfcString() {
-    final StringBuilder buffer = new StringBuilder();
-    params.forEach((k, v) -> {
-      buffer.append("; " + k + "=\"" + v + "\"");
-    });
+    String typeSubtype = primaryType + "/" + subType;
 
-    return primaryType + "/" + subType
-        + (getCharset().isPresent() ? "; charset=" + getCharset().get().name() : "")
-        + (!params.isEmpty() ? buffer.toString() : "");
+    if (charset == null && params.isEmpty()) {
+      return typeSubtype;
+    }
+
+    if (params.isEmpty()) {
+      return typeSubtype + "; charset=" + charset.name();
+    }
+
+    final StringBuilder buffer = new StringBuilder();
+
+    buffer.append(typeSubtype);
+
+    if (charset != null) {
+      buffer.append("; charset=" + charset.name());
+    }
+
+    if (!params.isEmpty()) {
+      params.forEach((k, v) -> {
+        buffer.append("; ").append(k).append("=\"").append(v).append("\"");
+      });
+    }
+
+    return buffer.toString();
   }
 
   private void writeObject(ObjectOutputStream out) throws Exception {
