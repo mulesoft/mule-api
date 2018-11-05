@@ -72,6 +72,8 @@ public abstract class MuleException extends Exception {
     String p = System.getProperty(MULE_VERBOSE_EXCEPTIONS);
     if (p != null) {
       verboseExceptions = Boolean.parseBoolean(p);
+    } else {
+      verboseExceptions = false;
     }
   }
 
