@@ -13,19 +13,19 @@ import java.util.Optional;
  * 
  * @since 1.2
  */
-public interface DeprecatableModel {
+public interface Deprecable {
 
   /**
-   * @return an {@link Optional} of a {@link DeprecatedModel} that fully describes the deprecation of a {@link DeprecatableModel},
+   * @return an {@link Optional} of a {@link DeprecationModel} that fully describes the deprecation of a {@link Deprecable},
    *         if the model is not deprecated, it will return {@link Optional#empty()}.
    */
-  Optional<DeprecatedModel> getDeprecatedModel();
+  Optional<DeprecationModel> getDeprecationModel();
 
   /**
    * @return whether a part of the extension is deprecated or not.
    */
   default boolean isDeprecated() {
-    return getDeprecatedModel().isPresent();
+    return getDeprecationModel().isPresent();
   }
 
 

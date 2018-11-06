@@ -14,7 +14,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
@@ -46,7 +46,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   private ParameterRole parameterRole = BEHAVIOUR;
   private ValueProviderModel valueProviderModel;
   private List<StereotypeModel> allowedStereotypeModels = new ArrayList<>();
-  private DeprecatedModel deprecation;
+  private DeprecationModel deprecation;
 
   /**
    * {@inheritDoc}
@@ -156,14 +156,14 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   /**
    * {@inheritDoc}
    */
-  public Optional<DeprecatedModel> getDeprecation() {
+  public Optional<DeprecationModel> getDeprecation() {
     return ofNullable(deprecation);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void withDeprecation(DeprecatedModel deprecation) {
+  public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
   }
 }

@@ -15,7 +15,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
@@ -357,7 +357,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    * {@inheritDoc}
    */
   @Override
-  public ExtensionDeclarer withDeprecation(DeprecatedModel deprecation) {
+  public ExtensionDeclarer withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
   }

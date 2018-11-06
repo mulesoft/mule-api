@@ -11,7 +11,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
@@ -184,7 +184,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   @Override
-  public ParameterDeclarer<T> withDeprecation(DeprecatedModel deprecation) {
+  public ParameterDeclarer<T> withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
   }

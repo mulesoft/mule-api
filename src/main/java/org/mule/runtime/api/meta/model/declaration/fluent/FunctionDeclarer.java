@@ -8,7 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.ModelProperty;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 
 /**
  * Allows configuring a {@link FunctionDeclaration} through a fluent API
@@ -54,7 +54,7 @@ public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, Fu
   }
 
   @Override
-  public FunctionDeclarer withDeprecation(DeprecatedModel deprecation) {
+  public FunctionDeclarer withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
   }

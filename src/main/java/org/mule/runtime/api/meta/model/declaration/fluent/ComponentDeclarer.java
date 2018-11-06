@@ -7,7 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
@@ -115,7 +115,7 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
    * {@inheritDoc}
    */
   @Override
-  public T withDeprecation(DeprecatedModel deprecation) {
+  public T withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return (T) this;
   }

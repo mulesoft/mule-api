@@ -23,7 +23,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.XmlDslModel;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
@@ -56,7 +56,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private Category category;
   private XmlDslModel xmlDslModel;
   private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
-  private DeprecatedModel deprecation;
+  private DeprecationModel deprecation;
 
   /**
    * Creates a new instance
@@ -392,14 +392,14 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     return notificationModels;
   }
 
-  public Optional<DeprecatedModel> getDeprecation() {
+  public Optional<DeprecationModel> getDeprecation() {
     return Optional.ofNullable(deprecation);
   }
 
   /**
    * {@inheritDoc}
    */
-  public void withDeprecation(DeprecatedModel deprecation) {
+  public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
   }
 }

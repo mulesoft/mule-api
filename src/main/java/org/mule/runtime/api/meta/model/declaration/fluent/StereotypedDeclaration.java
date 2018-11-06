@@ -6,13 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import static java.util.Optional.ofNullable;
+
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 /**
  * Implementation of {@link NamedDeclaration} which adds a {@link List} of {@link ParameterDeclaration}
@@ -24,7 +24,7 @@ public abstract class StereotypedDeclaration<T extends StereotypedDeclaration> e
     implements WithStereotypesDeclaration, WithDeprecatedDeclaration {
 
   private StereotypeModel stereotype;
-  private DeprecatedModel deprecation;
+  private DeprecationModel deprecation;
 
   /**
    * {@inheritDoc}
@@ -43,12 +43,12 @@ public abstract class StereotypedDeclaration<T extends StereotypedDeclaration> e
   }
 
   @Override
-  public Optional<DeprecatedModel> getDeprecation() {
+  public Optional<DeprecationModel> getDeprecation() {
     return ofNullable(deprecation);
   }
 
   @Override
-  public void withDeprecation(DeprecatedModel deprecation) {
+  public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
   }
 }

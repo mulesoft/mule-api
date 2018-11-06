@@ -6,12 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+
+import static java.util.Optional.ofNullable;
+
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 /**
  * A declaration object for a {@link OperationModel}. It contains raw, unvalidated data which is used to declare the structure of
@@ -22,7 +23,7 @@ import static java.util.Optional.ofNullable;
 public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclaration> implements WithDeprecatedDeclaration {
 
   private OutputDeclaration output;
-  private DeprecatedModel deprecation;
+  private DeprecationModel deprecation;
 
   /**
    * {@inheritDoc}
@@ -40,12 +41,12 @@ public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclar
   }
 
   @Override
-  public Optional<DeprecatedModel> getDeprecation() {
+  public Optional<DeprecationModel> getDeprecation() {
     return ofNullable(deprecation);
   }
 
   @Override
-  public void withDeprecation(DeprecatedModel deprecation) {
+  public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
   }
 }

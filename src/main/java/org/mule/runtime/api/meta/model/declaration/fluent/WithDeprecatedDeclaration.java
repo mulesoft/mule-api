@@ -8,12 +8,12 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 
 import org.mule.api.annotation.NoImplement;
-import org.mule.runtime.api.meta.model.deprecated.DeprecatedModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 
 import java.util.Optional;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link DeprecatedModel} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link DeprecationModel} objects
  *
  * @since 1.2
  */
@@ -21,13 +21,13 @@ import java.util.Optional;
 public interface WithDeprecatedDeclaration {
 
   /**
-   * @return {@code this} components {@link DeprecatedModel}
+   * @return {@code this} components {@link DeprecationModel}
    */
-  Optional<DeprecatedModel> getDeprecation();
+  Optional<DeprecationModel> getDeprecation();
 
   /**
-   * @param deprecation {@code this} components {@link DeprecatedModel}
+   * @param deprecation {@code this} components {@link DeprecationModel}
    */
-  void withDeprecation(DeprecatedModel deprecation);
+  void withDeprecation(DeprecationModel deprecation);
 
 }
