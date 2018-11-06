@@ -117,13 +117,15 @@
         <hamcrestVersion>1.3</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.0.1</javaFormatter.plugin.version>
+        <javax.activation.version>1.2.0</javax.activation.version>
         <javax.inject.version>1</javax.inject.version>
+        <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <guavaVersion>25.1-jre</guavaVersion>
         <commonsLangVersion>3.7</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
-        <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
         <allureJunitVersion>2.6.0</allureJunitVersion>
         <allureReportVersion>2.6.0</allureReportVersion>
@@ -186,6 +188,12 @@
               <version>${guavaVersion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>${javax.activation.version}</version>
+        </dependency>
+
         <!-- test dependencies -->
         <dependency>
             <groupId>org.hamcrest</groupId>
@@ -204,6 +212,12 @@
                     <artifactId>hamcrest-core</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${javax.jaxb-api.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
