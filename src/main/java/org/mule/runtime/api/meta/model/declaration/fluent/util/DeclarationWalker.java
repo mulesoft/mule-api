@@ -8,9 +8,21 @@ package org.mule.runtime.api.meta.model.declaration.fluent.util;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import org.mule.runtime.api.meta.model.declaration.fluent.*;
-import org.mule.runtime.api.meta.model.function.FunctionModel;
-import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConnectedDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ParameterDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ParameterGroupDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.WithConstructsDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.WithFunctionsDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.WithOperationsDeclaration;
+import org.mule.runtime.api.meta.model.declaration.fluent.WithSourcesDeclaration;
 
 /**
  * Navigates a {@link ExtensionDeclaration} and invokes methods when important model components are found.

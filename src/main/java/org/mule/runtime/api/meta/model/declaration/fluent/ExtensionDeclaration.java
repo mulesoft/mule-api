@@ -11,6 +11,7 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
@@ -27,7 +28,17 @@ import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
+
 
 /**
  * A declaration object for a {@link ExtensionModel}. It contains raw, unvalidated
@@ -393,7 +404,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   public Optional<DeprecationModel> getDeprecation() {
-    return Optional.ofNullable(deprecation);
+    return ofNullable(deprecation);
   }
 
   /**
