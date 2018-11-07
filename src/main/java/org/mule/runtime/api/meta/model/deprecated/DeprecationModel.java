@@ -29,6 +29,6 @@ public interface DeprecationModel {
   /**
    * @return a {@link String} which is the version of the extension in which the annotated member will be removed or was removed.
    */
-  Optional<String> getRemovedIn();
+  Optional<String> getToRemoveIn();
 
 }
