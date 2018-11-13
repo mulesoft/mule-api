@@ -13,10 +13,10 @@ import java.util.Optional;
  * 
  * @since 1.2
  */
-public interface Deprecable {
+public interface DeprecableModel {
 
   /**
-   * @return an {@link Optional} of a {@link DeprecationModel} that fully describes the deprecation of a {@link Deprecable},
+   * @return an {@link Optional} of a {@link DeprecationModel} that fully describes the deprecation of a {@link DeprecableModel},
    *         if the model is not deprecated, it will return {@link Optional#empty()}.
    */
   Optional<DeprecationModel> getDeprecationModel();

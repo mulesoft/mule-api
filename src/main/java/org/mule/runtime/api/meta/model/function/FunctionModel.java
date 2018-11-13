@@ -12,7 +12,7 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.OutputModel;
-import org.mule.runtime.api.meta.model.deprecated.Deprecable;
+import org.mule.runtime.api.meta.model.deprecated.DeprecableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 
@@ -29,7 +29,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
  * @since 1.0
  */
 @NoImplement
-public interface FunctionModel extends ParameterizedModel, EnrichableModel, HasDisplayModel, Deprecable {
+public interface FunctionModel extends ParameterizedModel, EnrichableModel, HasDisplayModel, DeprecableModel {
 
   /**
    * Returns a {@link MetadataType} for the value that this component sets

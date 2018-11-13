@@ -10,7 +10,7 @@ package org.mule.runtime.api.meta.model.deprecated;
 import java.util.Optional;
 
 /**
- * A model that fully describes the deprecation of a part of the extension model that is a {@link Deprecable}.
+ * A model that fully describes the deprecation of a part of the extension model that is a {@link DeprecableModel}.
  * 
  * @since 1.2
  */
