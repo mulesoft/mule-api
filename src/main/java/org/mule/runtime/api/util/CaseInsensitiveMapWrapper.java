@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
@@ -19,7 +20,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 /**
  * Represents a Map from String to {@link T} where the key's case is not taken into account when looking for it, but remembered
@@ -165,6 +165,9 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
 
     @Override
     public boolean equals(Object obj) {
+      if (obj == this) {
+        return true;
+      }
       return (obj instanceof CaseInsensitiveMapKey) && keyLowerCase.equals(((CaseInsensitiveMapKey) obj).keyLowerCase);
     }
   }
@@ -326,7 +329,7 @@ public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializabl
    * @return case-sensitive map
    */
   public Map<String, T> asCaseSensitiveMap() {
-    return baseMap.entrySet().stream().collect(Collectors.toMap(entry -> entry.getKey().getKey(), entry -> entry.getValue()));
+    return baseMap.entrySet().stream().collect(toMap(entry -> entry.getKey().getKey(), entry -> entry.getValue()));
   }
 
 }
