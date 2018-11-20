@@ -15,6 +15,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.XmlDslModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
@@ -30,7 +31,7 @@ import java.util.List;
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
-    HasConstructDeclarer<ExtensionDeclarer> {
+    HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
@@ -350,5 +351,14 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public void withFunction(FunctionDeclarer declarer) {
     declaration.addFunction(declarer.getDeclaration());
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ExtensionDeclarer withDeprecation(DeprecationModel deprecation) {
+    declaration.withDeprecation(deprecation);
+    return this;
   }
 }

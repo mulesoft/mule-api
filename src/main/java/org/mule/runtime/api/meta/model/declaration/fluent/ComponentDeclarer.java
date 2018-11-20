@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
@@ -18,7 +19,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
     implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer,
-    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T> {
+    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T> {
 
   /**
    * Creates a new instance
@@ -110,4 +111,12 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
     return (T) this;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public T withDeprecation(DeprecationModel deprecation) {
+    declaration.withDeprecation(deprecation);
+    return (T) this;
+  }
 }

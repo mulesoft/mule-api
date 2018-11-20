@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
@@ -13,6 +14,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
@@ -20,16 +22,18 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
- * A declaration object for a {@link ParameterModel}. It contains raw,
- * unvalidated data which is used to declare the structure of a {@link ParameterModel}.
+ * A declaration object for a {@link ParameterModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link ParameterModel}.
  * <p>
  * By default, {@link #getExpressionSupport()} ()} returns {@link ExpressionSupport#SUPPORTED}.
  *
  * @since 1.0
  */
-public class ParameterDeclaration extends AbstractParameterDeclaration<ParameterDeclaration> implements TypedDeclaration {
+public class ParameterDeclaration extends AbstractParameterDeclaration<ParameterDeclaration>
+    implements TypedDeclaration, WithDeprecatedDeclaration {
 
   private boolean required;
   private boolean isConfigOverride;
@@ -42,6 +46,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   private ParameterRole parameterRole = BEHAVIOUR;
   private ValueProviderModel valueProviderModel;
   private List<StereotypeModel> allowedStereotypeModels = new ArrayList<>();
+  private DeprecationModel deprecation;
 
   /**
    * {@inheritDoc}
@@ -148,4 +153,17 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
     isComponentId = componentId;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public Optional<DeprecationModel> getDeprecation() {
+    return ofNullable(deprecation);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void withDeprecation(DeprecationModel deprecation) {
+    this.deprecation = deprecation;
+  }
 }

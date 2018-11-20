@@ -11,6 +11,7 @@ import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
@@ -23,6 +24,7 @@ import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.XmlDslModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
@@ -33,8 +35,10 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
+
 
 /**
  * A declaration object for a {@link ExtensionModel}. It contains raw, unvalidated
@@ -45,7 +49,7 @@ import java.util.TreeSet;
 public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     implements ConnectedDeclaration<ExtensionDeclaration>, WithSourcesDeclaration<ExtensionDeclaration>,
     WithOperationsDeclaration<ExtensionDeclaration>, WithFunctionsDeclaration<ExtensionDeclaration>,
-    WithConstructsDeclaration<ExtensionDeclaration> {
+    WithConstructsDeclaration<ExtensionDeclaration>, WithDeprecatedDeclaration {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
@@ -63,6 +67,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private Category category;
   private XmlDslModel xmlDslModel;
   private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
+  private DeprecationModel deprecation;
 
   /**
    * Creates a new instance
@@ -396,5 +401,16 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
 
   public Set<NotificationModel> getNotificationModels() {
     return notificationModels;
+  }
+
+  public Optional<DeprecationModel> getDeprecation() {
+    return ofNullable(deprecation);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public void withDeprecation(DeprecationModel deprecation) {
+    this.deprecation = deprecation;
   }
 }
