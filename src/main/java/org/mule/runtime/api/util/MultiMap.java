@@ -216,7 +216,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @since 1.1.1
    */
   public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
-    aMultiMap.keySet().forEach(key -> put(key, (Collection<V>) aMultiMap.paramsMap.get(key)));
+    Set<? extends K> keySet = aMultiMap.keySet();
+    for (K key : keySet) {
+      put(key, (Collection<V>) aMultiMap.paramsMap.get(key));
+    }
   }
 
   @Override

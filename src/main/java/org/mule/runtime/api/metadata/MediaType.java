@@ -11,6 +11,9 @@ import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
 import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -27,8 +30,7 @@ import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
 /**
- * Immutable representation of Media Types as defined in
- * <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
+ * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
  * <p>
  * Also provides constants for common media types used in Mule.
  *
@@ -88,37 +90,38 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    MediaType value = cache.get(mediaType);
-
-    if (value == null) {
-      try {
-        MimeType mimeType = new MimeType(mediaType);
-
-        String charsetParam = mimeType.getParameter(CHARSET_PARAM);
-        Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
-
-        Map<String, String> params = new HashMap<>();
-        for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
-          if (!CHARSET_PARAM.equals(paramName)) {
-            params.put(paramName, mimeType.getParameter(paramName));
-          }
-        }
-
-        value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
-
-        // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
-        // in caching them).
-        // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
-        // determine if the value is cached or not.
-        if (params.isEmpty()) {
-          cache.putIfAbsent(mediaType, value);
-        }
-      } catch (MimeTypeParseException e) {
-        throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
-      }
+    MediaType cachedMediaType = cache.get(mediaType);
+    if (cachedMediaType != null) {
+      return cachedMediaType;
     }
 
-    return value;
+    try {
+      MimeType mimeType = new MimeType(mediaType);
+
+      String charsetParam = mimeType.getParameter(CHARSET_PARAM);
+      Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+
+      Map<String, String> params = new HashMap<>();
+      for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
+        if (!CHARSET_PARAM.equals(paramName)) {
+          params.put(paramName, mimeType.getParameter(paramName));
+        }
+      }
+
+      MediaType value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
+
+      // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
+      // in caching them).
+      // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
+      // determine if the value is cached or not.
+      if (params.isEmpty()) {
+        cache.putIfAbsent(mediaType, value);
+      }
+
+      return value;
+    } catch (MimeTypeParseException e) {
+      throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
+    }
   }
 
   /**
@@ -154,20 +157,26 @@ public final class MediaType implements Serializable {
     this.rfcString = calculateRfcString();
   }
 
+  private transient Cache<Charset, MediaType> withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
+
   /**
-   * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the
-   * {@code charset} with the value passed.
+   * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the {@code charset} with
+   * the value passed.
    *
    * @param charset the new charset to use or {@code null} to clear the current {@code charset}.
    * @return new immutable {@link MediaType} instance.
    */
   public MediaType withCharset(Charset charset) {
-    return new MediaType(this.getPrimaryType(), this.getSubType(), params, charset);
+    if (charset == null) {
+      return new MediaType(this.getPrimaryType(), this.getSubType(), params, null);
+    } else {
+      return withCharsetCache.get(charset, c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c));
+    }
   }
 
   /**
-   * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but removing all the
-   * parameters (like the {@code charset})
+   * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but removing all the parameters (like
+   * the {@code charset})
    *
    * @return new immutable {@link MediaType} instance.
    */
@@ -192,8 +201,7 @@ public final class MediaType implements Serializable {
   /**
    * @return The value of the {@code charset} parameter.
    *         <p>
-   *         This may be not set, in which case it is up to the caller to determine the
-   *         appropriate charset to use.
+   *         This may be not set, in which case it is up to the caller to determine the appropriate charset to use.
    */
   public Optional<Charset> getCharset() {
     return ofNullable(charset);
@@ -266,6 +274,8 @@ public final class MediaType implements Serializable {
     if (charsetStr != null) {
       charset = Charset.forName(charsetStr);
     }
+
+    this.withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
 
     this.rfcString = calculateRfcString();
   }
