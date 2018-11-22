@@ -94,25 +94,34 @@ public final class MediaType implements Serializable {
     if (cachedMediaType != null) {
       return cachedMediaType;
     }
-    return cache.computeIfAbsent(mediaType, mt -> {
-      try {
-        MimeType mimeType = new MimeType(mt);
 
-        String charsetParam = mimeType.getParameter(CHARSET_PARAM);
-        Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+    try {
+      MimeType mimeType = new MimeType(mediaType);
 
-        Map<String, String> params = new HashMap<>();
-        for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
-          if (!CHARSET_PARAM.equals(paramName)) {
-            params.put(paramName, mimeType.getParameter(paramName));
-          }
+      String charsetParam = mimeType.getParameter(CHARSET_PARAM);
+      Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
+
+      Map<String, String> params = new HashMap<>();
+      for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
+        if (!CHARSET_PARAM.equals(paramName)) {
+          params.put(paramName, mimeType.getParameter(paramName));
         }
-
-        return new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
-      } catch (MimeTypeParseException e) {
-        throw new IllegalArgumentException("MediaType cannot be parsed: " + mt, e);
       }
-    });
+
+      MediaType value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
+
+      // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
+      // in caching them).
+      // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
+      // determine if the value is cached or not.
+      if (params.isEmpty()) {
+        cache.putIfAbsent(mediaType, value);
+      }
+
+      return value;
+    } catch (MimeTypeParseException e) {
+      throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
+    }
   }
 
   /**
