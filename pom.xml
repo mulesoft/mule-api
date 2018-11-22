@@ -121,6 +121,7 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <guavaVersion>25.1-jre</guavaVersion>
+        <caffeineVersion>2.6.2</caffeineVersion>
         <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
         <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
@@ -173,6 +174,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
               <version>${guavaVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeineVersion}</version>
         </dependency>
 
         <!-- test dependencies -->
