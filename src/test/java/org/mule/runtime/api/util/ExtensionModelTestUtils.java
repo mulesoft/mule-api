@@ -6,13 +6,13 @@
  */
 package org.mule.runtime.api.util;
 
-import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.lenient;
 import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.construct.ConstructModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
-import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 
 import org.mockito.Mockito;
 
@@ -31,7 +31,7 @@ public final class ExtensionModelTestUtils {
    */
   public static void visitableMock(ComponentModel... components) {
     for (ComponentModel component : components) {
-      doAnswer(invocation -> {
+      lenient().doAnswer(invocation -> {
         ComponentModelVisitor visitor = (ComponentModelVisitor) invocation.getArguments()[0];
         if (component instanceof ConstructModel) {
           visitor.visit((ConstructModel) component);

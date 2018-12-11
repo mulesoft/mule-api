@@ -10,7 +10,6 @@ import org.mule.api.annotation.NoImplement;
 
 /**
  * Provides universal access for evaluating mule expressions #[].
- * And delegates the execution to the {@link DefaultExpressionLanguageFactoryService}
  *
  * @since 1.0
  */
