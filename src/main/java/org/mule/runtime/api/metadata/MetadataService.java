@@ -35,6 +35,11 @@ public interface MetadataService {
   String METADATA_SERVICE_KEY = "_muleMetadataService";
 
   /**
+   * Key under which the non lazy {@link MetadataService} can be found in the {@link org.mule.runtime.api.artifact.Registry}
+   */
+  String NON_LAZY_METADATA_SERVICE_KEY = "_muleNonLazyMetadataService";
+
+  /**
    * Returns the list of types that can be described by the {@link TypeKeysResolver} associated to the {@link MetadataKeyProvider}
    * Component identified by the {@link Location}.
    *
