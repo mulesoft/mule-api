@@ -59,7 +59,17 @@
           "classSimpleName": "MetadataCache",
           "elementKind": "interface",
           "justification": "All content was already Serializable so we are declaring it so"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.el.ExpressionLanguage org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService::create(org.mule.runtime.api.el.ExpressionLanguageConfiguration)",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "methodName": "create",
+          "elementKind": "method",
+          "justification": "The expression language implementation should match the Mule Runtime requirements."
         }
+
       ]
     }
   },
