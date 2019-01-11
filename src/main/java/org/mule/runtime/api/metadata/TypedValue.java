@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import static java.nio.charset.Charset.defaultCharset;
 import static org.mule.runtime.api.metadata.DataType.fromObject;
+
 import org.mule.runtime.api.util.LazyLong;
 import org.mule.runtime.internal.util.StringByteSizeCalculator;
 
@@ -61,7 +62,7 @@ public final class TypedValue<T> implements Serializable {
       return (TypedValue<T>) value;
     }
 
-    return new TypedValue<>(value, DataType.fromObject(value));
+    return new TypedValue<>(value, value != null ? DataType.fromObject(value) : DataType.OBJECT);
   }
 
   private final T value;
