@@ -20,4 +20,13 @@ public interface DefaultExpressionLanguageFactoryService extends Service {
    * @return The expression language
    */
   ExpressionLanguage create();
+
+  /**
+   * Create the expression language considering a specific configuration
+   *
+   * @param configuration the {@link ExpressionLanguageConfiguration} to use
+   * @return The expression language
+   * @since 1.2
+   */
+  ExpressionLanguage create(ExpressionLanguageConfiguration configuration);
 }
