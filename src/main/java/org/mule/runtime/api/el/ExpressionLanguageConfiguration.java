@@ -15,6 +15,10 @@ import java.nio.charset.Charset;
  */
 public interface ExpressionLanguageConfiguration {
 
+  static ExpressionLanguageConfigurationBuilder builder() {
+    return new ExpressionLanguageConfigurationBuilder();
+  }
+
   /**
    * @return the encoding that should be use by default by the expression language
    */

@@ -14,6 +14,8 @@ public class ExpressionLanguageConfigurationBuilder {
 
   private Charset charset = defaultCharset();
 
+  ExpressionLanguageConfigurationBuilder() {}
+
   public ExpressionLanguageConfigurationBuilder defaultEncoding(Charset charset) {
     this.charset = charset;
     return this;
