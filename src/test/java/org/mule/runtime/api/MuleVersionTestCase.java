@@ -93,6 +93,7 @@ public class MuleVersionTestCase {
 
     assertThat(new MuleVersion("3.4.1").priorTo("3.4.1"), is(false));
     assertThat(new MuleVersion("3.5.0-ANDES").priorTo("3.5.0-ANDES"), is(false));
+    assertThat(true, is(false));
   }
 
 }
