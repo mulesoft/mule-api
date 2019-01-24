@@ -26,6 +26,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   private static final long serialVersionUID = -7904681927277956932L;
 
   private String namespace;
+  private String namespaceLowerCase;
   private String name;
 
   private DefaultComponentIdentifier() {}
@@ -33,6 +34,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getNamespace() {
     return namespace;
   }
@@ -40,6 +42,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   /**
    * {@inheritDoc}
    */
+  @Override
   public String getName() {
     return name;
   }
@@ -62,14 +65,16 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
   public static class Builder implements ComponentIdentifier.Builder {
 
-    private DefaultComponentIdentifier componentIdentifier = new DefaultComponentIdentifier();
+    private final DefaultComponentIdentifier componentIdentifier = new DefaultComponentIdentifier();
 
     /**
      * @param namespace namespace identifier of the Mule language extensions module
      * @return the builder
      */
+    @Override
     public Builder namespace(String namespace) {
       componentIdentifier.namespace = namespace;
+      componentIdentifier.namespaceLowerCase = namespace.toLowerCase();
       return this;
     }
 
@@ -77,11 +82,13 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
      * @param identifier identifier unique identifier within the namespace of the language configuration extension
      * @return the builder
      */
+    @Override
     public Builder name(String identifier) {
       componentIdentifier.name = identifier;
       return this;
     }
 
+    @Override
     public ComponentIdentifier build() {
       checkState(componentIdentifier.namespace != null && !componentIdentifier.namespace.trim().isEmpty(),
                  "Prefix URI must be not blank");
@@ -102,7 +109,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
     DefaultComponentIdentifier that = (DefaultComponentIdentifier) o;
 
-    if (!getNamespace().equalsIgnoreCase(that.getNamespace())) {
+    if (!namespaceLowerCase.equals(that.namespaceLowerCase)) {
       return false;
     }
     return getName().equals(that.getName());
@@ -110,7 +117,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
   @Override
   public int hashCode() {
-    int result = getNamespace().toLowerCase().hashCode();
+    int result = namespaceLowerCase.hashCode();
     result = 31 * result + getName().hashCode();
     return result;
   }

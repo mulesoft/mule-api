@@ -51,7 +51,6 @@ public class LazyLong implements LongSupplier {
   public LazyLong(long value) {
     this.value = value;
     this.initialized = true;
-    valueSupplier = () -> value;
   }
 
   /**

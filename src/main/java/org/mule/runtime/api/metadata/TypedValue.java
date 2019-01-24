@@ -109,7 +109,7 @@ public final class TypedValue<T> implements Serializable {
     if (length.isPresent()) {
       this.length = new LazyLong(length.getAsLong());
     } else if (value instanceof byte[]) {
-      this.length = new LazyLong(new Long(((byte[]) value).length));
+      this.length = new LazyLong(((byte[]) value).length);
     } else if (value instanceof String) {
       this.length = new LazyLong(() -> {
         StringByteSizeCalculator stringByteSizeCalculator = new StringByteSizeCalculator();
