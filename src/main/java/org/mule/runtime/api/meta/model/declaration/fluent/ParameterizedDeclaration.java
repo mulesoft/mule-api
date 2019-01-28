@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static java.util.Collections.unmodifiableList;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.ArrayList;
@@ -50,6 +51,15 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
     checkArgument(!isBlank(groupName), "groupName cannot be blank");
 
     return parameterGroups.computeIfAbsent(groupName, ParameterGroupDeclaration::new);
+  }
+
+  /**
+   * @return the default {@link ParameterGroupDeclaration}, "General".
+   *
+   * @since 1.2
+   */
+  public ParameterGroupDeclaration getDefaultParameterGroup() {
+    return parameterGroups.computeIfAbsent(DEFAULT_GROUP_NAME, ParameterGroupDeclaration::new);
   }
 
   /**
