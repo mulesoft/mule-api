@@ -24,6 +24,13 @@ public final class MuleSystemProperties {
   public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
   /**
+   * Enables streaming statistics
+   *
+   * @since 4.2.0
+   */
+  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics";
+
+  /**
    * System property key for the default size of a streaming buffer bucket
    */
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
