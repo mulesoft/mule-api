@@ -54,6 +54,8 @@ public final class MediaType implements Serializable {
   private static final String SUBTYPE_FORM_DATA = "form-data";
   private static final String SUBTYPE_RELATED = "related";
 
+  private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
+
   public static final MediaType ANY = create("*", "*");
 
   public static final MediaType JSON = create(TYPE_TEXT, SUBTYPE_JSON);
@@ -73,11 +75,12 @@ public final class MediaType implements Serializable {
   public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
   public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
-  private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
-
   private final String primaryType;
   private final String subType;
   private final Map<String, String> params;
+
+  private transient Object withoutParamsLock = new Object();
+  private transient volatile MediaType withoutParams;
   private transient Charset charset;
 
   private transient String rfcString;
@@ -115,10 +118,10 @@ public final class MediaType implements Serializable {
       // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
       // determine if the value is cached or not.
       if (params.isEmpty()) {
-        cache.putIfAbsent(mediaType, value);
+        return cacheMediaType(value, mediaType);
+      } else {
+        return value;
       }
-
-      return value;
     } catch (MimeTypeParseException e) {
       throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
     }
@@ -132,7 +135,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType) {
-    return new MediaType(primaryType, subType, emptyMap(), null);
+    return create(primaryType, subType, emptyMap(), null);
   }
 
   /**
@@ -145,7 +148,42 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType, Charset charset) {
-    return new MediaType(primaryType, subType, emptyMap(), charset);
+    return create(primaryType, subType, emptyMap(), charset);
+  }
+
+  /**
+   * Returns a media-type for the given parameters. This would be the equivalent of the media type
+   * {@code "{primaryType}/{subType}[; {params}; charset={charset}]"}.
+   *
+   * @param primaryType the left part of the represented type.
+   * @param subType the right part of the represented type.
+   * @param params the key-value pairs of the additional parameter.
+   * @param charset the value of the {@code charset} parameter.
+   * @return {@link MediaType} instance for given parameters.
+   */
+  private static MediaType create(String primaryType, String subType, final Map<String, String> params, Charset charset) {
+    final MediaType value = new MediaType(primaryType, subType, params, charset);
+
+    // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
+    // in caching them).
+    // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
+    // determine if the value is cached or not.
+    if (params.isEmpty()) {
+      MediaType cachedMediaType = cache.get(value.toRfcString());
+
+      if (cachedMediaType != null) {
+        return cachedMediaType;
+      }
+
+      return cacheMediaType(value, value.toRfcString());
+    } else {
+      return value;
+    }
+  }
+
+  private static MediaType cacheMediaType(final MediaType type, String rfcString) {
+    final MediaType oldValue = cache.putIfAbsent(rfcString, type);
+    return oldValue == null ? type : oldValue;
   }
 
   private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset) {
@@ -181,7 +219,15 @@ public final class MediaType implements Serializable {
    * @return new immutable {@link MediaType} instance.
    */
   public MediaType withoutParameters() {
-    return create(this.getPrimaryType(), this.getSubType());
+    if (withoutParams == null) {
+      synchronized (withoutParamsLock) {
+        if (withoutParams == null) {
+          withoutParams = create(this.getPrimaryType(), this.getSubType());
+        }
+      }
+    }
+
+    return withoutParams;
   }
 
   /**
@@ -276,7 +322,7 @@ public final class MediaType implements Serializable {
     }
 
     this.withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
-
+    this.withoutParamsLock = new Object();
     this.rfcString = calculateRfcString();
   }
 
