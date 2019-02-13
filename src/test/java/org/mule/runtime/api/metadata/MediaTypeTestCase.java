@@ -230,7 +230,7 @@ public class MediaTypeTestCase {
   }
 
   @Test
-  public void SameParsedWithParamsNotSameInstance() {
+  public void sameParsedWithParamsNotSameInstance() {
     final MediaType withParam1 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
     final MediaType withParam2 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
 
