@@ -91,6 +91,8 @@ public interface InterceptionAction {
    *
    * @return a {@link CompletableFuture} using the same {@link InterceptionEvent event} passed to the
    *         {@link ProcessorInterceptor#around(java.util.Map, InterceptionEvent, InterceptionAction) around()} method.
+   *
+   * @since 1.2
    */
   CompletableFuture<InterceptionEvent> fail(ErrorType errorType, String msg);
 }
