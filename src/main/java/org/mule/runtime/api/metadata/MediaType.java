@@ -118,10 +118,10 @@ public final class MediaType implements Serializable {
       // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
       // determine if the value is cached or not.
       if (params.isEmpty()) {
-        cache.putIfAbsent(mediaType, value);
+        return cacheMediaType(value, mediaType);
+      } else {
+        return value;
       }
-
-      return value;
     } catch (MimeTypeParseException e) {
       throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
     }
@@ -164,16 +164,26 @@ public final class MediaType implements Serializable {
   private static MediaType create(String primaryType, String subType, final Map<String, String> params, Charset charset) {
     final MediaType value = new MediaType(primaryType, subType, params, charset);
 
-    if (charset == null) {
+    // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
+    // in caching them).
+    // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
+    // determine if the value is cached or not.
+    if (params.isEmpty()) {
       MediaType cachedMediaType = cache.get(value.toRfcString());
 
       if (cachedMediaType != null) {
         return cachedMediaType;
       }
 
-      cache.putIfAbsent(value.toRfcString(), value);
+      return cacheMediaType(value, value.toRfcString());
+    } else {
+      return value;
     }
-    return value;
+  }
+
+  private static MediaType cacheMediaType(final MediaType type, String rfcString) {
+    final MediaType oldValue = cache.putIfAbsent(rfcString, type);
+    return oldValue == null ? type : oldValue;
   }
 
   private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset) {
