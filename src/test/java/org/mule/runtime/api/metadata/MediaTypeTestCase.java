@@ -10,7 +10,14 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,10 +25,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class MediaTypeTestCase {
 
@@ -219,4 +222,27 @@ public class MediaTypeTestCase {
 
     assertThat(deserialized, is(withCharset));
   }
+
+  @Test
+  public void constantsAndParsedSameInstance() {
+    final MediaType appXml = APPLICATION_XML;
+    assertThat(MediaType.parse(appXml.toRfcString()), sameInstance(appXml));
+  }
+
+  @Test
+  public void sameParsedWithParamsNotSameInstance() {
+    final MediaType withParam1 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+    final MediaType withParam2 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+
+    assertThat(withParam1, not(sameInstance(withParam2)));
+  }
+
+  @Test
+  public void withoutParametersCached() {
+    final MediaType withParam = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+    final MediaType withoutParam = MediaType.parse("multipart/lalala");
+
+    assertThat(withParam.withoutParameters(), sameInstance(withoutParam));
+  }
+
 }
