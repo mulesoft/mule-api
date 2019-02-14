@@ -135,7 +135,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType) {
-    return create(primaryType, subType, emptyMap(), null);
+    return create(primaryType, subType, null);
   }
 
   /**
@@ -148,37 +148,19 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType, Charset charset) {
-    return create(primaryType, subType, emptyMap(), charset);
-  }
-
-  /**
-   * Returns a media-type for the given parameters. This would be the equivalent of the media type
-   * {@code "{primaryType}/{subType}[; {params}; charset={charset}]"}.
-   *
-   * @param primaryType the left part of the represented type.
-   * @param subType the right part of the represented type.
-   * @param params the key-value pairs of the additional parameter.
-   * @param charset the value of the {@code charset} parameter.
-   * @return {@link MediaType} instance for given parameters.
-   */
-  private static MediaType create(String primaryType, String subType, final Map<String, String> params, Charset charset) {
-    final MediaType value = new MediaType(primaryType, subType, params, charset);
+    final MediaType value = new MediaType(primaryType, subType, emptyMap(), charset);
 
     // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
     // in caching them).
     // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
     // determine if the value is cached or not.
-    if (params.isEmpty()) {
-      MediaType cachedMediaType = cache.get(value.toRfcString());
+    MediaType cachedMediaType = cache.get(value.toRfcString());
 
-      if (cachedMediaType != null) {
-        return cachedMediaType;
-      }
-
-      return cacheMediaType(value, value.toRfcString());
-    } else {
-      return value;
+    if (cachedMediaType != null) {
+      return cachedMediaType;
     }
+
+    return cacheMediaType(value, value.toRfcString());
   }
 
   private static MediaType cacheMediaType(final MediaType type, String rfcString) {
@@ -209,6 +191,24 @@ public final class MediaType implements Serializable {
       return new MediaType(this.getPrimaryType(), this.getSubType(), params, null);
     } else {
       return withCharsetCache.get(charset, c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c));
+    }
+  }
+
+  /**
+   * Creates a new {@link MediaType} instance with the same {@code type}, {@code sub-type} and {@code charset} but adding the
+   * {@code params} passed.
+   * <p>
+   * If any key of the passed {@code params} is the {@code charset} or another param already contained in this instance, the newly
+   * returned {@link MediaType} has those values replaced with the ones provided in {@code params}.
+   *
+   * @param params the key-value pairs of the additional parameter.
+   * @return new immutable {@link MediaType} instance.
+   */
+  public MediaType withParamaters(Map<String, String> params) {
+    if (!params.isEmpty()) {
+      return new MediaType(this.getPrimaryType(), this.getSubType(), params, charset);
+    } else {
+      return this;
     }
   }
 
