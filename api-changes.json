@@ -1,4 +1,18 @@
 {
+  "1.1.6": {
+    "revapi": {
+      "ignore": [
+          {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.util.MuleSystemProperties",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "elementKind": "class",
+          "justification": "Added system properties class"
+        }
+      ]
+    }
+  },
   "1.1.5": {
     "revapi": {
       "ignore": [
