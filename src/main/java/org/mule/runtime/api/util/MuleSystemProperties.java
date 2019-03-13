@@ -61,7 +61,7 @@ public final class MuleSystemProperties {
   /**
    * If set, the extension client will not use any cache to reuse resources between calls
    */
-  public static final String MULE_EXTENSION_CLIENT_CACHE_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionClient.disableCache";
+  public static final String MULE_EXTENSIONS_CLIENT_CACHE_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
 
   /**
    * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
