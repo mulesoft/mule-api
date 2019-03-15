@@ -39,10 +39,11 @@ import java.util.Set;
  */
 public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
-  private static final long serialVersionUID = -4723226524524565104L;
+  private static final long serialVersionUID = 5102672502150926191L;
 
   @SuppressWarnings("rawtypes")
   private static final MultiMap EMPTY_MAP = new MultiMap<>().toImmutableMultiMap();
+  private boolean mutable = true;
 
   /**
    * Returns an empty multi-map (immutable). This map is serializable.
@@ -82,6 +83,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
       return values;
     }));
     this.paramsMap = unmodifiableMap(paramsMap);
+    this.mutable = false;
   }
 
   public MultiMap() {
@@ -258,6 +260,14 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     List<Entry<K, V>> entries = new ArrayList<>(max(10, paramsMap.size() * 2));
     paramsMap.forEach((key, values) -> values.forEach(value -> entries.add(new AbstractMap.SimpleEntry<>(key, value))));
     return entries;
+  }
+
+  /**
+   * @return whether or not changes can be applied to the {@link MultiMap}.
+   * @since 1.2
+   */
+  public boolean isMutable() {
+    return mutable;
   }
 
   @Override
