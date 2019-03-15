@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -106,8 +106,8 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <metadataModelApiVersion>1.2.0-SNAPSHOT</metadataModelApiVersion>
-        <artifactDeclarationVersion>1.2.0-SNAPSHOT</artifactDeclarationVersion>
+        <metadataModelApiVersion>1.3.0-SNAPSHOT</metadataModelApiVersion>
+        <artifactDeclarationVersion>1.3.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.2.0-SNAPSHOT</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
         <gsonVersion>2.8.5</gsonVersion>
@@ -134,9 +134,9 @@
         <jacoco.version>0.8.2</jacoco.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
-        <oldMuleArtifactVersion>1.1.2</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.2.0-SNAPSHOT</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.1.0-SNAPSHOT</muleApiAnnotationsVersion>
+        <oldMuleArtifactVersion>1.2.0-SNAPSHOT</oldMuleArtifactVersion>
+        <muleRevapiExtensionVersion>1.3.0-SNAPSHOT</muleRevapiExtensionVersion>
+        <muleApiAnnotationsVersion>1.2.0-SNAPSHOT</muleApiAnnotationsVersion>
 
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
