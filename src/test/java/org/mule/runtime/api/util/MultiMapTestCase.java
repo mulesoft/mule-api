@@ -15,15 +15,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
-
 import org.mule.runtime.api.util.MultiMap.StringMultiMap;
-
-import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,6 +23,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
 public class MultiMapTestCase {
@@ -183,6 +182,17 @@ public class MultiMapTestCase {
     assertThat(map.entryList(), contains(
                                          new EntryMatcher(KEY_2, VALUE_1),
                                          new EntryMatcher(KEY_2, VALUE_2)));
+  }
+
+  @Test
+  public void mutability() {
+    checkMutable(multiMap);
+    checkMutable(new StringMultiMap());
+  }
+
+  private void checkMutable(MultiMap<String, String> multiMap) {
+    assertThat(multiMap.isMutable(), is(true));
+    assertThat(multiMap.toImmutableMultiMap().isMutable(), is(false));
   }
 
   private class EntryMatcher extends TypeSafeMatcher<Map.Entry<String, String>> {
