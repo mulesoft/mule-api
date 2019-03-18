@@ -126,6 +126,18 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
     }
 
     /**
+     * Indicates if the library can be provided as additionalDependency or not
+     *
+     * @return {@code this} builder
+     *
+     * @since 1.2.0
+     */
+    public ExternalLibraryModelBuilder allowingDeclarationAsAdditionalDependency(boolean isAllowed) {
+      product.allowDeclarationAsAdditionalDependency = isAllowed;
+      return this;
+    }
+
+    /**
      * @return a new {@link ExternalLibraryModel} instance
      * @throws IllegalStateException if {@link #withName(String)} was not provided
      */
@@ -149,6 +161,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   private ExternalLibraryType type;
   private String suggestedCoordinates;
   private boolean optional = false;
+  private boolean allowDeclarationAsAdditionalDependency = true;
 
   private ExternalLibraryModel() {}
 
@@ -217,5 +230,14 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
    */
   public ExternalLibraryType getType() {
     return type;
+  }
+
+  /**
+   * @return if the ExternalLib can be declared as additional dependency. Since 1.2.0, all externalLibs should allow this.
+   *
+   * @since 1.2.0
+   */
+  public boolean allowsDeclarationAsAdditionalDependency() {
+    return allowDeclarationAsAdditionalDependency;
   }
 }
