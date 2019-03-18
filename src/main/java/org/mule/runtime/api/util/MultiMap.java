@@ -300,7 +300,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   public static class StringMultiMap extends MultiMap<String, String> implements DataTypeAware {
 
-    private static final long serialVersionUID = 3153407829619876577L;
+    private static final long serialVersionUID = -1636419610956962045L;
 
     public StringMultiMap() {
       super();
