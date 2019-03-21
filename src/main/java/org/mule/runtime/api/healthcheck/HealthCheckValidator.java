@@ -17,9 +17,8 @@ package org.mule.runtime.api.healthcheck;
 public interface HealthCheckValidator {
 
   /**
-   *
-   * @return true if the application is ready to receive traffic
-   *  false otherwise
+   * @return a {@link ReadyStatus} instance that informs if the application is ready
+   *  to receive traffic or not
    */
-  boolean isReady();
+  ReadyStatus ready();
 }
