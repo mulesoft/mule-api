@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.scheduler;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.service.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import java.util.concurrent.SynchronousQueue;
  *
  * @since 1.0
  */
+@NoImplement
 public interface SchedulerService extends Service {
 
   /**
