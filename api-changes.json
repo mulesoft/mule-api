@@ -68,8 +68,29 @@
           "methodName": "create",
           "elementKind": "method",
           "justification": "The expression language implementation should match the Mule Runtime requirements."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "new": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
         }
-
       ]
     }
   },
@@ -111,6 +132,28 @@
           "methodName": "getLogConfigFile",
           "elementKind": "method",
           "justification": "Feature was in Mule 3.x but missing in Mule 4"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "new": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
         }
       ]
     }
@@ -1731,6 +1774,28 @@
           "methodName": "getByteLength",
           "elementKind": "method",
           "justification": "Avoid autoboxing/unboxing where possible"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "new": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
         }
       ]
     }
@@ -1983,6 +2048,28 @@
           "new": "class org.mule.runtime.api.deployment.meta.MuleServiceModel",
           "annotationType": "org.mule.api.annotation.NoExtend",
           "justification": "This interface is not meant to be extended by the user"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "new": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
         }
       ]
     }
