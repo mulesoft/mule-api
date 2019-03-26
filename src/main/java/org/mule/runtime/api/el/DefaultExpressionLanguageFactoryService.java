@@ -6,12 +6,13 @@
  */
 package org.mule.runtime.api.el;
 
-
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.service.Service;
 
 /**
  * Provides a factory for the default Expression language that is going to be used by the {@link MuleExpressionLanguage}
  */
+@NoImplement
 public interface DefaultExpressionLanguageFactoryService extends Service {
 
   /**
