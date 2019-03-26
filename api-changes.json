@@ -3,6 +3,28 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "new": "interface org.mule.runtime.api.el.DefaultExpressionLanguageFactoryService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "DefaultExpressionLanguageFactoryService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerService",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "elementKind": "interface",
+          "justification": "All services APIs should be annotated with NoImplement."
+        },
+        {
           "code": "java.method.visibilityReduced",
           "old": "method void org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::<init>(java.lang.Object)",
           "new": "method void org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::<init>(java.lang.Object)",

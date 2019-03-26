@@ -11,7 +11,7 @@ import org.mule.runtime.api.service.Service;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
-
+import org.mule.api.annotation.NoImplement;
 /**
  * Provides access to the different schedulers and thread pools that exist in the Mule runtime, allowing an artifact to schedule
  * tasks on those.
@@ -26,6 +26,7 @@ import java.util.concurrent.SynchronousQueue;
  *
  * @since 1.0
  */
+@NoImplement
 public interface SchedulerService extends Service {
 
   /**
