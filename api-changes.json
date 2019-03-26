@@ -1,5 +1,5 @@
 {
-  "1.3.0": {
+  "1.2.0": {
     "revapi": {
       "ignore": [
         {
@@ -23,13 +23,7 @@
           "classSimpleName": "SchedulerService",
           "elementKind": "interface",
           "justification": "All services APIs should be annotated with NoImplement."
-        }
-      ]
-    }
-  },
-  "1.2.0": {
-    "revapi": {
-      "ignore": [
+        },
         {
           "code": "java.method.visibilityReduced",
           "old": "method void org.mule.runtime.api.util.CaseInsensitiveMapWrapper.CaseInsensitiveMapKey::<init>(java.lang.Object)",
