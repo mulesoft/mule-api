@@ -1,4 +1,20 @@
 {
+  "1.3.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
+          "new": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
+          "superClass": "java.util.AbstractMap<java.lang.String, T extends java.lang.Object>",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "CaseInsensitiveMapWrapper",
+          "elementKind": "class",
+          "justification": "This was a bad implementation, will remove this after cherry-pick."
+        }
+      ]
+    }
+  },
   "1.2.0": {
     "revapi": {
       "ignore": [
@@ -69,7 +85,6 @@
           "elementKind": "method",
           "justification": "The expression language implementation should match the Mule Runtime requirements."
         }
-
       ]
     }
   },

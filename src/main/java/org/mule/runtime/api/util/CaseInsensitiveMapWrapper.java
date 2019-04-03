@@ -37,7 +37,7 @@ import java.util.concurrent.ConcurrentMap;
  *
  * @since 1.0
  */
-public class CaseInsensitiveMapWrapper<T> implements Map<String, T>, Serializable {
+public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> implements Serializable {
 
   private static final long serialVersionUID = 8534959274607933747L;
 
