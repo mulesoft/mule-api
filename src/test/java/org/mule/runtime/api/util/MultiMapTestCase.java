@@ -184,17 +184,6 @@ public class MultiMapTestCase {
                                          new EntryMatcher(KEY_2, VALUE_2)));
   }
 
-  @Test
-  public void mutability() {
-    checkMutable(multiMap);
-    checkMutable(new StringMultiMap());
-  }
-
-  private void checkMutable(MultiMap<String, String> multiMap) {
-    assertThat(multiMap.isMutable(), is(true));
-    assertThat(multiMap.toImmutableMultiMap().isMutable(), is(false));
-  }
-
   private class EntryMatcher extends TypeSafeMatcher<Map.Entry<String, String>> {
 
     private String expectedKey;
