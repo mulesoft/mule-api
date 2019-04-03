@@ -90,8 +90,17 @@
           "methodName": "create",
           "elementKind": "method",
           "justification": "The expression language implementation should match the Mule Runtime requirements."
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
+          "new": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
+          "superClass": "java.util.AbstractMap<java.lang.String, T extends java.lang.Object>",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "CaseInsensitiveMapWrapper",
+          "elementKind": "class",
+          "justification": "This was a bad implementation missing key methods."
         }
-
       ]
     }
   },
