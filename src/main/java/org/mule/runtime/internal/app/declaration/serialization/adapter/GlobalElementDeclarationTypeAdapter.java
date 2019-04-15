@@ -25,22 +25,21 @@ import static org.mule.runtime.internal.app.declaration.serialization.adapter.El
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateIdentifiableObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateMetadataAwareObject;
 import static org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationSerializationUtils.populateParameterizedObject;
-
 import org.mule.runtime.app.declaration.api.ComponentElementDeclaration;
-import org.mule.runtime.app.declaration.api.ConstructElementDeclaration;
 import org.mule.runtime.app.declaration.api.ConfigurationElementDeclaration;
+import org.mule.runtime.app.declaration.api.ConstructElementDeclaration;
 import org.mule.runtime.app.declaration.api.GlobalElementDeclaration;
 import org.mule.runtime.app.declaration.api.GlobalElementDeclarationVisitor;
-import org.mule.runtime.app.declaration.api.ParameterizedElementDeclaration;
 import org.mule.runtime.app.declaration.api.ParameterValue;
+import org.mule.runtime.app.declaration.api.ParameterizedElementDeclaration;
 import org.mule.runtime.app.declaration.api.TopLevelParameterDeclaration;
 import org.mule.runtime.app.declaration.api.fluent.ConfigurationElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.ConnectionElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.ConstructElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.EnrichableElementDeclarer;
-import org.mule.runtime.app.declaration.api.fluent.ParameterizedElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.ParameterObjectValue;
+import org.mule.runtime.app.declaration.api.fluent.ParameterizedElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.TopLevelParameterDeclarer;
 
 import com.google.gson.Gson;
@@ -151,7 +150,8 @@ class GlobalElementDeclarationTypeAdapter extends TypeAdapter<GlobalElementDecla
     if (jsonObject.has(REF_NAME)) {
       ((TopLevelParameterDeclarer) declarer).withRefName(jsonObject.get(REF_NAME).getAsString());
     }
-    ((TopLevelParameterDeclarer) declarer).withValue(delegate.fromJson(jsonObject.get(VALUE), ParameterObjectValue.class));
+    ((TopLevelParameterDeclarer) declarer)
+        .withValue((ParameterObjectValue) delegate.fromJson(jsonObject.get(VALUE), ParameterValue.class));
   }
 
   private void declareConstruct(JsonObject jsonObject, ConstructElementDeclarer declarer) {
