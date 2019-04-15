@@ -10,6 +10,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.core.IsNot.not;
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.CONNECTION;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newArtifact;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newListValue;
@@ -24,6 +25,7 @@ import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJso
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
 import org.mule.runtime.app.declaration.api.ParameterValue;
 import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
+import org.mule.runtime.app.declaration.api.fluent.ParameterObjectValue;
 import org.mule.runtime.app.declaration.api.fluent.SimpleValueType;
 
 import com.google.gson.JsonElement;
@@ -34,7 +36,6 @@ import java.io.InputStreamReader;
 
 import org.json.JSONException;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 
@@ -67,7 +68,6 @@ public class ArtifactDeclarationJsonSerializerTestCase {
   }
 
   @Test
-  @Ignore("See MULE-15599")
   public void serializeDeserializeSerializeTest() throws JSONException {
     ArtifactDeclarationJsonSerializer serializer = ArtifactDeclarationJsonSerializer.getDefault(true);
     String originalJson = serializer.serialize(applicationDeclaration);
@@ -79,6 +79,32 @@ public class ArtifactDeclarationJsonSerializerTestCase {
     String generatedJson = jsonElement.toString();
 
     JSONAssert.assertEquals(originalJson, generatedJson, true);
+  }
+
+  @Test
+  public void equalsTopLevelParameterShouldIncludeParameters() {
+    ElementDeclarer core = ElementDeclarer.forExtension("mule");
+    ParameterObjectValue parameterObjectValue = ParameterObjectValue.builder()
+        .withParameter("otherName", "simpleParam")
+        .build();
+
+    String globalParameterName = "globalParameterName";
+    String globalTemplateRefName = "globalTemplateRefName";
+
+    ParameterObjectValue modifiedParameterObjectValue = ParameterObjectValue.builder()
+        .withParameter("otherName", "simpleParam")
+        .withParameter("myCamelCaseName", "someContent")
+        .build();
+
+    assertThat(newArtifact().withGlobalElement(core.newGlobalParameter(globalParameterName)
+        .withRefName(globalTemplateRefName)
+        .withValue(parameterObjectValue)
+        .getDeclaration()).getDeclaration(),
+               not(equalTo(newArtifact().withGlobalElement(core.newGlobalParameter(globalParameterName)
+                   .withRefName(globalTemplateRefName)
+                   .withValue(modifiedParameterObjectValue)
+                   .getDeclaration()).getDeclaration())));
+
   }
 
   private ArtifactDeclaration createArtifact() {
