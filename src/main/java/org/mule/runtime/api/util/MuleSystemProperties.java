@@ -60,7 +60,7 @@ public final class MuleSystemProperties {
 
   /**
    * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
-   * all, the extension client will cache resourses.
+   * all, the extension client will cache resources.
    */
   public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
 

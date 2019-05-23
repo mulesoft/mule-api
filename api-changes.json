@@ -11,7 +11,18 @@
           "classSimpleName": "CaseInsensitiveMapWrapper",
           "elementKind": "class",
           "justification": "This was a bad implementation, will remove this after cherry-pick."
-        }
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.component.ComponentIdentifier.Builder",
+          "new": "interface org.mule.runtime.api.component.ComponentIdentifier.Builder",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.component",
+          "classSimpleName": "Builder",
+          "elementKind": "interface",
+          "justification": "Only implementations are provided by the runtime."
+        }        
       ]
     }
   },

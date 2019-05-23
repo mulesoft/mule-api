@@ -27,6 +27,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
   private String namespace;
   private String namespaceLowerCase;
+  private String namespaceUri;
   private String name;
 
   private DefaultComponentIdentifier() {}
@@ -37,6 +38,11 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   @Override
   public String getNamespace() {
     return namespace;
+  }
+
+  @Override
+  public String getNamespaceUri() {
+    return namespaceUri;
   }
 
   /**
@@ -75,6 +81,12 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
     public Builder namespace(String namespace) {
       componentIdentifier.namespace = namespace;
       componentIdentifier.namespaceLowerCase = namespace.toLowerCase();
+      return this;
+    }
+
+    @Override
+    public Builder namespaceUri(String namespaceUri) {
+      componentIdentifier.namespaceUri = namespaceUri;
       return this;
     }
 
