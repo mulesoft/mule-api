@@ -59,6 +59,12 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "schedulers.latency.report.interval";
 
   /**
+   * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
+   * all, the extension client will cache resourses.
+   */
+  public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
+
+  /**
    * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
    * <p>
    * Possible values are the enums in {@code ProcessingType}.
