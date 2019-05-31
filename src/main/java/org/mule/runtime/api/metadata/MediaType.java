@@ -11,9 +11,6 @@ import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
 import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -28,6 +25,9 @@ import java.util.concurrent.ConcurrentMap;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
@@ -177,7 +177,7 @@ public final class MediaType implements Serializable {
     this.rfcString = calculateRfcString();
   }
 
-  private transient Cache<Charset, MediaType> withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
+  private transient Cache<Optional<Charset>, MediaType> withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
 
   /**
    * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the {@code charset} with
@@ -187,11 +187,8 @@ public final class MediaType implements Serializable {
    * @return new immutable {@link MediaType} instance.
    */
   public MediaType withCharset(Charset charset) {
-    if (charset == null) {
-      return new MediaType(this.getPrimaryType(), this.getSubType(), params, null);
-    } else {
-      return withCharsetCache.get(charset, c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c));
-    }
+    return withCharsetCache.get(ofNullable(charset),
+                                c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c.orElse(null)));
   }
 
   /**
