@@ -188,6 +188,11 @@ public final class TypedValue<T> implements Serializable {
     return result;
   }
 
+  @Override
+  public String toString() {
+    return "TypedValue[value: '" + value.toString() + "', dataType: '" + dataType + "']";
+  }
+
   private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
     in.defaultReadObject();
     length = new LazyLong(in.readLong());
