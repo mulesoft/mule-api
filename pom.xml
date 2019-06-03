@@ -108,7 +108,7 @@
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.2.1-SNAPSHOT</metadataModelApiVersion>
         <artifactDeclarationVersion>1.2.1-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.1.1-SNAPSHOT</muleModuleMavenPluginVersion>
+        <muleModuleMavenPluginVersion>1.1.0</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
         <gsonVersion>2.8.5</gsonVersion>
         <commonsIoVersion>2.6</commonsIoVersion>
@@ -135,8 +135,8 @@
         <jsonassert.version>1.5.0</jsonassert.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.2.1-SNAPSHOT</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.2.1-SNAPSHOT</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.1.1-SNAPSHOT</muleApiAnnotationsVersion>
+        <muleRevapiExtensionVersion>1.2.0</muleRevapiExtensionVersion>
+        <muleApiAnnotationsVersion>1.1.0</muleApiAnnotationsVersion>
 
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
