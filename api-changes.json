@@ -1,4 +1,19 @@
 {
+  "1.2.1": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "elementKind": "field",
+          "justification": "Field added to Improve ExtensionClient performance"
+        }
+      ]
+    }
+  },
   "1.2.0": {
     "revapi": {
       "ignore": [
