@@ -100,6 +100,15 @@
           "classSimpleName": "CaseInsensitiveMapWrapper",
           "elementKind": "class",
           "justification": "This was a bad implementation missing key methods."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "elementKind": "field",
+          "justification": "Field added to Improve ExtensionClient performance"
         }
       ]
     }
