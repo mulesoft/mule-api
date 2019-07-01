@@ -9,7 +9,7 @@
           "classSimpleName": "MuleSystemProperties",
           "fieldName": "MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
           "elementKind": "field",
-          "justification": "Field added to Improve ExtensionClient performance"
+          "justification": "Constant added to toogle extensions client cache"
         }
       ]
     }
