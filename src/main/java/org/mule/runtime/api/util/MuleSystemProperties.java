@@ -72,6 +72,11 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
+   * If set to true, the removal of soft keys will not be done on undeployment.
+   */
+  public static final String DISABLE_MULE_LEAK_PREVENTION = SYSTEM_PROPERTY_PREFIX + "disable.leak.prevention";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
