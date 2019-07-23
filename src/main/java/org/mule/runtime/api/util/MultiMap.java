@@ -94,7 +94,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     if (this instanceof ImmutableMultiMap) {
       return this;
     }
-    return new ImmutableMultiMap(this);
+    return new ImmutableMultiMap(this.paramsMap);
   }
 
   @Override
@@ -285,8 +285,8 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
     private static final long serialVersionUID = -4581793201929981747L;
 
-    ImmutableMultiMap(final MultiMap<K, V> multiMap) {
-      super(multiMap);
+    ImmutableMultiMap(final Map<K, V> parametersMap) {
+      super(parametersMap);
     }
   }
 
