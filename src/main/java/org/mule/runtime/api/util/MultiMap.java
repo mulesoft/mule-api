@@ -80,7 +80,9 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
         values.add(e.getValue());
       }
       return values;
-    },(u,v) -> { throw new IllegalStateException(String.format("Duplicate key %s", u)); }, LinkedHashMap::new));
+    }, (u,v) -> {
+      throw new IllegalStateException(String.format("Duplicate key %s", u));
+    }, LinkedHashMap::new));
     this.paramsMap = unmodifiableMap(paramsMap);
   }
 
@@ -92,7 +94,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     if (this instanceof ImmutableMultiMap) {
       return this;
     }
-    return new ImmutableMultiMap(this.paramsMap);
+    return new ImmutableMultiMap(this);
   }
 
   @Override
@@ -283,8 +285,8 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
     private static final long serialVersionUID = -4581793201929981747L;
 
-    ImmutableMultiMap(final Map<K, V> parametersMap) {
-      super(parametersMap);
+    ImmutableMultiMap(final MultiMap<K, V> multiMap) {
+      super(multiMap);
     }
   }
 

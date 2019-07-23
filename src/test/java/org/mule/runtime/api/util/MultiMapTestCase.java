@@ -15,6 +15,7 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertEquals;
 import org.mule.runtime.api.util.MultiMap.StringMultiMap;
 
 import java.util.Arrays;
@@ -27,7 +28,6 @@ import java.util.function.Supplier;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
-import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
