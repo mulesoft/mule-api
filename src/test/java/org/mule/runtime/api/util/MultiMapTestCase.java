@@ -20,12 +20,14 @@ import org.mule.runtime.api.util.MultiMap.StringMultiMap;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -117,6 +119,16 @@ public class MultiMapTestCase {
   @Test(expected = UnsupportedOperationException.class)
   public void immutableMultiMapFailsOnClear() {
     multiMap.toImmutableMultiMap().clear();
+  }
+
+  @Test
+  public void toImmutableMapKeepsOrder() {
+    multiMap.put(KEY_3, VALUE_1);
+    multiMap.put(KEY_2, VALUE_1);
+    multiMap.put(KEY_1, VALUE_1);
+    List<Map.Entry<String, String>> entryList = multiMap.entryList();
+    List<Map.Entry<String, String>> immutableEntryList = multiMap.toImmutableMultiMap().entryList();
+    assertEquals(entryList, immutableEntryList);
   }
 
   @Test
