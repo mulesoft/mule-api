@@ -76,7 +76,9 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
         values.add(e.getValue());
       }
       return values;
-    }));
+    }, (u, v) -> {
+      throw new IllegalStateException(String.format("Duplicate key %s", u));
+    }, LinkedHashMap::new));
     this.paramsMap = unmodifiableMap(paramsMap);
   }
 
