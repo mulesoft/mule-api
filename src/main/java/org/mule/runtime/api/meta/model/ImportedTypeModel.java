@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model;
 
 import static java.util.Objects.hash;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.metadata.api.model.ObjectType;
 
 /**
@@ -48,5 +49,10 @@ public final class ImportedTypeModel {
   @Override
   public int hashCode() {
     return hash(importedType);
+  }
+
+  @Override
+  public String toString() {
+    return "ImportedTypeModel {" + importedType.toString() + "}";
   }
 }

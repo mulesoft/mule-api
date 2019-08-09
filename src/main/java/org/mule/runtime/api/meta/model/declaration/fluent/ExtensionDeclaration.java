@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
@@ -16,6 +17,7 @@ import static java.util.stream.Collectors.toCollection;
 import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
@@ -308,8 +310,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @param subType  a sub type implementation
    */
   public void addSubtype(MetadataType baseType, MetadataType subType) {
-    Set<MetadataType> items = subTypes.computeIfAbsent(baseType, key -> new LinkedHashSet<>());
-    items.add(subType);
+    addSubtypes(baseType, singletonList(subType));
   }
 
   /**
@@ -403,6 +404,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     return notificationModels;
   }
 
+  @Override
   public Optional<DeprecationModel> getDeprecation() {
     return ofNullable(deprecation);
   }
@@ -410,6 +412,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   /**
    * {@inheritDoc}
    */
+  @Override
   public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
   }
