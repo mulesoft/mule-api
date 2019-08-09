@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model;
 
 import static java.util.stream.Collectors.toCollection;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 
@@ -53,4 +54,10 @@ public final class SubTypesModel {
   public Set<ObjectType> getSubTypes() {
     return subTypes;
   }
+
+  @Override
+  public String toString() {
+    return "SubTypesModel {" + baseType.toString() + " <- " + subTypes.toString() + "}";
+  }
+
 }
