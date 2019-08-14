@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.internal.meta.type;
 
+import static java.lang.Boolean.getBoolean;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableList;
@@ -13,6 +14,8 @@ import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.MuleSystemProperties.SYSTEM_PROPERTY_PREFIX;
+
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
@@ -39,13 +42,15 @@ import java.util.Set;
  */
 public final class DefaultTypeCatalog implements TypeCatalog {
 
-  private List<SubTypesMappingContainer> mappings = new LinkedList<>();
+  private static final boolean VALIDATE_DUPICATE_IDS = getBoolean(SYSTEM_PROPERTY_PREFIX + "typeCatalog.validateDuplicateIds");
+
+  private final List<SubTypesMappingContainer> mappings = new LinkedList<>();
 
   // Map<ExtensionName, Map<TypeId, ObjectType>
-  private Map<String, Map<String, ObjectType>> types = new LinkedHashMap<>();
+  private final Map<String, Map<String, ObjectType>> types = new LinkedHashMap<>();
 
   // Map<TypeId, ExtensionName>
-  private Map<String, String> extensionTypesInvertedIndex = new LinkedHashMap<>();
+  private final Map<String, String> extensionTypesInvertedIndex = new LinkedHashMap<>();
 
 
   public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
@@ -59,6 +64,10 @@ public final class DefaultTypeCatalog implements TypeCatalog {
           Map<String, ObjectType> extensionTypesMap = new LinkedHashMap<>();
           extensionTypesMap.put(id, t);
           types.put(e.getName(), extensionTypesMap);
+        }
+        if (VALIDATE_DUPICATE_IDS && extensionTypesInvertedIndex.containsKey(id)) {
+          throw new IllegalStateException("Type '" + id + "' is defined in extensions '"
+              + extensionTypesInvertedIndex.get(id) + "' and '" + e.getName() + "'.");
         }
         extensionTypesInvertedIndex.put(id, e.getName());
       }));
