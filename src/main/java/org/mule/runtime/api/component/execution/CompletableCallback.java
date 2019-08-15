@@ -87,7 +87,7 @@ public interface CompletableCallback<T> {
   }
 
   default CompletableCallback<T> before(Consumer<T> consumer) {
-    return new CompletableCallback<T>() {
+    return before(new CompletableCallback<T>() {
 
       @Override
       public void complete(T value) {
@@ -98,7 +98,7 @@ public interface CompletableCallback<T> {
       public void error(Throwable e) {
 
       }
-    };
+    });
   }
 
   default CompletableCallback<T> before(CompletableCallback<T> beforeCallback) {
