@@ -32,6 +32,7 @@ import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -58,6 +59,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
   private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
+  private final Map<String, ObjectType> typesById = new HashMap<>();
   private final Set<String> privilegedPackages = new TreeSet<>(naturalOrder());
   private final Set<String> privilegedArtifacts = new TreeSet<>(naturalOrder());
   private final Set<String> resources = new TreeSet<>(naturalOrder());
@@ -212,8 +214,15 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * @return an immutable {@link Set} with the paths to all of the resources exposed by the
-   * declared extension
+   * @param typeId the id of the type to get.
+   * @return a type present in this declaration with the given {@code typeId}
+   */
+  public ObjectType getTypeById(String typeId) {
+    return typesById.get(typeId);
+  }
+
+  /**
+   * @return an immutable {@link Set} with the paths to all of the resources exposed by the declared extension
    */
   public Set<String> getResources() {
     return unmodifiableSet(resources);
@@ -241,6 +250,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    */
   public ExtensionDeclaration addType(ObjectType objectType) {
     types.add(objectType);
+    getTypeId(objectType).ifPresent(typeId -> typesById.put(typeId, objectType));
     return this;
   }
 
