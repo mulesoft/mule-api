@@ -32,7 +32,6 @@ import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -40,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 
@@ -58,8 +58,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
-  private final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
-  private final Map<String, ObjectType> typesById = new HashMap<>();
+  private final Map<String, ObjectType> typesById = new TreeMap<>();
   private final Set<String> privilegedPackages = new TreeSet<>(naturalOrder());
   private final Set<String> privilegedArtifacts = new TreeSet<>(naturalOrder());
   private final Set<String> resources = new TreeSet<>(naturalOrder());
@@ -210,6 +209,8 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return an immutable {@link Set} with all the types registered through {@link #getTypes()}
    */
   public Set<ObjectType> getTypes() {
+    final Set<ObjectType> types = new TreeSet<>(comparing(t -> getTypeId(t).orElse("")));
+    types.addAll(typesById.values());
     return unmodifiableSet(types);
   }
 
@@ -249,9 +250,11 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return {@code this} declaration
    */
   public ExtensionDeclaration addType(ObjectType objectType) {
-    if (types.add(objectType)) {
-      getTypeId(objectType).ifPresent(typeId -> typesById.put(typeId, objectType));
-    }
+    getTypeId(objectType).ifPresent(typeId -> {
+      if (!typesById.containsKey(typeId)) {
+        typesById.put(typeId, objectType);
+      }
+    });
     return this;
   }
 
