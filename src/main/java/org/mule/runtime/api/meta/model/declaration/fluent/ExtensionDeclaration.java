@@ -249,8 +249,9 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * @return {@code this} declaration
    */
   public ExtensionDeclaration addType(ObjectType objectType) {
-    types.add(objectType);
-    getTypeId(objectType).ifPresent(typeId -> typesById.put(typeId, objectType));
+    if (types.add(objectType)) {
+      getTypeId(objectType).ifPresent(typeId -> typesById.put(typeId, objectType));
+    }
     return this;
   }
 
