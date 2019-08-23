@@ -25,6 +25,10 @@ public interface CompletableCallback<T> {
     };
   }
 
+  static <T> CompletableCallback<T> merely(Runnable runnable) {
+    return CompletableCallback.<T>empty().finallyAfter(runnable);
+  }
+
   static <T> CompletableCallback<T> from(Runnable runnable) {
     return new CompletableCallback<T>() {
 
