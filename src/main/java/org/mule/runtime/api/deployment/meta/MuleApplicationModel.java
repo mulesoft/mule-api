@@ -23,12 +23,23 @@ import java.util.Set;
 @NoExtend
 public class MuleApplicationModel extends MuleDeployableModel {
 
+  private final String domainName;
+
   private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
-                               Optional<Boolean> redeploymentEnabled, List<String> secureProperties, String logConfigFile) {
+                               Optional<String> domainName, Optional<Boolean> redeploymentEnabled,
+                               List<String> secureProperties, String logConfigFile) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled,
           secureProperties, logConfigFile);
+    this.domainName = domainName.orElse(null);
+  }
+
+  /**
+   * @return the domain associated with this application
+   */
+  public Optional<String> getDomain() {
+    return ofNullable(domainName);
   }
 
   /**
@@ -39,8 +50,19 @@ public class MuleApplicationModel extends MuleDeployableModel {
   public static class MuleApplicationModelBuilder
       extends MuleDeployableModelBuilder<MuleApplicationModelBuilder, MuleApplicationModel> {
 
+    private String domain;
+
     @Override
     protected MuleApplicationModelBuilder getThis() {
+      return this;
+    }
+
+    /**
+     * @param domain the domain associated with this application
+     * @return the same builder instance.
+     */
+    public MuleApplicationModelBuilder setDomain(String domain) {
+      this.domain = domain;
       return this;
     }
 
@@ -48,8 +70,8 @@ public class MuleApplicationModel extends MuleDeployableModel {
     protected MuleApplicationModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled,
                                                  List<String> secureProperties, String logConfigFile) {
       return new MuleApplicationModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
-                                      getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled), secureProperties,
-                                      logConfigFile);
+                                      getBundleDescriptorLoader(), configs, ofNullable(domain), ofNullable(redeploymentEnabled),
+                                      secureProperties, logConfigFile);
 
     }
   }
