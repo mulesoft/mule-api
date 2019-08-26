@@ -15,7 +15,7 @@ import java.util.function.Consumer;
  * <p>
  * This interface also provides some utility methods for functional composition of several callbacks.
  * <p>
- * Supports void processes can be achieved using {@link Void} as the generic param {@code <T>} and using {@code null} when
+ * Supports for void processes can be achieved using {@link Void} as the generic param {@code <T>} and using {@code null} when
  * invoking {@link #complete(Object)}
  *
  * @param <T> the generic type of the values that complete the callback
