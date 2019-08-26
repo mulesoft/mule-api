@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.config;
 
+import org.mule.runtime.api.component.AbstractComponent;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +19,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  * @since 1.0
  */
 //TODO: MULE-9047 try to simplify
-public final class PoolingProfile {
+public final class PoolingProfile extends AbstractComponent {
 
   /**
    * Tells the object pool not to initialise any components on startup.
