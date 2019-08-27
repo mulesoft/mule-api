@@ -23,23 +23,23 @@ import java.util.Set;
 @NoExtend
 public class MuleApplicationModel extends MuleDeployableModel {
 
-  private final String domainName;
+  private final String domain;
 
   private MuleApplicationModel(String name, String minMuleVersion, Product product,
                                MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
-                               Optional<String> domainName, Optional<Boolean> redeploymentEnabled,
+                               Optional<String> domain, Optional<Boolean> redeploymentEnabled,
                                List<String> secureProperties, String logConfigFile) {
     super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled,
           secureProperties, logConfigFile);
-    this.domainName = domainName.orElse(null);
+    this.domain = domain.orElse(null);
   }
 
   /**
    * @return the domain associated with this application
    */
   public Optional<String> getDomain() {
-    return ofNullable(domainName);
+    return ofNullable(domain);
   }
 
   /**
