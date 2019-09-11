@@ -1,4 +1,28 @@
 {
+  "1.2.3": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder::setDomain(java.lang.String)",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleApplicationModelBuilder",
+          "methodName": "setDomain",
+          "elementKind": "method",
+          "justification": "Adding capability to set a domain name in the application model"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.util.Optional<java.lang.String> org.mule.runtime.api.deployment.meta.MuleApplicationModel::getDomain()",
+          "package": "org.mule.runtime.api.deployment.meta",
+          "classSimpleName": "MuleApplicationModel",
+          "methodName": "getDomain",
+          "elementKind": "method",
+          "justification": "Adding capability to set a domain name in the application model"
+        }
+      ]
+    }
+  },
   "1.2.1": {
     "revapi": {
       "ignore": [
