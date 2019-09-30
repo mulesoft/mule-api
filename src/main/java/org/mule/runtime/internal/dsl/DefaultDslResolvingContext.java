@@ -9,6 +9,7 @@ package org.mule.runtime.internal.dsl;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
+
 import org.mule.runtime.api.dsl.DslResolvingContext;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
@@ -66,5 +67,10 @@ public final class DefaultDslResolvingContext implements DslResolvingContext {
   @Override
   public TypeCatalog getTypeCatalog() {
     return typeCatalog;
+  }
+
+  @Override
+  public String toString() {
+    return this.getClass().getSimpleName() + extensionsByName.keySet();
   }
 }
