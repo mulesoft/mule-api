@@ -24,6 +24,9 @@ import javax.xml.namespace.QName;
  */
 public interface Component {
 
+  public static final String NS_MULE_DOCUMENTATION = "http://www.mulesoft.org/schema/mule/documentation";
+
+  public static final String NS_MULE_PARSER_METADATA = "http://www.mulesoft.org/schema/mule/parser-metadata";
 
   /**
    * Constants related to annotations placed over components in the configuration files.
@@ -33,13 +36,12 @@ public interface Component {
     /**
      * Annotation placed over source code components so the user can provide a meaningful name.
      */
-    QName NAME_ANNOTATION_KEY = new QName("http://www.mulesoft.org/schema/mule/documentation", "name");
+    QName NAME_ANNOTATION_KEY = new QName(NS_MULE_DOCUMENTATION, "name");
 
     /**
      * Annotation that defines the source code for the element.
      */
-    QName SOURCE_ELEMENT_ANNOTATION_KEY =
-        new QName("http://www.mulesoft.org/schema/mule/documentation", "sourceElement");
+    QName SOURCE_ELEMENT_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceElement");
   }
 
   /**

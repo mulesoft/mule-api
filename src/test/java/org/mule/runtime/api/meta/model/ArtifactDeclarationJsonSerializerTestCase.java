@@ -11,6 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.IsNot.not;
+import static org.mule.runtime.api.component.Component.NS_MULE_DOCUMENTATION;
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.CONNECTION;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newArtifact;
 import static org.mule.runtime.app.declaration.api.fluent.ElementDeclarer.newListValue;
@@ -21,6 +22,7 @@ import static org.mule.runtime.app.declaration.api.fluent.ParameterSimpleValue.p
 import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.BOOLEAN;
 import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.NUMBER;
 import static org.mule.runtime.app.declaration.api.fluent.SimpleValueType.STRING;
+
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
 import org.mule.runtime.app.declaration.api.ParameterValue;
@@ -28,16 +30,16 @@ import org.mule.runtime.app.declaration.api.fluent.ElementDeclarer;
 import org.mule.runtime.app.declaration.api.fluent.ParameterObjectValue;
 import org.mule.runtime.app.declaration.api.fluent.SimpleValueType;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
-
 import java.io.InputStreamReader;
 
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 
 public class ArtifactDeclarationJsonSerializerTestCase {
 
@@ -118,7 +120,7 @@ public class ArtifactDeclarationJsonSerializerTestCase {
     ElementDeclarer os = ElementDeclarer.forExtension("ObjectStore");
 
     return newArtifact()
-        .withCustomParameter("xmlns:doc", "http://www.mulesoft.org/schema/mule/documentation")
+        .withCustomParameter("xmlns:doc", NS_MULE_DOCUMENTATION)
         .withGlobalElement(core.newConstruct("configuration")
             .withParameterGroup(group -> group.withParameter("defaultErrorHandler-ref",
                                                              createStringParameter("referableHandler")))
