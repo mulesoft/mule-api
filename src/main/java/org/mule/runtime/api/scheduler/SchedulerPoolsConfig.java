@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.scheduler;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.OptionalInt;
 import java.util.OptionalLong;
 import java.util.concurrent.Executor;
@@ -15,7 +17,10 @@ import java.util.concurrent.Executor;
  * 
  * @since 1.0
  */
+@NoImplement
 public interface SchedulerPoolsConfig {
+
+  SchedulerPoolStrategy getSchedulerPoolStrategy();
 
   /**
    * @return the maximum time (in milliseconds) to wait until all tasks in all the runtime thread pools have completed execution
@@ -53,6 +58,27 @@ public interface SchedulerPoolsConfig {
    *         time (in milliseconds) that excess idle threads will wait for new tasks before terminating.
    */
   OptionalLong getIoKeepAlive();
+
+  /**
+   * @return the number of threads to keep in the {@code I/O} pool.
+   */
+  OptionalInt getUberCorePoolSize();
+
+  /**
+   * @return the maximum number of threads to allow in the {@code I/O} pool.
+   */
+  OptionalInt getUberMaxPoolSize();
+
+  /**
+   * @return the size of the queue to use for holding {@code I/O} tasks before they are executed.
+   */
+  OptionalInt getUberQueueSize();
+
+  /**
+   * @return when the number of threads in the {@code I/O} pool is greater than {@link #getIoCorePoolSize()}, this is the maximum
+   *         time (in milliseconds) that excess idle threads will wait for new tasks before terminating.
+   */
+  OptionalLong getUberKeepAlive();
 
   /**
    * @return the number of threads to keep in the {@code cpu_intensive} pool, even if they are idle.
