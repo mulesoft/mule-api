@@ -22,7 +22,18 @@
           "classSimpleName": "Builder",
           "elementKind": "interface",
           "justification": "Only implementations are provided by the runtime."
-        }        
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.scheduler.SchedulerPoolsConfig",
+          "new": "interface org.mule.runtime.api.scheduler.SchedulerPoolsConfig",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerPoolsConfig",
+          "elementKind": "interface",
+          "justification": "Annotation was missing"
+        }
       ]
     }
   },
