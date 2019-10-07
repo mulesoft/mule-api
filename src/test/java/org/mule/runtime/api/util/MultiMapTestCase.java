@@ -14,8 +14,10 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.util.MultiMap.unmodifiableMultiMap;
+
 import org.mule.runtime.api.util.MultiMap.StringMultiMap;
 
 import java.util.Arrays;
@@ -52,8 +54,8 @@ public class MultiMapTestCase {
     });
   }
 
-  private Supplier<MultiMap<String, String>> mapSupplier;
-  private Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier;
+  private final Supplier<MultiMap<String, String>> mapSupplier;
+  private final Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier;
 
   protected MultiMap<String, String> multiMap;
 
@@ -131,6 +133,38 @@ public class MultiMapTestCase {
     assertEquals(entryList, immutableEntryList);
   }
 
+  @Test(expected = UnsupportedOperationException.class)
+  public void unmodifiableMultiMapFailsOnPut() {
+    unmodifiableMultiMap(multiMap).put(KEY_1, VALUE_1);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void unmodifiableMultiMapFailsOnPutAll() {
+    HashMap<String, String> map = new HashMap<>();
+    map.put(KEY_1, VALUE_1);
+    unmodifiableMultiMap(multiMap).putAll(map);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void unmodifiableMultiMapFailsOnRemove() {
+    unmodifiableMultiMap(multiMap).remove(KEY_1);
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void unmodifiableMultiMapFailsOnClear() {
+    unmodifiableMultiMap(multiMap).clear();
+  }
+
+  @Test
+  public void toUnmodifiableMapKeepsOrder() {
+    multiMap.put(KEY_3, VALUE_1);
+    multiMap.put(KEY_2, VALUE_1);
+    multiMap.put(KEY_1, VALUE_1);
+    List<Map.Entry<String, String>> entryList = multiMap.entryList();
+    List<Map.Entry<String, String>> immutableEntryList = unmodifiableMultiMap(multiMap).entryList();
+    assertEquals(entryList, immutableEntryList);
+  }
+
   @Test
   public void valuesReturnsOnlyFirstValue() {
     multiMap.put(KEY_1, VALUE_1);
@@ -198,8 +232,8 @@ public class MultiMapTestCase {
 
   private class EntryMatcher extends TypeSafeMatcher<Map.Entry<String, String>> {
 
-    private String expectedKey;
-    private String expectedValue;
+    private final String expectedKey;
+    private final String expectedValue;
 
     public EntryMatcher(String expectedKey, String expectedValue) {
       this.expectedKey = expectedKey;

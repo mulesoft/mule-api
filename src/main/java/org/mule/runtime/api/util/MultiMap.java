@@ -8,8 +8,11 @@ package org.mule.runtime.api.util;
 
 import static java.lang.Math.max;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
 import static org.mule.runtime.api.metadata.DataType.MULTI_MAP_STRING_STRING;
 
@@ -27,6 +30,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Implementation of a multi-map that allows the aggregation of keys and access to the aggregated list or a single value (the
@@ -65,6 +71,28 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     return EMPTY_MAP;
   }
 
+  /**
+   * Returns an unmodifiable view of the specified multi-map. This method allows modules to provide users with "read-only" access
+   * to internal multi-maps. Query operations on the returned multi-map "read through" to the specified multi-map, and attempts to
+   * modify the returned multi-map, whether direct or via its collection views, result in an
+   * <tt>UnsupportedOperationException</tt>.
+   * <p>
+   * The returned map will be serializable if the specified map is serializable.
+   *
+   * @param <K> the class of the map keys
+   * @param <V> the class of the map values
+   * @param m the multi-map for which an unmodifiable view is to be returned.
+   * @return an unmodifiable view of the specified multi-map.
+   */
+  public static <K, V> MultiMap<K, V> unmodifiableMultiMap(MultiMap<K, V> m) {
+    requireNonNull(m);
+    if (m instanceof UnmodifiableMultiMap || m instanceof ImmutableMultiMap) {
+      return m;
+    } else {
+      return new UnmodifiableMultiMap<>(m);
+    }
+  }
+
   protected Map<K, LinkedList<V>> paramsMap;
 
   public MultiMap(final MultiMap<K, V> multiMap) {
@@ -94,6 +122,10 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     if (this instanceof ImmutableMultiMap) {
       return this;
     }
+    if (this.isEmpty() && emptyMultiMap() != null) {
+      return emptyMultiMap();
+    }
+
     return new ImmutableMultiMap(this.paramsMap);
   }
 
@@ -130,8 +162,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * Returns the values to which the specified key is mapped.
    *
    * @param key the key whose associated values are to be returned
-   * @return a list of values to which the specified key is mapped, or
-   *         an empty list if this map contains no mappings for the key
+   * @return a list of values to which the specified key is mapped, or an empty list if this map contains no mappings for the key
    */
   public List<V> getAll(Object key) {
     LinkedList<V> value = paramsMap.get(key);
@@ -145,14 +176,17 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   @Override
   public V put(K key, V value) {
     LinkedList<V> previousValue = paramsMap.get(key);
-    LinkedList<V> newValue = previousValue;
-    if (previousValue != null) {
-      previousValue = new LinkedList<>(previousValue);
-    } else {
-      newValue = new LinkedList<>();
+    final V previousItem = resolvePreviousItem(previousValue);
+
+    if (previousValue == null) {
+      previousValue = new LinkedList<>();
+      paramsMap.put(key, previousValue);
     }
-    newValue.add(value);
-    paramsMap.put(key, newValue);
+    previousValue.add(value);
+    return previousItem;
+  }
+
+  private V resolvePreviousItem(LinkedList<V> previousValue) {
     if (previousValue == null || previousValue.isEmpty()) {
       return null;
     }
@@ -160,9 +194,8 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Associates the specified value with the specified key in this map
-   * (optional operation).  If the map previously contained mappings for
-   * the key, the new values are aggregated to the old.
+   * Associates the specified value with the specified key in this map (optional operation). If the map previously contained
+   * mappings for the key, the new values are aggregated to the old.
    *
    * @param key key with which the specified values are to be associated
    * @param values collection of values to be associated with the specified key
@@ -292,6 +325,8 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
   public static class StringMultiMap extends MultiMap<String, String> implements DataTypeAware {
 
+    private static final StringMultiMap EMPTY_STRING_MAP = new StringMultiMap().toImmutableMultiMap();
+
     private static final long serialVersionUID = 3153407829619876577L;
 
     public StringMultiMap() {
@@ -316,6 +351,9 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
       if (this instanceof ImmutableStringMultiMap) {
         return this;
       }
+      if (this.isEmpty() && EMPTY_STRING_MAP != null) {
+        return EMPTY_STRING_MAP;
+      }
       return new ImmutableStringMultiMap(this.paramsMap);
     }
 
@@ -335,4 +373,180 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     }
   }
 
+  private static class UnmodifiableMultiMap<K, V> extends MultiMap<K, V> {
+
+    private static final long serialVersionUID = 6798199484376351419L;
+
+    private final MultiMap<K, V> m;
+
+    public UnmodifiableMultiMap(MultiMap<K, V> m) {
+      this.m = m;
+    }
+
+    @Override
+    public MultiMap<K, V> toImmutableMultiMap() {
+      return m.toImmutableMultiMap();
+    }
+
+    @Override
+    public int size() {
+      return m.size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return m.isEmpty();
+    }
+
+    @Override
+    public boolean containsKey(Object key) {
+      return m.containsKey(key);
+    }
+
+    @Override
+    public boolean containsValue(Object value) {
+      return m.containsValue(value);
+    }
+
+    @Override
+    public V get(Object key) {
+      return m.get(key);
+    }
+
+    @Override
+    public List<V> getAll(Object key) {
+      return m.getAll(key);
+    }
+
+    @Override
+    public V put(K key, V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void put(K key, Collection<V> values) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V remove(Object key) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<V> removeAll(Object key) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> aMap) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void clear() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Set<K> keySet() {
+      return unmodifiableSet(m.keySet());
+    }
+
+    @Override
+    public Collection<V> values() {
+      return unmodifiableCollection(m.values());
+    }
+
+    @Override
+    public Set<Entry<K, V>> entrySet() {
+      return unmodifiableSet(m.entrySet());
+    }
+
+    @Override
+    public List<Entry<K, V>> entryList() {
+      return unmodifiableList(m.entryList());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      return m.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+      return m.hashCode();
+    }
+
+    @Override
+    public Map<K, ? extends List<V>> toListValuesMap() {
+      return m.toListValuesMap();
+    }
+
+    @Override
+    public String toString() {
+      return m.toString();
+    }
+
+    @Override
+    public V getOrDefault(Object key, V defaultValue) {
+      return m.getOrDefault(key, defaultValue);
+    }
+
+    @Override
+    public void forEach(BiConsumer<? super K, ? super V> action) {
+      m.forEach(action);
+    }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V putIfAbsent(K key, V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean remove(Object key, Object value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean replace(K key, V oldValue, V newValue) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V replace(K key, V value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V computeIfAbsent(K key, Function<? super K, ? extends V> mappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V computeIfPresent(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V compute(K key, BiFunction<? super K, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+      throw new UnsupportedOperationException();
+    }
+
+  }
 }
