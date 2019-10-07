@@ -321,6 +321,11 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     ImmutableMultiMap(final Map<K, V> parametersMap) {
       super(parametersMap);
     }
+
+    @Override
+    public MultiMap<K, V> toImmutableMultiMap() {
+      return this;
+    }
   }
 
   public static class StringMultiMap extends MultiMap<String, String> implements DataTypeAware {
@@ -348,9 +353,6 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
 
     @Override
     public StringMultiMap toImmutableMultiMap() {
-      if (this instanceof ImmutableStringMultiMap) {
-        return this;
-      }
       if (this.isEmpty() && EMPTY_STRING_MAP != null) {
         return EMPTY_STRING_MAP;
       }
@@ -370,6 +372,11 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     @Override
     public DataType getDataType() {
       return MULTI_MAP_STRING_STRING;
+    }
+
+    @Override
+    public StringMultiMap toImmutableMultiMap() {
+      return this;
     }
   }
 
