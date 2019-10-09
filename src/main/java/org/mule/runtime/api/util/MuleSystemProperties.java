@@ -36,8 +36,6 @@ public final class MuleSystemProperties {
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
-  public static final String MULE_FLOW_DISPATCH_WORKERS = SYSTEM_PROPERTY_PREFIX + "streaming.flow.dispatch.workers";
-
   /**
    * Forces the validation of all loaded extension models
    */
