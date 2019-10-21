@@ -19,17 +19,19 @@ class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Seria
 
   private DefaultTypedComponentIdentifier() {}
 
+  @Override
   public ComponentIdentifier getIdentifier() {
     return identifier;
   }
 
+  @Override
   public ComponentType getType() {
     return type;
   }
 
   public static class Builder implements TypedComponentIdentifier.Builder {
 
-    private DefaultTypedComponentIdentifier typedComponentIdentifier = new DefaultTypedComponentIdentifier();
+    private final DefaultTypedComponentIdentifier typedComponentIdentifier = new DefaultTypedComponentIdentifier();
 
     @Override
     public TypedComponentIdentifier.Builder identifier(ComponentIdentifier identifier) {
@@ -37,11 +39,13 @@ class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Seria
       return this;
     }
 
+    @Override
     public Builder type(ComponentType type) {
       typedComponentIdentifier.type = type;
       return this;
     }
 
+    @Override
     public TypedComponentIdentifier build() {
       checkState(typedComponentIdentifier.identifier != null, "identifier cannot be null");
       checkState(typedComponentIdentifier.type != null,
@@ -70,7 +74,7 @@ class DefaultTypedComponentIdentifier implements TypedComponentIdentifier, Seria
   @Override
   public int hashCode() {
     int result = getIdentifier().hashCode();
-    result = 31 * result + getType().hashCode();
+    result = 31 * result + Integer.hashCode(getType().ordinal());
     return result;
   }
 
