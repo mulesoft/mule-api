@@ -18,7 +18,7 @@ import org.mule.api.annotation.NoImplement;
 public interface HasStereotypeModel {
 
   /**
-   * @return The {@link StereotypeModel stereotypes} which apply to this model
+   * @return The {@link StereotypeModel stereotypes} which apply to this model. Not null.
    */
   StereotypeModel getStereotype();
 

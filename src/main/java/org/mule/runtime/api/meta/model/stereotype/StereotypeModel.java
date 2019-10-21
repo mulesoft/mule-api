@@ -42,7 +42,8 @@ public interface StereotypeModel {
   Optional<StereotypeModel> getParent();
 
   /**
-   * @return if {@code this}
+   * @return {@code true} if {@code this} stereotype or any of its ancestors is equal to the provided {@code other}
+   *         {@link StereotypeModel}, {@code false} otherwise.
    */
   boolean isAssignableTo(StereotypeModel other);
 }
