@@ -7,6 +7,8 @@
 package org.mule.runtime.api.meta.model.util;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import org.mule.runtime.api.meta.model.ComposableModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
@@ -15,6 +17,7 @@ import org.mule.runtime.api.meta.model.construct.ConstructModel;
 import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.function.FunctionModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.nested.NestableElementModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
@@ -155,6 +158,14 @@ public abstract class ExtensionWalker {
    */
   protected void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {}
 
+  /**
+   * Invoked when an {@link NestableElementModel} is found in the traversed {@code extensionModel}
+   *
+   * @param owner The component that owns the parameter
+   * @param model the {@link NestableElementModel}
+   */
+  protected void onNestable(ComposableModel owner, NestableElementModel model) {}
+
   private void walkSources(HasSourceModels model) {
     for (SourceModel source : model.getSourceModels()) {
       if (stopped) {
@@ -164,6 +175,7 @@ public abstract class ExtensionWalker {
       ifContinue(() -> walkParameters(source));
       ifContinue(() -> source.getSuccessCallback().ifPresent(this::walkParameters));
       ifContinue(() -> source.getErrorCallback().ifPresent(this::walkParameters));
+      ifContinue(() -> walkNesteable(source));
     }
   }
 
@@ -174,6 +186,15 @@ public abstract class ExtensionWalker {
       }
       onParameterGroup(model, group);
       ifContinue(() -> walkGroupParameters(model, group));
+    }
+  }
+
+  private void walkNesteable(ComposableModel model) {
+    for (NestableElementModel nested : model.getNestedComponents()) {
+      if (stopped) {
+        return;
+      }
+      onNestable(model, nested);
     }
   }
 
@@ -203,6 +224,7 @@ public abstract class ExtensionWalker {
       }
       onConstruct(model, construct);
       ifContinue(() -> walkParameters(construct));
+      ifContinue(() -> walkNesteable(construct));
     }
   }
 
@@ -214,6 +236,7 @@ public abstract class ExtensionWalker {
 
       onOperation(model, operation);
       ifContinue(() -> walkParameters(operation));
+      ifContinue(() -> walkNesteable(operation));
     }
   }
 
