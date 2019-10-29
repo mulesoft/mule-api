@@ -17,6 +17,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.OptionalLong;
 
@@ -190,7 +191,7 @@ public final class TypedValue<T> implements Serializable {
 
   @Override
   public String toString() {
-    return "TypedValue[value: '" + value.toString() + "', dataType: '" + dataType + "']";
+    return "TypedValue[value: '" + value + "', dataType: '" + dataType + "']";
   }
 
   private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
