@@ -190,7 +190,7 @@ public final class TypedValue<T> implements Serializable {
 
   @Override
   public String toString() {
-    return "TypedValue[value: '" + value.toString() + "', dataType: '" + dataType + "']";
+    return "TypedValue[value: '" + value + "', dataType: '" + dataType + "']";
   }
 
   private void readObject(ObjectInputStream in) throws ClassNotFoundException, IOException {
