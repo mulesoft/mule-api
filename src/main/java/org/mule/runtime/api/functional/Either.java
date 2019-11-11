@@ -25,6 +25,8 @@ import java.util.function.Function;
  *
  * @param <L> the type of the left value
  * @param <R> the type of the right value
+ *
+ * @since 1.3
  */
 final public class Either<L, R> {
 
