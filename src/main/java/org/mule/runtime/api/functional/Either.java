@@ -16,11 +16,11 @@ import java.util.function.Function;
 
 /**
  * This class allow to represent a type that holds two different values.
- *
+ * <p>
  * Only one value can be present at any given type.
- *
+ * <p>
  * This class can be used as a monad to interact and chain functions to be executed over the possible return values.
- *
+ * <p>
  * Most likely the left type represent an error or failure result and the right value represent a successful result.
  *
  * @param <L> the type of the left value
@@ -28,7 +28,7 @@ import java.util.function.Function;
  *
  * @since 1.3
  */
-final public class Either<L, R> {
+public class Either<L, R> {
 
   /**
    * Creates an {@code Either} with a left value.
