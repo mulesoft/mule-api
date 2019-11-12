@@ -34,6 +34,10 @@ public final class MuleSystemProperties {
    * System property key for the default size of a streaming buffer bucket
    */
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
+  public static final String MULE_STREAMING_MAX_MEMORY_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxMemoryPercentage";
+  public static final String MULE_STREAMING_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolSize";
+
+
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
   /**
