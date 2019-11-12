@@ -7,7 +7,6 @@
 package org.mule.runtime.api.functional;
 
 import static java.lang.String.format;
-import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
@@ -31,6 +30,15 @@ import java.util.function.Function;
 public class Either<L, R> {
 
   /**
+   * Common instance for {@code empty()}.
+   */
+  private static final Either<?, ?> EMPTY = new Either<>(Optional.empty(), Optional.empty());
+
+  public static <L, R> Either<L, R> empty() {
+    return (Either<L, R>) EMPTY;
+  }
+
+  /**
    * Creates an {@code Either} with a left value.
    *
    * @param value the left value
@@ -39,7 +47,10 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> left(L value) {
-    return new Either<>(ofNullable(value), empty());
+    if (value == null) {
+      return (Either<L, R>) EMPTY;
+    }
+    return new Either<>(ofNullable(value), Optional.empty());
   }
 
   /**
@@ -53,7 +64,10 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> left(L value, Class<R> rightClass) {
-    return new Either<>(ofNullable(value), empty());
+    if (value == null) {
+      return (Either<L, R>) EMPTY;
+    }
+    return new Either<>(ofNullable(value), Optional.empty());
   }
 
   /**
@@ -65,7 +79,10 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> right(R value) {
-    return new Either<>(empty(), ofNullable(value));
+    if (value == null) {
+      return (Either<L, R>) EMPTY;
+    }
+    return new Either<>(Optional.empty(), ofNullable(value));
   }
 
   /**
@@ -79,7 +96,10 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> right(Class<L> leftClass, R value) {
-    return new Either<>(empty(), ofNullable(value));
+    if (value == null) {
+      return (Either<L, R>) EMPTY;
+    }
+    return new Either<>(Optional.empty(), ofNullable(value));
   }
 
   private final Optional<L> left;
@@ -96,10 +116,14 @@ public class Either<L, R> {
    * @param leftFunc the function to apply to the left value
    * @param rightFunc the function to apply to the left value
    * @param <T> the return type of the function.
-   * @return the result of applying the function on left of right values.
+   * @return the result of applying the function on left of right values, or {@code null} if none were set.
    */
   public <T> T reduce(Function<? super L, ? extends T> leftFunc, Function<? super R, ? extends T> rightFunc) {
-    return isLeft() ? leftFunc.apply(left.get()) : rightFunc.apply(right.get());
+    return isLeft()
+        ? leftFunc.apply(left.get())
+        : (isRight()
+            ? rightFunc.apply(right.get())
+            : null);
   }
 
   /**
@@ -177,7 +201,7 @@ public class Either<L, R> {
     } else if (right.isPresent()) {
       return (Optional<Object>) right;
     } else {
-      return empty();
+      return Optional.empty();
     }
   }
 
