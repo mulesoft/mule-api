@@ -34,6 +34,11 @@ public class Either<L, R> {
    */
   private static final Either<?, ?> EMPTY = new Either<>(Optional.empty(), Optional.empty());
 
+  /**
+   * Creates an {@link Either} that doesn't have any left or right value.
+   *
+   * @return a singleton empty {@code Either instance}
+   */
   public static <L, R> Either<L, R> empty() {
     return (Either<L, R>) EMPTY;
   }
@@ -64,10 +69,7 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> left(L value, Class<R> rightClass) {
-    if (value == null) {
-      return (Either<L, R>) EMPTY;
-    }
-    return new Either<>(ofNullable(value), Optional.empty());
+    return left(value);
   }
 
   /**
@@ -96,10 +98,7 @@ public class Either<L, R> {
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> right(Class<L> leftClass, R value) {
-    if (value == null) {
-      return (Either<L, R>) EMPTY;
-    }
-    return new Either<>(Optional.empty(), ofNullable(value));
+    return right(value);
   }
 
   private final Optional<L> left;
