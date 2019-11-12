@@ -6,12 +6,23 @@
  */
 package org.mule.runtime.api.functional;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
 public class EitherTestCase {
+
+  @Test
+  public void reduceLeftEither() {
+    assertThat(Either.left(1).reduce(l -> "l", r -> "r"), equalTo("l"));
+  }
+
+  @Test
+  public void reduceRightEither() {
+    assertThat(Either.right(2).reduce(l -> "l", r -> "r"), equalTo("r"));
+  }
 
   @Test
   public void reduceEmptyEither() {

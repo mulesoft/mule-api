@@ -119,11 +119,13 @@ public class Either<L, R> {
    * @return the result of applying the function on left of right values, or {@code null} if none were set.
    */
   public <T> T reduce(Function<? super L, ? extends T> leftFunc, Function<? super R, ? extends T> rightFunc) {
-    return isLeft()
-        ? leftFunc.apply(left.get())
-        : (isRight()
-            ? rightFunc.apply(right.get())
-            : null);
+    if (isLeft()) {
+      return left.map(leftFunc).orElse(null);
+    } else {
+      return isRight()
+          ? right.map(rightFunc).orElse(null)
+          : null;
+    }
   }
 
   /**
