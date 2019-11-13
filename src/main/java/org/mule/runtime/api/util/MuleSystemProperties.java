@@ -42,14 +42,14 @@ public final class MuleSystemProperties {
    *
    * @since 1.3.0
    */
-  public static final String MULE_STREAMING_MAX_MEMORY_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxMemoryPercentage";
+  public static final String MULE_STREAMING_MAX_HEAP_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxHeapPercentage";
 
   /**
    * System property key for the max size of byte buffer pools used for repeatable streaming
    *
    * @since 1.3.0
    */
-  public static final String MULE_STREAMING_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolSize";
+  public static final String MULE_STREAMING_MAX_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolMaxSize";
 
 
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
@@ -103,6 +103,5 @@ public final class MuleSystemProperties {
     return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
   }
 
-  private MuleSystemProperties() {
-  }
+  private MuleSystemProperties() {}
 }
