@@ -34,6 +34,24 @@ public final class MuleSystemProperties {
    * System property key for the default size of a streaming buffer bucket
    */
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
+
+  /**
+   * System property key for the max percentage of the total heap memory that can be assigned to repeatable streaming memory.
+   * <p>
+   * Valid values are doubles between 0 and 1 (inclusive)
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_STREAMING_MAX_HEAP_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxHeapPercentage";
+
+  /**
+   * System property key for the max size of byte buffer pools used for repeatable streaming
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_STREAMING_MAX_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolMaxSize";
+
+
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
   /**
