@@ -76,6 +76,14 @@ public final class MuleSystemProperties {
   public static final String MULE_LOGGING_INTERVAL_SCHEDULERS_LATENCY_REPORT =
       SYSTEM_PROPERTY_PREFIX + "schedulers.latency.report.interval";
 
+
+  /**
+   * This is the timeout in milliseconds to wait before we detect that the test connectivity is done in case the test connectivity
+   * is asynchronously done.
+   */
+  public static final String ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "async.test.connectivity.timeout";
+
   /**
    * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
    * all, the extension client will cache resources.
