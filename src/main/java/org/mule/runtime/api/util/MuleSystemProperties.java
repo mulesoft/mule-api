@@ -81,7 +81,7 @@ public final class MuleSystemProperties {
    * This is the timeout in milliseconds to wait before we detect that the test connectivity is done in case the test connectivity
    * is asynchronously done.
    * 
-   * @since 4.3.0
+   * @since 1.3.0
    */
   public static final String ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "async.test.connectivity.timeout";
