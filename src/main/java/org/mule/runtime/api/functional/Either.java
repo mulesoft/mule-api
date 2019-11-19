@@ -196,11 +196,11 @@ public class Either<L, R> {
     return right.orElse(null);
   }
 
-  public Optional<Object> getValue() {
+  public <T> Optional<T> getValue() {
     if (left.isPresent()) {
-      return (Optional<Object>) left;
+      return (Optional<T>) left;
     } else if (right.isPresent()) {
-      return (Optional<Object>) right;
+      return (Optional<T>) right;
     } else {
       return Optional.empty();
     }
