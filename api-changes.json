@@ -1,4 +1,19 @@
 {
+  "1.1.7": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "elementKind": "field",
+          "justification": "Timeout configurable"
+        }
+      ]
+    }
+  },
   "1.1.6": {
     "revapi": {
       "ignore": [
