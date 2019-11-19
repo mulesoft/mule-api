@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "elementKind": "field",
+          "justification": "Added a system property due to a bug"
+        },
+        {
           "code": "java.method.added",
           "new": "method org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder org.mule.runtime.api.deployment.meta.MuleApplicationModel.MuleApplicationModelBuilder::setDomain(java.lang.String)",
           "package": "org.mule.runtime.api.deployment.meta",
