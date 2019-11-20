@@ -51,6 +51,15 @@ public final class MuleSystemProperties {
    */
   public static final String MULE_STREAMING_MAX_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolMaxSize";
 
+  /**
+   * System property key to set the maximum allowed flowStack entries for an event context, before raising a {@code MULE:CRITICAL}
+   * error.
+   * <p>
+   * By default, the value is set to 50.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_FLOW_STACK_MAX_DEPTH = SYSTEM_PROPERTY_PREFIX + "flowStack.maxDepth";
 
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
