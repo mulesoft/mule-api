@@ -33,7 +33,53 @@
           "classSimpleName": "SchedulerPoolsConfig",
           "elementKind": "interface",
           "justification": "Annotation was missing"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.metadata.TypedValue<?> org.mule.runtime.api.el.ExpressionLanguageSession::evaluate(org.mule.runtime.api.el.CompiledExpression) throws org.mule.runtime.api.el.ExpressionExecutionException",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageSession",
+          "methodName": "evaluate",
+          "elementKind": "method",
+          "justification": "Support for compiled expressions"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.metadata.TypedValue<?> org.mule.runtime.api.el.ExpressionLanguageSession::evaluate(org.mule.runtime.api.el.CompiledExpression, long) throws org.mule.runtime.api.el.ExpressionExecutionException",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageSession",
+          "methodName": "evaluate",
+          "elementKind": "method",
+          "justification": "Support for compiled expressions"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.metadata.TypedValue<?> org.mule.runtime.api.el.ExpressionLanguageSession::evaluate(org.mule.runtime.api.el.CompiledExpression, org.mule.runtime.api.metadata.DataType) throws org.mule.runtime.api.el.ExpressionExecutionException",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageSession",
+          "methodName": "evaluate",
+          "elementKind": "method",
+          "justification": "Support for compiled expressions"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.metadata.TypedValue<?> org.mule.runtime.api.el.ExpressionLanguageSession::evaluateLogExpression(org.mule.runtime.api.el.CompiledExpression) throws org.mule.runtime.api.el.ExpressionExecutionException",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageSession",
+          "methodName": "evaluateLogExpression",
+          "elementKind": "method",
+          "justification": "Support for compiled expressions"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.util.Iterator<org.mule.runtime.api.metadata.TypedValue<?>> org.mule.runtime.api.el.ExpressionLanguageSession::split(org.mule.runtime.api.el.CompiledExpression)",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageSession",
+          "methodName": "split",
+          "elementKind": "method",
+          "justification": "Support for compiled expressions"
         }
+
       ]
     }
   },
