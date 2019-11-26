@@ -175,4 +175,9 @@ class PentaFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
     return new NFastMapDelegate<>(overflowDelegateFactory, target, previousValue);
   }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new PentaFastMapDelegate<>(overflowDelegateFactory, entry1, entry2, entry3, entry4, entry5, null);
+  }
 }

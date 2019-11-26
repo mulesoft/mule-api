@@ -115,4 +115,9 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       return this;
     }
   }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new BiFastMapDelegate<>(overflowDelegateFactory, entry1, entry2, null);
+  }
 }

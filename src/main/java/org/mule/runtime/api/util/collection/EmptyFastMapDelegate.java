@@ -70,4 +70,9 @@ class EmptyFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   public Set<Entry<K, V>> entrySet() {
     return emptySet();
   }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new EmptyFastMapDelegate<>(overflowDelegateFactory, null);
+  }
 }

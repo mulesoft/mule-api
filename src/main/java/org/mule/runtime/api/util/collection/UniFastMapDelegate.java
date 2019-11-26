@@ -85,4 +85,9 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   public Set<Entry<K, V>> entrySet() {
     return singleton(entry);
   }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new UniFastMapDelegate<>(overflowDelegateFactory, entry, null);
+  }
 }

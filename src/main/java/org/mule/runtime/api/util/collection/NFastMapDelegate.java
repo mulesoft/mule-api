@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util.collection;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -83,5 +84,10 @@ class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   @Override
   public Set<Entry<K, V>> entrySet() {
     return delegate.entrySet();
+  }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new NFastMapDelegate<>(overflowDelegateFactory, new HashMap<>(delegate), null);
   }
 }

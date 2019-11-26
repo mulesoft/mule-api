@@ -150,4 +150,9 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       return this;
     }
   }
+
+  @Override
+  FastMapDelegate<K, V> copy() {
+    return new QuadFastMapDelegate<>(overflowDelegateFactory, entry1, entry2, entry3, entry4, null);
+  }
 }

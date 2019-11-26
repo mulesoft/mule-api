@@ -10,6 +10,7 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -19,12 +20,15 @@ import java.util.function.Supplier;
 public class FastMap<K, V> implements Map<K, V>, Serializable {
 
   private FastMapDelegate<K, V> delegate;
-  private final Supplier<Map<K, V>> overflowDelegateFactory;
+  private transient final Supplier<Map<K, V>> overflowDelegateFactory;
 
   public static <K, V> FastMap<K, V> of(Map<K, V> map) {
+    if (map == null) {
+      return new FastMap<>(HashMap::new, new EmptyFastMapDelegate<>(HashMap::new, null));
+    }
+
     if (map instanceof FastMap) {
-      FastMap<K, V> other = (FastMap<K, V>) map;
-      return new FastMap<>(other.overflowDelegateFactory, other.delegate);
+      return ((FastMap<K, V>) map).copy();
     }
 
     Supplier<Map<K, V>> mapSupplier = () -> {
@@ -58,6 +62,10 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
       default:
         return new FastMap<>(mapSupplier, new NFastMapDelegate<>(mapSupplier, map, null));
     }
+  }
+
+  public FastMap() {
+    this(HashMap::new);
   }
 
   public FastMap(Supplier<Map<K, V>> overflowDelegateFactory) {
@@ -94,6 +102,10 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
   @Override
   public void clear() {
     delegate = new EmptyFastMapDelegate<>(overflowDelegateFactory, null);
+  }
+
+  public FastMap<K, V> copy() {
+    return new FastMap<>(overflowDelegateFactory, delegate.copy());
   }
 
   @Override
