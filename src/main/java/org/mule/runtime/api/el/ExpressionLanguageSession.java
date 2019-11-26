@@ -73,14 +73,14 @@ public interface ExpressionLanguageSession extends AutoCloseable {
    */
   Iterator<TypedValue<?>> split(String expression);
 
-
-
   /**
    * Evaluates an expression according to the parameters used during construction and the global bindings.
    *
    * @param expression the EL expression
    * @return the result of the expression plus its type
    * @throws ExpressionExecutionException when an error occurs during evaluation
+   *
+   * @since 1.3
    */
   TypedValue<?> evaluate(CompiledExpression expression) throws ExpressionExecutionException;
 
@@ -93,6 +93,8 @@ public interface ExpressionLanguageSession extends AutoCloseable {
    *        type.
    * @return the result of the expression plus its type
    * @throws ExpressionExecutionException or during transformation or during transformation
+   *
+   * @since 1.3
    */
   TypedValue<?> evaluate(CompiledExpression expression, DataType expectedOutputType)
       throws ExpressionExecutionException;
@@ -105,6 +107,8 @@ public interface ExpressionLanguageSession extends AutoCloseable {
    *        time, an {@link ExpressionExecutionException} will be thrown.
    * @return the result of the expression plus its type
    * @throws ExpressionExecutionException when an error occurs during evaluation
+   *
+   * @since 1.3
    */
   TypedValue<?> evaluate(CompiledExpression expression, long timeout) throws ExpressionExecutionException;
 
@@ -117,6 +121,8 @@ public interface ExpressionLanguageSession extends AutoCloseable {
    * @param expression the EL expression
    * @return the result of the expression plus its type
    * @throws ExpressionExecutionException when an error occurs during evaluation
+   *
+   * @since 1.3
    */
   TypedValue<?> evaluateLogExpression(CompiledExpression expression)
       throws ExpressionExecutionException;
@@ -127,6 +133,8 @@ public interface ExpressionLanguageSession extends AutoCloseable {
    *
    * @param expression the expression to be used to split
    * @return an iterator with the elements that were split
+   *
+   * @since 1.3
    */
   Iterator<TypedValue<?>> split(CompiledExpression expression);
 
