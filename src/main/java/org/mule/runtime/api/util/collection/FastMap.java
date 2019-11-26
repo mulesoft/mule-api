@@ -22,6 +22,44 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
   private FastMapDelegate<K, V> delegate;
   private transient final Supplier<Map<K, V>> overflowDelegateFactory;
 
+  public static <K, V> FastMap<K, V> of(K key, V value) {
+    return new FastMap<>(HashMap::new, new UniFastMapDelegate<>(HashMap::new, new FastMapEntry<>(key, value), null));
+  }
+
+  public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2) {
+    return new FastMap<>(HashMap::new, new BiFastMapDelegate<>(HashMap::new,
+                                                               new FastMapEntry<>(k1, v1),
+                                                               new FastMapEntry<>(k2, v2),
+                                                               null));
+  }
+
+  public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+    return new FastMap<>(HashMap::new, new TriFastMapDelegate<>(HashMap::new,
+                                                                new FastMapEntry<>(k1, v1),
+                                                                new FastMapEntry<>(k2, v2),
+                                                                new FastMapEntry<>(k3, v3),
+                                                                null));
+  }
+
+  public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
+    return new FastMap<>(HashMap::new, new QuadFastMapDelegate<>(HashMap::new,
+                                                                 new FastMapEntry<>(k1, v1),
+                                                                 new FastMapEntry<>(k2, v2),
+                                                                 new FastMapEntry<>(k3, v3),
+                                                                 new FastMapEntry<>(k4, v4),
+                                                                 null));
+  }
+
+  public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
+    return new FastMap<>(HashMap::new, new PentaFastMapDelegate<>(HashMap::new,
+                                                                  new FastMapEntry<>(k1, v1),
+                                                                  new FastMapEntry<>(k2, v2),
+                                                                  new FastMapEntry<>(k3, v3),
+                                                                  new FastMapEntry<>(k4, v4),
+                                                                  new FastMapEntry<>(k5, v5),
+                                                                  null));
+  }
+
   public static <K, V> FastMap<K, V> of(Map<K, V> map) {
     if (map == null) {
       return new FastMap<>(HashMap::new, new EmptyFastMapDelegate<>(HashMap::new, null));
