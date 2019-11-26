@@ -9,17 +9,14 @@ package org.mule.runtime.api.util.collection;
 import static java.util.Collections.singleton;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Supplier;
 
 class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   private final Entry<K, V> entry;
 
-  public UniFastMapDelegate(Supplier<Map<K, V>> overflowDelegateFactory, Entry<K, V> entry, V previousValue) {
-    super(overflowDelegateFactory);
+  public UniFastMapDelegate(Entry<K, V> entry, V previousValue) {
     this.entry = entry;
     this.previousValue = previousValue;
   }
@@ -57,14 +54,14 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       return this;
     } else {
       previousValue = null;
-      return new BiFastMapDelegate<>(overflowDelegateFactory, entry, new FastMapEntry<>(key, value), null);
+      return new BiFastMapDelegate<>(entry, new FastMapEntry<>(key, value), null);
     }
   }
 
   @Override
   FastMapDelegate<K, V> fastRemove(Object key) {
     if (containsKey(key)) {
-      return new EmptyFastMapDelegate<>(overflowDelegateFactory, entry.getValue());
+      return new EmptyFastMapDelegate<>(entry.getValue());
     }
 
     previousValue = null;
@@ -88,6 +85,6 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   FastMapDelegate<K, V> copy() {
-    return new UniFastMapDelegate<>(overflowDelegateFactory, entry, null);
+    return new UniFastMapDelegate<>(entry, null);
   }
 }

@@ -6,114 +6,89 @@
  */
 package org.mule.runtime.api.util.collection;
 
-import org.mule.runtime.api.exception.MuleRuntimeException;
-
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class FastMap<K, V> implements Map<K, V>, Serializable {
 
   private FastMapDelegate<K, V> delegate;
-  private transient final Supplier<Map<K, V>> overflowDelegateFactory;
 
   public static <K, V> FastMap<K, V> of(K key, V value) {
-    return new FastMap<>(HashMap::new, new UniFastMapDelegate<>(HashMap::new, new FastMapEntry<>(key, value), null));
+    return new FastMap<>(new UniFastMapDelegate<>(new FastMapEntry<>(key, value), null));
   }
 
   public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2) {
-    return new FastMap<>(HashMap::new, new BiFastMapDelegate<>(HashMap::new,
-                                                               new FastMapEntry<>(k1, v1),
-                                                               new FastMapEntry<>(k2, v2),
-                                                               null));
+    return new FastMap<>(new BiFastMapDelegate<>(new FastMapEntry<>(k1, v1),
+                                                 new FastMapEntry<>(k2, v2),
+                                                 null));
   }
 
   public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-    return new FastMap<>(HashMap::new, new TriFastMapDelegate<>(HashMap::new,
-                                                                new FastMapEntry<>(k1, v1),
-                                                                new FastMapEntry<>(k2, v2),
-                                                                new FastMapEntry<>(k3, v3),
-                                                                null));
+    return new FastMap<>(new TriFastMapDelegate<>(new FastMapEntry<>(k1, v1),
+                                                  new FastMapEntry<>(k2, v2),
+                                                  new FastMapEntry<>(k3, v3),
+                                                  null));
   }
 
   public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-    return new FastMap<>(HashMap::new, new QuadFastMapDelegate<>(HashMap::new,
-                                                                 new FastMapEntry<>(k1, v1),
-                                                                 new FastMapEntry<>(k2, v2),
-                                                                 new FastMapEntry<>(k3, v3),
-                                                                 new FastMapEntry<>(k4, v4),
-                                                                 null));
+    return new FastMap<>(new QuadFastMapDelegate<>(new FastMapEntry<>(k1, v1),
+                                                   new FastMapEntry<>(k2, v2),
+                                                   new FastMapEntry<>(k3, v3),
+                                                   new FastMapEntry<>(k4, v4),
+                                                   null));
   }
 
   public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    return new FastMap<>(HashMap::new, new PentaFastMapDelegate<>(HashMap::new,
-                                                                  new FastMapEntry<>(k1, v1),
-                                                                  new FastMapEntry<>(k2, v2),
-                                                                  new FastMapEntry<>(k3, v3),
-                                                                  new FastMapEntry<>(k4, v4),
-                                                                  new FastMapEntry<>(k5, v5),
-                                                                  null));
+    return new FastMap<>(new PentaFastMapDelegate<>(new FastMapEntry<>(k1, v1),
+                                                    new FastMapEntry<>(k2, v2),
+                                                    new FastMapEntry<>(k3, v3),
+                                                    new FastMapEntry<>(k4, v4),
+                                                    new FastMapEntry<>(k5, v5),
+                                                    null));
   }
 
   public static <K, V> FastMap<K, V> of(Map<K, V> map) {
     if (map == null) {
-      return new FastMap<>(HashMap::new, new EmptyFastMapDelegate<>(HashMap::new, null));
+      return new FastMap<>(new EmptyFastMapDelegate<>(null));
     }
 
     if (map instanceof FastMap) {
       return ((FastMap<K, V>) map).copy();
     }
 
-    Supplier<Map<K, V>> mapSupplier = () -> {
-      try {
-        return map.getClass().newInstance();
-      } catch (Exception e) {
-        throw new MuleRuntimeException(e);
-      }
-    };
     Iterator<Entry<K, V>> it;
     switch (map.size()) {
       case 0:
-        return new FastMap<>(mapSupplier, new EmptyFastMapDelegate<>(mapSupplier, null));
+        return new FastMap<>(new EmptyFastMapDelegate<>(null));
       case 1:
-        return new FastMap<>(mapSupplier, new UniFastMapDelegate<>(mapSupplier, map.entrySet().iterator().next(), null));
+        return new FastMap<>(new UniFastMapDelegate<>(map.entrySet().iterator().next(), null));
       case 2:
         it = map.entrySet().iterator();
-        return new FastMap<>(mapSupplier, new BiFastMapDelegate<>(mapSupplier, it.next(), it.next(), null));
+        return new FastMap<>(new BiFastMapDelegate<>(it.next(), it.next(), null));
       case 3:
         it = map.entrySet().iterator();
-        return new FastMap<>(mapSupplier, new TriFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), null));
+        return new FastMap<>(new TriFastMapDelegate<>(it.next(), it.next(), it.next(), null));
       case 4:
         it = map.entrySet().iterator();
-        return new FastMap<>(mapSupplier,
-                             new QuadFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), it.next(), null));
+        return new FastMap<>(new QuadFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), null));
       case 5:
         it = map.entrySet().iterator();
-        return new FastMap<>(mapSupplier,
-                             new PentaFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), it.next(), it.next(),
-                                                        null));
+        return new FastMap<>(new PentaFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), null));
       default:
-        return new FastMap<>(mapSupplier, new NFastMapDelegate<>(mapSupplier, map, null));
+        return new FastMap<>(new NFastMapDelegate<>(map, null));
     }
   }
 
   public FastMap() {
-    this(HashMap::new);
+    delegate = new EmptyFastMapDelegate<>(null);
   }
 
-  public FastMap(Supplier<Map<K, V>> overflowDelegateFactory) {
-    this.overflowDelegateFactory = overflowDelegateFactory;
-    delegate = new EmptyFastMapDelegate<>(overflowDelegateFactory, null);
-  }
-
-  private FastMap(Supplier<Map<K, V>> overflowDelegateFactory, FastMapDelegate<K, V> delegate) {
+  private FastMap(FastMapDelegate<K, V> delegate) {
     this.delegate = delegate;
-    this.overflowDelegateFactory = overflowDelegateFactory;
   }
 
   @Override
@@ -139,11 +114,11 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public void clear() {
-    delegate = new EmptyFastMapDelegate<>(overflowDelegateFactory, null);
+    delegate = new EmptyFastMapDelegate<>(null);
   }
 
   public FastMap<K, V> copy() {
-    return new FastMap<>(overflowDelegateFactory, delegate.copy());
+    return new FastMap<>(delegate.copy());
   }
 
   @Override

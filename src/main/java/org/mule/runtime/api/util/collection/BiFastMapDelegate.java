@@ -10,21 +10,17 @@ import static java.util.Collections.unmodifiableSet;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Supplier;
 
 class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   private final Entry<K, V> entry1;
   private final Entry<K, V> entry2;
 
-  public BiFastMapDelegate(Supplier<Map<K, V>> overflowDelegateFactory,
-                           Entry<K, V> entry1,
+  public BiFastMapDelegate(Entry<K, V> entry1,
                            Entry<K, V> entry2,
                            V previousValue) {
-    super(overflowDelegateFactory);
     this.entry1 = entry1;
     this.entry2 = entry2;
     this.previousValue = previousValue;
@@ -100,16 +96,16 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       return this;
     } else {
       previousValue = null;
-      return new TriFastMapDelegate<>(overflowDelegateFactory, entry1, entry2, new FastMapEntry<>(key, value), null);
+      return new TriFastMapDelegate<>(entry1, entry2, new FastMapEntry<>(key, value), null);
     }
   }
 
   @Override
   public FastMapDelegate<K, V> fastRemove(Object key) {
     if (Objects.equals(entry1.getKey(), key)) {
-      return new UniFastMapDelegate<>(overflowDelegateFactory, entry2, entry1.getValue());
+      return new UniFastMapDelegate<>(entry2, entry1.getValue());
     } else if (Objects.equals(entry2.getKey(), key)) {
-      return new UniFastMapDelegate<>(overflowDelegateFactory, entry1, entry2.getValue());
+      return new UniFastMapDelegate<>(entry1, entry2.getValue());
     } else {
       previousValue = null;
       return this;
@@ -118,6 +114,6 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   FastMapDelegate<K, V> copy() {
-    return new BiFastMapDelegate<>(overflowDelegateFactory, entry1, entry2, null);
+    return new BiFastMapDelegate<>(entry1, entry2, null);
   }
 }

@@ -9,20 +9,17 @@ package org.mule.runtime.api.util.collection;
 import static java.util.Collections.emptySet;
 
 import java.util.Collection;
-import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 
 class EmptyFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
-  public EmptyFastMapDelegate(Supplier<Map<K, V>> overflowDelegateFactory, V previousValue) {
-    super(overflowDelegateFactory);
+  public EmptyFastMapDelegate(V previousValue) {
     this.previousValue = previousValue;
   }
 
   @Override
   public FastMapDelegate<K, V> fastPut(K key, V value) {
-    return new UniFastMapDelegate<>(overflowDelegateFactory, new FastMapEntry<>(key, value), null);
+    return new UniFastMapDelegate<>(new FastMapEntry<>(key, value), null);
   }
 
   @Override
@@ -73,6 +70,6 @@ class EmptyFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   FastMapDelegate<K, V> copy() {
-    return new EmptyFastMapDelegate<>(overflowDelegateFactory, null);
+    return new EmptyFastMapDelegate<>(null);
   }
 }

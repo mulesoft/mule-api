@@ -11,14 +11,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Supplier;
 
 class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   private final Map<K, V> delegate;
 
-  public NFastMapDelegate(Supplier<Map<K, V>> overflowDelegateFactory, Map<K, V> delegate, V previousValue) {
-    super(overflowDelegateFactory);
+  public NFastMapDelegate(Map<K, V> delegate, V previousValue) {
     this.delegate = delegate;
     this.previousValue = previousValue;
   }
@@ -37,8 +35,7 @@ class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
     }
 
     Iterator<Entry<K, V>> iterator = entrySet().iterator();
-    return new PentaFastMapDelegate<>(overflowDelegateFactory,
-                                      iterator.next(),
+    return new PentaFastMapDelegate<>(iterator.next(),
                                       iterator.next(),
                                       iterator.next(),
                                       iterator.next(),
@@ -88,6 +85,6 @@ class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   FastMapDelegate<K, V> copy() {
-    return new NFastMapDelegate<>(overflowDelegateFactory, new HashMap<>(delegate), null);
+    return new NFastMapDelegate<>(new HashMap<>(delegate), null);
   }
 }

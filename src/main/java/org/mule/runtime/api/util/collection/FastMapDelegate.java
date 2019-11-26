@@ -8,17 +8,10 @@ package org.mule.runtime.api.util.collection;
 
 import java.io.Serializable;
 import java.util.Map;
-import java.util.function.Supplier;
 
 abstract class FastMapDelegate<K, V> implements Map<K, V>, Serializable {
 
-  protected final Supplier<Map<K, V>> overflowDelegateFactory;
-
   protected transient V previousValue;
-
-  FastMapDelegate(Supplier<Map<K, V>> overflowDelegateFactory) {
-    this.overflowDelegateFactory = overflowDelegateFactory;
-  }
 
   abstract FastMapDelegate<K, V> fastPut(K key, V value);
 
