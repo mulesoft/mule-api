@@ -8,6 +8,7 @@ package org.mule.runtime.api.util.collection;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
@@ -51,7 +52,7 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
                                                     null));
   }
 
-  public static <K, V> FastMap<K, V> of(Map<K, V> map) {
+  public static <K, V> Map<K, V> copy(Map<K, V> map) {
     if (map == null) {
       return new FastMap<>(new EmptyFastMapDelegate<>(null));
     }
@@ -79,7 +80,26 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
         it = map.entrySet().iterator();
         return new FastMap<>(new PentaFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), null));
       default:
-        return new FastMap<>(new NFastMapDelegate<>(map, null));
+        return new HashMap<>(map);
+    }
+  }
+
+  public static <K, V> Map<K, V> forSize(int size) {
+    switch (size) {
+      case 0:
+        return new FastMap<>(new EmptyFastMapDelegate<>(null));
+      case 1:
+        return new FastMap<>(new UniFastMapDelegate<>(null, null));
+      case 2:
+        return new FastMap<>(new BiFastMapDelegate<>(null, null, null));
+      case 3:
+        return new FastMap<>(new TriFastMapDelegate<>(null, null, null, null));
+      case 4:
+        return new FastMap<>(new QuadFastMapDelegate<>(null, null, null, null, null));
+      case 5:
+        return new FastMap<>(new PentaFastMapDelegate<>(null, null, null, null, null, null));
+      default:
+        return new HashMap<>(size);
     }
   }
 
