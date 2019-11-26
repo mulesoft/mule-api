@@ -7,13 +7,9 @@
 package org.mule.runtime.api.el;
 
 import org.mule.runtime.api.metadata.DataType;
-import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Evaluates an expression considering a set of given bindings and a set of global ones.
@@ -50,7 +46,7 @@ public interface ExpressionLanguage {
    *                           type.
    * @param context            the current dynamic binding context to consider
    * @return the result of the expression plus its type
-   * @throws ExpressionExecutionException when an error occurs during evaluation or while parsing
+   * @throws ExpressionExecutionException or during transformation or during transformation
    */
   TypedValue<?> evaluate(String expression, DataType expectedOutputType, BindingContext context)
       throws ExpressionExecutionException;
@@ -85,35 +81,6 @@ public interface ExpressionLanguage {
    * @return an iterator with the elements that were split
    */
   Iterator<TypedValue<?>> split(String expression, BindingContext context);
-
-  /**
-   * Compiles a specified expression with a given binding context and returns
-   *
-   * @param expression The expression
-   * @param context    The context to compile against
-   * @return The compiled expression
-   * @throws ExpressionCompilationException when an error occurs during compilation
-   * @since 1.3
-   */
-  default CompiledExpression compile(String expression, BindingContext context) throws ExpressionCompilationException {
-    return new CompiledExpression() {
-
-      @Override
-      public String expression() {
-        return expression;
-      }
-
-      @Override
-      public Optional<MediaType> outputType() {
-        return Optional.empty();
-      }
-
-      @Override
-      public List<ModuleElementName> externalDependencies() {
-        return Collections.emptyList();
-      }
-    };
-  }
 
   /**
    * Returns an object that caches computation results. Provides better performance when evaluation multiple expressions on the
@@ -153,32 +120,6 @@ public interface ExpressionLanguage {
       @Override
       public Iterator<TypedValue<?>> split(String expression) {
         return expressionLanguage.split(expression, context);
-      }
-
-      @Override
-      public TypedValue<?> evaluate(CompiledExpression expression) throws ExpressionExecutionException {
-        return evaluate(expression.expression());
-      }
-
-      @Override
-      public TypedValue<?> evaluate(CompiledExpression expression, DataType expectedOutputType)
-          throws ExpressionExecutionException {
-        return evaluate(expression.expression(), expectedOutputType);
-      }
-
-      @Override
-      public TypedValue<?> evaluate(CompiledExpression expression, long timeout) throws ExpressionExecutionException {
-        return evaluate(expression.expression(), timeout);
-      }
-
-      @Override
-      public TypedValue<?> evaluateLogExpression(CompiledExpression expression) throws ExpressionExecutionException {
-        return evaluateLogExpression(expression.expression());
-      }
-
-      @Override
-      public Iterator<TypedValue<?>> split(CompiledExpression expression) {
-        return split(expression.expression());
       }
 
       @Override
