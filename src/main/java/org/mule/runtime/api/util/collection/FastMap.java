@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.util.collection;
 
+import org.mule.runtime.api.exception.MuleRuntimeException;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Iterator;
@@ -25,7 +27,37 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
       return new FastMap<>(other.overflowDelegateFactory, other.delegate);
     }
 
-    return null;
+    Supplier<Map<K, V>> mapSupplier = () -> {
+      try {
+        return map.getClass().newInstance();
+      } catch (Exception e) {
+        throw new MuleRuntimeException(e);
+      }
+    };
+    Iterator<Entry<K, V>> it;
+    switch (map.size()) {
+      case 0:
+        return new FastMap<>(mapSupplier, new EmptyFastMapDelegate<>(mapSupplier, null));
+      case 1:
+        return new FastMap<>(mapSupplier, new UniFastMapDelegate<>(mapSupplier, map.entrySet().iterator().next(), null));
+      case 2:
+        it = map.entrySet().iterator();
+        return new FastMap<>(mapSupplier, new BiFastMapDelegate<>(mapSupplier, it.next(), it.next(), null));
+      case 3:
+        it = map.entrySet().iterator();
+        return new FastMap<>(mapSupplier, new TriFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), null));
+      case 4:
+        it = map.entrySet().iterator();
+        return new FastMap<>(mapSupplier,
+                             new QuadFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), it.next(), null));
+      case 5:
+        it = map.entrySet().iterator();
+        return new FastMap<>(mapSupplier,
+                             new PentaFastMapDelegate<>(mapSupplier, it.next(), it.next(), it.next(), it.next(), it.next(),
+                                                        null));
+      default:
+        return new FastMap<>(mapSupplier, new NFastMapDelegate<>(mapSupplier, map, null));
+    }
   }
 
   public FastMap(Supplier<Map<K, V>> overflowDelegateFactory) {
@@ -117,8 +149,9 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
   public int hashCode() {
     int h = 0;
     Iterator<Entry<K, V>> i = entrySet().iterator();
-    while (i.hasNext())
+    while (i.hasNext()) {
       h += i.next().hashCode();
+    }
     return h;
   }
 }
