@@ -15,10 +15,10 @@ import java.util.Set;
 
 class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
-  private final Entry<K, V> entry1;
-  private final Entry<K, V> entry2;
-  private final Entry<K, V> entry3;
-  private final Entry<K, V> entry4;
+  private Entry<K, V> entry1;
+  private Entry<K, V> entry2;
+  private Entry<K, V> entry3;
+  private Entry<K, V> entry4;
 
   public QuadFastMapDelegate(Entry<K, V> entry1,
                              Entry<K, V> entry2,
@@ -110,19 +110,19 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   public FastMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
-      entry1.setValue(value);
+      entry1 = new FastMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry2.getKey(), key)) {
       previousValue = entry2.getValue();
-      entry2.setValue(value);
+      entry2 = new FastMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry3.getKey(), key)) {
       previousValue = entry3.getValue();
-      entry3.setValue(value);
+      entry3 = new FastMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry4.getKey(), key)) {
       previousValue = entry4.getValue();
-      entry4.setValue(value);
+      entry4 = new FastMapEntry<>(key, value);
       return this;
     } else {
       previousValue = null;

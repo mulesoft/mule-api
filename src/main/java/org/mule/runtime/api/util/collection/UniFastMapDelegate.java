@@ -14,7 +14,7 @@ import java.util.Set;
 
 class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
-  private final Entry<K, V> entry;
+  private Entry<K, V> entry;
 
   public UniFastMapDelegate(Entry<K, V> entry, V previousValue) {
     this.entry = entry;
@@ -50,7 +50,7 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   FastMapDelegate<K, V> fastPut(K key, V value) {
     if (containsKey(key)) {
       previousValue = entry.getValue();
-      entry.setValue(value);
+      entry = new FastMapEntry<>(key, value);
       return this;
     } else {
       previousValue = null;

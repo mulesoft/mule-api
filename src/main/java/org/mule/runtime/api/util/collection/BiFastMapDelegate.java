@@ -15,8 +15,8 @@ import java.util.Set;
 
 class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
-  private final Entry<K, V> entry1;
-  private final Entry<K, V> entry2;
+  private Entry<K, V> entry1;
+  private Entry<K, V> entry2;
 
   public BiFastMapDelegate(Entry<K, V> entry1,
                            Entry<K, V> entry2,
@@ -88,11 +88,11 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   public FastMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
-      entry1.setValue(value);
+      entry1 = new FastMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry2.getKey(), key)) {
       previousValue = entry2.getValue();
-      entry2.setValue(value);
+      entry2 = new FastMapEntry<>(key, value);
       return this;
     } else {
       previousValue = null;

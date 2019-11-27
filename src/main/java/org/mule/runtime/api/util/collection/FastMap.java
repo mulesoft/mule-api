@@ -85,22 +85,7 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
   }
 
   public static <K, V> Map<K, V> forSize(int size) {
-    switch (size) {
-      case 0:
-        return new FastMap<>(new EmptyFastMapDelegate<>(null));
-      case 1:
-        return new FastMap<>(new UniFastMapDelegate<>(null, null));
-      case 2:
-        return new FastMap<>(new BiFastMapDelegate<>(null, null, null));
-      case 3:
-        return new FastMap<>(new TriFastMapDelegate<>(null, null, null, null));
-      case 4:
-        return new FastMap<>(new QuadFastMapDelegate<>(null, null, null, null, null));
-      case 5:
-        return new FastMap<>(new PentaFastMapDelegate<>(null, null, null, null, null, null));
-      default:
-        return new HashMap<>(size);
-    }
+    return size < 6 ? new FastMap<>() : new HashMap<>(size);
   }
 
   public FastMap() {
