@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.util.collection;
 
+import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -96,14 +99,14 @@ class PentaFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Collection<V> values() {
-    Set<V> values = new HashSet<>();
+    List<V> values = new ArrayList<>(5);
     values.add(entry1.getValue());
     values.add(entry2.getValue());
     values.add(entry3.getValue());
     values.add(entry4.getValue());
     values.add(entry5.getValue());
 
-    return unmodifiableSet(values);
+    return unmodifiableList(values);
   }
 
   @Override

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util.collection;
 
 import static java.util.Collections.singleton;
+import static java.util.Collections.singletonList;
 
 import java.util.Collection;
 import java.util.Objects;
@@ -75,7 +76,7 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Collection<V> values() {
-    return singleton(entry.getValue());
+    return singletonList(entry.getValue());
   }
 
   @Override

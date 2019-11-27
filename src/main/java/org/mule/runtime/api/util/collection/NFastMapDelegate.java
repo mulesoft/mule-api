@@ -8,7 +8,6 @@ package org.mule.runtime.api.util.collection;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,17 +29,7 @@ class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   @Override
   FastMapDelegate<K, V> fastRemove(Object key) {
     previousValue = delegate.remove(key);
-    if (delegate.size() > 5) {
-      return this;
-    }
-
-    Iterator<Entry<K, V>> iterator = entrySet().iterator();
-    return new PentaFastMapDelegate<>(iterator.next(),
-                                      iterator.next(),
-                                      iterator.next(),
-                                      iterator.next(),
-                                      iterator.next(),
-                                      previousValue);
+    return this;
   }
 
   @Override
@@ -50,7 +39,7 @@ class NFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public boolean isEmpty() {
-    return false;
+    return delegate.isEmpty();
   }
 
   @Override
