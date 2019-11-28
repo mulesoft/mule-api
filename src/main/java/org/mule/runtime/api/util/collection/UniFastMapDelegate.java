@@ -54,7 +54,6 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       entry = new FastMapEntry<>(key, value);
       return this;
     } else {
-      previousValue = null;
       return new BiFastMapDelegate<>(entry, new FastMapEntry<>(key, value), null);
     }
   }
@@ -65,7 +64,6 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       return new EmptyFastMapDelegate<>(entry.getValue());
     }
 
-    previousValue = null;
     return this;
   }
 

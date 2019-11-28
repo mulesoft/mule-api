@@ -44,12 +44,13 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
   }
 
   public static <K, V> FastMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    return new FastMap<>(new PentaFastMapDelegate<>(new FastMapEntry<>(k1, v1),
-                                                    new FastMapEntry<>(k2, v2),
-                                                    new FastMapEntry<>(k3, v3),
-                                                    new FastMapEntry<>(k4, v4),
-                                                    new FastMapEntry<>(k5, v5),
-                                                    null));
+    return new FastMap<>(new PentaPlusFastMapDelegate<>(new FastMapEntry<>(k1, v1),
+                                                        new FastMapEntry<>(k2, v2),
+                                                        new FastMapEntry<>(k3, v3),
+                                                        new FastMapEntry<>(k4, v4),
+                                                        new FastMapEntry<>(k5, v5),
+                                                        null,
+                                                        null));
   }
 
   public static <K, V> Map<K, V> copy(Map<K, V> map) {
@@ -78,7 +79,7 @@ public class FastMap<K, V> implements Map<K, V>, Serializable {
         return new FastMap<>(new QuadFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), null));
       case 5:
         it = map.entrySet().iterator();
-        return new FastMap<>(new PentaFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), null));
+        return new FastMap<>(new PentaPlusFastMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), null, null));
       default:
         return new HashMap<>(map);
     }

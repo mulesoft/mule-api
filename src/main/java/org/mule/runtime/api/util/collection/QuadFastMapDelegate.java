@@ -7,11 +7,9 @@
 package org.mule.runtime.api.util.collection;
 
 import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableSet;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -56,9 +54,9 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   @Override
   public boolean containsValue(Object value) {
     return Objects.equals(entry1.getValue(), value)
-        || Objects.equals(entry2.getKey(), value)
-        || Objects.equals(entry3.getKey(), value)
-        || Objects.equals(entry4.getKey(), value);
+        || Objects.equals(entry2.getValue(), value)
+        || Objects.equals(entry3.getValue(), value)
+        || Objects.equals(entry4.getValue(), value);
   }
 
   @Override
@@ -78,13 +76,13 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<K> keySet() {
-    Set<K> keys = new HashSet<>();
+    List<K> keys = new ArrayList<>(4);
     keys.add(entry1.getKey());
     keys.add(entry2.getKey());
     keys.add(entry3.getKey());
     keys.add(entry4.getKey());
 
-    return unmodifiableSet(keys);
+    return new UnmodifiableSetAdapter<>(keys);
   }
 
   @Override
@@ -100,13 +98,13 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    Set<Entry<K, V>> entries = new HashSet<>();
+    List<Entry<K, V>> entries = new ArrayList<>(4);
     entries.add(entry1);
     entries.add(entry2);
     entries.add(entry3);
     entries.add(entry4);
 
-    return unmodifiableSet(entries);
+    return new UnmodifiableSetAdapter<>(entries);
   }
 
   @Override
@@ -128,8 +126,7 @@ class QuadFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       entry4 = new FastMapEntry<>(key, value);
       return this;
     } else {
-      previousValue = null;
-      return new PentaFastMapDelegate(entry1, entry2, entry3, entry4, new FastMapEntry<>(key, value), null);
+      return new PentaPlusFastMapDelegate(entry1, entry2, entry3, entry4, new FastMapEntry<>(key, value), null, null);
     }
   }
 

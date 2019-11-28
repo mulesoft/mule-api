@@ -102,7 +102,7 @@ public class FastMapTestCase {
   @Test
   public void putAll() {
     map.clear();
-    
+
     String originalKey = "original";
     String originalValue = "value";
 

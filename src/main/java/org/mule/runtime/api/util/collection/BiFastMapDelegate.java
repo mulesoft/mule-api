@@ -7,11 +7,9 @@
 package org.mule.runtime.api.util.collection;
 
 import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableSet;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -62,11 +60,11 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<K> keySet() {
-    Set<K> keys = new HashSet<>();
+    List<K> keys = new ArrayList<>(2);
     keys.add(entry1.getKey());
     keys.add(entry2.getKey());
 
-    return unmodifiableSet(keys);
+    return new UnmodifiableSetAdapter<>(keys);
   }
 
   @Override
@@ -80,11 +78,11 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    Set<Entry<K, V>> entries = new HashSet<>();
+    List<Entry<K, V>> entries = new ArrayList<>(2);
     entries.add(entry1);
     entries.add(entry2);
 
-    return unmodifiableSet(entries);
+    return new UnmodifiableSetAdapter<>(entries);
   }
 
   @Override
@@ -98,7 +96,6 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       entry2 = new FastMapEntry<>(key, value);
       return this;
     } else {
-      previousValue = null;
       return new TriFastMapDelegate<>(entry1, entry2, new FastMapEntry<>(key, value), null);
     }
   }
