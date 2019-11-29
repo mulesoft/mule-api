@@ -108,7 +108,9 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
       throw new NullPointerException();
     }
 
-    map.forEach((key, value) -> delegate = delegate.fastPut(key, value));
+    for (Entry<? extends K, ? extends V> entry : map.entrySet()) {
+      delegate = delegate.fastPut(entry.getKey(), entry.getValue());
+    }
   }
 
   @Override

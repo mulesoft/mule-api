@@ -44,7 +44,7 @@ class UniSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   @Override
   public V get(Object key) {
-    return containsKey(key) ? entry.getValue() : null;
+    return Objects.equals(entry.getKey(), key) ? entry.getValue() : null;
   }
 
   @Override
