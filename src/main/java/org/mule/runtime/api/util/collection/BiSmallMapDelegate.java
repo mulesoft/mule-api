@@ -6,22 +6,18 @@
  */
 package org.mule.runtime.api.util.collection;
 
-import static java.util.Collections.unmodifiableList;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
+class BiSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private Entry<K, V> entry1;
   private Entry<K, V> entry2;
 
-  public BiFastMapDelegate(Entry<K, V> entry1,
-                           Entry<K, V> entry2,
-                           V previousValue) {
+  public BiSmallMapDelegate(Entry<K, V> entry1,
+                            Entry<K, V> entry2,
+                            V previousValue) {
     this.entry1 = entry1;
     this.entry2 = entry2;
     this.previousValue = previousValue;
@@ -60,33 +56,69 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<K> keySet() {
-    List<K> keys = new ArrayList<>(2);
-    keys.add(entry1.getKey());
-    keys.add(entry2.getKey());
+    return new UnmodifiableSet<K>() {
 
-    return new UnmodifiableSetAdapter<>(keys);
+      @Override
+      protected K get(int index) {
+        return index == 0 ? entry1.getKey() : entry2.getKey();
+      }
+
+      @Override
+      public int size() {
+        return 2;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return containsKey(o);
+      }
+    };
   }
 
   @Override
   public Collection<V> values() {
-    List<V> values = new ArrayList<>(2);
-    values.add(entry1.getValue());
-    values.add(entry2.getValue());
+    return new UnmodifiableSet<V>() {
 
-    return unmodifiableList(values);
+      @Override
+      protected V get(int index) {
+        return index == 0 ? entry1.getValue() : entry2.getValue();
+      }
+
+      @Override
+      public int size() {
+        return 2;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return containsValue(o);
+      }
+    };
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    List<Entry<K, V>> entries = new ArrayList<>(2);
-    entries.add(entry1);
-    entries.add(entry2);
+    return new UnmodifiableSet<Entry<K, V>>() {
 
-    return new UnmodifiableSetAdapter<>(entries);
+      @Override
+      protected Entry<K, V> get(int index) {
+        return index == 0 ? entry1 : entry2;
+      }
+
+      @Override
+      public int size() {
+        return 2;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return Objects.equals(o, entry1) || Objects.equals(o, entry2);
+      }
+    };
   }
 
   @Override
-  public FastMapDelegate<K, V> fastPut(K key, V value) {
+  public SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
       entry1 = new FastMapEntry<>(key, value);
@@ -96,16 +128,16 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       entry2 = new FastMapEntry<>(key, value);
       return this;
     } else {
-      return new TriFastMapDelegate<>(entry1, entry2, new FastMapEntry<>(key, value), null);
+      return new TriSmallMapDelegate<>(entry1, entry2, new FastMapEntry<>(key, value), null);
     }
   }
 
   @Override
-  public FastMapDelegate<K, V> fastRemove(Object key) {
+  public SmallMapDelegate<K, V> fastRemove(Object key) {
     if (Objects.equals(entry1.getKey(), key)) {
-      return new UniFastMapDelegate<>(entry2, entry1.getValue());
+      return new UniSmallMapDelegate<>(entry2, entry1.getValue());
     } else if (Objects.equals(entry2.getKey(), key)) {
-      return new UniFastMapDelegate<>(entry1, entry2.getValue());
+      return new UniSmallMapDelegate<>(entry1, entry2.getValue());
     } else {
       previousValue = null;
       return this;
@@ -113,7 +145,7 @@ class BiFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   }
 
   @Override
-  FastMapDelegate<K, V> copy() {
-    return new BiFastMapDelegate<>(entry1, entry2, null);
+  SmallMapDelegate<K, V> copy() {
+    return new BiSmallMapDelegate<>(entry1, entry2, null);
   }
 }

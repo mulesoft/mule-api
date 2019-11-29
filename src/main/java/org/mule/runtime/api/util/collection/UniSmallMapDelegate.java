@@ -13,11 +13,11 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
-class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
+class UniSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private Entry<K, V> entry;
 
-  public UniFastMapDelegate(Entry<K, V> entry, V previousValue) {
+  public UniSmallMapDelegate(Entry<K, V> entry, V previousValue) {
     this.entry = entry;
     this.previousValue = previousValue;
   }
@@ -48,20 +48,20 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   }
 
   @Override
-  FastMapDelegate<K, V> fastPut(K key, V value) {
+  SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (containsKey(key)) {
       previousValue = entry.getValue();
       entry = new FastMapEntry<>(key, value);
       return this;
     } else {
-      return new BiFastMapDelegate<>(entry, new FastMapEntry<>(key, value), null);
+      return new BiSmallMapDelegate<>(entry, new FastMapEntry<>(key, value), null);
     }
   }
 
   @Override
-  FastMapDelegate<K, V> fastRemove(Object key) {
+  SmallMapDelegate<K, V> fastRemove(Object key) {
     if (containsKey(key)) {
-      return new EmptyFastMapDelegate<>(entry.getValue());
+      return new EmptySmallMapDelegate<>(entry.getValue());
     }
 
     return this;
@@ -83,7 +83,7 @@ class UniFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   }
 
   @Override
-  FastMapDelegate<K, V> copy() {
-    return new UniFastMapDelegate<>(entry, null);
+  SmallMapDelegate<K, V> copy() {
+    return new UniSmallMapDelegate<>(entry, null);
   }
 }

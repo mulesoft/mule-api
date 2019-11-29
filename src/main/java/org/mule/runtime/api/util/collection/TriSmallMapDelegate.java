@@ -6,24 +6,20 @@
  */
 package org.mule.runtime.api.util.collection;
 
-import static java.util.Collections.unmodifiableList;
-
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-class TriFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
+class TriSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private Entry<K, V> entry1;
   private Entry<K, V> entry2;
   private Entry<K, V> entry3;
 
-  public TriFastMapDelegate(Entry<K, V> entry1,
-                            Entry<K, V> entry2,
-                            Entry<K, V> entry3,
-                            V previousValue) {
+  public TriSmallMapDelegate(Entry<K, V> entry1,
+                             Entry<K, V> entry2,
+                             Entry<K, V> entry3,
+                             V previousValue) {
     this.entry1 = entry1;
     this.entry2 = entry2;
     this.entry3 = entry3;
@@ -67,36 +63,89 @@ class TriFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
 
   @Override
   public Set<K> keySet() {
-    List<K> keys = new ArrayList<>(3);
-    keys.add(entry1.getKey());
-    keys.add(entry2.getKey());
-    keys.add(entry3.getKey());
+    return new UnmodifiableSet<K>() {
 
-    return new UnmodifiableSetAdapter<>(keys);
+      @Override
+      protected K get(int index) {
+        switch (index) {
+          case 0:
+            return entry1.getKey();
+          case 1:
+            return entry2.getKey();
+        }
+        return entry3.getKey();
+      }
+
+      @Override
+      public int size() {
+        return 3;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return containsKey(o);
+      }
+    };
   }
 
   @Override
   public Collection<V> values() {
-    List<V> values = new ArrayList<>(3);
-    values.add(entry1.getValue());
-    values.add(entry2.getValue());
-    values.add(entry3.getValue());
+    return new UnmodifiableSet<V>() {
 
-    return unmodifiableList(values);
+      @Override
+      protected V get(int index) {
+        switch (index) {
+          case 0:
+            return entry1.getValue();
+          case 1:
+            return entry2.getValue();
+        }
+        return entry3.getValue();
+      }
+
+      @Override
+      public int size() {
+        return 3;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return containsValue(o);
+      }
+    };
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    List<Entry<K, V>> entries = new ArrayList<>(3);
-    entries.add(entry1);
-    entries.add(entry2);
-    entries.add(entry3);
+    return new UnmodifiableSet<Entry<K, V>>() {
 
-    return new UnmodifiableSetAdapter<>(entries);
+      @Override
+      protected Entry<K, V> get(int index) {
+        switch (index) {
+          case 0:
+            return entry1;
+          case 1:
+            return entry2;
+        }
+        return entry3;
+      }
+
+      @Override
+      public int size() {
+        return 3;
+      }
+
+      @Override
+      public boolean contains(Object o) {
+        return Objects.equals(o, entry1)
+            || Objects.equals(o, entry2)
+            || Objects.equals(o, entry3);
+      }
+    };
   }
 
   @Override
-  public FastMapDelegate<K, V> fastPut(K key, V value) {
+  public SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
       entry1 = new FastMapEntry<>(key, value);
@@ -110,18 +159,18 @@ class TriFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
       entry3 = new FastMapEntry<>(key, value);
       return this;
     } else {
-      return new QuadFastMapDelegate<>(entry1, entry2, entry3, new FastMapEntry<>(key, value), null);
+      return new QuadSmallMapDelegate<>(entry1, entry2, entry3, new FastMapEntry<>(key, value), null);
     }
   }
 
   @Override
-  public FastMapDelegate<K, V> fastRemove(Object key) {
+  public SmallMapDelegate<K, V> fastRemove(Object key) {
     if (Objects.equals(entry1.getKey(), key)) {
-      return new BiFastMapDelegate<>(entry2, entry3, entry1.getValue());
+      return new BiSmallMapDelegate<>(entry2, entry3, entry1.getValue());
     } else if (Objects.equals(entry2.getKey(), key)) {
-      return new BiFastMapDelegate<>(entry1, entry3, entry2.getValue());
+      return new BiSmallMapDelegate<>(entry1, entry3, entry2.getValue());
     } else if (Objects.equals(entry3.getKey(), key)) {
-      return new BiFastMapDelegate<>(entry1, entry2, entry3.getValue());
+      return new BiSmallMapDelegate<>(entry1, entry2, entry3.getValue());
     } else {
       previousValue = null;
       return this;
@@ -129,7 +178,7 @@ class TriFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
   }
 
   @Override
-  FastMapDelegate<K, V> copy() {
-    return new TriFastMapDelegate<>(entry1, entry2, entry3, null);
+  SmallMapDelegate<K, V> copy() {
+    return new TriSmallMapDelegate<>(entry1, entry2, entry3, null);
   }
 }

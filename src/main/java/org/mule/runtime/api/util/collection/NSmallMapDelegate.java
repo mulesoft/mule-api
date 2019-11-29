@@ -6,70 +6,74 @@
  */
 package org.mule.runtime.api.util.collection;
 
-import static java.util.Collections.emptySet;
-
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
-class EmptyFastMapDelegate<K, V> extends FastMapDelegate<K, V> {
+class NSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
-  public EmptyFastMapDelegate(V previousValue) {
+  private final Map<K, V> delegate;
+
+  public NSmallMapDelegate(Map<K, V> delegate, V previousValue) {
+    this.delegate = delegate;
     this.previousValue = previousValue;
   }
 
   @Override
-  public FastMapDelegate<K, V> fastPut(K key, V value) {
-    return new UniFastMapDelegate<>(new FastMapEntry<>(key, value), null);
+  SmallMapDelegate<K, V> fastPut(K key, V value) {
+    previousValue = delegate.put(key, value);
+    return this;
   }
 
   @Override
-  public FastMapDelegate<K, V> fastRemove(Object key) {
-    previousValue = null;
+  SmallMapDelegate<K, V> fastRemove(Object key) {
+    previousValue = delegate.remove(key);
     return this;
   }
 
   @Override
   public int size() {
-    return 0;
+    return delegate.size();
   }
 
   @Override
   public boolean isEmpty() {
-    return true;
+    return delegate.isEmpty();
   }
 
   @Override
   public boolean containsKey(Object key) {
-    return false;
+    return delegate.containsKey(key);
   }
 
   @Override
   public boolean containsValue(Object value) {
-    return false;
+    return delegate.containsValue(value);
   }
 
   @Override
   public V get(Object key) {
-    return null;
+    return delegate.get(key);
   }
 
   @Override
   public Set<K> keySet() {
-    return emptySet();
+    return delegate.keySet();
   }
 
   @Override
   public Collection<V> values() {
-    return emptySet();
+    return delegate.values();
   }
 
   @Override
   public Set<Entry<K, V>> entrySet() {
-    return emptySet();
+    return delegate.entrySet();
   }
 
   @Override
-  FastMapDelegate<K, V> copy() {
-    return new EmptyFastMapDelegate<>(null);
+  SmallMapDelegate<K, V> copy() {
+    return new NSmallMapDelegate<>(new HashMap<>(delegate), null);
   }
 }

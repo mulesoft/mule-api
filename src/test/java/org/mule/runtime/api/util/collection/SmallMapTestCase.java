@@ -28,7 +28,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FastMapTestCase {
+public class SmallMapTestCase {
 
   private static final String[] KEYS = new String[] {"one", "two", "three", "four", "five", "six", "seven"};
   private static final String[] VALUES = new String[] {"uno", "dos", "tres", "cuatro", "cinco", "seis", "siete"};
@@ -39,9 +39,9 @@ public class FastMapTestCase {
   }
 
   private final int mapSize;
-  private Map<String, String> map = new FastMap<>();
+  private Map<String, String> map = new SmallMap<>();
 
-  public FastMapTestCase(int mapSize) {
+  public SmallMapTestCase(int mapSize) {
     this.mapSize = mapSize;
   }
 
