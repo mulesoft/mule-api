@@ -12,12 +12,12 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.Objects;
 
-class FastMapEntry<K, V> implements Map.Entry<K, V>, Serializable {
+class SmallMapEntry<K, V> implements Map.Entry<K, V>, Serializable {
 
   final K key;
   V value;
 
-  FastMapEntry(K key, V value) {
+  SmallMapEntry(K key, V value) {
     this.key = key;
     this.value = value;
   }

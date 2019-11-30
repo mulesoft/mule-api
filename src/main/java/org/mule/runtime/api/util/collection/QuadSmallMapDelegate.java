@@ -164,22 +164,22 @@ class QuadSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   public SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
-      entry1 = new FastMapEntry<>(key, value);
+      entry1 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry2.getKey(), key)) {
       previousValue = entry2.getValue();
-      entry2 = new FastMapEntry<>(key, value);
+      entry2 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry3.getKey(), key)) {
       previousValue = entry3.getValue();
-      entry3 = new FastMapEntry<>(key, value);
+      entry3 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry4.getKey(), key)) {
       previousValue = entry4.getValue();
-      entry4 = new FastMapEntry<>(key, value);
+      entry4 = new SmallMapEntry<>(key, value);
       return this;
     } else {
-      return new PentaSmallMapDelegate(entry1, entry2, entry3, entry4, new FastMapEntry<>(key, value), null);
+      return new PentaSmallMapDelegate(entry1, entry2, entry3, entry4, new SmallMapEntry<>(key, value), null);
     }
   }
 

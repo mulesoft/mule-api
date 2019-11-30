@@ -51,10 +51,10 @@ class UniSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (containsKey(key)) {
       previousValue = entry.getValue();
-      entry = new FastMapEntry<>(key, value);
+      entry = new SmallMapEntry<>(key, value);
       return this;
     } else {
-      return new BiSmallMapDelegate<>(entry, new FastMapEntry<>(key, value), null);
+      return new BiSmallMapDelegate<>(entry, new SmallMapEntry<>(key, value), null);
     }
   }
 

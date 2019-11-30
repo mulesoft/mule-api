@@ -121,14 +121,14 @@ class BiSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   public SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
-      entry1 = new FastMapEntry<>(key, value);
+      entry1 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry2.getKey(), key)) {
       previousValue = entry2.getValue();
-      entry2 = new FastMapEntry<>(key, value);
+      entry2 = new SmallMapEntry<>(key, value);
       return this;
     } else {
-      return new TriSmallMapDelegate<>(entry1, entry2, new FastMapEntry<>(key, value), null);
+      return new TriSmallMapDelegate<>(entry1, entry2, new SmallMapEntry<>(key, value), null);
     }
   }
 

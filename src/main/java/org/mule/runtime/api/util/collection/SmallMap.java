@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.util.collection;
 
+import static java.util.Collections.unmodifiableMap;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,42 +15,43 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.BiFunction;
 
 public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
-  private SmallMapDelegate<K, V> delegate;
+  protected SmallMapDelegate<K, V> delegate;
 
   public static <K, V> SmallMap<K, V> of(K key, V value) {
-    return new SmallMap<>(new UniSmallMapDelegate<>(new FastMapEntry<>(key, value), null));
+    return new SmallMap<>(new UniSmallMapDelegate<>(new SmallMapEntry<>(key, value), null));
   }
 
   public static <K, V> SmallMap<K, V> of(K k1, V v1, K k2, V v2) {
-    return new SmallMap<>(new BiSmallMapDelegate<>(new FastMapEntry<>(k1, v1),
-                                                   new FastMapEntry<>(k2, v2),
+    return new SmallMap<>(new BiSmallMapDelegate<>(new SmallMapEntry<>(k1, v1),
+                                                   new SmallMapEntry<>(k2, v2),
                                                    null));
   }
 
   public static <K, V> SmallMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
-    return new SmallMap<>(new TriSmallMapDelegate<>(new FastMapEntry<>(k1, v1),
-                                                    new FastMapEntry<>(k2, v2),
-                                                    new FastMapEntry<>(k3, v3),
+    return new SmallMap<>(new TriSmallMapDelegate<>(new SmallMapEntry<>(k1, v1),
+                                                    new SmallMapEntry<>(k2, v2),
+                                                    new SmallMapEntry<>(k3, v3),
                                                     null));
   }
 
   public static <K, V> SmallMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4) {
-    return new SmallMap<>(new QuadSmallMapDelegate<>(new FastMapEntry<>(k1, v1),
-                                                     new FastMapEntry<>(k2, v2),
-                                                     new FastMapEntry<>(k3, v3),
-                                                     new FastMapEntry<>(k4, v4),
+    return new SmallMap<>(new QuadSmallMapDelegate<>(new SmallMapEntry<>(k1, v1),
+                                                     new SmallMapEntry<>(k2, v2),
+                                                     new SmallMapEntry<>(k3, v3),
+                                                     new SmallMapEntry<>(k4, v4),
                                                      null));
   }
 
   public static <K, V> SmallMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5) {
-    return new SmallMap<>(new PentaSmallMapDelegate<>(new FastMapEntry<>(k1, v1),
-                                                      new FastMapEntry<>(k2, v2),
-                                                      new FastMapEntry<>(k3, v3),
-                                                      new FastMapEntry<>(k4, v4),
-                                                      new FastMapEntry<>(k5, v5),
+    return new SmallMap<>(new PentaSmallMapDelegate<>(new SmallMapEntry<>(k1, v1),
+                                                      new SmallMapEntry<>(k2, v2),
+                                                      new SmallMapEntry<>(k3, v3),
+                                                      new SmallMapEntry<>(k4, v4),
+                                                      new SmallMapEntry<>(k5, v5),
                                                       null));
   }
 
@@ -86,6 +89,16 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   public static <K, V> Map<K, V> forSize(int size) {
     return size < 6 ? new SmallMap<>() : new HashMap<>(size);
+  }
+
+  public static <K, V> Map<K, V> unmodifiable(Map<K, V> map) {
+    if (map instanceof UnmodifiableSmallMap) {
+      return map;
+    } else if (map instanceof SmallMap) {
+      return new UnmodifiableSmallMap<>((SmallMap) map);
+    } else {
+      return unmodifiableMap(map);
+    }
   }
 
   public SmallMap() {
@@ -185,5 +198,56 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
       h += i.next().hashCode();
     }
     return h;
+  }
+
+  private static class UnmodifiableSmallMap<K, V> extends SmallMap<K, V> {
+
+    public UnmodifiableSmallMap(SmallMap<K, V> delegate) {
+      super(delegate.delegate);
+    }
+
+    @Override
+    public V put(K key, V value) {
+      throw unsupported();
+    }
+
+    @Override
+    public void putAll(Map<? extends K, ? extends V> map) {
+      throw unsupported();
+    }
+
+    @Override
+    public void clear() {
+      throw unsupported();
+    }
+
+    @Override
+    public V merge(K key, V value, BiFunction<? super V, ? super V, ? extends V> remappingFunction) {
+      throw unsupported();
+    }
+
+    @Override
+    public V remove(Object key) {
+      throw unsupported();
+    }
+
+    @Override
+    public boolean remove(Object key, Object value) {
+      throw unsupported();
+    }
+
+    @Override
+    public boolean replace(K key, V oldValue, V newValue) {
+      throw unsupported();
+    }
+
+    @Override
+    public void replaceAll(BiFunction<? super K, ? super V, ? extends V> function) {
+      throw unsupported();
+    }
+
+    private UnsupportedOperationException unsupported() {
+      throw new UnsupportedOperationException("Map is unmodifiable");
+    }
   }
 }

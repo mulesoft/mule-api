@@ -181,23 +181,23 @@ class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   public SmallMapDelegate<K, V> fastPut(K key, V value) {
     if (Objects.equals(entry1.getKey(), key)) {
       previousValue = entry1.getValue();
-      entry1 = new FastMapEntry<>(key, value);
+      entry1 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry2.getKey(), key)) {
       previousValue = entry2.getValue();
-      entry2 = new FastMapEntry<>(key, value);
+      entry2 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry3.getKey(), key)) {
       previousValue = entry3.getValue();
-      entry3 = new FastMapEntry<>(key, value);
+      entry3 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry4.getKey(), key)) {
       previousValue = entry4.getValue();
-      entry4 = new FastMapEntry<>(key, value);
+      entry4 = new SmallMapEntry<>(key, value);
       return this;
     } else if (Objects.equals(entry5.getKey(), key)) {
       previousValue = entry5.getValue();
-      entry5 = new FastMapEntry<>(key, value);
+      entry5 = new SmallMapEntry<>(key, value);
       return this;
     } else {
       HashMap<K, V> target = new HashMap<>();

@@ -19,7 +19,7 @@ class EmptySmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   @Override
   public SmallMapDelegate<K, V> fastPut(K key, V value) {
-    return new UniSmallMapDelegate<>(new FastMapEntry<>(key, value), null);
+    return new UniSmallMapDelegate<>(new SmallMapEntry<>(key, value), null);
   }
 
   @Override
