@@ -19,7 +19,7 @@ import java.util.function.BiFunction;
 
 public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
-  protected SmallMapDelegate<K, V> delegate;
+  private SmallMapDelegate<K, V> delegate;
 
   public static <K, V> SmallMap<K, V> of(K key, V value) {
     return new SmallMap<>(new UniSmallMapDelegate<>(new SmallMapEntry<>(key, value), null));
