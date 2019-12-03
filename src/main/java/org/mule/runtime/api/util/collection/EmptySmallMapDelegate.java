@@ -11,6 +11,13 @@ import static java.util.Collections.emptySet;
 import java.util.Collection;
 import java.util.Set;
 
+/**
+ * {@link SmallMapDelegate} implementation for maps that don't yet have any items.
+ *
+ * @param <K> the generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
 class EmptySmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   public EmptySmallMapDelegate(V previousValue) {

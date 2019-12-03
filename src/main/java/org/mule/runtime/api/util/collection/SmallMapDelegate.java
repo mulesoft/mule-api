@@ -14,18 +14,62 @@ import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Base class for delegate obejcts used as a backing data structure for a {@link SmallMap}.
+ * <p>
+ * Notice that this class implements the {@link Map} interface even though many of its methods throw
+ * {@link UnsupportedOperationException}. This is an optimization to speed up copy operations in which the target object is not
+ * another {@link SmallMap}.
+ *
+ * @param <K> The generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
 abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
 
+  /**
+   * This is used for operations such as {@link Map#put(Object, Object)} in which a previous value might be returned. However,
+   * because that put operation might change the implementation of the underlying delegate, this field is used to temporarily
+   * store such value.
+   */
   protected transient V previousValue;
 
+  /**
+   * Method to be used to add an entry into the {@link SmallMap}. This operation returns another {@link SmallMapDelegate} which
+   * is the one that the owning {@link SmallMap} should continue to use
+   *
+   * @param key   the key to be added
+   * @param value the value to be added
+   * @return the {@link SmallMapDelegate} to be used from now on
+   */
   abstract SmallMapDelegate<K, V> fastPut(K key, V value);
 
+  /**
+   * Method to be used to remove an entry into the {@link SmallMap}. This operation returns another {@link SmallMapDelegate} which
+   * is the one that the owning {@link SmallMap} should continue to use
+   *
+   * @param key the key to be added
+   * @return the {@link SmallMapDelegate} to be used from now on
+   */
   abstract SmallMapDelegate<K, V> fastRemove(Object key);
 
+  /**
+   * Returns a shallow copy of {@code this} instance
+   *
+   * @return a shallow copy
+   */
   abstract SmallMapDelegate<K, V> copy();
 
+  /**
+   * Returns the contents of the {@link #previousValue} field, after which, said field is nullified.
+   *
+   * @return a nullable previous value.
+   */
   public V getPreviousValue() {
-    return previousValue;
+    V retVal = previousValue;
+    previousValue = null;
+
+    return retVal;
   }
 
   @Override
@@ -48,6 +92,12 @@ abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
     throw new UnsupportedOperationException();
   }
 
+  /**
+   * An implementation of an unmodifiable {@link Set} designed to power methods such as {@link Map#entrySet()},
+   * {@link Map#keySet()} or {@link Map#values()} in the most optimized way possible, without the need to copy data structures.
+   *
+   * @param <T> the generic type of the Set's elements
+   */
   protected abstract class UnmodifiableSet<T> implements Set<T> {
 
     @Override
@@ -55,6 +105,12 @@ abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
       return false;
     }
 
+    /**
+     * Returns the element of the given position.
+     *
+     * @param index the index of the element to be returned
+     * @return an element
+     */
     protected abstract T get(int index);
 
     @Override

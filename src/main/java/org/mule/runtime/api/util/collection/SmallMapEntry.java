@@ -9,10 +9,17 @@ package org.mule.runtime.api.util.collection;
 import static java.util.Objects.hash;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 
-class SmallMapEntry<K, V> implements Map.Entry<K, V>, Serializable {
+/**
+ * Implementation of {@link Entry} to be used by {@link SmallMap} implementations
+ *
+ * @param <K> the generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
+class SmallMapEntry<K, V> implements Entry<K, V>, Serializable {
 
   final K key;
   V value;
@@ -41,8 +48,8 @@ class SmallMapEntry<K, V> implements Map.Entry<K, V>, Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if (obj instanceof Map.Entry) {
-      Map.Entry<K, V> other = (Map.Entry<K, V>) obj;
+    if (obj instanceof Entry) {
+      Entry<K, V> other = (Entry<K, V>) obj;
       return Objects.equals(this.key, other.getKey()) && Objects.equals(this.value, other.getValue());
     }
 

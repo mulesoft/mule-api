@@ -11,10 +11,23 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * {@link SmallMapDelegate} implementation for maps that have overflown into a {@link Map}
+ *
+ * @param <K> the generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
 class NSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private final Map<K, V> delegate;
 
+  /**
+   * Creates a new instance
+   *
+   * @param delegate      the delegate map
+   * @param previousValue the last operation's previousValue (or null if non applicable)
+   */
   public NSmallMapDelegate(Map<K, V> delegate, V previousValue) {
     this.delegate = delegate;
     this.previousValue = previousValue;

@@ -7,11 +7,17 @@
 package org.mule.runtime.api.util.collection;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * {@link SmallMapDelegate} implementation for maps that have five entries
+ *
+ * @param <K> the generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
 class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private Entry<K, V> entry1;
@@ -200,9 +206,7 @@ class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
       entry5 = new SmallMapEntry<>(key, value);
       return this;
     } else {
-      HashMap<K, V> target = new HashMap<>();
-      target.put(key, value);
-      return toNaryDelegate(target, null);
+      return new HexSmallMapDelegate<>(entry1, entry2, entry3, entry4, entry5, new SmallMapEntry<>(key, value), null);
     }
   }
 

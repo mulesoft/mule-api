@@ -7,11 +7,12 @@
 package org.mule.runtime.api.util.collection;
 
 import static java.lang.String.valueOf;
-import static java.util.Arrays.asList;
+import static java.util.stream.IntStream.range;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.util.collection.Collectors.toImmutableList;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class SmallMapTestCase {
 
   @Parameters(name = "with Size: {0}")
   public static Iterable<Integer> data() {
-    return asList(KEYS.length, 5);
+    return range(0, 8).boxed().collect(toImmutableList());
   }
 
   private final int mapSize;
@@ -67,11 +68,17 @@ public class SmallMapTestCase {
   @Test
   public void putRepeatedKeys() {
     for (int i = 0; i < mapSize; i++) {
-      map.put(KEYS[i], VALUES[i]);
+      assertThat(map.put(KEYS[i], VALUES[i].toUpperCase()), is(VALUES[i]));
+      assertThat(map.get(KEYS[i]), equalTo(VALUES[i].toUpperCase()));
       assertThat(map.size(), is(mapSize));
       assertThat(map.containsKey(KEYS[i]), is(true));
       assertThat(map.isEmpty(), is(false));
     }
+  }
+
+  @Test
+  public void isEmpty() {
+    assertThat(map.isEmpty(), is(mapSize == 0));
   }
 
   @Test
@@ -161,12 +168,25 @@ public class SmallMapTestCase {
   }
 
   @Test
+  public void remove() {
+    for (int i = 0; i < mapSize;) {
+      assertThat(map.remove(KEYS[i]), is(VALUES[i]));
+      assertThat(map.size(), is(mapSize - ++i));
+    }
+  }
+
+  @Test
   public void mutateEntry() {
     map.entrySet().forEach(entry -> entry.setValue(entry.getValue().toUpperCase()));
 
     for (int i = 0; i < map.size(); i++) {
       assertThat(map.get(KEYS[i]), equalTo(VALUES[i].toUpperCase()));
     }
+  }
+
+  @Test
+  public void size() {
+    assertThat(map.size(), is(mapSize));
   }
 
   private int getKeyIndex(String key) {

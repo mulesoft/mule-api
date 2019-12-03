@@ -10,6 +10,13 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * {@link SmallMapDelegate} implementation for maps that have two entries
+ *
+ * @param <K> the generic type of the keys
+ * @param <V> the generic type of the values
+ * @since 1.3.0
+ */
 class BiSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   private Entry<K, V> entry1;
@@ -40,7 +47,7 @@ class BiSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
 
   @Override
   public boolean containsValue(Object value) {
-    return Objects.equals(entry1.getValue(), value) || Objects.equals(entry2.getKey(), value);
+    return Objects.equals(entry1.getValue(), value) || Objects.equals(entry2.getValue(), value);
   }
 
   @Override
