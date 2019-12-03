@@ -212,4 +212,21 @@ abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
       return a;
     }
   }
+
+  @Override
+  public String toString() {
+    StringBuilder builder = new StringBuilder("{");
+    boolean first = true;
+    for (Entry<K, V> entry : entrySet()) {
+      if (!first) {
+        builder.append(", ");
+      }
+
+      builder.append(entry.getKey()).append(" = ").append(entry.getValue());
+      first = false;
+    }
+
+    builder.append('}');
+    return builder.toString();
+  }
 }

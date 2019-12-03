@@ -189,6 +189,15 @@ public class SmallMapTestCase {
     assertThat(map.size(), is(mapSize));
   }
 
+  @Test
+  public void testToString() {
+    Map<String, String> map = new SmallMap<>();
+    map.put("a", "b");
+    map.put("c", "d");
+
+    assertThat(map.toString(), equalTo("{a = b, c = d}"));
+  }
+
   private int getKeyIndex(String key) {
     for (int i = 0; i < KEYS.length; i++) {
       if (KEYS[i].equals(key)) {

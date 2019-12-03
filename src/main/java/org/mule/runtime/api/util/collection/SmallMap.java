@@ -357,6 +357,11 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   }
 
   @Override
+  public String toString() {
+    return delegate.toString();
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (o instanceof Map) {
       return Objects.equals(entrySet(), ((Map) o).entrySet());
