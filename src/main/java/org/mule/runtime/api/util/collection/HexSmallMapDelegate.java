@@ -254,4 +254,26 @@ class HexSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new HexSmallMapDelegate<>(entry1, entry2, entry3, entry4, entry5, entry6, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    HexSmallMapDelegate<?, ?> that = (HexSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry1, that.entry1) &&
+        Objects.equals(entry2, that.entry2) &&
+        Objects.equals(entry3, that.entry3) &&
+        Objects.equals(entry4, that.entry4) &&
+        Objects.equals(entry5, that.entry5) &&
+        Objects.equals(entry6, that.entry6);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(entry1, entry2, entry3, entry4, entry5, entry6);
+  }
 }

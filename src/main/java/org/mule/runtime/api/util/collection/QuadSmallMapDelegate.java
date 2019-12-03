@@ -210,4 +210,24 @@ class QuadSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new QuadSmallMapDelegate<>(entry1, entry2, entry3, entry4, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    QuadSmallMapDelegate<?, ?> that = (QuadSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry1, that.entry1) &&
+        Objects.equals(entry2, that.entry2) &&
+        Objects.equals(entry3, that.entry3) &&
+        Objects.equals(entry4, that.entry4);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(entry1, entry2, entry3, entry4);
+  }
 }

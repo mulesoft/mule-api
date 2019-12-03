@@ -9,6 +9,7 @@ package org.mule.runtime.api.util.collection;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -88,5 +89,22 @@ class NSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   @Override
   SmallMapDelegate<K, V> copy() {
     return new NSmallMapDelegate<>(new HashMap<>(delegate), null);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    NSmallMapDelegate<?, ?> that = (NSmallMapDelegate<?, ?>) o;
+    return Objects.equals(delegate, that.delegate);
+  }
+
+  @Override
+  public int hashCode() {
+    return delegate.hashCode();
   }
 }

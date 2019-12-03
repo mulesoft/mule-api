@@ -48,7 +48,7 @@ import java.util.function.BiFunction;
  * <p>
  * NOTE: {@link #copy(Map)} should be used even if the input Map is not a SmallMap.
  * <p>
- * This map does not support concurrent access.
+ * This map supports concurrent reads but doesn't support concurrent writes.
  *
  * @param <K> the generic type of the keys
  * @param <V> the generic type of the values
@@ -288,10 +288,6 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public void putAll(Map<? extends K, ? extends V> map) {
-    if (map == null) {
-      throw new NullPointerException();
-    }
-
     for (Entry<? extends K, ? extends V> entry : map.entrySet()) {
       delegate = delegate.fastPut(entry.getKey(), entry.getValue());
     }
@@ -363,7 +359,9 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (o instanceof Map) {
+    if (o instanceof SmallMap) {
+      return delegate.equals(((SmallMap) o).delegate);
+    } else if (o instanceof Map) {
       return Objects.equals(entrySet(), ((Map) o).entrySet());
     }
 
@@ -372,12 +370,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   @Override
   public int hashCode() {
-    int h = 0;
-    Iterator<Entry<K, V>> i = entrySet().iterator();
-    while (i.hasNext()) {
-      h += i.next().hashCode();
-    }
-    return h;
+    return delegate.hashCode();
   }
 
   private static class UnmodifiableSmallMap<K, V> extends SmallMap<K, V> {

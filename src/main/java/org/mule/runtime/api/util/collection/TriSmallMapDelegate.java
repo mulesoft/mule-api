@@ -188,4 +188,23 @@ class TriSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new TriSmallMapDelegate<>(entry1, entry2, entry3, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TriSmallMapDelegate<?, ?> that = (TriSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry1, that.entry1) &&
+        Objects.equals(entry2, that.entry2) &&
+        Objects.equals(entry3, that.entry3);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(entry1, entry2, entry3);
+  }
 }

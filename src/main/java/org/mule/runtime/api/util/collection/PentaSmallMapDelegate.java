@@ -242,4 +242,25 @@ class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new PentaSmallMapDelegate<>(entry1, entry2, entry3, entry4, entry5, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    PentaSmallMapDelegate<?, ?> that = (PentaSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry1, that.entry1) &&
+        Objects.equals(entry2, that.entry2) &&
+        Objects.equals(entry3, that.entry3) &&
+        Objects.equals(entry4, that.entry4) &&
+        Objects.equals(entry5, that.entry5);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(entry1, entry2, entry3, entry4, entry5);
+  }
 }

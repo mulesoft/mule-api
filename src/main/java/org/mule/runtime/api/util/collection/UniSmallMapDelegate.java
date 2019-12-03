@@ -93,4 +93,21 @@ class UniSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new UniSmallMapDelegate<>(entry, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    UniSmallMapDelegate<?, ?> that = (UniSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry, that.entry);
+  }
+
+  @Override
+  public int hashCode() {
+    return entry.hashCode();
+  }
 }

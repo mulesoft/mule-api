@@ -60,4 +60,9 @@ class SmallMapEntry<K, V> implements Entry<K, V>, Serializable {
   public int hashCode() {
     return hash(key, value);
   }
+
+  @Override
+  public String toString() {
+    return key + "=" + value;
+  }
 }

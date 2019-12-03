@@ -190,12 +190,21 @@ public class SmallMapTestCase {
   }
 
   @Test
-  public void testToString() {
+  public void mapToString() {
     Map<String, String> map = new SmallMap<>();
     map.put("a", "b");
     map.put("c", "d");
 
-    assertThat(map.toString(), equalTo("{a = b, c = d}"));
+    assertThat(map.toString(), equalTo("{a=b, c=d}"));
+  }
+
+  @Test
+  public void setToString() {
+    Map<String, String> map = new SmallMap<>();
+    map.put("a", "b");
+    map.put("c", "d");
+
+    assertThat(map.toString(), equalTo("{a=b, c=d}"));
   }
 
   private int getKeyIndex(String key) {

@@ -155,4 +155,21 @@ class BiSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new BiSmallMapDelegate<>(entry1, entry2, null);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    BiSmallMapDelegate<?, ?> that = (BiSmallMapDelegate<?, ?>) o;
+    return Objects.equals(entry1, that.entry1) && Objects.equals(entry2, that.entry2);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(entry1, entry2);
+  }
 }

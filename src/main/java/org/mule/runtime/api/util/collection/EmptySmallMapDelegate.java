@@ -79,4 +79,19 @@ class EmptySmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   SmallMapDelegate<K, V> copy() {
     return new EmptySmallMapDelegate<>(null);
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    return obj instanceof EmptySmallMapDelegate;
+  }
+
+  @Override
+  public int hashCode() {
+    return 0;
+  }
+
+  @Override
+  public String toString() {
+    return "{}";
+  }
 }
