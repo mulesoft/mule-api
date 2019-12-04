@@ -10,6 +10,7 @@ import static java.lang.String.valueOf;
 import static java.util.stream.IntStream.range;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 import static org.mule.runtime.api.util.collection.Collectors.toImmutableList;
@@ -55,6 +56,10 @@ public class SmallMapTestCase {
   }
 
   private void populate(int size) {
+    populate(size, map);
+  }
+
+  private void populate(int size, Map<String, String> map) {
     map.clear();
 
     for (int i = 0; i < size; i++) {
@@ -159,6 +164,24 @@ public class SmallMapTestCase {
   }
 
   @Test
+  public void keySet() {
+    Collection<String> values = map.keySet();
+    assertThat(values, hasSize(mapSize));
+    for (int i = 0; i < mapSize; i++) {
+      assertThat(values.contains(KEYS[i]), is(true));
+    }
+  }
+
+  @Test
+  public void contains() {
+    for (int i = 0; i < mapSize; i++) {
+      assertThat(map.containsValue(VALUES[i]), is(true));
+    }
+
+    assertThat(map.containsValue("bleh"), is(false));
+  }
+
+  @Test
   public void values() {
     Collection<String> values = map.values();
     assertThat(values, hasSize(mapSize));
@@ -196,6 +219,19 @@ public class SmallMapTestCase {
     map.put("c", "d");
 
     assertThat(map.toString(), equalTo("{a=b, c=d}"));
+  }
+
+  @Test
+  public void equals() {
+    Map<String, String> other = new HashMap<>();
+    populate(mapSize, other);
+
+    assertThat(map, equalTo(other));
+    other.remove(KEYS[0]);
+
+    if (mapSize > 0) {
+      assertThat(map, not(equalTo(other)));
+    }
   }
 
   @Test

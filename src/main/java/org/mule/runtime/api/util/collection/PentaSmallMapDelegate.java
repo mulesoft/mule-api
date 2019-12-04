@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util.collection;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -206,7 +207,9 @@ class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
       entry5 = new SmallMapEntry<>(key, value);
       return this;
     } else {
-      return new HexSmallMapDelegate<>(entry1, entry2, entry3, entry4, entry5, new SmallMapEntry<>(key, value), null);
+      Map<K, V> overflow = new HashMap<>(this);
+      overflow.put(key, value);
+      return new NSmallMapDelegate<>(overflow, null);
     }
   }
 
@@ -226,16 +229,6 @@ class PentaSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
       previousValue = null;
       return this;
     }
-  }
-
-  private NSmallMapDelegate<K, V> toNaryDelegate(Map<K, V> target, V previousValue) {
-    target.put(entry1.getKey(), entry1.getValue());
-    target.put(entry2.getKey(), entry2.getValue());
-    target.put(entry3.getKey(), entry3.getValue());
-    target.put(entry4.getKey(), entry4.getValue());
-    target.put(entry5.getKey(), entry5.getValue());
-
-    return new NSmallMapDelegate<>(target, previousValue);
   }
 
   @Override

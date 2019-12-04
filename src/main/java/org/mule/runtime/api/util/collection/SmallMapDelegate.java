@@ -213,6 +213,36 @@ abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+      if (obj == this) {
+        return true;
+      }
+
+      if (!(obj instanceof Set)) {
+        return false;
+      }
+
+      Collection<?> c = (Collection<?>) obj;
+      if (c.size() != size()) {
+        return false;
+      }
+      return containsAll(c);
+    }
+
+    @Override
+    public int hashCode() {
+      int h = 0;
+      Iterator<T> i = iterator();
+      while (i.hasNext()) {
+        T obj = i.next();
+        if (obj != null) {
+          h += obj.hashCode();
+        }
+      }
+      return h;
+    }
+
+    @Override
     public String toString() {
       StringBuilder builder = new StringBuilder("{");
       boolean first = true;

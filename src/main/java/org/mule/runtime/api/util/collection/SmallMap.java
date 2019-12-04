@@ -21,11 +21,11 @@ import java.util.function.BiFunction;
 /**
  * A {@link Map} implementation optimized for cases in which:
  * <ul>
- *   <li>The size will not surpass the number of six entries, or will only surpass it in the minority of cases</li>
+ *   <li>The size will not surpass the number of five entries, or will only surpass it in the minority of cases</li>
  *   <li>The key's {@code equals(Object)} method is significantly faster than its {@code hashCode()} method</li>
  * </ul>
  * <p>
- * The way this map works is that instead of using a hash table, it will do a brute force search over its six keys. When the
+ * The way this map works is that instead of using a hash table, it will do a brute force search over its five keys. When the
  * above conditions are met, such approach is faster and consumes significantly less memory than a traditional {@link HashMap}.
  * <p>
  * Notice that the entire concept of this map is predicated on those two conditions. Using it in other situations will have the
@@ -158,36 +158,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Creates a new instance of a six entries described by the given keys and values
-   *
-   * @param k1  the first key
-   * @param v1  the first value
-   * @param k2  the second key
-   * @param v2  the second value
-   * @param k3  the third key
-   * @param v3  the third value
-   * @param k4  the fourth key
-   * @param v4  the fourth value
-   * @param k5  the fifth key
-   * @param v5  the fifth value
-   * @param k6  the sixth key
-   * @param v6  the sixth value
-   * @param <K> the generic type of the keys
-   * @param <V> the generic type of the values
-   * @return a new instance
-   */
-  public static <K, V> SmallMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3, K k4, V v4, K k5, V v5, K k6, V v6) {
-    return new SmallMap<>(new HexSmallMapDelegate<>(new SmallMapEntry<>(k1, v1),
-                                                    new SmallMapEntry<>(k2, v2),
-                                                    new SmallMapEntry<>(k3, v3),
-                                                    new SmallMapEntry<>(k4, v4),
-                                                    new SmallMapEntry<>(k5, v5),
-                                                    new SmallMapEntry<>(k6, v6),
-                                                    null));
-  }
-
-  /**
-   * Returns a copy of the given {@code map}. If the size of the map is lower or equal to six, then the result will be
+   * Returns a copy of the given {@code map}. If the size of the map is lower or equal to five, then the result will be
    * a new {@link SmallMap}. Otherwise, a new {@link HashMap} will be created with a matching initial capacity.
    * <p>
    * This method offers better performance when the {@code map} is an instance of this class, as custom code is used to more
@@ -226,16 +197,13 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
       case 5:
         it = map.entrySet().iterator();
         return new SmallMap<>(new PentaSmallMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), null));
-      case 6:
-        it = map.entrySet().iterator();
-        return new SmallMap<>(new HexSmallMapDelegate<>(it.next(), it.next(), it.next(), it.next(), it.next(), it.next(), null));
       default:
         return new HashMap<>(map);
     }
   }
 
   /**
-   * Creates a new map optimized to have the given {@code size}. If {@code size} is lower or equal than 6, then a SmallMap will
+   * Creates a new map optimized to have the given {@code size}. If {@code size} is lower or equal than 5, then a SmallMap will
    * be returned. Otherwise, a {@link HashMap} with {@code size} as the initial capacity will be produced.
    *
    * @param size the map's size
@@ -244,7 +212,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
    * @return a new Map
    */
   public static <K, V> Map<K, V> forSize(int size) {
-    return size < 6 ? new SmallMap<>() : new HashMap<>(size);
+    return size < 5 ? new SmallMap<>() : new HashMap<>(size);
   }
 
   /**
