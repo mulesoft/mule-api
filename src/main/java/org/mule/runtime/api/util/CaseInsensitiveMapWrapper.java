@@ -69,6 +69,13 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
     this(new HashMap());
   }
 
+  /**
+   * Creates a shallow copy of this instance. This is the recommended way of creating copy instances as this is optimized
+   * and usually much faster than using the {@link CaseInsensitiveMapWrapper#CaseInsensitiveMapWrapper(Map)} constructor.
+   *
+   * @return a shallow copy of {@code this} instance
+   * @since 1.3.0
+   */
   public CaseInsensitiveMapWrapper<T> copy() {
     return new CaseInsensitiveMapWrapper<>(SmallMap.copy(baseMap), false);
   }
