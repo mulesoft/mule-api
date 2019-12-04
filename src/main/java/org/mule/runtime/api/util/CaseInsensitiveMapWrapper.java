@@ -10,6 +10,8 @@ import static java.util.stream.Collectors.toMap;
 import static java.util.stream.Collectors.toSet;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.runtime.api.util.collection.SmallMap;
+
 import java.io.Serializable;
 import java.util.AbstractMap;
 import java.util.AbstractSet;
@@ -49,7 +51,14 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
    * @param map existing map
    */
   public CaseInsensitiveMapWrapper(Map map) {
-    checkArgument(map.isEmpty(), "Cannot create case insensitive map from a non empty one.");
+    this(map, true);
+  }
+
+  private CaseInsensitiveMapWrapper(Map map, boolean requireEmpty) {
+    if (requireEmpty) {
+      checkArgument(map.isEmpty(), "Cannot create case insensitive map from a non empty one.");
+    }
+
     baseMap = map;
   }
 
@@ -58,6 +67,10 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
    */
   public CaseInsensitiveMapWrapper() {
     this(new HashMap());
+  }
+
+  public CaseInsensitiveMapWrapper<T> copy() {
+    return new CaseInsensitiveMapWrapper<>(SmallMap.copy(baseMap), false);
   }
 
   @Override
