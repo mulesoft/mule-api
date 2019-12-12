@@ -131,6 +131,5 @@ public final class MuleSystemProperties {
     return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
   }
 
-  private MuleSystemProperties() {
-  }
+  private MuleSystemProperties() {}
 }
