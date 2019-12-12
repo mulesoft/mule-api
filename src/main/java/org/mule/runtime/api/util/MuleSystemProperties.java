@@ -108,6 +108,8 @@ public final class MuleSystemProperties {
    */
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
+  public static final String MULE_EXPRESSIONS_COMPILATION_FAIL_DEPLOYMENT = SYSTEM_PROPERTY_PREFIX + "expressionCompilationFailDeployment";
+
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
