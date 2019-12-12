@@ -89,7 +89,7 @@ public final class MuleSystemProperties {
   /**
    * This is the timeout in milliseconds to wait before we detect that the test connectivity is done in case the test connectivity
    * is asynchronously done.
-   * 
+   *
    * @since 1.3.0
    */
   public static final String ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY =
@@ -107,6 +107,15 @@ public final class MuleSystemProperties {
    * Possible values are the enums in {@code ProcessingType}.
    */
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
+
+  /**
+   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them
+   * cannot be compiled.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_EXPRESSIONS_COMPILATION_FAIL_DEPLOYMENT =
+      SYSTEM_PROPERTY_PREFIX + "expressionCompilationFailDeployment";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
