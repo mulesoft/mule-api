@@ -86,12 +86,11 @@ public class ImmutableFileRepeatableInputStreamTestCase {
   }
 
   @Test
-  public void isAutoClose() {
+  public void isAutoDelete() {
     ImmutableFileRepeatableInputStream stream = new ImmutableFileRepeatableInputStream(file, true);
     assertThat(stream.isAutoDelete(), is(true));
 
     stream = new ImmutableFileRepeatableInputStream(file, false);
     assertThat(stream.isAutoDelete(), is(false));
-
   }
 }
