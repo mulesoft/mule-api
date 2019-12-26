@@ -34,7 +34,8 @@ import java.io.InputStream;
  * <p>
  * Also keep in mind that the purpose of this class is to optimize repeatable streaming resources on certain cases. However,
  * in the context of a Mule application, the use can always decide to disable repeatable streaming, in which case, this stream
- * will behave similarly to {@link FileInputStream}.
+ * will not be treated in a repeatable manner. The user can also configure an in-memory streaming strategy, in which case the
+ * behavior will be similar to using a {@link FileInputStream}.
  * <p>
  * Finally, notice that this stream is not auto closeable. {@link #close()} method needs to be invoked explicitly.
  *
