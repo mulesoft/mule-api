@@ -21,6 +21,9 @@ public class MuleVersionTestCase {
     assertThat("3.4-RC1", is(new MuleVersion("3.4-RC1").toString()));
     assertThat("3.4.1-SNAPSHOT", is(new MuleVersion("3.4.1-SNAPSHOT").toString()));
     assertThat("3.4-M3-SNAPSHOT", is(new MuleVersion("3.4-M3-SNAPSHOT").toString()));
+    assertThat("4.0.1+20130313144700", is(new MuleVersion("4.0.1+20130313144700").toString()));
+    assertThat("4.2.1-prerelease+meta", is(new MuleVersion("4.2.1-prerelease+meta").toString()));
+    assertThat("4.9.5----RC-SNAPSHOT.12.9.1--.12+788", is(new MuleVersion("4.9.5----RC-SNAPSHOT.12.9.1--.12+788").toString()));
   }
 
   @Test(expected = IllegalArgumentException.class)
