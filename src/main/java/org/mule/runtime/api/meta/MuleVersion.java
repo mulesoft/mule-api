@@ -10,8 +10,7 @@ import com.google.common.base.Joiner;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
 
-import java.util.Optional;
-import java.util.regex.Pattern;
+import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 
 /**
  * This class represents Mule Software version scheme:
@@ -26,7 +25,6 @@ import java.util.regex.Pattern;
  */
 public final class MuleVersion {
 
-  private static final Pattern pattern = Pattern.compile("([0-9]+)(\\.)([0-9]+)(\\.([0-9]*))?(-(.+))?");
   public static final int NO_REVISION = -1;
 
   private Semver semver;
@@ -42,7 +40,7 @@ public final class MuleVersion {
 
   private void parse(String version) {
     try {
-      this.semver = new Semver(version, Semver.SemverType.LOOSE);
+      this.semver = new Semver(version, LOOSE);
       if (this.semver.getMajor() == null || this.semver.getMinor() == null) {
         throw new IllegalArgumentException("Invalid version " + version);
       }
@@ -137,9 +135,8 @@ public final class MuleVersion {
    * @return Complete numeric version: major.minor.revision
    */
   public String toCompleteNumericVersion() {
-    StringBuilder v = new StringBuilder(this.semver.getMajor() + "." + semver.getMinor() + "."
-        + Optional.ofNullable(this.semver.getPatch()).orElse(0));
-    return v.toString();
+    return this.semver.getMajor() + "." + semver.getMinor() + "."
+        + (this.semver.getPatch() != null ? this.semver.getPatch() : 0);
   }
 
   public boolean hasSuffix() {
@@ -185,7 +182,7 @@ public final class MuleVersion {
   }
 
   public int getRevision() {
-    return Optional.ofNullable(this.semver.getPatch()).orElse(NO_REVISION);
+    return this.semver.getPatch() != null ? this.semver.getPatch() : NO_REVISION;
   }
 
   public void setRevision(int revision) {
