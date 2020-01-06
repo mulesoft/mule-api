@@ -137,7 +137,7 @@
         <oldMuleArtifactVersion>1.2.1</oldMuleArtifactVersion>
         <muleRevapiExtensionVersion>1.2.1-HF-SNAPSHOT</muleRevapiExtensionVersion>
         <muleApiAnnotationsVersion>1.1.1-HF-SNAPSHOT</muleApiAnnotationsVersion>
-
+        <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
 
@@ -198,6 +198,12 @@
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
             <version>${javax.activation.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.vdurmont</groupId>
+            <artifactId>semver4j</artifactId>
+            <version>${semver4jVersion}</version>
         </dependency>
 
         <!-- test dependencies -->
