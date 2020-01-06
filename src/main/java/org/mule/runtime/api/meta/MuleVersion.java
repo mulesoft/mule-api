@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.api.meta;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.google.common.base.Joiner;
+import com.vdurmont.semver4j.Semver;
+import com.vdurmont.semver4j.SemverException;
+
+import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 
 /**
  * This class represents Mule Software version scheme:
@@ -22,13 +25,9 @@ import java.util.regex.Pattern;
  */
 public final class MuleVersion {
 
-  private static final Pattern pattern = Pattern.compile("([0-9]+)(\\.)([0-9]+)(\\.([0-9]*))?(-(.+))?");
   public static final int NO_REVISION = -1;
 
-  private int major = 0;
-  private int minor = 0;
-  private int revision = NO_REVISION;
-  private String suffix;
+  private Semver semver;
 
   public MuleVersion(String version) {
     parse(version);
@@ -36,43 +35,16 @@ public final class MuleVersion {
 
   @Override
   public String toString() {
-    StringBuilder v = new StringBuilder(major + "." + minor);
-
-    if (revision >= 0) {
-      v.append(".").append(revision);
-    }
-
-    if (suffix != null && suffix.trim().length() > 0) {
-      v.append("-").append(suffix);
-    }
-
-    return v.toString();
-
+    return this.semver.toString();
   }
 
   private void parse(String version) {
-    Matcher m = pattern.matcher(version);
-
-    if (!m.matches()) {
-      throw new IllegalArgumentException("Invalid version " + version);
-    }
-
     try {
-      major = Integer.parseInt(m.group(1));
-      minor = Integer.parseInt(m.group(3));
-
-      if (m.group(4) != null && m.group(4).startsWith(".")) {
-        revision = Integer.parseInt(m.group(5));
+      this.semver = new Semver(version, LOOSE);
+      if (this.semver.getMajor() == null || this.semver.getMinor() == null) {
+        throw new IllegalArgumentException("Invalid version " + version);
       }
-
-      if (m.group(6) != null && m.group(6).startsWith("-")) {
-        suffix = m.group(7);
-      }
-    } catch (NumberFormatException nfe) {
-      throw new IllegalArgumentException("Invalid version " + version);
-    }
-
-    if (!toString().equals(version)) {
+    } catch (SemverException sve) {
       throw new IllegalArgumentException("Invalid version " + version);
     }
   }
@@ -163,19 +135,12 @@ public final class MuleVersion {
    * @return Complete numeric version: major.minor.revision
    */
   public String toCompleteNumericVersion() {
-    StringBuilder v = new StringBuilder(major + "." + minor + ".");
-
-    if (revision >= 0) {
-      v.append(revision);
-    } else {
-      v.append("0");
-    }
-
-    return v.toString();
+    return this.semver.getMajor() + "." + semver.getMinor() + "."
+        + (this.semver.getPatch() != null ? this.semver.getPatch() : 0);
   }
 
   public boolean hasSuffix() {
-    return getSuffix() != null && getSuffix().length() > 0;
+    return this.semver.getSuffixTokens() != null && this.semver.getSuffixTokens().length > 0;
   }
 
   private MuleVersion getBaseVersion() {
@@ -201,34 +166,34 @@ public final class MuleVersion {
   }
 
   public int getMajor() {
-    return major;
+    return this.semver.getMajor();
   }
 
   public void setMajor(int major) {
-    this.major = major;
+    this.semver.withIncMajor(-1 * this.semver.getMajor() + major);
   }
 
   public int getMinor() {
-    return minor;
+    return this.semver.getMinor();
   }
 
   public void setMinor(int minor) {
-    this.minor = minor;
+    this.semver.withIncMinor(-1 * this.semver.getMinor() + minor);
   }
 
   public int getRevision() {
-    return revision;
+    return this.semver.getPatch() != null ? this.semver.getPatch() : NO_REVISION;
   }
 
   public void setRevision(int revision) {
-    this.revision = revision;
+    this.semver.withIncPatch(-1 * this.semver.getPatch() + revision);
   }
 
   public String getSuffix() {
-    return suffix;
+    return Joiner.on("").join(this.semver.getSuffixTokens());
   }
 
   public void setSuffix(String suffix) {
-    this.suffix = suffix;
+    this.semver.withSuffix(suffix);
   }
 }
