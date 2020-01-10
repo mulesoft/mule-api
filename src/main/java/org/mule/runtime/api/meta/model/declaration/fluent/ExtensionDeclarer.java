@@ -94,10 +94,14 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    */
   @Override
   public ConnectionProviderDeclarer withConnectionProvider(String name) {
+    return withConnectionProvider(declaration, name);
+  }
+
+  public ConnectionProviderDeclarer withConnectionProvider(ConnectedDeclaration owner, String name) {
     ConnectionProviderDeclaration declaration = new ConnectionProviderDeclaration(name);
 
     final ConnectionProviderDeclarer connectionProviderDeclarer = new ConnectionProviderDeclarer(declaration);
-    withConnectionProvider(connectionProviderDeclarer);
+    owner.addConnectionProvider(declaration);
 
     return connectionProviderDeclarer;
   }
