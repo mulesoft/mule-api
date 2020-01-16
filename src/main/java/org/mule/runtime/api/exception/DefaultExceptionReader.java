@@ -7,8 +7,8 @@
 package org.mule.runtime.api.exception;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
+import org.mule.runtime.api.util.collection.SmallMap;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +16,7 @@ import java.util.Map;
  */
 final class DefaultExceptionReader implements ExceptionReader {
 
-  private Map<String, Object> info = new HashMap<>();
+  private final Map<String, Object> info = new SmallMap<>();
 
   @Override
   public String getMessage(Throwable t) {
@@ -34,9 +34,9 @@ final class DefaultExceptionReader implements ExceptionReader {
   }
 
   /**
-   * Returns a map of the non-stanard information stored on the exception
-   * 
-   * @return a map of the non-stanard information stored on the exception
+   * Returns a map of the non-standard information stored on the exception
+   *
+   * @return a map of the non-standard information stored on the exception
    */
   @Override
   public Map<String, Object> getInfo(Throwable t) {

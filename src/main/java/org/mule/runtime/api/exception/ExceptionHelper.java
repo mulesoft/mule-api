@@ -16,13 +16,16 @@ import static java.util.Optional.of;
 import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
+import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * {@code ExceptionHelper} provides a number of helper functions that can be useful for dealing with Mule exceptions. This class
@@ -52,12 +55,12 @@ public class ExceptionHelper {
   /**
    * A list of the exception readers to use for different types of exceptions
    */
-  private static List<ExceptionReader> globalExceptionReaders = new ArrayList<>();
+  private static List<ExceptionReader> globalExceptionReaders = new CopyOnWriteArrayList<>();
 
   /**
    * A list of the exception readers and the classloader that loaded it to use for different types of exceptions
    */
-  private static List<ExceptionReader> exceptionReaders = new ArrayList<>();
+  private static List<ExceptionReader> exceptionReaders = new CopyOnWriteArrayList<>();
 
   /**
    * The default ExceptionReader which will be used for most types of exceptions
@@ -105,23 +108,26 @@ public class ExceptionHelper {
       }
     }
 
-    ClassLoader tccl = currentThread().getContextClassLoader();
+    if (!exceptionReaders.isEmpty()) {
+      ClassLoader tccl = currentThread().getContextClassLoader();
 
-    for (ExceptionReader exceptionReader : exceptionReaders) {
-      ClassLoader currentCl = tccl;
+      for (ExceptionReader exceptionReader : exceptionReaders) {
+        ClassLoader currentCl = tccl;
 
-      // The ExceptionReader is registered with its plugin classloader, but the TCCL when looking it up is the one for the
-      // application.
-      while (currentCl != null && currentCl != ExceptionHelper.class.getClassLoader()
-          && currentCl != exceptionReader.getClass().getClassLoader()) {
-        currentCl = currentCl.getParent();
-      }
+        // The ExceptionReader is registered with its plugin classloader, but the TCCL when looking it up is the one for the
+        // application.
+        while (currentCl != null && currentCl != ExceptionHelper.class.getClassLoader()
+            && currentCl != exceptionReader.getClass().getClassLoader()) {
+          currentCl = currentCl.getParent();
+        }
 
-      if (currentCl == exceptionReader.getClass().getClassLoader()
-          && exceptionReader.getExceptionType().isInstance(t)) {
-        return exceptionReader;
+        if (currentCl == exceptionReader.getClass().getClassLoader()
+            && exceptionReader.getExceptionType().isInstance(t)) {
+          return exceptionReader;
+        }
       }
     }
+
     return defaultExceptionReader;
   }
 
@@ -130,7 +136,7 @@ public class ExceptionHelper {
     MuleException exception = null;
     // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
     // properly logged.
-    Map muleExceptionInfo = new HashMap<>();
+    Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
     while (cause != null) {
       if (cause instanceof MuleException) {
@@ -342,7 +348,7 @@ public class ExceptionHelper {
   }
 
   public static List<Throwable> getExceptionsAsList(Throwable t) {
-    List<Throwable> exceptions = new ArrayList<>();
+    List<Throwable> exceptions = new LinkedList<>();
     Throwable cause = t;
     while (cause != null) {
       exceptions.add(0, cause);
