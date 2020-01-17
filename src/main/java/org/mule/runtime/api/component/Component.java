@@ -7,6 +7,7 @@
 package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
@@ -95,5 +96,12 @@ public interface Component {
    */
   default ComponentIdentifier getIdentifier() {
     return (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
+  }
+
+  /**
+   * @return a representation of a flow element to be logged in a standard way.
+   */
+  default String getRepresentation() {
+    return (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
   }
 }

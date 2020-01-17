@@ -8,6 +8,7 @@ package org.mule.runtime.api.util;
 
 import static org.mule.runtime.api.component.Component.Annotations.NAME_ANNOTATION_KEY;
 import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
+
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.component.Component;
 
@@ -26,7 +27,9 @@ public class ComponentLocationProvider {
    * @param processorPath
    * @param element
    * @return
+   * @deprecated Use {@link Component#getRepresentation()} instead.
    */
+  @Deprecated
   public static String resolveProcessorRepresentation(String appId, String processorPath, Object element) {
     StringBuilder stringBuilder = new StringBuilder();
 

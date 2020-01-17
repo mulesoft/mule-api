@@ -9,6 +9,7 @@ package org.mule.runtime.api.component;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
@@ -32,6 +33,7 @@ public abstract class AbstractComponent implements Component {
   private ComponentLocation location;
   private Location rootContainerLocation;
   private ComponentIdentifier identifier;
+  private String representation;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -49,6 +51,7 @@ public abstract class AbstractComponent implements Component {
     location = (ComponentLocation) getAnnotation(LOCATION_KEY);
     rootContainerLocation = initRootContainerName();
     identifier = (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
+    representation = (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
   }
 
   protected Location initRootContainerName() {
@@ -72,6 +75,11 @@ public abstract class AbstractComponent implements Component {
   @Override
   public ComponentIdentifier getIdentifier() {
     return identifier;
+  }
+
+  @Override
+  public String getRepresentation() {
+    return representation;
   }
 
 }

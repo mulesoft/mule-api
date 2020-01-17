@@ -8,11 +8,10 @@
 package org.mule.runtime.api.exception;
 
 import static java.lang.String.format;
-import static org.mule.runtime.api.util.ComponentLocationProvider.resolveProcessorRepresentation;
 
+import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.meta.NameableObject;
-import org.mule.runtime.api.meta.NamedObject;
 
 /**
  * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it
@@ -20,7 +19,6 @@ import org.mule.runtime.api.meta.NamedObject;
  *
  * @since 1.0
  */
-
 public class LocatedMuleException extends MuleException {
 
   /**
@@ -72,13 +70,7 @@ public class LocatedMuleException extends MuleException {
   }
 
   protected String resolveProcessorPath(Object component) {
-    if (component instanceof NamedObject) {
-      // Cannot currently get the application name without an event/context.
-      return resolveProcessorRepresentation("app", "/" + ((NamedObject) component).getName(),
-                                            component);
-    } else {
-      return resolveProcessorRepresentation("app", (component == null ? "null" : component.toString()), component);
-    }
+    return ((Component) component).getRepresentation();
   }
 
   public static String toString(Object obj) {
