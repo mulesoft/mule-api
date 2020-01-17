@@ -251,7 +251,6 @@ public class ExceptionHelper {
       stackTraceFilter = stackTraceFilterString.split(",");
     }
 
-    registerGlobalExceptionReader(new MuleExceptionReader());
     registerGlobalExceptionReader(new NamingExceptionReader());
     initialised = true;
   }

@@ -6,8 +6,9 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.util.Collections.emptyMap;
+
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
-import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.util.Map;
 
@@ -15,8 +16,6 @@ import java.util.Map;
  * This is the default exception reader used if there is no specific one registered for the current exception.
  */
 final class DefaultExceptionReader implements ExceptionReader {
-
-  private final Map<String, Object> info = new SmallMap<>();
 
   @Override
   public String getMessage(Throwable t) {
@@ -40,6 +39,6 @@ final class DefaultExceptionReader implements ExceptionReader {
    */
   @Override
   public Map<String, Object> getInfo(Throwable t) {
-    return info;
+    return (t instanceof MuleException ? ((MuleException) t).getInfo() : emptyMap());
   }
 }

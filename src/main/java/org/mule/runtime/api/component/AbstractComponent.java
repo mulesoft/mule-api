@@ -25,11 +25,13 @@ public abstract class AbstractComponent implements Component {
 
   public static QName LOCATION_KEY = new QName(NS_MULE_PARSER_METADATA, "COMPONENT_LOCATION");
   public static QName ROOT_CONTAINER_NAME_KEY = new QName(NS_MULE_PARSER_METADATA, "ROOT_CONTAINER_NAME");
+  public static final QName ANNOTATION_NAME = new QName("config", "componentIdentifier");
 
   private volatile Map<QName, Object> annotations = emptyMap();
 
   private ComponentLocation location;
   private Location rootContainerLocation;
+  private ComponentIdentifier identifier;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -46,6 +48,7 @@ public abstract class AbstractComponent implements Component {
     annotations = new HashMap<>(newAnnotations);
     location = (ComponentLocation) getAnnotation(LOCATION_KEY);
     rootContainerLocation = initRootContainerName();
+    identifier = (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
   }
 
   protected Location initRootContainerName() {
@@ -64,6 +67,11 @@ public abstract class AbstractComponent implements Component {
   @Override
   public Location getRootContainerLocation() {
     return rootContainerLocation;
+  }
+
+  @Override
+  public ComponentIdentifier getIdentifier() {
+    return identifier;
   }
 
 }

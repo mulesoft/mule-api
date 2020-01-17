@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.component;
 
+import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
+
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
 
@@ -42,6 +44,11 @@ public interface Component {
      * Annotation that defines the source code for the element.
      */
     QName SOURCE_ELEMENT_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceElement");
+
+    /**
+     * Annotation that defines the representation for the element to be used in error reporting.
+     */
+    QName REPRESENTATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation");
   }
 
   /**
@@ -82,4 +89,11 @@ public interface Component {
    * @return the root container component location.
    */
   Location getRootContainerLocation();
+
+  /**
+   * @return the type identifier for this component.
+   */
+  default ComponentIdentifier getIdentifier() {
+    return (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
+  }
 }

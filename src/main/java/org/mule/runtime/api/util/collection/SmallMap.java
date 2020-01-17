@@ -56,6 +56,8 @@ import java.util.function.BiFunction;
  */
 public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
+  private static final long serialVersionUID = 702299469995340780L;
+
   private SmallMapDelegate<K, V> delegate;
 
   /**

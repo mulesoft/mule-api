@@ -6,14 +6,10 @@
  */
 package org.mule.runtime.api.util;
 
-import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 import static org.mule.runtime.api.component.Component.Annotations.NAME_ANNOTATION_KEY;
 import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
-
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.component.Component;
-
-import com.github.benmanes.caffeine.cache.Cache;
 
 /**
  * Provides a standard way to generate a log entry or message that references an element in a flow.
@@ -22,8 +18,6 @@ import com.github.benmanes.caffeine.cache.Cache;
  */
 @NoExtend
 public class ComponentLocationProvider {
-
-  private static final Cache<Object, String> processorRepresentation = newBuilder().build();
 
   /**
    * Generates a representation of a flow element to be logged in a standard way.
@@ -34,31 +28,28 @@ public class ComponentLocationProvider {
    * @return
    */
   public static String resolveProcessorRepresentation(String appId, String processorPath, Object element) {
-    return processorRepresentation.get(element, c -> {
-      StringBuilder stringBuilder = new StringBuilder();
+    StringBuilder stringBuilder = new StringBuilder();
 
-      stringBuilder.append(processorPath)
-          .append(" @ ")
-          .append(appId);
+    stringBuilder.append(processorPath)
+        .append(" @ ")
+        .append(appId);
 
-      String sourceFile = getSourceFile((Component) c);
-      if (sourceFile != null) {
-        stringBuilder.append(":")
-            .append(sourceFile)
-            .append(":")
-            .append(getSourceFileLine((Component) c));
-      }
+    String sourceFile = getSourceFile((Component) element);
+    if (sourceFile != null) {
+      stringBuilder.append(":")
+          .append(sourceFile)
+          .append(":")
+          .append(getSourceFileLine((Component) element));
+    }
 
-      String docName = getDocName(c);
-      if (docName != null) {
-        stringBuilder.append(" (")
-            .append(docName)
-            .append(")");
-      }
+    String docName = getDocName(element);
+    if (docName != null) {
+      stringBuilder.append(" (")
+          .append(docName)
+          .append(")");
+    }
 
-      return stringBuilder.toString();
-    });
-
+    return stringBuilder.toString();
   }
 
   /**
