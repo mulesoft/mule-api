@@ -11,6 +11,7 @@ import static java.util.Optional.of;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mule.runtime.api.functional.Either.left;
 import static org.mule.runtime.api.functional.Either.right;
 
@@ -66,5 +67,67 @@ public class EitherTestCase {
   @Test
   public void reduceEmptyEitherBuiltRight() {
     assertThat(right(null).reduce(l -> "l", r -> "r"), nullValue());
+  }
+
+  @Test
+  public void mapRightOnLeftDoesntCallMapper() {
+    left("").mapRight(r -> {
+      fail("Must not call mapper");
+      return r;
+    });
+  }
+
+  @Test
+  public void mapLeftOnRightDoesntCallMapper() {
+    right("").mapLeft(l -> {
+      fail("Must not call mapper");
+      return l;
+    });
+  }
+
+  @Test
+  public void applyRightOnLeftDoesntCallConsumer() {
+    left("").applyRight(r -> {
+      fail("Must not call consumer");
+    });
+  }
+
+  @Test
+  public void applyLeftOnRightDoesntCallConsumer() {
+    right("").applyLeft(l -> {
+      fail("Must not call consumer");
+    });
+  }
+
+  @Test
+  public void applyOnLeftDoesntCallRightConsumer() {
+    left("").apply(l -> {
+    }, r -> {
+      fail("Must not call right consumer");
+    });
+  }
+
+  @Test
+  public void applyOnRightDoesntCallLeftConsumer() {
+    right("").apply(l -> {
+      fail("Must not call left consumer");
+    }, r -> {
+    });
+  }
+
+  @Test
+  public void reduceOnLeftDoesntCallRightFunction() {
+    left("", String.class).reduce(l -> l, r -> {
+      fail("Must not call right function");
+      return r;
+    });
+  }
+
+  @Test
+  public void reduceOnRightDoesntCallLeftFunction() {
+    right(String.class, "").reduce(l -> {
+      fail("Must not call left function");
+      return l;
+    }, r -> r);
   }
 }
