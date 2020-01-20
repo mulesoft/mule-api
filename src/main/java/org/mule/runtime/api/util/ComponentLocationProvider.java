@@ -7,7 +7,6 @@
 package org.mule.runtime.api.util;
 
 import static org.mule.runtime.api.component.Component.Annotations.NAME_ANNOTATION_KEY;
-import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.component.Component;
@@ -82,7 +81,7 @@ public class ComponentLocationProvider {
    *         file.
    */
   public static String getSourceCode(Component component) {
-    return (String) component.getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
+    return component.getDslSource();
   }
 
 }

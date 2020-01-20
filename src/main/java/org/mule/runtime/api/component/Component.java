@@ -8,6 +8,7 @@ package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
 import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
@@ -103,5 +104,12 @@ public interface Component {
    */
   default String getRepresentation() {
     return (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
+  }
+
+  /**
+   * @return the source code of this element in the DSL.
+   */
+  default String getDslSource() {
+    return (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
 }
