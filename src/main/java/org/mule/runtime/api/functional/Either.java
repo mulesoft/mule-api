@@ -7,7 +7,6 @@
 package org.mule.runtime.api.functional;
 
 import static java.lang.String.format;
-import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -32,7 +31,7 @@ public class Either<L, R> {
   /**
    * Common instance for {@code empty()}.
    */
-  private static final Either<?, ?> EMPTY = new Either<>(Optional.empty(), Optional.empty());
+  private static final Either<?, ?> EMPTY = new Either<>(null, null);
 
   /**
    * Creates an {@link Either} that doesn't have any left or right value.
@@ -55,7 +54,7 @@ public class Either<L, R> {
     if (value == null) {
       return (Either<L, R>) EMPTY;
     }
-    return new Either<>(ofNullable(value), Optional.empty());
+    return new Either<>(value, null);
   }
 
   /**
@@ -84,7 +83,7 @@ public class Either<L, R> {
     if (value == null) {
       return (Either<L, R>) EMPTY;
     }
-    return new Either<>(Optional.empty(), ofNullable(value));
+    return new Either<>(null, value);
   }
 
   /**
@@ -101,10 +100,10 @@ public class Either<L, R> {
     return right(value);
   }
 
-  private final Optional<L> left;
-  private final Optional<R> right;
+  private final L left;
+  private final R right;
 
-  private Either(Optional<L> l, Optional<R> r) {
+  private Either(L l, R r) {
     left = l;
     right = r;
   }
@@ -119,10 +118,10 @@ public class Either<L, R> {
    */
   public <T> T reduce(Function<? super L, ? extends T> leftFunc, Function<? super R, ? extends T> rightFunc) {
     if (isLeft()) {
-      return left.map(leftFunc).orElse(null);
+      return leftFunc.apply(left);
     } else {
       return isRight()
-          ? right.map(rightFunc).orElse(null)
+          ? rightFunc.apply(right)
           : null;
     }
   }
@@ -135,15 +134,23 @@ public class Either<L, R> {
    * @return a new {@code Either} created from the result of applying the function.
    */
   public <T> Either<T, R> mapLeft(Function<? super L, ? extends T> func) {
-    return new Either<>(left.map(func), right);
+    if (left == null) {
+      return (Either<T, R>) this;
+    } else {
+      return new Either<>(func.apply(left), right);
+    }
   }
 
   public void applyLeft(Consumer<? super L> consumer) {
-    left.ifPresent(consumer::accept);
+    if (left != null) {
+      consumer.accept(left);
+    }
   }
 
   public void applyRight(Consumer<? super R> consumer) {
-    right.ifPresent(consumer::accept);
+    if (right != null) {
+      consumer.accept(right);
+    }
   }
 
   /**
@@ -154,53 +161,57 @@ public class Either<L, R> {
    * @return a new {@code Either} created from the result of applying the function.
    */
   public <T> Either<L, T> mapRight(Function<? super R, ? extends T> func) {
-    return new Either<>(left, right.map(func));
+    if (right == null) {
+      return (Either<L, T>) this;
+    } else {
+      return new Either<>(left, func.apply(right));
+    }
   }
 
   /**
    * Receives a {@link Consumer} functions for both, the left and right value and applies the one over the value that is present.
    *
-   * @param leftFunc the function to apply to the left value
-   * @param rightFunc the function to apply to the right value
+   * @param leftConsumer the function to apply to the left value
+   * @param rightConsumer the function to apply to the right value
    */
-  public void apply(Consumer<? super L> leftFunc, Consumer<? super R> rightFunc) {
-    applyLeft(leftFunc);
-    applyRight(rightFunc);
+  public void apply(Consumer<? super L> leftConsumer, Consumer<? super R> rightConsumer) {
+    applyLeft(leftConsumer);
+    applyRight(rightConsumer);
   }
 
   /**
    * @return true if it holds a value for the left type, false otherwise
    */
   public boolean isLeft() {
-    return left.isPresent();
+    return left != null;
   }
 
   /**
    * @return true if it holds a value for the right type, false otherwise
    */
   public boolean isRight() {
-    return right.isPresent();
+    return right != null;
   }
 
   /**
    * @return the left value
    */
   public L getLeft() {
-    return left.orElse(null);
+    return left;
   }
 
   /**
    * @return the right value
    */
   public R getRight() {
-    return right.orElse(null);
+    return right;
   }
 
   public <T> Optional<T> getValue() {
-    if (left.isPresent()) {
-      return (Optional<T>) left;
-    } else if (right.isPresent()) {
-      return (Optional<T>) right;
+    if (left != null) {
+      return (Optional<T>) Optional.of(left);
+    } else if (right != null) {
+      return (Optional<T>) Optional.of(right);
     } else {
       return Optional.empty();
     }
