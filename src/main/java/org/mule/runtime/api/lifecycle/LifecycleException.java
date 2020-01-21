@@ -9,9 +9,9 @@ package org.mule.runtime.api.lifecycle;
 import static java.lang.String.format;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.exception.LocatedMuleException;
 import org.mule.runtime.api.i18n.I18nMessage;
-import org.mule.runtime.api.component.Component;
 import org.mule.runtime.api.meta.NamedObject;
 
 /**
@@ -22,7 +22,7 @@ import org.mule.runtime.api.meta.NamedObject;
 public class LifecycleException extends LocatedMuleException {
 
   /** Serial version */
-  private static final long serialVersionUID = 2909614055858287394L;
+  private static final long serialVersionUID = 8445060869503979540L;
 
   private transient Object component;
 

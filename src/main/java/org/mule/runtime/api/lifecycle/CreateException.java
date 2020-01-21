@@ -17,7 +17,7 @@ import org.mule.runtime.api.i18n.I18nMessage;
 public final class CreateException extends LifecycleException {
 
   /** Serial version */
-  private static final long serialVersionUID = -8402348927606781921L;
+  private static final long serialVersionUID = -5070464873918600823L;
 
   /**
    * @param message the exception message

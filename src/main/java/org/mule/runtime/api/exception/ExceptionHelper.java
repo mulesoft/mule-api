@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -155,7 +156,9 @@ public class ExceptionHelper {
       }
     }
     if (exception != null) {
-      exception.getInfo().putAll(muleExceptionInfo);
+      for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
+        exception.addInfo(entry.getKey(), entry.getValue());
+      }
     }
     return exception;
   }

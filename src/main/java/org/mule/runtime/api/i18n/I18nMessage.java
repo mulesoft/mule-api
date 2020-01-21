@@ -42,7 +42,7 @@ public class I18nMessage implements Serializable {
     if (nextMessage != null) {
       return message + ". " + nextMessage.getMessage();
     } else {
-      return message != null ? message : "";
+      return message != null ? message : "null";
     }
   }
 

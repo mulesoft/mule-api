@@ -18,7 +18,7 @@ public final class NotPermittedException extends ServerSecurityException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = -6664384216189042673L;
+  private static final long serialVersionUID = 287768744221027152L;
 
   public NotPermittedException(I18nMessage message) {
     super(message);

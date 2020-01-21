@@ -7,6 +7,7 @@
 package org.mule.runtime.api.security;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
@@ -19,7 +20,7 @@ public class UnauthorisedException extends ServerSecurityException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = -6664384216189042673L;
+  private static final long serialVersionUID = -8830402477997253918L;
 
   public UnauthorisedException(I18nMessage message) {
     super(message);

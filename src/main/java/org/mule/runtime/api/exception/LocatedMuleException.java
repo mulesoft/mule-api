@@ -24,7 +24,7 @@ public class LocatedMuleException extends MuleException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = 6941498759267936649L;
+  private static final long serialVersionUID = 5100364571184418132L;
 
   /**
    * @param component the object that failed during a lifecycle method call

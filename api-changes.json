@@ -3,6 +3,18 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.constantValueChanged",
+          "old": "field org.mule.runtime.api.exception.MuleException.INFO_SOURCE_XML_KEY",
+          "new": "field org.mule.runtime.api.exception.MuleException.INFO_SOURCE_XML_KEY",
+          "oldValue": "Element XML",
+          "newValue": "Element DSL",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleException",
+          "fieldName": "INFO_SOURCE_XML_KEY",
+          "elementKind": "field",
+          "justification": "Make the message more generic"
+        },
+        {
           "code": "java.class.nonFinalClassInheritsFromNewClass",
           "old": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
           "new": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",

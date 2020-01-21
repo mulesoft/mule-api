@@ -22,9 +22,9 @@ public final class UnsupportedAuthenticationSchemeException extends ServerSecuri
   /**
    * Serial version
    */
-  private static final long serialVersionUID = 3281021140543598681L;
+  private static final long serialVersionUID = 8780866132550426151L;
 
-  private Message errorMessage;
+  private final Message errorMessage;
 
   public UnsupportedAuthenticationSchemeException(I18nMessage message, Message errorMessage) {
     super(message);
