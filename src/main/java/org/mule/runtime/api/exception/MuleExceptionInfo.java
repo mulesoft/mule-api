@@ -33,6 +33,7 @@ public final class MuleExceptionInfo implements Serializable {
   public static final String INFO_ERROR_TYPE_KEY_MSG = INFO_ERROR_TYPE_KEY + getColonMatchingPad(INFO_ERROR_TYPE_KEY) + ":";
   public static final String INFO_LOCATION_KEY_MSG = INFO_LOCATION_KEY + getColonMatchingPad(INFO_LOCATION_KEY) + ":";
   public static final String INFO_SOURCE_DSL_KEY_MSG = INFO_SOURCE_DSL_KEY + getColonMatchingPad(INFO_SOURCE_DSL_KEY) + ":";
+  public static final String FLOW_STACK_INFO_KEY_MSG = FLOW_STACK_INFO_KEY + getColonMatchingPad(FLOW_STACK_INFO_KEY) + ":";
 
   private String errorType;
   private String location;
@@ -42,14 +43,17 @@ public final class MuleExceptionInfo implements Serializable {
 
   void addToSummaryMessage(StringBuilder buf) {
     buf
-        .append(INFO_ERROR_TYPE_KEY_MSG)
-        .append(errorType != null ? errorType : MISSING_DEFAULT_VALUE)
-        .append(lineSeparator())
         .append(INFO_LOCATION_KEY_MSG)
         .append(location != null ? location : MISSING_DEFAULT_VALUE)
         .append(lineSeparator())
         .append(INFO_SOURCE_DSL_KEY_MSG)
         .append(dslSource != null ? dslSource : MISSING_DEFAULT_VALUE)
+        .append(lineSeparator())
+        .append(INFO_ERROR_TYPE_KEY_MSG)
+        .append(errorType != null ? errorType : MISSING_DEFAULT_VALUE)
+        .append(lineSeparator())
+        .append(FLOW_STACK_INFO_KEY_MSG)
+        .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
   }
 

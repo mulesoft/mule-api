@@ -10,6 +10,7 @@ import static java.lang.System.lineSeparator;
 import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
+import static org.mule.runtime.api.exception.MuleExceptionInfo.FLOW_STACK_INFO_KEY;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
@@ -147,6 +148,8 @@ public abstract class MuleException extends Exception {
       this.info.setLocation(Objects.toString(info));
     } else if (INFO_SOURCE_XML_KEY.equals(name)) {
       this.info.setDslSource(Objects.toString(info));
+    } else if (FLOW_STACK_INFO_KEY.equals(name)) {
+      this.info.setFlowStack(info);
     }
 
     this.info.putAdditionalEntry(name, info);
