@@ -16,6 +16,7 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +37,9 @@ public abstract class MuleException extends Exception {
   public static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
   //Info keys for logging
+  /**
+   * @deprecated this is a property in an object now, no more need for a key
+   */
   @Deprecated
   public static final String INFO_ALREADY_LOGGED_KEY = "Logged";
 
@@ -55,7 +59,7 @@ public abstract class MuleException extends Exception {
    */
   public static boolean verboseExceptions = false;
 
-  private final MuleExceptionInfo info = new MuleExceptionInfo();
+  private final MuleExceptionInfo exceptionInfo = new MuleExceptionInfo();
   private String message = null;
   private I18nMessage i18nMessage;
 
@@ -144,16 +148,16 @@ public abstract class MuleException extends Exception {
 
   public void addInfo(String name, Object info) {
     if (INFO_ERROR_TYPE_KEY.equals(name)) {
-      this.info.setErrorType(Objects.toString(info));
+      this.exceptionInfo.setErrorType(Objects.toString(info));
     } else if (INFO_LOCATION_KEY.equals(name)) {
-      this.info.setLocation(Objects.toString(info));
+      this.exceptionInfo.setLocation(Objects.toString(info));
     } else if (INFO_SOURCE_XML_KEY.equals(name)) {
-      this.info.setDslSource(Objects.toString(info));
+      this.exceptionInfo.setDslSource(Objects.toString(info));
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
-      this.info.setFlowStack(info);
+      this.exceptionInfo.setFlowStack((Serializable) info);
     }
 
-    this.info.putAdditionalEntry(name, info);
+    this.exceptionInfo.putAdditionalEntry(name, info);
   }
 
   protected void appendMessage(String s) {
@@ -215,7 +219,7 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    info.addToSummaryMessage(buf);
+    exceptionInfo.addToSummaryMessage(buf);
     buf.append(lineSeparator())
         .append("  (set debug level logging or '-D" + MULE_VERBOSE_EXCEPTIONS + "=true' for everything)")
         .append(lineSeparator());
@@ -254,11 +258,11 @@ public abstract class MuleException extends Exception {
   }
 
   public Map<String, Object> getInfo() {
-    return info.asMap();
+    return exceptionInfo.asMap();
   }
 
   public MuleExceptionInfo getExceptionInfo() {
-    return info;
+    return exceptionInfo;
   }
 
   public static boolean isVerboseExceptions() {

@@ -40,8 +40,8 @@ public final class MuleExceptionInfo implements Serializable {
   private String errorType;
   private String location;
   private String dslSource;
-  private Object flowStack;
-  private final Map<String, Object> additionalEntries = new SmallMap<>();
+  private Serializable flowStack;
+  private final SmallMap<String, Object> additionalEntries = new SmallMap<>();
 
   void addToSummaryMessage(StringBuilder buf) {
     buf
@@ -91,11 +91,11 @@ public final class MuleExceptionInfo implements Serializable {
     this.dslSource = dslSource;
   }
 
-  public Object getFlowStack() {
+  public Serializable getFlowStack() {
     return flowStack;
   }
 
-  public void setFlowStack(Object flowStack) {
+  public void setFlowStack(Serializable flowStack) {
     this.flowStack = flowStack;
   }
 
