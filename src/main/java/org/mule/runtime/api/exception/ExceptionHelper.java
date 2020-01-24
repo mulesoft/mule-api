@@ -21,7 +21,6 @@ import org.mule.runtime.api.util.collection.SmallMap;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -349,11 +348,15 @@ public class ExceptionHelper {
     return empty();
   }
 
+  /**
+   * @param t
+   * @return t and its recursive causes, ordered from outer to inner.
+   */
   public static List<Throwable> getExceptionsAsList(Throwable t) {
-    List<Throwable> exceptions = new LinkedList<>();
+    List<Throwable> exceptions = new ArrayList<>(4);
     Throwable cause = t;
     while (cause != null) {
-      exceptions.add(0, cause);
+      exceptions.add(cause);
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
       if (t == cause) {

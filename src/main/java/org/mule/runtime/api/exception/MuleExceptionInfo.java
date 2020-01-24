@@ -30,10 +30,12 @@ public final class MuleExceptionInfo implements Serializable {
   public static final String FLOW_STACK_INFO_KEY = "FlowStack";
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
-  public static final String INFO_ERROR_TYPE_KEY_MSG = INFO_ERROR_TYPE_KEY + getColonMatchingPad(INFO_ERROR_TYPE_KEY) + ":";
-  public static final String INFO_LOCATION_KEY_MSG = INFO_LOCATION_KEY + getColonMatchingPad(INFO_LOCATION_KEY) + ":";
-  public static final String INFO_SOURCE_DSL_KEY_MSG = INFO_SOURCE_DSL_KEY + getColonMatchingPad(INFO_SOURCE_DSL_KEY) + ":";
-  public static final String FLOW_STACK_INFO_KEY_MSG = FLOW_STACK_INFO_KEY + getColonMatchingPad(FLOW_STACK_INFO_KEY) + ":";
+  public static final String INFO_ERROR_TYPE_KEY_MSG = INFO_ERROR_TYPE_KEY + getColonMatchingPad(INFO_ERROR_TYPE_KEY) + ": ";
+  public static final String INFO_LOCATION_KEY_MSG = INFO_LOCATION_KEY + getColonMatchingPad(INFO_LOCATION_KEY) + ": ";
+  public static final String INFO_SOURCE_DSL_KEY_MSG = INFO_SOURCE_DSL_KEY + getColonMatchingPad(INFO_SOURCE_DSL_KEY) + ": ";
+  public static final String FLOW_STACK_INFO_KEY_MSG = FLOW_STACK_INFO_KEY + getColonMatchingPad(FLOW_STACK_INFO_KEY) + ": ";
+
+  private boolean alreadyLogged = false;
 
   private String errorType;
   private String location;
@@ -55,6 +57,14 @@ public final class MuleExceptionInfo implements Serializable {
         .append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
+  }
+
+  public boolean isAlreadyLogged() {
+    return alreadyLogged;
+  }
+
+  public void setAlreadyLogged(boolean alreadyLogged) {
+    this.alreadyLogged = alreadyLogged;
   }
 
   public String getErrorType() {

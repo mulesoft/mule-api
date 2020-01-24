@@ -36,6 +36,7 @@ public abstract class MuleException extends Exception {
   public static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
   //Info keys for logging
+  @Deprecated
   public static final String INFO_ALREADY_LOGGED_KEY = "Logged";
 
   public static final String INFO_ERROR_TYPE_KEY = MuleExceptionInfo.INFO_ERROR_TYPE_KEY;
