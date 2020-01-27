@@ -123,8 +123,8 @@ public final class MuleSystemProperties {
    *
    * @since 1.3.0
    */
-  public static final String MULE_LIFECYCLE_PESSIMISTIC_DISPOSE =
-      SYSTEM_PROPERTY_PREFIX + "lifecycle.pessimisticDispose";
+  public static final String MULE_LIFECYCLE_FAIL_ON_FIRST_DISPOSE_ERROR =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
