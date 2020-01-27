@@ -130,4 +130,19 @@ public class EitherTestCase {
       return l;
     }, r -> r);
   }
+
+  @Test
+  public void leftToString() {
+    assertThat(left("hello").toString(), equalTo("Either - left: { hello }"));
+  }
+
+  @Test
+  public void rightToString() {
+    assertThat(right("world").toString(), equalTo("Either - right: { world }"));
+  }
+
+  @Test
+  public void emptyToString() {
+    assertThat(Either.empty().toString(), equalTo("Either - empty"));
+  }
 }

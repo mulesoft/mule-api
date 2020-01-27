@@ -219,6 +219,12 @@ public class Either<L, R> {
 
   @Override
   public String toString() {
-    return format("%s - left: { %s }; right: { %s }", this.getClass().getSimpleName(), left.toString(), right.toString());
+    if (left != null) {
+      return format("%s - left: { %s }", this.getClass().getSimpleName(), left.toString());
+    } else if (right != null) {
+      return format("%s - right: { %s }", this.getClass().getSimpleName(), right.toString());
+    } else {
+      return format("%s - empty", this.getClass().getSimpleName());
+    }
   }
 }
