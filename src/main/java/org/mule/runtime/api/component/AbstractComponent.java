@@ -25,8 +25,8 @@ import javax.xml.namespace.QName;
  */
 public abstract class AbstractComponent implements Component {
 
-  public static QName LOCATION_KEY = new QName(NS_MULE_PARSER_METADATA, "COMPONENT_LOCATION");
-  public static QName ROOT_CONTAINER_NAME_KEY = new QName(NS_MULE_PARSER_METADATA, "ROOT_CONTAINER_NAME");
+  public static final QName LOCATION_KEY = new QName(NS_MULE_PARSER_METADATA, "COMPONENT_LOCATION");
+  public static final QName ROOT_CONTAINER_NAME_KEY = new QName(NS_MULE_PARSER_METADATA, "ROOT_CONTAINER_NAME");
   public static final QName ANNOTATION_NAME = new QName("config", "componentIdentifier");
 
   private volatile Map<QName, Object> annotations = emptyMap();

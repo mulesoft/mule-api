@@ -3,6 +3,30 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.nowFinal",
+          "old": "field org.mule.runtime.api.component.AbstractComponent.LOCATION_KEY",
+          "new": "field org.mule.runtime.api.component.AbstractComponent.LOCATION_KEY",
+          "oldModifiers": "public static",
+          "newModifiers": "public static final",
+          "package": "org.mule.runtime.api.component",
+          "classSimpleName": "AbstractComponent",
+          "fieldName": "LOCATION_KEY",
+          "elementKind": "field",
+          "justification": "Value must be constant"
+        },
+        {
+          "code": "java.field.nowFinal",
+          "old": "field org.mule.runtime.api.component.AbstractComponent.ROOT_CONTAINER_NAME_KEY",
+          "new": "field org.mule.runtime.api.component.AbstractComponent.ROOT_CONTAINER_NAME_KEY",
+          "oldModifiers": "public static",
+          "newModifiers": "public static final",
+          "package": "org.mule.runtime.api.component",
+          "classSimpleName": "AbstractComponent",
+          "fieldName": "ROOT_CONTAINER_NAME_KEY",
+          "elementKind": "field",
+          "justification": "Value must be constant"
+        },
+        {
           "code": "java.field.constantValueChanged",
           "old": "field org.mule.runtime.api.exception.MuleException.INFO_SOURCE_XML_KEY",
           "new": "field org.mule.runtime.api.exception.MuleException.INFO_SOURCE_XML_KEY",
