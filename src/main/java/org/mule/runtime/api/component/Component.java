@@ -6,6 +6,10 @@
  */
 package org.mule.runtime.api.component;
 
+import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
+
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
 
@@ -42,6 +46,11 @@ public interface Component {
      * Annotation that defines the source code for the element.
      */
     QName SOURCE_ELEMENT_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceElement");
+
+    /**
+     * Annotation that defines the representation for the element to be used in error reporting.
+     */
+    QName REPRESENTATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation");
   }
 
   /**
@@ -82,4 +91,25 @@ public interface Component {
    * @return the root container component location.
    */
   Location getRootContainerLocation();
+
+  /**
+   * @return the type identifier for this component.
+   */
+  default ComponentIdentifier getIdentifier() {
+    return (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
+  }
+
+  /**
+   * @return a representation of a flow element to be logged in a standard way.
+   */
+  default String getRepresentation() {
+    return (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
+  }
+
+  /**
+   * @return the source code of this element in the DSL.
+   */
+  default String getDslSource() {
+    return (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
+  }
 }

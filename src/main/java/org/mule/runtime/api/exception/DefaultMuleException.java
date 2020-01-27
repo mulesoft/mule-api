@@ -20,7 +20,7 @@ public class DefaultMuleException extends MuleException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = 2554735072826262515L;
+  private static final long serialVersionUID = 3990670599515417655L;
 
   public DefaultMuleException(String message) {
     this(I18nMessageFactory.createStaticMessage(message));

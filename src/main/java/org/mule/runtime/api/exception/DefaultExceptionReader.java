@@ -6,17 +6,16 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.util.Collections.emptyMap;
+
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * This is the default exception reader used if there is no specific one registered for the current exception.
  */
 final class DefaultExceptionReader implements ExceptionReader {
-
-  private Map<String, Object> info = new HashMap<>();
 
   @Override
   public String getMessage(Throwable t) {
@@ -34,12 +33,12 @@ final class DefaultExceptionReader implements ExceptionReader {
   }
 
   /**
-   * Returns a map of the non-stanard information stored on the exception
-   * 
-   * @return a map of the non-stanard information stored on the exception
+   * Returns a map of the non-standard information stored on the exception
+   *
+   * @return a map of the non-standard information stored on the exception
    */
   @Override
   public Map<String, Object> getInfo(Throwable t) {
-    return info;
+    return (t instanceof MuleException ? ((MuleException) t).getInfo() : emptyMap());
   }
 }

@@ -19,7 +19,7 @@ public class TransactionException extends MuleException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = -3470229644235978820L;
+  private static final long serialVersionUID = -1077047092280362809L;
 
   /**
    * @param message the exception message

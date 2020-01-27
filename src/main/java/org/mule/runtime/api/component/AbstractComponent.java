@@ -9,6 +9,8 @@ package org.mule.runtime.api.component;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
@@ -25,11 +27,15 @@ public abstract class AbstractComponent implements Component {
 
   public static QName LOCATION_KEY = new QName(NS_MULE_PARSER_METADATA, "COMPONENT_LOCATION");
   public static QName ROOT_CONTAINER_NAME_KEY = new QName(NS_MULE_PARSER_METADATA, "ROOT_CONTAINER_NAME");
+  public static final QName ANNOTATION_NAME = new QName("config", "componentIdentifier");
 
   private volatile Map<QName, Object> annotations = emptyMap();
 
   private ComponentLocation location;
   private Location rootContainerLocation;
+  private ComponentIdentifier identifier;
+  private String representation;
+  private String dslSource;
 
   @Override
   public Object getAnnotation(QName qName) {
@@ -46,6 +52,9 @@ public abstract class AbstractComponent implements Component {
     annotations = new HashMap<>(newAnnotations);
     location = (ComponentLocation) getAnnotation(LOCATION_KEY);
     rootContainerLocation = initRootContainerName();
+    identifier = (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
+    representation = (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
+    dslSource = (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
 
   protected Location initRootContainerName() {
@@ -66,4 +75,18 @@ public abstract class AbstractComponent implements Component {
     return rootContainerLocation;
   }
 
+  @Override
+  public ComponentIdentifier getIdentifier() {
+    return identifier;
+  }
+
+  @Override
+  public String getRepresentation() {
+    return representation;
+  }
+
+  @Override
+  public String getDslSource() {
+    return dslSource;
+  }
 }

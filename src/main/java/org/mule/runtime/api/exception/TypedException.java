@@ -6,8 +6,8 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.util.Objects.requireNonNull;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.ErrorType;
@@ -21,7 +21,9 @@ import org.mule.runtime.api.message.ErrorType;
  */
 public class TypedException extends MuleRuntimeException {
 
-  private ErrorType errorType;
+  private static final long serialVersionUID = 5716341342349590954L;
+
+  private final ErrorType errorType;
 
   /**
    * @param throwable The {@link TypedException#getCause()} of this new exception.
@@ -29,8 +31,7 @@ public class TypedException extends MuleRuntimeException {
    */
   public TypedException(Throwable throwable, ErrorType errorType) {
     super(throwable);
-    checkArgument(errorType != null, "The 'errorType' argument can not be null");
-    this.errorType = errorType;
+    this.errorType = requireNonNull(errorType, "The 'errorType' argument can not be null");
   }
 
   /**
@@ -40,8 +41,7 @@ public class TypedException extends MuleRuntimeException {
    */
   public TypedException(Throwable throwable, ErrorType errorType, String message) {
     super(createStaticMessage(message), throwable);
-    checkArgument(errorType != null, "The 'errorType' argument can not be null");
-    this.errorType = errorType;
+    this.errorType = requireNonNull(errorType, "The 'errorType' argument can not be null");
   }
 
   /**

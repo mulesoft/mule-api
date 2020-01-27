@@ -7,6 +7,7 @@
 package org.mule.runtime.api.security;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import org.mule.runtime.api.exception.MuleException;
 
 /**
@@ -20,7 +21,7 @@ public final class UnknownAuthenticationTypeException extends MuleException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = 6275865761357999175L;
+  private static final long serialVersionUID = -994458254811668986L;
 
   public UnknownAuthenticationTypeException(Authentication authentication) {
     super(createStaticMessage("The authentication type %s is not recognised by the Security Manager",

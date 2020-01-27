@@ -30,6 +30,8 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   private String namespaceUri;
   private String name;
 
+  private int hash;
+
   private DefaultComponentIdentifier() {}
 
   /**
@@ -106,6 +108,10 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
                  "Prefix URI must be not blank");
       checkState(componentIdentifier.name != null && !componentIdentifier.name.trim().isEmpty(),
                  "Name must be not blank");
+
+      componentIdentifier.hash = componentIdentifier.namespaceLowerCase.hashCode();
+      componentIdentifier.hash = 31 * componentIdentifier.hash + componentIdentifier.name.hashCode();
+
       return componentIdentifier;
     }
   }
@@ -129,9 +135,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
   @Override
   public int hashCode() {
-    int result = namespaceLowerCase.hashCode();
-    result = 31 * result + getName().hashCode();
-    return result;
+    return hash;
   }
 
   /**

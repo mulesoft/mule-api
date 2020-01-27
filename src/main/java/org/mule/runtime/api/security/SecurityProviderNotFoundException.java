@@ -7,6 +7,7 @@
 package org.mule.runtime.api.security;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import org.mule.runtime.api.exception.MuleException;
 
 /**
@@ -20,7 +21,7 @@ public final class SecurityProviderNotFoundException extends MuleException {
   /**
    * Serial version
    */
-  private static final long serialVersionUID = 124630897095610595L;
+  private static final long serialVersionUID = -1730399161002458171L;
 
   public SecurityProviderNotFoundException(String providerName) {
     super(createStaticMessage("There is no Security Provider registered called %s", providerName));

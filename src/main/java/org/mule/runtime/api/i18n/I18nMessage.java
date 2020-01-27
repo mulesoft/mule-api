@@ -18,9 +18,9 @@ public class I18nMessage implements Serializable {
    */
   private static final long serialVersionUID = -6109760447384477924L;
 
-  private String message;
+  private final String message;
   private int code = 0;
-  private Object[] args;
+  private final Object[] args;
   private I18nMessage nextMessage;
 
   protected I18nMessage(String message, int code, Object... args) {
@@ -39,7 +39,11 @@ public class I18nMessage implements Serializable {
   }
 
   public String getMessage() {
-    return message + (nextMessage != null ? ". " + nextMessage.getMessage() : "");
+    if (nextMessage != null) {
+      return message + ". " + nextMessage.getMessage();
+    } else {
+      return message != null ? message : "null";
+    }
   }
 
   public I18nMessage setNextMessage(I18nMessage nextMessage) {
@@ -51,6 +55,7 @@ public class I18nMessage implements Serializable {
     return nextMessage;
   }
 
+  @Override
   public String toString() {
     return this.getMessage();
   }
