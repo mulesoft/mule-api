@@ -15,16 +15,6 @@
           "justification": "Make the message more generic"
         },
         {
-          "code": "java.class.nonFinalClassInheritsFromNewClass",
-          "old": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
-          "new": "class org.mule.runtime.api.util.CaseInsensitiveMapWrapper<T extends java.lang.Object>",
-          "superClass": "java.util.AbstractMap<java.lang.String, T extends java.lang.Object>",
-          "package": "org.mule.runtime.api.util",
-          "classSimpleName": "CaseInsensitiveMapWrapper",
-          "elementKind": "class",
-          "justification": "This was a bad implementation, will remove this after cherry-pick."
-        },
-        {
           "code": "java.annotation.added",
           "old": "interface org.mule.runtime.api.component.ComponentIdentifier.Builder",
           "new": "interface org.mule.runtime.api.component.ComponentIdentifier.Builder",
