@@ -9,6 +9,7 @@ package org.mule.runtime.api.exception;
 import static java.lang.System.lineSeparator;
 
 import org.mule.api.annotation.NoInstantiate;
+import org.mule.runtime.api.message.ErrorType;
 import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.io.Serializable;
@@ -37,7 +38,7 @@ public final class MuleExceptionInfo implements Serializable {
 
   private boolean alreadyLogged = false;
 
-  private String errorType;
+  private ErrorType errorType;
   private String location;
   private String dslSource;
   private Serializable flowStack;
@@ -52,7 +53,7 @@ public final class MuleExceptionInfo implements Serializable {
         .append(dslSource != null ? dslSource : MISSING_DEFAULT_VALUE)
         .append(lineSeparator())
         .append(INFO_ERROR_TYPE_KEY_MSG)
-        .append(errorType != null ? errorType : MISSING_DEFAULT_VALUE)
+        .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE)
         .append(lineSeparator())
         .append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
@@ -67,11 +68,11 @@ public final class MuleExceptionInfo implements Serializable {
     this.alreadyLogged = alreadyLogged;
   }
 
-  public String getErrorType() {
+  public ErrorType getErrorType() {
     return errorType;
   }
 
-  public void setErrorType(String errorType) {
+  public void setErrorType(ErrorType errorType) {
     this.errorType = errorType;
   }
 
