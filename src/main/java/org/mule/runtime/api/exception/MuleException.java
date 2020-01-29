@@ -155,9 +155,9 @@ public abstract class MuleException extends Exception {
       this.exceptionInfo.setDslSource(Objects.toString(info));
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
+    } else {
+      this.exceptionInfo.putAdditionalEntry(name, info);
     }
-
-    this.exceptionInfo.putAdditionalEntry(name, info);
   }
 
   protected void appendMessage(String s) {
