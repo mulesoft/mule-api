@@ -8,6 +8,7 @@ package org.mule.runtime.api.time;
 
 import org.mule.api.annotation.NoImplement;
 
+import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 /**
@@ -16,7 +17,18 @@ import java.util.function.Supplier;
  * @since 4.0
  */
 @NoImplement
-public interface TimeSupplier extends Supplier<Long> {
+public interface TimeSupplier extends Supplier<Long>, LongSupplier {
+
+  /**
+   * Returns {@link System#currentTimeMillis()}
+   *
+   * @return the current time in milliseconds
+   *
+   * @deprecated use {@link #getAsLong()} instead.
+   */
+  @Override
+  @Deprecated
+  Long get();
 
   /**
    * Returns {@link System#currentTimeMillis()}
@@ -24,5 +36,5 @@ public interface TimeSupplier extends Supplier<Long> {
    * @return the current time in milliseconds
    */
   @Override
-  Long get();
+  long getAsLong();
 }
