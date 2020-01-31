@@ -14,6 +14,7 @@ import static org.mule.runtime.api.exception.MuleExceptionInfo.FLOW_STACK_INFO_K
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
+import org.mule.runtime.api.message.ErrorType;
 
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -148,7 +149,7 @@ public abstract class MuleException extends Exception {
 
   public void addInfo(String name, Object info) {
     if (INFO_ERROR_TYPE_KEY.equals(name)) {
-      this.exceptionInfo.setErrorType(Objects.toString(info));
+      this.exceptionInfo.setErrorType((ErrorType) info);
     } else if (INFO_LOCATION_KEY.equals(name)) {
       this.exceptionInfo.setLocation(Objects.toString(info));
     } else if (INFO_SOURCE_XML_KEY.equals(name)) {
