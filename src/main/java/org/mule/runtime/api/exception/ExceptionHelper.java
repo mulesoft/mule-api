@@ -138,7 +138,7 @@ public class ExceptionHelper {
     // properly logged.
     Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
-    while (cause != null) {
+    while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
         muleExceptionInfo.putAll(exception.getInfo());
