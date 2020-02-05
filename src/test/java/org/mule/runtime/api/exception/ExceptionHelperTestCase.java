@@ -9,8 +9,8 @@ package org.mule.runtime.api.exception;
 import static java.lang.Thread.currentThread;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.io.IOUtils.toByteArray;
-import static org.hamcrest.Matchers.instanceOf;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
@@ -18,6 +18,7 @@ import static org.mule.runtime.api.exception.ExceptionHelper.registerExceptionRe
 import static org.mule.runtime.api.exception.ExceptionHelper.registerGlobalExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.unregisterExceptionReader;
 
+import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
 import org.junit.After;
@@ -25,7 +26,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mule.runtime.api.message.ErrorType;
+import org.mule.runtime.internal.exception.SuppressedMuleException;
 
+import java.util.List;
 import java.util.Map;
 
 public class ExceptionHelperTestCase {
@@ -40,6 +44,25 @@ public class ExceptionHelperTestCase {
 
   private ExceptionReader cl1Reader;
   private ExceptionReader cl2Reader;
+  private ErrorType dummyErrorType = new ErrorType() {
+
+    private static final long serialVersionUID = -5155728711167777541L;
+
+    @Override
+    public String getIdentifier() {
+      return "TEST_ERROR";
+    }
+
+    @Override
+    public String getNamespace() {
+      return "TST";
+    }
+
+    @Override
+    public ErrorType getParentErrorType() {
+      return null;
+    }
+  };
 
   @Before
   public void before() throws Exception {
@@ -108,6 +131,38 @@ public class ExceptionHelperTestCase {
   public void registerGlobalNotFromRuntime() throws Exception {
     expected.expect(IllegalArgumentException.class);
     registerGlobalExceptionReader(cl1Reader);
+  }
+
+  @Test
+  public void unsuppressedMuleExceptionInGetRootMuleException() {
+    Throwable innerCause = new ConnectionException(new NullPointerException());
+    Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
+    assertThat(ExceptionHelper.getRootMuleException(errorWithUnsuppressedCause), is(innerCause));
+  }
+
+  @Test
+  public void suppressedMuleExceptionInGetRootMuleException() {
+    Throwable innerCause = new ConnectionException(new NullPointerException());
+    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
+    assertNull(ExceptionHelper.getRootMuleException(errorWithSuppressedCause));
+  }
+
+  @Test
+  public void unsuppressedMuleExceptionInGetExceptionsAsList() {
+    Throwable innerCause = new ConnectionException(new NullPointerException());
+    Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
+    List<Throwable> exceptionsList = ExceptionHelper.getExceptionsAsList(errorWithUnsuppressedCause);
+    assertThat(exceptionsList, hasItems(errorWithUnsuppressedCause, innerCause));
+    assertThat(exceptionsList, hasSize(3));
+  }
+
+  @Test
+  public void suppressedMuleExceptionInGetExceptionsAsList() {
+    Throwable innerCause = new ConnectionException(new NullPointerException());
+    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
+    List<Throwable> exceptionsList = ExceptionHelper.getExceptionsAsList(errorWithSuppressedCause);
+    assertThat(exceptionsList, hasItem(errorWithSuppressedCause));
+    assertThat(exceptionsList, hasSize(1));
   }
 
   private static final class TestChildClassLoader extends ClassLoader {

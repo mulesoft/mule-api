@@ -17,6 +17,7 @@ import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIO
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 import org.mule.runtime.api.util.collection.SmallMap;
+import org.mule.runtime.internal.exception.SuppressedMuleException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -207,9 +208,7 @@ public class ExceptionHelper {
   }
 
   public static String getExceptionStack(Throwable t) {
-    Throwable root = getRootException(t);
     MuleException rootMule = getRootMuleException(t);
-
     StringBuilder buf = new StringBuilder();
 
     ExceptionReader rootMuleReader = getExceptionReader(rootMule);
@@ -217,6 +216,7 @@ public class ExceptionHelper {
         .append(lineSeparator());
 
     if (verbose) {
+      Throwable root = getRootException(t);
       int processedElements = 0;
       int processedMuleElements = 1;
       for (StackTraceElement stackTraceElement : root.getStackTrace()) {
@@ -355,7 +355,7 @@ public class ExceptionHelper {
   public static List<Throwable> getExceptionsAsList(Throwable t) {
     List<Throwable> exceptions = new ArrayList<>(4);
     Throwable cause = t;
-    while (cause != null) {
+    while (cause != null && !(cause instanceof SuppressedMuleException)) {
       exceptions.add(cause);
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
