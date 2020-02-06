@@ -21,7 +21,7 @@ import org.mule.runtime.api.message.Error;
  * <br/><br/>Same example with suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link SuppressedMuleException}(new {@link org.mule.runtime.api.connection.ConnectionException}()), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying ConnectionException's error type})
- * @since 4.3
+ * @since 1.2.3
  */
 public class SuppressedMuleException extends MuleException {
 
