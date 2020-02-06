@@ -6,10 +6,10 @@
  */
 package org.mule.runtime.internal.exception;
 
+import static java.util.Objects.requireNonNull;
+
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
-
-import java.util.Objects;
 
 /**
  * Wraps a provided exception as suppressed, meaning that the Mule Runtime will not take it into account for the error handling.
@@ -33,7 +33,6 @@ public class SuppressedMuleException extends MuleException {
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
   public SuppressedMuleException(Throwable causeToSuppress) {
-    super(causeToSuppress);
-    Objects.requireNonNull(causeToSuppress, "Cannot suppress a null cause");
+    super(requireNonNull(causeToSuppress, "Cannot suppress a null cause"));
   }
 }

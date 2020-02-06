@@ -10,17 +10,12 @@ import static java.lang.Thread.currentThread;
 import static java.util.Collections.emptyMap;
 import static org.apache.commons.io.IOUtils.toByteArray;
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.instanceOf;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
-import static org.mule.runtime.api.exception.ExceptionHelper.registerExceptionReader;
-import static org.mule.runtime.api.exception.ExceptionHelper.registerGlobalExceptionReader;
-import static org.mule.runtime.api.exception.ExceptionHelper.unregisterExceptionReader;
+import static org.mule.runtime.api.exception.ExceptionHelper.*;
 
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
@@ -141,32 +136,31 @@ public class ExceptionHelperTestCase {
   public void unsuppressedMuleExceptionInGetRootMuleException() {
     Throwable innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
-    assertThat(ExceptionHelper.getRootMuleException(errorWithUnsuppressedCause), is(innerCause));
+    assertThat(getRootMuleException(errorWithUnsuppressedCause), is(innerCause));
   }
 
   @Test
   public void suppressedMuleExceptionInGetRootMuleException() {
     Throwable innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
-    assertNull(ExceptionHelper.getRootMuleException(errorWithSuppressedCause));
+    assertThat(getRootMuleException(errorWithSuppressedCause), is(nullValue()));
   }
 
   @Test
   public void unsuppressedMuleExceptionInGetExceptionsAsList() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
+    Throwable rootCause = new NullPointerException("Root Cause");
+    Throwable innerCause = new ConnectionException(rootCause);
     Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
-    List<Throwable> exceptionsList = ExceptionHelper.getExceptionsAsList(errorWithUnsuppressedCause);
-    assertThat(exceptionsList, hasItems(errorWithUnsuppressedCause, innerCause));
-    assertThat(exceptionsList, hasSize(3));
+    List<Throwable> exceptionsList = getExceptionsAsList(errorWithUnsuppressedCause);
+    assertThat(exceptionsList, contains(errorWithUnsuppressedCause, innerCause, rootCause));
   }
 
   @Test
   public void suppressedMuleExceptionInGetExceptionsAsList() {
     Throwable innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
-    List<Throwable> exceptionsList = ExceptionHelper.getExceptionsAsList(errorWithSuppressedCause);
-    assertThat(exceptionsList, hasItem(errorWithSuppressedCause));
-    assertThat(exceptionsList, hasSize(1));
+    List<Throwable> exceptionsList = getExceptionsAsList(errorWithSuppressedCause);
+    assertThat(exceptionsList, contains(errorWithSuppressedCause));
   }
 
   private static final class TestChildClassLoader extends ClassLoader {
