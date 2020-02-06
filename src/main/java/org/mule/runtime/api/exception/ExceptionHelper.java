@@ -16,6 +16,7 @@ import static java.util.Optional.of;
 import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
+import org.mule.runtime.internal.exception.SuppressedMuleException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class ExceptionHelper {
     // properly logged.
     Map muleExceptionInfo = new HashMap<>();
 
-    while (cause != null) {
+    while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (cause instanceof MuleException) {
         exception = (MuleException) cause;
         muleExceptionInfo.putAll(exception.getInfo());
@@ -344,7 +345,7 @@ public class ExceptionHelper {
   public static List<Throwable> getExceptionsAsList(Throwable t) {
     List<Throwable> exceptions = new ArrayList<>();
     Throwable cause = t;
-    while (cause != null) {
+    while (cause != null && !(cause instanceof SuppressedMuleException)) {
       exceptions.add(0, cause);
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
