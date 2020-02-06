@@ -22,7 +22,6 @@ import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleExceptio
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionsAsList;
 import static org.junit.rules.ExpectedException.none;
 
-
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 
