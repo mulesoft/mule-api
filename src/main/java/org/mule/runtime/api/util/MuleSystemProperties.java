@@ -127,6 +127,13 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
 
   /**
+   * If set to true, schedulers flow sources won't start.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_DISABLE_SCHEDULERS = SYSTEM_PROPERTY_PREFIX + "schedulers.disable";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
