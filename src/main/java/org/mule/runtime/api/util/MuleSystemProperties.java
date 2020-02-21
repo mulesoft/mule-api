@@ -109,8 +109,8 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
-   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them
-   * cannot be compiled.
+   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
+   * be compiled.
    *
    * @since 1.3.0
    */
@@ -125,6 +125,12 @@ public final class MuleSystemProperties {
    */
   public static final String MULE_LIFECYCLE_FAIL_ON_FIRST_DISPOSE_ERROR =
       SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
+
+  /**
+   * This is a configuration property that can be set at deployment time to disable the scheduler message sources to be started
+   * when deploying an application.
+   */
+  public static final String DISABLE_SCHEDULER_SOURCES_PROPERTY = "mule.config.scheduler.disabled";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)

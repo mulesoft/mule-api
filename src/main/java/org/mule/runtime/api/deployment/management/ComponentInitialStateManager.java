@@ -18,6 +18,8 @@ public interface ComponentInitialStateManager {
   /**
    * This is a configuration property that can be set at deployment time to disable the scheduler message sources to be started
    * when deploying an application.
+   * 
+   * @deprecated Please use {@link org.mule.runtime.api.util.MuleSystemProperties#DISABLE_SCHEDULER_SOURCES_PROPERTY} instead.
    */
   String DISABLE_SCHEDULER_SOURCES_PROPERTY = "mule.config.scheduler.disabled";
 
