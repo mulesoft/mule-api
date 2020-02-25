@@ -7,7 +7,14 @@
 package org.mule.runtime.api.streaming;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.streaming.bytes.CursorStream;
+
+import java.util.Optional;
+
+import static java.lang.Boolean.getBoolean;
+import static java.util.Optional.empty;
+import static org.mule.runtime.api.util.MuleSystemProperties.SYSTEM_PROPERTY_PREFIX;
 
 /**
  * Provides instances of {@link Cursor} which allows concurrent access to a wrapped
@@ -27,6 +34,13 @@ import org.mule.runtime.api.streaming.bytes.CursorStream;
 @NoImplement
 public interface CursorProvider<T extends Cursor> {
 
+  /**
+   * When enabled, this System Property tracks the stacktrace from where the {@link #close()} method was called. It can be used
+   * for troubleshooting purposes (for example, if someone tries to call {@link #openCursor()} on an already closed cursor.
+   */
+  String TRACK_CURSOR_PROVIDER_CLOSE = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
+
+  boolean trackCursorProviderClose = getBoolean(TRACK_CURSOR_PROVIDER_CLOSE);
 
   /**
    * Creates a new {@link Cursor} of type {@code T} positioned on the very beginning of the wrapped stream.
@@ -64,5 +78,19 @@ public interface CursorProvider<T extends Cursor> {
    * @return Whether the {@link #close()} method has been invoked on {@code this} instance or not
    */
   boolean isClosed();
+
+  /**
+   * @return the {@link ComponentLocation} that describes the component where the cursor was created.
+   */
+  default Optional<ComponentLocation> getOriginatingLocation() {
+    return empty();
+  }
+
+  /**
+   * @return whether it's enabled cursor providers close tracking system property.
+   */
+  default boolean isTrackCursorProviderClose() {
+    return trackCursorProviderClose;
+  }
 }
 
