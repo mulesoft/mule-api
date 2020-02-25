@@ -109,8 +109,8 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
-   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
-   * be compiled.
+   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them
+   * cannot be compiled.
    *
    * @since 1.3.0
    */
