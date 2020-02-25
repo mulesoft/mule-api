@@ -130,7 +130,7 @@ public final class MuleSystemProperties {
    * This is a configuration property that can be set at deployment time to disable the scheduler message sources to be started
    * when deploying an application.
    */
-  public static final String DISABLE_SCHEDULER_SOURCES_PROPERTY = "mule.config.scheduler.disabled";
+  public static final String DISABLE_SCHEDULER_SOURCES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "config.scheduler.disabled";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
