@@ -9,7 +9,6 @@ package org.mule.runtime.api.streaming;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.streaming.bytes.CursorStream;
-import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.util.Optional;
 
