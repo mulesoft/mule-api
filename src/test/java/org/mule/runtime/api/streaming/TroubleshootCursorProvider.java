@@ -13,6 +13,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mule.runtime.api.streaming.CursorProvider.TRACK_CURSOR_PROVIDER_CLOSE;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -37,24 +38,30 @@ public class TroubleshootCursorProvider {
   @Parameter(1)
   public boolean hasComponentLocation;
 
-  @Parameterized.Parameters
+  @Parameter(2)
+  public boolean trackCursorProviderClose;
+
+  @Parameterized.Parameters(name = "hasComponentLocation: {1}, trackCursorProviderClose: {2}")
   public static Object[] cursorProviders() {
     return new Object[] {
-        new Object[] {new DummyCursorProvider(), false},
-        new Object[] {new DummyCursorProviderComponentLocation(), true},
+        new Object[] {new DummyCursorProvider(), false, false},
+        new Object[] {new DummyCursorProviderComponentLocation(), true, false},
+        new Object[] {new DummyCursorProvider(), false, true},
+        new Object[] {new DummyCursorProviderComponentLocation(), true, true},
     };
   }
 
   @Before
   public void setUp() throws NoSuchFieldException, IllegalAccessException {
-    setStaticField(CursorProvider.class, "trackCursorProviderClose", true);
+    setStaticField(CursorProvider.class, "TRACK_CURSOR_PROVIDER_CLOSE", trackCursorProviderClose);
   }
 
   @Test
   @Issue("MULE-18047")
   @Description("The cursor provider should have a component location reference")
   public void cursorProviderTracksCloser() {
-    assertThat(cursorProvider.isTrackCursorProviderClose(), is(true));
+    assertThat(cursorProvider.isTrackCursorProviderClose(), is(trackCursorProviderClose));
+    assertThat(TRACK_CURSOR_PROVIDER_CLOSE, is(trackCursorProviderClose));
   }
 
   @Test

@@ -9,12 +9,13 @@ package org.mule.runtime.api.streaming;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.streaming.bytes.CursorStream;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.util.Optional;
 
 import static java.lang.Boolean.getBoolean;
 import static java.util.Optional.empty;
-import static org.mule.runtime.api.util.MuleSystemProperties.SYSTEM_PROPERTY_PREFIX;
+import static org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY;
 
 /**
  * Provides instances of {@link Cursor} which allows concurrent access to a wrapped
@@ -34,13 +35,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.SYSTEM_PROPERTY_PRE
 @NoImplement
 public interface CursorProvider<T extends Cursor> {
 
-  /**
-   * When enabled, this System Property tracks the stacktrace from where the {@link #close()} method was called. It can be used
-   * for troubleshooting purposes (for example, if someone tries to call {@link #openCursor()} on an already closed cursor.
-   */
-  String TRACK_CURSOR_PROVIDER_CLOSE = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
-
-  boolean trackCursorProviderClose = getBoolean(TRACK_CURSOR_PROVIDER_CLOSE);
+  boolean TRACK_CURSOR_PROVIDER_CLOSE = getBoolean(TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY);
 
   /**
    * Creates a new {@link Cursor} of type {@code T} positioned on the very beginning of the wrapped stream.
@@ -81,6 +76,8 @@ public interface CursorProvider<T extends Cursor> {
 
   /**
    * @return the {@link ComponentLocation} that describes the component where the cursor was created.
+   *
+   * @since 1.3.0
    */
   default Optional<ComponentLocation> getOriginatingLocation() {
     return empty();
@@ -88,9 +85,11 @@ public interface CursorProvider<T extends Cursor> {
 
   /**
    * @return whether it's enabled cursor providers close tracking system property.
+   *
+   * @since 1.3.0
    */
   default boolean isTrackCursorProviderClose() {
-    return trackCursorProviderClose;
+    return TRACK_CURSOR_PROVIDER_CLOSE;
   }
 }
 
