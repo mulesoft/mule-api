@@ -34,8 +34,6 @@ import static org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVID
 @NoImplement
 public interface CursorProvider<T extends Cursor> {
 
-  boolean TRACK_CURSOR_PROVIDER_CLOSE = getBoolean(TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY);
-
   /**
    * Creates a new {@link Cursor} of type {@code T} positioned on the very beginning of the wrapped stream.
    * <p>
@@ -82,13 +80,6 @@ public interface CursorProvider<T extends Cursor> {
     return empty();
   }
 
-  /**
-   * @return whether it's enabled cursor providers close tracking system property.
-   *
-   * @since 1.3.0
-   */
-  default boolean isTrackCursorProviderClose() {
-    return TRACK_CURSOR_PROVIDER_CLOSE;
-  }
+
 }
 
