@@ -70,7 +70,18 @@ public final class MuleSystemProperties {
 
   public static final String MULE_STREAMING_MAX_MEMORY = SYSTEM_PROPERTY_PREFIX + "max.streaming.memory";
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
+
+  /**
+   * If specified, the log separation feature will be disabled, resulting in a performance boost.
+   * This makes sense in deployment models in which only one app will be deployed per runtime instance.
+   * <p>
+   * Log configuration file will only be fetched from {@code MULE_HOME/conf}. Deployed artifacts won't get their own file in
+   * the {@code MULE_HOME/logs/} automatically.
+   *
+   * @since 1.3.0
+   */
   public static final String MULE_LOG_SEPARATION_DISABLED = SYSTEM_PROPERTY_PREFIX + "disableLogSeparation";
+
   public static final String MULE_FORCE_CONSOLE_LOG = SYSTEM_PROPERTY_PREFIX + "forceConsoleLog";
   public static final String MULE_LOG_CONTEXT_DISPOSE_DELAY_MILLIS = SYSTEM_PROPERTY_PREFIX + "log.context.dispose.delay.millis";
   public static final String MULE_LOG_DEFAULT_POLICY_INTERVAL =
