@@ -74,6 +74,8 @@ public interface BindingContext {
    *
    * @return an {@link Optional} that holds the {@link ClassLoader} to be used by the EL, or {@link Optional#empty()} if
    *         there is none specified.
+   *
+   * @since 1.3
    */
   default Optional<ClassLoader> classLoader() {
     return empty();
