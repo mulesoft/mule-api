@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.el;
 
+import static java.util.Optional.empty;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.metadata.TypedValue;
 
@@ -67,6 +69,18 @@ public interface BindingContext {
    */
   Collection<ExpressionModule> modules();
 
+  /**
+   * The {@link ClassLoader} to be used by the EL.
+   *
+   * @return an {@link Optional} that holds the {@link ClassLoader} to be used by the EL, or {@link Optional#empty()} if
+   *         there is none specified.
+   *
+   * @since 1.3
+   */
+  default Optional<ClassLoader> classLoader() {
+    return empty();
+  }
+
   interface Builder {
 
     /**
@@ -95,6 +109,18 @@ public interface BindingContext {
      * @param context a context whose bindings to add
      */
     Builder addAll(BindingContext context);
+
+    /**
+     * Specifies the {@link ClassLoader} to be used by the EL.
+     *
+     * @param classloader the classloader to be used by the EL.
+     * @return this builder
+     *
+     * @since 1.3
+     */
+    default Builder setClassloader(ClassLoader classloader) {
+      return this;
+    }
 
     /**
      * Will add a new module to this binding
