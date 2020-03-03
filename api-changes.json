@@ -1,7 +1,25 @@
 {
-  "1.2.3": {
+  "1.2.4": {
     "revapi": {
       "ignore": [
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.util.Optional<org.mule.runtime.api.component.location.ComponentLocation> org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::getOriginatingLocation()",
+          "package": "org.mule.runtime.api.streaming",
+          "classSimpleName": "CursorProvider",
+          "methodName": "getOriginatingLocation",
+          "elementKind": "method",
+          "justification": "MULE-18595"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-18595"
+        },
         {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
