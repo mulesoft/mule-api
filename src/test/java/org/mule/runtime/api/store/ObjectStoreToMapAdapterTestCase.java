@@ -18,6 +18,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import io.qameta.allure.Issue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -147,6 +148,7 @@ public class ObjectStoreToMapAdapterTestCase {
   }
 
   @Test
+  @Issue("MULE-18172")
   public void getDoesntThrowExceptionsWhenKeyIsUpdatedConcurrently() throws InterruptedException {
     int putThreadsCount = 100;
     int getThreadsCount = 100;
@@ -200,6 +202,6 @@ public class ObjectStoreToMapAdapterTestCase {
       thread.join();
     }
 
-    Assert.assertThat(numberOfExceptions.get(), is(0));
+    assertThat(numberOfExceptions.get(), is(0));
   }
 }

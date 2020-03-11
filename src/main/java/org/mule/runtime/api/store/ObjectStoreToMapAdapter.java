@@ -26,6 +26,9 @@ import java.util.Set;
  * must be handled by the user.
  * <p>
  * Operations of this map are not thread safe so the user must synchronize access to this map properly.
+ * <p>
+ * If a method detects a data hazard such that the underlying object store throws an exception, it returns null instead of
+ * propagate the exception, in order to honor the Map interface.
  *
  * @param <T> the generic type of the instances contained in the {@link ObjectStore}
  *
