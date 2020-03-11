@@ -74,6 +74,9 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
         return null;
       }
       return getObjectStore().retrieve((String) key);
+    } catch (ObjectDoesNotExistException e) {
+      // Object could be removed concurrently.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
@@ -91,6 +94,12 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
         getObjectStore().store(key, value);
       }
       return previousValue;
+    } catch (ObjectDoesNotExistException | ObjectAlreadyExistsException e) {
+      // We should ignore these exceptions here, because an object could be:
+      // * Removed concurrently between contains and retrieve.
+      // * Removed between contains and remove.
+      // * Added between contains and store.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
@@ -102,6 +111,9 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
       if (getObjectStore().contains((String) key)) {
         return getObjectStore().remove((String) key);
       }
+    } catch (ObjectDoesNotExistException e) {
+      // Object could be removed concurrently.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
