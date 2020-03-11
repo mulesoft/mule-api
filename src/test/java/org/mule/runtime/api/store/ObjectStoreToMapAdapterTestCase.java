@@ -22,7 +22,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ObjectStoreToMapAdapterTest {
+public class ObjectStoreToMapAdapterTestCase {
 
   private Map<String, Serializable> map;
 
