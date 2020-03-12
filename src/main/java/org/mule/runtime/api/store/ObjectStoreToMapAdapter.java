@@ -26,6 +26,9 @@ import java.util.Set;
  * must be handled by the user.
  * <p>
  * Operations of this map are not thread safe so the user must synchronize access to this map properly.
+ * <p>
+ * If a method detects a data hazard such that the underlying object store throws an exception, it returns null instead of
+ * propagate the exception, in order to honor the Map interface.
  *
  * @param <T> the generic type of the instances contained in the {@link ObjectStore}
  *
@@ -74,6 +77,9 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
         return null;
       }
       return getObjectStore().retrieve((String) key);
+    } catch (ObjectDoesNotExistException e) {
+      // Object could be removed concurrently.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
@@ -91,6 +97,12 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
         getObjectStore().store(key, value);
       }
       return previousValue;
+    } catch (ObjectDoesNotExistException | ObjectAlreadyExistsException e) {
+      // We should ignore these exceptions here, because an object could be:
+      // * Removed concurrently between contains and retrieve.
+      // * Removed between contains and remove.
+      // * Added between contains and store.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
@@ -102,6 +114,9 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
       if (getObjectStore().contains((String) key)) {
         return getObjectStore().remove((String) key);
       }
+    } catch (ObjectDoesNotExistException e) {
+      // Object could be removed concurrently.
+      return null;
     } catch (ObjectStoreException e) {
       throw new MuleRuntimeException(e);
     }
