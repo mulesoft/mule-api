@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.tck;
 
 import static org.mule.metadata.api.model.MetadataFormat.JAVA;
+
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.metadata.api.builder.WithAnnotation;
@@ -47,7 +48,7 @@ public abstract class TestBaseDeclarer {
     return typeBuilder.voidType().build();
   }
 
-  private <T extends WithAnnotation<?>> T withType(T builder, Class<?> type) {
+  protected <T extends WithAnnotation<?>> T withType(T builder, Class<?> type) {
     return (T) builder.with(new TypeIdAnnotation(type.getName()));
   }
 }
