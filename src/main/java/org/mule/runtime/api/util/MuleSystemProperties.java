@@ -148,7 +148,7 @@ public final class MuleSystemProperties {
 
   /**
    * Allows to change the default value for the frequency property of the &lt;fixed-frequency&gt; element. Provided value must
-   * be coercible to a {@link Long}
+   * be coercible to a {@link Long} and be expressed in millis.
    *
    * @since 1.3.0
    */
