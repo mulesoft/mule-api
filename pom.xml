@@ -140,6 +140,7 @@
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
+        <javadoc.version>3.2.0</javadoc.version>
     </properties>
 
     <dependencies>
@@ -550,6 +551,65 @@
             </plugin>
         </plugins>
     </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${javadoc.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <id>aggregate</id>
+                        <inherited>false</inherited>
+                        <reports>
+                            <report>aggregate-no-fork</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+                <configuration>
+                    <minmemory>128m</minmemory>
+                    <maxmemory>512m</maxmemory>
+                    <charset>ISO-8859-1</charset>
+                    <encoding>ISO-8859-1</encoding>
+                    <source>${javaVersion}</source>
+                    <doclint>none</doclint>
+                    <!-- Link to the external online JavaDoc -->
+                    <links>
+                        <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                        <link>http://java.sun.com/j2ee/sdk_1.3/techdocs/api/</link>
+                        <link>http://jakarta.apache.org/commons/beanutils/commons-beanutils-1.9.4/docs/api/</link>
+                        <link>http://jakarta.apache.org/commons/collections/api-3.2/</link>
+                        <link>http://jakarta.apache.org/httpcomponents/httpclient-3.x/apidocs/</link>
+                        <link>http://jakarta.apache.org/commons/io/api-1.2/</link>
+                        <link>http://jakarta.apache.org/commons/lang/api-2.1/</link>
+                        <link>http://jakarta.apache.org/commons/pool/apidocs/</link>
+                        <link>http://logging.apache.org/log4j/2.x/log4j-api/apidocs/</link>
+                        <link>http://www.slf4j.org/api/</link>
+                        <link>http://junit.sourceforge.net/javadoc/</link>
+                    </links>
+                    <groups>
+                        <group>
+                            <title>Mule Core</title>
+                            <packages>org.mule.runtime.core.*</packages>
+                        </group>
+                        <group>
+                            <title>Modules (not part of the Mule core)</title>
+                            <packages>org.mule.runtime.module.*:org.mule.runtime.core.components.*</packages>
+                        </group>
+                        <group>
+                            <title>Testing Framework</title>
+                            <packages>org.mule.tck.*:org.mule.functional.*</packages>
+                        </group>
+                        <group>
+                            <title>Tools</title>
+                            <packages>org.mule.tools.*</packages>
+                        </group>
+                    </groups>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
     <distributionManagement>
         <repository>
