@@ -8,6 +8,8 @@ package org.mule.runtime.api.util;
 
 import static java.lang.System.getProperty;
 
+import org.mule.runtime.api.streaming.CursorProvider;
+
 /**
  * Defines Mule System properties.
  *
@@ -145,8 +147,18 @@ public final class MuleSystemProperties {
   public static final String DISABLE_SCHEDULER_SOURCES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "config.scheduler.disabled";
 
   /**
-   * When enabled, this System Property tracks the stacktrace from where the {@link #close()} method was called. It can be used
-   * for troubleshooting purposes (for example, if someone tries to call {@link #openCursor()} on an already closed cursor.
+   * Allows to change the default value for the frequency property of the &lt;fixed-frequency&gt; element. Provided value must
+   * be coercible to a {@link Long} and be expressed in millis.
+   *
+   * @since 1.3.0
+   */
+  public static final String DEFAULT_SCHEDULER_FIXED_FREQUENCY =
+      SYSTEM_PROPERTY_PREFIX + "config.scheduler.defaultFixedFrequency";
+
+  /**
+   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called.
+   * It can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on
+   * an already closed cursor.
    *
    * @since 1.3.0
    */
