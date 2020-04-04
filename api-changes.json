@@ -13,6 +13,15 @@
         },
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_SCHEDULER_FIXED_FREQUENCY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DEFAULT_SCHEDULER_FIXED_FREQUENCY",
+          "elementKind": "field",
+          "justification": "Added system property (MULE-18262)"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_LOGGING_BLOCKING_CATEGORIES",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
