@@ -187,7 +187,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-              <version>${guavaVersion}</version>
+            <version>${guavaVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
@@ -364,6 +364,24 @@
                             </goals>
                         </execution>
                     </executions>
+                    <configuration>
+                        <archive>
+                            <!-- Custom Entries -->
+                            <manifestEntries>
+                                <Git-tags>${git.tags}</Git-tags>
+                                <Git-branch>${git.branch}</Git-branch>
+                                <Git-remote-origin-url>${git.remote.origin.url}</Git-remote-origin-url>
+                                <Git-commit-id>${git.commit.id}</Git-commit-id>
+                                <Git-commit-id-abbrev>${git.commit.id.abbrev}</Git-commit-id-abbrev>
+                                <Git-commit-id-describe>${git.commit.id.describe}</Git-commit-id-describe>
+                                <Git-commit-user-name>${git.commit.user.name}</Git-commit-user-name>
+                                <Git-commit-user-email>${git.commit.user.email}</Git-commit-user-email>
+                                <Git-commit-time>${git.commit.time}</Git-commit-time>
+                                <Git-build-time>${git.build.time}</Git-build-time>
+                                <Git-build-version>${git.build.version}</Git-build-version>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -544,6 +562,19 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>4.0.0</version>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
                         </goals>
                     </execution>
                 </executions>
