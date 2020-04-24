@@ -6,20 +6,18 @@
  */
 package org.mule.runtime.api.connection;
 
-import org.mule.runtime.api.i18n.I18nMessage;
-
 /**
  * Signals that a remote error in the connection occurred related to the source
  *
- * @since 4.4.0
+ * @since 4.3.0, 4.2.3
  */
 public class SourceRemoteConnectionException extends RemoteConnectionException {
 
-  public SourceRemoteConnectionException(I18nMessage message) {
+  public SourceRemoteConnectionException(String message) {
     super(message);
   }
 
-  public SourceRemoteConnectionException(I18nMessage message, Throwable cause) {
+  public SourceRemoteConnectionException(String message, Throwable cause) {
     super(message, cause);
   }
 
