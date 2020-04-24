@@ -9,7 +9,7 @@ package org.mule.runtime.api.connection;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * Signals that an remote error in the connection occurred related to the source
+ * Signals that a remote error in the connection occurred related to the source
  *
  * @since 4.4.0
  */
