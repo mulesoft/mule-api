@@ -28,6 +28,22 @@
           "methodName": "getDomain",
           "elementKind": "method",
           "justification": "Adding capability to set a domain name in the application model"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.connection.RemoteConnectionException",
+          "package": "org.mule.runtime.api.connection",
+          "classSimpleName": "RemoteConnectionException",
+          "elementKind": "class",
+          "justification": "Needed to handle a special case i HTTP error handling"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.connection.SourceRemoteConnectionException",
+          "package": "org.mule.runtime.api.connection",
+          "classSimpleName": "SourceRemoteConnectionException",
+          "elementKind": "class",
+          "justification": "Needed to handle a special case i HTTP error handling"
         }
       ]
     }
