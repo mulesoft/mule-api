@@ -71,8 +71,8 @@ public class ComponentLocationProvider {
     return component.getLocation() != null ? component.getLocation().getFileName().orElse("unknown") : "internal";
   }
 
-  protected static Integer getSourceFileLine(Component component) {
-    return component.getLocation() != null ? component.getLocation().getLineInFile().orElse(-1) : -1;
+  protected static int getSourceFileLine(Component component) {
+    return component.getLocation() != null ? component.getLocation().getLine().orElse(-1) : -1;
   }
 
   /**
