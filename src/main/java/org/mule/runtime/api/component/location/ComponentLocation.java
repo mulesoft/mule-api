@@ -12,6 +12,7 @@ import org.mule.runtime.api.component.TypedComponentIdentifier;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * Provides information about the location of a component within an artifact.
@@ -57,14 +58,30 @@ public interface ComponentLocation {
   /**
    * @return the line number in the config file of the artifact where this component is defined, if it was defined in a config
    *         file.
+   * @deprecated Use {@link #getLine()} instead.
    */
+  @Deprecated
   Optional<Integer> getLineInFile();
 
   /**
    * @return the start column number in the config file of the artifact where this component is defined, is it was defined in a
    *         config file.
+   * @deprecated Use {@link #getColumn()} instead.
    */
+  @Deprecated
   Optional<Integer> getStartColumn();
+
+  /**
+   * @return the line number in the config file of the artifact where this component is defined, if it was defined in a config
+   *         file.
+   */
+  OptionalInt getLine();
+
+  /**
+   * @return the start column number in the config file of the artifact where this component is defined, is it was defined in a
+   *         config file.
+   */
+  OptionalInt getColumn();
 
   /**
    * @return the list of parts for the location. The location starts with the global element containing the component and
