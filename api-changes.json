@@ -3,6 +3,30 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.healthcheck.HealthCheckValidator",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "HealthCheckValidator",
+          "elementKind": "interface",
+          "justification": "cherry pick"
+        },
+        {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.healthcheck.ReadyStatus",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "ReadyStatus",
+          "elementKind": "interface",
+          "justification": "cherry pick"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.util.MuleSystemProperties",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "elementKind": "class",
+          "justification": "Added system properties class"
+        },
+        {
           "code": "java.method.added",
           "new": "method void org.mule.runtime.api.util.LazyValue<T>::<init>()",
           "package": "org.mule.runtime.api.util",
