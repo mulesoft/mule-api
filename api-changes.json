@@ -2,7 +2,23 @@
   "1.1.6": {
     "revapi": {
       "ignore": [
-          {
+        {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.healthcheck.HealthCheckValidator",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "HealthCheckValidator",
+          "elementKind": "interface",
+          "justification": "Changes introduced by MULE-16565"
+        },
+        {
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.healthcheck.ReadyStatus",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "ReadyStatus",
+          "elementKind": "interface",
+          "justification": "Changes introduced by MULE-16565"
+        },
+        {
           "code": "java.class.added",
           "new": "class org.mule.runtime.api.util.MuleSystemProperties",
           "package": "org.mule.runtime.api.util",
