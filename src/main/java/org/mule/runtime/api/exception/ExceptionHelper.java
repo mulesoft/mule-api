@@ -362,8 +362,9 @@ public class ExceptionHelper {
     while (cause != null && !cause.equals(suppressedCause)) {
       if (cause instanceof SuppressedMuleException) {
         suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
+      } else {
+        exceptions.add(cause);
       }
-      exceptions.add(cause);
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
       if (t == cause) {
