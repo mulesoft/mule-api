@@ -135,12 +135,15 @@ public class ExceptionHelper {
   public static MuleException getRootMuleException(Throwable t) {
     Throwable cause = t;
     MuleException exception = null;
+    MuleException suppressedException = null;
     // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
     // properly logged.
     Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
-    while (cause != null && !(cause instanceof SuppressedMuleException)) {
-      if (cause instanceof MuleException) {
+    while (cause != null && !(cause.equals(suppressedException))) {
+      if (cause instanceof SuppressedMuleException) {
+        suppressedException = ((SuppressedMuleException) cause).getSuppressedException();
+      } else if (cause instanceof MuleException) {
         exception = (MuleException) cause;
         muleExceptionInfo.putAll(exception.getInfo());
       }
@@ -355,7 +358,11 @@ public class ExceptionHelper {
   public static List<Throwable> getExceptionsAsList(Throwable t) {
     List<Throwable> exceptions = new ArrayList<>(4);
     Throwable cause = t;
-    while (cause != null && !(cause instanceof SuppressedMuleException)) {
+    MuleException suppressedCause = null;
+    while (cause != null && !cause.equals(suppressedCause)) {
+      if (cause instanceof SuppressedMuleException) {
+        suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
+      }
       exceptions.add(cause);
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop

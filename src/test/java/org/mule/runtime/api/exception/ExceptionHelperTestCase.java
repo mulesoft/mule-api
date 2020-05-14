@@ -146,7 +146,7 @@ public class ExceptionHelperTestCase {
 
   @Test
   public void suppressedMuleExceptionInGetRootMuleException() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
+    MuleException innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
     assertThat(getRootMuleException(errorWithSuppressedCause), is(nullValue()));
   }
@@ -162,7 +162,7 @@ public class ExceptionHelperTestCase {
 
   @Test
   public void suppressedMuleExceptionInGetExceptionsAsList() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
+    MuleException innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
     List<Throwable> exceptionsList = getExceptionsAsList(errorWithSuppressedCause);
     assertThat(exceptionsList, contains(errorWithSuppressedCause));

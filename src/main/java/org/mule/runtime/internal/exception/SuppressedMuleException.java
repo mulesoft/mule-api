@@ -27,12 +27,28 @@ public class SuppressedMuleException extends MuleException {
 
   private static final long serialVersionUID = -2020531237382360468L;
 
+  private final MuleException suppressedException;
+
   /**
    * Constructs a new {@link SuppressedMuleException}
    *
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
-  public SuppressedMuleException(Throwable causeToSuppress) {
-    super(requireNonNull(causeToSuppress, "Cannot suppress a null cause"));
+  public SuppressedMuleException(MuleException throwable) {
+    this(throwable, throwable);
+  }
+
+  /**
+   * Constructs a new {@link SuppressedMuleException}
+   *
+   * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
+   */
+  public SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
+    super(requireNonNull(throwable, "Exception cannot be null"));
+    suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
+  }
+
+  public MuleException getSuppressedException() {
+    return suppressedException;
   }
 }
