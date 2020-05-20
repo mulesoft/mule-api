@@ -1,4 +1,35 @@
 {
+  "1.2.4": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY",
+          "elementKind": "field",
+          "justification": "Added a system property due to a bug"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.connection.RemoteConnectionException",
+          "package": "org.mule.runtime.api.connection",
+          "classSimpleName": "RemoteConnectionException",
+          "elementKind": "class",
+          "justification": "Needed to handle a special case i HTTP error handling"
+        },
+        {
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.connection.SourceRemoteConnectionException",
+          "package": "org.mule.runtime.api.connection",
+          "classSimpleName": "SourceRemoteConnectionException",
+          "elementKind": "class",
+          "justification": "Needed to handle a special case i HTTP error handling"
+        }
+      ]
+    }
+  },
   "1.2.3": {
     "revapi": {
       "ignore": [
