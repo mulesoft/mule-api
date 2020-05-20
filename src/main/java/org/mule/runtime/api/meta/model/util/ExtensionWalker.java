@@ -8,8 +8,10 @@ package org.mule.runtime.api.meta.model.util;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.ComposableModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
+import org.mule.runtime.api.meta.model.SubTypesModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
@@ -71,6 +73,7 @@ public abstract class ExtensionWalker {
     ifContinue(() -> walkOperations(extensionModel));
     ifContinue(() -> walkFunctions(extensionModel));
     ifContinue(() -> walkConstructs(extensionModel));
+    ifContinue(() -> walkTypes(extensionModel));
 
   }
 
@@ -250,6 +253,34 @@ public abstract class ExtensionWalker {
       ifContinue(() -> walkParameters(function));
     }
   }
+
+  private void walkTypes(ExtensionModel model) {
+    for (MetadataType type : model.getTypes()) {
+      if (stopped) {
+        return;
+      }
+
+      onType(type);
+    }
+    for (SubTypesModel subType : model.getSubTypes()) {
+      for (MetadataType type : subType.getSubTypes()) {
+        if (stopped) {
+          return;
+        }
+
+        onType(type);
+      }
+    }
+  }
+
+  /**
+   * Invoked when an {@link MetadataType} is found in the traversed {@code extensionModel}
+   *
+   * @param type the {@link MetadataType}
+   *
+   * @since 1.4
+   */
+  protected void onType(MetadataType type) {}
 
   private void ifContinue(Runnable action) {
     if (!stopped) {
