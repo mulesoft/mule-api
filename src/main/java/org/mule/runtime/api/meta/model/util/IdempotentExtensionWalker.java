@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
+import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.ComposableModel;
 import org.mule.runtime.api.meta.model.ExtensionModel;
@@ -48,7 +49,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   private final Set<Reference<ConstructModel>> constructs = new HashSet<>();
   private final Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
   private final Set<Reference<NestableElementModel>> nestables = new HashSet<>();
-  private final Set<Reference<MetadataType>> types = new HashSet<>();
+  private final Set<Reference<MetadataTypeWrapper>> types = new HashSet<>();
 
   private <T> boolean isFirstAppearance(Set<Reference<T>> accumulator, T item) {
     return accumulator.add(new Reference<>(item));
@@ -96,7 +97,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
 
   @Override
   protected void onType(ExtensionModel model, MetadataType type) {
-    doOnce(types, type, this::onType);
+    doOnce(types, new MetadataTypeWrapper(type), t -> onType(t.wrapped));
   }
 
   private <T> void doOnce(Set<Reference<T>> accumulator, T item, Consumer<T> delegate) {
@@ -191,4 +192,46 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    */
   protected void onType(MetadataType model) {}
 
+  /**
+   * Wraps a {@link MetadataType} to do a faster equals relying only on the typeId instead of doing a deep cmparison.
+   * 
+   * @since 1.4
+   */
+  private static class MetadataTypeWrapper {
+
+    private final MetadataType wrapped;
+
+    public MetadataTypeWrapper(MetadataType wrapped) {
+      this.wrapped = wrapped;
+    }
+
+    @Override
+    public int hashCode() {
+      return wrapped.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (obj == null) {
+        return false;
+      }
+      if (getClass() != obj.getClass()) {
+        return false;
+      }
+      MetadataTypeWrapper other = (MetadataTypeWrapper) obj;
+      if (wrapped == null) {
+        if (other.wrapped != null) {
+          return false;
+        }
+      } else if (!wrapped.getAnnotation(TypeIdAnnotation.class)
+          .equals(other.wrapped.getAnnotation(TypeIdAnnotation.class))) {
+        return false;
+      }
+      return true;
+    }
+
+  }
 }
