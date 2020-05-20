@@ -6,12 +6,16 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
+import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.meta.model.ComposableModel;
+import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 import org.mule.runtime.api.meta.model.connection.HasConnectionProviderModels;
 import org.mule.runtime.api.meta.model.construct.ConstructModel;
 import org.mule.runtime.api.meta.model.construct.HasConstructModels;
 import org.mule.runtime.api.meta.model.function.FunctionModel;
 import org.mule.runtime.api.meta.model.function.HasFunctionModels;
+import org.mule.runtime.api.meta.model.nested.NestableElementModel;
 import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
@@ -36,13 +40,15 @@ import java.util.function.Consumer;
  */
 public abstract class IdempotentExtensionWalker extends ExtensionWalker {
 
-  private Set<Reference<SourceModel>> sources = new HashSet<>();
-  private Set<Reference<ParameterModel>> parameters = new HashSet<>();
-  private Set<Reference<ParameterGroupModel>> parameterGroups = new HashSet<>();
-  private Set<Reference<OperationModel>> operations = new HashSet<>();
-  private Set<Reference<FunctionModel>> functions = new HashSet<>();
-  private Set<Reference<ConstructModel>> constructs = new HashSet<>();
-  private Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
+  private final Set<Reference<SourceModel>> sources = new HashSet<>();
+  private final Set<Reference<ParameterModel>> parameters = new HashSet<>();
+  private final Set<Reference<ParameterGroupModel>> parameterGroups = new HashSet<>();
+  private final Set<Reference<OperationModel>> operations = new HashSet<>();
+  private final Set<Reference<FunctionModel>> functions = new HashSet<>();
+  private final Set<Reference<ConstructModel>> constructs = new HashSet<>();
+  private final Set<Reference<ConnectionProviderModel>> connectionProviders = new HashSet<>();
+  private final Set<Reference<NestableElementModel>> nestables = new HashSet<>();
+  private final Set<Reference<MetadataType>> types = new HashSet<>();
 
   private <T> boolean isFirstAppearance(Set<Reference<T>> accumulator, T item) {
     return accumulator.add(new Reference<>(item));
@@ -81,6 +87,16 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
   @Override
   protected final void onConnectionProvider(HasConnectionProviderModels owner, ConnectionProviderModel model) {
     doOnce(connectionProviders, model, this::onConnectionProvider);
+  }
+
+  @Override
+  protected void onNestable(ComposableModel owner, NestableElementModel model) {
+    doOnce(nestables, model, this::onNestable);
+  }
+
+  @Override
+  protected void onType(ExtensionModel model, MetadataType type) {
+    doOnce(types, type, this::onType);
   }
 
   private <T> void doOnce(Set<Reference<T>> accumulator, T item, Consumer<T> delegate) {
@@ -152,5 +168,27 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * @param model the {@link FunctionModel}
    */
   protected void onFunction(FunctionModel model) {}
+
+  /**
+   * Invoked when an {@link NestableElementModel} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance
+   *
+   * @param model the {@link FunctionModel}
+   *
+   * @since 1.4
+   */
+  protected void onNestable(NestableElementModel model) {}
+
+  /**
+   * Invoked when an {@link MetadataType} is found in the traversed {@code extensionModel}.
+   * <p>
+   * This method will only be invoked once per each found instance
+   *
+   * @param model the {@link FunctionModel}
+   *
+   * @since 1.4
+   */
+  protected void onType(MetadataType model) {}
 
 }
