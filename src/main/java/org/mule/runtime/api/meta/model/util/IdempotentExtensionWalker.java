@@ -194,20 +194,26 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
 
   /**
    * Wraps a {@link MetadataType} to do a faster equals relying only on the typeId instead of doing a deep cmparison.
-   * 
+   *
    * @since 1.4
    */
   private static class MetadataTypeWrapper {
 
     private final MetadataType wrapped;
+    private final TypeIdAnnotation wrappedTypeId;
 
     public MetadataTypeWrapper(MetadataType wrapped) {
       this.wrapped = wrapped;
+      this.wrappedTypeId = wrapped.getAnnotation(TypeIdAnnotation.class).orElse(null);
     }
 
     @Override
     public int hashCode() {
-      return wrapped.hashCode();
+      if (wrappedTypeId != null) {
+        return wrappedTypeId.getValue().hashCode();
+      } else {
+        return wrapped.hashCode();
+      }
     }
 
     @Override
@@ -222,15 +228,15 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
         return false;
       }
       MetadataTypeWrapper other = (MetadataTypeWrapper) obj;
-      if (wrapped == null) {
-        if (other.wrapped != null) {
+      if (wrappedTypeId == null) {
+        if (other.wrappedTypeId != null) {
           return false;
+        } else {
+          return wrapped.equals(other.wrapped);
         }
-      } else if (!wrapped.getAnnotation(TypeIdAnnotation.class)
-          .equals(other.wrapped.getAnnotation(TypeIdAnnotation.class))) {
-        return false;
+      } else {
+        return wrappedTypeId.equals(other.wrappedTypeId);
       }
-      return true;
     }
 
   }
