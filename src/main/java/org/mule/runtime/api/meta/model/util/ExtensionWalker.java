@@ -210,6 +210,10 @@ public abstract class ExtensionWalker {
         return;
       }
       onNestable(model, nested);
+
+      if (nested instanceof ComposableModel) {
+        ifContinue(() -> walkNesteable((ComposableModel) nested));
+      }
     }
   }
 
