@@ -11,7 +11,7 @@ import org.mule.runtime.api.message.Message;
 
 /**
  * Descriptor for a component in the configuration along with it's {@link ComponentType}.
- * 
+ *
  * @since 1.0
  */
 @NoImplement
@@ -50,7 +50,7 @@ public interface TypedComponentIdentifier {
     /**
      * Wraps the next defined component, controlling its invocation.
      */
-    INTERCEPTING,
+    @Deprecated INTERCEPTING,
 
     /**
      * Error handler component type
@@ -70,7 +70,12 @@ public interface TypedComponentIdentifier {
     /**
      * One of the options to be executed that belong to a {@link ComponentType#ROUTER}
      */
-    ROUTE
+    ROUTE,
+
+    /**
+     * The body contains the processors for a element declared by its parent.
+     */
+    BODY
   }
 
   /**
@@ -89,7 +94,7 @@ public interface TypedComponentIdentifier {
 
   /**
    * Builder interface for {@link TypedComponentIdentifier}.
-   * 
+   *
    * @since 1.0
    */
   interface Builder {
