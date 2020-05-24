@@ -147,7 +147,8 @@ public class ExceptionHelperTestCase {
   @Test
   public void suppressedMuleExceptionInGetRootMuleException() {
     MuleException innerCause = new ConnectionException(new NullPointerException());
-    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
+    Throwable errorWithSuppressedCause =
+        SuppressedMuleException.suppressIfPresent(new TypedException(innerCause, dummyErrorType), ConnectionException.class);
     assertThat(getRootMuleException(errorWithSuppressedCause), is(nullValue()));
   }
 
@@ -163,9 +164,11 @@ public class ExceptionHelperTestCase {
   @Test
   public void suppressedMuleExceptionInGetExceptionsAsList() {
     MuleException innerCause = new ConnectionException(new NullPointerException());
-    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
-    List<Throwable> exceptionsList = getExceptionsAsList(errorWithSuppressedCause);
-    assertThat(exceptionsList, contains(errorWithSuppressedCause));
+    TypedException muleError = new TypedException(innerCause, dummyErrorType);
+    Throwable muleErrorWithSuppressedCause =
+        SuppressedMuleException.suppressIfPresent(muleError, ConnectionException.class);
+    List<Throwable> exceptionsList = getExceptionsAsList(muleErrorWithSuppressedCause);
+    assertThat(exceptionsList, contains(muleError));
   }
 
   private static final class TestChildClassLoader extends ClassLoader {

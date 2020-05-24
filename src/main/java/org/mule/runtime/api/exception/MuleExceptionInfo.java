@@ -23,15 +23,18 @@ import java.util.Map;
 @NoInstantiate
 public final class MuleExceptionInfo implements Serializable {
 
-  private static final long serialVersionUID = -953920524424559726L;
+  private static final long serialVersionUID = -6844204561753057827L;
 
   public static final String INFO_ERROR_TYPE_KEY = "Error type";
+  public static final String INFO_CAUSED_BY_KEY = "Caused by";
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_DSL_KEY = "Element DSL";
   public static final String FLOW_STACK_INFO_KEY = "FlowStack";
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
+
   public static final String INFO_ERROR_TYPE_KEY_MSG = INFO_ERROR_TYPE_KEY + getColonMatchingPad(INFO_ERROR_TYPE_KEY) + ": ";
+  public static final String INFO_CAUSED_BY_KEY_MSG = INFO_CAUSED_BY_KEY + getColonMatchingPad(INFO_CAUSED_BY_KEY) + ": ";
   public static final String INFO_LOCATION_KEY_MSG = INFO_LOCATION_KEY + getColonMatchingPad(INFO_LOCATION_KEY) + ": ";
   public static final String INFO_SOURCE_DSL_KEY_MSG = INFO_SOURCE_DSL_KEY + getColonMatchingPad(INFO_SOURCE_DSL_KEY) + ": ";
   public static final String FLOW_STACK_INFO_KEY_MSG = FLOW_STACK_INFO_KEY + getColonMatchingPad(FLOW_STACK_INFO_KEY) + ": ";
@@ -39,12 +42,19 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
+  private String causedBy;
   private String location;
   private String dslSource;
   private Serializable flowStack;
   private final SmallMap<String, Object> additionalEntries = new SmallMap<>();
 
   void addToSummaryMessage(StringBuilder buf) {
+    if (causedBy != null) {
+      buf
+          .append(INFO_CAUSED_BY_KEY_MSG)
+          .append(causedBy)
+          .append(lineSeparator());
+    }
     buf
         .append(INFO_LOCATION_KEY_MSG)
         .append(location != null ? location : MISSING_DEFAULT_VALUE)
@@ -74,6 +84,14 @@ public final class MuleExceptionInfo implements Serializable {
 
   public void setErrorType(ErrorType errorType) {
     this.errorType = errorType;
+  }
+
+  public String getCausedBy() {
+    return causedBy;
+  }
+
+  public void setCausedBy(String causedBy) {
+    this.causedBy = causedBy;
   }
 
   public String getLocation() {
@@ -111,6 +129,9 @@ public final class MuleExceptionInfo implements Serializable {
 
     if (errorType != null) {
       result.put(INFO_ERROR_TYPE_KEY, errorType);
+    }
+    if (causedBy != null) {
+      result.put(INFO_CAUSED_BY_KEY, causedBy);
     }
     if (location != null) {
       result.put(INFO_LOCATION_KEY, location);

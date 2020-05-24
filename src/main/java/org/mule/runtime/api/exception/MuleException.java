@@ -11,6 +11,7 @@ import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static org.mule.runtime.api.exception.MuleExceptionInfo.FLOW_STACK_INFO_KEY;
+import static org.mule.runtime.api.exception.MuleExceptionInfo.INFO_CAUSED_BY_KEY;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
@@ -156,6 +157,8 @@ public abstract class MuleException extends Exception {
       this.exceptionInfo.setDslSource(Objects.toString(info));
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
+    } else if (INFO_CAUSED_BY_KEY.equals(name)) {
+      this.exceptionInfo.setCausedBy(Objects.toString(info));
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
     }
