@@ -149,7 +149,7 @@ public class ExceptionHelperTestCase {
     MuleException innerCause = new ConnectionException(new NullPointerException());
     Throwable errorWithSuppressedCause =
         suppressIfPresent(new TypedException(innerCause, dummyErrorType), ConnectionException.class,
-                                                  false);
+                          false);
     assertThat(getRootMuleException(errorWithSuppressedCause), is(nullValue()));
   }
 
