@@ -10,7 +10,6 @@ import static java.util.Objects.requireNonNull;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 
 import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.api.exception.MuleExceptionInfo;
 import org.mule.runtime.api.message.Error;
 
 /**
@@ -35,16 +34,20 @@ public class SuppressedMuleException extends MuleException {
    *
    * @param throwable Exception that will be wrapped
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
+   * @param logAsCause If true, an entry will be added to the error log, informing the suppressed exception message.
    */
-  private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
+  private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress, boolean logAsCause) {
     super(requireNonNull(throwable, "Exception cannot be null"));
-    suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
+    this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
+    if (logAsCause) {
+      getExceptionInfo().setCausedBy(causeToSuppress.getMessage());
+    }
   }
 
   /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}
    */
-  public MuleException getSuppressedException() {
+  public MuleException getSuppressedMuleException() {
     return suppressedException;
   }
 
@@ -53,13 +56,15 @@ public class SuppressedMuleException extends MuleException {
    * The search will stop if a {@link SuppressedMuleException} is found.
    * @param exception Exception that will be wrapped, suppressing the exception itself or one of it's causes.
    * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
+   * @param logAsCause If true, an entry will be added to the error log, informing the suppressed exception message.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
    */
-  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress) {
+  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress,
+                                            boolean logAsCause) {
     Throwable cause = exception;
     while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (causeToSuppress.isInstance(cause)) {
-        return new SuppressedMuleException(exception, (MuleException) cause);
+        return new SuppressedMuleException(exception, (MuleException) cause, logAsCause);
       }
       cause = getExceptionReader(cause).getCause(cause);
       // Address some misbehaving exceptions, avoid endless loop
@@ -67,11 +72,6 @@ public class SuppressedMuleException extends MuleException {
         break;
       }
     }
-    return exception;
-  }
-
-  public MuleException enrich(MuleException exception) {
-    exception.addInfo(MuleExceptionInfo.INFO_CAUSED_BY_KEY, this.getSuppressedException().getMessage());
     return exception;
   }
 }

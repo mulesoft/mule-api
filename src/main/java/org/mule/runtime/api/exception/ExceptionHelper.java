@@ -141,13 +141,17 @@ public class ExceptionHelper {
     Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
     while (cause != null
-        && (suppressedMuleException == null || !cause.equals(suppressedMuleException.getSuppressedException()))) {
-      if (cause instanceof SuppressedMuleException) {
-        suppressedMuleException = (SuppressedMuleException) cause;
-      } else if (cause instanceof MuleException) {
-        exception = (MuleException) cause;
-        muleExceptionInfo.putAll(exception.getInfo());
+        && (suppressedMuleException == null || !cause.equals(suppressedMuleException.getSuppressedMuleException()))) {
+
+      if (cause instanceof MuleException) {
+        muleExceptionInfo.putAll(((MuleException) cause).getInfo());
+        if (cause instanceof SuppressedMuleException) {
+          suppressedMuleException = (SuppressedMuleException) cause;
+        } else {
+          exception = (MuleException) cause;
+        }
       }
+
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
       if (verbose) {
         cause = tempCause;
@@ -162,9 +166,6 @@ public class ExceptionHelper {
     if (exception != null) {
       for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
         exception.addInfo(entry.getKey(), entry.getValue());
-      }
-      if (suppressedMuleException != null) {
-        suppressedMuleException.enrich(exception);
       }
     }
     return exception;
@@ -365,7 +366,7 @@ public class ExceptionHelper {
     MuleException suppressedCause = null;
     while (cause != null && !cause.equals(suppressedCause)) {
       if (cause instanceof SuppressedMuleException) {
-        suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
+        suppressedCause = ((SuppressedMuleException) cause).getSuppressedMuleException();
       } else {
         exceptions.add(cause);
       }
