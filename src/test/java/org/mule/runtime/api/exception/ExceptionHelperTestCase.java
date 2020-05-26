@@ -14,13 +14,13 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.registerExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.registerGlobalExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.unregisterExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionsAsList;
-import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.internal.exception.SuppressedMuleException.suppressIfPresent;
 
 import org.mule.runtime.api.connection.ConnectionException;
