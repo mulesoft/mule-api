@@ -372,13 +372,8 @@
                                 <Git-branch>${git.branch}</Git-branch>
                                 <Git-remote-origin-url>${git.remote.origin.url}</Git-remote-origin-url>
                                 <Git-commit-id>${git.commit.id}</Git-commit-id>
-                                <Git-commit-id-abbrev>${git.commit.id.abbrev}</Git-commit-id-abbrev>
                                 <Git-commit-id-describe>${git.commit.id.describe}</Git-commit-id-describe>
-                                <Git-commit-user-name>${git.commit.user.name}</Git-commit-user-name>
-                                <Git-commit-user-email>${git.commit.user.email}</Git-commit-user-email>
                                 <Git-commit-time>${git.commit.time}</Git-commit-time>
-                                <Git-build-time>${git.build.time}</Git-build-time>
-                                <Git-build-version>${git.build.version}</Git-build-version>
                             </manifestEntries>
                         </archive>
                     </configuration>
