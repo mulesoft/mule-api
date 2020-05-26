@@ -7,6 +7,7 @@
 package org.mule.runtime.api.component;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.interception.ProcessorInterceptorFactory;
 import org.mule.runtime.api.message.Message;
 
 /**
@@ -49,8 +50,12 @@ public interface TypedComponentIdentifier {
 
     /**
      * Wraps the next defined component, controlling its invocation.
+     *
+     * @deprecated Intercepting processors are a Mule 3 feature that is deprecated in Mule 4. Use interception API instead (ref:
+     *             {@link ProcessorInterceptorFactory}).
      */
-    @Deprecated INTERCEPTING,
+    @Deprecated
+    INTERCEPTING,
 
     /**
      * Error handler component type
@@ -74,6 +79,8 @@ public interface TypedComponentIdentifier {
 
     /**
      * The body contains the processors for a element declared by its parent.
+     *
+     * @since 1.4
      */
     BODY
   }
