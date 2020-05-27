@@ -54,8 +54,7 @@ public interface TypedComponentIdentifier {
      * @deprecated Intercepting processors are a Mule 3 feature that is deprecated in Mule 4. Use interception API instead (ref:
      *             {@link ProcessorInterceptorFactory}).
      */
-    @Deprecated
-    INTERCEPTING,
+    @Deprecated INTERCEPTING,
 
     /**
      * Error handler component type
@@ -78,11 +77,11 @@ public interface TypedComponentIdentifier {
     ROUTE,
 
     /**
-     * The body contains the processors for a element declared by its parent.
+     * The chain contains the processors for the component definition of its parent.
      *
      * @since 1.4
      */
-    BODY
+    CHAIN
   }
 
   /**
