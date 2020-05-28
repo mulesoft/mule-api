@@ -31,17 +31,13 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Constructs a new {@link SuppressedMuleException}
-   *
    * @param throwable Exception that will be wrapped
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
-   * @param logAsCause If true, an entry will be added to the error log, informing the suppressed exception message.
    */
-  private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress, boolean logAsCause) {
+  private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
     super(requireNonNull(throwable, "Exception cannot be null"));
     this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
-    if (logAsCause) {
-      getExceptionInfo().setCausedBy(causeToSuppress.getMessage());
-    }
+    getExceptionInfo().setCausedBy(causeToSuppress.getMessage());
   }
 
   /**
@@ -56,15 +52,13 @@ public class SuppressedMuleException extends MuleException {
    * The search will stop if a {@link SuppressedMuleException} is found.
    * @param exception Exception that will be wrapped, suppressing the exception itself or one of it's causes.
    * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
-   * @param logAsCause If true, an entry will be added to the error log, informing the suppressed exception message.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
    */
-  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress,
-                                            boolean logAsCause) {
+  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress) {
     Throwable cause = exception;
     while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (causeToSuppress.isInstance(cause)) {
-        return new SuppressedMuleException(exception, (MuleException) cause, logAsCause);
+        return new SuppressedMuleException(exception, (MuleException) cause);
       }
       cause = getExceptionReader(cause).getCause(cause);
       // Address some misbehaving exceptions, avoid endless loop
