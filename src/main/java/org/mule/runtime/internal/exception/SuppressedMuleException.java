@@ -12,6 +12,8 @@ import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
 
+import java.util.Objects;
+
 /**
  * Wraps a provided exception, or suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime will not take it into account for the error handling.
  * The suppressed cause and all its nested {@link Exception#getCause()} will not be taken into account during the {@link org.mule.runtime.api.message.Error} resolution.
@@ -67,5 +69,19 @@ public class SuppressedMuleException extends MuleException {
       }
     }
     return exception;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
+    SuppressedMuleException that = (SuppressedMuleException) o;
+    return suppressedException.equals(that.suppressedException);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), suppressedException);
   }
 }

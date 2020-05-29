@@ -134,41 +134,50 @@ public class ExceptionHelper {
 
   public static MuleException getRootMuleException(Throwable t) {
     Throwable cause = t;
-    MuleException exception = null;
+    MuleException rootMuleException = null;
     SuppressedMuleException suppressedMuleException = null;
-    // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
-    // properly logged.
+    // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is properly logged.
     Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
-    while (cause != null
-        && (suppressedMuleException == null || !cause.equals(suppressedMuleException.getSuppressedMuleException()))) {
-
+    while (cause != null && isNotSuppressed(cause, suppressedMuleException)) {
       if (cause instanceof MuleException) {
         muleExceptionInfo.putAll(((MuleException) cause).getInfo());
         if (cause instanceof SuppressedMuleException) {
           suppressedMuleException = (SuppressedMuleException) cause;
         } else {
-          exception = (MuleException) cause;
+          rootMuleException = (MuleException) cause;
         }
       }
-
-      final Throwable tempCause = getExceptionReader(cause).getCause(cause);
-      if (verbose) {
-        cause = tempCause;
-      } else {
-        cause = ExceptionHelper.sanitize(tempCause);
-      }
+      cause = getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
       if (t == cause) {
         break;
       }
     }
-    if (exception != null) {
+    return addExceptionInfo(rootMuleException, muleExceptionInfo);
+  }
+
+  private static MuleException addExceptionInfo(MuleException muleException, Map<String, Object> muleExceptionInfo) {
+    if (muleException != null) {
       for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
-        exception.addInfo(entry.getKey(), entry.getValue());
+        muleException.addInfo(entry.getKey(), entry.getValue());
       }
     }
-    return exception;
+    return muleException;
+  }
+
+  private static Throwable getCause(Throwable throwable) {
+    final Throwable tempCause = getExceptionReader(throwable).getCause(throwable);
+    if (verbose) {
+      throwable = tempCause;
+    } else {
+      throwable = ExceptionHelper.sanitize(tempCause);
+    }
+    return throwable;
+  }
+
+  private static boolean isNotSuppressed(Throwable cause, SuppressedMuleException suppressedMuleException) {
+    return suppressedMuleException == null || !cause.equals(suppressedMuleException.getSuppressedMuleException());
   }
 
   public static Throwable getNonMuleException(Throwable t) {
