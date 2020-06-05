@@ -60,7 +60,7 @@ public interface ProcessorInterceptor {
    * This method is called between {@link #before(ComponentLocation, Map, InterceptionEvent) before} and
    * {@link #after(ComponentLocation, InterceptionEvent, Optional) after}.
    * <p>
-   * If implemented, only by calling {@code action} {@link InterceptionAction#proceed() proceed()} will the interception chain
+   * If implemented, only by calling {@code action}#{@link InterceptionAction#proceed() proceed()} will the interception chain
    * continue and eventually call the intercepted component. Otherwise, by calling {@link InterceptionAction#skip() skip()} the
    * interception chain execution will be interrupted and {@link #after(ComponentLocation, InterceptionEvent, Optional) after}
    * method called immediately. ({@link InterceptionAction#skip() skip()} may not be called at all, but it is convenient that it

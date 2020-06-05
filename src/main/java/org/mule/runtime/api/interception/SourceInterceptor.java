@@ -31,7 +31,7 @@ import java.util.Optional;
  * {@link #beforeCallback(ComponentLocation, Map, InterceptionEvent) beforeCallback} methods of each and finally the
  * {@link #afterCallback(ComponentLocation, InterceptionEvent, Optional) afterCallback} methods.
  *
- * @since 1.0
+ * @since 1.2
  */
 public interface SourceInterceptor {
 

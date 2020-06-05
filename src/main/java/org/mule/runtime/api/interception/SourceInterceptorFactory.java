@@ -18,6 +18,8 @@ import java.util.function.Supplier;
  * <p>
  * Implementations may have fields annotated with {@link javax.inject.Inject @Inject}, which will be resolved before attempting to
  * call {@link #get()}.
+ *
+ * @since 1.2
  */
 public interface SourceInterceptorFactory extends Supplier<SourceInterceptor> {
 
