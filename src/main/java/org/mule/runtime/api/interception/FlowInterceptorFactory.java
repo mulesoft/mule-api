@@ -55,11 +55,10 @@ public interface FlowInterceptorFactory extends Supplier<FlowInterceptor> {
   public static final String FLOW_INTERCEPTORS_ORDER_REGISTRY_KEY = "_muleFlowInterceptorFactoryOrder";
 
   /**
-   * Determines if a {@link FlowInterceptor} shall be created by this factory to be applied to a component based on some of its
-   * attributes.
+   * Determines if a {@link FlowInterceptor} shall be created by this factory to be applied to a flow based on its name.
    *
-   * @param flowName the name of the to-be intercepted component in the mule app configuration.
-   * @return {@code true} if this handler must be applied to the component with the provided parameters, {@code false} otherwise.
+   * @param flowName the name of the to-be intercepted flow.
+   * @return {@code true} if this handler must be applied to the flow with the provided name, {@code false} otherwise.
    */
   default boolean intercept(String flowName) {
     return true;
