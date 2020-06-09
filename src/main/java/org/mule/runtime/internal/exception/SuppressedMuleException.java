@@ -7,7 +7,6 @@
 package org.mule.runtime.internal.exception;
 
 import static java.util.Objects.requireNonNull;
-import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
