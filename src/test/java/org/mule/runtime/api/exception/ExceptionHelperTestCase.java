@@ -139,9 +139,11 @@ public class ExceptionHelperTestCase {
 
   @Test
   public void unsuppressedMuleExceptionInGetRootMuleException() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
-    Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
-    assertThat(getRootMuleException(errorWithUnsuppressedCause), is(innerCause));
+    for (int i = 0; i < 1000000; i++) {
+      Throwable innerCause = new ConnectionException(new NullPointerException());
+      Throwable errorWithUnsuppressedCause = new TypedException(innerCause, dummyErrorType);
+      assertThat(getRootMuleException(errorWithUnsuppressedCause), is(innerCause));
+    }
   }
 
   @Test
