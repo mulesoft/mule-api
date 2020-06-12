@@ -26,6 +26,15 @@ public class SuppressedMuleExceptionTestCase {
     MatcherAssert.assertThat(one, not(equalTo(two)));
   }
 
+  @Test
+  @Issue("MULE-18041")
+  public void whithSameSuppressionHashCodeShouldNotBeEquals() {
+    ExceptionToSuppress exceptionToSuppress = new ExceptionToSuppress();
+    Throwable one = suppressIfPresent(exceptionToSuppress, ExceptionToSuppress.class);
+    Throwable two = suppressIfPresent(exceptionToSuppress, ExceptionToSuppress.class);
+    MatcherAssert.assertThat(one.hashCode(), not(equalTo(two.hashCode())));
+  }
+
   private static class ExceptionToSuppress extends MuleException {
 
     private static final long serialVersionUID = -225801936346795213L;
