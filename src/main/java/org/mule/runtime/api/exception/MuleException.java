@@ -158,7 +158,7 @@ public abstract class MuleException extends Exception {
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
     } else if (INFO_CAUSED_BY_KEY.equals(name)) {
-      this.exceptionInfo.setCausedBy(Objects.toString(info));
+      this.exceptionInfo.setCausedBy((MuleException) info);
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
     }

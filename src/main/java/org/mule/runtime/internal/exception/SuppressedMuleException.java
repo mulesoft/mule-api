@@ -11,10 +11,8 @@ import static java.util.Objects.requireNonNull;
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
 
-import java.util.Objects;
-
 /**
- * Wraps a provided exception, or suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime will not take it into account for the error handling.
+ * Wraps a provided exception, suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime will not take it into account for the error handling.
  * The suppressed cause and all its nested {@link Exception#getCause()} will not be taken into account during the {@link org.mule.runtime.api.message.Error} resolution.
  * <br/><br/>Example without suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link org.mule.runtime.api.connection.ConnectionException}(), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
@@ -32,17 +30,17 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Constructs a new {@link SuppressedMuleException}
-   * @param throwable Exception that will be wrapped
+   * @param throwable Exception that will be wrapped.
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
   private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
     super(requireNonNull(throwable, "Exception cannot be null"));
     this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
-    getExceptionInfo().setCausedBy(causeToSuppress.getMessage());
+    getExceptionInfo().setCausedBy(causeToSuppress);
   }
 
   /**
-   * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}
+   * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
   public MuleException getSuppressedMuleException() {
     return suppressedException;
@@ -50,7 +48,7 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Wraps the provided exception, suppressing the exception itself or the first cause that is an instance of the provided class.
-   * The search will stop if a {@link SuppressedMuleException} is found.
+   * The search will stop if a {@link SuppressedMuleException} is found, making no suppression.
    * @param exception Exception that will be wrapped, suppressing the exception itself or one of it's causes.
    * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
@@ -62,28 +60,11 @@ public class SuppressedMuleException extends MuleException {
         return new SuppressedMuleException(exception, (MuleException) cause);
       }
       cause = cause.getCause();
-      // Address some misbehaving exceptions, avoid endless loop
+      // Address some misbehaving exceptions, avoid endless loopMuleExceptionInfoTestCase
       if (exception == cause) {
         break;
       }
     }
     return exception;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o)
-      return true;
-    if (o == null || getClass() != o.getClass())
-      return false;
-    if (!super.equals(o))
-      return false;
-    SuppressedMuleException that = (SuppressedMuleException) o;
-    return suppressedException.equals(that.suppressedException);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), suppressedException);
   }
 }

@@ -42,19 +42,13 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
-  private String causedBy;
+  private MuleException causedBy;
   private String location;
   private String dslSource;
   private Serializable flowStack;
   private final SmallMap<String, Object> additionalEntries = new SmallMap<>();
 
   void addToSummaryMessage(StringBuilder buf) {
-    if (causedBy != null) {
-      buf
-          .append(INFO_CAUSED_BY_KEY_MSG)
-          .append(causedBy)
-          .append(lineSeparator());
-    }
     buf
         .append(INFO_LOCATION_KEY_MSG)
         .append(location != null ? location : MISSING_DEFAULT_VALUE)
@@ -64,8 +58,18 @@ public final class MuleExceptionInfo implements Serializable {
         .append(lineSeparator())
         .append(INFO_ERROR_TYPE_KEY_MSG)
         .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE)
-        .append(lineSeparator())
-        .append(FLOW_STACK_INFO_KEY_MSG)
+        .append(lineSeparator());
+    if (causedBy != null) {
+      ErrorType causedByErrorType = causedBy.getExceptionInfo().getErrorType();
+      buf
+          .append(INFO_CAUSED_BY_KEY_MSG);
+      if (causedByErrorType != null) {
+        buf.append(causedByErrorType.toString()).append(": ");
+      }
+      buf.append(causedBy.getMessage())
+          .append(lineSeparator());
+    }
+    buf.append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
   }
@@ -86,11 +90,11 @@ public final class MuleExceptionInfo implements Serializable {
     this.errorType = errorType;
   }
 
-  public String getCausedBy() {
+  public MuleException getCausedBy() {
     return causedBy;
   }
 
-  public void setCausedBy(String causedBy) {
+  public void setCausedBy(MuleException causedBy) {
     this.causedBy = causedBy;
   }
 
