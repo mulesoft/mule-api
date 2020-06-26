@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.runtime.api.message.ErrorType;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
@@ -33,7 +34,7 @@ public class MuleExceptionInfoTestCase {
   @Issue("MULE-18041")
   public void whenCausedByExistsThenIsAddedToSummary() {
     StringBuilder summaryMessage = new StringBuilder();
-    muleExceptionInfo.getSuppressedCauses().add(new TestMuleException("Caused by error"));
+    muleExceptionInfo.addSuppressedCause(new TestMuleException("Caused by error"));
     muleExceptionInfo.addToSummaryMessage(summaryMessage);
     assertThat(summaryMessage.toString(), containsString("Caused by             : Caused by error"));
   }
@@ -42,7 +43,7 @@ public class MuleExceptionInfoTestCase {
   @Issue("MULE-18041")
   public void whenCausedByErrorTypeExistsThenIsAddedToSummary() {
     StringBuilder summaryMessage = new StringBuilder();
-    muleExceptionInfo.getSuppressedCauses().add(new TestMuleException("Caused by error", errorType));
+    muleExceptionInfo.addSuppressedCause(new TestMuleException("Caused by error", errorType));
     muleExceptionInfo.addToSummaryMessage(summaryMessage);
     assertThat(summaryMessage.toString(), containsString("Caused by             : MULE:TESTING: Caused by error"));
   }

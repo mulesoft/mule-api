@@ -22,7 +22,6 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -159,9 +158,15 @@ public abstract class MuleException extends Exception {
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
     } else if (INFO_CAUSED_BY_KEY.equals(name)) {
-      this.exceptionInfo.getSuppressedCauses().addAll((Set<MuleException>) info);
+      this.exceptionInfo.setSuppressedCauses((MuleExceptionInfo.SuppressedCauses) info);
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
+    }
+  }
+
+  public void addInfo(Map<String, Object> info) {
+    for (Map.Entry<String, Object> entry : info.entrySet()) {
+      addInfo(entry.getKey(), entry.getValue());
     }
   }
 
@@ -191,8 +196,7 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    //Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
-    Map<String, Object> info = this.getInfo();
+    Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
     for (String key : info.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
@@ -265,6 +269,10 @@ public abstract class MuleException extends Exception {
 
   public Map<String, Object> getInfo() {
     return exceptionInfo.asMap();
+  }
+
+  public Map<String, Object> getAdditionalInfo() {
+    return exceptionInfo.getAdditionalEntries();
   }
 
   public MuleExceptionInfo getExceptionInfo() {

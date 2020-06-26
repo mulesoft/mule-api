@@ -16,10 +16,10 @@ import org.mule.runtime.api.message.Error;
  * The suppressed cause and all its nested {@link Exception#getCause()} will not be taken into account during the {@link org.mule.runtime.api.message.Error} resolution.
  * <br/><br/>Example without suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link org.mule.runtime.api.connection.ConnectionException}(), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
- * will resolve to an {@link Error} whith {@link Error#getErrorType()} returning ConnectionException's error type (discarding the top level customErrorType)
+ * will resolve to an {@link Error} whith {@link Error#getErrorType()} returning ConnectionException's error type (discarding the top level customErrorType).
  * <br/><br/>Same example with suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link SuppressedMuleException}(new {@link org.mule.runtime.api.connection.ConnectionException}()), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
- * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying ConnectionException's error type})
+ * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying ConnectionException's error type}).
  * @since 1.2.3, 1.3
  */
 public class SuppressedMuleException extends MuleException {
@@ -41,16 +41,20 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Completes the {@link org.mule.runtime.api.exception.MuleExceptionInfo} of a {@link SuppressedMuleException}
-   * by adding the {@link MuleException} that is being suppressed and any other suppression found in their causes tree.
-   * @param causeToSuppress
+   * by adding the {@link MuleException} that is being suppressed and traversing its causes to include any other suppression found
+   * and also the additional information from all the {@link MuleException}s.
+   * @param causeToSuppress Exception that is being suppressed.
    */
   private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
-    this.getExceptionInfo().getSuppressedCauses().add(causeToSuppress);
+    this.getExceptionInfo().addSuppressedCause(causeToSuppress);
     Throwable nestedCause = causeToSuppress;
-    while (nestedCause != null) {
+    while (nestedCause.getCause() != null && nestedCause.getCause() != nestedCause) {
       nestedCause = nestedCause.getCause();
-      if (nestedCause instanceof SuppressedMuleException) {
-        this.getExceptionInfo().getSuppressedCauses().add(((SuppressedMuleException) nestedCause).getSuppressedMuleException());
+      if (nestedCause instanceof MuleException) {
+        this.addInfo(((MuleException) nestedCause).getAdditionalInfo());
+        if (nestedCause instanceof SuppressedMuleException) {
+          this.getExceptionInfo().addSuppressedCause(((SuppressedMuleException) nestedCause).getSuppressedException());
+        }
       }
     }
   }
@@ -58,7 +62,7 @@ public class SuppressedMuleException extends MuleException {
   /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
-  public MuleException getSuppressedMuleException() {
+  public MuleException getSuppressedException() {
     return suppressedException;
   }
 
@@ -73,8 +77,7 @@ public class SuppressedMuleException extends MuleException {
     Throwable cause = exception;
     while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (causeToSuppress.isInstance(cause)) {
-        SuppressedMuleException suppressedMuleException = new SuppressedMuleException(exception, (MuleException) cause);
-        return suppressedMuleException;
+        return new SuppressedMuleException(exception, (MuleException) cause);
       }
       cause = cause.getCause();
       // Address some misbehaving exceptions, avoid endless loop

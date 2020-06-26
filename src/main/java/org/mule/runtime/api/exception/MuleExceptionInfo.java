@@ -14,10 +14,10 @@ import org.mule.runtime.api.message.ErrorType;
 import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Contains information relative to a {@link MuleException} to help in troubleshooting
@@ -46,7 +46,7 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
-  private final SuppressedCauses suppressedCauses = new SuppressedCauses(4);
+  private SuppressedCauses suppressedCauses = new SuppressedCauses(4);
   private String location;
   private String dslSource;
   private Serializable flowStack;
@@ -115,8 +115,20 @@ public final class MuleExceptionInfo implements Serializable {
     this.flowStack = flowStack;
   }
 
-  public Set<MuleException> getSuppressedCauses() {
-    return suppressedCauses;
+  public List<MuleException> getSuppressedCauses() {
+    return (suppressedCauses);
+  }
+
+  public void setSuppressedCauses(SuppressedCauses suppressedCauses) {
+    this.suppressedCauses = suppressedCauses;
+  }
+
+  public void addSuppressedCause(MuleException cause) {
+    this.suppressedCauses.add(cause);
+  }
+
+  public Map<String, Object> getAdditionalEntries() {
+    return (additionalEntries);
   }
 
   public void putAdditionalEntry(String name, Object info) {
@@ -170,7 +182,7 @@ public final class MuleExceptionInfo implements Serializable {
     return "";
   }
 
-  private static class SuppressedCauses extends LinkedHashSet<MuleException> {
+  protected static class SuppressedCauses extends ArrayList<MuleException> {
 
     private static final long serialVersionUID = -6392442432846066687L;
     private static final String PADDING = repeat(' ', INFO_CAUSED_BY_KEY_MSG.length());

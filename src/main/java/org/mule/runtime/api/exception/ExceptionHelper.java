@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -143,7 +142,7 @@ public class ExceptionHelper {
       if (cause instanceof MuleException) {
         muleExceptionInfo.putAll(((MuleException) cause).getInfo());
         if (cause instanceof SuppressedMuleException) {
-          suppressedMuleException = ((SuppressedMuleException) cause).getSuppressedMuleException();
+          suppressedMuleException = ((SuppressedMuleException) cause).getSuppressedException();
         } else {
           exception = (MuleException) cause;
         }
@@ -162,9 +161,7 @@ public class ExceptionHelper {
     }
 
     if (exception != null) {
-      for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
-        exception.addInfo(entry.getKey(), entry.getValue());
-      }
+      exception.addInfo(muleExceptionInfo);
     }
 
     return exception;
@@ -365,7 +362,7 @@ public class ExceptionHelper {
     MuleException suppressedCause = null;
     while (cause != null && cause != suppressedCause) {
       if (cause instanceof SuppressedMuleException) {
-        suppressedCause = ((SuppressedMuleException) cause).getSuppressedMuleException();
+        suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
       } else {
         exceptions.add(cause);
       }
