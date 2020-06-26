@@ -92,7 +92,6 @@ public class ExceptionHelper {
       return (T) ((InvocationTargetException) t).getTargetException();
     }
     return t;
-
   }
 
   /**
@@ -161,11 +160,13 @@ public class ExceptionHelper {
         break;
       }
     }
+
     if (exception != null) {
       for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
         exception.addInfo(entry.getKey(), entry.getValue());
       }
     }
+
     return exception;
   }
 

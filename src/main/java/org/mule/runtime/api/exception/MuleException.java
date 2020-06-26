@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.io.StringWriter;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,7 +159,7 @@ public abstract class MuleException extends Exception {
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
     } else if (INFO_CAUSED_BY_KEY.equals(name)) {
-      this.exceptionInfo.setCausedBy((MuleException) info);
+      this.exceptionInfo.getSuppressedCauses().addAll((Set<MuleException>) info);
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
     }
@@ -190,7 +191,8 @@ public abstract class MuleException extends Exception {
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
 
-    Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
+    //Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
+    Map<String, Object> info = this.getInfo();
     for (String key : info.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));

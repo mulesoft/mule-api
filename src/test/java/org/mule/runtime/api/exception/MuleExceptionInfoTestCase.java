@@ -23,7 +23,6 @@ public class MuleExceptionInfoTestCase {
   MuleExceptionInfo muleExceptionInfo = null;
   private final ErrorType errorType = mock(ErrorType.class);
 
-
   @Before
   public void before() {
     when(errorType.toString()).thenReturn("MULE:TESTING");
@@ -34,7 +33,7 @@ public class MuleExceptionInfoTestCase {
   @Issue("MULE-18041")
   public void whenCausedByExistsThenIsAddedToSummary() {
     StringBuilder summaryMessage = new StringBuilder();
-    muleExceptionInfo.setCausedBy(new TestMuleException("Caused by error"));
+    muleExceptionInfo.getSuppressedCauses().add(new TestMuleException("Caused by error"));
     muleExceptionInfo.addToSummaryMessage(summaryMessage);
     assertThat(summaryMessage.toString(), containsString("Caused by             : Caused by error"));
   }
@@ -43,7 +42,7 @@ public class MuleExceptionInfoTestCase {
   @Issue("MULE-18041")
   public void whenCausedByErrorTypeExistsThenIsAddedToSummary() {
     StringBuilder summaryMessage = new StringBuilder();
-    muleExceptionInfo.setCausedBy(new TestMuleException("Caused by error", errorType));
+    muleExceptionInfo.getSuppressedCauses().add(new TestMuleException("Caused by error", errorType));
     muleExceptionInfo.addToSummaryMessage(summaryMessage);
     assertThat(summaryMessage.toString(), containsString("Caused by             : MULE:TESTING: Caused by error"));
   }

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.valueOf;
 import static java.lang.System.lineSeparator;
 
 import org.mule.api.annotation.NoInstantiate;
@@ -13,7 +14,10 @@ import org.mule.runtime.api.message.ErrorType;
 import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Contains information relative to a {@link MuleException} to help in troubleshooting
@@ -42,7 +46,7 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
-  private MuleException causedBy;
+  private final SuppressedCauses suppressedCauses = new SuppressedCauses(4);
   private String location;
   private String dslSource;
   private Serializable flowStack;
@@ -57,19 +61,16 @@ public final class MuleExceptionInfo implements Serializable {
         .append(dslSource != null ? dslSource : MISSING_DEFAULT_VALUE)
         .append(lineSeparator())
         .append(INFO_ERROR_TYPE_KEY_MSG)
-        .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE)
-        .append(lineSeparator());
-    if (causedBy != null) {
-      ErrorType causedByErrorType = causedBy.getExceptionInfo().getErrorType();
+        .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE);
+    if (!suppressedCauses.isEmpty()) {
       buf
+          .append(lineSeparator())
           .append(INFO_CAUSED_BY_KEY_MSG);
-      if (causedByErrorType != null) {
-        buf.append(causedByErrorType.toString()).append(": ");
-      }
-      buf.append(causedBy.getMessage())
-          .append(lineSeparator());
+      suppressedCauses.toString(buf);
     }
-    buf.append(FLOW_STACK_INFO_KEY_MSG)
+    buf
+        .append(lineSeparator())
+        .append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
   }
@@ -88,14 +89,6 @@ public final class MuleExceptionInfo implements Serializable {
 
   public void setErrorType(ErrorType errorType) {
     this.errorType = errorType;
-  }
-
-  public MuleException getCausedBy() {
-    return causedBy;
-  }
-
-  public void setCausedBy(MuleException causedBy) {
-    this.causedBy = causedBy;
   }
 
   public String getLocation() {
@@ -122,6 +115,10 @@ public final class MuleExceptionInfo implements Serializable {
     this.flowStack = flowStack;
   }
 
+  public Set<MuleException> getSuppressedCauses() {
+    return suppressedCauses;
+  }
+
   public void putAdditionalEntry(String name, Object info) {
     additionalEntries.put(name, info);
   }
@@ -134,8 +131,8 @@ public final class MuleExceptionInfo implements Serializable {
     if (errorType != null) {
       result.put(INFO_ERROR_TYPE_KEY, errorType);
     }
-    if (causedBy != null) {
-      result.put(INFO_CAUSED_BY_KEY, causedBy);
+    if (!suppressedCauses.isEmpty()) {
+      result.put(INFO_CAUSED_BY_KEY, suppressedCauses);
     }
     if (location != null) {
       result.put(INFO_LOCATION_KEY, location);
@@ -151,7 +148,7 @@ public final class MuleExceptionInfo implements Serializable {
   }
 
   private static String repeat(char c, int len) {
-    String str = String.valueOf(c);
+    String str = valueOf(c);
     if (str == null) {
       return null;
     } else if (len <= 0) {
@@ -173,4 +170,44 @@ public final class MuleExceptionInfo implements Serializable {
     return "";
   }
 
+  private static class SuppressedCauses extends LinkedHashSet<MuleException> {
+
+    private static final long serialVersionUID = -6392442432846066687L;
+    private static final String PADDING = repeat(' ', INFO_CAUSED_BY_KEY_MSG.length());
+
+    public SuppressedCauses(int size) {
+      super(size);
+    }
+
+    @Override
+    public String toString() {
+      StringBuilder stringRepresentation = new StringBuilder();
+      toString(stringRepresentation, "");
+      return stringRepresentation.toString();
+    }
+
+    public void toString(StringBuilder buffer) {
+      toString(buffer, PADDING);
+    }
+
+    private void toString(StringBuilder buffer, String padding) {
+      if (!this.isEmpty()) {
+        Iterator<MuleException> causes = iterator();
+        writeCause(buffer, causes.next());
+        while (causes.hasNext()) {
+          buffer.append(lineSeparator());
+          buffer.append(padding);
+          writeCause(buffer, causes.next());
+        }
+      }
+    }
+
+    private void writeCause(StringBuilder buffer, MuleException causedByException) {
+      ErrorType causedByErrorType = causedByException.getExceptionInfo().getErrorType();
+      if (causedByErrorType != null) {
+        buffer.append(causedByErrorType.toString()).append(": ");
+      }
+      buffer.append(causedByException.getMessage());
+    }
+  }
 }

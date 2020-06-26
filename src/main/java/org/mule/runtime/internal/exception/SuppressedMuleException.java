@@ -36,7 +36,23 @@ public class SuppressedMuleException extends MuleException {
   private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
     super(requireNonNull(throwable, "Exception cannot be null"));
     this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
-    getExceptionInfo().setCausedBy(causeToSuppress);
+    addSuppressionToMuleExceptionInfo(causeToSuppress);
+  }
+
+  /**
+   * Completes the {@link org.mule.runtime.api.exception.MuleExceptionInfo} of a {@link SuppressedMuleException}
+   * by adding the {@link MuleException} that is being suppressed and any other suppression found in their causes tree.
+   * @param causeToSuppress
+   */
+  private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
+    this.getExceptionInfo().getSuppressedCauses().add(causeToSuppress);
+    Throwable nestedCause = causeToSuppress;
+    while (nestedCause != null) {
+      nestedCause = nestedCause.getCause();
+      if (nestedCause instanceof SuppressedMuleException) {
+        this.getExceptionInfo().getSuppressedCauses().add(((SuppressedMuleException) nestedCause).getSuppressedMuleException());
+      }
+    }
   }
 
   /**
@@ -57,10 +73,11 @@ public class SuppressedMuleException extends MuleException {
     Throwable cause = exception;
     while (cause != null && !(cause instanceof SuppressedMuleException)) {
       if (causeToSuppress.isInstance(cause)) {
-        return new SuppressedMuleException(exception, (MuleException) cause);
+        SuppressedMuleException suppressedMuleException = new SuppressedMuleException(exception, (MuleException) cause);
+        return suppressedMuleException;
       }
       cause = cause.getCause();
-      // Address some misbehaving exceptions, avoid endless loopMuleExceptionInfoTestCase
+      // Address some misbehaving exceptions, avoid endless loop
       if (exception == cause) {
         break;
       }

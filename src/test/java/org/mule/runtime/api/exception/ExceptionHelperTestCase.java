@@ -171,6 +171,19 @@ public class ExceptionHelperTestCase {
     assertThat(exceptionsList, contains(muleError));
   }
 
+  @Test
+  public void getExceptionsAsListPreventsInfiniteLoop() {
+    Exception exceptionWithRecursiveCause = new Exception() {
+
+      @Override
+      public synchronized Throwable getCause() {
+        return this;
+      }
+    };
+    //MuleException muleExceptionWithRecursiveCause = new ConnectionException(exceptionWithRecursiveCause);
+    getExceptionsAsList(exceptionWithRecursiveCause);
+  }
+
   private static final class TestChildClassLoader extends ClassLoader {
 
     private TestChildClassLoader(ClassLoader parent) {
