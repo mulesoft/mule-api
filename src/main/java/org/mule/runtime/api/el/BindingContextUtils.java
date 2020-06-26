@@ -12,6 +12,7 @@ import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.STRING;
 import static org.mule.runtime.api.metadata.DataType.fromType;
+import static org.slf4j.LoggerFactory.getLogger;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.event.Event;
@@ -28,12 +29,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.slf4j.Logger;
+
 /**
  * Provides a reusable way for creating {@link BindingContext}s.
  *
  * @since 1.0
  */
 public class BindingContextUtils {
+
+  private static final Logger LOGGER = getLogger(BindingContextUtils.class);
 
   public static final String MESSAGE = "message";
   public static final String PAYLOAD = "payload";
@@ -138,7 +143,11 @@ public class BindingContextUtils {
     }
 
     Message message = event.getMessage();
-    contextBuilder.addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message), MESAGE_DATA_TYPE)));
+    contextBuilder
+        .addBinding(MESSAGE,
+                    new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message,
+                                                                              event.getError().map(Error::getCause).orElse(null)),
+                                                           MESAGE_DATA_TYPE)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE,
@@ -176,14 +185,14 @@ public class BindingContextUtils {
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
     return BindingContext.builder()
-        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message), MESAGE_DATA_TYPE)))
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message, null), MESAGE_DATA_TYPE)))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
 
   private static class FlowVariablesAccessor {
 
-    private String name;
+    private final String name;
 
     public FlowVariablesAccessor(String name) {
       this.name = name;
@@ -197,12 +206,20 @@ public class BindingContextUtils {
 
   private static class MessageWrapper implements Message {
 
+    private static final LazyValue<String> EXCEPTION_PAYLOAD_WARN = new LazyValue<>(() -> {
+      String msg = "Use 'error.cause' instead of 'message.message.exceptionPayload' to get details from an error.";
+      LOGGER.warn(msg);
+      return msg;
+    });
+
     private static final long serialVersionUID = -8097230480930728693L;
 
-    private Message message;
+    private final Message message;
+    private transient final Throwable exceptionPayload;
 
-    public MessageWrapper(Message message) {
+    public MessageWrapper(Message message, Throwable exceptionPayload) {
       this.message = message;
+      this.exceptionPayload = exceptionPayload;
     }
 
     @Override
@@ -213,6 +230,23 @@ public class BindingContextUtils {
     @Override
     public <T> TypedValue<T> getAttributes() {
       return message.getAttributes();
+    }
+
+    /**
+     * @deprecated since 1.3, use the `error` binding instead.
+     */
+    @Deprecated
+    public Message getMessage() {
+      return this;
+    }
+
+    /**
+     * @deprecated since 1.3, use the `error` binding instead.
+     */
+    @Deprecated
+    public Throwable getExceptionPayload() {
+      EXCEPTION_PAYLOAD_WARN.get();
+      return exceptionPayload;
     }
 
     @Override
