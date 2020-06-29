@@ -8,6 +8,8 @@ package org.mule.runtime.api.streaming.bytes;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,7 +43,8 @@ import java.io.InputStream;
  *
  * @since 1.3.0
  */
-public final class ImmutableFileRepeatableInputStream extends InputStream {
+@NoExtend
+public class ImmutableFileRepeatableInputStream extends InputStream {
 
   private final InputStream delegate;
   private final File file;
