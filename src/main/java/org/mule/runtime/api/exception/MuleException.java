@@ -20,6 +20,7 @@ import org.mule.runtime.api.message.ErrorType;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -158,13 +159,13 @@ public abstract class MuleException extends Exception {
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
     } else if (INFO_CAUSED_BY_KEY.equals(name)) {
-      this.exceptionInfo.setSuppressedCauses((MuleExceptionInfo.SuppressedCauses) info);
+      this.exceptionInfo.setSuppressedCauses((List<MuleException>) info);
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
     }
   }
 
-  public void addInfo(Map<String, Object> info) {
+  public void putAll(Map<String, Object> info) {
     for (Map.Entry<String, Object> entry : info.entrySet()) {
       addInfo(entry.getKey(), entry.getValue());
     }
@@ -195,15 +196,19 @@ public abstract class MuleException extends Exception {
     StringBuilder buf = new StringBuilder(1024);
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
-
-    Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
-    for (String key : info.keySet().stream().sorted().collect(toList())) {
+    // Info about the root mule exception is obtained and logged
+    MuleException rootMuleException = getRootMuleException(this);
+    rootMuleException.getExceptionInfo().addToSummaryMessage(buf);
+    // For verbose messages, additional entries from suppressed MuleExceptions and any other Throwable in the causes list are logged
+    rootMuleException.putAll(ExceptionHelper.getExceptionInfo(this));
+    Map<String, Object> additionalInfo = rootMuleException.getAdditionalInfo();
+    for (String key : additionalInfo.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
       buf.append(": ");
-      buf.append((info.get(key) == null ? "null"
-          : info.get(key).toString().replaceAll(lineSeparator(),
-                                                lineSeparator() + repeat(' ', 24))))
+      buf.append((additionalInfo.get(key) == null ? "null"
+          : additionalInfo.get(key).toString().replaceAll(lineSeparator(),
+                                                          lineSeparator() + repeat(' ', 24))))
           .append(lineSeparator());
     }
 

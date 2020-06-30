@@ -46,7 +46,7 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
-  private SuppressedCauses suppressedCauses = new SuppressedCauses(4);
+  private List<MuleException> suppressedCauses = new ArrayList<>(4);
   private String location;
   private String dslSource;
   private Serializable flowStack;
@@ -63,16 +63,35 @@ public final class MuleExceptionInfo implements Serializable {
         .append(INFO_ERROR_TYPE_KEY_MSG)
         .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE);
     if (!suppressedCauses.isEmpty()) {
-      buf
-          .append(lineSeparator())
-          .append(INFO_CAUSED_BY_KEY_MSG);
-      suppressedCauses.toString(buf);
+      writeSuppressedCauses(buf);
     }
     buf
         .append(lineSeparator())
         .append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
+  }
+
+  private void writeSuppressedCauses(StringBuilder buffer) {
+    final String PADDING = repeat(' ', INFO_CAUSED_BY_KEY_MSG.length());
+    buffer
+        .append(lineSeparator())
+        .append(INFO_CAUSED_BY_KEY_MSG);
+    Iterator<MuleException> causes = suppressedCauses.iterator();
+    writeCause(buffer, causes.next());
+    while (causes.hasNext()) {
+      buffer.append(lineSeparator());
+      buffer.append(PADDING);
+      writeCause(buffer, causes.next());
+    }
+  }
+
+  private void writeCause(StringBuilder buffer, MuleException causedByException) {
+    ErrorType causedByErrorType = causedByException.getExceptionInfo().getErrorType();
+    if (causedByErrorType != null) {
+      buffer.append(causedByErrorType.toString()).append(": ");
+    }
+    buffer.append(causedByException.getMessage());
   }
 
   public boolean isAlreadyLogged() {
@@ -119,7 +138,7 @@ public final class MuleExceptionInfo implements Serializable {
     return (suppressedCauses);
   }
 
-  public void setSuppressedCauses(SuppressedCauses suppressedCauses) {
+  public void setSuppressedCauses(List<MuleException> suppressedCauses) {
     this.suppressedCauses = suppressedCauses;
   }
 
@@ -182,44 +201,4 @@ public final class MuleExceptionInfo implements Serializable {
     return "";
   }
 
-  protected static class SuppressedCauses extends ArrayList<MuleException> {
-
-    private static final long serialVersionUID = -6392442432846066687L;
-    private static final String PADDING = repeat(' ', INFO_CAUSED_BY_KEY_MSG.length());
-
-    public SuppressedCauses(int size) {
-      super(size);
-    }
-
-    @Override
-    public String toString() {
-      StringBuilder stringRepresentation = new StringBuilder();
-      toString(stringRepresentation, "");
-      return stringRepresentation.toString();
-    }
-
-    public void toString(StringBuilder buffer) {
-      toString(buffer, PADDING);
-    }
-
-    private void toString(StringBuilder buffer, String padding) {
-      if (!this.isEmpty()) {
-        Iterator<MuleException> causes = iterator();
-        writeCause(buffer, causes.next());
-        while (causes.hasNext()) {
-          buffer.append(lineSeparator());
-          buffer.append(padding);
-          writeCause(buffer, causes.next());
-        }
-      }
-    }
-
-    private void writeCause(StringBuilder buffer, MuleException causedByException) {
-      ErrorType causedByErrorType = causedByException.getExceptionInfo().getErrorType();
-      if (causedByErrorType != null) {
-        buffer.append(causedByErrorType.toString()).append(": ");
-      }
-      buffer.append(causedByException.getMessage());
-    }
-  }
 }
