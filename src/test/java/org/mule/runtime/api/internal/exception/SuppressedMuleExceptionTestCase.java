@@ -1,5 +1,12 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
 package org.mule.runtime.api.internal.exception;
 
+import io.qameta.allure.Issue;
 import org.junit.Test;
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.internal.exception.SuppressedMuleException;
@@ -17,12 +24,14 @@ import static org.hamcrest.core.Is.is;
 public class SuppressedMuleExceptionTestCase {
 
   @Test
+  @Issue("MULE-18041")
   public void whenClassToSuppressIsNotFoundThenNoSuppressionIsAdded() {
     Throwable result = SuppressedMuleException.suppressIfPresent(new TestException(), AnotherTestException.class);
     assertThat(result, is(instanceOf(TestException.class)));
   }
 
   @Test
+  @Issue("MULE-18041")
   public void whenClassToSuppressIsFoundThenSuppressionIsAdded() {
     Throwable result =
         SuppressedMuleException.suppressIfPresent(new TestException(new AnotherTestException()), AnotherTestException.class);
@@ -30,6 +39,7 @@ public class SuppressedMuleExceptionTestCase {
   }
 
   @Test
+  @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenIncludeSuppressedAdditionalProperties() {
     Throwable suppressedTestException =
         SuppressedMuleException.suppressIfPresent(new TestException(new AnotherTestException()), TestException.class);
@@ -43,6 +53,7 @@ public class SuppressedMuleExceptionTestCase {
   }
 
   @Test
+  @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenPreviousSuppressionsAreAdded() {
     Throwable suppressedTestException = SuppressedMuleException.suppressIfPresent(new TestException(), TestException.class);
     Throwable suppressedAnotherTestException =
