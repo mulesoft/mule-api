@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mule.runtime.api.message.ErrorType;
 
-import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
