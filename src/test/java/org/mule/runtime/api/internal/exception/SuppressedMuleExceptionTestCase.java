@@ -26,15 +26,16 @@ public class SuppressedMuleExceptionTestCase {
   @Test
   @Issue("MULE-18041")
   public void whenClassToSuppressIsNotFoundThenNoSuppressionIsAdded() {
-    Throwable result = SuppressedMuleException.suppressIfPresent(new TestException(), AnotherTestException.class);
-    assertThat(result, is(instanceOf(TestException.class)));
+    Throwable result = SuppressedMuleException.suppressIfPresent(new SimpleException(), ExceptionWithAdditionalInfo.class);
+    assertThat(result, is(instanceOf(SimpleException.class)));
   }
 
   @Test
   @Issue("MULE-18041")
   public void whenClassToSuppressIsFoundThenSuppressionIsAdded() {
     Throwable result =
-        SuppressedMuleException.suppressIfPresent(new TestException(new AnotherTestException()), AnotherTestException.class);
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()),
+                                                  ExceptionWithAdditionalInfo.class);
     assertThat(result, is(instanceOf(SuppressedMuleException.class)));
   }
 
@@ -42,10 +43,11 @@ public class SuppressedMuleExceptionTestCase {
   @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenIncludeSuppressedAdditionalProperties() {
     Throwable suppressedTestException =
-        SuppressedMuleException.suppressIfPresent(new TestException(new AnotherTestException()), TestException.class);
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()), SimpleException.class);
     Map<String, Object> suppressedTestExceptionEntries = ((SuppressedMuleException) suppressedTestException).getInfo();
     Throwable suppressedAnotherTestException =
-        SuppressedMuleException.suppressIfPresent(new TestException(new AnotherTestException()), AnotherTestException.class);
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()),
+                                                  ExceptionWithAdditionalInfo.class);
     Map<String, Object> suppressedAnotherTestExceptionEntries =
         ((SuppressedMuleException) suppressedAnotherTestException).getInfo();
     assertThat(suppressedTestExceptionEntries, hasEntry("Additional entry key", "Test additional entry value"));
@@ -55,38 +57,71 @@ public class SuppressedMuleExceptionTestCase {
   @Test
   @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenPreviousSuppressionsAreAdded() {
-    Throwable suppressedTestException = SuppressedMuleException.suppressIfPresent(new TestException(), TestException.class);
+    Throwable suppressedTestException = SuppressedMuleException.suppressIfPresent(new SimpleException(), SimpleException.class);
     Throwable suppressedAnotherTestException =
-        SuppressedMuleException.suppressIfPresent(new AnotherTestException(suppressedTestException), AnotherTestException.class);
+        SuppressedMuleException.suppressIfPresent(new ExceptionWithAdditionalInfo(suppressedTestException),
+                                                  ExceptionWithAdditionalInfo.class);
     List<MuleException> suppressions = ((MuleException) suppressedAnotherTestException).getExceptionInfo().getSuppressedCauses();
     assertThat(suppressions,
                contains(sameInstance(((SuppressedMuleException) suppressedAnotherTestException).getSuppressedException()),
                         sameInstance(((SuppressedMuleException) suppressedTestException).getSuppressedException())));
   }
 
-  private static class TestException extends MuleException {
+  @Test
+  public void selfCausedExceptionInMainLoopMustBeResolved() {
+    Throwable suppressedSelfCausedException =
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new SelfCausedException()), SelfCausedException.class);
+    assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
+    List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
+    assertThat(suppressions,
+               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+  }
+
+  @Test
+  public void selfCausedExceptionInSecondaryLoopMustBeResolved() {
+    Throwable suppressedSelfCausedException =
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new SelfCausedException()), SimpleException.class);
+    assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
+    List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
+    assertThat(suppressions,
+               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+  }
+
+  private static class SimpleException extends MuleException {
 
     private static final long serialVersionUID = 21078091124109763L;
 
-    public TestException() {}
+    public SimpleException() {}
 
-    public TestException(Throwable cause) {
+    public SimpleException(Throwable cause) {
       super(cause);
     }
+
   }
 
-  private static class AnotherTestException extends MuleException {
+  private static class ExceptionWithAdditionalInfo extends MuleException {
 
     private static final long serialVersionUID = -2095590887184779909L;
 
-    public AnotherTestException() {
+    public ExceptionWithAdditionalInfo() {
       getExceptionInfo().putAdditionalEntry("Additional entry key", "Test additional entry value");
     }
 
-    public AnotherTestException(Throwable cause) {
+    public ExceptionWithAdditionalInfo(Throwable cause) {
       super(cause);
       getExceptionInfo().putAdditionalEntry("Additional entry key", "Test additional entry value");
     }
+
   }
 
+  private static class SelfCausedException extends MuleException {
+
+    private static final long serialVersionUID = -8420615463020752243L;
+
+    @Override
+    public synchronized Throwable getCause() {
+      return this;
+    }
+
+  }
 }

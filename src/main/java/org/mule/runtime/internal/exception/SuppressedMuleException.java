@@ -80,9 +80,9 @@ public class SuppressedMuleException extends MuleException {
       if (causeToSuppress.isInstance(cause)) {
         return new SuppressedMuleException(exception, (MuleException) cause);
       }
-      cause = cause.getCause();
-      // Address some misbehaving exceptions, avoid endless loop
-      if (exception == cause) {
+      if (cause.getCause() != cause) {
+        cause = cause.getCause();
+      } else {
         break;
       }
     }

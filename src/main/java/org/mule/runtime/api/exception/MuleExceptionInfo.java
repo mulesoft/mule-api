@@ -146,12 +146,14 @@ public final class MuleExceptionInfo implements Serializable {
     this.suppressedCauses.add(cause);
   }
 
-  public Map<String, Object> getAdditionalEntries() {
-    return (additionalEntries);
-  }
-
   public void putAdditionalEntry(String name, Object info) {
     additionalEntries.put(name, info);
+  }
+
+  Map<String, Object> getAdditionalEntries() {
+    Map<String, Object> result = new SmallMap<>();
+    result.putAll(additionalEntries);
+    return result;
   }
 
   Map<String, Object> asMap() {
