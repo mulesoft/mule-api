@@ -43,8 +43,7 @@ import java.io.InputStream;
  *
  * @since 1.3.0
  */
-@NoExtend
-public class ImmutableFileRepeatableInputStream extends InputStream {
+public final class ImmutableFileRepeatableInputStream extends InputStream {
 
   private final InputStream delegate;
   private final File file;

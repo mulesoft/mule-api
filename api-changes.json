@@ -1,21 +1,4 @@
 {
-  "1.4.0": {
-    "revapi": {
-      "ignore": [
-        {
-          "code": "java.annotation.added",
-          "old": "class org.mule.runtime.api.streaming.bytes.ImmutableFileRepeatableInputStream",
-          "new": "class org.mule.runtime.api.streaming.bytes.ImmutableFileRepeatableInputStream",
-          "annotationType": "org.mule.api.annotation.NoExtend",
-          "annotation": "@org.mule.api.annotation.NoExtend",
-          "package": "org.mule.runtime.api.streaming.bytes",
-          "classSimpleName": "ImmutableFileRepeatableInputStream",
-          "elementKind": "class",
-          "justification": "Change needed for forward compatibility"
-        }
-      ]
-    }
-  },
   "1.3.0": {
     "revapi": {
       "ignore": [
