@@ -47,12 +47,12 @@ public class SuppressedMuleException extends MuleException {
    */
   private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
     this.getExceptionInfo().addSuppressedCause(causeToSuppress);
-    this.putAll(causeToSuppress.getAdditionalInfo());
+    this.addAllInfo(causeToSuppress.getAdditionalInfo());
     Throwable nestedCause = causeToSuppress;
     while (nestedCause.getCause() != null && nestedCause.getCause() != nestedCause) {
       nestedCause = nestedCause.getCause();
       if (nestedCause instanceof MuleException) {
-        this.putAll(((MuleException) nestedCause).getAdditionalInfo());
+        this.addAllInfo(((MuleException) nestedCause).getAdditionalInfo());
         if (nestedCause instanceof SuppressedMuleException) {
           this.getExceptionInfo().addSuppressedCause(((SuppressedMuleException) nestedCause).getSuppressedException());
         }

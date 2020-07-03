@@ -165,7 +165,9 @@ public abstract class MuleException extends Exception {
     }
   }
 
-  public void putAll(Map<String, Object> info) {
+  public void addAllInfo(Map<String, Object> info) {
+    // The received Map needs to be iterated due to MuleExceptionInfo design,
+    // where some of the values are not stored in a Map.
     for (Map.Entry<String, Object> entry : info.entrySet()) {
       addInfo(entry.getKey(), entry.getValue());
     }
@@ -200,7 +202,7 @@ public abstract class MuleException extends Exception {
     MuleException rootMuleException = getRootMuleException(this);
     rootMuleException.getExceptionInfo().addToSummaryMessage(buf);
     // For verbose messages, additional entries from suppressed MuleExceptions and any other Throwable in the causes list are logged
-    rootMuleException.putAll(ExceptionHelper.getExceptionInfo(this));
+    rootMuleException.addAllInfo(ExceptionHelper.getExceptionInfo(this));
     Map<String, Object> additionalInfo = rootMuleException.getAdditionalInfo();
     for (String key : additionalInfo.keySet().stream().sorted().collect(toList())) {
       buf.append(key);

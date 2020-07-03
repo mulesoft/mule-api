@@ -161,7 +161,7 @@ public class ExceptionHelper {
     }
 
     if (exception != null) {
-      exception.putAll(muleExceptionInfo);
+      exception.addAllInfo(muleExceptionInfo);
     }
 
     return exception;
