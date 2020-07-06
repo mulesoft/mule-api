@@ -8,8 +8,6 @@ package org.mule.runtime.api.streaming.bytes;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import org.mule.api.annotation.NoExtend;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
