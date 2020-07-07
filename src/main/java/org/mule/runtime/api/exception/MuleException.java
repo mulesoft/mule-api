@@ -11,6 +11,7 @@ import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static org.mule.runtime.api.exception.MuleExceptionInfo.FLOW_STACK_INFO_KEY;
+import static org.mule.runtime.api.exception.MuleExceptionInfo.INFO_CAUSED_BY_KEY;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.i18n.I18nMessage;
@@ -19,6 +20,7 @@ import org.mule.runtime.api.message.ErrorType;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -156,8 +158,18 @@ public abstract class MuleException extends Exception {
       this.exceptionInfo.setDslSource(Objects.toString(info));
     } else if (FLOW_STACK_INFO_KEY.equals(name)) {
       this.exceptionInfo.setFlowStack((Serializable) info);
+    } else if (INFO_CAUSED_BY_KEY.equals(name)) {
+      this.exceptionInfo.setSuppressedCauses((List<MuleException>) info);
     } else {
       this.exceptionInfo.putAdditionalEntry(name, info);
+    }
+  }
+
+  public void addAllInfo(Map<String, Object> info) {
+    // The received Map needs to be iterated due to MuleExceptionInfo design,
+    // where some of the values are not stored in a Map.
+    for (Map.Entry<String, Object> entry : info.entrySet()) {
+      addInfo(entry.getKey(), entry.getValue());
     }
   }
 
@@ -186,15 +198,19 @@ public abstract class MuleException extends Exception {
     StringBuilder buf = new StringBuilder(1024);
     buf.append(lineSeparator()).append(EXCEPTION_MESSAGE_DELIMITER);
     buf.append("Message               : ").append(message).append(lineSeparator());
-
-    Map<String, Object> info = ExceptionHelper.getExceptionInfo(this);
-    for (String key : info.keySet().stream().sorted().collect(toList())) {
+    // Info about the root mule exception is obtained and logged
+    MuleException rootMuleException = getRootMuleException(this);
+    rootMuleException.getExceptionInfo().addToSummaryMessage(buf);
+    // For verbose messages, additional entries from suppressed MuleExceptions and any other Throwable in the causes list are logged
+    rootMuleException.addAllInfo(ExceptionHelper.getExceptionInfo(this));
+    Map<String, Object> additionalInfo = rootMuleException.getAdditionalInfo();
+    for (String key : additionalInfo.keySet().stream().sorted().collect(toList())) {
       buf.append(key);
       buf.append(getColonMatchingPad(key));
       buf.append(": ");
-      buf.append((info.get(key) == null ? "null"
-          : info.get(key).toString().replaceAll(lineSeparator(),
-                                                lineSeparator() + repeat(' ', 24))))
+      buf.append((additionalInfo.get(key) == null ? "null"
+          : additionalInfo.get(key).toString().replaceAll(lineSeparator(),
+                                                          lineSeparator() + repeat(' ', 24))))
           .append(lineSeparator());
     }
 
@@ -260,6 +276,10 @@ public abstract class MuleException extends Exception {
 
   public Map<String, Object> getInfo() {
     return exceptionInfo.asMap();
+  }
+
+  public Map<String, Object> getAdditionalInfo() {
+    return exceptionInfo.getAdditionalEntries();
   }
 
   public MuleExceptionInfo getExceptionInfo() {

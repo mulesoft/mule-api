@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -92,7 +91,6 @@ public class ExceptionHelper {
       return (T) ((InvocationTargetException) t).getTargetException();
     }
     return t;
-
   }
 
   /**
@@ -135,15 +133,21 @@ public class ExceptionHelper {
   public static MuleException getRootMuleException(Throwable t) {
     Throwable cause = t;
     MuleException exception = null;
-    // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is
-    // properly logged.
+    MuleException suppressedMuleException = null;
+    // Info is added to the wrapper exceptions. We add them to the root mule exception so the gotten info is properly logged.
     Map<String, Object> muleExceptionInfo = new SmallMap<>();
 
-    while (cause != null && !(cause instanceof SuppressedMuleException)) {
+    while (cause != null && cause != suppressedMuleException) {
+
       if (cause instanceof MuleException) {
-        exception = (MuleException) cause;
-        muleExceptionInfo.putAll(exception.getInfo());
+        muleExceptionInfo.putAll(((MuleException) cause).getInfo());
+        if (cause instanceof SuppressedMuleException) {
+          suppressedMuleException = ((SuppressedMuleException) cause).getSuppressedException();
+        } else {
+          exception = (MuleException) cause;
+        }
       }
+
       final Throwable tempCause = getExceptionReader(cause).getCause(cause);
       if (verbose) {
         cause = tempCause;
@@ -155,11 +159,11 @@ public class ExceptionHelper {
         break;
       }
     }
+
     if (exception != null) {
-      for (Entry<String, Object> entry : muleExceptionInfo.entrySet()) {
-        exception.addInfo(entry.getKey(), entry.getValue());
-      }
+      exception.addAllInfo(muleExceptionInfo);
     }
+
     return exception;
   }
 
@@ -355,8 +359,13 @@ public class ExceptionHelper {
   public static List<Throwable> getExceptionsAsList(Throwable t) {
     List<Throwable> exceptions = new ArrayList<>(4);
     Throwable cause = t;
-    while (cause != null && !(cause instanceof SuppressedMuleException)) {
-      exceptions.add(cause);
+    MuleException suppressedCause = null;
+    while (cause != null && cause != suppressedCause) {
+      if (cause instanceof SuppressedMuleException) {
+        suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
+      } else {
+        exceptions.add(cause);
+      }
       cause = getExceptionReader(cause).getCause(cause);
       // address some misbehaving exceptions, avoid endless loop
       if (t == cause) {

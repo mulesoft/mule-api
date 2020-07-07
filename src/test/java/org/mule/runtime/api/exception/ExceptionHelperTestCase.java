@@ -14,13 +14,14 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.nullValue;
 import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.registerExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.registerGlobalExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.unregisterExceptionReader;
 import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static org.mule.runtime.api.exception.ExceptionHelper.getExceptionsAsList;
-import static org.junit.rules.ExpectedException.none;
+import static org.mule.runtime.internal.exception.SuppressedMuleException.suppressIfPresent;
 
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
@@ -31,7 +32,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mule.runtime.api.message.ErrorType;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
 
 import java.util.List;
 import java.util.Map;
@@ -146,8 +146,9 @@ public class ExceptionHelperTestCase {
 
   @Test
   public void suppressedMuleExceptionInGetRootMuleException() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
-    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
+    MuleException innerCause = new ConnectionException(new NullPointerException());
+    Throwable errorWithSuppressedCause =
+        suppressIfPresent(new TypedException(innerCause, dummyErrorType), ConnectionException.class);
     assertThat(getRootMuleException(errorWithSuppressedCause), is(nullValue()));
   }
 
@@ -162,10 +163,12 @@ public class ExceptionHelperTestCase {
 
   @Test
   public void suppressedMuleExceptionInGetExceptionsAsList() {
-    Throwable innerCause = new ConnectionException(new NullPointerException());
-    Throwable errorWithSuppressedCause = new TypedException(new SuppressedMuleException(innerCause), dummyErrorType);
-    List<Throwable> exceptionsList = getExceptionsAsList(errorWithSuppressedCause);
-    assertThat(exceptionsList, contains(errorWithSuppressedCause));
+    MuleException innerCause = new ConnectionException(new NullPointerException());
+    TypedException muleError = new TypedException(innerCause, dummyErrorType);
+    Throwable muleErrorWithSuppressedCause =
+        suppressIfPresent(muleError, ConnectionException.class);
+    List<Throwable> exceptionsList = getExceptionsAsList(muleErrorWithSuppressedCause);
+    assertThat(exceptionsList, contains(muleError));
   }
 
   private static final class TestChildClassLoader extends ClassLoader {

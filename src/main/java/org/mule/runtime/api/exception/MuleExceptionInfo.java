@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.exception;
 
+import static java.lang.String.valueOf;
 import static java.lang.System.lineSeparator;
 
 import org.mule.api.annotation.NoInstantiate;
@@ -13,6 +14,9 @@ import org.mule.runtime.api.message.ErrorType;
 import org.mule.runtime.api.util.collection.SmallMap;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,15 +27,18 @@ import java.util.Map;
 @NoInstantiate
 public final class MuleExceptionInfo implements Serializable {
 
-  private static final long serialVersionUID = -953920524424559726L;
+  private static final long serialVersionUID = -6844204561753057827L;
 
   public static final String INFO_ERROR_TYPE_KEY = "Error type";
+  public static final String INFO_CAUSED_BY_KEY = "Caused by";
   public static final String INFO_LOCATION_KEY = "Element";
   public static final String INFO_SOURCE_DSL_KEY = "Element DSL";
   public static final String FLOW_STACK_INFO_KEY = "FlowStack";
   public static final String MISSING_DEFAULT_VALUE = "(None)";
 
+
   public static final String INFO_ERROR_TYPE_KEY_MSG = INFO_ERROR_TYPE_KEY + getColonMatchingPad(INFO_ERROR_TYPE_KEY) + ": ";
+  public static final String INFO_CAUSED_BY_KEY_MSG = INFO_CAUSED_BY_KEY + getColonMatchingPad(INFO_CAUSED_BY_KEY) + ": ";
   public static final String INFO_LOCATION_KEY_MSG = INFO_LOCATION_KEY + getColonMatchingPad(INFO_LOCATION_KEY) + ": ";
   public static final String INFO_SOURCE_DSL_KEY_MSG = INFO_SOURCE_DSL_KEY + getColonMatchingPad(INFO_SOURCE_DSL_KEY) + ": ";
   public static final String FLOW_STACK_INFO_KEY_MSG = FLOW_STACK_INFO_KEY + getColonMatchingPad(FLOW_STACK_INFO_KEY) + ": ";
@@ -39,6 +46,7 @@ public final class MuleExceptionInfo implements Serializable {
   private boolean alreadyLogged = false;
 
   private ErrorType errorType;
+  private List<MuleException> suppressedCauses = new ArrayList<>(4);
   private String location;
   private String dslSource;
   private Serializable flowStack;
@@ -53,11 +61,37 @@ public final class MuleExceptionInfo implements Serializable {
         .append(dslSource != null ? dslSource : MISSING_DEFAULT_VALUE)
         .append(lineSeparator())
         .append(INFO_ERROR_TYPE_KEY_MSG)
-        .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE)
+        .append(errorType != null ? errorType.toString() : MISSING_DEFAULT_VALUE);
+    if (!suppressedCauses.isEmpty()) {
+      writeSuppressedCauses(buf);
+    }
+    buf
         .append(lineSeparator())
         .append(FLOW_STACK_INFO_KEY_MSG)
         .append(flowStack != null ? flowStack : MISSING_DEFAULT_VALUE)
         .append(lineSeparator());
+  }
+
+  private void writeSuppressedCauses(StringBuilder buffer) {
+    final String PADDING = repeat(' ', INFO_CAUSED_BY_KEY_MSG.length());
+    buffer
+        .append(lineSeparator())
+        .append(INFO_CAUSED_BY_KEY_MSG);
+    Iterator<MuleException> causes = suppressedCauses.iterator();
+    writeCause(buffer, causes.next());
+    while (causes.hasNext()) {
+      buffer.append(lineSeparator());
+      buffer.append(PADDING);
+      writeCause(buffer, causes.next());
+    }
+  }
+
+  private void writeCause(StringBuilder buffer, MuleException causedByException) {
+    ErrorType causedByErrorType = causedByException.getExceptionInfo().getErrorType();
+    if (causedByErrorType != null) {
+      buffer.append(causedByErrorType.toString()).append(": ");
+    }
+    buffer.append(causedByException.getMessage());
   }
 
   public boolean isAlreadyLogged() {
@@ -100,8 +134,26 @@ public final class MuleExceptionInfo implements Serializable {
     this.flowStack = flowStack;
   }
 
+  public List<MuleException> getSuppressedCauses() {
+    return (suppressedCauses);
+  }
+
+  public void setSuppressedCauses(List<MuleException> suppressedCauses) {
+    this.suppressedCauses = suppressedCauses;
+  }
+
+  public void addSuppressedCause(MuleException cause) {
+    this.suppressedCauses.add(cause);
+  }
+
   public void putAdditionalEntry(String name, Object info) {
     additionalEntries.put(name, info);
+  }
+
+  Map<String, Object> getAdditionalEntries() {
+    Map<String, Object> result = new SmallMap<>();
+    result.putAll(additionalEntries);
+    return result;
   }
 
   Map<String, Object> asMap() {
@@ -111,6 +163,9 @@ public final class MuleExceptionInfo implements Serializable {
 
     if (errorType != null) {
       result.put(INFO_ERROR_TYPE_KEY, errorType);
+    }
+    if (!suppressedCauses.isEmpty()) {
+      result.put(INFO_CAUSED_BY_KEY, suppressedCauses);
     }
     if (location != null) {
       result.put(INFO_LOCATION_KEY, location);
@@ -126,7 +181,7 @@ public final class MuleExceptionInfo implements Serializable {
   }
 
   private static String repeat(char c, int len) {
-    String str = String.valueOf(c);
+    String str = valueOf(c);
     if (str == null) {
       return null;
     } else if (len <= 0) {
