@@ -72,4 +72,6 @@ public interface Error extends Serializable {
    */
   List<Error> getChildErrors();
 
+  List<Error> getSuppressedErrors();
+
 }
