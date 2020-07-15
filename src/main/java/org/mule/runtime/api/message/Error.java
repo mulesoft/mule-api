@@ -72,6 +72,10 @@ public interface Error extends Serializable {
    */
   List<Error> getChildErrors();
 
+  /**
+   * List of errors that identified as underlying causes of the parent error.
+   * @return {@link List<Error>} with all the underlying causes.
+   */
   List<Error> getSuppressedErrors();
 
 }
