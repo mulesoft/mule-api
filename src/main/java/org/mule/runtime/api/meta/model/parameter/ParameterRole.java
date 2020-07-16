@@ -29,7 +29,7 @@ public enum ParameterRole {
   /**
    * Indicates that this parameter holds the main piece of content to be sent to another system or endpoint.
    * This differentiation becomes specially important when the component has many content parameters.
-   *
+   * <p>
    * If the component only has one content parameter, then this role will be used to mark such parameter
    */
   PRIMARY_CONTENT
