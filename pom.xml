@@ -249,6 +249,11 @@
         </dependency>
         <dependency>
             <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-artifact-declaration-persistence</artifactId>
+            <version>${artifactDeclarationVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
             <artifactId>api-annotations</artifactId>
             <version>${muleApiAnnotationsVersion}</version>
         </dependency>

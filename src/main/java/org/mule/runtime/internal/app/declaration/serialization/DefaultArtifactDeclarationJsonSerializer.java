@@ -8,7 +8,7 @@ package org.mule.runtime.internal.app.declaration.serialization;
 
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
-import org.mule.runtime.app.declaration.api.serialization.ElementDeclarationJsonSerializer;
+import org.mule.runtime.app.declaration.serialization.api.ElementDeclarationJsonSerializer;
 
 /**
  * Default implementation of an {@link ArtifactDeclarationJsonSerializer}
