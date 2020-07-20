@@ -63,4 +63,17 @@ public interface SourceInterceptor {
    * @param thrown the exception thrown by the intercepted component, if any.
    */
   default void afterCallback(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
+
+  /**
+   * This method is called when the event was already processed and all the event context of that event are completed.
+   * <p>
+   * If the intercepted source callback fails, the {@link #afterTerminated(ComponentLocation, InterceptionEvent, Optional) after}
+   * methods will still be called, with the thrown exception provided in the {@code thrown} parameter.
+   * <p>
+   *
+   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param event the result of the component.
+   * @param thrown the exception thrown by the intercepted component, if any.
+   */
+  default void afterTerminated(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
 }
