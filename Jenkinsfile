@@ -1,4 +1,4 @@
-def UPSTREAM_PROJECTS_LIST = [ "Mule-runtime/metadata-model-api/master",
+def UPSTREAM_PROJECTS_LIST = [ "Mule-runtime/metadata-model-api/master-JULY",
                                "Mule-runtime/mule-artifact-declaration/master-JULY" ]
 
 Map pipelineParams = [ "upstreamProjects" : UPSTREAM_PROJECTS_LIST.join(','),
