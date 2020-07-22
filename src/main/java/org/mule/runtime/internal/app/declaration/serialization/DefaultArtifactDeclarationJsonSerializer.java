@@ -8,14 +8,7 @@ package org.mule.runtime.internal.app.declaration.serialization;
 
 import org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer;
 import org.mule.runtime.app.declaration.api.ArtifactDeclaration;
-import org.mule.runtime.app.declaration.api.ParameterGroupElementDeclaration;
-import org.mule.runtime.app.declaration.api.ParameterValue;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ElementDeclarationTypeAdapterFactory;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterGroupElementDeclarationTypeAdapter;
-import org.mule.runtime.internal.app.declaration.serialization.adapter.ParameterValueTypeAdapter;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import org.mule.runtime.app.declaration.serialization.api.ElementDeclarationJsonSerializer;
 
 /**
  * Default implementation of an {@link ArtifactDeclarationJsonSerializer}
@@ -24,10 +17,10 @@ import com.google.gson.GsonBuilder;
  */
 public class DefaultArtifactDeclarationJsonSerializer implements ArtifactDeclarationJsonSerializer {
 
-  private boolean prettyPrint;
+  private ElementDeclarationJsonSerializer delegateSerializer;
 
   public DefaultArtifactDeclarationJsonSerializer(boolean prettyPrint) {
-    this.prettyPrint = prettyPrint;
+    this.delegateSerializer = ElementDeclarationJsonSerializer.getDefault(prettyPrint);
   }
 
   /**
@@ -37,7 +30,7 @@ public class DefaultArtifactDeclarationJsonSerializer implements ArtifactDeclara
    * @return {@link String} JSON representation of the {@link ArtifactDeclaration}
    */
   public String serialize(ArtifactDeclaration declaration) {
-    return createGson().toJson(declaration);
+    return delegateSerializer.serialize(declaration);
   }
 
   /**
@@ -47,21 +40,7 @@ public class DefaultArtifactDeclarationJsonSerializer implements ArtifactDeclara
    * @return an instance of {@link ArtifactDeclaration} based in the JSON
    */
   public ArtifactDeclaration deserialize(String declaration) {
-    return createGson().fromJson(declaration, ArtifactDeclaration.class);
+    return delegateSerializer.deserialize(declaration, ArtifactDeclaration.class);
   }
-
-  private Gson createGson() {
-    GsonBuilder gsonBuilder = new GsonBuilder()
-        .registerTypeAdapterFactory(new ElementDeclarationTypeAdapterFactory())
-        .registerTypeAdapter(ParameterValue.class, new ParameterValueTypeAdapter())
-        .registerTypeAdapter(ParameterGroupElementDeclaration.class, new ParameterGroupElementDeclarationTypeAdapter());
-
-    if (prettyPrint) {
-      gsonBuilder.setPrettyPrinting();
-    }
-
-    return gsonBuilder.create();
-  }
-
 }
 
