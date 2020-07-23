@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.util;
 
+import org.mule.runtime.api.streaming.CursorProvider;
+
 import static java.lang.System.getProperty;
 
 /**
@@ -70,6 +72,14 @@ public final class MuleSystemProperties {
    * Possible values are the enums in {@code ProcessingType}.
    */
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
+
+  /**
+   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called. It can be used
+   * for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on an already closed cursor.
+   *
+   * @since 1.2.4
+   */
+  public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
