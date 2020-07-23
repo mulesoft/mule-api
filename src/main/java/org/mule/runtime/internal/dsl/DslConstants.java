@@ -182,4 +182,9 @@ public interface DslConstants {
    * The identifier name of the {@code schedulingStrategy} infrastructure parameter
    */
   String CRON_STRATEGY_ELEMENT_IDENTIFIER = "cron";
+
+  /**
+   * The identifier name of the {@code errorMapping} infrastructure parameter
+   */
+  String ERROR_MAPPING_ELEMENT_IDENTIFIER = "error-mapping";
 }

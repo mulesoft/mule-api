@@ -47,6 +47,11 @@ public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDi
   String CONNECTION = "Connection";
 
   /**
+   * Group name for parameters that configure error mapping.
+   */
+  String ERROR_MAPPINGS = "Error Mappings";
+
+  /**
    * Returns the {@link ParameterModel parameterModels}
    * available for {@code this} group
    *
