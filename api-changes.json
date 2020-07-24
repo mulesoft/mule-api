@@ -17,6 +17,15 @@
           "classSimpleName": "SourceRemoteConnectionException",
           "elementKind": "class",
           "justification": "Needed to handle a special case i HTTP error handling"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.message.Error::getFailingComponent()",
+          "package": "org.mule.runtime.api.message",
+          "classSimpleName": "Error",
+          "methodName": "getFailingComponent",
+          "elementKind": "method",
+          "justification": "MULE-18535: Needed to properly fix a functional regression"
         }
       ]
     }

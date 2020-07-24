@@ -16,6 +16,8 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.event.Event;
+import org.mule.runtime.api.exception.DefaultMuleException;
+import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.DataType;
@@ -145,8 +147,9 @@ public class BindingContextUtils {
     Message message = event.getMessage();
     contextBuilder
         .addBinding(MESSAGE,
-                    new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message,
-                                                                              event.getError().map(Error::getCause).orElse(null)),
+                    new LazyValue<>(() -> new TypedValue<>(event.getError()
+                        .map(error -> new MessageWrapper(message, error.getCause(), error.getFailingComponent()))
+                        .orElseGet(() -> new MessageWrapper(message, null, null)),
                                                            MESAGE_DATA_TYPE)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
@@ -185,7 +188,7 @@ public class BindingContextUtils {
   public static BindingContext getTargetBindingContext(Message message) {
     requireNonNull(message);
     return BindingContext.builder()
-        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message, null), MESAGE_DATA_TYPE)))
+        .addBinding(MESSAGE, new LazyValue<>(() -> new TypedValue<>(new MessageWrapper(message, null, null), MESAGE_DATA_TYPE)))
         .addBinding(PAYLOAD, message.getPayload())
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
@@ -207,7 +210,8 @@ public class BindingContextUtils {
   private static class MessageWrapper implements Message {
 
     private static final LazyValue<String> EXCEPTION_PAYLOAD_WARN = new LazyValue<>(() -> {
-      String msg = "Use 'error.cause' instead of 'message.message.exceptionPayload' to get details from an error.";
+      String msg =
+          "Use 'error.cause' or 'error.failingComponent' instead of 'message.message.exceptionPayload' to get details from an error.";
       LOGGER.warn(msg);
       return msg;
     });
@@ -215,11 +219,17 @@ public class BindingContextUtils {
     private static final long serialVersionUID = -8097230480930728693L;
 
     private final Message message;
-    private transient final Throwable exceptionPayload;
+    private transient final MuleException exceptionPayload;
 
-    public MessageWrapper(Message message, Throwable exceptionPayload) {
+    public MessageWrapper(Message message, Throwable exceptionPayload, String location) {
       this.message = message;
-      this.exceptionPayload = exceptionPayload;
+
+      if (exceptionPayload == null || exceptionPayload instanceof MuleException) {
+        this.exceptionPayload = (MuleException) exceptionPayload;
+      } else {
+        this.exceptionPayload = new DefaultMuleException(exceptionPayload.getMessage(), exceptionPayload);
+        this.exceptionPayload.getExceptionInfo().setLocation(location);
+      }
     }
 
     @Override
