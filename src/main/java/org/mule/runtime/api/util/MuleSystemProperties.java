@@ -72,6 +72,14 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
+   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then
+   * it's used the app ErrorType repository.
+   *
+   * @since 1.3.0
+   */
+  public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
