@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.SHARE_ERROR_TYPE_REPOSITORY_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "SHARE_ERROR_TYPE_REPOSITORY_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-18196"
+        },
+        {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method java.util.Optional<org.mule.runtime.api.component.location.ComponentLocation> org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::getOriginatingLocation()",
           "package": "org.mule.runtime.api.streaming",
