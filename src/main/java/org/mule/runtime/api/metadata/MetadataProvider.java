@@ -12,8 +12,8 @@ import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
-import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
+import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 
 /**
  * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
@@ -53,5 +53,40 @@ public interface MetadataProvider<T extends ComponentModel> {
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    */
   MetadataResult<ComponentMetadataDescriptor<T>> getMetadata(MetadataKey key) throws MetadataResolvingException;
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component parameter with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param parameterName {@link String} name of the parameter to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component parameter. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<MetadataType> getInputMetadata(MetadataKey key, String parameterName) throws MetadataResolvingException;
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<MetadataType> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component output attributes with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output attributes. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   */
+  MetadataResult<MetadataType> getOutputAttributesMetadata(MetadataKey key) throws MetadataResolvingException;
+
 }
 
