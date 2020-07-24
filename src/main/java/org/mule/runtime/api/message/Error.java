@@ -29,6 +29,15 @@ public interface Error extends Serializable {
   String getDetailedDescription();
 
   /**
+   * @return The component where this error was generated
+   *
+   * @since 1.3
+   */
+  default String getFailingComponent() {
+    return null;
+  }
+
+  /**
    * Returns the type of the error. @see {@link ErrorType}.
    *
    * @return the type of the error
