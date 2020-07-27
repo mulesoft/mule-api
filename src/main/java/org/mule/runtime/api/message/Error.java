@@ -62,7 +62,7 @@ public interface Error extends Serializable {
    */
   Message getErrorMessage();
 
-  /**
+  /**x
    * Lists any child {@link Error Errors}, if any.
    * For instance, the scatter-gather router may throw an error aggregating all of its routes errors as children.
    *

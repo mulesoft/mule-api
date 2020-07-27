@@ -60,6 +60,14 @@ public class SuppressedMuleException extends MuleException {
     }
   }
 
+  public Throwable unwrap() {
+    Throwable cause = this;
+    while (cause instanceof SuppressedMuleException) {
+      cause = cause.getCause();
+    }
+    return cause != null ? cause : this;
+  }
+
   /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
@@ -88,4 +96,5 @@ public class SuppressedMuleException extends MuleException {
     }
     return exception;
   }
+
 }
