@@ -50,6 +50,47 @@ public interface MetadataService {
   MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location);
 
   /**
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver}
+   * associated to this Component.
+   *
+   * @param partialKey {@link MetadataKey} to be considered for resolve the next key levels.
+   * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
+   *         error while retrieving the keys
+   */
+  MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location, MetadataKey partialKey);
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component parameter with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param parameterName {@link String} name of the parameter to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component parameter. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   */
+  MetadataResult<MetadataType> getInputMetadata(Location location, MetadataKey key, String parameterName);
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   */
+  MetadataResult<MetadataType> getOutputMetadata(Location location, MetadataKey key);
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current component output attributes with the given key.
+   *
+   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output attributes. Successful
+   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
+   *         retrieval fails for any reason
+   */
+  MetadataResult<MetadataType> getOutputAttributesMetadata(Location location, MetadataKey key);
+
+  /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
    * {@link Location} using only the static types of its parameters, attributes and output.
    *
