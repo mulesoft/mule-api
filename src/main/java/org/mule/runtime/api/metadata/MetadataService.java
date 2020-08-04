@@ -12,6 +12,8 @@ import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
@@ -64,31 +66,21 @@ public interface MetadataService {
    *
    * @param key {@link MetadataKey} of the type which's structure has to be resolved.
    * @param parameterName {@link String} name of the parameter to be resolved.
-   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component parameter. Successful
+   * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
    */
-  MetadataResult<MetadataType> getInputMetadata(Location location, MetadataKey key, String parameterName);
+  MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
 
   /**
    * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
    *
    * @param key {@link MetadataKey} of the type which's structure has to be resolved.
-   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output. Successful
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
    */
-  MetadataResult<MetadataType> getOutputMetadata(Location location, MetadataKey key);
-
-  /**
-   * Resolves the dynamic {@link MetadataType} for the current component output attributes with the given key.
-   *
-   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
-   * @return A {@link MetadataType} with the dynamic Metadata representation of the Component output attributes. Successful
-   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
-   *         retrieval fails for any reason
-   */
-  MetadataResult<MetadataType> getOutputAttributesMetadata(Location location, MetadataKey key);
+  MetadataResult<OutputMetadataDescriptor> getOutputMetadata(Location location, MetadataKey key);
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
