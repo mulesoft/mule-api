@@ -58,6 +58,7 @@ public interface MetadataService {
    * @param partialKey {@link MetadataKey} to be considered for resolve the next key levels.
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while retrieving the keys
+   * @since 1.4
    */
   MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location, MetadataKey partialKey);
 
@@ -69,6 +70,7 @@ public interface MetadataService {
    * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
+   * @since 1.4
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
 
@@ -79,6 +81,7 @@ public interface MetadataService {
    * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
+   * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(Location location, MetadataKey key);
 

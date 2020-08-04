@@ -36,6 +36,7 @@ public interface MetadataKeyProvider {
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while retrieving the keys
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.4
    */
   MetadataResult<MetadataKeysContainer> getMetadataKeys(MetadataKey partialKey) throws MetadataResolvingException;
 

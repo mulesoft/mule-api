@@ -64,6 +64,7 @@ public interface MetadataProvider<T extends ComponentModel> {
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.4
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(MetadataKey key) throws MetadataResolvingException;
 
@@ -75,6 +76,7 @@ public interface MetadataProvider<T extends ComponentModel> {
    *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
    *         retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
 
