@@ -61,15 +61,12 @@ public class SuppressedMuleException extends MuleException {
   }
 
   /**
-   * Unwraps a {@link SuppressedMuleException}
-   * @return First cause that is not an instance of {@link SuppressedMuleException}
+   * Unwraps a {@link SuppressedMuleException}.
+   * @return First cause that is not an instance of {@link SuppressedMuleException}.
    */
   public Throwable unwrap() {
-    Throwable cause = this;
-    while (cause instanceof SuppressedMuleException) {
-      cause = cause.getCause();
-    }
-    return cause != null ? cause : this;
+    // There cannot be consecutive suppressions, so returning the cause is enough
+    return getCause();
   }
 
   /**
