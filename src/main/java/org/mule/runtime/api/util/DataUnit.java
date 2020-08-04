@@ -91,12 +91,12 @@ public enum DataUnit {
 
     @Override
     public int toKB(int value) {
-      return value / ONE_MB;
+      return value * ONE_MB;
     }
 
     @Override
     public int toMB(int value) {
-      return value / ONE_KB;
+      return value * ONE_KB;
     }
 
     @Override
