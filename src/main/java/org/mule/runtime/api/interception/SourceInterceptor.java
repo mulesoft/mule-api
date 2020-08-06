@@ -8,6 +8,7 @@
 package org.mule.runtime.api.interception;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
+import org.mule.runtime.api.event.EventContext;
 
 import java.util.Map;
 import java.util.Optional;
@@ -63,4 +64,14 @@ public interface SourceInterceptor {
    * @param thrown the exception thrown by the intercepted component, if any.
    */
   default void afterCallback(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
+
+  /**
+   * This method is called when the root {@link EventContext} is terminated (all the event contexts of that event are completed)
+   * regardless of whether the events finished successfully, on error, or a combination of both.
+   *
+   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param rootEventContext of the component result.
+   * @since 4.4
+   */
+  default void afterTerminated(ComponentLocation location, EventContext rootEventContext) {}
 }
