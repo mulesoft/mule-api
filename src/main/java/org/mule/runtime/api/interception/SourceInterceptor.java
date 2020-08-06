@@ -66,11 +66,12 @@ public interface SourceInterceptor {
   default void afterCallback(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
 
   /**
-   * This method is called when the event was already processed and all the event contexts of that event are completed.
+   * This method is called when the root {@link EventContext} is terminated (all the event contexts of that event are completed)
+   * regardless of whether the events finished successfully, on error, or a combination of both.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param eventContext of the component result.
+   * @param rootEventContext of the component result.
    * @since 4.4
    */
-  default void afterTerminated(ComponentLocation location, EventContext eventContext) {}
+  default void afterTerminated(ComponentLocation location, EventContext rootEventContext) {}
 }
