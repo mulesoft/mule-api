@@ -21,26 +21,31 @@ import java.util.Optional;
  */
 public class ComponentMetadataTypesDescriptor {
 
-  private Map<String, MetadataType> input;
-  private MetadataType output;
-  private MetadataType outputAttributes;
+  private Map<String, MetadataType> inputMetadata;
+  private MetadataType outputMetadata;
+  private MetadataType outputAttributesMetadata;
 
-  public ComponentMetadataTypesDescriptor(Map<String, MetadataType> input, MetadataType output, MetadataType outputAttributes) {
-    this.input = input;
-    this.output = output;
-    this.outputAttributes = outputAttributes;
+  public ComponentMetadataTypesDescriptor(Map<String, MetadataType> inputMetadata, MetadataType outputMetadata,
+                                          MetadataType outputAttributesMetadata) {
+    this.inputMetadata = inputMetadata;
+    this.outputMetadata = outputMetadata;
+    this.outputAttributesMetadata = outputAttributesMetadata;
   }
 
   public Map<String, MetadataType> getInputMetadata() {
-    return new HashMap<>(input);
+    return new HashMap<>(inputMetadata);
+  }
+
+  public Optional<MetadataType> getInputMetadata(String parameterName) {
+    return ofNullable(inputMetadata.getOrDefault(parameterName, null));
   }
 
   public Optional<MetadataType> getOutputMetadata() {
-    return ofNullable(output);
+    return ofNullable(outputMetadata);
   }
 
   public Optional<MetadataType> getOutputAttributesMetadata() {
-    return ofNullable(outputAttributes);
+    return ofNullable(outputAttributesMetadata);
   }
 
   public static ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder builder() {
