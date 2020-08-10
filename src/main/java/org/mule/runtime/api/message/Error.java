@@ -72,15 +72,4 @@ public interface Error extends Serializable {
    */
   List<Error> getChildErrors();
 
-  /**
-   * List of errors that where identified as underlying causes of this error.
-   * For instance, the until-successful scope may throw a retry exhausted error including the error that caused the exhaustion as a suppressed error.
-   *
-   * Can be an empty list if no underlying causes exist.
-   *
-   * @return {@link List<Error>} with the underlying causes.
-   * @since 4.4
-   */
-  List<Error> getSuppressedErrors();
-
 }
