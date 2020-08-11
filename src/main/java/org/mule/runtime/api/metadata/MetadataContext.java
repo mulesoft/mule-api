@@ -26,7 +26,9 @@ public interface MetadataContext extends Disposable {
   /**
    * @param <C> Configuration type
    * @return Optional instance of the configuration related to the component
+   * @deprecated metadata resolution should not require the configuration.
    */
+  @Deprecated
   <C> Optional<C> getConfig();
 
   /**
