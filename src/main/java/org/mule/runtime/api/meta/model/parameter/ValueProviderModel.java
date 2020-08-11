@@ -43,7 +43,9 @@ public class ValueProviderModel {
    * @param partOrder             the position in the value
    * @param providerName          the category of the associated value provider for this parameter
    *
-   * @deprecated the {@link ValueProviderModel} must specify a providerId.
+   * @deprecated the {@link ValueProviderModel} must specify a providerId, use
+   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)
+   *             instead}.
    */
   @Deprecated
   public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
