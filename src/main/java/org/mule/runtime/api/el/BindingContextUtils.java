@@ -209,6 +209,38 @@ public class BindingContextUtils {
 
   private static class MessageWrapper implements Message {
 
+    private static final long serialVersionUID = -8097230480930728693L;
+
+    private final Message message;
+
+    public MessageWrapper(Message message, Throwable exceptionPayload, String location) {
+      this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location);
+    }
+
+    @Override
+    public <T> TypedValue<T> getPayload() {
+      return message.getPayload();
+    }
+
+    @Override
+    public <T> TypedValue<T> getAttributes() {
+      return message.getAttributes();
+    }
+
+    @Override
+    public String toString() {
+      return message.toString();
+    }
+
+  }
+
+  /**
+   * This exists only for maintaining backwards compatibility with some expressions that were possible before 4.3
+   */
+  private static class MessageExceptionInfoWrapper implements Message {
+
+    private static final long serialVersionUID = 5854772290551915468L;
+
     private static final LazyValue<String> EXCEPTION_PAYLOAD_WARN = new LazyValue<>(() -> {
       String msg =
           "Use 'error.cause' or 'error.failingComponent' instead of 'message.message.exceptionPayload' to get details from an error.";
@@ -216,12 +248,10 @@ public class BindingContextUtils {
       return msg;
     });
 
-    private static final long serialVersionUID = -8097230480930728693L;
-
     private final Message message;
     private transient final MuleException exceptionPayload;
 
-    public MessageWrapper(Message message, Throwable exceptionPayload, String location) {
+    public MessageExceptionInfoWrapper(Message message, Throwable exceptionPayload, String location) {
       this.message = message;
 
       if (exceptionPayload == null || exceptionPayload instanceof MuleException) {
@@ -240,14 +270,6 @@ public class BindingContextUtils {
     @Override
     public <T> TypedValue<T> getAttributes() {
       return message.getAttributes();
-    }
-
-    /**
-     * @deprecated since 1.3, use the `error` binding instead.
-     */
-    @Deprecated
-    public Message getMessage() {
-      return this;
     }
 
     /**
