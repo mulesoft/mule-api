@@ -28,6 +28,7 @@ public class ValueProviderModel {
   private final List<String> actingParameters;
   private final Integer partOrder;
   private final String providerName;
+  private final String providerId;
   private final boolean requiresConfiguration;
   private final boolean requiresConnection;
   private final boolean isOpen;
@@ -41,19 +42,45 @@ public class ValueProviderModel {
    * @param isOpen                indicates if the calculated values should be considered as an open or closed set
    * @param partOrder             the position in the value
    * @param providerName          the category of the associated value provider for this parameter
+   *
+   * @deprecated the {@link ValueProviderModel} must specify a providerId, use
+   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)
+   *             instead}.
    */
+  @Deprecated
   public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
                             boolean isOpen,
                             Integer partOrder, String providerName) {
+    this(actingParameters, requiresConfiguration, requiresConnection, isOpen, partOrder, providerName, providerName);
+  }
+
+  /**
+   * Creates a new instance
+   *
+   * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
+   * @param requiresConfiguration indicates if the configuration is required to resolve the values
+   * @param requiresConnection    indicates if the connection is required to resolve the values
+   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
+   * @param partOrder             the position in the value
+   * @param providerName          the category of the associated value provider for this parameter
+   * @param providerId            the id of the associated value provider for this parameter
+   *
+   * @since 1.4.0
+   */
+  public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
+                            boolean isOpen,
+                            Integer partOrder, String providerName, String providerId) {
     checkNotNull(actingParameters, "'actingParameters' can't be null");
     checkNotNull(partOrder, "'valueParts' can't be null");
     checkNotNull(providerName, "'providerName' can't be null");
+    checkNotNull(providerId, "'providerId' can't be null");
     this.isOpen = isOpen;
     this.actingParameters = actingParameters;
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
     this.providerName = providerName;
+    this.providerId = providerId;
   }
 
   /**
@@ -75,6 +102,14 @@ public class ValueProviderModel {
    */
   public String getProviderName() {
     return providerName;
+  }
+
+  /**
+   * @return The id of the element that provides values
+   * @since 1.4.0
+   */
+  public String getProviderId() {
+    return providerId;
   }
 
   /**
@@ -114,6 +149,7 @@ public class ValueProviderModel {
         .append(actingParameters, that.actingParameters)
         .append(partOrder, that.partOrder)
         .append(providerName, that.providerName)
+        .append(providerId, that.providerId)
         .append(requiresConnection, that.requiresConnection)
         .append(requiresConfiguration, that.requiresConfiguration)
         .append(isOpen, that.isOpen)
@@ -126,6 +162,7 @@ public class ValueProviderModel {
         .append(actingParameters)
         .append(partOrder)
         .append(providerName)
+        .append(providerId)
         .append(requiresConnection)
         .append(requiresConfiguration)
         .append(isOpen)
