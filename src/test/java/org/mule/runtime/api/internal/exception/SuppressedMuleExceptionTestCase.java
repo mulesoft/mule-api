@@ -87,6 +87,29 @@ public class SuppressedMuleExceptionTestCase {
                contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
   }
 
+  @Test
+  @Issue("MULE-18562")
+  public void consecutiveSuppressionsMustNotBePossible() {
+    SimpleException exception = new SimpleException(new ExceptionWithAdditionalInfo());
+    SuppressedMuleException suppression =
+        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(exception,
+                                                                            ExceptionWithAdditionalInfo.class);
+    SuppressedMuleException attemptedConsecutiveSuppression =
+        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(suppression,
+                                                                            SimpleException.class);
+    assertThat(attemptedConsecutiveSuppression, is(suppression));
+  }
+
+  @Test
+  @Issue("MULE-18562")
+  public void suppressionMustBeUnwrapped() {
+    SimpleException unwrappedException = new SimpleException();
+    SuppressedMuleException result =
+        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(new SimpleException(),
+                                                                            SimpleException.class);
+    assertThat(result.unwrap(), is(unwrappedException));
+  }
+
   private static class SimpleException extends MuleException {
 
     private static final long serialVersionUID = 21078091124109763L;
