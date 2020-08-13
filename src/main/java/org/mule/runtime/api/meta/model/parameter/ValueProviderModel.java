@@ -7,7 +7,9 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import static org.mule.runtime.api.util.Preconditions.checkNotNull;
-import org.mule.api.annotation.NoImplement;
+
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoInstantiate;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
@@ -22,7 +24,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @since 1.0
  */
-@NoImplement
+@NoExtend
+@NoInstantiate
 public class ValueProviderModel {
 
   private final List<String> actingParameters;
