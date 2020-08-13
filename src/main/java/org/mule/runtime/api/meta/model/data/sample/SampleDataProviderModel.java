@@ -20,15 +20,16 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 /**
  * Model for a {@link HasOutputModel} to communicate if it supports fetching sample data and what it requires.
  * <p>
- * The element with this model will considered as a one that provides values.
+ * The provider has the concept of a {@link #getProviderId()}, which unequivocally identifies each resolver within the module.
+ * When the same provider implementation is used in several components, those components will all reference the same provider id.
  *
- * @since 1.0
+ * @since 1.4
  */
 @NoInstantiate
 public final class SampleDataProviderModel {
 
   private final List<String> actingParameters;
-  private final String id;
+  private final String providerId;
   private final boolean requiresConfiguration;
   private final boolean requiresConnection;
 
@@ -36,20 +37,20 @@ public final class SampleDataProviderModel {
    * Creates a new instance
    *
    * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
-   * @param id          the category of the associated value provider for this parameter
+   * @param providerId            the category of the associated value provider for this parameter
    * @param requiresConfiguration indicates if the configuration is required to resolve the values
    * @param requiresConnection    indicates if the connection is required to resolve the values
    */
   public SampleDataProviderModel(List<String> actingParameters,
-                                 String id,
+                                 String providerId,
                                  boolean requiresConfiguration,
                                  boolean requiresConnection) {
     requireNonNull(actingParameters, "'actingParameters' can't be null");
-    checkArgument(id != null && id.length() > 0, "id cannot be blank");
+    checkArgument(providerId != null && providerId.length() > 0, "providerId cannot be blank");
     this.actingParameters = actingParameters;
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
-    this.id = id;
+    this.providerId = providerId;
   }
 
   /**
@@ -62,8 +63,8 @@ public final class SampleDataProviderModel {
   /**
    * @return the provider's id
    */
-  public String getId() {
-    return id;
+  public String getProviderId() {
+    return providerId;
   }
 
   /**
@@ -93,18 +94,18 @@ public final class SampleDataProviderModel {
     SampleDataProviderModel that = (SampleDataProviderModel) o;
 
     return new EqualsBuilder()
-        .append(actingParameters, that.actingParameters)
-        .append(requiresConnection, that.requiresConnection)
-        .append(requiresConfiguration, that.requiresConfiguration)
-        .isEquals();
+            .append(actingParameters, that.actingParameters)
+            .append(requiresConnection, that.requiresConnection)
+            .append(requiresConfiguration, that.requiresConfiguration)
+            .isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
-        .append(actingParameters)
-        .append(requiresConnection)
-        .append(requiresConfiguration)
-        .toHashCode();
+            .append(actingParameters)
+            .append(requiresConnection)
+            .append(requiresConfiguration)
+            .toHashCode();
   }
 }
