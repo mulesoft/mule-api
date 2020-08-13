@@ -16,7 +16,7 @@ import org.mule.runtime.api.message.Error;
  * The suppressed cause and all its nested {@link Exception#getCause()} will not be taken into account during the {@link org.mule.runtime.api.message.Error} resolution.
  * <br/><br/>Example without suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link org.mule.runtime.api.connection.ConnectionException}(), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
- * will resolve to an {@link Error} whith {@link Error#getErrorType()} returning ConnectionException's error type (discarding the top level customErrorType).
+ * will resolve to an {@link Error} with {@link Error#getErrorType()} returning ConnectionException's error type (discarding the top level customErrorType).
  * <br/><br/>Same example with suppression:
  * <br/><pre>throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link SuppressedMuleException}(new {@link org.mule.runtime.api.connection.ConnectionException}()), {@link org.mule.runtime.api.message.ErrorType customErrorType})</pre>
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying ConnectionException's error type}).
@@ -61,6 +61,15 @@ public class SuppressedMuleException extends MuleException {
   }
 
   /**
+   * Unwraps a {@link SuppressedMuleException}.
+   * @return First cause that is not an instance of {@link SuppressedMuleException}.
+   */
+  public Throwable unwrap() {
+    // There cannot be consecutive suppressions, so returning the cause is enough
+    return getCause();
+  }
+
+  /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
   public MuleException getSuppressedException() {
@@ -88,4 +97,5 @@ public class SuppressedMuleException extends MuleException {
     }
     return exception;
   }
+
 }
