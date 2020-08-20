@@ -35,6 +35,69 @@
           "methodName": "getFailingComponent",
           "elementKind": "method",
           "justification": "MULE-18535: Needed to properly fix a functional regression"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.exception.MuleException::addAllInfo(java.util.Map<java.lang.String, java.lang.Object>)",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleException",
+          "methodName": "addAllInfo",
+          "elementKind": "method",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.util.Map<java.lang.String, java.lang.Object> org.mule.runtime.api.exception.MuleException::getAdditionalInfo()",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleException",
+          "methodName": "getAdditionalInfo",
+          "elementKind": "method",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.exception.MuleExceptionInfo.INFO_CAUSED_BY_KEY",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleExceptionInfo",
+          "fieldName": "INFO_CAUSED_BY_KEY",
+          "elementKind": "field",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.exception.MuleExceptionInfo.INFO_CAUSED_BY_KEY_MSG",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleExceptionInfo",
+          "fieldName": "INFO_CAUSED_BY_KEY_MSG",
+          "elementKind": "field",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.exception.MuleExceptionInfo::addSuppressedCause(org.mule.runtime.api.exception.MuleException)",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleExceptionInfo",
+          "methodName": "addSuppressedCause",
+          "elementKind": "method",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method java.util.List<org.mule.runtime.api.exception.MuleException> org.mule.runtime.api.exception.MuleExceptionInfo::getSuppressedCauses()",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleExceptionInfo",
+          "methodName": "getSuppressedCauses",
+          "elementKind": "method",
+          "justification": "MULE-18041: Support for suppressed errors"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method void org.mule.runtime.api.exception.MuleExceptionInfo::setSuppressedCauses(java.util.List<org.mule.runtime.api.exception.MuleException>)",
+          "package": "org.mule.runtime.api.exception",
+          "classSimpleName": "MuleExceptionInfo",
+          "methodName": "setSuppressedCauses",
+          "elementKind": "method",
+          "justification": "MULE-18041: Support for suppressed errors"
         }
       ]
     }
