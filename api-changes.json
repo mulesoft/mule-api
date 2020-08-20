@@ -35,6 +35,24 @@
           "methodName": "getFailingComponent",
           "elementKind": "method",
           "justification": "MULE-18535: Needed to properly fix a functional regression"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_DISABLE_PAYLOAD_STATISTICS",
+          "elementKind": "field",
+          "justification": "EE-7419: Needed to enable or disable tests without monitoring"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STATISTICS",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_ENABLE_STATISTICS",
+          "elementKind": "field",
+          "justification": "EE-7419: Needed to enable or disable tests without monitoring"
         }
       ]
     }
