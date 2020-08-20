@@ -174,6 +174,7 @@ public final class MuleSystemProperties {
 
   /**
    * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated.
+   * This property is only read on deploying an app.
    * 
    * @since 4.4, 4.3.1
    */
@@ -181,6 +182,7 @@ public final class MuleSystemProperties {
 
   /**
    * When enabled this System Property, the payload statistics are disabled independently of the statistics flag.
+   * This property is only read on deploying an app.
    * 
    * @since 4.4, 4.3.1
    */
