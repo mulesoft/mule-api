@@ -173,6 +173,22 @@ public final class MuleSystemProperties {
   public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
 
   /**
+   * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated.
+   * This property is only read on deploying an app.
+   * 
+   * @since 4.4, 4.3.1
+   */
+  public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
+
+  /**
+   * When enabled this System Property, the payload statistics are disabled independently of the statistics flag.
+   * This property is only read on deploying an app.
+   * 
+   * @since 4.4, 4.3.1
+   */
+  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";;
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
