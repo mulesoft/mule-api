@@ -165,7 +165,7 @@ public final class MuleSystemProperties {
   public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
-   * When enabled this System Property.
+   * When enabled this System Property, more information about streaming will be logged. It can be used for troubleshooting purposes
    *
    * @since 1.3.0
    */
