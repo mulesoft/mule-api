@@ -63,6 +63,17 @@ public final class MuleSystemProperties {
    */
   public static final String MULE_FLOW_STACK_MAX_DEPTH = SYSTEM_PROPERTY_PREFIX + "flowStack.maxDepth";
 
+  /**
+   * System property key to set the maximum nested sub-flow calls to create a single execution chain with. For the nth nested
+   * sub-flow (n being the value of this variable), a new execution chain will be created, as was the default behavior until
+   * 4.2.1.
+   * <p>
+   * By default, the value is set to 10.
+   *
+   * @since 1.4.0, 1.3.1
+   */
+  public static final String MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN = SYSTEM_PROPERTY_PREFIX + "flowRef.maxSubFlowsSingleChain";
+
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
   /**
@@ -175,7 +186,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated.
    * This property is only read on deploying an app.
-   * 
+   *
    * @since 4.4, 4.3.1
    */
   public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
@@ -183,7 +194,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled this System Property, the payload statistics are disabled independently of the statistics flag.
    * This property is only read on deploying an app.
-   * 
+   *
    * @since 4.4, 4.3.1
    */
   public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";;
