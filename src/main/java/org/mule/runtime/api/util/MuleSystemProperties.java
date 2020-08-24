@@ -160,9 +160,16 @@ public final class MuleSystemProperties {
    * It can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on
    * an already closed cursor.
    *
-   * @since 1.3.0
+   * @since 1.4.0
    */
   public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
+
+  /**
+   * When enabled this System Property.
+   *
+   * @since 1.3.0
+   */
+  public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
   /**
    * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then
