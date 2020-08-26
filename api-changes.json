@@ -62,6 +62,15 @@
           "fieldName": "MULE_ENABLE_STATISTICS",
           "elementKind": "field",
           "justification": "EE-7419: Needed to enable or disable tests without monitoring"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.STREAMING_VERBOSE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "STREAMING_VERBOSE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-18573: CursorProvider key collision at CursorProvider cache"
         }
       ]
     }
