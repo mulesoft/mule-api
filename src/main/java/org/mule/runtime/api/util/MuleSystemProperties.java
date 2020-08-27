@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.util;
 
+import org.mule.runtime.api.streaming.CursorProvider;
+
 import static java.lang.System.getProperty;
 
 /**
@@ -78,6 +80,14 @@ public final class MuleSystemProperties {
    * @since 1.3.0
    */
   public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
+
+  /**
+   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called. It can be used
+   * for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on an already closed cursor.
+   *
+   * @since 1.2.4
+   */
+  public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
