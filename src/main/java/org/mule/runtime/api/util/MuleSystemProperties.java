@@ -82,6 +82,13 @@ public final class MuleSystemProperties {
   public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
+   * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for troubleshooting purposes
+   *
+   * @since 1.4.0
+   */
+  public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
