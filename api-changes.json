@@ -54,7 +54,7 @@
            "elementKind": "field",
            "justification": "MULE-18573: CursorProvider key collision at CursorProvider cache"
         }
-       ]
+      ]
     }
   },
   "1.2.0": {
