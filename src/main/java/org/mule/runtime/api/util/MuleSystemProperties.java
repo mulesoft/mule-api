@@ -76,7 +76,7 @@ public final class MuleSystemProperties {
   /**
    * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for troubleshooting purposes
    *
-   * @since 1.4.0
+   * @since 1.2.4
    */
   public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
