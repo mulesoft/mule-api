@@ -1,4 +1,43 @@
 {
+  "1.4.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.meta.model.parameter",
+          "classSimpleName": "ValueProviderModel",
+          "elementKind": "class",
+          "justification": "Missing documentation annotation"
+        },
+        {
+          "code": "java.annotation.removed",
+          "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.meta.model.parameter",
+          "classSimpleName": "ValueProviderModel",
+          "elementKind": "class",
+          "justification": "Missing documentation annotation"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "annotationType": "org.mule.api.annotation.NoInstantiate",
+          "annotation": "@org.mule.api.annotation.NoInstantiate",
+          "package": "org.mule.runtime.api.meta.model.parameter",
+          "classSimpleName": "ValueProviderModel",
+          "elementKind": "class",
+          "justification": "Missing documentation annotation"
+        }
+      ]
+    }
+  },
   "1.3.0": {
     "revapi": {
       "ignore": [

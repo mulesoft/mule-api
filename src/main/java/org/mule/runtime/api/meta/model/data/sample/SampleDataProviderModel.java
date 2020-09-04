@@ -94,18 +94,18 @@ public final class SampleDataProviderModel {
     SampleDataProviderModel that = (SampleDataProviderModel) o;
 
     return new EqualsBuilder()
-            .append(actingParameters, that.actingParameters)
-            .append(requiresConnection, that.requiresConnection)
-            .append(requiresConfiguration, that.requiresConfiguration)
-            .isEquals();
+        .append(actingParameters, that.actingParameters)
+        .append(requiresConnection, that.requiresConnection)
+        .append(requiresConfiguration, that.requiresConfiguration)
+        .isEquals();
   }
 
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
-            .append(actingParameters)
-            .append(requiresConnection)
-            .append(requiresConfiguration)
-            .toHashCode();
+        .append(actingParameters)
+        .append(requiresConnection)
+        .append(requiresConfiguration)
+        .toHashCode();
   }
 }
