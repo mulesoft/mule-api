@@ -9,6 +9,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 
+import java.util.Optional;
+
 /**
  * Contract interface for a {@link BaseDeclaration} in which it's possible
  * to get/set {@link OutputDeclaration} objects of payload and attributes.
@@ -39,10 +41,10 @@ public interface WithOutputDeclaration {
   void setOutputAttributes(OutputDeclaration outputAttributes);
 
   /**
-   * @return a {@link SampleDataProviderModel} associated to this declaration
+   * @return an {@link Optional} {@link SampleDataProviderModel} associated to this declaration
    * @since 1.4.0
    */
-  SampleDataProviderModel getSampleDataProviderModel();
+  Optional<SampleDataProviderModel> getSampleDataProviderModel();
 
   /**
    * Sets a {@link SampleDataProviderModel} that describes {@code this} declaration's sample data capabilities
