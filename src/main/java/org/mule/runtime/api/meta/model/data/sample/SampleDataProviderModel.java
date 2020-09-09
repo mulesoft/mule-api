@@ -95,7 +95,7 @@ public final class SampleDataProviderModel {
 
     return new EqualsBuilder()
         .append(actingParameters, that.actingParameters)
-            .append(providerId, that.providerId)
+        .append(providerId, that.providerId)
         .append(requiresConnection, that.requiresConnection)
         .append(requiresConfiguration, that.requiresConfiguration)
         .isEquals();
@@ -105,7 +105,7 @@ public final class SampleDataProviderModel {
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
         .append(actingParameters)
-            .append(providerId)
+        .append(providerId)
         .append(requiresConnection)
         .append(requiresConfiguration)
         .toHashCode();
