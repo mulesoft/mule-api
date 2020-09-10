@@ -28,9 +28,9 @@ import javax.xml.namespace.QName;
  */
 public interface Component {
 
-  public static final String NS_MULE_DOCUMENTATION = "http://www.mulesoft.org/schema/mule/documentation";
+  String NS_MULE_DOCUMENTATION = "http://www.mulesoft.org/schema/mule/documentation";
 
-  public static final String NS_MULE_PARSER_METADATA = "http://www.mulesoft.org/schema/mule/parser-metadata";
+  String NS_MULE_PARSER_METADATA = "http://www.mulesoft.org/schema/mule/parser-metadata";
 
   /**
    * Constants related to annotations placed over components in the configuration files.

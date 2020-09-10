@@ -203,5 +203,12 @@ public interface ExtensionModel
    */
   Set<NotificationModel> getNotificationModels();
 
-
+  /**
+   * Looks for a {@link ComponentModel} of the given {@code componentName} all through the extension model.
+   *
+   * @param componentName the name of the component being looked for
+   * @return an {@link Optional} {@link ComponentModel}
+   * @since 1.4.0
+   */
+  Optional<ComponentModel> findComponentModel(String componentName);
 }
