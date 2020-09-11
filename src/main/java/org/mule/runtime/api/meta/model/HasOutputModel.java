@@ -6,9 +6,14 @@
  */
 package org.mule.runtime.api.meta.model;
 
+import static java.util.Optional.empty;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.message.Message;
+import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
+
+import java.util.Optional;
 
 /**
  * Interface for a model which declares an {@link OutputModel} for its resulting payload and attributes.
@@ -32,7 +37,7 @@ public interface HasOutputModel {
   OutputModel getOutput();
 
   /**
-   * Returns a {@link OutputModel} for the value that this operation sets
+   * Returns a {@link OutputModel} for the value that this component sets
    * on the output {@link Message#getAttributes() attributes} of the message.
    * <p>
    * If this executable component does not modify the attributes of the {@link Message},
@@ -44,4 +49,14 @@ public interface HasOutputModel {
    */
   OutputModel getOutputAttributes();
 
+  /**
+   * If the component supports providing sample data, this method returns an {@link Optional} {@link SampleDataProviderModel}
+   * which describes the used provider.
+   *
+   * @return an {@link Optional} {@link SampleDataProviderModel}
+   * @since 1.4.0
+   */
+  default Optional<SampleDataProviderModel> getSampleDataProviderModel() {
+    return empty();
+  }
 }

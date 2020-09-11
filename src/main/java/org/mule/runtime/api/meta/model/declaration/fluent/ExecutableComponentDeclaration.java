@@ -6,10 +6,14 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Optional.ofNullable;
+
+import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -26,6 +30,7 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   private boolean supportsStreaming = false;
   private OutputDeclaration outputContent;
   private OutputDeclaration outputAttributes;
+  private SampleDataProviderModel sampleDataProviderModel;
   private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
 
   /**
@@ -67,6 +72,22 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
     this.outputAttributes = outputAttributes;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Optional<SampleDataProviderModel> getSampleDataProviderModel() {
+    return ofNullable(sampleDataProviderModel);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void setSampleDataProviderModel(SampleDataProviderModel sampleDataProviderModel) {
+    this.sampleDataProviderModel = sampleDataProviderModel;
+  }
+
   public boolean isTransactional() {
     return transactional;
   }
@@ -98,5 +119,4 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   public Set<NotificationModel> getNotificationModels() {
     return notificationModels;
   }
-
 }
