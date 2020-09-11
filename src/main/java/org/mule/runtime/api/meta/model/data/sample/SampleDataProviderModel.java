@@ -37,9 +37,9 @@ public final class SampleDataProviderModel {
    * Creates a new instance
    *
    * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
-   * @param providerId            the category of the associated value provider for this parameter
-   * @param requiresConfiguration indicates if the configuration is required to resolve the values
-   * @param requiresConnection    indicates if the connection is required to resolve the values
+   * @param providerId            the id which unequivocally identifies each provider
+   * @param requiresConfiguration indicates if the configuration is required to fetch the sample
+   * @param requiresConnection    indicates if the connection is required to fetch the sample
    */
   public SampleDataProviderModel(List<String> actingParameters,
                                  String providerId,
@@ -47,6 +47,7 @@ public final class SampleDataProviderModel {
                                  boolean requiresConnection) {
     requireNonNull(actingParameters, "'actingParameters' can't be null");
     checkArgument(providerId != null && providerId.length() > 0, "providerId cannot be blank");
+
     this.actingParameters = actingParameters;
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
@@ -54,7 +55,7 @@ public final class SampleDataProviderModel {
   }
 
   /**
-   * @return the list of parameters that are required to execute the Value Provider resolution.
+   * @return the list of parameters that are required to fetch the sample data
    */
   public List<String> getActingParameters() {
     return actingParameters;
@@ -68,14 +69,14 @@ public final class SampleDataProviderModel {
   }
 
   /**
-   * @return a boolean indicating if the configuration is required to resolve the values
+   * @return a boolean indicating if the configuration is required to fetch the values
    */
   public boolean requiresConfiguration() {
     return requiresConfiguration;
   }
 
   /**
-   * @return a boolean indicating if the connection is required to resolve the values
+   * @return a boolean indicating if the connection is required to fetch the values
    */
   public boolean requiresConnection() {
     return requiresConnection;

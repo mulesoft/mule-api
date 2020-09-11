@@ -24,9 +24,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @since 1.0
  */
-@NoExtend
 @NoInstantiate
-public class ValueProviderModel {
+public final class ValueProviderModel {
 
   private final List<String> actingParameters;
   private final Integer partOrder;

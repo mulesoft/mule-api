@@ -14,6 +14,17 @@
           "justification": "Missing documentation annotation"
         },
         {
+          "code": "java.class.nowFinal",
+          "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
+          "oldModifiers": "public",
+          "newModifiers": "public final",
+          "package": "org.mule.runtime.api.meta.model.parameter",
+          "classSimpleName": "ValueProviderModel",
+          "elementKind": "class",
+          "justification": "The class was annotated with @NoExtend anyway"
+        },
+        {
           "code": "java.annotation.removed",
           "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
           "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
