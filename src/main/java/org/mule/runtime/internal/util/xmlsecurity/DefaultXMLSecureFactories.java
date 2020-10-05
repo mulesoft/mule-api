@@ -27,7 +27,7 @@ import org.slf4j.Logger;
 
 /**
  * Create different XML factories configured through the same interface for disabling vulnerabilities.
- *
+ * <p>
  * Also make sure we are using standard Java implementations when not overriding explicitly. This is necessary as some
  * dependencies such as Woodstox and Saxon register service providers that take precedence over the Java defaults (in
  * META-INF/services).
