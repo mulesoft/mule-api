@@ -81,6 +81,13 @@ public final class MuleSystemProperties {
    */
   public static final String FORCE_EXTENSION_VALIDATION_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "forceExtensionValidation";
 
+  /**
+   * Disables the {@code @Ignore} annotation processing. All annotated components will not be skipped.
+   * 
+   * @since 1.4.0
+   */
+  public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
+
   public static final String MULE_STREAMING_MAX_MEMORY = SYSTEM_PROPERTY_PREFIX + "max.streaming.memory";
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
 
