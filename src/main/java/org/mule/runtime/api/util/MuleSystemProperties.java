@@ -211,7 +211,16 @@ public final class MuleSystemProperties {
    *
    * @since 4.4, 4.3.1
    */
-  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";;
+  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
+
+  /**
+   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to {@code false}, or not set all,
+   * schema resources will be cached.
+   * This property is only read on deploying an app.
+   *
+   * @since 4.4
+   */
+  public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
