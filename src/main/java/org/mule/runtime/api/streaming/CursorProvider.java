@@ -6,15 +6,13 @@
  */
 package org.mule.runtime.api.streaming;
 
+import static java.util.Optional.empty;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.streaming.bytes.CursorStream;
 
 import java.util.Optional;
-
-import static java.lang.Boolean.getBoolean;
-import static java.util.Optional.empty;
-import static org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY;
 
 /**
  * Provides instances of {@link Cursor} which allows concurrent access to a wrapped
@@ -80,6 +78,9 @@ public interface CursorProvider<T extends Cursor> {
     return empty();
   }
 
+  default boolean isManaged() {
+    return false;
+  }
 
 }
 
