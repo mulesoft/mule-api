@@ -78,6 +78,11 @@ public interface CursorProvider<T extends Cursor> {
     return empty();
   }
 
+  /**
+   * @return {@code true} if the implementation refers to a provider that has been already managed, {@code false} otherwise.
+   *
+   * @since 1.4, 1.3.1
+   */
   default boolean isManaged() {
     return false;
   }
