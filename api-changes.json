@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::isManaged()",
+          "package": "org.mule.runtime.api.streaming",
+          "classSimpleName": "CursorProvider",
+          "methodName": "isManaged",
+          "elementKind": "method",
+          "justification": "MULE-18895"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN",
           "package": "org.mule.runtime.api.util",
