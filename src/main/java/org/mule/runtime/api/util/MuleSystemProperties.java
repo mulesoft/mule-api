@@ -82,7 +82,7 @@ public final class MuleSystemProperties {
   public static final String FORCE_EXTENSION_VALIDATION_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "forceExtensionValidation";
 
   /**
-   * Disables the {@code @Ignore} annotation processing. All annotated components will not be skipped.
+   * Disables the {@code ignore} directive when loading an Extension.
    * 
    * @since 1.4.0
    */
