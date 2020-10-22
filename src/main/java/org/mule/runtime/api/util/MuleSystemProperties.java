@@ -204,7 +204,15 @@ public final class MuleSystemProperties {
    *
    * @since 4.4, 4.3.1
    */
-  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";;
+  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
+
+  /**
+   * When enabled, the defined categories of logging will result in a blocking processing type.
+   * Categories must be comma separated. For instance: {@code some.category,other.category}.
+   * 
+   * @since 4.2.0, 4.1.6
+   */
+  public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
