@@ -223,6 +223,14 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
 
   /**
+   * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
+   * separated. For instance: {@code some.category,other.category}.
+   * 
+   * @since 4.2.0, 4.1.6
+   */
+  public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
