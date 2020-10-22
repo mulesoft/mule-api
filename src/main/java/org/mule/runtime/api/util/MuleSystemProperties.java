@@ -224,6 +224,7 @@ public final class MuleSystemProperties {
 
   /**
    * When enabled, the defined categories of logging will result in a blocking processing type.
+   * Categories should be comma separated. For example: "some.category,other.category".
    * 
    * @since 4.2.0, 4.1.6
    */
