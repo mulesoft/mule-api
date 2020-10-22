@@ -3,6 +3,14 @@
     "revapi": {
       "ignore": [
         {
+        "code": "java.class.added",
+        "new": "class org.mule.runtime.api.util.IOUtils",
+        "package": "org.mule.runtime.api.util",
+        "classSimpleName": "IOUtils",
+        "elementKind": "class",
+        "justification": "MULE-18922:, HTTP-SERVICE bug with jdk8u265-b01 and Runtime 4.1.6 in EBS 12.2 Conn"
+        },
+        {
           "code": "java.class.added",
           "new": "interface org.mule.runtime.api.healthcheck.HealthCheckValidator",
           "package": "org.mule.runtime.api.healthcheck",
