@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_LOGGING_BLOCKING_CATEGORIES",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_LOGGING_BLOCKING_CATEGORIES",
+          "elementKind": "field",
+          "justification": "This system property already existed"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.SHARE_ERROR_TYPE_REPOSITORY_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
