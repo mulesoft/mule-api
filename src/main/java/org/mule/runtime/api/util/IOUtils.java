@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 /**
  * Mule API I/O Utilities.
- * @since 1.2.0
+ * @since 1.1.6
  */
 public class IOUtils {
 
