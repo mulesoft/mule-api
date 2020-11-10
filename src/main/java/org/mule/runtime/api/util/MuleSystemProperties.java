@@ -89,7 +89,9 @@ public final class MuleSystemProperties {
   public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
 
   /**
-   * ADD JDOC
+   * When present, adds to polling sources the parameter to configure the item limit per poll feature.
+   *
+   * @since 1.4.0
    */
   public static final String ENABLE_SDK_POLLING_SOURCE_LIMIT = SYSTEM_PROPERTY_PREFIX + "enablePollingSourceLimit";
 
