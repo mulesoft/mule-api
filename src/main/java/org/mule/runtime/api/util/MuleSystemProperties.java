@@ -36,6 +36,18 @@ public final class MuleSystemProperties {
    * System property key for the default size of a streaming buffer bucket
    */
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
+
+  /**
+   * System property key to set the maximum nested sub-flow calls to create a single execution chain with. For the nth nested
+   * sub-flow (n being the value of this variable), a new execution chain will be created, as was the default behavior until
+   * 4.2.1.
+   * <p>
+   * By default, the value is set to 10.
+   *
+   * @since 1.4.0, 1.3.1, 1.2.4
+   */
+  public static final String MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN = SYSTEM_PROPERTY_PREFIX + "flowRef.maxSubFlowsSingleChain";
+
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
   /**
