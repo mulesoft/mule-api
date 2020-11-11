@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN",
+          "elementKind": "field",
+          "justification": "Needed for setting a maximum number of sub-flow calls to create a single execution chain with"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_LOGGING_BLOCKING_CATEGORIES",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
