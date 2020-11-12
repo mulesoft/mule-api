@@ -7,7 +7,8 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import static java.util.Collections.emptyList;
-import static org.mule.runtime.api.util.Preconditions.checkNotNull;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toList;
 
 import org.mule.api.annotation.NoInstantiate;
 import org.mule.runtime.api.value.Value;
@@ -47,21 +48,20 @@ public final class ValueProviderModel {
    * @param providerName          the category of the associated value provider for this parameter
    *
    * @deprecated the {@link ValueProviderModel} must specify a providerId, use
-   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, java.util.List, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)
+   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, javlang.Integer, java.lang.String, java.lang.String)
    *             instead}.
    */
   @Deprecated
   public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
                             boolean isOpen,
                             Integer partOrder, String providerName) {
-    this(actingParameters, emptyList(), requiresConfiguration, requiresConnection, isOpen, partOrder, providerName, providerName);
+    this(actingParameters, requiresConfiguration, requiresConnection, isOpen, partOrder, providerName, providerName);
   }
 
   /**
    * Creates a new instance
    *
    * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
-   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
    * @param requiresConfiguration indicates if the configuration is required to resolve the values
    * @param requiresConnection    indicates if the connection is required to resolve the values
    * @param isOpen                indicates if the calculated values should be considered as an open or closed set
@@ -70,19 +70,55 @@ public final class ValueProviderModel {
    * @param providerId            the id of the associated value provider for this parameter
    *
    * @since 1.4.0
+   *
+   * @deprecated the {@link ValueProviderModel} must specify the necessary list of ParameterModel, use
+   *             {@link ValueProviderModel#ValueProviderModel(boolean, boolean, boolean, Integer, String, String, List)}
+   *             instead.
    */
-  public ValueProviderModel(List<String> actingParameters, List<ParameterModel> parameters, boolean requiresConfiguration,
+  @Deprecated
+  public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration,
                             boolean requiresConnection,
                             boolean isOpen,
                             Integer partOrder, String providerName, String providerId) {
-    checkNotNull(actingParameters, "'actingParameters' can't be null");
-    checkNotNull(parameters, "'parameters' can't be null");
-    checkNotNull(partOrder, "'valueParts' can't be null");
-    checkNotNull(providerName, "'providerName' can't be null");
-    checkNotNull(providerId, "'providerId' can't be null");
+    requireNonNull(actingParameters, "'actingParameters' can't be null");
+    requireNonNull(partOrder, "'valueParts' can't be null");
+    requireNonNull(providerName, "'providerName' can't be null");
+    requireNonNull(providerId, "'providerId' can't be null");
     this.isOpen = isOpen;
     this.actingParameters = actingParameters;
+    this.parameters = emptyList();
+    this.requiresConfiguration = requiresConfiguration;
+    this.requiresConnection = requiresConnection;
+    this.partOrder = partOrder;
+    this.providerName = providerName;
+    this.providerId = providerId;
+  }
+
+  /**
+   * Creates a new instance
+   *
+   * @param requiresConfiguration indicates if the configuration is required to resolve the values
+   * @param requiresConnection    indicates if the connection is required to resolve the values
+   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
+   * @param partOrder             the position in the value
+   * @param providerName          the category of the associated value provider for this parameter
+   * @param providerId            the id of the associated value provider for this parameter
+   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
+   *
+   * @since 1.4.0
+   */
+  public ValueProviderModel(boolean requiresConfiguration,
+                            boolean requiresConnection,
+                            boolean isOpen,
+                            Integer partOrder, String providerName, String providerId, List<ParameterModel> parameters) {
+    requireNonNull(parameters, "'parameters' can't be null");
+    requireNonNull(partOrder, "'valueParts' can't be null");
+    requireNonNull(providerName, "'providerName' can't be null");
+    requireNonNull(providerId, "'providerId' can't be null");
+    this.isOpen = isOpen;
     this.parameters = parameters;
+    this.actingParameters =
+        parameters.stream().filter(ParameterModel::isRequired).map(ParameterModel::getName).collect(toList());
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
@@ -92,7 +128,10 @@ public final class ValueProviderModel {
 
   /**
    * @return the list of parameters that are required to execute the Value Provider resolution.
+   *
+   * @deprecated Use {@link #getParameters()} instead.
    */
+  @Deprecated
   public List<String> getActingParameters() {
     return actingParameters;
   }
