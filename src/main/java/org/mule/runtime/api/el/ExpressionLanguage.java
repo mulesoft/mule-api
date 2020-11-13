@@ -87,7 +87,7 @@ public interface ExpressionLanguage {
   Iterator<TypedValue<?>> split(String expression, BindingContext context);
 
   /**
-   * Compiles a specified expression with a given binding context and returns
+   * Compiles a specified expression with a given binding context and returns the CompiledExpression`
    *
    * @param expression The expression
    * @param context    The context to compile against
@@ -111,6 +111,44 @@ public interface ExpressionLanguage {
       @Override
       public List<ModuleElementName> externalDependencies() {
         return Collections.emptyList();
+      }
+    };
+  }
+
+
+  /**
+   * Compiles a specified expression with a given binding context and a name.
+   * It returns the compiled expression
+   *
+   * @param expression The expression
+   * @param context    The context to compile against
+   * @param nameIdentifier The nameIdentifier to be given to the compiled expression
+   * @return The compiled expression
+   * @throws ExpressionCompilationException when an error occurs during compilation
+   * @since 1.4
+   */
+  default CompiledExpression compile(String nameIdentifier, String expression, BindingContext context)
+      throws ExpressionCompilationException {
+    return new CompiledExpression() {
+
+      @Override
+      public String expression() {
+        return expression;
+      }
+
+      @Override
+      public Optional<MediaType> outputType() {
+        return Optional.empty();
+      }
+
+      @Override
+      public List<ModuleElementName> externalDependencies() {
+        return Collections.emptyList();
+      }
+
+      @Override
+      public String nameIdentifier() {
+        return nameIdentifier;
       }
     };
   }
