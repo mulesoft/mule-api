@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.metadata.message.api.el.ModuleDefinition org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::moduleDefinition(java.lang.String, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>) throws org.mule.runtime.api.el.ExpressionCompilationException",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "ExpressionLanguageMetadataService",
+          "methodName": "moduleDefinition",
+          "elementKind": "method",
+          "justification": "Add a method for getting a DW module definition"
+        },
+        {
           "code": "java.annotation.added",
           "old": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",
           "new": "class org.mule.runtime.api.meta.model.parameter.ValueProviderModel",

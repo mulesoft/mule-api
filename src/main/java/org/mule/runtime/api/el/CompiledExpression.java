@@ -42,4 +42,9 @@ public interface CompiledExpression {
   List<ModuleElementName> externalDependencies();
 
 
+  default String nameIdentifier() {
+    return "Anonymous";
+  }
+
+
 }

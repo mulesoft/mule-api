@@ -11,10 +11,13 @@ import org.mule.metadata.api.model.MetadataFormat;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.message.api.MuleEventMetadataType;
 import org.mule.metadata.message.api.MuleEventMetadataTypeBuilder;
+import org.mule.metadata.message.api.el.ModuleDefinition;
 import org.mule.metadata.message.api.el.TypeBindings;
+import org.mule.runtime.api.el.ExpressionCompilationException;
 import org.mule.runtime.api.service.Service;
 
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -129,6 +132,19 @@ public interface ExpressionLanguageMetadataService extends Service {
    * @return The type loader
    */
   TypeLoader createTypeLoader(String content, MetadataFormat metadataFormat);
+
+
+  /**
+   * Returns a module definition from a given NameIdentifier.
+   *
+   * @param nameIdentifier The NameIdentifier for the modules core::test::MyModule
+   * @param modules Other modules available
+   * @return  The ModuleDefinition
+   * @throws ExpressionCompilationException if any problem occurs while trying to parse the expression
+   * @since 1.4
+   */
+  ModuleDefinition moduleDefinition(String nameIdentifier, Collection<ModuleDefinition> modules)
+      throws ExpressionCompilationException;
 
 
   /**
