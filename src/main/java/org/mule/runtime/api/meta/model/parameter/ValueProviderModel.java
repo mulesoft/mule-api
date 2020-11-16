@@ -48,7 +48,7 @@ public final class ValueProviderModel {
    * @param providerName          the category of the associated value provider for this parameter
    *
    * @deprecated the {@link ValueProviderModel} must specify a providerId, use
-   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, javlang.Integer, java.lang.String, java.lang.String)
+   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)
    *             instead}.
    */
   @Deprecated
