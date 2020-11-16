@@ -111,6 +111,15 @@ public final class MuleSystemProperties {
   public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
   /**
+   * Allows to change the default value for the frequency property of the &lt;fixed-frequency&gt; element. Provided value must
+   * be coercible to a {@link Long} and be expressed in millis.
+   *
+   * @since 1.2.4
+   */
+  public static final String DEFAULT_SCHEDULER_FIXED_FREQUENCY =
+      SYSTEM_PROPERTY_PREFIX + "config.scheduler.defaultFixedFrequency";
+
+  /**
    * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then
    * it's used the app ErrorType repository.
    *
