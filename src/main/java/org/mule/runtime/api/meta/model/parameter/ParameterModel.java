@@ -82,8 +82,7 @@ public interface ParameterModel
   Object getDefaultValue();
 
   /**
-   * @return A {@link ParameterDslConfiguration }which describes the language which
-   * allows configuring this parameter
+   * @return A {@link ParameterDslConfiguration} which describes the language which allows configuring this parameter
    */
   ParameterDslConfiguration getDslConfiguration();
 
