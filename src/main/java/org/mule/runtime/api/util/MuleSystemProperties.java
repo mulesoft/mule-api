@@ -243,6 +243,15 @@ public final class MuleSystemProperties {
   public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
 
   /**
+   * A flux sink drops an event if next() is called after complete() or error().
+   * When enabled, if there is an event dropped, a WARN will be logged on next(), showing the complete() or error() stack trace.
+   * Additionally, the accept() stack trace is logged in order to get a hint about how the chain is created or what is it intended for.
+   *
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
