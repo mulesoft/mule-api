@@ -83,7 +83,7 @@ public final class MuleSystemProperties {
 
   /**
    * Disables the {@code ignore} directive when loading an Extension.
-   * 
+   *
    * @since 1.4.0
    */
   public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
@@ -237,7 +237,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
    * separated. For instance: {@code some.category,other.category}.
-   * 
+   *
    * @since 4.2.0, 4.1.6
    */
   public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
@@ -250,6 +250,14 @@ public final class MuleSystemProperties {
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
+
+  /**
+   * When set to {@code true}, if an error type is found that does not exist in the error type repository of the application (for
+   * instance, an error handler for a random error that no component raises), a WARN is logged instead of failing the deployment.
+   *
+   * @since 4.4
+   */
+  public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
