@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_STACK_TRACES_ON_DROP",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_PRINT_STACK_TRACES_ON_DROP",
+          "elementKind": "field",
+          "justification": "Added debug system property"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
