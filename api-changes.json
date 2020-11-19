@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_STACK_TRACES_ON_DROP",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_PRINT_STACK_TRACES_ON_DROP",
+          "elementKind": "field",
+          "justification": "Added debug system property"
+        },
+        {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method boolean org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::isManaged()",
           "package": "org.mule.runtime.api.streaming",
