@@ -2,6 +2,14 @@
   "1.1.5": {
     "revapi": {
       "ignore": [
+	  		{
+	  		   "code": "java.class.added",
+	  		   "new": "class org.mule.runtime.api.util.IOUtils",
+	  		   "package": "org.mule.runtime.api.util",
+	  		   "classSimpleName": "IOUtils",
+	  		   "elementKind": "class",
+	  		   "justification": "Issue MULE-14729"
+	  		},
         {
           "code": "java.class.added",
           "new": "interface org.mule.runtime.api.healthcheck.HealthCheckValidator",
