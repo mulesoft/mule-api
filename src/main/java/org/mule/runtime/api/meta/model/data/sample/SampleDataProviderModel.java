@@ -45,7 +45,7 @@ public final class SampleDataProviderModel {
                                  String providerId,
                                  boolean requiresConfiguration,
                                  boolean requiresConnection) {
-    checkArgument(parameters != null, "'actingParameters' can't be null");
+    checkArgument(parameters != null, "parameters cannot be null");
     checkArgument(providerId != null && providerId.length() > 0, "providerId cannot be blank");
 
     this.parameters = parameters;
