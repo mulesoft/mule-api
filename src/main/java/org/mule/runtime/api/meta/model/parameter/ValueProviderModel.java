@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
-import static java.util.Collections.emptyList;
-import static java.util.Objects.requireNonNull;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
 import org.mule.api.annotation.NoInstantiate;
+import org.mule.runtime.api.util.LazyValue;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
@@ -28,8 +28,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @NoInstantiate
 public final class ValueProviderModel {
 
-  private final List<String> actingParameters;
-  private final List<ParameterModel> parameters;
+  private final LazyValue<List<String>> actingParameters;
+  private final List<ActingParameterModel> parameters;
   private final Integer partOrder;
   private final String providerName;
   private final String providerId;
@@ -40,28 +40,7 @@ public final class ValueProviderModel {
   /**
    * Creates a new instance
    *
-   * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
-   * @param requiresConfiguration indicates if the configuration is required to resolve the values
-   * @param requiresConnection    indicates if the connection is required to resolve the values
-   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
-   * @param partOrder             the position in the value
-   * @param providerName          the category of the associated value provider for this parameter
-   *
-   * @deprecated the {@link ValueProviderModel} must specify a providerId, use
-   *             {@link ValueProviderModel#ValueProviderModel(java.util.List, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)
-   *             instead}.
-   */
-  @Deprecated
-  public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration, boolean requiresConnection,
-                            boolean isOpen,
-                            Integer partOrder, String providerName) {
-    this(actingParameters, requiresConfiguration, requiresConnection, isOpen, partOrder, providerName, providerName);
-  }
-
-  /**
-   * Creates a new instance
-   *
-   * @param actingParameters      the list of parameters that are required to execute the Value Provider resolution
+   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
    * @param requiresConfiguration indicates if the configuration is required to resolve the values
    * @param requiresConnection    indicates if the connection is required to resolve the values
    * @param isOpen                indicates if the calculated values should be considered as an open or closed set
@@ -70,55 +49,19 @@ public final class ValueProviderModel {
    * @param providerId            the id of the associated value provider for this parameter
    *
    * @since 1.4.0
-   *
-   * @deprecated the {@link ValueProviderModel} must specify the necessary list of ParameterModel, use
-   *             {@link ValueProviderModel#ValueProviderModel(boolean, boolean, boolean, Integer, String, String, List)}
-   *             instead.
    */
-  @Deprecated
-  public ValueProviderModel(List<String> actingParameters, boolean requiresConfiguration,
+  public ValueProviderModel(List<ActingParameterModel> parameters, boolean requiresConfiguration,
                             boolean requiresConnection,
                             boolean isOpen,
                             Integer partOrder, String providerName, String providerId) {
-    requireNonNull(actingParameters, "'actingParameters' can't be null");
-    requireNonNull(partOrder, "'valueParts' can't be null");
-    requireNonNull(providerName, "'providerName' can't be null");
-    requireNonNull(providerId, "'providerId' can't be null");
-    this.isOpen = isOpen;
-    this.actingParameters = actingParameters;
-    this.parameters = emptyList();
-    this.requiresConfiguration = requiresConfiguration;
-    this.requiresConnection = requiresConnection;
-    this.partOrder = partOrder;
-    this.providerName = providerName;
-    this.providerId = providerId;
-  }
-
-  /**
-   * Creates a new instance
-   *
-   * @param requiresConfiguration indicates if the configuration is required to resolve the values
-   * @param requiresConnection    indicates if the connection is required to resolve the values
-   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
-   * @param partOrder             the position in the value
-   * @param providerName          the category of the associated value provider for this parameter
-   * @param providerId            the id of the associated value provider for this parameter
-   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
-   *
-   * @since 1.4.0
-   */
-  public ValueProviderModel(boolean requiresConfiguration,
-                            boolean requiresConnection,
-                            boolean isOpen,
-                            Integer partOrder, String providerName, String providerId, List<ParameterModel> parameters) {
-    requireNonNull(parameters, "'parameters' can't be null");
-    requireNonNull(partOrder, "'valueParts' can't be null");
-    requireNonNull(providerName, "'providerName' can't be null");
-    requireNonNull(providerId, "'providerId' can't be null");
+    checkArgument(parameters != null, "'parameters' can't be null");
+    checkArgument(partOrder != null, "'valueParts' can't be null");
+    checkArgument(providerName != null, "'providerName' can't be null");
+    checkArgument(providerId != null, "'providerId' can't be null");
     this.isOpen = isOpen;
     this.parameters = parameters;
-    this.actingParameters =
-        parameters.stream().filter(ParameterModel::isRequired).map(ParameterModel::getName).collect(toList());
+    this.actingParameters = new LazyValue<>(() -> parameters.stream().filter(ActingParameterModel::isRequired)
+        .map(ActingParameterModel::getName).collect(toList()));
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
@@ -133,7 +76,7 @@ public final class ValueProviderModel {
    */
   @Deprecated
   public List<String> getActingParameters() {
-    return actingParameters;
+    return actingParameters.get();
   }
 
   /**
@@ -141,7 +84,7 @@ public final class ValueProviderModel {
    *
    * @since 1.4.0
    */
-  public List<ParameterModel> getParameters() {
+  public List<ActingParameterModel> getParameters() {
     return parameters;
   }
 
@@ -201,7 +144,6 @@ public final class ValueProviderModel {
     ValueProviderModel that = (ValueProviderModel) o;
 
     return new EqualsBuilder()
-        .append(actingParameters, that.actingParameters)
         .append(parameters, that.parameters)
         .append(partOrder, that.partOrder)
         .append(providerName, that.providerName)
@@ -215,7 +157,6 @@ public final class ValueProviderModel {
   @Override
   public int hashCode() {
     return new HashCodeBuilder(17, 37)
-        .append(actingParameters)
         .append(parameters)
         .append(partOrder)
         .append(providerName)
