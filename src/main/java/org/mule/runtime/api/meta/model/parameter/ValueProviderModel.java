@@ -10,7 +10,6 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
 import org.mule.api.annotation.NoInstantiate;
-import org.mule.runtime.api.util.LazyValue;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 @NoInstantiate
 public final class ValueProviderModel {
 
-  private final LazyValue<List<String>> actingParameters;
+  private List<String> actingParameters;
   private final List<ActingParameterModel> parameters;
   private final Integer partOrder;
   private final String providerName;
@@ -60,8 +59,8 @@ public final class ValueProviderModel {
     checkArgument(providerId != null, "'providerId' can't be null");
     this.isOpen = isOpen;
     this.parameters = parameters;
-    this.actingParameters = new LazyValue<>(() -> parameters.stream().filter(ActingParameterModel::isRequired)
-        .map(ActingParameterModel::getName).collect(toList()));
+    this.actingParameters = parameters.stream().filter(ActingParameterModel::isRequired)
+        .map(ActingParameterModel::getName).collect(toList());
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
@@ -76,7 +75,7 @@ public final class ValueProviderModel {
    */
   @Deprecated
   public List<String> getActingParameters() {
-    return actingParameters.get();
+    return actingParameters;
   }
 
   /**
