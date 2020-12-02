@@ -15,7 +15,7 @@ import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
  * An acting parameter provides a name, a default value and indicates if it is required
  * </p>
  *
- * @since 4.4.0
+ * @since 1.4.0
  */
 @NoImplement
 public interface ActingParameterModel {

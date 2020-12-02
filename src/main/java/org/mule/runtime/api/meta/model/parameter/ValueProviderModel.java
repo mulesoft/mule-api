@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import static java.util.Collections.unmodifiableList;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
@@ -58,7 +59,7 @@ public final class ValueProviderModel {
     checkArgument(providerName != null, "'providerName' can't be null");
     checkArgument(providerId != null, "'providerId' can't be null");
     this.isOpen = isOpen;
-    this.parameters = parameters;
+    this.parameters = unmodifiableList(parameters);
     this.actingParameters = parameters.stream().filter(ActingParameterModel::isRequired)
         .map(ActingParameterModel::getName).collect(toList());
     this.requiresConfiguration = requiresConfiguration;
@@ -71,7 +72,7 @@ public final class ValueProviderModel {
   /**
    * @return the list of parameters that are required to execute the Value Provider resolution.
    *
-   * @deprecated Use {@link #getParameters()} instead.
+   * @deprecated since 1.4.0, use {@link #getParameters()} instead.
    */
   @Deprecated
   public List<String> getActingParameters() {

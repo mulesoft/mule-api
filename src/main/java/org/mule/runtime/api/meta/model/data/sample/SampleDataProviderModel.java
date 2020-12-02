@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.data.sample;
 
+import static java.util.Collections.unmodifiableList;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.api.annotation.NoInstantiate;
@@ -48,7 +49,7 @@ public final class SampleDataProviderModel {
     checkArgument(parameters != null, "parameters cannot be null");
     checkArgument(providerId != null && providerId.length() > 0, "providerId cannot be blank");
 
-    this.parameters = parameters;
+    this.parameters = unmodifiableList(parameters);
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.providerId = providerId;

@@ -63,7 +63,7 @@
           "classSimpleName": "ValueProviderModel",
           "methodName": "<init>",
           "elementKind": "constructor",
-          "justification": "The class is annotated with @NoInstantiate"
+          "justification": "Keeping the original constructor will breach the contract between actingParameters and parameters (which are an extended and augmented collection of actingParameters). The class is annotated with @NoInstantiate, so it allows us to remove that constructor without breaking backward compatibility."
         }
       ]
     }
