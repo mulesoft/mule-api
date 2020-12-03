@@ -60,8 +60,6 @@ public final class ValueProviderModel {
     checkArgument(providerId != null, "'providerId' can't be null");
     this.isOpen = isOpen;
     this.parameters = unmodifiableList(parameters);
-    this.actingParameters = parameters.stream().filter(ActingParameterModel::isRequired)
-        .map(ActingParameterModel::getName).collect(toList());
     this.requiresConfiguration = requiresConfiguration;
     this.requiresConnection = requiresConnection;
     this.partOrder = partOrder;
@@ -76,6 +74,10 @@ public final class ValueProviderModel {
    */
   @Deprecated
   public List<String> getActingParameters() {
+    if (actingParameters == null) {
+      actingParameters = parameters.stream().filter(ActingParameterModel::isRequired)
+          .map(ActingParameterModel::getName).collect(toList());
+    }
     return actingParameters;
   }
 
