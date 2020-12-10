@@ -9,6 +9,9 @@ package org.mule.runtime.api.config;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 /**
  * <p>
@@ -38,7 +41,8 @@ import static java.util.Optional.ofNullable;
  *       * @since 4.4.0, 4.3.1
  *       *
  *      {@code *}/
- *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.", "MULE-17659", "4.4.0, 4.3.1"),
+ *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.",
+ *            "MULE-19083", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
  *
  *      ...
  *
@@ -48,10 +52,19 @@ import static java.util.Optional.ofNullable;
  * @since 4.4.0 4.3.1
  */
 public enum MuleRuntimeFeature implements Feature {
-  ;
+
+  /**
+   * An application shouldn't override reserved properties, but it was possible until MULE-17659. This behaviour has to be fixed
+   * by default to any application developed for 4.3.0+ Runtime but can be overridden by setting
+   * {@link MuleSystemProperties#HONOUR_RESERVED_PROPERTIES_PROPERTY} System Property.
+   * 
+   * @since 4.4.0, 4.3.1
+   */
+  HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.",
+      "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY);
 
   private final String description;
-  private final String issue;
+  private final String issueId;
   private final String since;
   private final String overridingSystemPropertyName;
 
@@ -59,9 +72,9 @@ public enum MuleRuntimeFeature implements Feature {
     this(description, issue, since, null);
   }
 
-  MuleRuntimeFeature(String description, String issue, String since, String overridingSystemPropertyName) {
+  MuleRuntimeFeature(String description, String issueId, String since, String overridingSystemPropertyName) {
     this.description = description;
-    this.issue = issue;
+    this.issueId = issueId;
     this.since = since;
     this.overridingSystemPropertyName = overridingSystemPropertyName;
   }
@@ -72,7 +85,7 @@ public enum MuleRuntimeFeature implements Feature {
 
   @Override
   public String getIssueId() {
-    return issue;
+    return issueId;
   }
 
   @Override
