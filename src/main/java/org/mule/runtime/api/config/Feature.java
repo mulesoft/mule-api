@@ -10,7 +10,7 @@ package org.mule.runtime.api.config;
 import org.mule.runtime.api.util.MuleSystemProperties;
 
 /**
- * List of features that can be configured to be enabled per application by using.
+ * List of features that can be configured to be enabled or disabled per application depending on the deployment context.
  */
 public enum Feature {
 
