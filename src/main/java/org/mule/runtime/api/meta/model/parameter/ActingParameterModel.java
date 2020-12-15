@@ -33,11 +33,4 @@ public interface ActingParameterModel {
    * @return a boolean value saying if this parameter is required or not
    */
   boolean isRequired();
-
-  /**
-   * Gets the default value.
-   *
-   * @return the default value
-   */
-  Object getDefaultValue();
 }
