@@ -54,6 +54,16 @@
           "classSimpleName": "ValueProviderModel",
           "elementKind": "class",
           "justification": "Missing documentation annotation"
+        },
+        {
+          "code": "java.method.numberOfParametersChanged",
+          "old": "method void org.mule.runtime.api.meta.model.parameter.ValueProviderModel::<init>(java.util.List<java.lang.String>, boolean, boolean, boolean, java.lang.Integer, java.lang.String)",
+          "new": "method void org.mule.runtime.api.meta.model.parameter.ValueProviderModel::<init>(java.util.List<org.mule.runtime.api.meta.model.parameter.ActingParameterModel>, boolean, boolean, boolean, java.lang.Integer, java.lang.String, java.lang.String)",
+          "package": "org.mule.runtime.api.meta.model.parameter",
+          "classSimpleName": "ValueProviderModel",
+          "methodName": "<init>",
+          "elementKind": "constructor",
+          "justification": "Keeping the original constructor will breach the contract between actingParameters and parameters (which are an extended and augmented collection of actingParameters). The class is annotated with @NoInstantiate, so it allows us to remove that constructor without breaking backward compatibility."
         }
       ]
     }
