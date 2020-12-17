@@ -7,12 +7,11 @@
 package org.mule.runtime.api.meta.model.parameter;
 
 import org.mule.api.annotation.NoImplement;
-import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 
 /**
- * An acting parameter of a {@link ValueProviderModel} or {@link SampleDataProviderModel}
+ * An acting parameter of a design time tooling capability.
  * <p>
- * An acting parameter provides a name, a default value and indicates if it is required
+ * An acting parameter provides a name and indicates if it is required
  * </p>
  *
  * @since 1.4.0
