@@ -4,30 +4,15 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-
 package org.mule.runtime.api.config;
 
-import org.mule.runtime.api.util.MuleSystemProperties;
-
 /**
- * List of features that can be configured to be enabled or disabled per application depending on the deployment context.
+ * A feature that can be enabled or disabled according to a certain configuration
+ * 
+ * @since 4.4.0 4.3.1
  */
-public enum Feature {
+public interface Feature {
 
-  /**
-   * @deprecated Used just for testing.
-   * @since 4.4.0, 4.3.1
-   */
-  TESTING_FEATURE("Feature used just for testing purposes.");
-
-  private final String description;
-
-  Feature(String description) {
-    this.description = description;
-  }
-
-  public String getDescription() {
-    return description;
-  }
+  String getDescription();
 
 }
