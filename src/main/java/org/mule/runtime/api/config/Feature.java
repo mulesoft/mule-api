@@ -13,6 +13,25 @@ package org.mule.runtime.api.config;
  */
 public interface Feature {
 
+  /**
+   * Brief description of the feature.
+   * 
+   * @return The feature description
+   */
   String getDescription();
 
+  /**
+   * The issue that caused this feature was added.
+   * 
+   * @return Issue that motivated the feature.
+   */
+  String getIssue();
+
+
+  /**
+   * A comma-separated list of versions since this feature exists.
+   * 
+   * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0"</code>
+   */
+  String getSince();
 }
