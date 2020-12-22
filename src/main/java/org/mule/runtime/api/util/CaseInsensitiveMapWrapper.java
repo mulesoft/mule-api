@@ -22,6 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Represents a Map from String to {@link T} where the key's case is not taken into account when looking for it, but remembered
@@ -151,16 +152,29 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
     private static final long serialVersionUID = -4964071931663826261L;
 
     private static final ConcurrentMap<Object, CaseInsensitiveMapKey> cache = new ConcurrentHashMap<>();
+    private static final AtomicBoolean usingCache = new AtomicBoolean(true);
+    private static final int MAX_CACHE_SIZE = 1000;
+    private static final int MAX_KEY_SIZE = 100;
 
     private final String key;
     private final String keyLowerCase;
     private final int keyHash;
 
     public static CaseInsensitiveMapKey keyFor(Object key) {
+      if (!usingCache.get() || key.toString().length() > MAX_KEY_SIZE) {
+        return new CaseInsensitiveMapKey(key);
+      }
+
       CaseInsensitiveMapKey value = cache.get(key);
       if (value == null) {
         value = cache.computeIfAbsent(key, k -> new CaseInsensitiveMapKey(k));
       }
+
+      if (cache.size() > MAX_CACHE_SIZE) {
+        usingCache.set(false);
+        cache.clear();
+      }
+
       return value;
     }
 
