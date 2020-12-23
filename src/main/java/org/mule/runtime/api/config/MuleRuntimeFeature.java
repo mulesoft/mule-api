@@ -1,0 +1,75 @@
+/*
+ * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
+ * The software in this package is published under the terms of the CPAL v1.0
+ * license, a copy of which has been included with this distribution in the
+ * LICENSE.txt file.
+ */
+package org.mule.runtime.api.config;
+
+/**
+ * <p>
+ * List of {@link Feature}s that can be configured to be enabled or disabled per application depending on the deployment context.
+ * </p>
+ * 
+ * <p>
+ * When some Mule runtime feature needs to be flagged, it should be added here as a new enum constant. Each entry must have a
+ * meaningful name, clear enough to understand what it represents, a description with enough information to know how the runtime
+ * will work whether the feature is enabled or disabled, the issue that motivated this feature, and a list of Runtime versions
+ * from when it exists. Each enum constant has to have its Javadoc with further information about how the feature is configured.
+ * </p>
+ *
+ * <p>
+ * For example:
+ * </p>
+ * 
+ * <pre>
+ *    public enum MuleRuntimeFeature implements Feature {
+ *      ...
+ *
+ *     {@code /}**
+ *       * An application shouldn't override reserved properties, but it was possible until MULE-17659. This behaviour has
+ *       * to be fixed by default to any application developed for 4.3.0+ Runtime but can be overridden by setting
+ *       * &lcub;@link MuleSystemProperties#HONOUR_RESERVED_PROPERTIES_PROPERTY&rcub; System Property.
+ *       *
+ *       * @since 4.4.0, 4.3.1
+ *       *
+ *      {@code *}/
+ *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.", "MULE-17659", "4.4.0, 4.3.1"),
+ *
+ *      ...
+ *
+ *    }
+ * </pre>
+ * 
+ * @since 4.4.0 4.3.1
+ */
+public enum MuleRuntimeFeature implements Feature {
+  ;
+
+  private final String description;
+  private final String issue;
+  private final String since;
+
+  MuleRuntimeFeature(String description, String issue, String since) {
+    this.description = description;
+    this.issue = issue;
+    this.since = since;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  @Override
+  public String getIssueId() {
+    return issue;
+  }
+
+  @Override
+  public String getSince() {
+    return since;
+  }
+
+}
+
+
