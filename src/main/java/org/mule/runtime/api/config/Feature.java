@@ -21,11 +21,11 @@ public interface Feature {
   String getDescription();
 
   /**
-   * The issue that caused this feature was added.
+   * The issue that caused this feature was added.  For example <code>MULE-1234</code>
    * 
    * @return Issue that motivated the feature.
    */
-  String getIssue();
+  String getIssueId();
 
 
   /**
