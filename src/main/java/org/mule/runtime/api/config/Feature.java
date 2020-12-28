@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.config;
 
+import java.util.Optional;
+
 /**
  * A feature that can be enabled or disabled according to a certain configuration
  * 
@@ -34,4 +36,21 @@ public interface Feature {
    * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0"</code>
    */
   String getSince();
+
+  /**
+   * <p>
+   * Name of a System Property to be used if the feature has to be enabled or disabled for the whole Runtime instance doesn't
+   * matter any other condition related to the deployment context.
+   * </p>
+   * 
+   * <p>
+   * For example if it is set with <code>mule.enable.my.feature</code> and there is a System Property with this name, then its
+   * value will be parsed as a <code>Boolean.getValue("mule.enable.my.feature")</code> to decide whether the feature is enabled.
+   * If there isn't a System Property with this name, then the proper feature flagging criteria will be applied according to how
+   * it was configured.
+   * </p>
+   * 
+   * @return The name of a System Property to configure the feature.
+   */
+  Optional<String> getOverridingSystemPropertyName();
 }

@@ -6,6 +6,10 @@
  */
 package org.mule.runtime.api.config;
 
+import java.util.Optional;
+
+import static java.util.Optional.ofNullable;
+
 /**
  * <p>
  * List of {@link Feature}s that can be configured to be enabled or disabled per application depending on the deployment context.
@@ -49,11 +53,17 @@ public enum MuleRuntimeFeature implements Feature {
   private final String description;
   private final String issue;
   private final String since;
+  private final String overridingSystemPropertyName;
 
   MuleRuntimeFeature(String description, String issue, String since) {
+    this(description, issue, since, null);
+  }
+
+  MuleRuntimeFeature(String description, String issue, String since, String overridingSystemPropertyName) {
     this.description = description;
     this.issue = issue;
     this.since = since;
+    this.overridingSystemPropertyName = overridingSystemPropertyName;
   }
 
   public String getDescription() {
@@ -68,6 +78,11 @@ public enum MuleRuntimeFeature implements Feature {
   @Override
   public String getSince() {
     return since;
+  }
+
+  @Override
+  public Optional<String> getOverridingSystemPropertyName() {
+    return ofNullable(overridingSystemPropertyName);
   }
 
 }
