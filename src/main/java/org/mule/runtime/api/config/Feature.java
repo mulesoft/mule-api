@@ -23,7 +23,7 @@ public interface Feature {
   String getDescription();
 
   /**
-   * The issue that caused this feature was added. For example <code>MULE-1234</code>
+   * The issue that caused this feature was added. For instance <code>MULE-1234</code>
    * 
    * @return Issue that motivated the feature.
    */
@@ -40,12 +40,12 @@ public interface Feature {
   /**
    * <p>
    * System Property name to be used to decide whether the feature has to be enabled or disabled for the whole Runtime instance
-   * doesn't matter any other condition related to the deployment context. The feature will be enabled according to the value
+   * without considering any other condition related to the deployment context. The feature will be enabled according to the value
    * provided, by parsing it as a boolean.
    * </p>
    * 
    * <p>
-   * For example if {@link #getOverridingSystemPropertyName()}:
+   * For instance if {@link #getOverridingSystemPropertyName()}:
    * </p>
    * <ol>
    * <li>Is set to a non-null value and there is a System Property defined with this name, then the feature will be enabled or
