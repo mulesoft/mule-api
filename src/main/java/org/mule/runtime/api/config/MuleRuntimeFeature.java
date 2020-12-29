@@ -41,7 +41,7 @@ import org.mule.runtime.api.util.MuleSystemProperties;
  *       * @since 4.4.0, 4.3.1
  *       *
  *      {@code *}/
- *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.",
+ *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
  *            "MULE-19083", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
  *
  *      ...
@@ -60,7 +60,7 @@ public enum MuleRuntimeFeature implements Feature {
    * 
    * @since 4.4.0, 4.3.1
    */
-  HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as app.name can't be overridden by global properties.",
+  HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
       "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY);
 
   private final String description;
