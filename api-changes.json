@@ -98,7 +98,16 @@
           "fieldName": "MULE_LOGGING_BLOCKING_CATEGORIES",
           "elementKind": "field",
           "justification": "This system property already existed. Moved to mule system properties file."
-        }      
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY",
+          "elementKind": "field",
+          "justification": "MULE-19110"
+        }
       ]
     }
   }, 
