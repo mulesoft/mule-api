@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.util.Optional<java.lang.String> org.mule.runtime.api.healthcheck.ReadyStatus::statusDescription()",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "ReadyStatus",
+          "methodName": "statusDescription",
+          "elementKind": "method",
+          "justification": "AGW-4580"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_STACK_TRACES_ON_DROP",
           "package": "org.mule.runtime.api.util",
