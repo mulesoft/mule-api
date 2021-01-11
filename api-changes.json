@@ -2,6 +2,22 @@
   "1.3.1": {
     "revapi": {
       "ignore": [
+       {
+         "code": "java.class.added",
+         "new": "interface org.mule.runtime.api.config.Feature",
+         "package": "org.mule.runtime.api.config",
+         "classSimpleName": "Feature",
+         "elementKind": "interface",
+         "justification": "MULE-18976"
+       },
+       {
+         "code": "java.class.added",
+         "new": "enum org.mule.runtime.api.config.MuleRuntimeFeature",
+         "package": "org.mule.runtime.api.config",
+         "classSimpleName": "MuleRuntimeFeature",
+         "elementKind": "enum",
+         "justification": "MULE-18976"
+        },
         {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method java.util.Optional<java.lang.String> org.mule.runtime.api.healthcheck.ReadyStatus::statusDescription()",
