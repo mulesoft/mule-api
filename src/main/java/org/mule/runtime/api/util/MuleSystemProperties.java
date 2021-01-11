@@ -8,6 +8,7 @@ package org.mule.runtime.api.util;
 
 import static java.lang.System.getProperty;
 
+import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.streaming.CursorProvider;
 
 /**
@@ -232,6 +233,15 @@ public final class MuleSystemProperties {
    */
   // MULE-19110
   public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
+
+  /**
+   * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
+   * isn't set, the behaviour will depend on {@link MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES}.
+   * 
+   * @see MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String HONOUR_RESERVED_PROPERTIES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "honour.reserved.properties";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
