@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
        {
+        "code": "java.field.addedStaticField",
+        "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY",
+        "package": "org.mule.runtime.api.util",
+        "classSimpleName": "MuleSystemProperties",
+        "fieldName": "HONOUR_RESERVED_PROPERTIES_PROPERTY",
+        "elementKind": "field",
+        "justification": "MULE-19038"
+       },
+       {
          "code": "java.class.added",
          "new": "interface org.mule.runtime.api.config.Feature",
          "package": "org.mule.runtime.api.config",
