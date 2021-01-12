@@ -2,6 +2,22 @@
   "1.2.4": {
     "revapi": {
       "ignore": [
+       {
+         "code": "java.class.added",
+         "new": "interface org.mule.runtime.api.config.Feature",
+         "package": "org.mule.runtime.api.config",
+         "classSimpleName": "Feature",
+         "elementKind": "interface",
+         "justification": "MULE-18976"
+       },
+       {
+         "code": "java.class.added",
+         "new": "enum org.mule.runtime.api.config.MuleRuntimeFeature",
+         "package": "org.mule.runtime.api.config",
+         "classSimpleName": "MuleRuntimeFeature",
+         "elementKind": "enum",
+         "justification": "MULE-18976"
+        },
         {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_STACK_TRACES_ON_DROP",
