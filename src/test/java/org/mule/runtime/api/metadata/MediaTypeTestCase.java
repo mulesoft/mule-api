@@ -39,6 +39,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getCharset().isPresent(), is(false));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s"));
+    assertThat(parsed.isDefinedInApp(), is(false));
   }
 
   @Test
@@ -50,6 +51,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("charset"), is(nullValue()));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8"));
+    assertThat(parsed.isDefinedInApp(), is(false));
   }
 
   @Test
@@ -62,6 +64,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("param2"), is("value2"));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(false));
   }
 
   @Test
@@ -75,6 +78,62 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("param2"), is("value2"));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(false));
+  }
+
+
+  @Test
+  public void mimeTypeCharsetAndParamsDefinedInApp() {
+    final MediaType parsed = MediaType.parseDefinedInApp("m/s; param1=value1; param2=value2; charset=UTF-8");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().get(), is(UTF_8));
+    assertThat(parsed.getParameter("charset"), is(nullValue()));
+    assertThat(parsed.getParameter("param1"), is("value1"));
+    assertThat(parsed.getParameter("param2"), is("value2"));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(true));
+  }
+
+  @Test
+  public void mimeTypeAndParamsParamsDefinedInApp() {
+    final MediaType parsed = MediaType.parseDefinedInApp("m/s; param1=value1; param2=value2");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().isPresent(), is(false));
+    assertThat(parsed.getParameter("param1"), is("value1"));
+    assertThat(parsed.getParameter("param2"), is("value2"));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(true));
+  }
+
+  @Test
+  public void onlyMimeTypeDefinedInApp() {
+    MediaType parsed = MediaType.parseDefinedInApp("m/s");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().isPresent(), is(false));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s"));
+    assertThat(parsed.isDefinedInApp(), is(true));
+    //Validate caching correctly
+    parsed = MediaType.parse("m/s");
+    assertThat(parsed.isDefinedInApp(), is(false));
+  }
+
+
+  @Test
+  public void cachingCorrectly() {
+    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo");
+    MediaType parsed = MediaType.parse("test/foo");
+    MediaType created = MediaType.create("test", "foo");
+    assertThat(parsed.isDefinedInApp(), is(false));
+    assertThat(parsedAppDefined.isDefinedInApp(), is(true));
+    assertThat(parsed, sameInstance(created));
+    assertThat(parsed, not(sameInstance(parsedAppDefined)));
+
   }
 
   @Test
