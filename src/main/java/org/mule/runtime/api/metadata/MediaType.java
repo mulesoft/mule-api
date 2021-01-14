@@ -109,7 +109,7 @@ public final class MediaType implements Serializable {
    * <p>
    * <b>WARNING</b> This method should not be used if the source of the mediaType was not defined by the APP Developer.
    * For example if the source is a Transport user should use {@link MediaType#parse(String)}
-   *</p>
+   *
    * @param mediaType String representation to be parsed
    * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
