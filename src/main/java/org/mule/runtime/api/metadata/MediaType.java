@@ -106,7 +106,7 @@ public final class MediaType implements Serializable {
 
   /**
    * Parses a media type, defined by the developer in the App, from its string representation.
-   *<p>
+   * <p>
    * <b>WARNING</b> This method should not be used if the source of the mediaType was not defined by the APP Developer.
    * For example if the source is a Transport user should use {@link MediaType#parse(String)}
    *</p>
