@@ -113,7 +113,7 @@ public final class MediaType implements Serializable {
    * @param mediaType String representation to be parsed
    * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
-   * @since 1.4,1.3.1,1.2.4,1.1.7
+   * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
     MediaType cachedMediaType = definedInAppCache.get(mediaType);
