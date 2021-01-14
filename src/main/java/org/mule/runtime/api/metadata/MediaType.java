@@ -103,7 +103,6 @@ public final class MediaType implements Serializable {
     return parseMediaType(mediaType, false);
   }
 
-
   /**
    * Parses a media type, defined by the developer in the App, from its string representation.
    * <p>

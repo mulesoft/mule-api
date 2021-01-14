@@ -11,7 +11,7 @@
          "classSimpleName": "MediaType",
          "fieldName": "serialVersionUID",
          "elementKind": "field",
-         "justification": ""
+         "justification": "MULE-19140"
        },
        {
          "code": "java.method.added",
@@ -20,7 +20,7 @@
          "classSimpleName": "MediaType",
          "methodName": "isDefinedInApp",
          "elementKind": "method",
-         "justification": ""
+         "justification": "MULE-19140"
        },
        {
          "code": "java.method.added",
@@ -29,7 +29,7 @@
          "classSimpleName": "MediaType",
          "methodName": "parseDefinedInApp",
          "elementKind": "method",
-         "justification": ""
+         "justification": "MULE-19140"
        },
         {
           "code": "java.method.addedToInterface",
