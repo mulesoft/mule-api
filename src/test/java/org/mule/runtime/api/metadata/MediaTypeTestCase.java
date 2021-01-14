@@ -133,7 +133,15 @@ public class MediaTypeTestCase {
     assertThat(parsedAppDefined.isDefinedInApp(), is(true));
     assertThat(parsed, sameInstance(created));
     assertThat(parsed, not(sameInstance(parsedAppDefined)));
+  }
 
+  @Test
+  public void shouldNotBeEqualParseAndParseDefined() {
+    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo");
+    MediaType parse = MediaType.parse("test/foo");
+
+    assertThat(parsedAppDefined, not(is(parse)));
+    assertThat(parsedAppDefined.hashCode(), not(is(parse.hashCode())));
   }
 
   @Test

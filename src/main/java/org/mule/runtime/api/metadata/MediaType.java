@@ -326,7 +326,7 @@ public final class MediaType implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(primaryType, subType, charset, params);
+    return Objects.hash(primaryType, subType, charset, params, definedInApp);
   }
 
   @Override
@@ -345,6 +345,7 @@ public final class MediaType implements Serializable {
     return Objects.equals(primaryType, other.primaryType)
         && Objects.equals(subType, other.subType)
         && Objects.equals(params, other.params)
+        && Objects.equals(definedInApp, other.definedInApp)
         && Objects.equals(charset, other.charset);
   }
 
