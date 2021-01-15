@@ -6,15 +6,6 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertThat;
-import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -25,6 +16,15 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
 
 public class MediaTypeTestCase {
 
@@ -39,7 +39,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getCharset().isPresent(), is(false));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s"));
-    assertThat(parsed.isDefinedInApp(), is(false));
+    assertThat(parsed.isDefinedInApp(), is(true));
   }
 
   @Test
@@ -51,7 +51,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("charset"), is(nullValue()));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8"));
-    assertThat(parsed.isDefinedInApp(), is(false));
+    assertThat(parsed.isDefinedInApp(), is(true));
   }
 
   @Test
@@ -118,20 +118,14 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s"));
     assertThat(parsed.isDefinedInApp(), is(true));
-    //Validate caching correctly
-    parsed = MediaType.parse("m/s");
-    assertThat(parsed.isDefinedInApp(), is(false));
   }
 
 
   @Test
   public void cachingCorrectly() {
-    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo");
-    MediaType parsed = MediaType.parse("test/foo");
-    MediaType created = MediaType.create("test", "foo");
-    assertThat(parsed.isDefinedInApp(), is(false));
+    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo;a=1");
+    MediaType parsed = MediaType.parse("test/foo;a=1");
     assertThat(parsedAppDefined.isDefinedInApp(), is(true));
-    assertThat(parsed, sameInstance(created));
     assertThat(parsed, not(sameInstance(parsedAppDefined)));
   }
 
@@ -139,6 +133,12 @@ public class MediaTypeTestCase {
   public void shouldNotBeEqualParseAndParseDefined() {
     MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo");
     MediaType parse = MediaType.parse("test/foo");
+
+    assertThat(parsedAppDefined, is(parse));
+    assertThat(parsedAppDefined.hashCode(), is(parse.hashCode()));
+
+    parsedAppDefined = MediaType.parseDefinedInApp("test/foo;a=1");
+    parse = MediaType.parse("test/foo;a=1");
 
     assertThat(parsedAppDefined, not(is(parse)));
     assertThat(parsedAppDefined.hashCode(), not(is(parse.hashCode())));

@@ -55,7 +55,6 @@ public final class MediaType implements Serializable {
   private static final String SUBTYPE_RELATED = "related";
 
   private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
-  private static final ConcurrentMap<String, MediaType> definedInAppCache = new ConcurrentHashMap<>();
 
   public static final MediaType ANY = create("*", "*");
 
@@ -115,7 +114,7 @@ public final class MediaType implements Serializable {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
-    MediaType cachedMediaType = definedInAppCache.get(mediaType);
+    MediaType cachedMediaType = cache.get(mediaType);
     if (cachedMediaType != null) {
       return cachedMediaType;
     }
@@ -137,7 +136,8 @@ public final class MediaType implements Serializable {
         }
       }
 
-      MediaType value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset, definedInApp);
+      final MediaType value =
+          new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset, definedInApp || params.isEmpty());
 
       // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
       // in caching them).
@@ -174,7 +174,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType, Charset charset) {
-    final MediaType value = new MediaType(primaryType, subType, emptyMap(), charset, false);
+    final MediaType value = new MediaType(primaryType, subType, emptyMap(), charset, true);
 
     // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
     // in caching them).
@@ -190,8 +190,7 @@ public final class MediaType implements Serializable {
   }
 
   private static MediaType cacheMediaType(final MediaType type, String rfcString, boolean definedInApp) {
-    final ConcurrentMap<String, MediaType> mediaTypeCache = definedInApp ? definedInAppCache : cache;
-    final MediaType oldValue = mediaTypeCache.putIfAbsent(rfcString, type);
+    final MediaType oldValue = cache.putIfAbsent(rfcString, type);
     return oldValue == null ? type : oldValue;
   }
 
