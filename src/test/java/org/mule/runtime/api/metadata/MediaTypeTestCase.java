@@ -17,8 +17,12 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Arrays;
+import java.util.Collections;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -175,7 +179,7 @@ public class MediaTypeTestCase {
 
   @Test
   public void takeIntoAccountKnownParamName() {
-    System.setProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES, "a,b,c");
+    MediaType.setKnownParamNames(asList("a", "b", "c"));
     try {
       MediaType parse = MediaType.parse("test/foo;a=1");
       assertThat(parse.isDefinedInApp(), is(true));
@@ -198,7 +202,7 @@ public class MediaTypeTestCase {
       parse = MediaType.parse("test/foo;d=2");
       assertThat(parse.isDefinedInApp(), is(false));
     } finally {
-      System.clearProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES);
+      MediaType.setKnownParamNames(emptyList());
     }
   }
 

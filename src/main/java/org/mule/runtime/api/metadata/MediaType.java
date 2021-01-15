@@ -6,16 +6,16 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static java.util.Collections.emptyMap;
-import static java.util.Collections.list;
-import static java.util.Optional.ofNullable;
-import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
+import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +25,13 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import javax.activation.MimeType;
-import javax.activation.MimeTypeParseException;
-
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import org.mule.runtime.api.util.MuleSystemProperties;
+import static java.lang.System.getProperty;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.list;
+import static java.util.Optional.ofNullable;
+import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
@@ -77,6 +78,10 @@ public final class MediaType implements Serializable {
   public static final MediaType MULTIPART_FORM_DATA = create(TYPE_MULTIPART, SUBTYPE_FORM_DATA);
   public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
   public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
+
+  private static List<String> KNOWN_PARAM_NAMES =
+      getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
+          ? asList(getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(",")) : emptyList();
 
   private final String primaryType;
   private final String subType;
@@ -132,7 +137,6 @@ public final class MediaType implements Serializable {
       String charsetParam = mimeType.getParameter(CHARSET_PARAM);
       Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
 
-
       Map<String, String> params = new HashMap<>();
       for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
         if (!CHARSET_PARAM.equals(paramName)) {
@@ -142,11 +146,9 @@ public final class MediaType implements Serializable {
 
       boolean isDefinedInApp = definedInApp || params.isEmpty();
 
-      if (!isDefinedInApp && System.getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null) {
-        final String knownProperties = System.getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES);
-        final String[] knownParamNames = knownProperties.split(",");
+      if (!isDefinedInApp && !KNOWN_PARAM_NAMES.isEmpty()) {
         final Set<String> paramNames = params.keySet();
-        isDefinedInApp = Arrays.asList(knownParamNames).containsAll(paramNames);
+        isDefinedInApp = KNOWN_PARAM_NAMES.containsAll(paramNames);
       }
 
       final MediaType value =
@@ -164,6 +166,17 @@ public final class MediaType implements Serializable {
     } catch (MimeTypeParseException e) {
       throw new IllegalArgumentException("MediaType cannot be parsed: " + mediaType, e);
     }
+  }
+
+  /**
+   * Sets the well known media type param names
+   * <p>
+   * <b>WARNING</b> This is only for testing
+   *
+   * @param knownParamNames The list of params
+   */
+  static void setKnownParamNames(List<String> knownParamNames) {
+    KNOWN_PARAM_NAMES = knownParamNames;
   }
 
   /**
