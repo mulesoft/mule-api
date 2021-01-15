@@ -2,25 +2,63 @@
   "1.2.1": {
     "revapi": {
        "ignore": [
-       {
-         "code": "java.method.defaultMethodAddedToInterface",
-         "new": "method java.util.Optional<org.mule.runtime.api.component.location.ComponentLocation> org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::getOriginatingLocation()",
-         "package": "org.mule.runtime.api.streaming",
-         "classSimpleName": "CursorProvider",
-         "methodName": "getOriginatingLocation",
-         "elementKind": "method",
-         "justification": "MULE-18595"
-       },
-       {
-         "code": "java.field.addedStaticField",
-         "new": "field org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
-         "package": "org.mule.runtime.api.util",
-         "classSimpleName": "MuleSystemProperties",
-         "fieldName": "TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
-         "elementKind": "field",
-         "justification": "MULE-18595"
-       },
-       {
+        {
+          "code": "java.field.serialVersionUIDUnchanged",
+          "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "serialVersionUID": "-3626429370741009489",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "fieldName": "serialVersionUID",
+          "elementKind": "field",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method boolean org.mule.runtime.api.metadata.MediaType::isDefinedInApp()",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "isDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.metadata.MediaType org.mule.runtime.api.metadata.MediaType::parseDefinedInApp(java.lang.String)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "parseDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES",
+          "elementKind": "field",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.util.Optional<org.mule.runtime.api.component.location.ComponentLocation> org.mule.runtime.api.streaming.CursorProvider<T extends org.mule.runtime.api.streaming.Cursor>::getOriginatingLocation()",
+          "package": "org.mule.runtime.api.streaming",
+          "classSimpleName": "CursorProvider",
+          "methodName": "getOriginatingLocation",
+          "elementKind": "method",
+          "justification": "MULE-18595"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-18595"
+        },
+        {
           "code": "java.class.added",
           "new": "class org.mule.runtime.api.connection.RemoteConnectionException",
           "package": "org.mule.runtime.api.connection",
