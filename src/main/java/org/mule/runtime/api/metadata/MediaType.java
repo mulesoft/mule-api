@@ -6,13 +6,15 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.lang.System.getProperty;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
 import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -23,11 +25,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
@@ -75,9 +81,15 @@ public final class MediaType implements Serializable {
 
   private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
 
+  private static List<String> KNOWN_PARAM_NAMES =
+      getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
+          ? asList(getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(",")) : emptyList();
+
   private final String primaryType;
   private final String subType;
   private final Map<String, String> params;
+  private boolean definedInApp = false;
+
   private transient Charset charset;
 
   private transient String rfcString;
@@ -95,6 +107,30 @@ public final class MediaType implements Serializable {
       return cachedMediaType;
     }
 
+    return parseMediaType(mediaType, false);
+  }
+
+  /**
+   * Parses a media type, defined by the developer in the App, from its string representation.
+   * <p>
+   * <b>WARNING</b> This method should not be used if the source of the mediaType was not defined by the APP Developer.
+   * For example if the source is a Transport user should use {@link MediaType#parse(String)}.
+   *
+   * @param mediaType String representation to be parsed
+   * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
+   * @return {@link MediaType} instance for the parsed {@code mediaType} string.
+   * @since 1.4, 1.3.1, 1.2.4, 1.1.7
+   */
+  public static MediaType parseDefinedInApp(String mediaType) {
+    MediaType cachedMediaType = cache.get(mediaType);
+    if (cachedMediaType != null) {
+      return cachedMediaType;
+    }
+
+    return parseMediaType(mediaType, true);
+  }
+
+  private static MediaType parseMediaType(String mediaType, boolean definedInApp) {
     try {
       MimeType mimeType = new MimeType(mediaType);
 
@@ -108,7 +144,15 @@ public final class MediaType implements Serializable {
         }
       }
 
-      MediaType value = new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset);
+      boolean isDefinedInApp = definedInApp || params.isEmpty();
+
+      if (!isDefinedInApp && !KNOWN_PARAM_NAMES.isEmpty()) {
+        final Set<String> paramNames = params.keySet();
+        isDefinedInApp = KNOWN_PARAM_NAMES.containsAll(paramNames);
+      }
+
+      final MediaType value =
+          new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset, isDefinedInApp);
 
       // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
       // in caching them).
@@ -125,6 +169,17 @@ public final class MediaType implements Serializable {
   }
 
   /**
+   * Sets the well known media type param names
+   * <p>
+   * <b>WARNING</b> This is only for testing
+   *
+   * @param knownParamNames The list of params
+   */
+  static void setKnownParamNames(List<String> knownParamNames) {
+    KNOWN_PARAM_NAMES = knownParamNames;
+  }
+
+  /**
    * Returns a media-type for. This would be the equivalent of the media type {@code "{primaryType}/{subType}"}.
    *
    * @param primaryType the left part of the represented type.
@@ -132,7 +187,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType) {
-    return new MediaType(primaryType, subType, emptyMap(), null);
+    return new MediaType(primaryType, subType, emptyMap(), null, true);
   }
 
   /**
@@ -145,15 +200,15 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for given parameters.
    */
   public static MediaType create(String primaryType, String subType, Charset charset) {
-    return new MediaType(primaryType, subType, emptyMap(), charset);
+    return new MediaType(primaryType, subType, emptyMap(), charset, true);
   }
 
-  private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset) {
+  private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset, boolean definedInApp) {
     this.primaryType = primaryType;
     this.subType = subType;
     this.params = params;
     this.charset = charset;
-
+    this.definedInApp = definedInApp;
     this.rfcString = calculateRfcString();
   }
 
@@ -168,9 +223,9 @@ public final class MediaType implements Serializable {
    */
   public MediaType withCharset(Charset charset) {
     if (charset == null) {
-      return new MediaType(this.getPrimaryType(), this.getSubType(), params, null);
+      return new MediaType(this.getPrimaryType(), this.getSubType(), params, null, definedInApp);
     } else {
-      return withCharsetCache.get(charset, c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c));
+      return withCharsetCache.get(charset, c -> new MediaType(this.getPrimaryType(), this.getSubType(), params, c, definedInApp));
     }
   }
 
@@ -182,6 +237,15 @@ public final class MediaType implements Serializable {
    */
   public MediaType withoutParameters() {
     return create(this.getPrimaryType(), this.getSubType());
+  }
+
+  /**
+   * Returns true if this mimeType was defined in the Mule App by the developer
+   * @return True if defined in the Mule App
+   * @since 1.2.4
+   */
+  public boolean isDefinedInApp() {
+    return definedInApp;
   }
 
   /**
@@ -246,7 +310,7 @@ public final class MediaType implements Serializable {
 
   @Override
   public int hashCode() {
-    return Objects.hash(primaryType, subType, charset, params);
+    return Objects.hash(primaryType, subType, charset, params, definedInApp);
   }
 
   @Override
@@ -265,6 +329,7 @@ public final class MediaType implements Serializable {
     return Objects.equals(primaryType, other.primaryType)
         && Objects.equals(subType, other.subType)
         && Objects.equals(params, other.params)
+        && Objects.equals(definedInApp, other.definedInApp)
         && Objects.equals(charset, other.charset);
   }
 
