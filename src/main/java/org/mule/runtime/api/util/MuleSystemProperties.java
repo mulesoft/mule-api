@@ -24,6 +24,14 @@ public final class MuleSystemProperties {
   public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
   /**
+   * A list of comma separated names of all known {@link org.mule.runtime.api.metadata.MediaType} param names. If they all match then
+   * {@link MediaType#isDefinedInApp()} returns true even if used the {@link MediaType#parse(String)} method.
+   *
+   * @since 1.4, 1.3.1, 1.2.4, 1.1.7
+   */
+  public static final String MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES = SYSTEM_PROPERTY_PREFIX + "mediatype.paramNames";
+
+  /**
    * Enables streaming statistics
    *
    * @since 4.1.6
