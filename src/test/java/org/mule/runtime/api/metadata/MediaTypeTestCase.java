@@ -9,6 +9,7 @@ package org.mule.runtime.api.metadata;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -170,6 +171,35 @@ public class MediaTypeTestCase {
 
     assertThat(parsed.matches(withCharset), is(true));
     assertThat(parsed.equals(withCharset), is(false));
+  }
+
+  @Test
+  public void takeIntoAccountKnownParamName() {
+    System.setProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES, "a,b,c");
+    try {
+      MediaType parse = MediaType.parse("test/foo;a=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;a=1;c=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;charset=UTF-8; a=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;charset=UTF-8");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;a=1;b=2;c=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+
+      //Unknown
+      parse = MediaType.parse("test/foo;charset=UTF-8;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+      parse = MediaType.parse("test/foo;a=UTF-8;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+      parse = MediaType.parse("test/foo;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+    } finally {
+      System.clearProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES);
+    }
   }
 
   @Test

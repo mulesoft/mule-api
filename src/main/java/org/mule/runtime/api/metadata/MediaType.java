@@ -15,11 +15,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -28,6 +30,7 @@ import javax.activation.MimeTypeParseException;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
@@ -129,6 +132,7 @@ public final class MediaType implements Serializable {
       String charsetParam = mimeType.getParameter(CHARSET_PARAM);
       Charset charset = isNotEmpty(charsetParam) ? Charset.forName(charsetParam) : null;
 
+
       Map<String, String> params = new HashMap<>();
       for (String paramName : (List<String>) list(mimeType.getParameters().getNames())) {
         if (!CHARSET_PARAM.equals(paramName)) {
@@ -136,8 +140,17 @@ public final class MediaType implements Serializable {
         }
       }
 
+      boolean isDefinedInApp = definedInApp || params.isEmpty();
+
+      if (!isDefinedInApp && System.getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null) {
+        final String knownProperties = System.getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES);
+        final String[] knownParamNames = knownProperties.split(",");
+        final Set<String> paramNames = params.keySet();
+        isDefinedInApp = Arrays.asList(knownParamNames).containsAll(paramNames);
+      }
+
       final MediaType value =
-          new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset, definedInApp || params.isEmpty());
+          new MediaType(mimeType.getPrimaryType(), mimeType.getSubType(), params, charset, isDefinedInApp);
 
       // multipart content types may have a random boundary, so we don't want to cache those (they won't be reused so no point
       // in caching them).
