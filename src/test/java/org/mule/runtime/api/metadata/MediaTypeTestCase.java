@@ -6,18 +6,10 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.sameInstance;
-import static org.junit.Assert.assertThat;
-import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -25,6 +17,19 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.Arrays;
+import java.util.Collections;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.sameInstance;
+import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
 
 public class MediaTypeTestCase {
 
@@ -39,6 +44,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getCharset().isPresent(), is(false));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s"));
+    assertThat(parsed.isDefinedInApp(), is(true));
   }
 
   @Test
@@ -50,6 +56,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("charset"), is(nullValue()));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8"));
+    assertThat(parsed.isDefinedInApp(), is(true));
   }
 
   @Test
@@ -62,6 +69,7 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("param2"), is("value2"));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(false));
   }
 
   @Test
@@ -75,6 +83,70 @@ public class MediaTypeTestCase {
     assertThat(parsed.getParameter("param2"), is("value2"));
     assertThat(parsed.getParameter(""), is(nullValue()));
     assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(false));
+  }
+
+
+  @Test
+  public void mimeTypeCharsetAndParamsDefinedInApp() {
+    final MediaType parsed = MediaType.parseDefinedInApp("m/s; param1=value1; param2=value2; charset=UTF-8");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().get(), is(UTF_8));
+    assertThat(parsed.getParameter("charset"), is(nullValue()));
+    assertThat(parsed.getParameter("param1"), is("value1"));
+    assertThat(parsed.getParameter("param2"), is("value2"));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s; charset=UTF-8; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(true));
+  }
+
+  @Test
+  public void mimeTypeAndParamsParamsDefinedInApp() {
+    final MediaType parsed = MediaType.parseDefinedInApp("m/s; param1=value1; param2=value2");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().isPresent(), is(false));
+    assertThat(parsed.getParameter("param1"), is("value1"));
+    assertThat(parsed.getParameter("param2"), is("value2"));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s; param1=\"value1\"; param2=\"value2\""));
+    assertThat(parsed.isDefinedInApp(), is(true));
+  }
+
+  @Test
+  public void onlyMimeTypeDefinedInApp() {
+    MediaType parsed = MediaType.parseDefinedInApp("m/s");
+    assertThat(parsed.getPrimaryType(), is("m"));
+    assertThat(parsed.getSubType(), is("s"));
+    assertThat(parsed.getCharset().isPresent(), is(false));
+    assertThat(parsed.getParameter(""), is(nullValue()));
+    assertThat(parsed.toRfcString(), is("m/s"));
+    assertThat(parsed.isDefinedInApp(), is(true));
+  }
+
+
+  @Test
+  public void cachingCorrectly() {
+    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo;a=1");
+    MediaType parsed = MediaType.parse("test/foo;a=1");
+    assertThat(parsedAppDefined.isDefinedInApp(), is(true));
+    assertThat(parsed, not(sameInstance(parsedAppDefined)));
+  }
+
+  @Test
+  public void shouldNotBeEqualParseAndParseDefined() {
+    MediaType parsedAppDefined = MediaType.parseDefinedInApp("test/foo");
+    MediaType parse = MediaType.parse("test/foo");
+
+    assertThat(parsedAppDefined, is(parse));
+    assertThat(parsedAppDefined.hashCode(), is(parse.hashCode()));
+
+    parsedAppDefined = MediaType.parseDefinedInApp("test/foo;a=1");
+    parse = MediaType.parse("test/foo;a=1");
+
+    assertThat(parsedAppDefined, not(is(parse)));
+    assertThat(parsedAppDefined.hashCode(), not(is(parse.hashCode())));
   }
 
   @Test
@@ -103,6 +175,35 @@ public class MediaTypeTestCase {
 
     assertThat(parsed.matches(withCharset), is(true));
     assertThat(parsed.equals(withCharset), is(false));
+  }
+
+  @Test
+  public void takeIntoAccountKnownParamName() {
+    MediaType.setKnownParamNames(asList("a", "b", "c"));
+    try {
+      MediaType parse = MediaType.parse("test/foo;a=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;a=1;c=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;charset=UTF-8; a=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;charset=UTF-8");
+      assertThat(parse.isDefinedInApp(), is(true));
+      parse = MediaType.parse("test/foo;a=1;b=2;c=1");
+      assertThat(parse.isDefinedInApp(), is(true));
+
+      //Unknown
+      parse = MediaType.parse("test/foo;charset=UTF-8;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+      parse = MediaType.parse("test/foo;a=UTF-8;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+      parse = MediaType.parse("test/foo;d=2");
+      assertThat(parse.isDefinedInApp(), is(false));
+    } finally {
+      MediaType.setKnownParamNames(emptyList());
+    }
   }
 
   @Test
