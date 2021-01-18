@@ -3,6 +3,44 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.serialVersionUIDUnchanged",
+          "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "serialVersionUID": "-3626429370741009489",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "fieldName": "serialVersionUID",
+          "elementKind": "field",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method boolean org.mule.runtime.api.metadata.MediaType::isDefinedInApp()",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "isDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.metadata.MediaType org.mule.runtime.api.metadata.MediaType::parseDefinedInApp(java.lang.String)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "parseDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.metadata.MediaType.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "fieldName": "MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES",
+          "elementKind": "field",
+          "justification": "MULE-19140"
+        },
+        {
           "code": "java.method.added",
           "new": "method java.lang.String org.mule.runtime.api.util.NameUtils::titleize(java.lang.String)",
           "package": "org.mule.runtime.api.util",
