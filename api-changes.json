@@ -170,6 +170,15 @@
           "fieldName": "STREAMING_VERBOSE_PROPERTY",
           "elementKind": "field",
           "justification": "MULE-18573: CursorProvider key collision at CursorProvider cache"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.util.Optional<java.lang.String> org.mule.runtime.api.healthcheck.ReadyStatus::statusDescription()",
+          "package": "org.mule.runtime.api.healthcheck",
+          "classSimpleName": "ReadyStatus",
+          "methodName": "statusDescription",
+          "elementKind": "method",
+          "justification": "AGW-4580"
         }
       ]
     }
