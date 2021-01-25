@@ -6,6 +6,10 @@
  */
 package org.mule.runtime.api.healthcheck;
 
+import static java.util.Optional.empty;
+
+import java.util.Optional;
+
 /**
  * Encapsulates the information regarding the ready status of an application.
  */
@@ -16,5 +20,13 @@ public interface ReadyStatus {
    *  false otherwise
    */
   boolean isReady();
+
+  /**
+   * @return A human-readable description of the current status of the application.
+   * In case of errors, expect a brief summary of what is wrong.
+   */
+  default Optional<String> statusDescription() {
+    return empty();
+  }
 
 }
