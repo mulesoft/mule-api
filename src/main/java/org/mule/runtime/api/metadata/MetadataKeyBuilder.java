@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static java.util.stream.Collectors.toCollection;
 import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
 
 import org.mule.api.annotation.NoExtend;
@@ -13,7 +14,6 @@ import org.mule.api.annotation.NoExtend;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * An implementation of the builder design pattern to create a new {@link MetadataKey} instance.
@@ -116,7 +116,7 @@ public class MetadataKeyBuilder {
    */
   public MetadataKey build() {
     String name = isNotEmpty(displayName) ? displayName : id;
-    childs.addAll(unbuiltChilds.stream().map(MetadataKeyBuilder::build).collect(Collectors.toSet()));
+    childs.addAll(unbuiltChilds.stream().map(MetadataKeyBuilder::build).collect(toCollection(LinkedHashSet::new)));
     return new DefaultMetadataKey(id, name, properties, childs, partName);
   }
 }
