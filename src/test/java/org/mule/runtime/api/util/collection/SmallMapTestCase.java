@@ -7,13 +7,16 @@
 package org.mule.runtime.api.util.collection;
 
 import static java.lang.String.valueOf;
+import static java.util.Collections.singletonMap;
 import static java.util.stream.IntStream.range;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mule.runtime.api.util.collection.Collectors.toImmutableList;
+import static org.mule.runtime.api.util.collection.SmallMap.unmodifiable;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,6 +26,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 
+import io.qameta.allure.Issue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -251,5 +255,30 @@ public class SmallMapTestCase {
     }
 
     throw new NoSuchElementException();
+  }
+
+  @Test
+  @Issue("MULE-19180")
+  public void unmodifiableMapUsingSmallMap() {
+    // Create unmodifiable map
+    Map<String, String> unmodifiableMap = unmodifiable(map);
+    assertThat(map, not(sameInstance(unmodifiableMap)));
+
+    // An other unmodifiable from previous one
+    Map<String, String> unmodifiable2 = unmodifiable(unmodifiableMap);
+    assertThat(unmodifiableMap, is(sameInstance(unmodifiable2)));
+  }
+
+  @Test
+  @Issue("MULE-19180")
+  public void unmodifiableMapUsingMap() {
+    // Create unmodifiable map
+    Map<String, String> source = singletonMap("key", "value");
+    Map<String, String> unmodifiableMap = unmodifiable(source);
+    assertThat(source, not(sameInstance(unmodifiableMap)));
+
+    // An other unmodifiable from previous one
+    Map<String, String> unmodifiable2 = unmodifiable(unmodifiableMap);
+    assertThat(unmodifiableMap, is(sameInstance(unmodifiable2)));
   }
 }

@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.util.collection;
 
-import static java.util.Collections.unmodifiableMap;
+import static org.mule.runtime.internal.util.collection.UnmodifiableMap.unmodifiableMap;
 
 import java.io.Serializable;
 import java.util.Collection;
