@@ -20,7 +20,7 @@ import java.util.function.Function;
  * 
  * @param <K> the generic type of the keys
  * @param <V> the generic type of the values
- * @since 1.4, 1.3.1, 1.2.4
+ * @since 1.4, 1.3.1
  */
 public class UnmodifiableMap<K, V> implements Map<K, V>, Serializable {
 
