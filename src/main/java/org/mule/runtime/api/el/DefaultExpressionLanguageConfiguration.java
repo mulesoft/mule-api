@@ -6,18 +6,28 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.runtime.api.config.FeatureFlaggingService;
+
 import java.nio.charset.Charset;
 
 class DefaultExpressionLanguageConfiguration implements ExpressionLanguageConfiguration {
 
   private final Charset charset;
 
-  DefaultExpressionLanguageConfiguration(Charset charset) {
+  private final FeatureFlaggingService featureFlaggingService;
+
+  DefaultExpressionLanguageConfiguration(Charset charset, FeatureFlaggingService featureFlaggingService) {
     this.charset = charset;
+    this.featureFlaggingService = featureFlaggingService;
   }
 
   @Override
   public Charset getDefaultEncoding() {
     return charset;
+  }
+
+  @Override
+  public FeatureFlaggingService getFeatureFlaggingService() {
+    return featureFlaggingService;
   }
 }

@@ -8,11 +8,15 @@ package org.mule.runtime.api.el;
 
 import static java.nio.charset.Charset.defaultCharset;
 
+import org.mule.runtime.api.config.FeatureFlaggingService;
+
 import java.nio.charset.Charset;
 
 public class ExpressionLanguageConfigurationBuilder {
 
   private Charset charset = defaultCharset();
+
+  private FeatureFlaggingService featureFlaggingService;
 
   ExpressionLanguageConfigurationBuilder() {}
 
@@ -21,8 +25,13 @@ public class ExpressionLanguageConfigurationBuilder {
     return this;
   }
 
+  public ExpressionLanguageConfigurationBuilder featureFlaggingService(FeatureFlaggingService featureFlaggingService) {
+    this.featureFlaggingService = featureFlaggingService;
+    return this;
+  }
+
   public ExpressionLanguageConfiguration build() {
-    return new DefaultExpressionLanguageConfiguration(charset);
+    return new DefaultExpressionLanguageConfiguration(charset, featureFlaggingService);
   }
 
 }

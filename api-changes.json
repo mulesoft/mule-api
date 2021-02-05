@@ -3,6 +3,17 @@
     "revapi": {
       "ignore": [
        {
+         "code": "java.annotation.added",
+         "old": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
+         "new": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
+         "annotationType": "org.mule.api.annotation.NoImplement",
+         "annotation": "@org.mule.api.annotation.NoImplement",
+         "package": "org.mule.runtime.api.el",
+         "classSimpleName": "ExpressionLanguageConfiguration",
+         "elementKind": "interface",
+         "justification": "MULE-19197"
+       },
+       {
          "code": "java.field.serialVersionUIDUnchanged",
          "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
          "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",

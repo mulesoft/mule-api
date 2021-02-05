@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.config.FeatureFlaggingService;
+
 import java.nio.charset.Charset;
 
 /**
@@ -13,6 +16,7 @@ import java.nio.charset.Charset;
  *
  * @since 1.2
  */
+@NoImplement
 public interface ExpressionLanguageConfiguration {
 
   static ExpressionLanguageConfigurationBuilder builder() {
@@ -23,5 +27,13 @@ public interface ExpressionLanguageConfiguration {
    * @return the encoding that should be use by default by the expression language
    */
   Charset getDefaultEncoding();
+
+  /**
+   * Returns an instance of FeatureFlaggingService with per deployment configured {@link org.mule.runtime.api.config.Feature}s
+   * 
+   * @return
+   * @since 1.4.0, 1.3.1
+   */
+  FeatureFlaggingService getFeatureFlaggingService();
 
 }
