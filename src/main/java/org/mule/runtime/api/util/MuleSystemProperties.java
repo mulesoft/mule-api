@@ -289,6 +289,14 @@ public final class MuleSystemProperties {
   public static final String HONOUR_RESERVED_PROPERTIES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "honour.reserved.properties";
 
   /**
+   * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
+   * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
+   * 
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  public static final String HANDLE_SPLITTER_EXCEPTION_PROPERTY = "mule.dw.handle_splitter_exception";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
