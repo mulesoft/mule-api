@@ -83,7 +83,8 @@ public final class MediaType implements Serializable {
 
   private static List<String> KNOWN_PARAM_NAMES =
       getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
-          ? asList(getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(",")) : emptyList();
+          ? asList(getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(","))
+          : emptyList();
 
   private final String primaryType;
   private final String subType;
@@ -115,8 +116,8 @@ public final class MediaType implements Serializable {
   /**
    * Parses a media type, defined by the developer in the App, from its string representation.
    * <p>
-   * <b>WARNING</b> This method should not be used if the source of the mediaType was not defined by the APP Developer.
-   * For example if the source is a Transport user should use {@link MediaType#parse(String)}.
+   * <b>WARNING</b> This method should not be used if the source of the mediaType was not defined by the APP Developer. For
+   * example if the source is a Transport user should use {@link MediaType#parse(String)}.
    *
    * @param mediaType String representation to be parsed
    * @throws IllegalArgumentException if the {@code mimeType} cannot be parsed.
@@ -284,6 +285,7 @@ public final class MediaType implements Serializable {
 
   /**
    * Returns true if this mimeType was defined in the Mule App by the developer
+   * 
    * @return True if defined in the Mule App
    * @since 1.2.4
    */
@@ -409,7 +411,7 @@ public final class MediaType implements Serializable {
 
     if (!params.isEmpty()) {
       params.forEach((k, v) -> {
-        buffer.append("; ").append(k).append("=\"").append(v).append("\"");
+        buffer.append("; ").append(k).append("=\"").append(quote(v)).append("\"");
       });
     }
 
@@ -424,4 +426,21 @@ public final class MediaType implements Serializable {
       out.writeObject(null);
     }
   }
+
+  private String quote(String value) {
+    int length = value.length();
+    StringBuffer buffer = new StringBuffer();
+
+    buffer.ensureCapacity(new Double(length * 1.5D).intValue());
+
+    for (int i = 0; i < length; i++) {
+      char c = value.charAt(i);
+      if (c == '\\' || c == '"') {
+        buffer.append('\\');
+      }
+      buffer.append(c);
+    }
+    return buffer.toString();
+  }
 }
+

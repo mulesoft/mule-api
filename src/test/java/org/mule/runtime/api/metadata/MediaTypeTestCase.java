@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.HashMap;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -319,6 +320,19 @@ public class MediaTypeTestCase {
     final Object deserialized = new ObjectInputStream(new ByteArrayInputStream(os.toByteArray())).readObject();
 
     assertThat(deserialized, is(withCharset));
+  }
+
+  @Test
+  public void parseAndGenerateMimeTypeCorrectly() {
+    final String originalMediaTypeString = "application/csv; quote=\"\\\"\"; separator=\"\\\\\"";
+    final MediaType mediaType = MediaType.parse(originalMediaTypeString);
+    assertThat(mediaType.getParameter("quote"), is("\""));
+    assertThat(mediaType.getParameter("separator"), is("\\"));
+    final HashMap<String, String> properties = new HashMap<>();
+    properties.put("quote", mediaType.getParameter("quote"));
+    properties.put("separator", mediaType.getParameter("separator"));
+    final MediaType newMediaType = MediaType.parse("application/csv").withParamaters(properties);
+    assertThat(newMediaType.toRfcString(), is(originalMediaTypeString));
   }
 
   @Test
