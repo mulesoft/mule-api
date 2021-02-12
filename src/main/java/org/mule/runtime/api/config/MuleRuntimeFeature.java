@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -61,7 +62,12 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.1
    */
   HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
-      "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY);
+      "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+
+  HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE(
+      "Whether resolution of operation retry policy template should prioritize operation overriding", "MULE-19160",
+      "4.4.0, 4.3.1",
+      HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY);
 
   private final String description;
   private final String issueId;
