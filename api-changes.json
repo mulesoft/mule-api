@@ -2,6 +2,15 @@
   "1.3.1": {
     "revapi": {
       "ignore": [
+		 {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19160: retry policies for operations do not override connection provider policies"
+        },
         {
           "code": "java.field.serialVersionUIDUnchanged",
           "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
