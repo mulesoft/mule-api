@@ -95,6 +95,14 @@ public final class MuleSystemProperties {
    * @since 1.2.4
    */
   public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
+  
+  /**
+   * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
+   *
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  public static final String BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY =
+          SYSTEM_PROPERTY_PREFIX + "batch.fixed.aggregator.transaction.record.buffer";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
