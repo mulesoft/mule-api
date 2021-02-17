@@ -260,7 +260,7 @@ public final class MuleSystemProperties {
    */
   public static final String HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "honour.operation.retry.policy.template.override";
-  
+
   /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
    * 
