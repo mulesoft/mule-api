@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 
 /**
  * <p>
@@ -48,7 +49,16 @@ import static java.util.Optional.ofNullable;
  * @since 4.4.0 4.3.1 4.2.3
  */
 public enum MuleRuntimeFeature implements Feature {
-  ;
+
+  /**
+   * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
+   * 
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
+      "If set to true, then fixed batch aggregator will only commit when a full block is processed.",
+      "EE-7443",
+      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY);
 
   private final String description;
   private final String issue;
