@@ -102,7 +102,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY =
-          SYSTEM_PROPERTY_PREFIX + "batch.fixed.aggregator.transaction.record.buffer";
+      SYSTEM_PROPERTY_PREFIX + "batch.fixed.aggregator.transaction.record.buffer";
 
 
   /**

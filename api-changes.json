@@ -91,6 +91,15 @@
            "fieldName": "STREAMING_VERBOSE_PROPERTY",
            "elementKind": "field",
            "justification": "MULE-18573: CursorProvider key collision at CursorProvider cache"
+        }, 
+        {
+           "code": "java.field.addedStaticField",
+           "new": "field org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY",
+           "package": "org.mule.runtime.api.util",
+           "classSimpleName": "MuleSystemProperties",
+           "fieldName": "BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY",
+           "elementKind": "field",
+           "justification": "MULE-19218: Add feature flag to Remove intermediate commits from batch:aggregator"
         }
       ]
     }
