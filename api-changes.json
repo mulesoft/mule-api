@@ -179,6 +179,15 @@
           "methodName": "statusDescription",
           "elementKind": "method",
           "justification": "AGW-4580"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19218: Add feature flag to Remove intermediate commits from batch:aggregator"
         }
       ]
     }
