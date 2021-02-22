@@ -6,15 +6,13 @@
  */
 package org.mule.runtime.api.notification;
 
-import java.time.LocalDateTime;
-
 public class PollingSourceNotificationInfo {
 
-  private LocalDateTime dispatchTimestamp;
   private String pollId;
 
   public PollingSourceNotificationInfo(String pollId) {
     this.pollId = pollId;
-    this.dispatchTimestamp = LocalDateTime.now();
+    // The notification already has the timestamp
+    // TODO: see what information is needed, it might be possible that this class is not necessary.
   }
 }
