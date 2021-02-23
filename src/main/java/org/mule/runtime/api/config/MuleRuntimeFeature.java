@@ -11,7 +11,6 @@ import java.util.Optional;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -64,11 +63,6 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
       "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
-
-  HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE(
-      "Whether resolution of operation retry policy template should prioritize operation overriding", "MULE-19160",
-      "4.4.0, 4.3.1",
-      HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY),
 
   /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
