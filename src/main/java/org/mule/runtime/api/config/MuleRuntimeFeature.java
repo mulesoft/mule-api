@@ -9,7 +9,6 @@ package org.mule.runtime.api.config;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
-import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
@@ -78,19 +77,9 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   HANDLE_SPLITTER_EXCEPTION(
-      "If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues.",
+      " If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues.",
       "DW-383",
-      "4.4.0, 4.3.1, 4.2.3", HANDLE_SPLITTER_EXCEPTION_PROPERTY),
-
-  /**
-   * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
-   * 
-   * @since 4.4.0, 4.3.1, 4.2.3
-   */
-  BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
-      "If set to true, then fixed batch aggregator will only commit when a full block is processed.",
-      "EE-7443",
-      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY);
+      "4.4.0, 4.3.1, 4.2.3", HANDLE_SPLITTER_EXCEPTION_PROPERTY);
 
   private final String description;
   private final String issueId;
