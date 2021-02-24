@@ -270,6 +270,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "batch.fixed.aggregator.transaction.record.buffer";
 
   /**
+   * If set to true, the connection exceptions will be computed to trigger alerts.
+   * 
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
