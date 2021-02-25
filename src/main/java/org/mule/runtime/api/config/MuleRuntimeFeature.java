@@ -6,13 +6,14 @@
  */
 package org.mule.runtime.api.config;
 
-import java.util.Optional;
-
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+
+import java.util.Optional;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -90,7 +91,17 @@ public enum MuleRuntimeFeature implements Feature {
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
       "If set to true, then fixed batch aggregator will only commit when a full block is processed.",
       "EE-7443",
-      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY);
+      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
+
+  /**
+   * If set to true, the connection errors will be taken into account to trigger alerts.
+   * 
+   * @since 4.4.0, 4.3.1
+   */
+  COMPUTE_CONNECTION_ERRORS_IN_STATS(
+      " If set to true, the connection errors will be computed to trigger alerts.",
+      "DW-383",
+      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY);
 
   private final String description;
   private final String issueId;
