@@ -30,7 +30,7 @@ public final class MuleFatalException extends MuleRuntimeException {
 
   /**
    * @param message the exception message
-   * @param cause the exception that triggered this exception
+   * @param cause   the exception that triggered this exception
    */
   public MuleFatalException(I18nMessage message, Throwable cause) {
     super(message, cause);

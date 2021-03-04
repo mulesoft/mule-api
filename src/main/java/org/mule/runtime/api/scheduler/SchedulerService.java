@@ -126,7 +126,7 @@ public interface SchedulerService extends Service {
    * If the provided {@code config} has {@code maxConcurrentTasks} set, exceeding tasks will block the caller, until a running
    * task is finished.
    *
-   * @param config allows customization of the returned scheduler.
+   * @param config             allows customization of the returned scheduler.
    * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
    *
    * @return a scheduler that runs {@code cpu-light} tasks.
@@ -142,7 +142,7 @@ public interface SchedulerService extends Service {
    * If the provided {@code config} has {@code maxConcurrentTasks} set, exceeding tasks will block the caller, until a running
    * task is finished.
    *
-   * @param config allows customization of the returned scheduler.
+   * @param config             allows customization of the returned scheduler.
    * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
    *
    * @return a scheduler that runs {@code blocking I/O} tasks.
@@ -159,7 +159,7 @@ public interface SchedulerService extends Service {
    * If the provided {@code config} has {@code maxConcurrentTasks} set, exceeding tasks will block the caller, until a running
    * task is finished.
    *
-   * @param config allows customization of the returned scheduler.
+   * @param config             allows customization of the returned scheduler.
    * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
    *
    * @return a scheduler that runs {@code CPU intensive} tasks.

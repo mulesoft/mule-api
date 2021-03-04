@@ -24,7 +24,7 @@ public interface NotificationListenerRegistry {
    * this class triggering listeners when a Mule Event is received).
    *
    * @param listener the listener to register
-   * @param <N> the concrete type of the notification to be handled by the {@code listener}
+   * @param <N>      the concrete type of the notification to be handled by the {@code listener}
    */
   <N extends Notification> void registerListener(NotificationListener<N> listener);
 
@@ -35,7 +35,7 @@ public interface NotificationListenerRegistry {
    *
    * @param listener the listener to register
    * @param selector a filter to apply on a fired {@link Notification} before calling the {@code listener} with it. Non-null.
-   * @param <N> the concrete type of the notification to be handled by the {@code listener}
+   * @param <N>      the concrete type of the notification to be handled by the {@code listener}
    */
   <N extends Notification> void registerListener(NotificationListener<N> listener, Predicate<N> selector);
 
@@ -44,7 +44,7 @@ public interface NotificationListenerRegistry {
    * method should return without exception
    *
    * @param listener the listener to unregister
-   * @param <N> the concrete type of the notification handled by the {@code listener}
+   * @param <N>      the concrete type of the notification handled by the {@code listener}
    */
   <N extends Notification> void unregisterListener(NotificationListener<N> listener);
 

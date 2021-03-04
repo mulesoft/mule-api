@@ -37,17 +37,18 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   /**
    * Creates a new model
    *
-   * @param name name of the artifact
-   * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
-   * @param product the target product for this artifact
+   * @param name                             name of the artifact
+   * @param minMuleVersion                   minimum Mule Runtime version that requires to work correctly.
+   * @param product                          the target product for this artifact
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
-   * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
-   * @param configs the application configuration files
-   * @param redeploymentEnabled indicates if the artifact can be redeployed or not
-   * @param secureProperties the list of properties names that must be handled as secrets. Those properties names won't be shown
-   *        in the runtime manager UI when looking at the deployment configuration of the artifact.
-   * @param logConfigFile the location of the file to use as the log4j configuration for this artifact instead of the default. May
-   *        be null.
+   * @param bundleDescriptorLoader           indicates how to load the bundle descriptor.
+   * @param configs                          the application configuration files
+   * @param redeploymentEnabled              indicates if the artifact can be redeployed or not
+   * @param secureProperties                 the list of properties names that must be handled as secrets. Those properties names
+   *                                         won't be shown in the runtime manager UI when looking at the deployment configuration
+   *                                         of the artifact.
+   * @param logConfigFile                    the location of the file to use as the log4j configuration for this artifact instead
+   *                                         of the default. May be null.
    */
   protected MuleDeployableModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,

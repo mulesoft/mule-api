@@ -41,7 +41,7 @@ public final class MuleArtifactLoaderDescriptorBuilder {
    * <p>
    * If a value is already associated with the {@code key}, then it is overridden with the new {@code value}
    *
-   * @param key the property's key
+   * @param key   the property's key
    * @param value the property's value
    * @return {@code this} builder
    */

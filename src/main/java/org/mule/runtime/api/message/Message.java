@@ -128,7 +128,7 @@ public interface Message extends Serializable {
      * <p>
      * If you already have a {@link Collection} instance, use {@link #collectionValue(Collection, Class)} instead.
      *
-     * @param value the iterator for the collection content
+     * @param value    the iterator for the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the payload is null
@@ -143,7 +143,7 @@ public interface Message extends Serializable {
      * {@link MediaType} in which case this will be used instead. See
      * {@link org.mule.runtime.api.metadata.DataTypeBuilder#fromObject(Object)}
      *
-     * @param value the collection content
+     * @param value    the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the content is null
@@ -167,8 +167,8 @@ public interface Message extends Serializable {
     /**
      * Sets the map value for the {@link Message}'s payload to be built.
      *
-     * @param value the map content
-     * @param keyType the map's key type
+     * @param value     the map content
+     * @param keyType   the map's key type
      * @param valueType the map's value type
      * @return this builder
      * @throws NullPointerException if the content is null

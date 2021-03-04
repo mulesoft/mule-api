@@ -37,10 +37,10 @@ public final class SampleDataProviderModel {
   /**
    * Creates a new instance
    *
-   * @param parameters the list of parameters that the Sample Data Provider takes into account for its resolution
-   * @param providerId the id which unequivocally identifies each provider
+   * @param parameters            the list of parameters that the Sample Data Provider takes into account for its resolution
+   * @param providerId            the id which unequivocally identifies each provider
    * @param requiresConfiguration indicates if the configuration is required to fetch the sample
-   * @param requiresConnection indicates if the connection is required to fetch the sample
+   * @param requiresConnection    indicates if the connection is required to fetch the sample
    */
   public SampleDataProviderModel(List<ActingParameterModel> parameters,
                                  String providerId,

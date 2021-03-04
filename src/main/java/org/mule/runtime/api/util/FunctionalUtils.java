@@ -39,8 +39,8 @@ public class FunctionalUtils {
    * If the given {@code optional} is not present, then it returns the optional provided by the {@code orElse} supplier
    *
    * @param optional an {@link Optional}
-   * @param orElse a {@link Supplier} that provides the return value in case the {@code optional} is empty
-   * @param <T> the generic type of the optional item
+   * @param orElse   a {@link Supplier} that provides the return value in case the {@code optional} is empty
+   * @param <T>      the generic type of the optional item
    * @return an {@link Optional}
    */
   public static <T> Optional<T> or(Optional<T> optional, Supplier<Optional<T>> orElse) {
@@ -51,10 +51,10 @@ public class FunctionalUtils {
    * If the {@code optional} is present, it executes the {@code ifPresent} consumer. Otherwise, it executes the {@code orElse}
    * runnable
    *
-   * @param optional an {@link Optional} value
+   * @param optional  an {@link Optional} value
    * @param ifPresent the consumer to execute if the value is present
-   * @param orElse a fallback runnable in case the optional is empty.
-   * @param <T> the generic type of the optional's value.
+   * @param orElse    a fallback runnable in case the optional is empty.
+   * @param <T>       the generic type of the optional's value.
    */
   public static <T> void ifPresent(Optional<T> optional, Consumer<? super T> ifPresent, Runnable orElse) {
     if (optional.isPresent()) {

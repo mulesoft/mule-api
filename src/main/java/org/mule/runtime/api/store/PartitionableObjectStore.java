@@ -32,7 +32,7 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
    *
    * @param key the identifier of the object to check
    * @return <code>true</code> if the key is stored or <code>false</code> no value was stored for the key.
-   * @throws ObjectStoreException if the given key is <code>null</code>.
+   * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if any implementation-specific error occured, e.g. when the store is not available
    * @code partitionName the partition in which the key is to be tested
    */
@@ -41,12 +41,12 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
   /**
    * Stores the given Object in the given {@code partitionName}
    *
-   * @param key the identifier for <code>value</code>
+   * @param key   the identifier for <code>value</code>
    * @param value the Object to store with <code>key</code>
-   * @throws ObjectStoreException if the given key cannot be stored or is <code>null</code>.
+   * @throws ObjectStoreException             if the given key cannot be stored or is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
-   * @throws ObjectAlreadyExistsException if an attempt is made to store an object for a key that already has an object
-   *         associated.
+   * @throws ObjectAlreadyExistsException     if an attempt is made to store an object for a key that already has an object
+   *                                          associated.
    * @code partitionName the partition in which the value is to be stored
    */
   void store(String key, T value, String partitionName) throws ObjectStoreException;
@@ -57,9 +57,9 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
    * @param key the identifier of the object to retrieve.
    * @return the object associated with the given key. If no object for the given key was found this method throws an
    *         {@link ObjectDoesNotExistException}.
-   * @throws ObjectStoreException if the given key is <code>null</code>.
+   * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
-   * @throws ObjectDoesNotExistException if no value for the given key was previously stored.
+   * @throws ObjectDoesNotExistException      if no value for the given key was previously stored.
    * @code partitionName the partition from which the value is to be retrieved
    */
   T retrieve(String key, String partitionName) throws ObjectStoreException;
@@ -69,8 +69,8 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
    *
    * @param key the identifier of the object to remove.
    * @return the object that was previously stored for the given key
-   * @throws ObjectStoreException if the given key is <code>null</code> or if the store is not available or any other
-   *         implementation-specific error occured
+   * @throws ObjectStoreException        if the given key is <code>null</code> or if the store is not available or any other
+   *                                     implementation-specific error occured
    * @throws ObjectDoesNotExistException if no value for the given key was previously stored.
    * @code partitionName the partition from which the value is to be removed
    */

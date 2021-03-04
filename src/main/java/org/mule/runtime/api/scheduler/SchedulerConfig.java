@@ -177,8 +177,8 @@ public class SchedulerConfig {
    * Sets the graceful shutdown timeout to use when stopping the target {@link Scheduler}.
    *
    * @param shutdownTimeoutSupplier a supplier of the value of the timeout to use when gracefully stopping the target
-   *        {@link Scheduler}, expressed in the provided {@link TimeUnit}.
-   * @param shutdownTimeoutUnit the unit of the timeout to use when gracefully stopping the target {@link Scheduler}.
+   *                                {@link Scheduler}, expressed in the provided {@link TimeUnit}.
+   * @param shutdownTimeoutUnit     the unit of the timeout to use when gracefully stopping the target {@link Scheduler}.
    * @return the updated configuration
    */
   public SchedulerConfig withShutdownTimeout(Supplier<Long> shutdownTimeoutSupplier, TimeUnit shutdownTimeoutUnit) {
@@ -194,8 +194,8 @@ public class SchedulerConfig {
   /**
    * Sets the graceful shutdown timeout to use when stopping the target {@link Scheduler}.
    *
-   * @param shutdownTimeout the value of the timeout to use when gracefully stopping the target {@link Scheduler}, expressed in
-   *        the provided {@link TimeUnit}.
+   * @param shutdownTimeout     the value of the timeout to use when gracefully stopping the target {@link Scheduler}, expressed
+   *                            in the provided {@link TimeUnit}.
    * @param shutdownTimeoutUnit the unit of the timeout to use when gracefully stopping the target {@link Scheduler}.
    * @return the updated configuration
    */

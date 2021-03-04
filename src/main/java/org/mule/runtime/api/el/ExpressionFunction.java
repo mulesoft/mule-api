@@ -25,7 +25,7 @@ public interface ExpressionFunction {
    * Function logic to be executed.
    *
    * @param parameters array of parameters that should match the indicated ones in {@link #parameters()}.
-   * @param context the current {@link BindingContext} at the time of execution.
+   * @param context    the current {@link BindingContext} at the time of execution.
    * @return the function outcome that should match the one indicated in {@link #returnType()}.
    */
   Object call(Object[] parameters, BindingContext context);

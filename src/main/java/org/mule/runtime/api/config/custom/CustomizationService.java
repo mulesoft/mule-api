@@ -30,9 +30,9 @@ public interface CustomizationService {
    * <p>
    * The service identifier can be used to locate the service in the mule registry.
    *
-   * @param serviceId identifier of the services implementation to customize.
+   * @param serviceId   identifier of the services implementation to customize.
    * @param serviceImpl the service implementation instance
-   * @param <T> the service type
+   * @param <T>         the service type
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
@@ -42,9 +42,9 @@ public interface CustomizationService {
    * <p>
    * The service class can be annotated with {@code javax.inject.Inject} and implement methods from {@link Lifecycle}.
    *
-   * @param serviceId identifier of the services implementation to customize.
+   * @param serviceId    identifier of the services implementation to customize.
    * @param serviceClass the service class
-   * @param <T> the service type
+   * @param <T>          the service type
    */
   <T> void overrideDefaultServiceClass(String serviceId, Class<T> serviceClass);
 
@@ -55,9 +55,9 @@ public interface CustomizationService {
    * <p>
    * The service identifier can be used to locate the service in the mule registry.
    *
-   * @param serviceId identifier of the services implementation to register. Non empty.
+   * @param serviceId   identifier of the services implementation to register. Non empty.
    * @param serviceImpl the service implementation instance. Non null.
-   * @param <T> the service type
+   * @param <T>         the service type
    */
   <T> void registerCustomServiceImpl(String serviceId, T serviceImpl);
 
@@ -68,9 +68,9 @@ public interface CustomizationService {
    * <p>
    * The service class can be annotated with {@code javax.inject.Inject} and implement methods from {@link Lifecycle}.
    *
-   * @param serviceId identifier of the services implementation to register. Non empty.
+   * @param serviceId    identifier of the services implementation to register. Non empty.
    * @param serviceClass the service class. Non null.
-   * @param <T> the service type
+   * @param <T>          the service type
    */
   <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass);
 }

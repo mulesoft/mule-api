@@ -44,8 +44,8 @@ public interface FlowInterceptor {
    * given {@code event}.
    *
    * @param flowName the name of the flow being intercepted.
-   * @param event an object that contains the state of the event to be dispatched to the flow. It may be modified by calling its
-   *        mutator methods.
+   * @param event    an object that contains the state of the event to be dispatched to the flow. It may be modified by calling
+   *                 its mutator methods.
    */
   default void before(String flowName, InterceptionEvent event) {};
 
@@ -72,10 +72,11 @@ public interface FlowInterceptor {
    * </ul>
    *
    * @param flowName the name of the flow being intercepted.
-   * @param event an object that contains the state of the event to be dispatched to the flow. It may be modified by calling its
-   *        mutator methods.
-   * @param action when something other than continuing the interception is desired, the corresponding method on this object must
-   *        be called. The methods on this object return a {@link CompletableFuture} that may be used to return from this method.
+   * @param event    an object that contains the state of the event to be dispatched to the flow. It may be modified by calling
+   *                 its mutator methods.
+   * @param action   when something other than continuing the interception is desired, the corresponding method on this object
+   *                 must be called. The methods on this object return a {@link CompletableFuture} that may be used to return from
+   *                 this method.
    * @return a non-null {@link CompletableFuture} for modifying the intercepted {@link InterceptionEvent event} after this method
    *         returns.
    */
@@ -97,8 +98,8 @@ public interface FlowInterceptor {
    * the {@link #after(String, InterceptionEvent, Optional) afters} of the already called handlers will still be called.
    *
    * @param flowName the name of the flow being intercepted.
-   * @param event the result of the component.
-   * @param thrown the exception thrown by the intercepted component, if any.
+   * @param event    the result of the component.
+   * @param thrown   the exception thrown by the intercepted component, if any.
    */
   default void after(String flowName, InterceptionEvent event, Optional<Throwable> thrown) {}
 }

@@ -45,7 +45,7 @@ public interface SerializationProtocol {
    * Serializes the given object and writes the result into {@code out}
    *
    * @param object the object to be serialized. Might be <code>null</code>
-   * @param out an {@link OutputStream} where the result will be written
+   * @param out    an {@link OutputStream} where the result will be written
    * @return an array of {@link byte}
    * @throws SerializationException in case of unexpected exception
    */
@@ -63,7 +63,7 @@ public interface SerializationProtocol {
    * @param bytes an array of byte that an original object was serialized into
    * @return the deserialized object
    * @throws IllegalArgumentException if {@code bytes} is {@code null}
-   * @throws SerializationException in case of unexpected exception
+   * @throws SerializationException   in case of unexpected exception
    */
   <T> T deserialize(byte[] bytes) throws SerializationException;
 
@@ -73,11 +73,11 @@ public interface SerializationProtocol {
    * If the obtained object implements {@link org.mule.runtime.core.privileged.store.DeserializationPostInitialisable} then this
    * serializer will be responsible for properly initializing the object before returning it.
    *
-   * @param bytes an array of byte that an original object was serialized into
+   * @param bytes       an array of byte that an original object was serialized into
    * @param classLoader the {@link java.lang.ClassLoader} to deserialize with
    * @return the deserialized object
    * @throws IllegalArgumentException if {@code bytes} is {@code null}
-   * @throws SerializationException in case of unexpected exception
+   * @throws SerializationException   in case of unexpected exception
    */
   <T> T deserialize(byte[] bytes, ClassLoader classLoader) throws SerializationException;
 
@@ -94,7 +94,7 @@ public interface SerializationProtocol {
    * @param inputStream a stream of bytes that an original object was serialized into
    * @return the deserialized object
    * @throws IllegalArgumentException if {@code inputStream} is {@code null}
-   * @throws SerializationException in case of unexpected exception
+   * @throws SerializationException   in case of unexpected exception
    */
   <T> T deserialize(InputStream inputStream) throws SerializationException;
 
@@ -110,7 +110,7 @@ public interface SerializationProtocol {
    * @param classLoader the {@link java.lang.ClassLoader} to deserialize with
    * @return the deserialized object
    * @throws IllegalArgumentException if {@code inputStream} is {@code null}
-   * @throws SerializationException in case of unexpected exception
+   * @throws SerializationException   in case of unexpected exception
    */
   <T> T deserialize(InputStream inputStream, ClassLoader classLoader) throws SerializationException;
 }

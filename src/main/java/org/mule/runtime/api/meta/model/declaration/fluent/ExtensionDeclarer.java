@@ -260,7 +260,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
    * Registers the given {@code subType} as an implementation of the {@code baseType}
    *
    * @param baseType a base type
-   * @param subType a sub type implementation
+   * @param subType  a sub type implementation
    * @return {@code this} declarer
    */
   public ExtensionDeclarer withSubType(MetadataType baseType, MetadataType subType) {

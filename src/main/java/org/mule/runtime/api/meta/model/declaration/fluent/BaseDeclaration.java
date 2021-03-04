@@ -49,7 +49,7 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
    * Returns the model property registered under {@code key}
    *
    * @param propertyType the property's {@link Class}
-   * @param <P> the generic type for the response value
+   * @param <P>          the generic type for the response value
    * @return the associated value wrapped on an {@link Optional}
    */
   public <P extends ModelProperty> Optional<P> getModelProperty(Class<P> propertyType) {

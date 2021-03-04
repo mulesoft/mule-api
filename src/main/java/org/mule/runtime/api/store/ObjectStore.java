@@ -24,7 +24,7 @@ public interface ObjectStore<T extends Serializable> {
    *
    * @param key the identifier of the object to check
    * @return <code>true</code> if the key is stored or <code>false</code> no value was stored for the key.
-   * @throws ObjectStoreException if the given key is <code>null</code>.
+   * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if any implementation-specific error occured, e.g. when the store is not available
    */
   boolean contains(String key) throws ObjectStoreException;
@@ -32,12 +32,12 @@ public interface ObjectStore<T extends Serializable> {
   /**
    * Store the given Object.
    *
-   * @param key the identifier for <code>value</code>
+   * @param key   the identifier for <code>value</code>
    * @param value the Object to store with <code>key</code>
-   * @throws ObjectStoreException if the given key cannot be stored or is <code>null</code>.
+   * @throws ObjectStoreException             if the given key cannot be stored or is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
-   * @throws ObjectAlreadyExistsException if an attempt is made to store an object for a key that already has an object
-   *         associated.
+   * @throws ObjectAlreadyExistsException     if an attempt is made to store an object for a key that already has an object
+   *                                          associated.
    */
   void store(String key, T value) throws ObjectStoreException;
 
@@ -47,9 +47,9 @@ public interface ObjectStore<T extends Serializable> {
    * @param key the identifier of the object to retrieve.
    * @return the object associated with the given key. If no object for the given key was found this method throws an
    *         {@link ObjectDoesNotExistException}.
-   * @throws ObjectStoreException if the given key is <code>null</code>.
+   * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
-   * @throws ObjectDoesNotExistException if no value for the given key was previously stored.
+   * @throws ObjectDoesNotExistException      if no value for the given key was previously stored.
    */
   T retrieve(String key) throws ObjectStoreException;
 
@@ -58,8 +58,8 @@ public interface ObjectStore<T extends Serializable> {
    *
    * @param key the identifier of the object to remove.
    * @return the object that was previously stored for the given key
-   * @throws ObjectStoreException if the given key is <code>null</code> or if the store is not available or any other
-   *         implementation-specific error occured
+   * @throws ObjectStoreException        if the given key is <code>null</code> or if the store is not available or any other
+   *                                     implementation-specific error occured
    * @throws ObjectDoesNotExistException if no value for the given key was previously stored.
    */
   T remove(String key) throws ObjectStoreException;

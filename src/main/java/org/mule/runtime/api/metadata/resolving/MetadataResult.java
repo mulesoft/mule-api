@@ -36,7 +36,7 @@ public interface MetadataResult<T> {
   /**
    * Creates a failure {@link MetadataResult} with a payload and with one or more associated {@link MetadataFailure}s.
    *
-   * @param result the resulting content bounded to this failure result.
+   * @param result   the resulting content bounded to this failure result.
    * @param failures one or more {@link MetadataFailure}s that contains the failure information.
    * @return a {@link FailureMetadataResult} instance.
    */
@@ -47,7 +47,7 @@ public interface MetadataResult<T> {
   /**
    * Creates a failure {@link MetadataResult} with a payload and a list of associated {@link MetadataFailure}s.
    *
-   * @param result the resulting content bounded to this failure result.
+   * @param result   the resulting content bounded to this failure result.
    * @param failures a list of {@link MetadataFailure}s that contains the failure information.
    * @return a {@link FailureMetadataResult} instance.
    */

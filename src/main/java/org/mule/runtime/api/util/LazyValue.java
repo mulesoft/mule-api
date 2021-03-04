@@ -110,7 +110,7 @@ public class LazyValue<T> implements Supplier<T> {
    * If the value has not already been computed, this method will trigger computation. This method is thread-safe.
    *
    * @param function a transformation function
-   * @param <R> the generic type of the function's output
+   * @param <R>      the generic type of the function's output
    * @return a transformed value
    */
   public <R> R flatMap(Function<T, R> function) {

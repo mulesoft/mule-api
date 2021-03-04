@@ -25,7 +25,7 @@ public class CustomNotification extends AbstractServerNotification {
    * Creates a custom action event
    * 
    * @param message the message to associate with the event
-   * @param action the action code for the event
+   * @param action  the action code for the event
    * @throws IllegalArgumentException if the action value is less than CUSTOM_ACTION_START_RANGE
    */
   public CustomNotification(Object message, int action) {

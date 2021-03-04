@@ -91,7 +91,7 @@ public abstract class MuleException extends Exception {
 
   /**
    * @param message the exception message
-   * @param cause the exception that cause this exception to be thrown
+   * @param cause   the exception that cause this exception to be thrown
    */
   public MuleException(I18nMessage message, Throwable cause) {
     super(null, ExceptionHelper.unwrap(cause), true, isVerboseExceptions());

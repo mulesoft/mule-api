@@ -139,9 +139,9 @@ public abstract class ExtensionWalker {
   /**
    * Invoked when an {@link ParameterModel} is found in the traversed {@code extensionModel}
    *
-   * @param owner The component that owns the parameter
+   * @param owner      The component that owns the parameter
    * @param groupModel the {@link ParameterGroupModel} in which the {@code model} is contained
-   * @param model the {@link ParameterModel}
+   * @param model      the {@link ParameterModel}
    */
   protected void onParameter(ParameterizedModel owner, ParameterGroupModel groupModel, ParameterModel model) {}
 
@@ -159,7 +159,7 @@ public abstract class ExtensionWalker {
    * For each distinct type found, this method will be invoked just once.
    *
    * @param owner The component that owns the parameter
-   * @param type the {@link MetadataType}
+   * @param type  the {@link MetadataType}
    *
    * @since 1.4
    */

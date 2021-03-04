@@ -36,7 +36,7 @@ public class TypedException extends MuleRuntimeException {
   /**
    * @param throwable The {@link TypedException#getCause()} of this new exception.
    * @param errorType The {@link ErrorType} that identifies the {@link TypedException#getCause()} {@link Throwable}
-   * @param message error message to override the once from the original exception
+   * @param message   error message to override the once from the original exception
    */
   public TypedException(Throwable throwable, ErrorType errorType, String message) {
     super(createStaticMessage(message), throwable);

@@ -73,7 +73,7 @@ public interface BindingContext {
     /**
      * Will create a binding for the specified identifier and value.
      *
-     * @param value the value to bind
+     * @param value      the value to bind
      * @param identifier the keyword to use in the EL to access the {@code value}
      */
     Builder addBinding(String identifier, TypedValue value);
@@ -81,7 +81,7 @@ public interface BindingContext {
     /**
      * Will create a binding for the specified identifier and lazy value.
      *
-     * @param value the value to bind
+     * @param value      the value to bind
      * @param identifier the keyword to use in the EL to access the {@code value}
      * 
      * @since 1.1

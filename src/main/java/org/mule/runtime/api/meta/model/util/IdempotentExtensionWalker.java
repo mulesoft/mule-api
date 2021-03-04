@@ -139,7 +139,7 @@ public abstract class IdempotentExtensionWalker extends ExtensionWalker {
    * This method will only be invoked once per each found instance
    *
    * @param groupModel the {@link ParameterGroupModel} on which the {@code model} is contained
-   * @param model the {@link ParameterModel}
+   * @param model      the {@link ParameterModel}
    */
   protected void onParameter(ParameterGroupModel groupModel, ParameterModel model) {}
 

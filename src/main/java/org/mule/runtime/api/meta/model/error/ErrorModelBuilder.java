@@ -28,7 +28,7 @@ public final class ErrorModelBuilder {
   /**
    * Creates a builder to be able to create {@link ErrorModel} instances
    *
-   * @param typeName The type of the {@link ErrorModel} to create.
+   * @param typeName  The type of the {@link ErrorModel} to create.
    * @param namespace adds a namespace to the {@link ErrorModel} that is being built
    * @return An {@link ErrorModelBuilder} initialized with the {@code typeName}
    */

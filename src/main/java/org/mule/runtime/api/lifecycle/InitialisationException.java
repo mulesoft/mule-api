@@ -20,7 +20,7 @@ public final class InitialisationException extends LifecycleException {
   private static final long serialVersionUID = 6423668077165119108L;
 
   /**
-   * @param message the exception message
+   * @param message   the exception message
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(I18nMessage message, Initialisable component) {
@@ -28,8 +28,8 @@ public final class InitialisationException extends LifecycleException {
   }
 
   /**
-   * @param message the exception message
-   * @param cause the exception that cause this exception to be thrown
+   * @param message   the exception message
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(I18nMessage message, Throwable cause, Initialisable component) {
@@ -37,7 +37,7 @@ public final class InitialisationException extends LifecycleException {
   }
 
   /**
-   * @param cause the exception that cause this exception to be thrown
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(Throwable cause, Initialisable component) {

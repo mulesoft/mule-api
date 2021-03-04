@@ -101,7 +101,7 @@ public class BindingContextUtils {
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
    *
-   * @param event the event to build the new bindings for. Not-null.
+   * @param event       the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    *         given {@code event}.
@@ -114,7 +114,7 @@ public class BindingContextUtils {
    * Creates a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
    * to the given {@code event}.
    *
-   * @param event the event to build the new bindings for. Not-null.
+   * @param event       the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
    *         to the given {@code event}.

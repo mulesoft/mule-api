@@ -25,7 +25,7 @@ public final class StereotypeModelBuilder {
   /**
    * Creates a builder to be able to create {@link StereotypeModel} instances
    *
-   * @param typeName The type of the {@link StereotypeModel} to create.
+   * @param typeName  The type of the {@link StereotypeModel} to create.
    * @param namespace adds a namespace to the {@link StereotypeModel} that is being built
    * @return An {@link StereotypeModelBuilder} initialized with the {@code typeName}
    */

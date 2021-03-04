@@ -35,7 +35,7 @@ public final class ItemSequenceInfo implements Serializable {
   /**
    * Builds a new {@link ItemSequenceInfo} with the given parameters.
    *
-   * @param position see {@link #getPosition()}.
+   * @param position     see {@link #getPosition()}.
    * @param sequenceSize see {@link #getSequenceSize()}.
    */
   private ItemSequenceInfo(int position, OptionalInt sequenceSize) {

@@ -318,7 +318,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * Registers the given {@code subType} as an implementation of the {@code baseType}
    *
    * @param baseType a base type
-   * @param subType a sub type implementation
+   * @param subType  a sub type implementation
    */
   public void addSubtype(MetadataType baseType, MetadataType subType) {
     addSubtypes(baseType, singletonList(subType));

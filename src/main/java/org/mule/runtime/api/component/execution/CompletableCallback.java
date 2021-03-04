@@ -49,7 +49,7 @@ public interface CompletableCallback<T> {
    * normal or exceptional.
    *
    * @param runnable the task to run
-   * @param <T> the callback's generic type
+   * @param <T>      the callback's generic type
    * @return a new callback
    */
   static <T> CompletableCallback<T> always(Runnable runnable) {

@@ -49,7 +49,7 @@ public interface TlsContextFactoryBuilder {
    * will occur upon {@link #build()}. By default, those global ones will be used.
    *
    * @param cipherSuites a comma separated {@link String} with the cipher suites, for example
-   *        "TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA".
+   *                     "TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA".
    * @return this builder
    */
   TlsContextFactoryBuilder enabledCipherSuites(String cipherSuites);
@@ -159,7 +159,7 @@ public interface TlsContextFactoryBuilder {
    *
    * @return a newly built {@link TlsContextFactory}.
    * @throws CreateException if there's any trouble regarding protocols and cipher validation or store loading (such as the files
-   *         not being found)
+   *                         not being found)
    */
   TlsContextFactory build() throws CreateException;
 

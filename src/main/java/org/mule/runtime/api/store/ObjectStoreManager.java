@@ -65,7 +65,7 @@ public interface ObjectStoreManager {
    * returned.
    *
    * @param name the name of the object store
-   * @param <T> the generic type of the items in the store
+   * @param <T>  the generic type of the items in the store
    * @return an {@link ObjectStore}
    * @throws NoSuchElementException if the store doesn't exist or has been disposed
    */
@@ -83,9 +83,9 @@ public interface ObjectStoreManager {
    * If this method is invoked with a {@code name} for which an ObjectStore has already been created, it will throw
    * {@link IllegalArgumentException}, if the {@code settings} of the two objects differ.
    *
-   * @param name the name of the object store
+   * @param name     the name of the object store
    * @param settings the object store configuration
-   * @param <T> the generic type of the items in the store
+   * @param <T>      the generic type of the items in the store
    * @return a new {@link ObjectStore}
    * @throws IllegalArgumentException if the store already exists
    */
@@ -97,9 +97,9 @@ public interface ObjectStoreManager {
    * <p>
    * Notice that if the store does actually exist, then the returned store might not actually match the provided {@code settings}
    *
-   * @param name the name of the object store
+   * @param name     the name of the object store
    * @param settings the object store configuration
-   * @param <T> the generic type of the items in the store
+   * @param <T>      the generic type of the items in the store
    * @return an {@link ObjectStore}
    */
   <T extends ObjectStore<? extends Serializable>> T getOrCreateObjectStore(String name, ObjectStoreSettings settings);

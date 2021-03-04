@@ -32,11 +32,11 @@ public interface InputTypeResolver<K> extends NamedTypeResolver {
    * {@link MetadataType} will be considered as the main input of an Operation for their parameter marked as Content.
    *
    * @param context MetaDataContext of the MetaData resolution
-   * @param key {@code K} representing the type which's structure has to be resolved
+   * @param key     {@code K} representing the type which's structure has to be resolved
    * @return the {@link MetadataType} of the Content parameter
    * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See {@link FailureCode} for
-   *         possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
+   *                                    possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException        if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataType getInputMetadata(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 

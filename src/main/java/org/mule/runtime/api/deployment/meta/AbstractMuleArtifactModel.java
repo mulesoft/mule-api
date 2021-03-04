@@ -54,11 +54,11 @@ public abstract class AbstractMuleArtifactModel {
   /**
    * Creates a new model
    * 
-   * @param name name of the artifact
-   * @param minMuleVersion minimum Mule Runtime version that requires to work correctly.
-   * @param requiredProduct the target product for the artifact
+   * @param name                             name of the artifact
+   * @param minMuleVersion                   minimum Mule Runtime version that requires to work correctly.
+   * @param requiredProduct                  the target product for the artifact
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
-   * @param bundleDescriptorLoader indicates how to load the bundle descriptor.
+   * @param bundleDescriptorLoader           indicates how to load the bundle descriptor.
    */
   protected AbstractMuleArtifactModel(
                                       String name, String minMuleVersion,

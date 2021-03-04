@@ -21,7 +21,7 @@ public interface ErrorTypeRepository {
    * will be available for use in on-error components.
    *
    * @param errorTypeIdentifier the {@link ComponentIdentifier} for the error
-   * @param parentErrorType the {@link ErrorType} that will act as parent
+   * @param parentErrorType     the {@link ErrorType} that will act as parent
    * @return the created {@link ErrorType}
    */
   ErrorType addErrorType(ComponentIdentifier errorTypeIdentifier, ErrorType parentErrorType);
@@ -31,7 +31,7 @@ public interface ErrorTypeRepository {
    * it won't be available for use in on-error components.
    *
    * @param errorTypeIdentifier the {@link ComponentIdentifier} for the error
-   * @param parentErrorType the {@link ErrorType} that will act as parent
+   * @param parentErrorType     the {@link ErrorType} that will act as parent
    * @return the created {@link ErrorType}
    */
   ErrorType addInternalErrorType(ComponentIdentifier errorTypeIdentifier, ErrorType parentErrorType);

@@ -42,7 +42,7 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @param message Message in case of a invalid connection
+   * @param message   Message in case of a invalid connection
    * @param exception The exception that causes the connection invalidity
    * @return a {@link ConnectionValidationResult} with a invalid status.
    */
@@ -51,7 +51,7 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @param message Message in case of a invalid connection
+   * @param message   Message in case of a invalid connection
    * @param errorType An {@link ErrorType} that represents the cause of the invalid connection
    * @param exception The exception that causes the connection invalidity
    * @return a {@link ConnectionValidationResult} with a invalid status.

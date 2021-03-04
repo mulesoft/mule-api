@@ -29,7 +29,7 @@ public final class ExclusiveParametersDeclaration {
    * Creates a new instance
    *
    * @param parameterNames the parameter names
-   * @param requiresOne whether one is required
+   * @param requiresOne    whether one is required
    */
   public ExclusiveParametersDeclaration(Set<String> parameterNames, boolean requiresOne) {
     this.parameterNames = parameterNames;

@@ -24,7 +24,7 @@ public interface MetadataEnrichableModel {
    * Returns a registered model property of type{@code propertyType}
    *
    * @param propertyType the {@link Class} of the {@link MetadataProperty} which is being queried
-   * @param <T> the generic type of the return value
+   * @param <T>          the generic type of the return value
    * @return an {@link Optional} {@link MetadataProperty}
    */
   <T extends MetadataProperty> Optional<T> getMetadataProperty(Class<T> propertyType);

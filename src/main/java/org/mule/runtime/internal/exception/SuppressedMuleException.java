@@ -45,7 +45,7 @@ public class SuppressedMuleException extends MuleException {
   /**
    * Constructs a new {@link SuppressedMuleException}
    * 
-   * @param throwable Exception that will be wrapped.
+   * @param throwable       Exception that will be wrapped.
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
   private SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
@@ -97,7 +97,7 @@ public class SuppressedMuleException extends MuleException {
    * Wraps the provided exception, suppressing the exception itself or the first cause that is an instance of the provided class.
    * The search will stop if a {@link SuppressedMuleException} is found, making no suppression.
    * 
-   * @param exception Exception that will be wrapped, suppressing the exception itself or one of it's causes.
+   * @param exception       Exception that will be wrapped, suppressing the exception itself or one of it's causes.
    * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
    */

@@ -20,8 +20,8 @@ public interface DataSourceDecorator {
   /**
    * Decorates a dataSource
    *
-   * @param dataSource dataSource to decorate. Non null
-   * @param dataSourceName dataSource bean name
+   * @param dataSource       dataSource to decorate. Non null
+   * @param dataSourceName   dataSource bean name
    * @param dbPoolingProfile pooling profile use to create the wrapped dataSource
    * @return
    */

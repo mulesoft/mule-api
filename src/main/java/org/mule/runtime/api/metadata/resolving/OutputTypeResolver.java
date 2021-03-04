@@ -32,11 +32,11 @@ public interface OutputTypeResolver<K> extends NamedTypeResolver {
    * {@link MetadataType} will be considered as the output or result of the Component
    *
    * @param context {@link MetadataContext} of the MetaData resolution
-   * @param key {@code K} representing the type which's structure has to be resolved
+   * @param key     {@code K} representing the type which's structure has to be resolved
    * @return {@link MetadataType} from the given {@param key}
    * @throws MetadataResolvingException if an error occurs during the {@link MetadataType} building. See {@link FailureCode} for
-   *         possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
+   *                                    possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException        if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataType getOutputType(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException;
 

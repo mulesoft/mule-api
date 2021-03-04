@@ -27,8 +27,8 @@ public interface TypeKeysResolver extends NamedTypeResolver {
    * @param context {@link MetadataContext} of the Metadata resolution
    * @return A set of {@link MetadataKey} of the available types
    * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See {@link FailureCode} for
-   *         possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
+   *                                    possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException        if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   Set<MetadataKey> getKeys(MetadataContext context) throws MetadataResolvingException, ConnectionException;
 

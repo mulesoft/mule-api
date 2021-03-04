@@ -49,7 +49,7 @@ public final class ImmutableFileRepeatableInputStream extends InputStream {
   /**
    * Creates a new instance
    *
-   * @param file the File that contains the stream's contents
+   * @param file       the File that contains the stream's contents
    * @param autoDelete if {@code true}, the file will be deleted when {@link #close()} is invoked.
    * @throws IllegalArgumentException if the file cannot be found
    */

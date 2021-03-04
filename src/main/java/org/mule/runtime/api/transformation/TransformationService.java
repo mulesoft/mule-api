@@ -18,7 +18,7 @@ public interface TransformationService {
    *
    * @param value the value to transform
    * 
-   * @param valueDataType the value's {@link DataType }
+   * @param valueDataType    the value's {@link DataType }
    * @param expectedDataType the expected type's {@link DataType}
    * @return the transformed value
    */
@@ -33,7 +33,7 @@ public interface TransformationService {
    * with a byte[] representation as part of this operations.
    * <p/>
    *
-   * @param message the message to transform
+   * @param message        the message to transform
    * @param outputDataType the desired return type
    */
   Message transform(Message message, DataType outputDataType);

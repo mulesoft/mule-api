@@ -45,8 +45,8 @@ public interface PartialTypeKeysResolver<T> extends TypeKeysResolver {
    * @param partial the current, partial representation of the type key.
    * @return A multi level {@link MetadataKey} of representing the available types
    * @throws MetadataResolvingException if an error occurs during the {@link MetadataKey} building. See {@link FailureCode} for
-   *         possible {@link MetadataResolvingException} reasons
-   * @throws ConnectionException if an error occurs when using the connection provided by the {@link MetadataContext}
+   *                                    possible {@link MetadataResolvingException} reasons
+   * @throws ConnectionException        if an error occurs when using the connection provided by the {@link MetadataContext}
    */
   MetadataKey resolveChilds(MetadataContext context, T partial) throws MetadataResolvingException, ConnectionException;
 

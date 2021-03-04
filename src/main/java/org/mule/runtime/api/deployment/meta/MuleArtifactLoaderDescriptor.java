@@ -29,7 +29,7 @@ public final class MuleArtifactLoaderDescriptor {
   /**
    * Creates an immutable implementation of {@link MuleArtifactLoaderDescriptor}
    *
-   * @param id ID of the descriptor
+   * @param id         ID of the descriptor
    * @param attributes collection of attributes
    */
   public MuleArtifactLoaderDescriptor(String id, Map<String, Object> attributes) {

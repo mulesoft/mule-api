@@ -39,7 +39,7 @@ public interface ObjectProvider extends Component {
    * Finds all objects matching the given type
    *
    * @param type the object type class object
-   * @param <T> type parameter for the object
+   * @param <T>  type parameter for the object
    * @return a map where the keys are the object names and the values the objects associated with the key
    */
   <T> Map<String, T> getObjectsByType(Class<T> type);

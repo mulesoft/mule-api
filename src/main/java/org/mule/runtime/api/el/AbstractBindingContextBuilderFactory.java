@@ -58,7 +58,7 @@ public abstract class AbstractBindingContextBuilderFactory {
 
   /**
    * @param bindingContext existing {@link BindingContext} to use as a template to create a new {@link BindingContext.Builder}
-   *        instance.
+   *                       instance.
    * @return a fresh {@link BindingContext.Builder} based on the template {@code bindingContext} provided.
    */
   protected abstract BindingContext.Builder create(BindingContext bindingContext);

@@ -63,10 +63,10 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a single entry described by the given {@code key} and {@code value}
    *
-   * @param key the key
+   * @param key   the key
    * @param value the value
-   * @param <K> the generic type of the keys
-   * @param <V> the generic type of the values
+   * @param <K>   the generic type of the keys
+   * @param <V>   the generic type of the values
    * @return a new instance
    */
   public static <K, V> SmallMap<K, V> of(K key, V value) {
@@ -76,10 +76,10 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a two entries described by the given keys and values
    *
-   * @param k1 the first key
-   * @param v1 the first value
-   * @param k2 the second key
-   * @param v2 the second value
+   * @param k1  the first key
+   * @param v1  the first value
+   * @param k2  the second key
+   * @param v2  the second value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -93,12 +93,12 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a three entries described by the given keys and values
    *
-   * @param k1 the first key
-   * @param v1 the first value
-   * @param k2 the second key
-   * @param v2 the second value
-   * @param k3 the third key
-   * @param v3 the third value
+   * @param k1  the first key
+   * @param v1  the first value
+   * @param k2  the second key
+   * @param v2  the second value
+   * @param k3  the third key
+   * @param v3  the third value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -113,14 +113,14 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a four entries described by the given keys and values
    *
-   * @param k1 the first key
-   * @param v1 the first value
-   * @param k2 the second key
-   * @param v2 the second value
-   * @param k3 the third key
-   * @param v3 the third value
-   * @param k4 the fourth key
-   * @param v4 the fourth value
+   * @param k1  the first key
+   * @param v1  the first value
+   * @param k2  the second key
+   * @param v2  the second value
+   * @param k3  the third key
+   * @param v3  the third value
+   * @param k4  the fourth key
+   * @param v4  the fourth value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -136,16 +136,16 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a five entries described by the given keys and values
    *
-   * @param k1 the first key
-   * @param v1 the first value
-   * @param k2 the second key
-   * @param v2 the second value
-   * @param k3 the third key
-   * @param v3 the third value
-   * @param k4 the fourth key
-   * @param v4 the fourth value
-   * @param k5 the fifth key
-   * @param v5 the fifth value
+   * @param k1  the first key
+   * @param v1  the first value
+   * @param k2  the second key
+   * @param v2  the second value
+   * @param k3  the third key
+   * @param v3  the third value
+   * @param k4  the fourth key
+   * @param v4  the fourth value
+   * @param k5  the fifth key
+   * @param v5  the fifth value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -209,8 +209,8 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
    * returned. Otherwise, a {@link HashMap} with {@code size} as the initial capacity will be produced.
    *
    * @param size the map's size
-   * @param <K> the generic type of the key
-   * @param <V> the generic type of the value
+   * @param <K>  the generic type of the key
+   * @param <V>  the generic type of the value
    * @return a new Map
    */
   public static <K, V> Map<K, V> forSize(int size) {
