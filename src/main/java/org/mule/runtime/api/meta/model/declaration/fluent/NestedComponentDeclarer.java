@@ -29,8 +29,7 @@ public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extend
   }
 
   /**
-   * Adds the given {@code stereotypes} to the ones which are allowed on
-   * the route.
+   * Adds the given {@code stereotypes} to the ones which are allowed on the route.
    *
    * @param stereotypes the stereotypes to add
    * @return {@code this} declarer

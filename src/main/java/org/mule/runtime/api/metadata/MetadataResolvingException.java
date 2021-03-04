@@ -12,8 +12,8 @@ import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.metadata.resolving.FailureCode;
 
 /**
- * Exception that represents an error related to Metadata resolving.
- * A {@link FailureCode} is required in order to describe the error reason.
+ * Exception that represents an error related to Metadata resolving. A {@link FailureCode} is required in order to describe the
+ * error reason.
  *
  * @since 1.0
  */

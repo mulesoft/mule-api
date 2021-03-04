@@ -12,10 +12,10 @@ package org.mule.runtime.api.meta;
  * <ul>
  * <li>{@link Category#COMMUNITY}: Represents that the plugin does not requires an Enterprise Mule Runtime to work.</li>
  * <li>{@link Category#SELECT}: Represents that the plugin requires an Enterprise Mule Runtime to work.</li>
- * <li>{@link Category#PREMIUM}: Represents that the plugin requires an Enterprise Mule Runtime to work and also
- * an plugin entitlement to work</li>
- * <li>{@link Category#CERTIFIED}: Represent that the plugin is MuleSoft certified and requires an Enterprise Mule
- * Runtime to work</li>
+ * <li>{@link Category#PREMIUM}: Represents that the plugin requires an Enterprise Mule Runtime to work and also an plugin
+ * entitlement to work</li>
+ * <li>{@link Category#CERTIFIED}: Represent that the plugin is MuleSoft certified and requires an Enterprise Mule Runtime to
+ * work</li>
  * </ul>
  *
  * @since 1.0

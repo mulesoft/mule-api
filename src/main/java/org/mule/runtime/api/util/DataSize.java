@@ -20,6 +20,7 @@ public final class DataSize {
 
   /**
    * Creates a new instance
+   * 
    * @param size an scalar amount of data
    * @param unit the unit which qualifies the {@code size}
    */

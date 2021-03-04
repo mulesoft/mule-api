@@ -15,8 +15,8 @@ import java.util.Set;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 /**
- * A declaration object for a {@link ParameterGroupModel}. It contains raw,
- * unvalidated data which is used to declare the structure of a {@link ParameterGroupModel}.
+ * A declaration object for a {@link ParameterGroupModel}. It contains raw, unvalidated data which is used to declare the
+ * structure of a {@link ParameterGroupModel}.
  *
  * @since 1.0
  */
@@ -34,8 +34,8 @@ public class ParameterGroupDeclaration extends AbstractParameterDeclaration<Para
   }
 
   /**
-   * @return an unmodifiable {@link List} with the {@link ParameterDeclaration declarations}
-   * registered through {@link #addParameter(ParameterDeclaration)}
+   * @return an unmodifiable {@link List} with the {@link ParameterDeclaration declarations} registered through
+   *         {@link #addParameter(ParameterDeclaration)}
    */
   public List<ParameterDeclaration> getParameters() {
     return parameters;
@@ -65,9 +65,8 @@ public class ParameterGroupDeclaration extends AbstractParameterDeclaration<Para
   }
 
   /**
-   * Sets the declaration of whether this {@link ParameterDeclaration} represents
-   * a {@link ParameterGroupModel} that will be shown inline in the DSL or instead
-   * is represented as a set of standalone attributes.
+   * Sets the declaration of whether this {@link ParameterDeclaration} represents a {@link ParameterGroupModel} that will be shown
+   * inline in the DSL or instead is represented as a set of standalone attributes.
    *
    * @param showInDsl {@code true} if the group should be shown explicitly inline in the DSL
    */

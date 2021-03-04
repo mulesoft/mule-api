@@ -19,8 +19,8 @@ import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 public interface MetadataKeyProvider {
 
   /**
-   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver}
-   * associated to this Component.
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver} associated to
+   * this Component.
    *
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
    *         error while retrieving the keys
@@ -29,8 +29,8 @@ public interface MetadataKeyProvider {
   MetadataResult<MetadataKeysContainer> getMetadataKeys() throws MetadataResolvingException;
 
   /**
-   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver}
-   * associated to this Component.
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver} associated to
+   * this Component.
    *
    * @param partialKey {@link MetadataKey} to be resolved.
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an

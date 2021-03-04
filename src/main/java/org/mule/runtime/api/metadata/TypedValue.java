@@ -38,7 +38,7 @@ public final class TypedValue<T> implements Serializable {
    * if it's {@code null})
    *
    * @param value a value which may or may not be a TypeValue
-   * @param <T>   the output's generic type
+   * @param <T> the output's generic type
    * @return an unwrapped value
    */
   public static <T> T unwrap(Object value) {
@@ -54,7 +54,7 @@ public final class TypedValue<T> implements Serializable {
    * particular media types or encoding are required
    *
    * @param value this object's content
-   * @param <T>   the value's generic type
+   * @param <T> the value's generic type
    * @return a new {@link TypedValue}
    */
   public static <T> TypedValue<T> of(T value) {
@@ -72,7 +72,7 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value    this object's content.
+   * @param value this object's content.
    * @param dataType the {@link DataType} for this object's content.
    */
   public TypedValue(T value, DataType dataType) {
@@ -82,9 +82,9 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value    this object's content.
+   * @param value this object's content.
    * @param dataType the {@link DataType} for this object's content.
-   * @param length   the length of the value in bytes.
+   * @param length the length of the value in bytes.
    * @deprecated Use {@link #TypedValue(Object, DataType, OptionalLong)} instead.
    */
   @Deprecated
@@ -95,9 +95,9 @@ public final class TypedValue<T> implements Serializable {
   /**
    * Constructs a new {@link TypedValue} with the given parameters.
    *
-   * @param value    this object's content.
+   * @param value this object's content.
    * @param dataType the {@link DataType} for this object's content.
-   * @param length   the length of the value in bytes.
+   * @param length the length of the value in bytes.
    */
   public TypedValue(T value, DataType dataType, OptionalLong length) {
     this.value = value;

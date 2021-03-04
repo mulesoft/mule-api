@@ -12,8 +12,8 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A model which can be augmented with {@link MetadataProperty MetadataProperties}
- * that are not part of the canonical metadata model.
+ * A model which can be augmented with {@link MetadataProperty MetadataProperties} that are not part of the canonical metadata
+ * model.
  *
  * @since 1.0
  */

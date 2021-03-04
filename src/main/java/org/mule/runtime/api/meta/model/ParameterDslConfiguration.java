@@ -7,11 +7,9 @@
 package org.mule.runtime.api.meta.model;
 
 /**
- * Contains directives regarding semantics for the DSL which supports
- * one given owning element.
+ * Contains directives regarding semantics for the DSL which supports one given owning element.
  * <p>
- * Instances of this interface are to be created by the builder
- * obtained through {@link #builder()}
+ * Instances of this interface are to be created by the builder obtained through {@link #builder()}
  *
  * @since 1.0
  */

@@ -15,19 +15,18 @@ import java.util.function.Supplier;
 /**
  * Provides a value which may be lazily computed.
  * <p>
- * The value is only computed on the first invokation of {@link #get()}. Subsequent calls to such method
- * will always return the same value.
+ * The value is only computed on the first invokation of {@link #get()}. Subsequent calls to such method will always return the
+ * same value.
  * <p>
- * This class is thread-safe. When invoking {@link #get()}, it is guaranteed that the value will be computed
- * only once.
+ * This class is thread-safe. When invoking {@link #get()}, it is guaranteed that the value will be computed only once.
  *
  * @param <T> the generic type of the provided value
  * @since 1.0
  */
 public class LazyValue<T> implements Supplier<T> {
 
-  //All LazyValue attributes are declared transient to allow child classes that implement the Serializable interface
-  //to add custom logic for serialization and not depend on the default serialization logic for non-transient fields.
+  // All LazyValue attributes are declared transient to allow child classes that implement the Serializable interface
+  // to add custom logic for serialization and not depend on the default serialization logic for non-transient fields.
   protected transient volatile boolean initialized = false;
   protected transient T value;
   protected transient Supplier<T> valueSupplier;
@@ -42,9 +41,8 @@ public class LazyValue<T> implements Supplier<T> {
   }
 
   /**
-   * Creates a new instance which lazily obtains its value from the given {@code supplier}.
-   * It is guaranteed that {@link Supplier#get()} will only be invoked once. Because this class is thread-safe,
-   * the supplier is not required to be.
+   * Creates a new instance which lazily obtains its value from the given {@code supplier}. It is guaranteed that
+   * {@link Supplier#get()} will only be invoked once. Because this class is thread-safe, the supplier is not required to be.
    *
    * @param supplier A {@link Supplier} through which the value is obtained
    */
@@ -95,8 +93,8 @@ public class LazyValue<T> implements Supplier<T> {
   /**
    * If the value has already been computed, if passes it to the given {@code consumer}.
    *
-   * This method does not perform any synchronization so keep in mind that dirty reads are possible
-   * if this method is being called from one thread while another thread is triggering the value's computation
+   * This method does not perform any synchronization so keep in mind that dirty reads are possible if this method is being called
+   * from one thread while another thread is triggering the value's computation
    *
    * @param consumer a {@link Consumer}
    */
@@ -109,8 +107,7 @@ public class LazyValue<T> implements Supplier<T> {
   /**
    * Applies the given {@code function} through the output of {@link #get()}.
    *
-   * If the value has not already been computed, this method will trigger computation.
-   * This method is thread-safe.
+   * If the value has not already been computed, this method will trigger computation. This method is thread-safe.
    *
    * @param function a transformation function
    * @param <R> the generic type of the function's output

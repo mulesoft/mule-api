@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A declaration object for a {@link NestedRouteModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link NestedRouteModel}
+ * A declaration object for a {@link NestedRouteModel}. It contains raw, unvalidated data which is used to declare the structure
+ * of a {@link NestedRouteModel}
  *
  * @since 1.0
  */

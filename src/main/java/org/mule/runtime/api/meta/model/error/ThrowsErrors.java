@@ -19,8 +19,7 @@ import java.util.Set;
 public interface ThrowsErrors {
 
   /**
-   * @return a {@link Set} of {@link ErrorModel} with the possible errors that the current
-   * component could throw.
+   * @return a {@link Set} of {@link ErrorModel} with the possible errors that the current component could throw.
    * @see ErrorModel
    */
   Set<ErrorModel> getErrorModels();

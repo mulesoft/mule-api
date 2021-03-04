@@ -19,12 +19,11 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Container for all the {@link ObjectType types} declared in a given {@link DslResolvingContext},
- * defined by the {@link Set} of {@link ExtensionModel}s that coexist in.
+ * Container for all the {@link ObjectType types} declared in a given {@link DslResolvingContext}, defined by the {@link Set} of
+ * {@link ExtensionModel}s that coexist in.
  * <p>
- * A {@link TypeCatalog} provides access to all the declared types, along with their type it mapping,
- * storing the relation of a given type and its declared subtypes across all the {@link ExtensionModel}
- * available in the context.
+ * A {@link TypeCatalog} provides access to all the declared types, along with their type it mapping, storing the relation of a
+ * given type and its declared subtypes across all the {@link ExtensionModel} available in the context.
  *
  * @since 1.0
  */
@@ -36,24 +35,21 @@ public interface TypeCatalog {
   }
 
   /**
-   * @return the {@link ObjectType} with the given {@link TypeIdAnnotation typeId}
-   * if one is present in {@code this} {@link TypeCatalog}, or {@link Optional#empty}
-   * otherwise.
+   * @return the {@link ObjectType} with the given {@link TypeIdAnnotation typeId} if one is present in {@code this}
+   *         {@link TypeCatalog}, or {@link Optional#empty} otherwise.
    */
   Optional<ObjectType> getType(String typeId);
 
   /**
-   * @return an immutable {@link Set} with all the {@link ObjectType} defined
-   * in {@code this} {@link TypeCatalog}
+   * @return an immutable {@link Set} with all the {@link ObjectType} defined in {@code this} {@link TypeCatalog}
    */
   Collection<ObjectType> getTypes();
 
   /**
-   * Returns a {@link Set} with all the declared {@link ObjectType} subtypes
-   * for the indicated {@link ObjectType} {@code type}.
+   * Returns a {@link Set} with all the declared {@link ObjectType} subtypes for the indicated {@link ObjectType} {@code type}.
    * <p>
-   * Lookup will be performed first by {@link TypeIdAnnotation typeId},
-   * defaulting to {@link ObjectType type} comparison if no {@link TypeIdAnnotation typeId} was found
+   * Lookup will be performed first by {@link TypeIdAnnotation typeId}, defaulting to {@link ObjectType type} comparison if no
+   * {@link TypeIdAnnotation typeId} was found
    *
    * @param type the {@link ObjectType} for which to retrieve its declared subTypes
    * @return a {@link Set} with all the declared subtypes for the indicated {@link ObjectType}
@@ -61,12 +57,11 @@ public interface TypeCatalog {
   Set<ObjectType> getSubTypes(ObjectType type);
 
   /**
-   * Returns a {@link Set} with all the declared {@link ObjectType} that are considered super
-   * types from the given {@link ObjectType} {@code type}.
+   * Returns a {@link Set} with all the declared {@link ObjectType} that are considered super types from the given
+   * {@link ObjectType} {@code type}.
    * <p>
-   * The lookup will be performed by looking through all the mappings that contains the given
-   * {@code type} as subtype in {@code this} {@link TypeCatalog} and storing the base type and
-   * again looking the super type of the found base type.
+   * The lookup will be performed by looking through all the mappings that contains the given {@code type} as subtype in
+   * {@code this} {@link TypeCatalog} and storing the base type and again looking the super type of the found base type.
    *
    * @param type {@link ObjectType} to look for their super types
    * @return a {@link Set} with all the declared supertypes for the indicated {@link ObjectType}
@@ -84,11 +79,11 @@ public interface TypeCatalog {
   Collection<ObjectType> getAllSubTypes();
 
   /**
-   * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping.
-   * If a {@link TypeIdAnnotation typeId} is available for the given {@code type},
-   * the lookup will be performed by {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its
-   * full extent, which includes type generics and interfaces implementations, and
-   * defaulting to {@link MetadataType#equals} comparison if no {@link TypeIdAnnotation typeId} was found
+   * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping. If a
+   * {@link TypeIdAnnotation typeId} is available for the given {@code type}, the lookup will be performed by
+   * {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its full extent, which includes type
+   * generics and interfaces implementations, and defaulting to {@link MetadataType#equals} comparison if no
+   * {@link TypeIdAnnotation typeId} was found
    *
    * @param type the {@link MetadataType} for which to retrieve its declared subTypes
    * @return <tt>true</tt> if this map contains a mapping for the specified key {@link MetadataType type}

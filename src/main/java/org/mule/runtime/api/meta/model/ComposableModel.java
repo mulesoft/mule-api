@@ -22,8 +22,7 @@ import java.util.List;
 public interface ComposableModel extends NamedObject {
 
   /**
-   * @return the {@link List} of {@link NestableElementModel components} contained by
-   * {@code this} model
+   * @return the {@link List} of {@link NestableElementModel components} contained by {@code this} model
    */
   List<? extends NestableElementModel> getNestedComponents();
 

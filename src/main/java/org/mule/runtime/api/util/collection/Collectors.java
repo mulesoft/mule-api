@@ -43,9 +43,8 @@ public class Collectors {
    * @param <U> the output type of the value mapping function
    * @param keyMapper a mapping function to produce keys
    * @param valueMapper a mapping function to produce values
-   * @return a {@code Collector} which collects elements into a {@code Map}
-   * whose keys and values are the result of applying mapping functions to
-   * the input elements
+   * @return a {@code Collector} which collects elements into a {@code Map} whose keys and values are the result of applying
+   *         mapping functions to the input elements
    */
   public static <T, K, V> Collector<T, ?, Map<K, V>> toImmutableMap(Function<T, K> keyMapper, Function<T, V> valueMapper) {
     return new ImmutableMapCollector<>(keyMapper, valueMapper);

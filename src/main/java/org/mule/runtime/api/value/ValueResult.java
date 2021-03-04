@@ -30,7 +30,7 @@ public interface ValueResult {
   }
 
   /**
-   * Creates  a new {@link ValueResult} with a failure result containing the associated {@link ResolvingFailure failure}
+   * Creates a new {@link ValueResult} with a failure result containing the associated {@link ResolvingFailure failure}
    *
    * @param failure The generated failure occurred trying to resolve the {@link Value values}
    * @return a {@link ValueResult} with the {@link ResolvingFailure}
@@ -45,8 +45,8 @@ public interface ValueResult {
   Set<Value> getValues();
 
   /**
-   * @return An {@link Optional} {@link ResolvingFailure failure} with the error that occurred trying to resolve the
-   * {@link Value values}
+   * @return An {@link Optional} {@link ResolvingFailure failure} with the error that occurred trying to resolve the {@link Value
+   *         values}
    */
   Optional<ResolvingFailure> getFailure();
 

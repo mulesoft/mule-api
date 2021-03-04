@@ -33,30 +33,26 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   DataTypeParamsBuilder type(Class<?> type);
 
   /**
-   * Sets the given type for the {@link CollectionDataType} to be built. See
-   * {@link CollectionDataType#getType()}.
+   * Sets the given type for the {@link CollectionDataType} to be built. See {@link CollectionDataType#getType()}.
    * 
    * @param iteratorType the java collection type to set.
    * @return this builder.
-   * @throws IllegalArgumentException if the given collectionType is not a descendant of
-   *             {@link Iterator}.
+   * @throws IllegalArgumentException if the given collectionType is not a descendant of {@link Iterator}.
    */
   DataTypeCollectionTypeBuilder streamType(Class<? extends Iterator> iteratorType);
 
   /**
-   * Sets the given type for the {@link CollectionDataType} to be built. See
-   * {@link CollectionDataType#getType()}.
+   * Sets the given type for the {@link CollectionDataType} to be built. See {@link CollectionDataType#getType()}.
    * 
    * @param collectionType the java collection type to set.
    * @return this builder.
-   * @throws IllegalArgumentException if the given collectionType is not a descendant of
-   *             {@link Collection}.
+   * @throws IllegalArgumentException if the given collectionType is not a descendant of {@link Collection}.
    */
   DataTypeCollectionTypeBuilder collectionType(Class<? extends Collection> collectionType);
 
   /**
-   * Down-casts the builder to {@link DataTypeCollectionTypeBuilder}, allowing the builder to be used in a fluent way
-   * without having to cast it when dealing with {@link Iterable}s.
+   * Down-casts the builder to {@link DataTypeCollectionTypeBuilder}, allowing the builder to be used in a fluent way without
+   * having to cast it when dealing with {@link Iterable}s.
    *
    * @return this builder.
    */
@@ -71,8 +67,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   DataTypeFunctionTypeBuilder functionType(Class<? extends ExpressionFunction> functionType);
 
   /**
-   * Down-casts the builder to {@link DataTypeFunctionTypeBuilder}, allowing the builder to be used in a fluent way
-   * without having to cast it when dealing with {@link ExpressionFunction}s.
+   * Down-casts the builder to {@link DataTypeFunctionTypeBuilder}, allowing the builder to be used in a fluent way without having
+   * to cast it when dealing with {@link ExpressionFunction}s.
    *
    * @return this builder.
    */
@@ -87,8 +83,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   DataTypeMapTypeBuilder mapType(Class<? extends Map> mapType);
 
   /**
-   * Down-casts the builder to {@link DataTypeMapTypeBuilder}, allowing the builder to be used in a fluent way
-   * without having to cast it when dealing with {@link Map}s.
+   * Down-casts the builder to {@link DataTypeMapTypeBuilder}, allowing the builder to be used in a fluent way without having to
+   * cast it when dealing with {@link Map}s.
    *
    * @return this builder.
    */
@@ -97,8 +93,8 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   /**
    * Populates the builder from the given {@code value}.
    * <p>
-   * This method will get the {@code type}, {@code mimeType} and {@code encoding} from the given {@code value}
-   * according to its concrete type.
+   * This method will get the {@code type}, {@code mimeType} and {@code encoding} from the given {@code value} according to its
+   * concrete type.
    * <p>
    *
    * @param value an object instance.
@@ -115,14 +111,12 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   DataTypeFunctionTypeBuilder fromFunction(ExpressionFunction function);
 
   /**
-   * Provides methods to set data associated to the items of a {@link Collection}, when the type
-   * is a {@link Collection}.
+   * Provides methods to set data associated to the items of a {@link Collection}, when the type is a {@link Collection}.
    */
   interface DataTypeCollectionTypeBuilder extends DataTypeParamsBuilder {
 
     /**
-     * Sets the given {@code itemType} for the {@link DataType} to be built, when the type is an
-     * {@link Iterable}.
+     * Sets the given {@code itemType} for the {@link DataType} to be built, when the type is an {@link Iterable}.
      * 
      * @param itemType the java type to set.
      * @return this builder.
@@ -130,8 +124,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeCollectionTypeBuilder itemType(Class<?> itemType);
 
     /**
-     * Sets the given {@code itemMediaType} for the {@link DataType} to be built., when the type
-     * is an {@link Iterable}.
+     * Sets the given {@code itemMediaType} for the {@link DataType} to be built., when the type is an {@link Iterable}.
      * 
      * @param itemMediaType the media type string to set
      * @return this builder.
@@ -139,12 +132,10 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeCollectionTypeBuilder itemMediaType(String itemMediaType);
 
     /**
-     * Sets the given {@code itemMediaType} for the {@link DataType} to be built, when the type
-     * is an {@link Iterable}.
+     * Sets the given {@code itemMediaType} for the {@link DataType} to be built, when the type is an {@link Iterable}.
      * <p>
-     * If the media type for the given string has a {@code charset} parameter, that will be set
-     * as the encoding for the items's {@link DataType} being built, unless it had been
-     * previously set.
+     * If the media type for the given string has a {@code charset} parameter, that will be set as the encoding for the items's
+     * {@link DataType} being built, unless it had been previously set.
      * 
      * @param itemMediaType the media type to set. If null, the builder is not changed.
      * @return this builder.
@@ -177,14 +168,12 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
   }
 
   /**
-   * Provides methods to set data associated to the keys and values of a {@link Map}, when the type
-   * is a {@link Map}.
+   * Provides methods to set data associated to the keys and values of a {@link Map}, when the type is a {@link Map}.
    */
   interface DataTypeMapTypeBuilder extends DataTypeParamsBuilder {
 
     /**
-     * Sets the given {@code keyType} for the {@link DataType} to be built, when the type is a
-     * {@link Map}.
+     * Sets the given {@code keyType} for the {@link DataType} to be built, when the type is a {@link Map}.
      *
      * @param keyType the java type to set.
      * @return this builder.
@@ -192,8 +181,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder keyType(Class<?> keyType);
 
     /**
-     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
-     * is a {@link Map}.
+     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type is a {@link Map}.
      *
      * @param keyMediaType the media type string to set
      * @return this builder.
@@ -201,12 +189,10 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder keyMediaType(String keyMediaType);
 
     /**
-     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type
-     * is a {@link Map}.
+     * Sets the given {@code keyMediaType} for the {@link DataType} to be built, when the type is a {@link Map}.
      * <p>
-     * If the media type for the given string has a {@code charset} parameter, that will be set
-     * as the encoding for the key's {@link DataType} being built, unless it had been
-     * previously set.
+     * If the media type for the given string has a {@code charset} parameter, that will be set as the encoding for the key's
+     * {@link DataType} being built, unless it had been previously set.
      *
      * @param keyMediaType the media type to set. If null, the builder is not changed.
      * @return this builder.
@@ -214,8 +200,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder keyMediaType(MediaType keyMediaType);
 
     /**
-     * Sets the given {@code valueType} for the {@link DataType} to be built, when the type is a
-     * {@link Map}.
+     * Sets the given {@code valueType} for the {@link DataType} to be built, when the type is a {@link Map}.
      *
      * @param valueType the java type to set.
      * @return this builder.
@@ -223,8 +208,7 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder valueType(Class<?> valueType);
 
     /**
-     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
-     * is a {@link Map}.
+     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type is a {@link Map}.
      *
      * @param valueMediaType the media type string to set
      * @return this builder.
@@ -232,12 +216,10 @@ public interface DataTypeBuilder extends DataTypeParamsBuilder {
     DataTypeMapTypeBuilder valueMediaType(String valueMediaType);
 
     /**
-     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type
-     * is a {@link Map}.
+     * Sets the given {@code valueMediaType} for the {@link DataType} to be built, when the type is a {@link Map}.
      * <p>
-     * If the media type for the given string has a {@code charset} parameter, that will be set
-     * as the encoding for the key's {@link DataType} being built, unless it had been
-     * previously set.
+     * If the media type for the given string has a {@code charset} parameter, that will be set as the encoding for the key's
+     * {@link DataType} being built, unless it had been previously set.
      *
      * @param valueMediaType the media type to set. If null, the builder is not changed.
      * @return this builder.

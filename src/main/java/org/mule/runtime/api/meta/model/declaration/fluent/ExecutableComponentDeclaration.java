@@ -17,8 +17,8 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A declaration object for a {@link OperationModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link OperationModel}
+ * A declaration object for a {@link OperationModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link OperationModel}
  *
  * @since 1.0
  */

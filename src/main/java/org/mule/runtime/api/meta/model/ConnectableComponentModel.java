@@ -11,9 +11,9 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 
 /**
- * A definition of an executable {@link ComponentModel} in an {@link ExtensionModel}.
- * This model groups all the common contracts between extension components that can be executed,
- * producing or altering an event, like an {@link OperationModel} or {@link SourceModel}.
+ * A definition of an executable {@link ComponentModel} in an {@link ExtensionModel}. This model groups all the common contracts
+ * between extension components that can be executed, producing or altering an event, like an {@link OperationModel} or
+ * {@link SourceModel}.
  *
  * @since 1.0
  */
@@ -33,8 +33,8 @@ public interface ConnectableComponentModel extends ComponentModel, HasOutputMode
   /**
    * Indicates if this component supports streaming.
    * <p>
-   * Notice that supporting streaming doesn't necessarily mean that streaming will be performed
-   * each time the component is executed
+   * Notice that supporting streaming doesn't necessarily mean that streaming will be performed each time the component is
+   * executed
    *
    * @return whether this component supports streaming or not
    */

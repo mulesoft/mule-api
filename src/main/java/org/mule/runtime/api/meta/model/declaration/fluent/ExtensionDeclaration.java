@@ -44,8 +44,8 @@ import java.util.TreeSet;
 
 
 /**
- * A declaration object for a {@link ExtensionModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link ExtensionModel}
+ * A declaration object for a {@link ExtensionModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link ExtensionModel}
  *
  * @since 1.0
  */
@@ -80,8 +80,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * Returns an immutable list with the {@link ConfigurationDeclaration} instances
-   * that have been declared so far.
+   * Returns an immutable list with the {@link ConfigurationDeclaration} instances that have been declared so far.
    *
    * @return an unmodifiable list. May be empty but will never be {@code null}
    */
@@ -125,8 +124,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * @return an unmodifiable {@link List} with
-   * the available {@link OperationDeclaration}s
+   * @return an unmodifiable {@link List} with the available {@link OperationDeclaration}s
    */
   @Override
   public List<OperationDeclaration> getOperations() {
@@ -230,14 +228,15 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * @return an immutable  {@link Set} with all the Java package name that are registered as privileged API
+   * @return an immutable {@link Set} with all the Java package name that are registered as privileged API
    */
   public Set<String> getPrivilegedPackages() {
     return unmodifiableSet(privilegedPackages);
   }
 
   /**
-   * @return an immutable  {@link Set} with all the artifact IDs that are registered to have access to the privileged API. Each artifact is defined using Maven's groupId:artifactId
+   * @return an immutable {@link Set} with all the artifact IDs that are registered to have access to the privileged API. Each
+   *         artifact is defined using Maven's groupId:artifactId
    */
   public Set<String> getPrivilegedArtifacts() {
     return unmodifiableSet(privilegedArtifacts);
@@ -259,8 +258,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * Declares that this extension contains a resource which can be found
-   * at the relative {@code resourcePath}
+   * Declares that this extension contains a resource which can be found at the relative {@code resourcePath}
    *
    * @param resourcePath the relative path to the extension's resource
    * @return {@code this} declaration
@@ -295,8 +293,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * Declares that the extension is importing a type from another
-   * extension
+   * Declares that the extension is importing a type from another extension
    *
    * @param importedType a {@link ImportedTypeModel} with the import information
    * @return {@code this} declaration
@@ -321,7 +318,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
    * Registers the given {@code subType} as an implementation of the {@code baseType}
    *
    * @param baseType a base type
-   * @param subType  a sub type implementation
+   * @param subType a sub type implementation
    */
   public void addSubtype(MetadataType baseType, MetadataType subType) {
     addSubtypes(baseType, singletonList(subType));
@@ -339,8 +336,8 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * @return a {@link Map} with the subType mappings declared through {@link #addSubtype(MetadataType, MetadataType)}
-   * and {@link #addSubtypes(MetadataType, Collection)}
+   * @return a {@link Map} with the subType mappings declared through {@link #addSubtype(MetadataType, MetadataType)} and
+   *         {@link #addSubtypes(MetadataType, Collection)}
    */
   public Set<SubTypesModel> getSubTypes() {
     return subTypes.entrySet().stream().map(entry -> new SubTypesModel(entry.getKey(), entry.getValue()))

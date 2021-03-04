@@ -195,7 +195,7 @@ public class MediaTypeTestCase {
       parse = MediaType.parse("test/foo;a=1;b=2;c=1");
       assertThat(parse.isDefinedInApp(), is(true));
 
-      //Unknown
+      // Unknown
       parse = MediaType.parse("test/foo;charset=UTF-8;d=2");
       assertThat(parse.isDefinedInApp(), is(false));
       parse = MediaType.parse("test/foo;a=UTF-8;d=2");

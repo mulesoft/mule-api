@@ -14,8 +14,8 @@ import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.meta.NameableObject;
 
 /**
- * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it
- * occurred in the application).
+ * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it occurred in
+ * the application).
  *
  * @since 1.0
  */

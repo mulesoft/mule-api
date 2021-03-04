@@ -9,8 +9,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.nested.NestableElementModel;
 
 /**
- * A declaration object for a {@link NestableElementModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link NestableElementModel}
+ * A declaration object for a {@link NestableElementModel}. It contains raw, unvalidated data which is used to declare the
+ * structure of a {@link NestableElementModel}
  *
  * @since 1.0
  */

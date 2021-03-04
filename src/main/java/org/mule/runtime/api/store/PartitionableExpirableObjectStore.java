@@ -18,13 +18,13 @@ public interface PartitionableExpirableObjectStore<T extends Serializable>
     extends ExpirableObjectStore<T>, PartitionableObjectStore<T> {
 
   /**
-   * Expires eligible entries in the given {@code partitionName}. This method is required to be
-   * thread safe and atomic, meaning that while running, all other methods must wait for it to finish.
+   * Expires eligible entries in the given {@code partitionName}. This method is required to be thread safe and atomic, meaning
+   * that while running, all other methods must wait for it to finish.
    *
-   * @param entryTTL      expire all entries which were inserted after this number of milliseconds. If lower or equal than zero,
-   *                      no items will be expired on a TTL basis
-   * @param maxEntries    The max number of entries that this store is allowed to have. If the store has more entries than this,
-   *                      it will start removing entries until the boundary is met. The selection criteria is up to each implementation
+   * @param entryTTL expire all entries which were inserted after this number of milliseconds. If lower or equal than zero, no
+   *        items will be expired on a TTL basis
+   * @param maxEntries The max number of entries that this store is allowed to have. If the store has more entries than this, it
+   *        will start removing entries until the boundary is met. The selection criteria is up to each implementation
    * @param partitionName the name of the partition to expire
    * @throws ObjectStoreException in case of failure
    */

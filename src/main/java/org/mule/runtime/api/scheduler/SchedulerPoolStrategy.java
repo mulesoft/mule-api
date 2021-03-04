@@ -7,8 +7,8 @@
 package org.mule.runtime.api.scheduler;
 
 /**
- * The strategy that the {@link SchedulerService} should use to provision the thread pools that back the three main types
- * of schedulers
+ * The strategy that the {@link SchedulerService} should use to provision the thread pools that back the three main types of
+ * schedulers
  *
  * @since 1.3.0
  */

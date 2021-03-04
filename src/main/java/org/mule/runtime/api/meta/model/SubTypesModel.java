@@ -17,9 +17,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * A model which describes that a given {@link #getBaseType() base type} is extended by a
- * {@link Set} of {@link #getSubTypes() sub-types}. In all cases, the types are described through
- * the {@link MetadataType} model.
+ * A model which describes that a given {@link #getBaseType() base type} is extended by a {@link Set} of {@link #getSubTypes()
+ * sub-types}. In all cases, the types are described through the {@link MetadataType} model.
  *
  * @since 1.0
  */

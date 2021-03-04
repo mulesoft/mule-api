@@ -9,8 +9,8 @@ package org.mule.runtime.api.component.execution;
 import java.util.function.Consumer;
 
 /**
- * A generic callback for asynchronous processing. The callback is completed normally when the {@link #complete(Object)} method
- * is invoked, or completed exceptionally when {@link #error(Throwable)} is used instead. Per each instance, only one of those
+ * A generic callback for asynchronous processing. The callback is completed normally when the {@link #complete(Object)} method is
+ * invoked, or completed exceptionally when {@link #error(Throwable)} is used instead. Per each instance, only one of those
  * methods should be called, and they should be called only once.
  * <p>
  * This interface also provides some utility methods for functional composition of several callbacks.
@@ -45,11 +45,11 @@ public interface CompletableCallback<T> {
   }
 
   /**
-   * Returns a new callback which always executes the given {@code runnable} upon completion, regardless of said completion
-   * being normal or exceptional.
+   * Returns a new callback which always executes the given {@code runnable} upon completion, regardless of said completion being
+   * normal or exceptional.
    *
    * @param runnable the task to run
-   * @param <T>      the callback's generic type
+   * @param <T> the callback's generic type
    * @return a new callback
    */
   static <T> CompletableCallback<T> always(Runnable runnable) {
@@ -121,8 +121,8 @@ public interface CompletableCallback<T> {
   }
 
   /**
-   * Returns a new composed callback which propagates the normal completion signal to the given {@code beforeCallback} BEFORE
-   * the {@link #complete(Object)} method is executed on {@code this} callback.
+   * Returns a new composed callback which propagates the normal completion signal to the given {@code beforeCallback} BEFORE the
+   * {@link #complete(Object)} method is executed on {@code this} callback.
    * <p>
    * Notice that if the {@code consumer} throws exception, the completion signal will never reach {@code this} callback.
    *
@@ -145,8 +145,8 @@ public interface CompletableCallback<T> {
   }
 
   /**
-   * Returns a new composed callback which propagates the completion signal to the given {@code beforeCallback} BEFORE
-   * the {@link #complete(Object)} or {@link #error(Throwable)} methods are executed on {@code this} callback.
+   * Returns a new composed callback which propagates the completion signal to the given {@code beforeCallback} BEFORE the
+   * {@link #complete(Object)} or {@link #error(Throwable)} methods are executed on {@code this} callback.
    * <p>
    * Notice that if the {@code beforeCallback} throws exception, the completion signal will never reach {@code this} callback.
    *

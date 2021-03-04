@@ -25,8 +25,8 @@ public interface Registry {
   /**
    * Looks up for a service within the artifact.
    * <p>
-   * If there are multiple services registered then an exception will be raised. If that could be the case then
-   * {@code {@link #lookupAllByType(Class)}} should be used instead.
+   * If there are multiple services registered then an exception will be raised. If that could be the case then {@code {@link
+   * #lookupAllByType(Class)}} should be used instead.
    * 
    * @param objectType the service type
    * @param <T> the type of the service

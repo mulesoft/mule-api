@@ -55,6 +55,7 @@ public interface ExpressionModule {
 
   /**
    * Returns the namespace of this module
+   * 
    * @return The namespace
    */
   ModuleNamespace namespace();
@@ -65,7 +66,7 @@ public interface ExpressionModule {
     /**
      * Will create a binding for the specified identifier and value.
      *
-     * @param value      the value to bind
+     * @param value the value to bind
      * @param identifier the keyword to use in the EL to access the {@code value}
      */
     ExpressionModule.Builder addBinding(String identifier, TypedValue<?> value);

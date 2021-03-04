@@ -13,9 +13,9 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.FunctionParameter;
 
 /**
- * Representation of a function to be used by an {@link ExpressionLanguage}.
- * Allows to define the parameter list expected and the return type so that validations can be applied before and after execution
- * by the {@link ExpressionLanguage}. Thus, it is not necessary for implementations to validate the input.
+ * Representation of a function to be used by an {@link ExpressionLanguage}. Allows to define the parameter list expected and the
+ * return type so that validations can be applied before and after execution by the {@link ExpressionLanguage}. Thus, it is not
+ * necessary for implementations to validate the input.
  *
  * @since 1.0
  */

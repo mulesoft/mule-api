@@ -7,15 +7,13 @@
 package org.mule.runtime.api.meta;
 
 /**
- * Enumerates the different types of support that
- * a given component can provide regarding expressions
+ * Enumerates the different types of support that a given component can provide regarding expressions
  *
  * @since 1.0
  */
 public enum ExpressionSupport {
   /**
-   * Expressions are required but not enforced. Static values
-   * are accepted too.
+   * Expressions are required but not enforced. Static values are accepted too.
    */
   SUPPORTED,
 

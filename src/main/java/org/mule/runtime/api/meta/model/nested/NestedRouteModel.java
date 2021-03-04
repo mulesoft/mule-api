@@ -13,8 +13,8 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import java.util.Optional;
 
 /**
- * Represents a {@link NestableElementModel} that is itself a {@link ComposableModel} and {@link ParameterizedModel}.
- * A {@link NestedRouteModel route} can be declared as a repeatable element, so multiple declarations of {@code this}
+ * Represents a {@link NestableElementModel} that is itself a {@link ComposableModel} and {@link ParameterizedModel}. A
+ * {@link NestedRouteModel route} can be declared as a repeatable element, so multiple declarations of {@code this}
  * {@link NestedRouteModel route} are associated to the same model definition.
  *
  * @since 1.0
@@ -30,8 +30,7 @@ public interface NestedRouteModel extends NestableElementModel, ParameterizedMod
   int getMinOccurs();
 
   /**
-   * {@link Optional} value which represents the maximum amount of times that this route can be used inside the owning
-   * component.
+   * {@link Optional} value which represents the maximum amount of times that this route can be used inside the owning component.
    *
    * @return If present, a number greater or equal to zero.
    */

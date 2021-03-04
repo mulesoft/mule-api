@@ -15,8 +15,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * A declaration object for a {@link ConfigurationModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link ConfigurationModel}
+ * A declaration object for a {@link ConfigurationModel}. It contains raw, unvalidated data which is used to declare the structure
+ * of a {@link ConfigurationModel}
  *
  * @since 1.0
  */
@@ -36,8 +36,7 @@ public class ConfigurationDeclaration extends StereotypedDeclaration<Configurati
   }
 
   /**
-   * @return an unmodifiable {@link List} with
-   * the available {@link OperationDeclaration}s
+   * @return an unmodifiable {@link List} with the available {@link OperationDeclaration}s
    */
   @Override
   public List<OperationDeclaration> getOperations() {

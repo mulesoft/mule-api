@@ -42,7 +42,7 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @param message   Message in case of a invalid connection
+   * @param message Message in case of a invalid connection
    * @param exception The exception that causes the connection invalidity
    * @return a {@link ConnectionValidationResult} with a invalid status.
    */
@@ -51,7 +51,7 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @param message   Message in case of a invalid connection
+   * @param message Message in case of a invalid connection
    * @param errorType An {@link ErrorType} that represents the cause of the invalid connection
    * @param exception The exception that causes the connection invalidity
    * @return a {@link ConnectionValidationResult} with a invalid status.
@@ -68,8 +68,7 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @return A {@link String} indicating the Validation message.
-   * The message should not be null in case of a invalid connection.
+   * @return A {@link String} indicating the Validation message. The message should not be null in case of a invalid connection.
    */
   public String getMessage() {
     return this.message;
@@ -83,8 +82,8 @@ public final class ConnectionValidationResult {
   }
 
   /**
-   * @return The {@link Exception} that causes the connection invalidity.
-   * The exception should not be null in case of a invalid connection.
+   * @return The {@link Exception} that causes the connection invalidity. The exception should not be null in case of a invalid
+   *         connection.
    */
   public Exception getException() {
     return this.exception;

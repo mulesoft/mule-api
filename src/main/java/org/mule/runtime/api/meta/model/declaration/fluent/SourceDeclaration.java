@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A declaration object for a {@link SourceModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link SourceModel}
+ * A declaration object for a {@link SourceModel}. It contains raw, unvalidated data which is used to declare the structure of a
+ * {@link SourceModel}
  *
  * @since 1.0
  */
@@ -35,8 +35,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
   }
 
   /**
-   * Returns all the parameter declarations declared on all groups, including
-   * the ones declared on the success and error callbacks
+   * Returns all the parameter declarations declared on all groups, including the ones declared on the success and error callbacks
    *
    * @return a flattened list of all the parameters in this declaration
    */
@@ -77,6 +76,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the success {@link SourceCallbackDeclaration}
+   * 
    * @param successCallback a callback declaration or {@code null}
    */
   public void setSuccessCallback(SourceCallbackDeclaration successCallback) {
@@ -100,6 +100,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the error {@link SourceCallbackDeclaration}
+   * 
    * @param errorCallback a callback declaration or {@code null}
    */
   public void setErrorCallback(SourceCallbackDeclaration errorCallback) {
@@ -115,6 +116,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the terminate {@link SourceCallbackDeclaration}
+   * 
    * @param terminateCallback a callback declaration or {@code null}
    */
   public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
@@ -134,6 +136,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets whether the declared source should only run in the primary node when in cluster mode
+   * 
    * @param runsOnPrimaryNodeOnly whether to only run on the primary node
    */
   public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
@@ -142,8 +145,9 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the back pressure {@link SourceCallbackDeclaration}
+   * 
    * @param backPressureCallback a callback declaration or {@code null}
-   *                             @since 1.1
+   * @since 1.1
    */
   public void setBackPressureCallback(SourceCallbackDeclaration backPressureCallback) {
     this.backPressureCallback = backPressureCallback;

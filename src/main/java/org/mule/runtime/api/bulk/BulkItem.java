@@ -47,8 +47,8 @@ public final class BulkItem<T> implements Serializable {
   }
 
   /**
-   * Whether or not it was successful. Notice that this should be {@code false} if {@link #exception} is not
-   * {@code null}, however there might not be an exception but the item could still not be successful for other reasons.
+   * Whether or not it was successful. Notice that this should be {@code false} if {@link #exception} is not {@code null}, however
+   * there might not be an exception but the item could still not be successful for other reasons.
    */
   public boolean isSuccessful() {
     return successful;

@@ -26,7 +26,7 @@ class NSmallMapDelegate<K, V> extends SmallMapDelegate<K, V> {
   /**
    * Creates a new instance
    *
-   * @param delegate      the delegate map
+   * @param delegate the delegate map
    * @param previousValue the last operation's previousValue (or null if non applicable)
    */
   public NSmallMapDelegate(Map<K, V> delegate, V previousValue) {

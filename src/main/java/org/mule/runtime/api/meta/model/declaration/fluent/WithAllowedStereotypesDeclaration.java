@@ -12,8 +12,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 import java.util.Set;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which
- * it's possible to add/get {@link StereotypeModel} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link StereotypeModel} objects
  *
  * @since 1.0
  */

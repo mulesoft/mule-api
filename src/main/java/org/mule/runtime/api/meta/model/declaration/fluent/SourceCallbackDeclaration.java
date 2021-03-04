@@ -9,8 +9,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.source.SourceCallbackModel;
 
 /**
- * A declaration object for a {@link SourceCallbackModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link SourceCallbackModel}
+ * A declaration object for a {@link SourceCallbackModel}. It contains raw, unvalidated data which is used to declare the
+ * structure of a {@link SourceCallbackModel}
  *
  * @since 1.0
  */

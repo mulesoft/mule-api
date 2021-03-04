@@ -33,8 +33,7 @@ public interface ConnectivityTestingService {
    * @return connectivity testing result.
    * @throws UnsupportedConnectivityTestingObjectException when it's not possible to do connectivity testing over the mule
    *         component.
-   * @throws {@link ObjectNotFoundException} when the object to use to do connectivity does
-   *         not exists
+   * @throws {@link ObjectNotFoundException} when the object to use to do connectivity does not exists
    */
   ConnectionValidationResult testConnection(Location location);
 

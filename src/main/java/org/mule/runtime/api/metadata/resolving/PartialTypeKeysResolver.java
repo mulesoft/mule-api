@@ -12,19 +12,20 @@ import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
 /**
- * A {@link TypeKeysResolver} that can handle the resolution of multi-level {@link MetadataKey} in a lazy way.
- * On each invocation, this resolver will perform the resolution of one more level of the {@link MetadataKey} tree,
- * based on the configuration of the previous levels.
+ * A {@link TypeKeysResolver} that can handle the resolution of multi-level {@link MetadataKey} in a lazy way. On each invocation,
+ * this resolver will perform the resolution of one more level of the {@link MetadataKey} tree, based on the configuration of the
+ * previous levels.
  *
  * @since 1.1
  */
 public interface PartialTypeKeysResolver<T> extends TypeKeysResolver {
 
   /**
-   * Further resolves the of types that can be described based on a partial configuration of the Type descriptor,
-   * representing them as a multi level {@link MetadataKey}.
+   * Further resolves the of types that can be described based on a partial configuration of the Type descriptor, representing
+   * them as a multi level {@link MetadataKey}.
    *
    * For example, if we have a location key composed by:
+   * 
    * <pre>
    * {@code
    *  Location: {
@@ -35,10 +36,9 @@ public interface PartialTypeKeysResolver<T> extends TypeKeysResolver {
    * }
    * </pre>
    *
-   * Were the {@code Continent} is required to resolve the {@code Country},
-   * and the {@code Country} is required to resolve the {@code City}, this {@link PartialTypeKeysResolver#resolveChilds}
-   * method will be invoked with the {@code Location} configuration available so far.
-   * In this case, possible values for the {@code partial} parameter of this method are
+   * Were the {@code Continent} is required to resolve the {@code Country}, and the {@code Country} is required to resolve the
+   * {@code City}, this {@link PartialTypeKeysResolver#resolveChilds} method will be invoked with the {@code Location}
+   * configuration available so far. In this case, possible values for the {@code partial} parameter of this method are
    * {@code Location: { continent } } and {@code Location: { continent, country } }
    *
    * @param context {@link MetadataContext} of the Metadata resolution

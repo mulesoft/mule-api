@@ -33,9 +33,9 @@ public interface ExpressionLanguageMetadataService extends Service {
    * Infers the expected input mule event type {@link MuleEventMetadataType} for specified output type with the given script.
    *
    * @param expression The scripting text.
-   * @param output     The expected output type
-   * @param builder    The builder to be used to build the event type
-   * @param callback   The callback
+   * @param output The expected output type
+   * @param builder The builder to be used to build the event type
+   * @param callback The callback
    */
   void getInputType(String expression, MetadataType output, MuleEventMetadataTypeBuilder builder, MessageCallback callback);
 
@@ -43,8 +43,8 @@ public interface ExpressionLanguageMetadataService extends Service {
    * Returns the result type expression when invoked with the given {@link TypeBindings}.
    *
    * @param typeBindings The script bindings
-   * @param expression   The scripting text.
-   * @param callback     The callback
+   * @param expression The scripting text.
+   * @param callback The callback
    * @return The return type of the expression.
    */
   MetadataType getOutputType(TypeBindings typeBindings, String expression, MessageCallback callback);
@@ -53,10 +53,10 @@ public interface ExpressionLanguageMetadataService extends Service {
   /**
    * Returns the result type expression when invoked with the given {@link TypeBindings}.
    *
-   * @param typeBindings   The script bindings
-   * @param expression     The scripting text.
+   * @param typeBindings The script bindings
+   * @param expression The scripting text.
    * @param outputMimeType The output mimeType of the expression
-   * @param callback       The callback
+   * @param callback The callback
    * @return The return type of the expression.
    */
   MetadataType getOutputType(TypeBindings typeBindings, String expression, String outputMimeType, MessageCallback callback);
@@ -64,9 +64,9 @@ public interface ExpressionLanguageMetadataService extends Service {
   /**
    * Infers the metadata out of a sample data
    *
-   * @param sample           The sample data to be use
+   * @param sample The sample data to be use
    * @param readerProperties The configuration properties to read the sample data
-   * @param mimeType         The mimeType of the sample data
+   * @param mimeType The mimeType of the sample data
    * @return The infered MetadataType
    */
   MetadataType getMetadataFromSample(InputStream sample, Map<String, Object> readerProperties, String mimeType);
@@ -75,8 +75,8 @@ public interface ExpressionLanguageMetadataService extends Service {
    * Returns if the assignment type can be assigned to the expected type
    *
    * @param assignment The type to be assigned
-   * @param expected   The expected type
-   * @param callback   Callback for error messages. All the reasons of why it was not able to assign
+   * @param expected The expected type
+   * @param callback Callback for error messages. All the reasons of why it was not able to assign
    * @return True if it can be assign
    */
   boolean isAssignable(MetadataType assignment, MetadataType expected, MessageCallback callback);
@@ -85,8 +85,8 @@ public interface ExpressionLanguageMetadataService extends Service {
    * Returns the substitution that needs to be done in order for this two types can be assigned
    *
    * @param assignment The assignment type
-   * @param expected   The expected type
-   * @param callback   The callback for errors and warnings
+   * @param expected The expected type
+   * @param callback The callback for errors and warnings
    * @return The substitution
    */
   Map<String, MetadataType> resolveAssignment(MetadataType assignment, MetadataType expected, MessageCallback callback);
@@ -94,7 +94,7 @@ public interface ExpressionLanguageMetadataService extends Service {
   /**
    * Returns a new type with the substitution being applied
    *
-   * @param assignment   The type to be substituted
+   * @param assignment The type to be substituted
    * @param substitution The substitution
    * @return The new type
    */
@@ -127,7 +127,7 @@ public interface ExpressionLanguageMetadataService extends Service {
   /**
    * Returns a new type loader. Loads a script that contains a collections of types serialized with the language syntax.
    *
-   * @param content        The script
+   * @param content The script
    * @param metadataFormat The format that will be used for the loaded types
    * @return The type loader
    */
@@ -139,7 +139,7 @@ public interface ExpressionLanguageMetadataService extends Service {
    *
    * @param nameIdentifier The NameIdentifier for the modules core::test::MyModule
    * @param modules Other modules available
-   * @return  The ModuleDefinition
+   * @return The ModuleDefinition
    * @throws ExpressionCompilationException if any problem occurs while trying to parse the expression
    * @since 1.4
    */
@@ -181,7 +181,7 @@ public interface ExpressionLanguageMetadataService extends Service {
     /**
      * Is called when a warning message happens while resolving metadata
      *
-     * @param message  The message
+     * @param message The message
      * @param location The location of the message
      */
     void warning(String message, MessageLocation location);
@@ -189,7 +189,7 @@ public interface ExpressionLanguageMetadataService extends Service {
     /**
      * Is called when a error message happens while resolving metadata
      *
-     * @param message  The message
+     * @param message The message
      * @param location The location of the message
      */
     void error(String message, MessageLocation location);

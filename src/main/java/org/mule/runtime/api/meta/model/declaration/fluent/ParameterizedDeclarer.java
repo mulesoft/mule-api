@@ -25,9 +25,8 @@ public abstract class ParameterizedDeclarer<T extends ParameterizedDeclarer, D e
   }
 
   /**
-   * Provides a {@link ParameterGroupDeclarer} for adding parameters
-   * into a group of the given {@code name}. Use this if you wish to
-   * declare a parameter which should belong to a specific group.
+   * Provides a {@link ParameterGroupDeclarer} for adding parameters into a group of the given {@code name}. Use this if you wish
+   * to declare a parameter which should belong to a specific group.
    *
    * @param name the name of the group to declare
    * @return a {@link ParameterGroupDeclarer}
@@ -37,8 +36,8 @@ public abstract class ParameterizedDeclarer<T extends ParameterizedDeclarer, D e
   }
 
   /**
-   * Provides the default {@link ParameterGroupDeclarer}. Use this if you wish
-   * to add a parameter which shouldn't belong to any specific group.
+   * Provides the default {@link ParameterGroupDeclarer}. Use this if you wish to add a parameter which shouldn't belong to any
+   * specific group.
    *
    * @return a {@link ParameterGroupDeclarer}
    */

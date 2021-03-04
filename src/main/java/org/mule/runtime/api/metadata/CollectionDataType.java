@@ -11,8 +11,7 @@ import org.mule.api.annotation.NoImplement;
 /**
  * A data type that represents a generified collection.
  * <p>
- * When checked for compatibility both the collection type and the generic item type will be
- * compared.
+ * When checked for compatibility both the collection type and the generic item type will be compared.
  *
  * @since 1.0
  */

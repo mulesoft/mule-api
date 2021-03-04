@@ -40,13 +40,13 @@ public final class ValueProviderModel {
   /**
    * Creates a new instance
    *
-   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
+   * @param parameters the list of parameters that the Value Provider takes into account for its resolution
    * @param requiresConfiguration indicates if the configuration is required to resolve the values
-   * @param requiresConnection    indicates if the connection is required to resolve the values
-   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
-   * @param partOrder             the position in the value
-   * @param providerName          the category of the associated value provider for this parameter
-   * @param providerId            the id of the associated value provider for this parameter
+   * @param requiresConnection indicates if the connection is required to resolve the values
+   * @param isOpen indicates if the calculated values should be considered as an open or closed set
+   * @param partOrder the position in the value
+   * @param providerName the category of the associated value provider for this parameter
+   * @param providerId the id of the associated value provider for this parameter
    *
    * @since 1.4.0
    */

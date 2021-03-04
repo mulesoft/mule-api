@@ -39,8 +39,8 @@ public interface ResourceLocator {
   Optional<URL> find(String resource, Object caller);
 
   /**
-   * Same as {@link #loadFrom(String, String, String, Optional, String, String, Object)} but using no classifier and {@code jar} as
-   * type.
+   * Same as {@link #loadFrom(String, String, String, Optional, String, String, Object)} but using no classifier and {@code jar}
+   * as type.
    *
    * @param resource the name of the resource to load
    * @param groupId the group ID of the artifact where to look
@@ -55,8 +55,8 @@ public interface ResourceLocator {
   }
 
   /**
-   * Looks for a resource as in {@link #findIn(String, String, String, Optional, String, String, Object)} and returns it's {@link InputStream} if
-   * possible.
+   * Looks for a resource as in {@link #findIn(String, String, String, Optional, String, String, Object)} and returns it's
+   * {@link InputStream} if possible.
    *
    * @param resource the name of the resource to load
    * @param groupId the group ID of the artifact where to look
@@ -71,8 +71,8 @@ public interface ResourceLocator {
                                  String type, Object caller);
 
   /**
-   * Looks for a resource based on the calling class classloader and the current context classloader, specifically within the artifact
-   * specified by it's GAV coordinates, considering it's classifier and type as well.
+   * Looks for a resource based on the calling class classloader and the current context classloader, specifically within the
+   * artifact specified by it's GAV coordinates, considering it's classifier and type as well.
    *
    * @param resource the name of the resource to load
    * @param groupId the group ID of the artifact where to look

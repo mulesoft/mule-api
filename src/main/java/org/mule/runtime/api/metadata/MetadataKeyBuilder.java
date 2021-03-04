@@ -35,8 +35,8 @@ public class MetadataKeyBuilder {
   }
 
   /**
-   * Creates and returns new instance of a {@link MetadataKeyBuilder}, to help building a new {@link MetadataKey}
-   * represented by the given {@param id}
+   * Creates and returns new instance of a {@link MetadataKeyBuilder}, to help building a new {@link MetadataKey} represented by
+   * the given {@param id}
    *
    * @param id of the {@link MetadataKey} to be created
    * @return an initialized instance of {@link MetadataKeyBuilder}

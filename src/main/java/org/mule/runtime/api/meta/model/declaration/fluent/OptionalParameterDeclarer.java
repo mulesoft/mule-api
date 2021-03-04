@@ -7,8 +7,8 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 /**
- * A specialization of {@link ParameterDeclarer} for optional parameters.
- * It allows adding properties that only apply to optional parameters
+ * A specialization of {@link ParameterDeclarer} for optional parameters. It allows adding properties that only apply to optional
+ * parameters
  *
  * @since 1.0
  */

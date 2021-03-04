@@ -9,8 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import java.util.Set;
 
 /**
- * A declaration object to indicate that parameters in a {@link ParameterizedDeclaration}
- * are mutually exclusive
+ * A declaration object to indicate that parameters in a {@link ParameterizedDeclaration} are mutually exclusive
  *
  * @since 1.0
  */
@@ -22,8 +21,7 @@ public final class ExclusiveParametersDeclaration {
   private final Set<String> parameterNames;
 
   /**
-   * Indicates if besides of being exclusive, the runtime should enforce that on of
-   * the parameters MUST be provided
+   * Indicates if besides of being exclusive, the runtime should enforce that on of the parameters MUST be provided
    */
   private final boolean requiresOne;
 
@@ -31,7 +29,7 @@ public final class ExclusiveParametersDeclaration {
    * Creates a new instance
    *
    * @param parameterNames the parameter names
-   * @param requiresOne    whether one is required
+   * @param requiresOne whether one is required
    */
   public ExclusiveParametersDeclaration(Set<String> parameterNames, boolean requiresOne) {
     this.parameterNames = parameterNames;

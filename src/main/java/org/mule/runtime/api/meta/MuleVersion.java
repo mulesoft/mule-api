@@ -13,13 +13,10 @@ import com.vdurmont.semver4j.SemverException;
 import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 
 /**
- * This class represents Mule Software version scheme:
- * {major}.{minor}.{revision}-{suffix}
+ * This class represents Mule Software version scheme: {major}.{minor}.{revision}-{suffix}
  * <p>
- * For example:
- * 3.3.2 => major: 3, minor: 3, revision: 2, suffix: ''
- * 3.3.1-SNAPSHOT => major: 3, minor: 3, revision: 1, suffix: SNAPSHOT
- * 3.4-M2 => major: 3, minor: 4, suffix: M2
+ * For example: 3.3.2 => major: 3, minor: 3, revision: 2, suffix: '' 3.3.1-SNAPSHOT => major: 3, minor: 3, revision: 1, suffix:
+ * SNAPSHOT 3.4-M2 => major: 3, minor: 4, suffix: M2
  *
  * @since 1.0
  */
@@ -50,8 +47,7 @@ public final class MuleVersion {
   }
 
   /**
-   * Returns true if the version represented by the current object is
-   * equals newer to the version sent as parameter.
+   * Returns true if the version represented by the current object is equals newer to the version sent as parameter.
    *
    * @param version
    * @return
@@ -122,9 +118,8 @@ public final class MuleVersion {
   }
 
   /**
-   * Returns a string representing the complete numeric version, what means the
-   * 3 numbers that represent major.minor.revision. If revision is not present, then it will
-   * be set to 0 (zero).<br/>
+   * Returns a string representing the complete numeric version, what means the 3 numbers that represent major.minor.revision. If
+   * revision is not present, then it will be set to 0 (zero).<br/>
    * Examples:<br/>
    * <ol>
    * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>

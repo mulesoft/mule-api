@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * A declaration object for a {@link ComponentModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link ComponentModel}
+ * A declaration object for a {@link ComponentModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link ComponentModel}
  *
  * @since 1.0
  */

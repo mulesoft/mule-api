@@ -14,8 +14,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * Base class for marshalling an {@link org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel} instance
- * to {@code JSON} format and back
+ * Base class for marshalling an {@link org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel} instance to {@code JSON}
+ * format and back
  *
  * TODO MULE-11007: these classes should be moved to a persistence module
  *

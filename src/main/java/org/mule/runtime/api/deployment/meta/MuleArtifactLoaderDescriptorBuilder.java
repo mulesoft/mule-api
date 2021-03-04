@@ -16,8 +16,7 @@ import java.util.Map;
 /**
  * A builder to create instances of {@link MuleArtifactLoaderDescriptor}.
  * <p>
- * A new instance of this class should be used per each manifest to be
- * created. The created instances will be immutable.
+ * A new instance of this class should be used per each manifest to be created. The created instances will be immutable.
  *
  * @since 1.0
  */
@@ -40,10 +39,9 @@ public final class MuleArtifactLoaderDescriptorBuilder {
   /**
    * Sets the given property on the describer.
    * <p>
-   * If a value is already associated with the {@code key}, then
-   * it is overridden with the new {@code value}
+   * If a value is already associated with the {@code key}, then it is overridden with the new {@code value}
    *
-   * @param key   the property's key
+   * @param key the property's key
    * @param value the property's value
    * @return {@code this} builder
    */

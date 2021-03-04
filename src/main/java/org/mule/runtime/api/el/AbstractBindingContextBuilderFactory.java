@@ -40,12 +40,10 @@ public abstract class AbstractBindingContextBuilderFactory {
   private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY;
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
-   * this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
    * <p>
-   * If more than one implementation is found, the classLoading order of those implementations
-   * will determine which one is used. Information about this will be logged to aid in the
-   * troubleshooting of those cases.
+   * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
+   * Information about this will be logged to aid in the troubleshooting of those cases.
    *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
@@ -59,7 +57,8 @@ public abstract class AbstractBindingContextBuilderFactory {
   protected abstract BindingContext.Builder create();
 
   /**
-   * @param bindingContext existing {@link BindingContext} to use as a template to create a new {@link BindingContext.Builder} instance.
+   * @param bindingContext existing {@link BindingContext} to use as a template to create a new {@link BindingContext.Builder}
+   *        instance.
    * @return a fresh {@link BindingContext.Builder} based on the template {@code bindingContext} provided.
    */
   protected abstract BindingContext.Builder create(BindingContext bindingContext);

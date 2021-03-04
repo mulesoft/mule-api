@@ -13,9 +13,9 @@ import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
 /**
- * Handles the construction of a custom {@link MetadataType} in any format to be set in a {@link Typed} component statically
- * when building the extension avoiding dynamically metadata resolution when we know exactly the non necessarily java type
- * structure at compile time.
+ * Handles the construction of a custom {@link MetadataType} in any format to be set in a {@link Typed} component statically when
+ * building the extension avoiding dynamically metadata resolution when we know exactly the non necessarily java type structure at
+ * compile time.
  * <p>
  * Provided implementations of this interfaces should be used and not this one directly.
  *

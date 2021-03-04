@@ -12,8 +12,8 @@ import java.util.Optional;
 
 /**
  * A model which represents an stereotype qualifier for the {@link HasStereotypeModel} that is categorized with this stereotype.
- * An stereotype is a widely held but fixed and oversimplified image or idea of the owning model.
- * Examples would be {@code validator}, {@code source}, {@code processor}, etc.
+ * An stereotype is a widely held but fixed and oversimplified image or idea of the owning model. Examples would be
+ * {@code validator}, {@code source}, {@code processor}, etc.
  *
  * @since 1.0
  */
@@ -28,9 +28,8 @@ public interface StereotypeModel {
   String getType();
 
   /**
-   * Gets the namespace of error.
-   * This namespace represent the origin or who declares this error, so it could be the namespace of an
-   * extension or the {@code MULE} namespace.
+   * Gets the namespace of error. This namespace represent the origin or who declares this error, so it could be the namespace of
+   * an extension or the {@code MULE} namespace.
    *
    * @return The namespace of the error
    */

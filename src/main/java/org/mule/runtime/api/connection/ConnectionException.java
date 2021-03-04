@@ -45,7 +45,7 @@ public class ConnectionException extends MuleException {
    * Creates a new instance with the specified detail {@code message} and {@code cause}
    *
    * @param message the detail message
-   * @param cause   the exception's cause
+   * @param cause the exception's cause
    */
   public ConnectionException(String message, Throwable cause) {
     super(createStaticMessage(message), cause);
@@ -54,8 +54,8 @@ public class ConnectionException extends MuleException {
   /**
    * Creates a new instance with the specified detail {@code message}, {@code cause} and {@link ErrorType}
    *
-   * @param message   the detail message
-   * @param cause     the exception's cause
+   * @param message the detail message
+   * @param cause the exception's cause
    * @param errorType the exception's errorType
    */
   public ConnectionException(String message, Throwable cause, ErrorType errorType) {
@@ -66,7 +66,7 @@ public class ConnectionException extends MuleException {
   /**
    * Creates a new instance with the specified detail {@code cause} and {@code failed connection}
    *
-   * @param cause      the exception's cause
+   * @param cause the exception's cause
    * @param connection the failed connection
    */
   public ConnectionException(Throwable cause, Object connection) {
@@ -78,9 +78,9 @@ public class ConnectionException extends MuleException {
    * Creates a new instance with the specified detail {@code message}, {@code cause}, {@link ErrorType} and
    * {@code failed connection}
    *
-   * @param message    the detail message
-   * @param cause      the exception's cause
-   * @param errorType  the exception's errorType
+   * @param message the detail message
+   * @param cause the exception's cause
+   * @param errorType the exception's errorType
    * @param connection the failed connection
    */
   public ConnectionException(String message, Throwable cause, ErrorType errorType, Object connection) {

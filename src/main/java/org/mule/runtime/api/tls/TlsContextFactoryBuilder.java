@@ -14,8 +14,8 @@ import java.security.KeyStore;
 import javax.net.ssl.KeyManagerFactory;
 
 /**
- * Builder for {@link TlsContextFactory}. To configure a trust store, at least it's path and password must be provided. To configure
- * a key store, at least it's path, password and key password must be provided.
+ * Builder for {@link TlsContextFactory}. To configure a trust store, at least it's path and password must be provided. To
+ * configure a key store, at least it's path, password and key password must be provided.
  *
  * @since 1.0
  */
@@ -36,8 +36,8 @@ public interface TlsContextFactoryBuilder {
   TlsContextFactoryBuilder name(String name);
 
   /**
-   * Defines the enabled TLS protocols, which must be a subset of the global enabled ones, otherwise a {@link CreateException} will
-   * occur upon {@link #build()}. By default, those global ones will be used.
+   * Defines the enabled TLS protocols, which must be a subset of the global enabled ones, otherwise a {@link CreateException}
+   * will occur upon {@link #build()}. By default, those global ones will be used.
    *
    * @param protocols a comma separated {@link String} with the protocols, for example "TLSv1.1,TLSv1.2"
    * @return this builder
@@ -48,7 +48,8 @@ public interface TlsContextFactoryBuilder {
    * Defines the enabled TLS cipher suites, which must be a subset of the global enabled ones, otherwise a {@link CreateException}
    * will occur upon {@link #build()}. By default, those global ones will be used.
    *
-   * @param cipherSuites a comma separated {@link String} with the cipher suites, for example "TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA".
+   * @param cipherSuites a comma separated {@link String} with the cipher suites, for example
+   *        "TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA".
    * @return this builder
    */
   TlsContextFactoryBuilder enabledCipherSuites(String cipherSuites);
@@ -71,7 +72,8 @@ public interface TlsContextFactoryBuilder {
   TlsContextFactoryBuilder trustStorePassword(String password);
 
   /**
-   * Defines the type of the trust store (such as jks, jceks or pkcs12). By default, {@link KeyStore#getDefaultType()} will be used.
+   * Defines the type of the trust store (such as jks, jceks or pkcs12). By default, {@link KeyStore#getDefaultType()} will be
+   * used.
    *
    * @param type
    * @return this builder
@@ -156,7 +158,8 @@ public interface TlsContextFactoryBuilder {
    * Returns a {@link TlsContextFactory} based on the configured properties.
    *
    * @return a newly built {@link TlsContextFactory}.
-   * @throws CreateException if there's any trouble regarding protocols and cipher validation or store loading (such as the files not being found)
+   * @throws CreateException if there's any trouble regarding protocols and cipher validation or store loading (such as the files
+   *         not being found)
    */
   TlsContextFactory build() throws CreateException;
 

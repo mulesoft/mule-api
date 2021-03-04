@@ -14,8 +14,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * A declaration object for a {@link NestedComponentModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link NestedComponentModel}
+ * A declaration object for a {@link NestedComponentModel}. It contains raw, unvalidated data which is used to declare the
+ * structure of a {@link NestedComponentModel}
  *
  * @since 1.0
  */

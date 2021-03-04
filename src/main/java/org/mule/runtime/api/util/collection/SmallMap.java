@@ -21,8 +21,8 @@ import java.util.function.BiFunction;
 /**
  * A {@link Map} implementation optimized for cases in which:
  * <ul>
- *   <li>The size will not surpass the number of five entries, or will only surpass it in the minority of cases</li>
- *   <li>The key's {@code equals(Object)} method is significantly faster than its {@code hashCode()} method</li>
+ * <li>The size will not surpass the number of five entries, or will only surpass it in the minority of cases</li>
+ * <li>The key's {@code equals(Object)} method is significantly faster than its {@code hashCode()} method</li>
  * </ul>
  * <p>
  * The way this map works is that instead of using a hash table, it will do a brute force search over its five keys. When the
@@ -30,8 +30,8 @@ import java.util.function.BiFunction;
  * <p>
  * Notice that the entire concept of this map is predicated on those two conditions. Using it in other situations will have the
  * opposite effect of actually decreasing performance. Ideal case if that of {@link String} keys. Because most keys will be of
- * different sizes, the equals method will be faster than the hashCode and the gain can be obtained. Notice that if we were to
- * use {@link Integer} instead, then the optimization would not occur as the hashCode of an int is the int itself.
+ * different sizes, the equals method will be faster than the hashCode and the gain can be obtained. Notice that if we were to use
+ * {@link Integer} instead, then the optimization would not occur as the hashCode of an int is the int itself.
  * <p>
  * If a seventh element is introduced into the map, then it will internally switch gears and start delegating into a
  * {@link HashMap}. Notice there's a performance penalty in copying the contents of this map into the new delegate.
@@ -39,11 +39,11 @@ import java.util.function.BiFunction;
  * Best performance can be obtained if:
  *
  * <ul>
- *   <li>The {@code of()} factory methods are used to initialize instances (when possible)</li>
- *   <li>The {@link #copy(Map)} and {@link #copy()} methods are used as the preferred way of copying maps</li>
- *   <li>The {@link #unmodifiable(Map)} method is preferred over {@link Collections#unmodifiableMap(Map)}
- *   <li>The {@link #forSize(int)} is the preferred way of initializing a map of a known size</li>
- *   or Guava's {@code UnmodifiableMap}</li>
+ * <li>The {@code of()} factory methods are used to initialize instances (when possible)</li>
+ * <li>The {@link #copy(Map)} and {@link #copy()} methods are used as the preferred way of copying maps</li>
+ * <li>The {@link #unmodifiable(Map)} method is preferred over {@link Collections#unmodifiableMap(Map)}
+ * <li>The {@link #forSize(int)} is the preferred way of initializing a map of a known size</li> or Guava's
+ * {@code UnmodifiableMap}</li>
  * </ul>
  * <p>
  * NOTE: {@link #copy(Map)} should be used even if the input Map is not a SmallMap.
@@ -63,10 +63,10 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a single entry described by the given {@code key} and {@code value}
    *
-   * @param key   the key
+   * @param key the key
    * @param value the value
-   * @param <K>   the generic type of the keys
-   * @param <V>   the generic type of the values
+   * @param <K> the generic type of the keys
+   * @param <V> the generic type of the values
    * @return a new instance
    */
   public static <K, V> SmallMap<K, V> of(K key, V value) {
@@ -76,10 +76,10 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a two entries described by the given keys and values
    *
-   * @param k1  the first key
-   * @param v1  the first value
-   * @param k2  the second key
-   * @param v2  the second value
+   * @param k1 the first key
+   * @param v1 the first value
+   * @param k2 the second key
+   * @param v2 the second value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -93,12 +93,12 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a three entries described by the given keys and values
    *
-   * @param k1  the first key
-   * @param v1  the first value
-   * @param k2  the second key
-   * @param v2  the second value
-   * @param k3  the third key
-   * @param v3  the third value
+   * @param k1 the first key
+   * @param v1 the first value
+   * @param k2 the second key
+   * @param v2 the second value
+   * @param k3 the third key
+   * @param v3 the third value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -113,14 +113,14 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a four entries described by the given keys and values
    *
-   * @param k1  the first key
-   * @param v1  the first value
-   * @param k2  the second key
-   * @param v2  the second value
-   * @param k3  the third key
-   * @param v3  the third value
-   * @param k4  the fourth key
-   * @param v4  the fourth value
+   * @param k1 the first key
+   * @param v1 the first value
+   * @param k2 the second key
+   * @param v2 the second value
+   * @param k3 the third key
+   * @param v3 the third value
+   * @param k4 the fourth key
+   * @param v4 the fourth value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -136,16 +136,16 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   /**
    * Creates a new instance of a five entries described by the given keys and values
    *
-   * @param k1  the first key
-   * @param v1  the first value
-   * @param k2  the second key
-   * @param v2  the second value
-   * @param k3  the third key
-   * @param v3  the third value
-   * @param k4  the fourth key
-   * @param v4  the fourth value
-   * @param k5  the fifth key
-   * @param v5  the fifth value
+   * @param k1 the first key
+   * @param v1 the first value
+   * @param k2 the second key
+   * @param v2 the second value
+   * @param k3 the third key
+   * @param v3 the third value
+   * @param k4 the fourth key
+   * @param v4 the fourth value
+   * @param k5 the fifth key
+   * @param v5 the fifth value
    * @param <K> the generic type of the keys
    * @param <V> the generic type of the values
    * @return a new instance
@@ -160,12 +160,12 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Returns a copy of the given {@code map}. If the size of the map is lower or equal to five, then the result will be
-   * a new {@link SmallMap}. Otherwise, a new {@link HashMap} will be created with a matching initial capacity.
+   * Returns a copy of the given {@code map}. If the size of the map is lower or equal to five, then the result will be a new
+   * {@link SmallMap}. Otherwise, a new {@link HashMap} will be created with a matching initial capacity.
    * <p>
    * This method offers better performance when the {@code map} is an instance of this class, as custom code is used to more
-   * efficiently copy the underlying data structures used by this class. Therefore, the
-   * {@link #unmodifiable(Map)} method should be preferred over other similar alternatives in order to leverage said optimization.
+   * efficiently copy the underlying data structures used by this class. Therefore, the {@link #unmodifiable(Map)} method should
+   * be preferred over other similar alternatives in order to leverage said optimization.
    *
    * @param map the map to be copied
    * @param <K> the generic type of the key
@@ -205,12 +205,12 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
   }
 
   /**
-   * Creates a new map optimized to have the given {@code size}. If {@code size} is lower or equal than 5, then a SmallMap will
-   * be returned. Otherwise, a {@link HashMap} with {@code size} as the initial capacity will be produced.
+   * Creates a new map optimized to have the given {@code size}. If {@code size} is lower or equal than 5, then a SmallMap will be
+   * returned. Otherwise, a {@link HashMap} with {@code size} as the initial capacity will be produced.
    *
    * @param size the map's size
-   * @param <K>  the generic type of the key
-   * @param <V>  the generic type of the value
+   * @param <K> the generic type of the key
+   * @param <V> the generic type of the value
    * @return a new Map
    */
   public static <K, V> Map<K, V> forSize(int size) {
@@ -244,6 +244,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Creates a new instance backed by the given {@code delegate}
+   * 
    * @param delegate a delegate
    */
   private SmallMap(SmallMapDelegate<K, V> delegate) {
@@ -276,6 +277,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Creates a copy of this map. This is the most performing way of copying a SmallMap
+   * 
    * @return a copy of {@code this} instance.
    */
   public SmallMap<K, V> copy() {

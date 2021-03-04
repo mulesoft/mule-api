@@ -28,7 +28,7 @@ public final class ErrorModelBuilder {
   /**
    * Creates a builder to be able to create {@link ErrorModel} instances
    *
-   * @param typeName  The type of the {@link ErrorModel} to create.
+   * @param typeName The type of the {@link ErrorModel} to create.
    * @param namespace adds a namespace to the {@link ErrorModel} that is being built
    * @return An {@link ErrorModelBuilder} initialized with the {@code typeName}
    */
@@ -47,8 +47,7 @@ public final class ErrorModelBuilder {
   }
 
   /**
-   * Specifies if the error can be handled through an error handler or not. If not specified, {@code true}
-   * will be assumed
+   * Specifies if the error can be handled through an error handler or not. If not specified, {@code true} will be assumed
    *
    * @param handleable whether the error can be handled through an error handler or not.
    * @return the contributed {@link ErrorModelBuilder}

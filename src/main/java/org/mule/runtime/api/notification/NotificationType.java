@@ -7,9 +7,9 @@
 package org.mule.runtime.api.notification;
 
 /**
- *  Type of notification to fire.
+ * Type of notification to fire.
  *
- *  @since 1.1
+ * @since 1.1
  */
 public enum NotificationType {
 

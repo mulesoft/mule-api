@@ -63,6 +63,7 @@ public interface BindingContext {
 
   /**
    * Returns all modules
+   * 
    * @return a {@link Collection} of all modules
    */
   Collection<ExpressionModule> modules();
@@ -98,6 +99,7 @@ public interface BindingContext {
 
     /**
      * Will add a new module to this binding
+     * 
      * @param expressionModule The module to be added
      */
     Builder addModule(ExpressionModule expressionModule);

@@ -44,8 +44,8 @@ public final class ItemSequenceInfo implements Serializable {
   }
 
   /**
-   * Gets the position or ordering number for this event in the the sequence, starting from 0
-   * up to {@link #getSequenceSize()} - 1 in case it's defined
+   * Gets the position or ordering number for this event in the the sequence, starting from 0 up to {@link #getSequenceSize()} - 1
+   * in case it's defined
    *
    * @return the position of the item inside the sequence.
    */

@@ -10,8 +10,8 @@ import org.mule.runtime.api.meta.model.operation.ExecutionType;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
 /**
- * A declaration object for a {@link OperationModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link OperationModel}
+ * A declaration object for a {@link OperationModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link OperationModel}
  *
  * @since 1.0
  */

@@ -155,11 +155,11 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Returns a {@link List} with all the declared {@link MetadataType} subtypes
-     * for the indicated {@link MetadataType} {@code type}.
+     * Returns a {@link List} with all the declared {@link MetadataType} subtypes for the indicated {@link MetadataType}
+     * {@code type}.
      * <p>
-     * Lookup will be performed first by {@link TypeIdAnnotation typeId},
-     * defaulting to {@link MetadataType type} comparison if no {@link TypeIdAnnotation typeId} was found
+     * Lookup will be performed first by {@link TypeIdAnnotation typeId}, defaulting to {@link MetadataType type} comparison if no
+     * {@link TypeIdAnnotation typeId} was found
      *
      * @param type the {@link MetadataType} for which to retrieve its declared subTypes
      * @return a {@link List} with all the declared subtypes for the indicated {@link MetadataType}
@@ -170,16 +170,14 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Returns a {@link List} with all the declared {@link MetadataType} that are considered super
-     * types from the given {@link MetadataType} {@code type}.
+     * Returns a {@link List} with all the declared {@link MetadataType} that are considered super types from the given
+     * {@link MetadataType} {@code type}.
      * <p>
-     * The lookup will be performed by looking recursively all the mappings that contains the given
-     * {@code type} as subtype and storing the base type and again looking the super type of the
-     * found base type.
+     * The lookup will be performed by looking recursively all the mappings that contains the given {@code type} as subtype and
+     * storing the base type and again looking the super type of the found base type.
      *
      * @param type {@link MetadataType} to look for their super types
-     * @return a {@link List} with all the declared supertypes for the indicated {@link
-     * MetadataType}
+     * @return a {@link List} with all the declared supertypes for the indicated {@link MetadataType}
      */
     List<ObjectType> getSuperTypes(MetadataType type) {
       final List<ObjectType> types = new LinkedList<>();
@@ -195,11 +193,11 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping.
-     * If a {@link TypeIdAnnotation typeId} is available for the given {@code type},
-     * the lookup will be performed by {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its
-     * full extent, which includes type generics and interfaces implementations, and
-     * defaulting to {@link MetadataType#equals} comparison if no {@link TypeIdAnnotation typeId} was found
+     * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping. If a
+     * {@link TypeIdAnnotation typeId} is available for the given {@code type}, the lookup will be performed by
+     * {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its full extent, which includes type
+     * generics and interfaces implementations, and defaulting to {@link MetadataType#equals} comparison if no
+     * {@link TypeIdAnnotation typeId} was found
      *
      * @param type the {@link MetadataType} for which to retrieve its declared subTypes
      * @return <tt>true</tt> if this map contains a mapping for the specified key {@link MetadataType type}

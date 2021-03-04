@@ -26,9 +26,8 @@ public interface Typed {
   MetadataType getType();
 
   /**
-   * Returns {@code true} if the type of the {@link Typed Component} is
-   * of dynamic kind, and has to be discovered during design time using
-   * the {@link MetadataService} service.
+   * Returns {@code true} if the type of the {@link Typed Component} is of dynamic kind, and has to be discovered during design
+   * time using the {@link MetadataService} service.
    *
    * @return {@code true} if {@code this} element type is of dynamic kind
    */

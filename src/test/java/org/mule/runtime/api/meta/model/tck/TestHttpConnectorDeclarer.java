@@ -23,12 +23,11 @@ import java.io.Serializable;
 
 
 /**
- * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
- * which represents a theoretical &quot;Http connector&quot; extension.
+ * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents a
+ * theoretical &quot;Http connector&quot; extension.
  * <p>
- * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()}
- * method plus some other getters which provides access to other declaration components
- * that you might want to make tests against.
+ * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()} method plus
+ * some other getters which provides access to other declaration components that you might want to make tests against.
  * <p>
  * This case focuses on the scenario in which each config has its own set of operations, providers and sources.
  *

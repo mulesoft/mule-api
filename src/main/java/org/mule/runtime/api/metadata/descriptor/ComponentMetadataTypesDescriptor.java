@@ -80,8 +80,8 @@ public class ComponentMetadataTypesDescriptor {
     }
 
     /**
-     * @return a {@link ComponentMetadataTypesDescriptor} instance with the metadata description for the content, output, and type of
-     * each of the parameters of the Component
+     * @return a {@link ComponentMetadataTypesDescriptor} instance with the metadata description for the content, output, and type
+     *         of each of the parameters of the Component
      */
     public ComponentMetadataTypesDescriptor build() {
       if (inputMetadataDescriptor == null && outputMetadataDescriptor == null) {

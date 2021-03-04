@@ -20,19 +20,16 @@ import java.util.Optional;
 public interface HasFunctionModels {
 
   /**
-   * Returns a {@link List} of {@link FunctionModel}s defined at the level
-   * of the component implementing this interface.
+   * Returns a {@link List} of {@link FunctionModel}s defined at the level of the component implementing this interface.
    *
-   * Each function is guaranteed to have a unique name which will not
-   * overlap with any other component defined at any level.
+   * Each function is guaranteed to have a unique name which will not overlap with any other component defined at any level.
    *
    * @return an immutable {@link List} of {@link FunctionModel}
    */
   List<FunctionModel> getFunctionModels();
 
   /**
-   * Returns the {@link FunctionModel} that matches
-   * the given name.
+   * Returns the {@link FunctionModel} that matches the given name.
    *
    * @param name case sensitive operation name
    * @return an {@link Optional} {@link FunctionModel}

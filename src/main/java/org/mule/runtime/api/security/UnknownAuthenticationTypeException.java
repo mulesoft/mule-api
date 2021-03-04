@@ -11,8 +11,8 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 import org.mule.runtime.api.exception.MuleException;
 
 /**
- * {@code UnknownAuthenticationTypeException} is thrown if a security context request is make with an unrecognised
- * Authentication type.
+ * {@code UnknownAuthenticationTypeException} is thrown if a security context request is make with an unrecognised Authentication
+ * type.
  *
  * @since 1.0
  */

@@ -9,16 +9,15 @@ package org.mule.runtime.api.connection;
 /**
  * A {@link ConnectionProvider} specialization which pools connections.
  * <p>
- * This interface is declarative. The actual pooling is not implemented on the provider
- * itself but performed by the runtime.
+ * This interface is declarative. The actual pooling is not implemented on the provider itself but performed by the runtime.
  * <p>
- * This interface also extends {@link PoolingListener}, allowing to perform operations
- * when a connection is borrow and/or returned to the pool.
+ * This interface also extends {@link PoolingListener}, allowing to perform operations when a connection is borrow and/or returned
+ * to the pool.
  *
  * @param <C> the generic type of the connections to be handled
  * @since 1.0
  */
-//TODO: MULE-10174: Review where do ConnectionProvide specializations belong
+// TODO: MULE-10174: Review where do ConnectionProvide specializations belong
 public interface PoolingConnectionProvider<C> extends ConnectionProvider<C>, PoolingListener<C> {
 
 }

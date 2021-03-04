@@ -9,8 +9,7 @@ package org.mule.runtime.api.deployment.persistence;
 import org.mule.runtime.api.deployment.meta.MulePluginModel;
 
 /**
- * Serializer capable of marshalling an {@link MulePluginModel} instance
- * to {@code JSON} format and back
+ * Serializer capable of marshalling an {@link MulePluginModel} instance to {@code JSON} format and back
  *
  * @since 1.0
  */

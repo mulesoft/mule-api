@@ -13,8 +13,8 @@ import java.io.Serializable;
 /**
  * Template for {@link ObjectStore} implementations so that it's easier to conform to the contract.
  * <p>
- * {@link ObjectStore} implementations are not required to extend this class, but it is recommended to do so
- * in order to help guaranteeing that implementations implement the contract correctly.
+ * {@link ObjectStore} implementations are not required to extend this class, but it is recommended to do so in order to help
+ * guaranteeing that implementations implement the contract correctly.
  *
  * @since 1.0
  */
@@ -30,8 +30,7 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
   }
 
   /**
-   * Template method for {@link #contains(String)}. Implement this method assuming that
-   * the {@code key} is already valid
+   * Template method for {@link #contains(String)}. Implement this method assuming that the {@code key} is already valid
    * {@inheritDoc}
    */
   protected abstract boolean doContains(String key) throws ObjectStoreException;
@@ -50,10 +49,8 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
   }
 
   /**
-   * Template method for {@link #store(String, Serializable)}. Implement this method assuming that the key is valid
-   * and that {@link #contains(String)} has already been invoked to verify that the key doesn't already exists
-   * in this store.
-   * {@inheritDoc}
+   * Template method for {@link #store(String, Serializable)}. Implement this method assuming that the key is valid and that
+   * {@link #contains(String)} has already been invoked to verify that the key doesn't already exists in this store. {@inheritDoc}
    */
   protected abstract void doStore(String key, T value) throws ObjectStoreException;
 
@@ -67,9 +64,8 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
   }
 
   /**
-   * Template method for {@link #store(String, Serializable)}. Implement this method assuming that the key is valid
-   * and that {@link #contains(String)} has already been invoked to verify that the key actually exists in this store.
-   * {@inheritDoc}
+   * Template method for {@link #store(String, Serializable)}. Implement this method assuming that the key is valid and that
+   * {@link #contains(String)} has already been invoked to verify that the key actually exists in this store. {@inheritDoc}
    */
   protected abstract T doRetrieve(String key) throws ObjectStoreException;
 
@@ -88,9 +84,8 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
   }
 
   /**
-   * Template method for {@link #remove(String)} (String, Serializable)}. Implement this method assuming that the key is valid
-   * and that {@link #contains(String)} has already been invoked to verify that the key actually exists in this store.
-   * {@inheritDoc}
+   * Template method for {@link #remove(String)} (String, Serializable)}. Implement this method assuming that the key is valid and
+   * that {@link #contains(String)} has already been invoked to verify that the key actually exists in this store. {@inheritDoc}
    */
   protected abstract T doRemove(String key) throws ObjectStoreException;
 }

@@ -107,8 +107,8 @@ public final class OutputMetadataDescriptor {
     /**
      * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
      *         {@link MetadataProvider} component
-     * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set
-     *         during building
+     * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set during
+     *         building
      */
     public OutputMetadataDescriptor build() {
       if (returnTypeResult == null) {

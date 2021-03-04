@@ -124,6 +124,6 @@ public abstract class AbstractMuleArtifactModel {
   }
 
   void doValidateCustomFields(String descriptorName) {
-    //Do nothing
+    // Do nothing
   }
 }

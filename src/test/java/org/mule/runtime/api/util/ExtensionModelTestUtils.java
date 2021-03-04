@@ -24,8 +24,7 @@ import org.mockito.Mockito;
 public final class ExtensionModelTestUtils {
 
   /**
-   * Makes the {@link ComponentModel#accept(ComponentModelVisitor)} method work
-   * on the given {@code components} mocks
+   * Makes the {@link ComponentModel#accept(ComponentModelVisitor)} method work on the given {@code components} mocks
    *
    * @param components an array of mock {@link ComponentModel components}
    */

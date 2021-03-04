@@ -15,8 +15,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * A declaration object for a {@link ConnectionProviderModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link ConfigurationModel}
+ * A declaration object for a {@link ConnectionProviderModel}. It contains raw, unvalidated data which is used to declare the
+ * structure of a {@link ConfigurationModel}
  *
  * @since 1.0
  */
