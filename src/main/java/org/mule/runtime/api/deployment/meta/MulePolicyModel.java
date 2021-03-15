@@ -11,8 +11,8 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import org.mule.api.annotation.NoExtend;
 
 /**
- * This object matches the mule-artifact.json element within a policy. The describer holds information that has being picked up from
- * the JSON file (and the pom.xml when implemented).
+ * This object matches the mule-artifact.json element within a policy. The describer holds information that has being picked up
+ * from the JSON file (and the pom.xml when implemented).
  *
  * @since 1.0
  */

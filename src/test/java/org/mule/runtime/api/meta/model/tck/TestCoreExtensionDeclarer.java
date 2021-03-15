@@ -12,12 +12,11 @@ import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 
 /**
- * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
- * which represents an oversimplified &quot;core&quot; extension with Mule's main language elements.
+ * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents an
+ * oversimplified &quot;core&quot; extension with Mule's main language elements.
  * <p>
- * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()}
- * method plus some other getters which provides access to other declaration components
- * that you might want to make tests against.
+ * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()} method plus
+ * some other getters which provides access to other declaration components that you might want to make tests against.
  * <p>
  * This case focuses on the scenario of scopes and routers (although not necessarily limited to that)
  *

@@ -12,8 +12,8 @@ import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 import java.util.Optional;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which it's possible
- * to get/set {@link OutputDeclaration} objects of payload and attributes.
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to get/set {@link OutputDeclaration} objects of payload
+ * and attributes.
  *
  * @since 1.0
  */

@@ -46,7 +46,7 @@ public interface ObjectStore<T extends Serializable> {
    *
    * @param key the identifier of the object to retrieve.
    * @return the object associated with the given key. If no object for the given key was found this method throws an
-   * {@link ObjectDoesNotExistException}.
+   *         {@link ObjectDoesNotExistException}.
    * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
    * @throws ObjectDoesNotExistException      if no value for the given key was previously stored.

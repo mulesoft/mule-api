@@ -21,12 +21,9 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 /**
  * Introspection model for {@link ConnectionProvider} types.
  * <p>
- * Provider models implement the flyweight pattern. This means
- * that a given operation should only be represented by only
- * one instance of this class. Thus, if the same operation is
- * contained by different {@link HasConnectionProviderModels} instances,
- * then each of those containers should reference the same
- * operation model instance.
+ * Provider models implement the flyweight pattern. This means that a given operation should only be represented by only one
+ * instance of this class. Thus, if the same operation is contained by different {@link HasConnectionProviderModels} instances,
+ * then each of those containers should reference the same operation model instance.
  * <p>
  *
  * @since 1.0

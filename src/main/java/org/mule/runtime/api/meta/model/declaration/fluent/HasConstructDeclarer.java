@@ -9,8 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.api.annotation.NoImplement;
 
 /**
- * Contract interface for a declarer in which it's possible
- * to add constructs
+ * Contract interface for a declarer in which it's possible to add constructs
  *
  * @since 1.0
  */
@@ -26,8 +25,7 @@ public interface HasConstructDeclarer<T> {
   ConstructDeclarer withConstruct(String name);
 
   /**
-   * Adds an {@link ConstructDeclaration} by receiving
-   * a {@code declarer} which describes it
+   * Adds an {@link ConstructDeclaration} by receiving a {@code declarer} which describes it
    *
    * @param declarer a {@link ConstructDeclaration}
    */

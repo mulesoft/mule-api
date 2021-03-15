@@ -19,8 +19,7 @@ import java.util.Optional;
 public interface HasDisplayModel {
 
   /**
-   * @return An {@link Optional} {@link DisplayModel} which contains
-   * directives about how this model should be displayed in the UI
+   * @return An {@link Optional} {@link DisplayModel} which contains directives about how this model should be displayed in the UI
    */
   Optional<DisplayModel> getDisplayModel();
 }

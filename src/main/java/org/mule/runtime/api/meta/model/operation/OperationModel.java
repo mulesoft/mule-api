@@ -15,12 +15,9 @@ import org.mule.runtime.api.meta.model.notification.HasNotifications;
 /**
  * A definition of an operation in a {@link ExtensionModel}.
  * <p>
- * Operation models implement the flyweight pattern. This means
- * that a given operation should only be represented by only
- * one instance of this class. Thus, if the same operation is
- * contained by different {@link HasOperationModels} instances,
- * then each of those containers should reference the same
- * operation model instance.
+ * Operation models implement the flyweight pattern. This means that a given operation should only be represented by only one
+ * instance of this class. Thus, if the same operation is contained by different {@link HasOperationModels} instances, then each
+ * of those containers should reference the same operation model instance.
  *
  * @since 1.0
  */

@@ -15,11 +15,11 @@ import java.io.Serializable;
 /**
  * Base class with utility methods that {@link ObjectStore} implementations might be interested on.
  *
- * It is not mandatory for {@link ObjectStore} implementations to extend this class, but it does contain
- * methods which are useful for correctly implementing the {@link ObjectStore} contract.
+ * It is not mandatory for {@link ObjectStore} implementations to extend this class, but it does contain methods which are useful
+ * for correctly implementing the {@link ObjectStore} contract.
  *
  * @param <T> the generic type of the store's items
- *           @since 1.0
+ * @since 1.0
  */
 @NoExtend
 public abstract class AbstractObjectStoreSupport<T extends Serializable> implements ObjectStore<T> {

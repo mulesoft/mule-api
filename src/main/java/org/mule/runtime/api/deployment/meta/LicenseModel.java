@@ -25,8 +25,8 @@ public final class LicenseModel {
    * Creates an immutable implementation of {@link LicenseModel}
    *
    * @param requiredEntitlement the required entitlement. May be null.
-   * @param provider the provider of the license.
-   * @param allowsEvaluation true if it allows execution with an evaluation license, false otherwise.
+   * @param provider            the provider of the license.
+   * @param allowsEvaluation    true if it allows execution with an evaluation license, false otherwise.
    */
   public LicenseModel(String requiredEntitlement, String provider, boolean allowsEvaluation) {
     this.requiredEntitlement = requiredEntitlement;

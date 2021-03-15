@@ -19,8 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Utility class which groups operations, connection providers and sources together,
- * also providing methods to add/get them
+ * Utility class which groups operations, connection providers and sources together, also providing methods to add/get them
  *
  * @since 1.0
  */
@@ -33,8 +32,7 @@ final class SubDeclarationsContainer {
   private final List<ConnectionProviderDeclaration> connectionProviders = new LinkedList<>();
 
   /**
-   * @return an unmodifiable {@link List} with
-   * the available {@link OperationDeclaration}s
+   * @return an unmodifiable {@link List} with the available {@link OperationDeclaration}s
    */
   public List<OperationDeclaration> getOperations() {
     return alphaSorted(operations);

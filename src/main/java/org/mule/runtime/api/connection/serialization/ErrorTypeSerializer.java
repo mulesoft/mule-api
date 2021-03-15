@@ -32,9 +32,8 @@ public class ErrorTypeSerializer {
   private ErrorTypeSerializer() {}
 
   /**
-   * Creates a new instance of the {@link ErrorTypeSerializer}.
-   * This serializer is capable of serializing and deserializing {@link ErrorType}
-   * from JSON ({@link #deserialize(String)} and to JSON ( {@link #serialize(ErrorType)}
+   * Creates a new instance of the {@link ErrorTypeSerializer}. This serializer is capable of serializing and deserializing
+   * {@link ErrorType} from JSON ({@link #deserialize(String)} and to JSON ( {@link #serialize(ErrorType)}
    */
   public static ErrorTypeSerializer create() {
     return new ErrorTypeSerializer();

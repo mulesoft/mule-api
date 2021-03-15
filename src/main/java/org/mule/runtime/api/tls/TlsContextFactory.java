@@ -16,12 +16,11 @@ import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 
 /**
- * A factory for TLS contexts. A TLS context is configured with a key store and a trust store. The key store stores
- * the private and public keys of the current host. The trust store stores the certificates of the other hosts that are
- * trusted.
+ * A factory for TLS contexts. A TLS context is configured with a key store and a trust store. The key store stores the private
+ * and public keys of the current host. The trust store stores the certificates of the other hosts that are trusted.
  * <p>
- * This factory provides methods for creating client and server socket factories that will be already configured
- * according to the current context.
+ * This factory provides methods for creating client and server socket factories that will be already configured according to the
+ * current context.
  *
  * @since 1.0
  */
@@ -38,10 +37,11 @@ public interface TlsContextFactory {
   }
 
   /**
-   * Allows the creation of an {@link SSLContext} with the configured keystore and trust store. You must use {@link #getEnabledProtocols()}
-   * and {@link #getEnabledCipherSuites()} to further configure your TLS environment. The resulting {@link SSLContext} should not
-   * be used to create {@link SSLSocketFactory} or {@link SSLServerSocketFactory} directly, use {@link #createSocketFactory()} and
-   * {@link #createServerSocketFactory()} instead, otherwise protocols and ciphers will not be enforced.
+   * Allows the creation of an {@link SSLContext} with the configured keystore and trust store. You must use
+   * {@link #getEnabledProtocols()} and {@link #getEnabledCipherSuites()} to further configure your TLS environment. The resulting
+   * {@link SSLContext} should not be used to create {@link SSLSocketFactory} or {@link SSLServerSocketFactory} directly, use
+   * {@link #createSocketFactory()} and {@link #createServerSocketFactory()} instead, otherwise protocols and ciphers will not be
+   * enforced.
    *
    * @return a new SSL Context
    * @throws KeyManagementException
@@ -60,8 +60,9 @@ public interface TlsContextFactory {
   SSLSocketFactory createSocketFactory() throws KeyManagementException, NoSuchAlgorithmException;
 
   /**
-   * Allows the creation of a {@link SSLServerSocketFactory} that restricts the available protocols and cipher suites in the sockets
-   * that are created according to the enabled ones (see {@link #getEnabledProtocols()} and {@link #getEnabledCipherSuites()}).
+   * Allows the creation of a {@link SSLServerSocketFactory} that restricts the available protocols and cipher suites in the
+   * sockets that are created according to the enabled ones (see {@link #getEnabledProtocols()} and
+   * {@link #getEnabledCipherSuites()}).
    *
    * @return a new {@link SSLServerSocketFactory}
    * @throws KeyManagementException

@@ -138,8 +138,8 @@ public interface ExpressionLanguageMetadataService extends Service {
    * Returns a module definition from a given NameIdentifier.
    *
    * @param nameIdentifier The NameIdentifier for the modules core::test::MyModule
-   * @param modules Other modules available
-   * @return  The ModuleDefinition
+   * @param modules        Other modules available
+   * @return The ModuleDefinition
    * @throws ExpressionCompilationException if any problem occurs while trying to parse the expression
    * @since 1.4
    */

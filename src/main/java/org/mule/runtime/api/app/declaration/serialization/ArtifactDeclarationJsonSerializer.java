@@ -20,9 +20,9 @@ import org.mule.runtime.internal.app.declaration.serialization.DefaultArtifactDe
 public interface ArtifactDeclarationJsonSerializer {
 
   /**
-   * Creates a new instance of the {@link ArtifactDeclarationJsonSerializer}.
-   * This serializer is capable of serializing and deserializing {@link ArtifactDeclaration}
-   * from JSON ({@link #deserialize(String)} and to JSON ( {@link #serialize(ArtifactDeclaration)}
+   * Creates a new instance of the {@link ArtifactDeclarationJsonSerializer}. This serializer is capable of serializing and
+   * deserializing {@link ArtifactDeclaration} from JSON ({@link #deserialize(String)} and to JSON (
+   * {@link #serialize(ArtifactDeclaration)}
    */
   static ArtifactDeclarationJsonSerializer getDefault(boolean prettyPrint) {
     return new DefaultArtifactDeclarationJsonSerializer(prettyPrint);

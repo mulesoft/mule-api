@@ -29,14 +29,14 @@ public interface Scheduler extends ScheduledExecutorService {
    * terminate via cancellation or termination of the executor. If any execution of this task takes longer than the time before
    * the next execution should start, then subsequent executions may start late, but will not concurrently execute.
    *
-   * @param command the task to execute
+   * @param command        the task to execute
    * @param cronExpression the
-   *        <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html">cron</a> expression
-   *        string to base the schedule on.
+   *                       <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html">cron</a>
+   *                       expression string to base the schedule on.
    * @return a ScheduledFuture representing pending completion of the task, and whose {@code get()} method will throw an exception
    *         upon cancellation
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
-   * @throws NullPointerException if command is null
+   * @throws NullPointerException       if command is null
    */
   ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression);
 
@@ -46,15 +46,15 @@ public interface Scheduler extends ScheduledExecutorService {
    * task will only terminate via cancellation or termination of the executor. If any execution of this task takes longer than the
    * time before the next execution should start, then subsequent executions may start late, but will not concurrently execute.
    *
-   * @param command the task to execute
+   * @param command        the task to execute
    * @param cronExpression the
-   *        <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html">cron</a> expression
-   *        string to base the schedule on.
-   * @param timeZone the time-zone for the schedule.
+   *                       <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/tutorials/crontrigger.html">cron</a>
+   *                       expression string to base the schedule on.
+   * @param timeZone       the time-zone for the schedule.
    * @return a ScheduledFuture representing pending completion of the task, and whose {@code get()} method will throw an exception
    *         upon cancellation
    * @throws RejectedExecutionException if the task cannot be scheduled for execution
-   * @throws NullPointerException if command is null
+   * @throws NullPointerException       if command is null
    */
   ScheduledFuture<?> scheduleWithCronExpression(Runnable command, String cronExpression, TimeZone timeZone);
 

@@ -33,7 +33,7 @@ public class MuleRuntimeException extends RuntimeException {
 
   /**
    * @param message the exception message
-   * @param cause the exception that triggered this exception
+   * @param cause   the exception that triggered this exception
    */
   public MuleRuntimeException(I18nMessage message, Throwable cause) {
     this(message != null ? message.getMessage() : null, cause);

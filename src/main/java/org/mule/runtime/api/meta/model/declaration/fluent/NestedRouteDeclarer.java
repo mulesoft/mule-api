@@ -12,8 +12,8 @@ import org.mule.runtime.api.meta.model.ModelProperty;
 /**
  * Allows configuring a {@link NestedComponentDeclaration} through a fluent API.
  * <p>
- * Keep in mind that Routes are required to have at least one child component,
- * which translate to almost always having to invoke the {@link NestedRouteDeclarer#withChain} method of this declarer.
+ * Keep in mind that Routes are required to have at least one child component, which translate to almost always having to invoke
+ * the {@link NestedRouteDeclarer#withChain} method of this declarer.
  *
  * @since 1.0
  */
@@ -30,8 +30,7 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
   }
 
   /**
-   * Sets the minimum amount of times that this route can be present on the owning
-   * component
+   * Sets the minimum amount of times that this route can be present on the owning component
    *
    * @param minOccurs a value equal or greater than zero
    * @return {@code this} declarer
@@ -42,8 +41,7 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
   }
 
   /**
-   * Sets the maximum amount of times that this route can be present on the owning
-   * component
+   * Sets the maximum amount of times that this route can be present on the owning component
    *
    * @param maxOccurs a value greater or equal than zero
    * @return {@code this} declarer

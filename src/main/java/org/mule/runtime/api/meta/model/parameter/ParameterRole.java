@@ -14,21 +14,20 @@ package org.mule.runtime.api.meta.model.parameter;
 public enum ParameterRole {
 
   /**
-   * Indicates that the parameter is only configuring the component's behaviour and doesn't represent
-   * data that is being sent to another endpoint
+   * Indicates that the parameter is only configuring the component's behaviour and doesn't represent data that is being sent to
+   * another endpoint
    */
   BEHAVIOUR,
 
   /**
-   * Indicates that this parameter holds information to be considered content to be sent to a different
-   * system or endpoint. It makes sense to use this when the operation has many content parameters but
-   * this one is not the {@link #PRIMARY_CONTENT}
+   * Indicates that this parameter holds information to be considered content to be sent to a different system or endpoint. It
+   * makes sense to use this when the operation has many content parameters but this one is not the {@link #PRIMARY_CONTENT}
    */
   CONTENT,
 
   /**
-   * Indicates that this parameter holds the main piece of content to be sent to another system or endpoint.
-   * This differentiation becomes specially important when the component has many content parameters.
+   * Indicates that this parameter holds the main piece of content to be sent to another system or endpoint. This differentiation
+   * becomes specially important when the component has many content parameters.
    * <p>
    * If the component only has one content parameter, then this role will be used to mark such parameter
    */

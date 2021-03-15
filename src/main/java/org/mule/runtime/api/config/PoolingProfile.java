@@ -18,7 +18,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @since 1.0
  */
-//TODO: MULE-9047 try to simplify
+// TODO: MULE-9047 try to simplify
 public final class PoolingProfile extends AbstractComponent {
 
   /**
@@ -42,27 +42,22 @@ public final class PoolingProfile extends AbstractComponent {
   public static final int WHEN_EXHAUSTED_GROW = 2;
 
   /**
-   * Controls the maximum number of Mule components that can be borrowed from a service
-   * pool at one time. When non-positive, there is no limit to the number of
-   * components that may be active at one time. When maxActive is exceeded, the
-   * pool is said to be exhausted. You can specify this value on the descriptor
-   * declaration. If none is set this value will be used.
+   * Controls the maximum number of Mule components that can be borrowed from a service pool at one time. When non-positive, there
+   * is no limit to the number of components that may be active at one time. When maxActive is exceeded, the pool is said to be
+   * exhausted. You can specify this value on the descriptor declaration. If none is set this value will be used.
    */
   public static final int DEFAULT_MAX_POOL_ACTIVE = 5;
 
   /**
-   * Controls the maximum number of Mule components that can sit idle in the pool at any
-   * time. When non-positive, there is no limit to the number of Mule components that may
-   * be idle at one time. You can specify this value on the descriptor declaration.
-   * If none is set this value will be used. If this value is not set then a system
-   * default of '5' will be used.
+   * Controls the maximum number of Mule components that can sit idle in the pool at any time. When non-positive, there is no
+   * limit to the number of Mule components that may be idle at one time. You can specify this value on the descriptor
+   * declaration. If none is set this value will be used. If this value is not set then a system default of '5' will be used.
    */
   public static final int DEFAULT_MAX_POOL_IDLE = 5;
 
   /**
-   * When the threadPoolExhaustedAction is set to WHEN_EXHAUSTED_WAIT this can
-   * specify the maximum milliseconds the pool should block before throwing a
-   * NoSuchElementException
+   * When the threadPoolExhaustedAction is set to WHEN_EXHAUSTED_WAIT this can specify the maximum milliseconds the pool should
+   * block before throwing a NoSuchElementException
    */
   public static final long DEFAULT_MAX_POOL_WAIT = 4000;
 
@@ -70,39 +65,32 @@ public final class PoolingProfile extends AbstractComponent {
    * Specifies the behaviour of the Mule component pool when the pool is exhausted:
    * <ul>
    * <li>WHEN_EXHAUSTED_FAIL : will throw a NoSuchElementException</li>
-   * <li>WHEN_EXHAUSTED_WAIT : will block (invoke Object.wait(long) until a new or
-   * idle object is available.</li>
-   * <li>WHEN_EXHAUSTED_GROW : will create a new Mule and return it (essentially
-   * making maxActive meaningless).</li>
+   * <li>WHEN_EXHAUSTED_WAIT : will block (invoke Object.wait(long) until a new or idle object is available.</li>
+   * <li>WHEN_EXHAUSTED_GROW : will create a new Mule and return it (essentially making maxActive meaningless).</li>
    * </ul>
-   * If a positive maxWait value is supplied, it will block for at most that many
-   * milliseconds, after which a NoSuchElementException will be thrown. If maxWait
-   * is non-positive, it will block indefinitely.
+   * If a positive maxWait value is supplied, it will block for at most that many milliseconds, after which a
+   * NoSuchElementException will be thrown. If maxWait is non-positive, it will block indefinitely.
    */
   public static final int DEFAULT_POOL_EXHAUSTED_ACTION = WHEN_EXHAUSTED_GROW;
 
   /**
-   * Determines how components in a pool should be initialised. The possible values
-   * are:
+   * Determines how components in a pool should be initialised. The possible values are:
    * <ul>
    * <li>INITIALISE_NONE : Will not load any components in the pool on startup</li>
-   * <li>INITIALISE_ONE : Will load only the first service in the pool on
-   * startup</li>
+   * <li>INITIALISE_ONE : Will load only the first service in the pool on startup</li>
    * <li>INITIALISE_ALL : Will load all components in the pool on startup</li>
    * </ul>
    */
   public static final int DEFAULT_POOL_INITIALISATION_POLICY = INITIALISE_ONE;
 
   /**
-   * Determines the minimum amount of time an object may sit idle in the pool
-   * before it is eligible for eviction. When non-positive, no objects will
-   * be evicted from the pool due to idle time alone.
+   * Determines the minimum amount of time an object may sit idle in the pool before it is eligible for eviction. When
+   * non-positive, no objects will be evicted from the pool due to idle time alone.
    */
   public static final int DEFAULT_MIN_EVICTION_MILLIS = 1000 * 60 * 30;
 
   /**
-   * Determines the number of milliseconds between runs of the object evictor.
-   * When non-positive, no object evictor is executed.
+   * Determines the number of milliseconds between runs of the object evictor. When non-positive, no object evictor is executed.
    */
   public static final int DEFAULT_EVICTION_INTERVAL_MILLIS = -1;
 
@@ -193,9 +181,8 @@ public final class PoolingProfile extends AbstractComponent {
   }
 
   /**
-   * @return time in miilisconds to wait for a Mule component to be available in a
-   * service when the pool of Mule components is exhausted and the
-   * PoolExhaustedAction is set to WHEN_EXHAUSTED_BLOCK
+   * @return time in miilisconds to wait for a Mule component to be available in a service when the pool of Mule components is
+   *         exhausted and the PoolExhaustedAction is set to WHEN_EXHAUSTED_BLOCK
    */
   public long getMaxWait() {
     return maxWait;

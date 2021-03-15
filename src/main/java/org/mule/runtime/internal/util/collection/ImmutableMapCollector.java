@@ -33,7 +33,7 @@ public class ImmutableMapCollector<T, K, V> implements Collector<T, ImmutableMap
   /**
    * Creates a new instance
    *
-   * @param keyMapper a mapping function to produce keys
+   * @param keyMapper   a mapping function to produce keys
    * @param valueMapper a mapping function to produce values
    */
   public ImmutableMapCollector(Function<T, K> keyMapper, Function<T, V> valueMapper) {

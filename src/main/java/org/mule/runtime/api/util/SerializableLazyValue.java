@@ -15,11 +15,11 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
- * Implementation of {@link LazyValue} that adds logic for serialization.
- * In order to work properly, values must implement the {@link Serializable} interface.
+ * Implementation of {@link LazyValue} that adds logic for serialization. In order to work properly, values must implement the
+ * {@link Serializable} interface.
  * </p>
- * While serializing, if the value was not yet resolved, it will be. As a consequence, {@link LazyValue#isComputed()} will
- * return different values before and after serialization.
+ * While serializing, if the value was not yet resolved, it will be. As a consequence, {@link LazyValue#isComputed()} will return
+ * different values before and after serialization.
  *
  * @since 1.2.0
  */

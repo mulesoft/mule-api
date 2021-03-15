@@ -11,8 +11,7 @@ import org.mule.api.annotation.NoImplement;
 import java.util.List;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which
- * it's possible to add/get {@link SourceDeclaration} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link SourceDeclaration} objects
  *
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0
@@ -29,8 +28,7 @@ public interface WithSourcesDeclaration<T extends BaseDeclaration> {
   T addMessageSource(SourceDeclaration sourceDeclaration);
 
   /**
-   * @return a {@link List} with the {@link SourceDeclaration} which have been
-   * added to {@code this} declaration
+   * @return a {@link List} with the {@link SourceDeclaration} which have been added to {@code this} declaration
    */
   List<SourceDeclaration> getMessageSources();
 

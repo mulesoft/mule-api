@@ -9,8 +9,7 @@ package org.mule.runtime.api.store;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * This exception is thrown when an {@link ObjectStore} attempts to operate on a key for which it doesn't
- * have an associated value
+ * This exception is thrown when an {@link ObjectStore} attempts to operate on a key for which it doesn't have an associated value
  *
  * @since 1.0
  */

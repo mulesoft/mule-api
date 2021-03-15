@@ -11,8 +11,8 @@ import org.mule.api.annotation.NoImplement;
 import java.util.Set;
 
 /**
- * Indicates that some of the optional {@link ParameterModel parameters} in a
- * {@link ParameterGroupModel} are mutually exclusive and cannot be defined at the same time.
+ * Indicates that some of the optional {@link ParameterModel parameters} in a {@link ParameterGroupModel} are mutually exclusive
+ * and cannot be defined at the same time.
  *
  * @since 1.0
  */
@@ -25,8 +25,7 @@ public interface ExclusiveParametersModel {
   Set<String> getExclusiveParameterNames();
 
   /**
-  * Indicates if besides of being exclusive, the runtime should enforce that on of
-  * the parameters MUST be provided
-  */
+   * Indicates if besides of being exclusive, the runtime should enforce that on of the parameters MUST be provided
+   */
   boolean isOneRequired();
 }

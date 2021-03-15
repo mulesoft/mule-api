@@ -12,8 +12,8 @@ import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ConnectableComponentModel;
 
 /**
- * An specialization of a {@link ComponentModel} that is not executable as an standalone component and depends
- * on the composition with {@link ConnectableComponentModel}s in order to act in an application.
+ * An specialization of a {@link ComponentModel} that is not executable as an standalone component and depends on the composition
+ * with {@link ConnectableComponentModel}s in order to act in an application.
  *
  * @since 1.0
  */

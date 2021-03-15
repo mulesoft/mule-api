@@ -66,7 +66,7 @@ public final class InputMetadataDescriptor {
     /**
      * Ads a parameter to the resulting {@link InputMetadataDescriptor}.
      *
-     * @param name the name of the parameter
+     * @param name            the name of the parameter
      * @param parameterResult the {@link ParameterMetadataDescriptor} representing this parameter type.
      * @return this {@link InputMetadataDescriptorBuilder}.
      */
@@ -82,7 +82,7 @@ public final class InputMetadataDescriptor {
      * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
      *         {@link MetadataProvider} component
      * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set during
-     *         building
+     *                                  building
      */
     public InputMetadataDescriptor build() {
       return new InputMetadataDescriptor(parameters);

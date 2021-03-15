@@ -31,7 +31,7 @@ public class MuleServiceContractModel {
    * Creates a new instance
    *
    * @param serviceProviderClassName The classname for the {@link ServiceProvider} that instantiates the contract implementation
-   * @param contractClassName the classname of the {@link Service} contract
+   * @param contractClassName        the classname of the {@link Service} contract
    */
   public MuleServiceContractModel(String serviceProviderClassName, String contractClassName) {
     checkArgument(!StringUtils.isBlank(serviceProviderClassName), "serviceProviderClassName cannot be blank");

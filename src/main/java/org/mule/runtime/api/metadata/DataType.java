@@ -24,11 +24,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Defines a Java type and its association with additional information about the data, like MIME
- * type and encoding.
+ * Defines a Java type and its association with additional information about the data, like MIME type and encoding.
  * <p>
- * The java type may be a {@link Collection}, in which case implementations should provide
- * additional information about the item type.
+ * The java type may be a {@link Collection}, in which case implementations should provide additional information about the item
+ * type.
  * <p>
  * This also provides constants for some commonly used {@link DataType}s.
  *
@@ -51,14 +50,14 @@ public interface DataType extends Serializable {
    *
    * @param dataType existing {@link DataType} to use as a template to create a new {@link DataTypeBuilder} instance.
    * @return a new {@link DataTypeBuilder} based on the template {@code dataType} provided.
-   * */
+   */
   static DataTypeBuilder builder(DataType dataType) {
     return getDefaultFactory().create(dataType);
   }
 
   /**
-   * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType}
-   * and {@code encoding}.
+   * Shortcut to create a {@link DataType} using just a Java type. Default values will be used for {@code mimeType} and
+   * {@code encoding}.
    *
    * @param type the Java type to create {@link DataType} for.
    * @return a new {@link DataTypeBuilder} for the given {@code type}.
@@ -70,12 +69,11 @@ public interface DataType extends Serializable {
   /**
    * Shortcut to create the {@link DataType} from an Object instance.
    * <p>
-   * This behaves in the same way as {@link #fromType(Class)} creating a {@link DataType} based on
-   * the value type with default values being used for {@code mimeType} and {@code encoding} if
-   * the Object type has no mimeType or encoding. The {@link DataTypeBuilder} used by default may
-   * introspect certain types that do contain type this meta-data such as
-   * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate
-   * {@code mimeType} and {@code encoding} values based on this.
+   * This behaves in the same way as {@link #fromType(Class)} creating a {@link DataType} based on the value type with default
+   * values being used for {@code mimeType} and {@code encoding} if the Object type has no mimeType or encoding. The
+   * {@link DataTypeBuilder} used by default may introspect certain types that do contain type this meta-data such as
+   * {@link javax.activation.DataHandler} and {@link javax.activation.DataSource} and populate {@code mimeType} and
+   * {@code encoding} values based on this.
    *
    * @param value the object to determine the {@link DataType} of.
    * @return a new {@link DataType} for the given {@code value}.
@@ -100,8 +98,8 @@ public interface DataType extends Serializable {
   /**
    * Static method to evaluate if the {@param superType} is compatible with the {@param subType}.
    * <p/>
-   * This means that the {@param superType} mime type should match the one in the given {@param subType}
-   * and the {@param superType} JAVA class should be assignable from the {@param subType} one.
+   * This means that the {@param superType} mime type should match the one in the given {@param subType} and the
+   * {@param superType} JAVA class should be assignable from the {@param subType} one.
    *
    * @param superType
    * @param subType
@@ -118,7 +116,7 @@ public interface DataType extends Serializable {
   DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
   DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
 
-  //Common Java types
+  // Common Java types
   DataType STRING = fromType(String.class);
   DataType NUMBER = fromType(Number.class);
   DataType BOOLEAN = fromType(Boolean.class);
@@ -157,13 +155,13 @@ public interface DataType extends Serializable {
   MediaType getMediaType();
 
   /**
-   * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime
-   * types matches the one in the given dataType and whether the Java types are assignable.
+   * Used to determine if this data type is compatible with the data type passed in. This checks to see if this mime types matches
+   * the one in the given dataType and whether the Java types are assignable.
    * <p/>
    * Keep in mind that if this mime type is {@link MediaType#ANY} it will match any mime type {@param dataType} could have.
    * <p>
-   * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may
-   * yield different result.
+   * This method is NOT <i>symmetric</i>. That is, {@code a.isCompatibleWith(b)} and {@code b.isCompatibleWith(a)} may yield
+   * different result.
    *
    * @param dataType the dataType object to compare with
    * @return true if the mime types are the same and this type can be assigned to the dataType.type.

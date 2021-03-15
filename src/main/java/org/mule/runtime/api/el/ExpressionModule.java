@@ -55,6 +55,7 @@ public interface ExpressionModule {
 
   /**
    * Returns the namespace of this module
+   * 
    * @return The namespace
    */
   ModuleNamespace namespace();

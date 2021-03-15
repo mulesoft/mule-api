@@ -21,7 +21,7 @@ public final class Time {
   /**
    * Creates a new instance
    *
-   * @param time a scalar value representing a time
+   * @param time     a scalar value representing a time
    * @param timeUnit a {@link TimeUnit} that qualifies the {@code time}
    */
   public Time(long time, TimeUnit timeUnit) {

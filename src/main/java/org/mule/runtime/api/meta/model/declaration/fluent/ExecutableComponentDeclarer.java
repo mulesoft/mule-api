@@ -70,9 +70,8 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
   }
 
   /**
-   * Specifies if this component supports streaming. Notice that supporting streaming
-   * doesn't necessarily mean that streaming will be performed when the component
-   * is actually executed.
+   * Specifies if this component supports streaming. Notice that supporting streaming doesn't necessarily mean that streaming will
+   * be performed when the component is actually executed.
    *
    * @param supportsStreaming whether the component supports streaming or not
    * @return {@code this} declarer

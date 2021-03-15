@@ -40,11 +40,11 @@ public interface SourceInterceptor {
    * This method is called before the intercepted source sends its response after a flow execution is complete. It may modify the
    * event to be used for generating the response via the given {@code event}.
    *
-   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param location   the location and identification properties of the intercepted component in the mule app configuration.
    * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
-   *        they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
-   * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
-   *        mutator methods.
+   *                   they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
+   * @param event      an object that contains the state of the event to be sent to the component. It may be modified by calling
+   *                   its mutator methods.
    */
   default void beforeCallback(ComponentLocation location, Map<String, ProcessorParameterValue> parameters,
                               InterceptionEvent event) {};
@@ -60,8 +60,8 @@ public interface SourceInterceptor {
    * called handlers will still be called.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param event the result of the component.
-   * @param thrown the exception thrown by the intercepted component, if any.
+   * @param event    the result of the component.
+   * @param thrown   the exception thrown by the intercepted component, if any.
    */
   default void afterCallback(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
 
@@ -69,7 +69,8 @@ public interface SourceInterceptor {
    * This method is called when the root {@link EventContext} is terminated (all the event contexts of that event are completed)
    * regardless of whether the events finished successfully, on error, or a combination of both.
    *
-   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param location         the location and identification properties of the intercepted component in the mule app
+   *                         configuration.
    * @param rootEventContext of the component result.
    * @since 4.4
    */

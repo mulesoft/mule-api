@@ -47,8 +47,7 @@ public final class ErrorModelBuilder {
   }
 
   /**
-   * Specifies if the error can be handled through an error handler or not. If not specified, {@code true}
-   * will be assumed
+   * Specifies if the error can be handled through an error handler or not. If not specified, {@code true} will be assumed
    *
    * @param handleable whether the error can be handled through an error handler or not.
    * @return the contributed {@link ErrorModelBuilder}

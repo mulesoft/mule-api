@@ -9,9 +9,9 @@ package org.mule.runtime.api.exception;
 import org.mule.runtime.api.message.Message;
 
 /**
- * Exception that holds a {@link Message} regarding the error that occurred.
- * When this exception is analysed to create an {@link org.mule.runtime.api.message.Error}, it will feature the message as it's
- * error message and the exception will be the specified one.
+ * Exception that holds a {@link Message} regarding the error that occurred. When this exception is analysed to create an
+ * {@link org.mule.runtime.api.message.Error}, it will feature the message as it's error message and the exception will be the
+ * specified one.
  *
  * @since 1.0
  */

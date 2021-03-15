@@ -17,8 +17,7 @@ public interface ServiceProvider {
   /**
    * Provides a service instance.
    * <p/>
-   * A service provider can return different service definitions depending on the execution
-   * environment.
+   * A service provider can return different service definitions depending on the execution environment.
    *
    * @return the service definition provided by this instance. Non null.
    */

@@ -23,8 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A builder object which allows creating an {@link ExtensionDeclaration}
- * through a fluent API.
+ * A builder object which allows creating an {@link ExtensionDeclaration} through a fluent API.
  *
  * @since 1.0
  */
@@ -187,8 +186,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Adds the given {@code objectType} to the list of types declared
-   * by the extension being built.
+   * Adds the given {@code objectType} to the list of types declared by the extension being built.
    *
    * @param objectType an {@link ObjectType}
    * @return {@code this} declarer
@@ -226,8 +224,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Adds the given {@code resourcePath} to the list of resources
-   * declared by the extension being built
+   * Adds the given {@code resourcePath} to the list of resources declared by the extension being built
    *
    * @param resourcePath the relative path to the extension's resource
    * @return {@code this} declarer
@@ -238,8 +235,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Declares that the extension is importing a type from another
-   * extension
+   * Declares that the extension is importing a type from another extension
    *
    * @param importedType a {@link ImportedTypeModel} with the import information
    * @return {@code this} declarer
@@ -312,8 +308,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Registers an {@link ErrorModel} that could be thrown by one their
-   * operations
+   * Registers an {@link ErrorModel} that could be thrown by one their operations
    *
    * @param errorModel to add
    * @return {@code this} descriptor

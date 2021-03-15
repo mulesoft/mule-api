@@ -9,8 +9,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.nested.NestedChainModel;
 
 /**
- * A declaration object for a {@link NestedChainModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link NestedChainModel}
+ * A declaration object for a {@link NestedChainModel}. It contains raw, unvalidated data which is used to declare the structure
+ * of a {@link NestedChainModel}
  *
  * @since 1.0
  */

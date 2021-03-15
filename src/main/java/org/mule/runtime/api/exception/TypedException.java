@@ -13,9 +13,8 @@ import org.mule.runtime.api.message.Error;
 import org.mule.runtime.api.message.ErrorType;
 
 /**
- * Internal {@link RuntimeException} implementation to throw {@link Throwable throwables} that indicates explicitly
- * the {@link ErrorType} that is wanted to throw.
- * Also gives the possibility to declare a message for the {@link Error} being built.
+ * Internal {@link RuntimeException} implementation to throw {@link Throwable throwables} that indicates explicitly the
+ * {@link ErrorType} that is wanted to throw. Also gives the possibility to declare a message for the {@link Error} being built.
  *
  * @since 1.0
  */
@@ -35,9 +34,9 @@ public class TypedException extends MuleRuntimeException {
   }
 
   /**
-   * @param throwable       The {@link TypedException#getCause()} of this new exception.
-   * @param errorType       The {@link ErrorType} that identifies the {@link TypedException#getCause()} {@link Throwable}
-   * @param message         error message to override the once from the original exception
+   * @param throwable The {@link TypedException#getCause()} of this new exception.
+   * @param errorType The {@link ErrorType} that identifies the {@link TypedException#getCause()} {@link Throwable}
+   * @param message   error message to override the once from the original exception
    */
   public TypedException(Throwable throwable, ErrorType errorType, String message) {
     super(createStaticMessage(message), throwable);

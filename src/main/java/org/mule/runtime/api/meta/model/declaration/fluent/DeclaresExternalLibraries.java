@@ -10,8 +10,7 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 
 /**
- * Common interface for {@link Declarer declarers} which support
- * adding {@link ExternalLibraryModel} instances
+ * Common interface for {@link Declarer declarers} which support adding {@link ExternalLibraryModel} instances
  *
  * @param <T> the generic type of the {@link Declarer} which implements this interface
  */

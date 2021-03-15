@@ -7,8 +7,7 @@
 package org.mule.runtime.api.meta.model.connection;
 
 /**
- * Enumerates the different strategies that the runtime
- * supports for managing connections.
+ * Enumerates the different strategies that the runtime supports for managing connections.
  *
  * @since 1.0
  */
@@ -24,8 +23,7 @@ public enum ConnectionManagementType {
   CACHED,
 
   /**
-   * Connections are created upon operation execution
-   * and destroyed when operation finished
+   * Connections are created upon operation execution and destroyed when operation finished
    */
   NONE
 }

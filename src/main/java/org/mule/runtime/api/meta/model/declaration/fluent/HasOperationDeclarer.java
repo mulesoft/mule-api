@@ -9,8 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.api.annotation.NoImplement;
 
 /**
- * Contract interface for a declarer in which it's possible
- * to add operations
+ * Contract interface for a declarer in which it's possible to add operations
  *
  * @since 1.0
  */
@@ -26,8 +25,7 @@ public interface HasOperationDeclarer {
   OperationDeclarer withOperation(String name);
 
   /**
-   * Adds an {@link OperationDeclaration} by receiving
-   * a {@code declarer} which describes it
+   * Adds an {@link OperationDeclaration} by receiving a {@code declarer} which describes it
    *
    * @param declarer a {@link OperationDeclaration}
    */

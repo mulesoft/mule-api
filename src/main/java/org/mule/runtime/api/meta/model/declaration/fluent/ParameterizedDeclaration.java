@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of {@link NamedDeclaration} which adds
- * a {@link List} of {@link ParameterDeclaration}
+ * Implementation of {@link NamedDeclaration} which adds a {@link List} of {@link ParameterDeclaration}
  *
  * @param <T> the concrete type for {@code this} declaration
  * @since 1.0

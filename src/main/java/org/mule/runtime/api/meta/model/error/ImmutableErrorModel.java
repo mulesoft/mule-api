@@ -30,8 +30,8 @@ public final class ImmutableErrorModel implements ErrorModel {
    * @param type      the error type
    * @param namespace the error namespace
    * @param parent    the error's parent
-   * @deprecated This constructor is deprecated and will be removed in Mule 5. Use {@link #ImmutableErrorModel(String, String, ErrorModel)}
-   * instead
+   * @deprecated This constructor is deprecated and will be removed in Mule 5. Use
+   *             {@link #ImmutableErrorModel(String, String, ErrorModel)} instead
    */
   @Deprecated
   public ImmutableErrorModel(String type, String namespace, ErrorModel parent) {

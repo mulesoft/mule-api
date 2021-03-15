@@ -17,8 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which
- * it's possible to add/get {@link SourceDeclaration} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link SourceDeclaration} objects
  *
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0

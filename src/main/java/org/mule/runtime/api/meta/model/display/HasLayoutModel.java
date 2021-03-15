@@ -19,8 +19,7 @@ import java.util.Optional;
 public interface HasLayoutModel {
 
   /**
-   * @return An {@link Optional} {@link LayoutModel} which contains directives
-   * about how this parameter should be shown in the UI
+   * @return An {@link Optional} {@link LayoutModel} which contains directives about how this parameter should be shown in the UI
    */
   Optional<LayoutModel> getLayoutModel();
 }

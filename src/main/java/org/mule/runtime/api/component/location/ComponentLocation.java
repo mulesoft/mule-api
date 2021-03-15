@@ -24,8 +24,8 @@ import java.util.OptionalInt;
  * <li>COMPONENT_NAME - global component defined with name COMPONENT_NAME</li>
  * <li>FLOW_NAME/source - a source defined within a flow</li>
  * <li>FLOW_NAME/processors/0 - the first processor defined within a flow with name FLOW_NAME</li>
- * <li>FLOW_NAME/processors/4/processors/1 - the second processors defined inside another processor which is positioned fifth within a flow
- * with name FLOW_NAME</li>
+ * <li>FLOW_NAME/processors/4/processors/1 - the second processors defined inside another processor which is positioned fifth
+ * within a flow with name FLOW_NAME</li>
  * <li>FLOW_NAME/errorHandler/0 - the first on-error within the error handler</li>
  * <li>FLOW_NAME/0/errorHandler/3 - the fourth on-error within the error handler of the first element of the flow with name
  * FLOW_NAME</li>

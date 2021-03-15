@@ -9,16 +9,14 @@ package org.mule.runtime.api.config;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Pooling configuration for JDBC Data Sources capable of
- * pooling connections.
+ * Pooling configuration for JDBC Data Sources capable of pooling connections.
  *
- * Unlike {@link PoolingProfile} which serves a more general
- * purpose, this interface should be used when configuring
- * pooling for JDBC connections
+ * Unlike {@link PoolingProfile} which serves a more general purpose, this interface should be used when configuring pooling for
+ * JDBC connections
  *
  * @since 1.0
  */
-//TODO: MULE-9047 - review if we can use the standard pooling profile
+// TODO: MULE-9047 - review if we can use the standard pooling profile
 public interface DatabasePoolingProfile {
 
   /**
@@ -42,8 +40,8 @@ public interface DatabasePoolingProfile {
   int getPreparedStatementCacheSize();
 
   /**
-   * @return The number of milliseconds a client trying to obtain a connection waits for
-   * it to be checked-in or acquired when the pool is exhausted. Zero (default) means wait indefinitely
+   * @return The number of milliseconds a client trying to obtain a connection waits for it to be checked-in or acquired when the
+   *         pool is exhausted. Zero (default) means wait indefinitely
    */
   int getMaxWait();
 

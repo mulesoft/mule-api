@@ -34,8 +34,8 @@ public interface Service extends NamedObject, SplashMessageProvider {
   }
 
   /**
-   * Returns the name of the specific contract that {@code this} instance is fulfilling. This is optional for service
-   * bundles which contain only one contract, mandatory for those with many.
+   * Returns the name of the specific contract that {@code this} instance is fulfilling. This is optional for service bundles
+   * which contain only one contract, mandatory for those with many.
    *
    * @return The name of the fulfilled contract
    * @since 1.2.0

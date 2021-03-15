@@ -78,7 +78,7 @@ public abstract class I18nMessageFactory {
    * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arg
    * @see #getBundlePath(String)
    */
@@ -91,7 +91,7 @@ public abstract class I18nMessageFactory {
    * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arg1
    * @param arg2
    * @see #getBundlePath(String)
@@ -105,7 +105,7 @@ public abstract class I18nMessageFactory {
    * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arg1
    * @param arg2
    * @param arg3
@@ -122,7 +122,7 @@ public abstract class I18nMessageFactory {
    * <b>Attention:</b> do not confuse this method with {@link this#createMessage}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arguments
    * @see #getBundlePath(String)
    */
@@ -136,7 +136,7 @@ public abstract class I18nMessageFactory {
    * from the resource bundle {@code bundlePath}.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    */
   protected I18nMessage createMessage(String bundlePath, int code) {
     String messageString = getString(bundlePath, code, null);
@@ -156,7 +156,7 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a {@link I18nMessage} instance that is not read from a resource bundle.
    *
-   * @param message Static message text that may contain format specifiers
+   * @param message   Static message text that may contain format specifiers
    * @param arguments Arguments referenced by the format specifiers in the message string.
    * @return a Messsage instance that has an error code of -1 and no arguments.
    */
@@ -168,7 +168,7 @@ public abstract class I18nMessageFactory {
    * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @return formatted error message as {@link String}
    */
   protected String getString(String bundlePath, int code) {
@@ -179,7 +179,7 @@ public abstract class I18nMessageFactory {
    * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arg
    * @return formatted error message as {@link String}
    */
@@ -192,7 +192,7 @@ public abstract class I18nMessageFactory {
    * Factory method to read the message with code {@code code} from the resource bundle.
    * 
    * @param bundlePath complete path to the resource bundle for lookup
-   * @param code numeric code of the message
+   * @param code       numeric code of the message
    * @param arg1
    * @param arg2
    * @return formatted error message as {@link String}

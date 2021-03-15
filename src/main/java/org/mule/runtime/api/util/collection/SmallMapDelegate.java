@@ -35,8 +35,8 @@ abstract class SmallMapDelegate<K, V> implements Map<K, V>, Serializable {
   protected transient V previousValue;
 
   /**
-   * Method to be used to add an entry into the {@link SmallMap}. This operation returns another {@link SmallMapDelegate} which
-   * is the one that the owning {@link SmallMap} should continue to use
+   * Method to be used to add an entry into the {@link SmallMap}. This operation returns another {@link SmallMapDelegate} which is
+   * the one that the owning {@link SmallMap} should continue to use
    *
    * @param key   the key to be added
    * @param value the value to be added

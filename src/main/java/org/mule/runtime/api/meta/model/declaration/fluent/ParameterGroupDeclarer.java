@@ -22,6 +22,7 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
 
   /**
    * Creates a new instance
+   * 
    * @param declaration a declaration
    */
   public ParameterGroupDeclarer(D declaration) {
@@ -54,9 +55,8 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
   }
 
   /**
-   * Sets the DSL representation type to be either inline, where the group
-   * is represented as a child element, or implicit, where the group
-   * is shown as a set of attributes in the element.
+   * Sets the DSL representation type to be either inline, where the group is represented as a child element, or implicit, where
+   * the group is shown as a set of attributes in the element.
    *
    * @param showInDsl {@code true} if the group is shown in the DSL
    * @return {@code this} {@link ParameterGroupDeclarer}

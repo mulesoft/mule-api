@@ -16,8 +16,8 @@ import org.mule.api.annotation.NoExtend;
 import java.util.Optional;
 
 /**
- * This object matches the mule-artifact.json element within a server plugin. The describer holds information that has been
- * picked up from the JSON file (and the pom.xml when implemented). 
+ * This object matches the mule-artifact.json element within a server plugin. The describer holds information that has been picked
+ * up from the JSON file (and the pom.xml when implemented).
  *
  * @since 1.0
  */

@@ -81,7 +81,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    *
    * @param <K> the class of the map keys
    * @param <V> the class of the map values
-   * @param m the multi-map for which an unmodifiable view is to be returned.
+   * @param m   the multi-map for which an unmodifiable view is to be returned.
    * @return an unmodifiable view of the specified multi-map.
    */
   public static <K, V> MultiMap<K, V> unmodifiableMultiMap(MultiMap<K, V> m) {
@@ -197,7 +197,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * Associates the specified value with the specified key in this map (optional operation). If the map previously contained
    * mappings for the key, the new values are aggregated to the old.
    *
-   * @param key key with which the specified values are to be associated
+   * @param key    key with which the specified values are to be associated
    * @param values collection of values to be associated with the specified key
    */
   public void put(K key, Collection<V> values) {
@@ -243,11 +243,12 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * key.
    *
    * @param aMultiMap mappings to be stored in this map
-   * @throws ClassCastException if the class of a key or value in the specified map prevents it from being stored in this map
-   * @throws NullPointerException if the specified map is null, or if this map does not permit null keys or values, and the
-   *         specified map contains null keys or values
+   * @throws ClassCastException       if the class of a key or value in the specified map prevents it from being stored in this
+   *                                  map
+   * @throws NullPointerException     if the specified map is null, or if this map does not permit null keys or values, and the
+   *                                  specified map contains null keys or values
    * @throws IllegalArgumentException if some property of a key or value in the specified map prevents it from being stored in
-   *         this map
+   *                                  this map
    * @since 1.1.1
    */
   public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {

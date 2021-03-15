@@ -11,8 +11,8 @@ import org.mule.runtime.api.message.Error;
 import java.util.List;
 
 /**
- * Exception that holds a collection of child {@link Error Errors}.
- * When this exception is analysed to create an {@link org.mule.runtime.api.message.Error}, it will feature the collection.
+ * Exception that holds a collection of child {@link Error Errors}. When this exception is analysed to create an
+ * {@link org.mule.runtime.api.message.Error}, it will feature the collection.
  *
  * @since 1.0
  */
