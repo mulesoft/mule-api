@@ -22,6 +22,13 @@ public interface EventContext {
   String getId();
 
   /**
+   * Unique time-based id (UUID) for this {@link EventContext}'s root.
+   *
+   * @return the UUID for this {@link EventContext}' root.
+   */
+  String getRootId();
+
+  /**
    * The correlation ID is used to correlate messages between different flows and systems.
    * <p>
    * If the connector that receives the source message supports the concept of a correlation ID then the connector should create
