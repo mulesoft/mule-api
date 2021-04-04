@@ -355,7 +355,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0, 4.3.1
    */
   public static final String ENABLE_POLICY_ISOLATION_PROPERTY =
-          SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
+      SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)

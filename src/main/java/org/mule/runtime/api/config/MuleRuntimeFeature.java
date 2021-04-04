@@ -130,16 +130,16 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0", RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY),
 
   /**
-   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported
-   * by the application that is being applied to, and validations will prevent the usage
-   * of explicit configurations declared by the application as part of the policy initialization."
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
    *
    * @since 4.4.0, 4.3.1
    */
   ENABLE_POLICY_ISOLATION(
       "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
-              "MULE-19226",
-              "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
+      "MULE-19226",
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issueId;
