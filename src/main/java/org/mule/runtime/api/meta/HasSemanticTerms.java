@@ -8,8 +8,11 @@ package org.mule.runtime.api.meta;
 
 import static java.util.Collections.emptySet;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.Set;
 
+@NoImplement
 public interface HasSemanticTerms {
 
   default Set<String> getSemanticTerms() {

@@ -52,6 +52,7 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
     router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1).withChain();
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain();
+    router.withSemanticTerm("router");
     ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
 
