@@ -11,8 +11,8 @@ import org.mule.api.annotation.NoImplement;
 import java.util.Set;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get semantic terms which describe
- * the declaration's meaning and effect
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get semantic terms which describe the
+ * declaration's meaning and effect
  *
  * @since 1.4.0
  */

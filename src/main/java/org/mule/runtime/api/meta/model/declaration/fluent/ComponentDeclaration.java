@@ -6,14 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
-
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 
 import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -25,12 +21,11 @@ import java.util.Set;
  * @since 1.0
  */
 public class ComponentDeclaration<T extends ComponentDeclaration> extends StereotypedDeclaration<T>
-        implements WithNestedComponentsDeclaration<T>, WithStereotypesDeclaration,
-        WithSemanticTermsDeclaration {
+    implements WithNestedComponentsDeclaration<T>, WithStereotypesDeclaration {
+
 
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
   private Set<ErrorModel> errorModels = new HashSet<>();
-  private Set<String> semanticTerms = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
@@ -50,27 +45,6 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
 
   public void addErrorModel(ErrorModel errorModel) {
     errorModels.add(errorModel);
-  }
-
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1.4.0
-   */
-  @Override
-  public void addSemanticTerm(String semanticTerm) {
-    checkArgument(!isBlank(semanticTerm), "Semantic term cannot be blank");
-    semanticTerms.add(semanticTerm);
-  }
-
-  /**
-   * {@inheritDoc}
-   *
-   * @since 1.4.0
-   */
-  @Override
-  public Set<String> getSemanticTerms() {
-    return semanticTerms;
   }
 
   public Set<ErrorModel> getErrorModels() {
