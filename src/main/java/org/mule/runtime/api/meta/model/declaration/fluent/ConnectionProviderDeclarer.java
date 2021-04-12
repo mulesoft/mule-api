@@ -19,7 +19,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 public final class ConnectionProviderDeclarer
     extends ParameterizedDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
     implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer>,
-    HasStereotypeDeclarer<ConnectionProviderDeclarer> {
+    HasStereotypeDeclarer<ConnectionProviderDeclarer>, HasSemanticTermsDeclarer<ConnectionProviderDeclarer> {
 
   /**
    * Creates a new instance
@@ -81,6 +81,17 @@ public final class ConnectionProviderDeclarer
 
   public ConnectionProviderDeclarer supportsConnectivityTesting(boolean supportsConnectivityTesting) {
     declaration.setSupportsConnectivityTesting(supportsConnectivityTesting);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public ConnectionProviderDeclarer withSemanticTerm(String semanticTerm) {
+    declaration.addSemanticTerm(semanticTerm);
     return this;
   }
 }
