@@ -283,7 +283,7 @@ public final class MuleSystemProperties {
   /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
    * isn't set, the behaviour will depend on {@link MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES}.
-   * 
+   *
    * @see MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES
    * @since 4.4.0, 4.3.1
    */
@@ -292,7 +292,7 @@ public final class MuleSystemProperties {
   /**
    * When set to {@code true} the runtime will prioritize the retry policy defined in the operation over the one defined in the
    * connection to resolve whether the policy is async. This may affect the resolution of whether the operation is async or not.
-   * 
+   *
    * @since 4.4.0, 4.3.1
    */
   public static final String HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY =
@@ -301,14 +301,14 @@ public final class MuleSystemProperties {
   /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
    * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String HANDLE_SPLITTER_EXCEPTION_PROPERTY = "mule.dw.handle_splitter_exception";
 
   /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY =
@@ -316,11 +316,20 @@ public final class MuleSystemProperties {
 
   /**
    * If set to true, the connection exceptions will be computed to trigger alerts.
-   * 
+   *
    * @since 4.4.0, 4.3.1
    */
   public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
+
+  /**
+   * If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic
+   * 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.
+   *
+   * @since 4.4.0
+   */
+  public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
