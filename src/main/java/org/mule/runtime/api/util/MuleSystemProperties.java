@@ -326,7 +326,7 @@ public final class MuleSystemProperties {
    * If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic
    * 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.
    *
-   * @since 4.4.0, 4.3.1
+   * @since 4.4.0
    */
   public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
