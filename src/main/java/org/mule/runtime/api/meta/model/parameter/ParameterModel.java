@@ -10,7 +10,7 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.StringType;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExpressionSupport;
-import org.mule.runtime.api.meta.HasSemanticTerms;
+import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.Typed;
 import org.mule.runtime.api.meta.model.ComponentModel;

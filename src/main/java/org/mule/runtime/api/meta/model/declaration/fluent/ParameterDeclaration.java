@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
@@ -190,6 +191,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
    */
   @Override
   public void addSemanticTerm(String semanticTerm) {
+    checkArgument(!isBlank(semanticTerm), "semantic terms cannot be blank");
     semanticTerms.add(semanticTerm);
   }
 }

@@ -7,7 +7,7 @@
 package org.mule.runtime.api.meta.model;
 
 import org.mule.api.annotation.NoImplement;
-import org.mule.runtime.api.meta.HasSemanticTerms;
+import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.model.deprecated.DeprecableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.error.ThrowsErrors;
