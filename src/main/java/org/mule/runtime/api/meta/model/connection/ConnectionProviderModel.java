@@ -10,6 +10,7 @@ package org.mule.runtime.api.meta.model.connection;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionProvider;
 import org.mule.runtime.api.meta.DescribedObject;
+import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.HasExternalLibraries;
@@ -31,7 +32,8 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 @NoImplement
 public interface ConnectionProviderModel
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
-    HasDisplayModel, HasExternalLibraries, HasStereotypeModel, DeprecableModel {
+    HasDisplayModel, HasExternalLibraries, HasStereotypeModel, DeprecableModel,
+    HasSemanticTerms {
 
   /**
    * @return the type of connection management that the provider performs

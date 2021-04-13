@@ -10,6 +10,7 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.StringType;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.ExpressionSupport;
+import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.Typed;
 import org.mule.runtime.api.meta.model.ComponentModel;
@@ -37,7 +38,8 @@ import java.util.Optional;
  */
 @NoImplement
 public interface ParameterModel
-    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, DeprecableModel {
+    extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, DeprecableModel,
+    HasSemanticTerms {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with {@link #getDefaultValue()} in the sense that a

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Optional.ofNullable;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
@@ -22,8 +23,10 @@ import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * A declaration object for a {@link ParameterModel}. It contains raw, unvalidated data which is used to declare the structure of
@@ -34,7 +37,7 @@ import java.util.Optional;
  * @since 1.0
  */
 public class ParameterDeclaration extends AbstractParameterDeclaration<ParameterDeclaration>
-    implements TypedDeclaration, WithDeprecatedDeclaration {
+    implements TypedDeclaration, WithDeprecatedDeclaration, WithSemanticTermsDeclaration {
 
   private boolean required;
   private boolean isConfigOverride;
@@ -48,6 +51,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   private ValueProviderModel valueProviderModel;
   private final List<StereotypeModel> allowedStereotypeModels = new ArrayList<>();
   private DeprecationModel deprecation;
+  private final Set<String> semanticTerms = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
@@ -168,5 +172,26 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   @Override
   public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public Set<String> getSemanticTerms() {
+    return semanticTerms;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public void addSemanticTerm(String semanticTerm) {
+    checkArgument(!isBlank(semanticTerm), "semantic terms cannot be blank");
+    semanticTerms.add(semanticTerm);
   }
 }

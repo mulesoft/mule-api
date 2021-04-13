@@ -14,8 +14,10 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Implementation of {@link NamedDeclaration} which adds a {@link List} of {@link ParameterDeclaration}
@@ -24,9 +26,10 @@ import java.util.Map;
  * @since 1.0
  */
 public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaration> extends NamedDeclaration<T>
-    implements WithParametersDeclaration {
+    implements WithParametersDeclaration, WithSemanticTermsDeclaration {
 
   private final Map<String, ParameterGroupDeclaration> parameterGroups = new LinkedHashMap<>();
+  private final Set<String> semanticTerms = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
@@ -68,5 +71,26 @@ public abstract class ParameterizedDeclaration<T extends ParameterizedDeclaratio
    */
   public List<ParameterDeclaration> getAllParameters() {
     return parameterGroups.values().stream().flatMap(g -> g.getParameters().stream()).collect(toList());
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public void addSemanticTerm(String semanticTerm) {
+    checkArgument(!isBlank(semanticTerm), "Semantic term cannot be blank");
+    semanticTerms.add(semanticTerm);
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public Set<String> getSemanticTerms() {
+    return semanticTerms;
   }
 }

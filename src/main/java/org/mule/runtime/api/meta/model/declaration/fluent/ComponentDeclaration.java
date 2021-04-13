@@ -8,7 +8,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 import java.util.HashSet;
 import java.util.LinkedList;

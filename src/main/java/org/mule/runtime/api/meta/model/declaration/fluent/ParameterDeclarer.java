@@ -29,7 +29,7 @@ import java.util.List;
 public class ParameterDeclarer<T extends ParameterDeclarer>
     implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>,
     HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>>,
-    HasDeprecatedDeclarer<ParameterDeclarer<T>> {
+    HasDeprecatedDeclarer<ParameterDeclarer<T>>, HasSemanticTermsDeclarer<T> {
 
   private final ParameterDeclaration declaration;
 
@@ -187,5 +187,16 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   public ParameterDeclarer<T> withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public T withSemanticTerm(String semanticTerm) {
+    declaration.addSemanticTerm(semanticTerm);
+    return (T) this;
   }
 }
