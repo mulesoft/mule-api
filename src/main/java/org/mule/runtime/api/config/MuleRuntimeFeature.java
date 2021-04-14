@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_OPERATION_EXECUTION_WITHOUT_USING_RECONNECTION_CONFIG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
@@ -113,7 +114,17 @@ public enum MuleRuntimeFeature implements Feature {
   TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS(
       "If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.",
       "MULE-19323",
-      "4.4.0", TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY);
+      "4.4.0", TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
+
+  /**
+   * If set to true, execution of operations will not take into account reconnection policies to evaluate if execution should go
+   * through a flux supplier or not and will depend only on whether the operation is blocking.
+   *
+   * @since 4.4.0
+   */
+  RESOLVE_OPERATION_EXECUTION_WITHOUT_USING_RECONNECTION_CONFIG(
+      "If set to true, execution of operations will take not into account reconnection policy to evaluate if execution should go through a flux supplier or not and will depend only on whether the operation is blocking.",
+      "MULE-19342", "4.4.0", RESOLVE_OPERATION_EXECUTION_WITHOUT_USING_RECONNECTION_CONFIG_PROPERTY);
 
   private final String description;
   private final String issueId;

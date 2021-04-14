@@ -332,6 +332,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
 
   /**
+   * If set to true, execution of operations will not take into account reconnection policies to evaluate if execution should go
+   * through a flux supplier or not and will depend only on whether the operation is blocking.
+   *
+   * @since 4.4.0
+   */
+  public static final String RESOLVE_OPERATION_EXECUTION_WITHOUT_USING_RECONNECTION_CONFIG_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "do.not.resolve.reconnection.config.for.operation.execution";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
