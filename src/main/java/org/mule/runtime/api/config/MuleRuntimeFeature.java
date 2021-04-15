@@ -116,6 +116,7 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-19323",
       "4.4.0",
       TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
+
   /**
    * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
    * connection strategy. On the contrary, by default it will only consider that it is enabled.
