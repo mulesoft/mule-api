@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY;
 
 import java.util.Optional;
 
@@ -89,7 +90,18 @@ public enum MuleRuntimeFeature implements Feature {
   COMPUTE_CONNECTION_ERRORS_IN_STATS(
       " If set to true, the connection errors will be computed to trigger alerts.",
       "MULE-19020",
-      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY);
+      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
+
+  /**
+   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
+   * connection strategy. On the contrary, by default it will only consider that it is enabled.
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY(
+      "If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the connection strategy. By default it will only consider that it is enabled.",
+      "MULE-19346",
+      "4.4.0, 4.3.1", RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY);
 
   private final String description;
   private final String issueId;

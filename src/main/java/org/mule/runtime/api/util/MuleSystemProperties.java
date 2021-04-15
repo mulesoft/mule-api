@@ -278,6 +278,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
 
   /**
+   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
+   * connection strategy. On the contrary, by default it will only consider that it is enabled.
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY =
+      "resolve.execution.mode.based.on.async.reconnection.strategy";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {

@@ -4,6 +4,15 @@
       "ignore": [
          {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19160: retry policies for operations do not override connection"
+          },
+         {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
