@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
@@ -113,7 +114,19 @@ public enum MuleRuntimeFeature implements Feature {
   TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS(
       "If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.",
       "MULE-19323",
-      "4.4.0", TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY);
+      "4.4.0",
+      TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
+
+  /**
+   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
+   * connection strategy. On the contrary, by default it will only consider that it is enabled.
+   *
+   * @since 4.4.0
+   */
+  RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY(
+      "If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the connection strategy. By default it will only consider that it is enabled.",
+      "MULE-19346",
+      "4.4.0", RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY);
 
   private final String description;
   private final String issueId;
