@@ -34,7 +34,7 @@ public interface ActingParameterModel {
   boolean isRequired();
 
   /**
-   * @return the path to the acting parameter’s value in the component.
+   * @return the extraction expression to the acting parameter’s value in the component.
    */
-  String getPath();
+  String getExtractionExpression();
 }
