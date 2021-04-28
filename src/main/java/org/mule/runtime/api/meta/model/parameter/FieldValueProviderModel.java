@@ -8,17 +8,20 @@ package org.mule.runtime.api.meta.model.parameter;
 
 import static java.util.Objects.hash;
 
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoInstantiate;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Objects;
 
 /**
  * Model for {@link ParameterModel} to communicate if one of these are capable to provide {@link Value values} for its fields.
  *
  * @since 1.4
  */
+@NoExtend
+@NoInstantiate
 public class FieldValueProviderModel extends ValueProviderModel {
 
   private final String targetPath;
@@ -53,15 +56,16 @@ public class FieldValueProviderModel extends ValueProviderModel {
       return true;
     }
 
-    if (o == null || getClass() != o.getClass()) {
+    if (!super.equals(o)) {
+      return false;
+    }
+
+    if (getClass() != o.getClass()) {
       return false;
     }
 
     FieldValueProviderModel that = (FieldValueProviderModel) o;
-
-    return new EqualsBuilder()
-        .append(targetPath, that.targetPath)
-        .isEquals() && super.equals(o);
+    return Objects.equals(targetPath, that.targetPath);
   }
 
   @Override
