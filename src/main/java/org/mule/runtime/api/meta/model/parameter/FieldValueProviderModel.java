@@ -24,7 +24,7 @@ import java.util.Objects;
 @NoInstantiate
 public class FieldValueProviderModel extends ValueProviderModel {
 
-  private final String targetPath;
+  private final String targetSelector;
 
   /**
    * Creates a new instance
@@ -36,18 +36,19 @@ public class FieldValueProviderModel extends ValueProviderModel {
    * @param partOrder             the position in the value
    * @param providerName          the category of the associated value provider for this parameter
    * @param providerId            the id of the associated value provider for this parameter
-   * @param targetPath            the path of the field whose values are provided within the parameter
+   * @param targetSelector        the path of the field whose values are provided within the parameter
    *
    * @since 1.4.0
    */
   public FieldValueProviderModel(List<ActingParameterModel> parameters, boolean requiresConfiguration, boolean requiresConnection,
-                                 boolean isOpen, Integer partOrder, String providerName, String providerId, String targetPath) {
+                                 boolean isOpen, Integer partOrder, String providerName, String providerId,
+                                 String targetSelector) {
     super(parameters, requiresConfiguration, requiresConnection, isOpen, partOrder, providerName, providerId);
-    this.targetPath = targetPath;
+    this.targetSelector = targetSelector;
   }
 
-  public String getTargetPath() {
-    return targetPath;
+  public String getTargetSelector() {
+    return targetSelector;
   }
 
   @Override
@@ -65,12 +66,12 @@ public class FieldValueProviderModel extends ValueProviderModel {
     }
 
     FieldValueProviderModel that = (FieldValueProviderModel) o;
-    return Objects.equals(targetPath, that.targetPath);
+    return Objects.equals(targetSelector, that.targetSelector);
   }
 
   @Override
   public int hashCode() {
-    return hash(super.hashCode(), targetPath);
+    return hash(super.hashCode(), targetSelector);
   }
 
 }
