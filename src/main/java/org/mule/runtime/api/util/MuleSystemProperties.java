@@ -291,15 +291,6 @@ public final class MuleSystemProperties {
   public static final String HONOUR_RESERVED_PROPERTIES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "honour.reserved.properties";
 
   /**
-   * When set to {@code true} the runtime will prioritize the retry policy defined in the operation over the one defined in the
-   * connection to resolve whether the policy is async. This may affect the resolution of whether the operation is async or not.
-   *
-   * @since 4.4.0, 4.3.1
-   */
-  public static final String HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "honour.operation.retry.policy.template.override";
-
-  /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
    * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
    *
