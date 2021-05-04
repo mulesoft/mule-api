@@ -253,15 +253,6 @@ public final class MuleSystemProperties {
   public static final String HONOUR_RESERVED_PROPERTIES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "honour.reserved.properties";
 
   /**
-   * When set to {@code true} the runtime will prioritize the retry policy defined in the operation over the one defined in the
-   * connection to resolve whether the policy is async. This may affect the resolution of whether the operation is async or not.
-   * 
-   * @since 4.4.0, 4.3.1
-   */
-  public static final String HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "honour.operation.retry.policy.template.override";
-
-  /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
    * 
    * @since 4.4.0, 4.3.1, 4.2.3
@@ -276,15 +267,6 @@ public final class MuleSystemProperties {
    */
   public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
-
-  /**
-   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
-   * connection strategy. On the contrary, by default it will only consider that it is enabled.
-   *
-   * @since 4.4.0, 4.3.1
-   */
-  public static final String RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY =
-      "resolve.execution.mode.based.on.async.reconnection.strategy";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
