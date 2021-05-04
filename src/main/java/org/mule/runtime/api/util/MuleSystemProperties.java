@@ -290,15 +290,6 @@ public final class MuleSystemProperties {
   public static final String HONOUR_RESERVED_PROPERTIES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "honour.reserved.properties";
 
   /**
-   * When set to {@code true} the runtime will prioritize the retry policy defined in the operation over the one defined in the
-   * connection to resolve whether the policy is async. This may affect the resolution of whether the operation is async or not.
-   *
-   * @since 4.4.0, 4.3.1
-   */
-  public static final String HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "honour.operation.retry.policy.template.override";
-
-  /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
    * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
    *
@@ -330,15 +321,6 @@ public final class MuleSystemProperties {
    */
   public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
-
-  /**
-   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
-   * connection strategy. On the contrary, by default it will only consider that it is enabled.
-   *
-   * @since 4.4.0
-   */
-  public static final String RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY =
-      "resolve.execution.mode.based.on.async.reconnection.strategy";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
