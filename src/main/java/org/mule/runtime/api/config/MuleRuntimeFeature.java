@@ -11,9 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
@@ -70,11 +68,6 @@ public enum MuleRuntimeFeature implements Feature {
   HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
       "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
-  HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE(
-      "Whether resolution of operation retry policy template should prioritize operation overriding", "MULE-19160",
-      "4.4.0, 4.3.1",
-      HONOUR_OPERATION_RETRY_POLICY_TEMPLATE_OVERRIDE_PROPERTY),
-
   /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
    * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
@@ -117,17 +110,6 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-19323",
       "4.4.0",
       TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
-
-  /**
-   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
-   * connection strategy. On the contrary, by default it will only consider that it is enabled.
-   *
-   * @since 4.4.0
-   */
-  RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY(
-      "If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the connection strategy. By default it will only consider that it is enabled.",
-      "MULE-19346",
-      "4.4.0", RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY),
 
   /**
    * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
