@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
-import static com.google.common.collect.Maps.asMap;
+import static java.util.Arrays.stream;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableSet;
 import static java.util.Optional.ofNullable;
@@ -20,7 +20,7 @@ import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.value.Value;
 
-import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -50,7 +50,8 @@ public class ValueProviderModel implements EnrichableModel {
   private final boolean requiresConfiguration;
   private final boolean requiresConnection;
   private final boolean isOpen;
-  protected Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new LinkedHashMap<>();
+  private Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new LinkedHashMap<>();
+  private transient Set<ModelProperty> modelPropertiesValues = new HashSet<>();
 
   /**
    * Creates a new instance
@@ -114,7 +115,8 @@ public class ValueProviderModel implements EnrichableModel {
     this.providerName = providerName;
     this.providerId = providerId;
     this.modelProperties =
-        Arrays.stream(modelProperties).collect(toMap(modelProperty -> modelProperty.getClass(), modelProperty -> modelProperty));
+        stream(modelProperties).collect(toMap(modelProperty -> modelProperty.getClass(), modelProperty -> modelProperty));
+    this.modelPropertiesValues = unmodifiableSet(new LinkedHashSet<>(this.modelProperties.values()));
   }
 
   /**
@@ -235,6 +237,9 @@ public class ValueProviderModel implements EnrichableModel {
    */
   @Override
   public Set<ModelProperty> getModelProperties() {
-    return unmodifiableSet(new LinkedHashSet<>(modelProperties.values()));
+    if (modelPropertiesValues == null) {
+      modelPropertiesValues = unmodifiableSet(new LinkedHashSet<>(modelProperties.values()));
+    }
+    return modelPropertiesValues;
   }
 }
