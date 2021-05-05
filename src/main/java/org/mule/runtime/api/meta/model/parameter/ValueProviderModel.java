@@ -6,15 +6,27 @@
  */
 package org.mule.runtime.api.meta.model.parameter;
 
+import static com.google.common.collect.Maps.asMap;
 import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableSet;
+import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toMap;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
 import org.mule.api.annotation.NoExtend;
 import org.mule.api.annotation.NoInstantiate;
+import org.mule.runtime.api.meta.model.EnrichableModel;
+import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.value.Value;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -28,7 +40,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 @NoExtend
 @NoInstantiate
-public class ValueProviderModel {
+public class ValueProviderModel implements EnrichableModel {
 
   private List<String> actingParameters;
   private final List<ActingParameterModel> parameters;
@@ -38,6 +50,7 @@ public class ValueProviderModel {
   private final boolean requiresConfiguration;
   private final boolean requiresConnection;
   private final boolean isOpen;
+  protected Map<Class<? extends ModelProperty>, ModelProperty> modelProperties = new LinkedHashMap<>();
 
   /**
    * Creates a new instance
@@ -67,6 +80,41 @@ public class ValueProviderModel {
     this.partOrder = partOrder;
     this.providerName = providerName;
     this.providerId = providerId;
+  }
+
+  /**
+   * Creates a new instance
+   *
+   * @param parameters            the list of parameters that the Value Provider takes into account for its resolution
+   * @param requiresConfiguration indicates if the configuration is required to resolve the values
+   * @param requiresConnection    indicates if the connection is required to resolve the values
+   * @param isOpen                indicates if the calculated values should be considered as an open or closed set
+   * @param partOrder             the position in the value
+   * @param providerName          the category of the associated value provider for this parameter
+   * @param providerId            the id of the associated value provider for this parameter
+   * @param modelProperties       the model properties this model is enriched with
+   *
+   * @since 1.4.0
+   */
+  public ValueProviderModel(List<ActingParameterModel> parameters, boolean requiresConfiguration,
+                            boolean requiresConnection,
+                            boolean isOpen,
+                            Integer partOrder, String providerName, String providerId,
+                            ModelProperty... modelProperties) {
+    checkArgument(parameters != null, "'parameters' can't be null");
+    checkArgument(partOrder != null, "'valueParts' can't be null");
+    checkArgument(providerName != null, "'providerName' can't be null");
+    checkArgument(providerId != null, "'providerId' can't be null");
+    checkArgument(modelProperties != null, "'modelProperties' can't be null");
+    this.isOpen = isOpen;
+    this.parameters = unmodifiableList(parameters);
+    this.requiresConfiguration = requiresConfiguration;
+    this.requiresConnection = requiresConnection;
+    this.partOrder = partOrder;
+    this.providerName = providerName;
+    this.providerId = providerId;
+    this.modelProperties =
+        Arrays.stream(modelProperties).collect(toMap(modelProperty -> modelProperty.getClass(), modelProperty -> modelProperty));
   }
 
   /**
@@ -155,6 +203,7 @@ public class ValueProviderModel {
         .append(requiresConnection, that.requiresConnection)
         .append(requiresConfiguration, that.requiresConfiguration)
         .append(isOpen, that.isOpen)
+        .append(modelProperties, that.modelProperties)
         .isEquals();
   }
 
@@ -168,6 +217,24 @@ public class ValueProviderModel {
         .append(requiresConnection)
         .append(requiresConfiguration)
         .append(isOpen)
+        .append(modelProperties)
         .toHashCode();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public <T extends ModelProperty> Optional<T> getModelProperty(Class<T> propertyType) {
+    checkArgument(propertyType != null, "Cannot get model properties of a null type");
+    return ofNullable((T) modelProperties.get(propertyType));
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Set<ModelProperty> getModelProperties() {
+    return unmodifiableSet(new LinkedHashSet<>(modelProperties.values()));
   }
 }
