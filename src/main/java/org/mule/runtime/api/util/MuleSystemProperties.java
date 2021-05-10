@@ -22,14 +22,6 @@ public final class MuleSystemProperties {
 
   public static final String SYSTEM_PROPERTY_PREFIX = "mule.";
 
-  static {
-    // Maintain compatibility after fix for MULE-19406
-    if (getProperty(SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics") == null) {
-      setProperty(SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics",
-                  getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics"));
-    }
-  }
-
   public static final String MULE_CONTEXT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "context";
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
@@ -330,6 +322,13 @@ public final class MuleSystemProperties {
    */
   public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
+
+  static {
+    // Maintain compatibility after fix for MULE-19406
+    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null) {
+      setProperty(MULE_ENABLE_STREAMING_STATISTICS, getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics"));
+    }
+  }
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
