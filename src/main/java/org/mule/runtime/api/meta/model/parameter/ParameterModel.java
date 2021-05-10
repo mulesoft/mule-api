@@ -108,6 +108,14 @@ public interface ParameterModel
   Optional<ValueProviderModel> getValueProviderModel();
 
   /**
+   * @return A {@link List} of {@link FieldValueProviderModel}s if the fields of this parameter are capable of providing
+   *         {@link Value values}
+   *
+   * @since 1.4
+   */
+  List<FieldValueProviderModel> getFieldValueProviderModels();
+
+  /**
    * Whether or not this {@link ParameterModel} is declared as ID of the owning {@link ComponentModel}. Being a Component ID means
    * that the value associated to the annotated parameter can be used to reference the {@link ComponentModel component} in a mule
    * application uniquely across all the instances of the same {@link ComponentModel}. When used on a global element of the

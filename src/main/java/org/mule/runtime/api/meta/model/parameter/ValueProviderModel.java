@@ -10,6 +10,7 @@ import static java.util.Collections.unmodifiableList;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static java.util.stream.Collectors.toList;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.api.annotation.NoInstantiate;
 import org.mule.runtime.api.value.Value;
 
@@ -25,8 +26,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * @since 1.0
  */
+@NoExtend
 @NoInstantiate
-public final class ValueProviderModel {
+public class ValueProviderModel {
 
   private List<String> actingParameters;
   private final List<ActingParameterModel> parameters;
