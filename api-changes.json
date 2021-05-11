@@ -3,6 +3,18 @@
     "revapi": {
       "ignore": [
          {
+           "code": "java.field.constantValueChanged",
+           "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
+           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
+           "oldValue": "mule..enableStreamingStatistics",
+           "newValue": "mule.streaming.enableStatistics",
+           "package": "org.mule.runtime.api.util",
+           "classSimpleName": "MuleSystemProperties",
+           "fieldName": "MULE_ENABLE_STREAMING_STATISTICS",
+           "elementKind": "field",
+           "justification": "MULE-19406 - Added code to honor the property with the old value if set"
+         },
+         {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY",
           "package": "org.mule.runtime.api.util",
