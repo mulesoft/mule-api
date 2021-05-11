@@ -325,8 +325,9 @@ public final class MuleSystemProperties {
 
   static {
     // Maintain compatibility after fix for MULE-19406
-    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null) {
-      setProperty(MULE_ENABLE_STREAMING_STATISTICS, getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics"));
+    final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
+    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null && oldEnableStreamingStatisticsValue != null) {
+      setProperty(MULE_ENABLE_STREAMING_STATISTICS, oldEnableStreamingStatisticsValue);
     }
   }
 
