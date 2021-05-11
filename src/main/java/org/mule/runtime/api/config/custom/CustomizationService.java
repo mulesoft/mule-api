@@ -11,10 +11,10 @@ import org.mule.runtime.api.lifecycle.Lifecycle;
 
 /**
  * Interface that allows to customize the set of services provided by the {@code MuleContext}.
- *
+ * <p>
  * It's possible to add new services or replace default implementation for services specifying a service implementation or a
  * services class.
- *
+ * <p>
  * For replacing an existent service, the service identifier must be used. Make sure to use the same constants as the runtime.
  *
  * @since 1.0

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.util;
 
 import static java.lang.System.getProperty;
+import static java.lang.System.setProperty;
 
 import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.metadata.MediaType;
@@ -40,7 +41,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.2.0
    */
-  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics";
+  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics";
 
   /**
    * System property key for the default size of a streaming buffer bucket
@@ -321,6 +322,14 @@ public final class MuleSystemProperties {
    */
   public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
+
+  static {
+    // Maintain compatibility after fix for MULE-19406
+    final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
+    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null && oldEnableStreamingStatisticsValue != null) {
+      setProperty(MULE_ENABLE_STREAMING_STATISTICS, oldEnableStreamingStatisticsValue);
+    }
+  }
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
