@@ -332,15 +332,6 @@ public final class MuleSystemProperties {
   }
 
   /**
-   * If set to true, the criteria for the operation to execute in async mode will depend only on the asynchronicity of the
-   * connection strategy. On the contrary, by default it will only consider that it is enabled.
-   *
-   * @since 4.4.0
-   */
-  public static final String RESOLVE_EXECUTION_MODE_BASED_ON_ASYNC_RECONNECTION_STRATEGY_PROPERTY =
-      "resolve.execution.mode.based.on.async.reconnection.strategy";
-
-  /**
    * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
    * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
    * application as part of the policy initialization."
