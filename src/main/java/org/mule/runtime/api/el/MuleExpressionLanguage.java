@@ -10,6 +10,9 @@ import org.mule.api.annotation.NoImplement;
 
 /**
  * Provides universal access for evaluating mule expressions #[].
+ * <p>
+ * Callers must ensure that the proper threadContexClassloader, being able to access any class or resource required by the
+ * expression, is used when calling any of the methods defined here or in the inherited interfaces.
  *
  * @since 1.0
  */
