@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_POLICY_ISOLATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19226: Policy not able to inject internal dependencies for artifacts that shares with the application"
+        },
+        {
           "code": "java.field.serialVersionUIDUnchanged",
           "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
           "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",

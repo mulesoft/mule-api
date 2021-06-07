@@ -84,7 +84,7 @@ public final class MuleSystemProperties {
   /**
    * This is the timeout in milliseconds to wait before we detect that the test connectivity is done in case the test connectivity
    * is asynchronously done.
-   * 
+   *
    * @since 1.2.3
    */
   public static final String ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY =
@@ -138,7 +138,7 @@ public final class MuleSystemProperties {
   /**
   * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
   * separated. For instance: {@code some.category,other.category}.
-  * 
+  *
   * @since 4.2.0, 4.1.6
   */
   public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
@@ -173,6 +173,16 @@ public final class MuleSystemProperties {
   public static boolean isForceExtensionValidation() {
     return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
   }
+
+  /**
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String ENABLE_POLICY_ISOLATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
 
   private MuleSystemProperties() {}
 }

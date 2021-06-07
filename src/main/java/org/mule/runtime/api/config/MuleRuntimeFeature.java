@@ -10,12 +10,13 @@ import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 
 /**
  * <p>
  * List of {@link Feature}s that can be configured to be enabled or disabled per application depending on the deployment context.
  * </p>
- * 
+ *
  * <p>
  * When some Mule runtime feature needs to be flagged, it should be added here as a new enum constant. Each entry must have a
  * meaningful name, clear enough to understand what it represents, a description with enough information to know how the runtime
@@ -26,7 +27,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
  * <p>
  * For example:
  * </p>
- * 
+ *
  * <pre>
  *    public enum MuleRuntimeFeature implements Feature {
  *      ...
@@ -45,20 +46,32 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
  *
  *    }
  * </pre>
- * 
+ *
  * @since 4.4.0 4.3.1 4.2.3
  */
 public enum MuleRuntimeFeature implements Feature {
 
   /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
       "If set to true, then fixed batch aggregator will only commit when a full block is processed.",
       "EE-7443",
-      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY);
+      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
+
+  /**
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  ENABLE_POLICY_ISOLATION(
+      "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
+      "MULE-19226",
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issue;
@@ -76,6 +89,7 @@ public enum MuleRuntimeFeature implements Feature {
     this.overridingSystemPropertyName = overridingSystemPropertyName;
   }
 
+  @Override
   public String getDescription() {
     return description;
   }
