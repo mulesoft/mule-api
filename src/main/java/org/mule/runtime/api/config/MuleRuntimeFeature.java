@@ -125,7 +125,8 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
 
   /**
-   * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed when trying to resolve an element from that schema.
+   * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed
+   * when trying to resolve an element from that schema.
    *
    * @since 4.4.0
    */

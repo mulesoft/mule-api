@@ -324,12 +324,13 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
 
   /**
-   * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed when trying to resolve an element from that schema.
+   * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed
+   * when trying to resolve an element from that schema.
    *
    * @since 4.4.0
    */
   public static final String ENTITY_RESOLVER_FAIL_PROACTIVELY_PROPERTY =
-          SYSTEM_PROPERTY_PREFIX + "entityResolver.failProactively";
+      SYSTEM_PROPERTY_PREFIX + "entityResolver.failProactively";
 
   static {
     // Maintain compatibility after fix for MULE-19406
