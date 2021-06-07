@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
@@ -108,7 +109,19 @@ public enum MuleRuntimeFeature implements Feature {
       "If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.",
       "MULE-19323",
       "4.4.0",
-      TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY);
+      TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
+
+  /**
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  ENABLE_POLICY_ISOLATION(
+      "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
+      "MULE-19226",
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issueId;
