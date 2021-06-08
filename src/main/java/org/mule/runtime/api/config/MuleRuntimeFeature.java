@@ -9,17 +9,18 @@ package org.mule.runtime.api.config;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 
-import java.util.Optional;
-
 import org.mule.runtime.api.util.MuleSystemProperties;
+
+import java.util.Optional;
 
 /**
  * <p>
  * List of {@link Feature}s that can be configured to be enabled or disabled per application depending on the deployment context.
  * </p>
- * 
+ *
  * <p>
  * When some Mule runtime feature needs to be flagged, it should be added here as a new enum constant. Each entry must have a
  * meaningful name, clear enough to understand what it represents, a description with enough information to know how the runtime
@@ -30,7 +31,7 @@ import org.mule.runtime.api.util.MuleSystemProperties;
  * <p>
  * For example:
  * </p>
- * 
+ *
  * <pre>
  *    public enum MuleRuntimeFeature implements Feature {
  *      ...
@@ -50,7 +51,7 @@ import org.mule.runtime.api.util.MuleSystemProperties;
  *
  *    }
  * </pre>
- * 
+ *
  * @since 4.4.0 4.3.1
  */
 public enum MuleRuntimeFeature implements Feature {
@@ -59,7 +60,7 @@ public enum MuleRuntimeFeature implements Feature {
    * An application shouldn't override reserved properties, but it was possible until MULE-17659. This behaviour has to be fixed
    * by default to any application developed for 4.3.0+ Runtime but can be overridden by setting
    * {@link MuleSystemProperties#HONOUR_RESERVED_PROPERTIES_PROPERTY} System Property.
-   * 
+   *
    * @since 4.4.0, 4.3.1
    */
   HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
@@ -67,7 +68,7 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
@@ -77,13 +78,25 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * If set to true, the connection errors will be taken into account to trigger alerts.
-   * 
+   *
    * @since 4.4.0, 4.3.1
    */
   COMPUTE_CONNECTION_ERRORS_IN_STATS(
       " If set to true, the connection errors will be computed to trigger alerts.",
       "MULE-19020",
-      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY);
+      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
+
+  /**
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  ENABLE_POLICY_ISOLATION(
+      "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
+      "MULE-19226",
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issueId;
@@ -101,6 +114,7 @@ public enum MuleRuntimeFeature implements Feature {
     this.overridingSystemPropertyName = overridingSystemPropertyName;
   }
 
+  @Override
   public String getDescription() {
     return description;
   }
