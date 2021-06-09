@@ -126,15 +126,16 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed
-   * when trying to resolve an element from that schema.
+   * when trying to resolve an element from that schema. With the legacy behaviour the namespace resolution only fails after a
+   * number of attempts are made.
    *
    * @since 4.4.0
    */
   ENTITY_RESOLVER_FAIL_PROACTIVELY(
-          "If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed when trying to resolve an element from that schema.",
-          "EE-7827",
-          "4.4.0",
-          ENTITY_RESOLVER_FAIL_PROACTIVELY_PROPERTY);
+      "If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed when trying to resolve an element from that schema.",
+      "EE-7827",
+      "4.4.0",
+      ENTITY_RESOLVER_FAIL_PROACTIVELY_PROPERTY);
 
   private final String description;
   private final String issueId;
