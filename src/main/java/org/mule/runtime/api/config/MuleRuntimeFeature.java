@@ -13,7 +13,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLA
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_PROACTIVELY_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -125,17 +125,16 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
 
   /**
-   * If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed
-   * when trying to resolve an element from that schema. With the legacy behaviour the namespace resolution only fails after a
-   * number of attempts are made.
+   * If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10
+   * attempts were made.
    *
    * @since 4.4.0
    */
-  ENTITY_RESOLVER_FAIL_PROACTIVELY(
-      "If set to true, the entity resolver will fail proactively if a namespace cannot be resolved, while previously it only failed when trying to resolve an element from that schema.",
+  ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
+      "If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10 attempts were made.",
       "EE-7827",
       "4.4.0",
-      ENTITY_RESOLVER_FAIL_PROACTIVELY_PROPERTY);
+      ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY);
 
   private final String description;
   private final String issueId;
