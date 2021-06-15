@@ -125,13 +125,14 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
 
   /**
-   * If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10
-   * attempts were made.
+   * If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be
+   * located, while previously it only failed if such application was using the namespace that such schema defines (the error was
+   * silently ignored otherwise).
    *
    * @since 4.4.0
    */
   ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
-      "If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10 attempts were made.",
+      "If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located, while previously it only failed if such application was using the namespace that such schema defines (the error was silently ignored otherwise).",
       "EE-7827",
       "4.4.0",
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY);
