@@ -126,13 +126,13 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be
-   * located, while previously it only failed if such application was using the namespace that such schema defines (the error was
-   * silently ignored otherwise).
+   * located. If set to false, it will only fail if such application makes use of the namespace that such schema defines, instead
+   * of just declaring it.
    *
    * @since 4.4.0
    */
   ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
-      "If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located, while previously it only failed if such application was using the namespace that such schema defines (the error was silently ignored otherwise).",
+      "If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. If set to false, it will only fail if such application makes use of the namespace that such schema defines, instead of just declaring it.",
       "EE-7827",
       "4.4.0",
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY);
