@@ -323,6 +323,15 @@ public final class MuleSystemProperties {
   public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
 
+  /**
+   * If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10
+   * attempts were made.
+   *
+   * @since 4.4.0
+   */
+  public static final String ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "entityResolver.failOnFirstError";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");

@@ -13,6 +13,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLA
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -121,7 +122,20 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_POLICY_ISOLATION(
       "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
       "MULE-19226",
-      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
+
+  /**
+   * If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be
+   * located. If set to false, it will only fail if such application makes use of the namespace that such schema defines, instead
+   * of just declaring it.
+   *
+   * @since 4.4.0
+   */
+  ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
+      "If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. If set to false, it will only fail if such application makes use of the namespace that such schema defines, instead of just declaring it.",
+      "EE-7827",
+      "4.4.0",
+      ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY);
 
   private final String description;
   private final String issueId;
