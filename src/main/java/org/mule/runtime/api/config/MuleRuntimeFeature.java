@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.NO_OAUTH_REDIRECT_URI_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 
@@ -135,7 +136,17 @@ public enum MuleRuntimeFeature implements Feature {
       "If set to true, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. If set to false, it will only fail if such application makes use of the namespace that such schema defines, instead of just declaring it.",
       "EE-7827",
       "4.4.0",
-      ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY);
+      ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
+
+  /**
+   * If set to true, the redirect_uri parameter will not be added to the OAuthAuthorizationCodeDancer."
+   *
+   * @since 4.4.0
+   */
+  NO_OAUTH_REDIRECT_URI(
+      "If set to true, the redirect_uri parameter will not be added to the OAuthAuthorizationCodeDancer.",
+      "EE-7789",
+      "4.4.0", NO_OAUTH_REDIRECT_URI_PROPERTY);
 
   private final String description;
   private final String issueId;

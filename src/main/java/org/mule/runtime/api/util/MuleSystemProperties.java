@@ -351,6 +351,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
 
   /**
+   * If set to true, the redirect_uri parameter will not be added to the OAuthAuthorizationCodeDancer.
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String NO_OAUTH_REDIRECT_URI_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "oauth.remove.redirect.uri";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
