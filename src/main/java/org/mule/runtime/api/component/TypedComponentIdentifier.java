@@ -82,7 +82,20 @@ public interface TypedComponentIdentifier {
      *
      * @since 1.4
      */
-    CHAIN
+    CHAIN,
+
+    /**
+     * Definition of an operation though the Mule DSL
+     *
+     * @since 1.4
+     */
+    OPERATION_DEF,
+
+    PARAMETER,
+
+    OUTPUT_PAYLOAD_TYPE,
+
+    OUTPUT_ATTRIBUTES_TYPE
   }
 
   /**
