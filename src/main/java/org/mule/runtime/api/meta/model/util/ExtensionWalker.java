@@ -226,6 +226,9 @@ public abstract class ExtensionWalker {
         return;
       }
       onConstruct(model, construct);
+    }
+
+    for (ConstructModel construct : model.getConstructModels()) {
       ifContinue(() -> walkParameters(construct));
       ifContinue(() -> walkNesteable(construct));
     }
