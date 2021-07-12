@@ -91,8 +91,6 @@ public interface TypedComponentIdentifier {
      */
     OPERATION_DEF,
 
-    PARAMETER,
-
     OUTPUT_PAYLOAD_TYPE,
 
     OUTPUT_ATTRIBUTES_TYPE
