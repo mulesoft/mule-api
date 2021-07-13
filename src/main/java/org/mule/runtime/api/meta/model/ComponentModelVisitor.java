@@ -8,6 +8,9 @@ package org.mule.runtime.api.meta.model;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.construct.ConstructModel;
+import org.mule.runtime.api.meta.model.nested.NestedChainModel;
+import org.mule.runtime.api.meta.model.nested.NestedComponentModel;
+import org.mule.runtime.api.meta.model.nested.NestedRouteModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 
@@ -39,4 +42,16 @@ public interface ComponentModelVisitor {
    * @param model the visited object
    */
   void visit(ConstructModel model);
+
+  default void visit(NestedComponentModel model) {
+
+  }
+
+  default void visit(NestedChainModel model) {
+
+  }
+
+  default void visit(NestedRouteModel model) {
+
+  }
 }

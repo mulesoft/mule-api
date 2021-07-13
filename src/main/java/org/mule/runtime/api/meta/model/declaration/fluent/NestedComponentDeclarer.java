@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @since 1.0
  */
 public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extends NestedComponentDeclaration>
-    extends ComponentDeclarer<T, D>  {
+    extends ComponentDeclarer<T, D> {
 
   /**
    * Creates a new instance

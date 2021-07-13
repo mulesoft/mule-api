@@ -116,6 +116,216 @@
           "methodName": "<init>",
           "elementKind": "constructor",
           "justification": "Keeping the original constructor will breach the contract between actingParameters and parameters (which are an extended and augmented collection of actingParameters). The class is annotated with @NoInstantiate, so it allows us to remove that constructor without breaking backward compatibility."
+        },
+        {
+          "code": "java.class.noLongerImplementsInterface",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "interface": "org.mule.runtime.api.meta.model.declaration.fluent.HasModelProperties<org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ComponentDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.noLongerImplementsInterface",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer",
+          "interface": "org.mule.runtime.api.meta.model.declaration.fluent.HasModelProperties<org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConstructDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.noLongerImplementsInterface",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "interface": "org.mule.runtime.api.meta.model.declaration.fluent.HasModelProperties<org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ExecutableComponentDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestableElementDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestableElementDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestableElementDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedRouteDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedRouteDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedRouteDeclaration",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.noLongerImplementsInterface",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer",
+          "interface": "org.mule.runtime.api.meta.model.declaration.fluent.HasModelProperties<org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "OperationDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.class.noLongerImplementsInterface",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer",
+          "interface": "org.mule.runtime.api.meta.model.declaration.fluent.HasModelProperties<org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "SourceDeclarer",
+          "elementKind": "class",
+          "justification": "False positive due to bogus generic declaration"
         }
       ]
     }
