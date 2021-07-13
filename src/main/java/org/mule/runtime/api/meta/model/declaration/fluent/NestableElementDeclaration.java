@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.nested.NestableElementModel;
  *
  * @since 1.0
  */
-public class NestableElementDeclaration<T extends NestableElementDeclaration> extends ParameterizedDeclaration<T> {
+public class NestableElementDeclaration<T extends NestableElementDeclaration> extends ComponentDeclaration<T> {
 
   private boolean isRequired;
 
