@@ -43,14 +43,32 @@ public interface ComponentModelVisitor {
    */
   void visit(ConstructModel model);
 
+  /**
+   * Visits a {@link NestedComponentModel}
+   *
+   * @param model the visited object
+   * @since 1.4.0
+   */
   default void visit(NestedComponentModel model) {
 
   }
 
+  /**
+   * Visits a {@link NestedChainModel}
+   *
+   * @param model the visited object
+   * @since 1.4.0
+   */
   default void visit(NestedChainModel model) {
 
   }
 
+  /**
+   * Visits a {@link NestedRouteModel}
+   *
+   * @param model the visited object
+   * @since 1.4.0
+   */
   default void visit(NestedRouteModel model) {
 
   }
