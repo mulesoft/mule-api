@@ -332,6 +332,14 @@ public final class MuleSystemProperties {
   public static final String ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "entityResolver.failOnFirstError";
 
+  /**
+   * If set to true, profiling events will be produced according to MULE-19588.
+   *
+   * @since 4.4.0
+   */
+  public static final String ENABLE_DIAGNOSTICS_SERVICE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.diagnostics.service";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
