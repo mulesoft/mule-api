@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @since 1.0
  */
 public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extends NestedComponentDeclaration>
-    extends Declarer<D> implements HasModelProperties<T> {
+    extends ComponentDeclarer<T, D> {
 
   /**
    * Creates a new instance
@@ -41,8 +41,7 @@ public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extend
 
   @Override
   public T withModelProperty(ModelProperty modelProperty) {
-    declaration.addModelProperty(modelProperty);
-    return (T) this;
+    return super.withModelProperty(modelProperty);
   }
 
   /**
@@ -52,8 +51,11 @@ public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extend
    * @return {@code this} declarer
    */
   public T describedAs(String description) {
-    declaration.setDescription(description);
-    return (T) this;
+    return super.describedAs(description);
   }
 
+  @Override
+  public T withStereotype(StereotypeModel stereotype) {
+    return super.withStereotype(stereotype);
+  }
 }

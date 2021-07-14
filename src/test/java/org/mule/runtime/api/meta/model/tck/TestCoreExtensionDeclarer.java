@@ -10,6 +10,7 @@ import static org.mule.runtime.api.meta.Category.COMMUNITY;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
+import org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclarer;
 
 /**
  * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents an
@@ -50,7 +51,11 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
         .withXmlDsl(XmlDslModel.builder().build());
 
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
-    router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1).withChain();
+
+    NestedRouteDeclarer whenDeclaration = router.withRoute(WHEN_ROUTE_NAME);
+    whenDeclaration.withMinOccurs(1).withChain();
+    whenDeclaration.withComponent("errorHandler")
+        .onDefaultParameterGroup().withRequiredParameter("type").ofType(getStringType());
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain();
     router.withSemanticTerm("router");
     ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);

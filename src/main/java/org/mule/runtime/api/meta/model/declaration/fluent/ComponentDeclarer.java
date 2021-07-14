@@ -18,7 +18,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  */
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
-    implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer,
+    implements HasModelProperties<T>, HasNestedComponentsDeclarer,
     HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T>, HasSemanticTermsDeclarer<T> {
 
   /**
@@ -83,7 +83,7 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
   /**
    * Adds the given {@code stereotype}
    *
-   * @param stereotype a {@link org.mule.runtime.api.meta.model.stereotype.StereotypeModel}
+   * @param stereotype a {@link StereotypeModel}
    * @return {@code this} declarer
    */
   public T withStereotype(StereotypeModel stereotype) {
