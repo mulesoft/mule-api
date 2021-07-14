@@ -139,10 +139,10 @@ public enum MuleRuntimeFeature implements Feature {
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
 
   SET_VARIABLE_WITH_NULL_VALUE(
-  "If set to true, the set variable will create a variable even if the value is null",
-  "MULE-19586",
-  "4.4.0",
-  SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
+      "If set to true, the set variable will create a variable even if the value is null",
+      "MULE-19586",
+      "4.4.0",
+      SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
 
 
   private final String description;
