@@ -49,9 +49,7 @@ public interface ComponentModelVisitor {
    * @param model the visited object
    * @since 1.4.0
    */
-  default void visit(NestedComponentModel model) {
-
-  }
+  void visit(NestedComponentModel model);
 
   /**
    * Visits a {@link NestedChainModel}
@@ -59,9 +57,7 @@ public interface ComponentModelVisitor {
    * @param model the visited object
    * @since 1.4.0
    */
-  default void visit(NestedChainModel model) {
-
-  }
+  void visit(NestedChainModel model);
 
   /**
    * Visits a {@link NestedRouteModel}
@@ -69,7 +65,5 @@ public interface ComponentModelVisitor {
    * @param model the visited object
    * @since 1.4.0
    */
-  default void visit(NestedRouteModel model) {
-
-  }
+  void visit(NestedRouteModel model);
 }
