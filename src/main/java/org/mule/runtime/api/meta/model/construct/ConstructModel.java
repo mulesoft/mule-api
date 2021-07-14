@@ -11,8 +11,8 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 
 /**
- * An specialization of a {@link ComponentModel} that is not necessarily executable and optionally supports being declared as
- * a top level element
+ * An specialization of a {@link ComponentModel} that is not necessarily executable and optionally supports being declared as a
+ * top level element
  *
  * @since 1.0
  */
