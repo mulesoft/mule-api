@@ -9,11 +9,10 @@ package org.mule.runtime.api.meta.model.construct;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
-import org.mule.runtime.api.meta.model.ConnectableComponentModel;
 
 /**
- * An specialization of a {@link ComponentModel} that is not executable as an standalone component and depends on the composition
- * with {@link ConnectableComponentModel}s in order to act in an application.
+ * An specialization of a {@link ComponentModel} that is not necessarily executable and optionally supports being declared as
+ * a top level element
  *
  * @since 1.0
  */
