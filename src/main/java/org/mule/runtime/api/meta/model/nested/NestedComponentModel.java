@@ -21,14 +21,12 @@ import java.util.Set;
 public interface NestedComponentModel extends NestableElementModel {
 
   /**
+   * @return whether or not {@code this} element is required for its owner element
+   */
+  boolean isRequired();
+
+  /**
    * @return a {@link Set} with the {@link StereotypeModel}s that can be assigned to this nested element.
    */
   Set<StereotypeModel> getAllowedStereotypes();
-
-  /**
-   * Accepts a {@link NestableElementModelVisitor}
-   *
-   * @param visitor a {@link NestableElementModelVisitor}
-   */
-  void accept(NestableElementModelVisitor visitor);
 }
