@@ -338,7 +338,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0
    */
   public static final String SET_VARIABLE_WITH_NULL_VALUE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "setVariable.failOnFirstError";
+      SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
 
   static {
     // Maintain compatibility after fix for MULE-19406
