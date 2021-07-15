@@ -140,7 +140,7 @@ public enum MuleRuntimeFeature implements Feature {
 
   SET_VARIABLE_WITH_NULL_VALUE(
       "If set to true, the set variable will create a variable even if the value is null",
-      "MULE-19586",
+      "MULE-19443",
       "4.4.0",
       SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
 
