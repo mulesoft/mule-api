@@ -269,6 +269,14 @@ public final class MuleSystemProperties {
   public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
 
+  /**
+   * If set to true, the set variable will create a variable even if the value is null.
+   *
+   * @since 4.4.0
+   */
+  public static final String SET_VARIABLE_WITH_NULL_VALUE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");

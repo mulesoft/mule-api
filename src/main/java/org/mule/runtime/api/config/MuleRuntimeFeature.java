@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -96,7 +97,13 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_POLICY_ISOLATION(
       "If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
       "MULE-19226",
-      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY);
+      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
+
+  SET_VARIABLE_WITH_NULL_VALUE(
+      "If set to true, the set variable will create a variable even if the value is null",
+      "MULE-19443",
+      "4.4.0",
+      SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
 
   private final String description;
   private final String issueId;
