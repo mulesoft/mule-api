@@ -11,6 +11,15 @@
            "elementKind": "field",
            "justification": "MULE-19226: Policy not able to inject internal dependencies for artifacts that shares with the application"
          },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "SET_VARIABLE_WITH_NULL_VALUE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19443: Create variable even if null value is set"
+        },
          {
            "code": "java.field.constantValueChanged",
            "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
