@@ -12,7 +12,8 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
- * Service that provides resources for profiling. This is implemented by the runtime.
+ * Service that provides resources for profiling. This is implemented by the runtime. Different component can obtain a
+ * {@link ProfilingDataProducer} to begin emitting profiling data.
  *
  * @since 1.4
  */

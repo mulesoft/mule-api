@@ -11,7 +11,10 @@ import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 
 /**
- * A producer of profiling data. This should be implemented by the components that produce profiling data.
+ * A producer of profiling data.
+ * <p>
+ * This is a resource that can be obtained from a {@link ProfilingService}. Once it is acquired, it can be used to emit profiling
+ * data by invoking {@link #event(ProfilingEventContext)}.
  *
  * @param <T> the class that encapsulates the data for the profiling event context.
  * @since 1.4
@@ -20,7 +23,7 @@ import org.mule.api.annotation.NoImplement;
 public interface ProfilingDataProducer<T extends ProfilingEventContext> {
 
   /**
-   * Notifies a profiling event.
+   * Triggers a profiling event.
    *
    * @param profilerEventContext the {@link ProfilingEventContext} for the emitted event.
    */

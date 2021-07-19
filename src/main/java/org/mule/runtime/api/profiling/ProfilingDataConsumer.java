@@ -14,7 +14,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * A consumer of profiler data. This should be implemented for creating profiling data consumers.
+ * A consumer of profiling data represented by a {@link ProfilingEventContext}.
+ * <p>
+ * The implementation of this interface will be discovered by the Mule Runtime. Every time a profiling event included in the
+ * {@link #getProfilingEventTypes()} is triggered, the {@link #onProfilingEvent(String, ProfilingEventContext)} callback will be
+ * invoked if {@link #getEventContextFilter} returns true.
+ * <p>
+ * This is the class that should be implemented for consuming profiler data.
  *
  * @since 1.4
  */
@@ -30,7 +36,7 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   void onProfilingEvent(String profilingEventIdentifier, T profilingEventContext);
 
   /**
-   * @return the {@link ProfilingEventType} {@link ProfilingDataConsumer} will listen to.
+   * @return the {@link ProfilingEventType}'s the consumer will listen to.
    */
   Set<ProfilingEventType<T>> getProfilingEventTypes();
 

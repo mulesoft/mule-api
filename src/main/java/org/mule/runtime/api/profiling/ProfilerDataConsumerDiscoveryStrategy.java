@@ -8,22 +8,20 @@
 package org.mule.runtime.api.profiling;
 
 import org.mule.api.annotation.Experimental;
-import org.mule.api.annotation.NoImplement;
 
 import java.util.Set;
 
 /**
  * A strategy for discovering the available instances of {@link ProfilingDataConsumer}. The implementations of this interface
- * defines different ways of discovery by the runtime.
+ * defines different ways for the Mule Runtime to discover the {@link ProfilingDataConsumer}'s available in the environment.
  *
  * @since 1.4
  */
 @Experimental
-@NoImplement
 public interface ProfilerDataConsumerDiscoveryStrategy {
 
   /**
-   * Discovers the {@link ProfilingDataProducer} visible for the runtime.
+   * Discovers the {@link ProfilingDataProducer}'s.
    *
    * @param <S> the type for the {@link ProfilingDataConsumer}
    * @param <T> the type for the event context which will have the profiling event context data.
