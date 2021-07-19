@@ -341,7 +341,7 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
 
   /**
-   * If set to true, profiling events will be produced according to MULE-19588.
+   * If set to true, profiling events will be produced.
    *
    * @since 4.4.0
    */
