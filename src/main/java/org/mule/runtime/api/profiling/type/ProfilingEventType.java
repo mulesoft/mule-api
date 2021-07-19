@@ -15,6 +15,8 @@ import org.mule.runtime.api.profiling.ProfilingEventContext;
  * The profiling event type. This is implemented for defining profiling event types by the runtime
  *
  * @param <T> the {@link ProfilingEventContext} associated to the type.
+ *
+ * @since 1.4
  */
 @Experimental
 @NoImplement
