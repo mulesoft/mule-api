@@ -37,8 +37,6 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   /**
    * @return the selector to indicate another filter for the events the data consumer will consume.
    */
-  default Predicate<T> selector() {
-    return ctx -> true;
-  }
+  Predicate<T> selector();
 
 }
