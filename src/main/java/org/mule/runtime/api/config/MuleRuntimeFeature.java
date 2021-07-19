@@ -140,7 +140,7 @@ public enum MuleRuntimeFeature implements Feature {
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
 
   /**
-   * If set to true, profiling events will be produced according.
+   * If set to true, profiling events will be produced.
    *
    * @since 4.4.0
    */
