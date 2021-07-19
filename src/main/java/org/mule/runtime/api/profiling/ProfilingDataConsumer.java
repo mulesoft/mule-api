@@ -35,7 +35,9 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   Set<ProfilingEventType<T>> getProfilingEventTypes();
 
   /**
-   * @return the selector to indicate another filter for the events the data consumer will consume.
+   * @return a selector that can be used to indicate a filter that will be applied to all the produced profiling data. If the
+   *         predicate returns false, the profiling event will not be notified.
+   *         ({@link #onProfilingEvent(String, ProfilingEventContext)})
    */
   Predicate<T> getEventContextFilter();
 
