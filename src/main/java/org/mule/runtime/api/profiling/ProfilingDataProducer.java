@@ -8,7 +8,6 @@
 package org.mule.runtime.api.profiling;
 
 import org.mule.api.annotation.Experimental;
-import org.mule.api.annotation.NoImplement;
 
 /**
  * A producer of profiling data.
