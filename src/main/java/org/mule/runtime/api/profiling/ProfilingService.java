@@ -18,6 +18,7 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
  * @since 1.4
  */
 @Experimental
+@NoImplement
 public interface ProfilingService {
 
   /**
