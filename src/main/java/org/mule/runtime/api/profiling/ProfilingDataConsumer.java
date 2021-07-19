@@ -24,19 +24,19 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   /**
    * Callback for consuming the profiling event.
    *
-   * @param profilerEventIdentifier the profiling event id.
-   * @param profilerEventContext    the profiler event context.
+   * @param profilingEventIdentifier the profiling event id.
+   * @param profilingEventContext    the profiler event context.
    */
-  void onProfilingEvent(String profilerEventIdentifier, T profilerEventContext);
+  void onProfilingEvent(String profilingEventIdentifier, T profilingEventContext);
 
   /**
    * @return the {@link ProfilingEventType} {@link ProfilingDataConsumer} will listen to.
    */
-  Set<ProfilingEventType<T>> profilerEventTypes();
+  Set<ProfilingEventType<T>> getProfilingEventTypes();
 
   /**
    * @return the selector to indicate another filter for the events the data consumer will consume.
    */
-  Predicate<T> selector();
+  Predicate<T> getEventContextFilter();
 
 }
