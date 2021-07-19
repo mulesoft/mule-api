@@ -14,7 +14,7 @@ import org.mule.api.annotation.NoImplement;
  * A producer of profiling data. This should be implemented by the components that produce profiling data.
  *
  * @param <T> the class that encapsulates the data for the profiling event context.
- * @since 4.4
+ * @since 1.4
  */
 @Experimental
 public interface ProfilingDataProducer<T extends ProfilingEventContext> {

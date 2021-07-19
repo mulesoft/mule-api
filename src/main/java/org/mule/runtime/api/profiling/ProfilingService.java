@@ -14,7 +14,7 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
 /**
  * Service that provides resources for profiling. This is implemented by the runtime.
  *
- * @since 4.4
+ * @since 1.4
  */
 @Experimental
 @NoImplement

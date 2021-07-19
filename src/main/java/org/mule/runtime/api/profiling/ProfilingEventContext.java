@@ -17,7 +17,7 @@ import org.mule.api.annotation.Experimental;
 public interface ProfilingEventContext {
 
   /**
-   * @return the timestamp.
+   * @return the timestamp that corresponds to when the profiling event is triggered.
    */
   long getTimestamp();
 }
