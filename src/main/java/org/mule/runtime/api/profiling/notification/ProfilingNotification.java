@@ -15,8 +15,8 @@ import org.mule.runtime.api.profiling.ProfilingEventContext;
 import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
- * A {@link Notification} that produces data for troubleshooting.
- * This is extended for using notifications for producing profiling data by the runtime.
+ * A {@link Notification} that produces data for troubleshooting. This is extended for using notifications for producing profiling
+ * data by the runtime.
  *
  * @since 4.4
  */

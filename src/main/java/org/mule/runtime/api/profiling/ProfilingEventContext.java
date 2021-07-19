@@ -10,8 +10,8 @@ package org.mule.runtime.api.profiling;
 import org.mule.api.annotation.Experimental;
 
 /**
- * The general event context to encapsulate profiling data.
- * This should be implemented by the components that produce profiling data.
+ * The general event context to encapsulate profiling data. This should be implemented by the components that produce profiling
+ * data.
  */
 @Experimental
 public interface ProfilingEventContext {

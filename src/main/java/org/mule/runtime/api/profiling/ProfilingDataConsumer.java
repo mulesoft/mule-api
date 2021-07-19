@@ -14,8 +14,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 /**
- * A consumer of profiler data.
- * This should be implemented for creating profiling data consumers.
+ * A consumer of profiler data. This should be implemented for creating profiling data consumers.
  *
  * @since 4.4
  */

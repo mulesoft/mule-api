@@ -12,8 +12,8 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.notification.NotificationListener;
 
 /**
- * An interface for {@link ProfilingNotification} listeners.
- * This is implemented by the runtime to use notifications for producing profiling data.
+ * An interface for {@link ProfilingNotification} listeners. This is implemented by the runtime to use notifications for producing
+ * profiling data.
  *
  * @param <T> extension of {@link ProfilingNotification}
  */

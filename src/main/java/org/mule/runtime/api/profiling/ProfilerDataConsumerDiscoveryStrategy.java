@@ -13,8 +13,8 @@ import org.mule.api.annotation.NoImplement;
 import java.util.Set;
 
 /**
- * A strategy for discovering the available instances of {@link ProfilingDataConsumer}.
- * The implementations of this interface defines different ways of discovery by the runtime.
+ * A strategy for discovering the available instances of {@link ProfilingDataConsumer}. The implementations of this interface
+ * defines different ways of discovery by the runtime.
  *
  * @since 4.4
  */
