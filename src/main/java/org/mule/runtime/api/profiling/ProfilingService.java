@@ -22,7 +22,7 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
 public interface ProfilingService {
 
   /**
-   * Returns a data producer to notify events for a profiler event type.
+   * Returns a data producer to notify events for a {@link ProfilingEventContext}.
    *
    * @param profilingEventType the {@link ProfilingEventType} for the {@link ProfilingDataProducer}
    * @return the corresponding {@link ProfilingDataProducer}
