@@ -13,7 +13,8 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
  * Service that provides resources for profiling. This is implemented by the Runtime. Different components can inject this service
- * and obtain a {@link ProfilingDataProducer} to begin emitting profiling data. For example:
+ * and register a {@link ProfilingEventContext} or obtain a {@link ProfilingDataProducer} to begin emitting profiling data. For
+ * example:
  *
  * <code>
  *    &#64;Inject

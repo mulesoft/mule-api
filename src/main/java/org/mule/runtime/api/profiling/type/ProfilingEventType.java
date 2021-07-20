@@ -10,20 +10,20 @@ package org.mule.runtime.api.profiling.type;
 import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.profiling.ProfilingDataProducer;
 import org.mule.runtime.api.profiling.ProfilingEventContext;
+import org.mule.runtime.api.profiling.ProfilingService;
 
 /**
  * The profiling event type.
  * <p>
  * A component (a connector, the Runtime itself) may register this profiling event type by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingService#register(ProfilingEventType, ProfilingDataProducer)}.
+ * {@link ProfilingService#register(ProfilingEventType, ProfilingDataProducer)}.
  * <p>
- * Once registered, it can be obtained by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingService#getProfilingDataProducer(ProfilingEventType)}.
+ * Once registered, it can be obtained by invoking {@link ProfilingService#getProfilingDataProducer(ProfilingEventType)}.
  * <p>
- * New profiling data can be produced by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingDataProducer#event(ProfilingEventContext)}.
+ * New profiling data can be produced by invoking {@link ProfilingDataProducer#event(ProfilingEventContext)}.
  *
  * @param <T> the {@link ProfilingEventContext} associated to the type.
+ * @see ProfilingService
  * @since 1.4
  */
 @Experimental
