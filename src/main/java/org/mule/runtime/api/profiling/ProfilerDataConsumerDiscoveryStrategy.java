@@ -8,7 +8,6 @@
 package org.mule.runtime.api.profiling;
 
 import org.mule.api.annotation.Experimental;
-import org.mule.api.annotation.NoImplement;
 
 import java.util.Set;
 
@@ -21,7 +20,6 @@ import java.util.Set;
  * @since 1.4
  */
 @Experimental
-@NoImplement
 public interface ProfilerDataConsumerDiscoveryStrategy {
 
   /**
