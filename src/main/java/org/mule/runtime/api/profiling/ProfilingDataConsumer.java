@@ -32,10 +32,10 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   /**
    * Consumes a profiling event.
    *
-   * @param profilingEventIdentifier the profiling event id.
-   * @param profilingEventContext    the profiler event context.
+   * @param profilingEventType    the {@link ProfilingEventType}.
+   * @param profilingEventContext the profiler event context.
    */
-  void onProfilingEvent(String profilingEventIdentifier, T profilingEventContext);
+  void onProfilingEvent(ProfilingEventType<T> profilingEventType, T profilingEventContext);
 
   /**
    * @return the {@link ProfilingEventType}'s the consumer will listen to.
@@ -45,7 +45,7 @@ public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
   /**
    * @return a selector that can be used to indicate a filter that will be applied to all the produced profiling data. If the
    *         predicate returns false, the profiling event will not be notified.
-   *         ({@link #onProfilingEvent(String, ProfilingEventContext)})
+   *         ({@link #onProfilingEvent(ProfilingEventType, ProfilingEventContext)})
    */
   Predicate<T> getEventContextFilter();
 
