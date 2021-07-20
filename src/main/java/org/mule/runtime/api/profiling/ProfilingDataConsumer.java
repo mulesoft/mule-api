@@ -18,7 +18,7 @@ import java.util.function.Predicate;
  * <p>
  * The implementation of this interface will be discovered by the Mule Runtime through a
  * {@link ProfilerDataConsumerDiscoveryStrategy}. Every time a profiling event included in the {@link #getProfilingEventTypes()}
- * is triggered, {@link #onProfilingEvent(String, ProfilingEventContext)} will be invoked if {@link #getEventContextFilter}
+ * is triggered, {@link #onProfilingEvent(ProfilingEventType, ProfilingEventContext)} will be invoked if {@link #getEventContextFilter}
  * returns true.
  * <p>
  * This is the class that should be implemented for consuming profiler data.

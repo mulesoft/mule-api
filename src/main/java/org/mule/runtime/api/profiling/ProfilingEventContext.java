@@ -8,11 +8,12 @@
 package org.mule.runtime.api.profiling;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
  * The general event context to encapsulate profiling data. This should be implemented by the components that produce profiling
  * data. When a profiling event is triggered, an implementation of this class is passed to
- * {@link ProfilingDataConsumer#onProfilingEvent(String, ProfilingEventContext).
+ * {@link ProfilingDataConsumer#onProfilingEvent(ProfilingEventType, ProfilingEventContext)}.
  *
  * @since 1.4
  */
