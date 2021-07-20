@@ -30,7 +30,7 @@ public interface ProfilingService {
   <T extends ProfilingEventContext> ProfilingDataProducer<T> getProfilingDataProducer(ProfilingEventType<T> profilingEventType);
 
   /**
-   * register a {@link ProfilingEventType} associated to a {@link ProfilingDataProducer}
+   * Registers a {@link ProfilingEventType} associated to a {@link ProfilingDataProducer}
    *
    * @param profilingEventType the {@link ProfilingEventType} to be registered.
    * @param dataProducer       the {@link ProfilingDataProducer} to be associated.
