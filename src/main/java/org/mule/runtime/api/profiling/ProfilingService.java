@@ -12,8 +12,8 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
- * Service that provides resources for profiling. This is implemented by the Runtime. Different components can inject this service
- * and register a {@link ProfilingEventContext} or obtain a {@link ProfilingDataProducer} to begin emitting profiling data. For
+ * Service that provides profiling resources. This is implemented by the Runtime. Different components can inject this service and
+ * register a {@link ProfilingEventContext} or obtain a {@link ProfilingDataProducer} to begin emitting profiling data. For
  * example:
  *
  * <code>
@@ -38,20 +38,22 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
 public interface ProfilingService {
 
   /**
-   * Returns a data producer to notify events for a {@link ProfilingEventContext}.
+   * Returns a previously registered {@link ProfilingDataProducer} that can be used to emit profiling events of a certain
+   * {@link ProfilingEventType}.
    *
-   * @param profilingEventType the {@link ProfilingEventType} for the {@link ProfilingDataProducer}
+   * @param profilingEventType the {@link ProfilingEventType} that will be emitted.
    * @return the corresponding {@link ProfilingDataProducer}
    */
   <T extends ProfilingEventContext> ProfilingDataProducer<T> getProfilingDataProducer(ProfilingEventType<T> profilingEventType);
 
   /**
-   * Registers a {@link ProfilingEventType} associated to a {@link ProfilingDataProducer}
+   * Registers a {@link ProfilingDataProducer} that can be obtained to emit profiling events of a certain
+   * {@link ProfilingEventType}.
    *
-   * @param profilingEventType the {@link ProfilingEventType} to be registered.
-   * @param dataProducer       the {@link ProfilingDataProducer} to be associated.
+   * @param profilingEventType    the {@link ProfilingEventType} that the {@link ProfilingDataProducer} will emit.
+   * @param profilingDataProducer the {@link ProfilingDataProducer} that will be registered.
    */
-  <T extends ProfilingEventContext> void register(ProfilingEventType<T> profilingEventType,
-                                                  ProfilingDataProducer<T> dataProducer);
+  <T extends ProfilingEventContext> void registerProfilingDataProducer(ProfilingEventType<T> profilingEventType,
+                                                                       ProfilingDataProducer<T> profilingDataProducer);
 
 }

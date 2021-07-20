@@ -8,11 +8,14 @@
 package org.mule.runtime.api.profiling;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.runtime.api.profiling.type.ProfilingEventType;
 
 /**
- * A producer of profiling data.
+ * A producer of profiling data represented by a {@link ProfilingEventContext}.
  * <p>
- * This is a resource that can be obtained from a {@link ProfilingService}. Once it is acquired, it can be used to emit profiling
+ * A {@link ProfilingDataProducer} must be firstly registered via
+ * {@link ProfilingService#registerProfilingDataProducer(ProfilingEventType, ProfilingDataProducer)} and then can be obtained via
+ * {@link ProfilingService#getProfilingDataProducer(ProfilingEventType)}. Once it is obtained, it can be used to emit profiling
  * data by invoking {@link #event(ProfilingEventContext)}.
  *
  * @param <T> the class that encapsulates the data for the profiling event context.
@@ -23,7 +26,7 @@ import org.mule.api.annotation.Experimental;
 public interface ProfilingDataProducer<T extends ProfilingEventContext> {
 
   /**
-   * Triggers a profiling event.
+   * Triggers a profiling event. Implementations must either be stateless or designed to support concurrent invocations.
    *
    * @param profilerEventContext the {@link ProfilingEventContext} for the emitted event.
    */

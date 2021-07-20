@@ -28,7 +28,7 @@ import java.util.function.Predicate;
 public interface ProfilingDataConsumer<T extends ProfilingEventContext> {
 
   /**
-   * Callback for consuming the profiling event.
+   * Callback for consuming the profiling events.
    *
    * @param profilingEventIdentifier the profiling event id.
    * @param profilingEventContext    the profiler event context.
