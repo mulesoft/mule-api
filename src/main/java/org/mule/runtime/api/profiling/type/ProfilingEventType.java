@@ -25,7 +25,7 @@ public interface ProfilingEventType<T extends ProfilingEventContext> {
   /**
    * @return the identifier for the profiling event type.
    */
-  String getProfilingEventTypeName();
+  String getProfilingEventTypeIdentifier();
 
   /**
    * @return the namespace of the module where the profiling event type is defined. For instance, for runtime profiling events the
