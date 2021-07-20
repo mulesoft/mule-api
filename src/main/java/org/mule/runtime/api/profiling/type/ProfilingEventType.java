@@ -13,16 +13,7 @@ import org.mule.runtime.api.profiling.ProfilingEventContext;
 import org.mule.runtime.api.profiling.ProfilingService;
 
 /**
- * The profiling event type.
- * <p>
- * A component (a connector, the Runtime itself) may register this profiling event type by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingService#registerProfilingDataProducer(ProfilingEventType, ProfilingDataProducer)}.
- * <p>
- * Once registered, it can be obtained by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingService#getProfilingDataProducer(ProfilingEventType)}.
- * <p>
- * New profiling data can be produced by invoking
- * {@link org.mule.runtime.api.profiling.ProfilingDataProducer#event(ProfilingEventContext)}.
+ * The profiling event type. A {@link ProfilingEventType} along with a {@link ProfilingEventContext} represents a profiling event.
  *
  * @param <T> the {@link ProfilingEventContext} associated to the type.
  * @see ProfilingService
@@ -32,18 +23,14 @@ import org.mule.runtime.api.profiling.ProfilingService;
 public interface ProfilingEventType<T extends ProfilingEventContext> {
 
   /**
-   * @return the profiling event type name.
+   * @return the identifier for the profiling event type.
    */
   String getProfilingEventTypeName();
 
   /**
-   * @return the profiler event type namespace.
+   * @return the namespace of the module where the profiling event type is defined. For instance, for runtime profiling events the
+   *         namespace is core.
    */
   String getProfilerEventTypeNamespace();
-
-  /**
-   * @return the numeric id for the profiling event type.
-   */
-  long getProfilingEventTypeId();
 
 }

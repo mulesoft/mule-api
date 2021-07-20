@@ -15,7 +15,7 @@ import java.util.Set;
  * A strategy for discovering the available instances of {@link ProfilingDataConsumer}. The implementations of this interface
  * defines different ways for the Mule Runtime to discover the {@link ProfilingDataConsumer}'s available in the environment.
  * <p>
- * Different environments can use different discoveries strategies (CH may use a different strategy).
+ * Different environments can use different discovery strategies.
  *
  * @since 1.4
  */
