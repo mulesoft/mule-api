@@ -16,6 +16,7 @@ import org.mule.api.annotation.Experimental;
  * data by invoking {@link #event(ProfilingEventContext)}.
  *
  * @param <T> the class that encapsulates the data for the profiling event context.
+ * @see ProfilingService
  * @since 1.4
  */
 @Experimental
