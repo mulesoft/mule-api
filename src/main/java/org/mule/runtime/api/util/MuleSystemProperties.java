@@ -340,6 +340,14 @@ public final class MuleSystemProperties {
   public static final String SET_VARIABLE_WITH_NULL_VALUE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
 
+  /**
+   * If set to true, profiling events will be produced.
+   *
+   * @since 4.4.0
+   */
+  public static final String ENABLE_PROFILING_SERVICE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.diagnostics.service";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");

@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
@@ -138,12 +139,22 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0",
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
 
+  /**
+   * If set to true, profiling events will be produced.
+   *
+   * @since 4.4.0
+   */
+  ENABLE_PROFILING_SERVICE(
+      "If set to true, profiling events will be produced",
+      "MULE-19588",
+      "4.5.0",
+      ENABLE_PROFILING_SERVICE_PROPERTY),
+
   SET_VARIABLE_WITH_NULL_VALUE(
       "If set to true, the set variable will create a variable even if the value is null",
       "MULE-19443",
       "4.4.0",
       SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
-
 
   private final String description;
   private final String issueId;
