@@ -16,7 +16,7 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
  * A {@link ProfilingDataProducer} must be firstly registered via
  * {@link ProfilingService#registerProfilingDataProducer(ProfilingEventType, ProfilingDataProducer)} and then can be obtained via
  * {@link ProfilingService#getProfilingDataProducer(ProfilingEventType)}. Once it is obtained, it can be used to emit profiling
- * data by invoking {@link #trigggerProfilingEvent(ProfilingEventContext)}.
+ * data by invoking {@link #triggerProfilingEvent(ProfilingEventContext)}.
  *
  * @param <T> the class that encapsulates the data for the profiling event context.
  * @see ProfilingService
@@ -30,6 +30,6 @@ public interface ProfilingDataProducer<T extends ProfilingEventContext> {
    *
    * @param profilerEventContext the {@link ProfilingEventContext} for the emitted event.
    */
-  void trigggerProfilingEvent(T profilerEventContext);
+  void triggerProfilingEvent(T profilerEventContext);
 
 }
