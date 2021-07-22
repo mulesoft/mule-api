@@ -16,15 +16,9 @@ import org.mule.runtime.api.meta.model.nested.NestableElementModel;
  */
 public class NestableElementDeclaration<T extends NestableElementDeclaration> extends ComponentDeclaration<T> {
 
-  private boolean isRequired;
-
-  public boolean isRequired() {
-    return isRequired;
-  }
-
-  public void setRequired(boolean required) {
-    isRequired = required;
-  }
+  private boolean isRequired = false;
+  private int minOccurs = 0;
+  private Integer maxOccurs;
 
   /**
    * Creates a new instance
@@ -33,5 +27,33 @@ public class NestableElementDeclaration<T extends NestableElementDeclaration> ex
    */
   public NestableElementDeclaration(String name) {
     super(name);
+  }
+
+  public int getMinOccurs() {
+    return minOccurs;
+  }
+
+  public void setMinOccurs(int minOccurs) {
+    this.minOccurs = minOccurs;
+    isRequired = minOccurs > 0;
+  }
+
+  public boolean isRequired() {
+    return isRequired;
+  }
+
+  public void setRequired(boolean required) {
+    isRequired = required;
+    if (!required) {
+      minOccurs = 0;
+    }
+  }
+
+  public Integer getMaxOccurs() {
+    return maxOccurs;
+  }
+
+  public void setMaxOccurs(Integer maxOccurs) {
+    this.maxOccurs = maxOccurs;
   }
 }
