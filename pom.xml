@@ -122,7 +122,6 @@
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <guavaVersion>25.1-jre</guavaVersion>
         <caffeineVersion>2.8.0</caffeineVersion>
         <commonsLangVersion>3.7</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
@@ -139,7 +138,20 @@
         <muleApiAnnotationsVersion>1.2.1-SNAPSHOT</muleApiAnnotationsVersion>
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
+        <muleBomVersion>4.3.1-SNAPSHOT</muleBomVersion>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mule</groupId>
+                <artifactId>mule-runtime-bom</artifactId>
+                <version>${muleBomVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -186,7 +198,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guavaVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
