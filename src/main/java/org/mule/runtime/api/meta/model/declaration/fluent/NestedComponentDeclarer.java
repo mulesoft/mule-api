@@ -54,8 +54,37 @@ public class NestedComponentDeclarer<T extends NestedComponentDeclarer, D extend
     return super.describedAs(description);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public T withStereotype(StereotypeModel stereotype) {
     return super.withStereotype(stereotype);
+  }
+
+  /**
+   * Sets the minimum amount of times that this component can be present on the owning one.
+   * <p>
+   * Setting this to zero means that the element becomes optional.
+   *
+   * @param minOccurs a value equal or greater than zero
+   * @return {@code this} declarer
+   */
+  public NestedComponentDeclarer<T, D> withMinOccurs(int minOccurs) {
+    declaration.setMinOccurs(minOccurs);
+    return this;
+  }
+
+  /**
+   * Sets the maximum amount of times that this component can be present on the owning one.
+   * <p>
+   * Setting this to {@code null} means that repetitions are unbounded.
+   *
+   * @param maxOccurs a value greater or equal than zero
+   * @return {@code this} declarer
+   */
+  public NestedComponentDeclarer<T, D> withMaxOccurs(Integer maxOccurs) {
+    declaration.setMaxOccurs(maxOccurs);
+    return this;
   }
 }

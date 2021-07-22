@@ -136,5 +136,4 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
     declaration.setDescription(description);
     return this;
   }
-
 }
