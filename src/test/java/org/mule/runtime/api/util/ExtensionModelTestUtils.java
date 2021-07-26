@@ -11,6 +11,9 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.ComponentModelVisitor;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.construct.ConstructModel;
+import org.mule.runtime.api.meta.model.nested.NestedChainModel;
+import org.mule.runtime.api.meta.model.nested.NestedComponentModel;
+import org.mule.runtime.api.meta.model.nested.NestedRouteModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 
@@ -38,6 +41,12 @@ public final class ExtensionModelTestUtils {
           visitor.visit((OperationModel) component);
         } else if (component instanceof SourceModel) {
           visitor.visit((SourceModel) component);
+        } else if (component instanceof NestedComponentModel) {
+          visitor.visit((NestedComponentModel) component);
+        } else if (component instanceof NestedChainModel) {
+          visitor.visit((NestedChainModel) component);
+        } else if (component instanceof NestedRouteModel) {
+          visitor.visit((NestedRouteModel) component);
         } else {
           throw new IllegalArgumentException("Unsupported visitable mock of class " + component.getClass().getName());
         }
