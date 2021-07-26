@@ -8,7 +8,6 @@
 package org.mule.runtime.api.profiling.type;
 
 import org.mule.api.annotation.Experimental;
-import org.mule.runtime.api.profiling.ProfilingDataProducer;
 import org.mule.runtime.api.profiling.ProfilingEventContext;
 import org.mule.runtime.api.profiling.ProfilingService;
 
