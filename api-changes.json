@@ -1,4 +1,48 @@
 {
+  "1.5.0": {
+    "revapi": {
+      "ignore": [
+       {
+         "code": "java.class.removed",
+         "old": "interface org.mule.runtime.api.profiling.ProfilerDataConsumerDiscoveryStrategy",
+         "package": "org.mule.runtime.api.profiling",
+         "classSimpleName": "ProfilerDataConsumerDiscoveryStrategy",
+         "elementKind": "interface",
+         "justification": "Experimental API - Name Changed"
+       },
+       {
+         "code": "java.method.removed",
+         "old": "method java.lang.String org.mule.runtime.api.profiling.type.ProfilingEventType<T extends org.mule.runtime.api.profiling.ProfilingEventContext>::getProfilerEventTypeNamespace()",
+         "package": "org.mule.runtime.api.profiling.type",
+         "classSimpleName": "ProfilingEventType",
+         "methodName": "getProfilerEventTypeNamespace",
+         "elementKind": "method",
+         "justification": "Experimental API - Name Changed"
+       },
+       {
+         "code": "java.method.addedToInterface",
+         "new": "method java.lang.String org.mule.runtime.api.profiling.type.ProfilingEventType<T extends org.mule.runtime.api.profiling.ProfilingEventContext>::getProfilingEventTypeNamespace()",
+         "package": "org.mule.runtime.api.profiling.type",
+         "classSimpleName": "ProfilingEventType",
+         "methodName": "getProfilingEventTypeNamespace",
+         "elementKind": "method",
+         "justification": "Experimental API - Name Changed"
+       },
+       {
+         "code": "java.field.constantValueChanged",
+         "old": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY",
+         "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY",
+         "oldValue": "mule.enable.diagnostics.service",
+         "newValue": "mule.enable.profiling.service",
+         "package": "org.mule.runtime.api.util",
+         "classSimpleName": "MuleSystemProperties",
+         "fieldName": "ENABLE_PROFILING_SERVICE_PROPERTY",
+         "elementKind": "field",
+         "justification": "Experimental API - Name Changed"
+       }
+      ]
+    }
+  },
   "1.4.0": {
     "revapi": {
       "ignore": [
