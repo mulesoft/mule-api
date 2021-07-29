@@ -8,7 +8,6 @@
 package org.mule.runtime.api.profiling.type;
 
 import org.mule.api.annotation.Experimental;
-import org.mule.runtime.api.profiling.ProfilingDataProducer;
 import org.mule.runtime.api.profiling.ProfilingEventContext;
 import org.mule.runtime.api.profiling.ProfilingService;
 
@@ -31,6 +30,6 @@ public interface ProfilingEventType<T extends ProfilingEventContext> {
    * @return the namespace of the module where the profiling event type is defined. For instance, for runtime profiling events the
    *         namespace is core.
    */
-  String getProfilerEventTypeNamespace();
+  String getProfilingEventTypeNamespace();
 
 }

@@ -20,7 +20,7 @@ import java.util.Set;
  * @since 1.4
  */
 @Experimental
-public interface ProfilerDataConsumerDiscoveryStrategy {
+public interface ProfilingDataConsumerDiscoveryStrategy {
 
   /**
    * Discovers the {@link ProfilingDataProducer}'s.
