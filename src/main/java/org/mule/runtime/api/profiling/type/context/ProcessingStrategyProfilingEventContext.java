@@ -8,6 +8,8 @@
 package org.mule.runtime.api.profiling.type.context;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.profiling.type.ProcessingStrategyProfilingEventType;
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.profiling.ProfilingEventContext;
 import org.mule.runtime.api.profiling.type.ProfilingEventType;
@@ -15,10 +17,13 @@ import org.mule.runtime.api.profiling.type.ProfilingEventType;
 import java.util.Optional;
 
 /**
- * {@link ProfilingEventContext} for processing strategy related {@link ProfilingEventType}'s.
+ * {@link ProfilingEventContext} for processing strategy related {@link ProfilingEventType}'s. This defines the data associated to
+ * processing strategies profiling event types.
  *
+ * @see ProcessingStrategyProfilingEventType
  * @since 4.4
  */
+@NoImplement
 @Experimental
 public interface ProcessingStrategyProfilingEventContext extends ProfilingEventContext {
 

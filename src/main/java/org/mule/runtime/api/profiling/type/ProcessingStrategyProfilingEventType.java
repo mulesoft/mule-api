@@ -10,17 +10,21 @@ package org.mule.runtime.api.profiling.type;
 import static java.util.Objects.requireNonNull;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.runtime.api.profiling.ProfilingDataConsumer;
 import org.mule.runtime.api.profiling.type.context.ProcessingStrategyProfilingEventContext;
 
 import java.util.Objects;
 
 /**
- * A {@link ProfilingEventType} for processing strategies.
+ * A {@link ProfilingEventType} for processing strategies. A {@link ProfilingDataConsumer} can be created to consume the data
+ * associated to these profiling events.
  *
+ * @see ProfilingEventType
+ * @see ProfilingDataConsumer
  * @since 4.4
  */
 @Experimental
-public class ProcessingStrategyProfilingEventType implements ProfilingEventType<ProcessingStrategyProfilingEventContext> {
+public final class ProcessingStrategyProfilingEventType implements ProfilingEventType<ProcessingStrategyProfilingEventContext> {
 
   private final String profilingEventTypeIdentifier;
   private final String profilingEventTypeNamespace;
