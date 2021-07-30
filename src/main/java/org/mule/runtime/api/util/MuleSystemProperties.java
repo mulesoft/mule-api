@@ -346,7 +346,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0
    */
   public static final String ENABLE_PROFILING_SERVICE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "enable.diagnostics.service";
+      SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
 
   static {
     // Maintain compatibility after fix for MULE-19406
