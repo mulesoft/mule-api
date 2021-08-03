@@ -17,8 +17,6 @@ import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_N
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 
-import org.mule.runtime.api.util.MuleSystemProperties;
-
 import java.util.Optional;
 
 /**
@@ -57,23 +55,22 @@ import java.util.Optional;
  *    }
  * </pre>
  *
- * @since 4.4.0 4.3.1
+ * @since 4.4.0 4.3.0-202102
  */
 public enum MuleRuntimeFeature implements Feature {
 
   /**
-   * An application shouldn't override reserved properties, but it was possible until MULE-17659. This behaviour has to be fixed
-   * by default to any application developed for 4.3.0+ Runtime but can be overridden by setting
-   * {@link MuleSystemProperties#HONOUR_RESERVED_PROPERTIES_PROPERTY} System Property.
+   * When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).
    *
-   * @since 4.4.0, 4.3.1
+   * @since 4.4.0, 4.3.0-202102
    */
-  HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
-      "MULE-19038", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+  HONOUR_RESERVED_PROPERTIES(
+      "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).",
+      "MULE-17659", "4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
-   * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
-   * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
+   * If set to true, then DataWeave will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that
+   * when enabled, this can make {@code error.cause} return a different exception.
    *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
