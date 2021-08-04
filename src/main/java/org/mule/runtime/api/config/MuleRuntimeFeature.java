@@ -38,7 +38,7 @@ import java.util.Optional;
  *     {@code /}**
  *       * When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).
  *       *
- *       * @since 4.4.0, 4.3.0-202103
+ *       * @since 4.4.0, 4.3.0-202102
  *       *
  *      {@code *}/
  *      HONOUR_RESERVED_PROPERTIES("When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).",
