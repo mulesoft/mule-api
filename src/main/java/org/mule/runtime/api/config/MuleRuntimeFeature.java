@@ -120,13 +120,12 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located.
-   * Otherwise, it will only fail if such application makes use of the namespace that such schema defines instead of just
-   * declaring it.
+   * Otherwise, it will fail if the application also makes use of the namespace that such schema is bound to.
    *
    * @since 4.4.0
    */
   ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
-      "When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. Otherwise, it will only fail if such application makes use of the namespace that such schema defines instead of just declaring it.",
+      "When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. Otherwise, it will fail if the application also makes use of the namespace that such schema is bound to.",
       "EE-7827",
       "4.4.0",
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
@@ -137,13 +136,18 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   ENABLE_PROFILING_SERVICE(
-      "When enabled, profiling data will be emitted",
+      "When enabled, profiling data will be emitted.",
       "MULE-19588",
       "4.5.0",
       ENABLE_PROFILING_SERVICE_PROPERTY),
 
+  /**
+   * When enabled, the Set Variable component will create a variable even if it's value is null.
+   *
+   * @since 4.4.0
+   */
   SET_VARIABLE_WITH_NULL_VALUE(
-      "When enabled, the set variable will create a variable even if the value is null",
+      "When enabled, the Set Variable component will create a variable even if it's value is null.",
       "MULE-19443",
       "4.4.0",
       SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
