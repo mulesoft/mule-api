@@ -36,8 +36,9 @@ public interface Feature {
   String getSince();
 
   /**
-   * A comma-separated list of versions (must include all the different minors) since this feature will be enabled by default.
-   * Any relevant artifact (application, policy... etc) with a minMuleVersion matching this list will have this {@link Feature} enabled by default.
+   * A comma-separated list of versions (must include all the different minors) since this feature will be enabled by default. Any
+   * relevant artifact (application, policy... etc) with a minMuleVersion matching this list will have this {@link Feature}
+   * enabled by default.
    *
    * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0-202103"</code>.
    * @since 4.4.0
@@ -47,8 +48,8 @@ public interface Feature {
   /**
    * <p>
    * System Property name to be used to decide whether the feature has to be enabled or disabled for the whole Runtime instance,
-   * without considering any other condition. The feature will be enabled according to the value
-   * provided, by parsing it as a boolean.
+   * without considering any other condition. The feature will be enabled according to the value provided, by parsing it as a
+   * boolean.
    * </p>
    * 
    * <p>

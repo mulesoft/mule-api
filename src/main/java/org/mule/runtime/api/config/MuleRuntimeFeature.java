@@ -95,8 +95,8 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
 
   /**
-   * When enabled, managed cursor iterators transformed to Strings will show the representation of the elements instead of the generic
-   * 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.
+   * When enabled, managed cursor iterators transformed to Strings will show the representation of the elements instead of the
+   * generic 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.
    *
    * @since 4.4.0
    */
@@ -119,9 +119,9 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
 
   /**
-   * When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be
-   * located. Otherwise, it will only fail if such application makes use of the namespace that such schema defines instead
-   * of just declaring it.
+   * When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located.
+   * Otherwise, it will only fail if such application makes use of the namespace that such schema defines instead of just
+   * declaring it.
    *
    * @since 4.4.0
    */
