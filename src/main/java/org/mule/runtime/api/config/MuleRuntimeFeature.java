@@ -75,22 +75,22 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0", HANDLE_SPLITTER_EXCEPTION_PROPERTY),
 
   /**
-   * When enabled, batch aggregator will only commit when a full block is processed. For more information see EE-7443.
+   * When enabled, fixed batch aggregators will only commit when a full block is processed. See EE-7443 for more information.
    *
    * @since 4.4.0, 4.3.0-202103, 4.2.2-202103"
    */
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
-      "When enabled, batch aggregator will only commit when a full block is processed. For more information see EE-7443.",
+      "When enabled, fixed batch aggregators will only commit when a full block is processed. See EE-7443 for more information.",
       "MULE-19218",
       "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
 
   /**
-   * If set to true, the connection errors will be taken into account to trigger alerts.
+   * When enabled, Connection errors will be computed as part of alerts triggering.
    *
    * @since 4.4.0, 4.3.0-202103
    */
   COMPUTE_CONNECTION_ERRORS_IN_STATS(
-      "When enabled, Connection errors will be computed to trigger alerts.",
+      "When enabled, Connection errors will be computed as part of alerts triggering.",
       "MULE-19020",
       "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
 
