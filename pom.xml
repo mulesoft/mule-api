@@ -139,6 +139,7 @@
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
         <muleBomVersion>4.4.0-SNAPSHOT</muleBomVersion>
+        <xerces2Version>2.11.3</xerces2Version>
     </properties>
 
     <dependencyManagement>
@@ -166,6 +167,11 @@
             <version>${metadataModelApiVersion}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mule.apache</groupId>
+            <artifactId>xerces2-xsd11</artifactId>
+            <version>${xerces2Version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
