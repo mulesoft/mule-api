@@ -36,11 +36,11 @@ import org.slf4j.Logger;
  */
 public class DefaultXMLSecureFactories {
 
-  public static final String DOCUMENT_BUILDER_FACTORY = "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl";
-  public static final String SAX_PARSER_FACTORY = "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl";
+  public static final String DOCUMENT_BUILDER_FACTORY = "org.mule.apache.xerces.jaxp.DocumentBuilderFactoryImpl";
+  public static final String SAX_PARSER_FACTORY = "org.mule.apache.xerces.jaxp.SAXParserFactoryImpl";
   public static final String XML_INPUT_FACTORY = "com.sun.xml.internal.stream.XMLInputFactoryImpl";
   public static final String TRANSFORMER_FACTORY = "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl";
-  public static final String SCHEMA_FACTORY = "com.sun.org.apache.xerces.internal.jaxp.validation.XMLSchemaFactory";
+  public static final String SCHEMA_FACTORY = "org.mule.apache.xerces.jaxp.validation.XMLSchemaFactory";
 
   public static final String DOCUMENT_BUILDER_PROPERTY = "javax.xml.parsers.DocumentBuilderFactory";
   public static final String SAX_PARSER_PROPERTY = "javax.xml.parsers.SAXParserFactory";
