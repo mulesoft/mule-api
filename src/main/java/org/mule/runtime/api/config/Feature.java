@@ -30,7 +30,7 @@ public interface Feature {
   String getIssueId();
 
   /**
-   * @deprecated Misleading name, use {@link #getEnabledByDefaultSince()} instead.
+   * @deprecated Misleading name, implement {@link #getEnabledByDefaultSince()} and delegate this implementation to that one.
    */
   @Deprecated
   String getSince();
@@ -43,7 +43,9 @@ public interface Feature {
    * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0-202103"</code>.
    * @since 4.4.0
    */
-  String getEnabledByDefaultSince();
+  default String getEnabledByDefaultSince() {
+    return getSince();
+  }
 
   /**
    * <p>
