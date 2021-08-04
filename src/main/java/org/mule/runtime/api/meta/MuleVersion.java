@@ -118,8 +118,8 @@ public final class MuleVersion {
   }
 
   /**
-   * Returns a string representing the complete numeric version, what means the 3 numbers that represent major.minor.revision. If
-   * revision is not present, then it will be set to 0 (zero).<br/>
+   * Returns a string representing the complete numeric version,without suffixes. If revision is not present, then it will be set
+   * to 0 (zero).<br/>
    * Examples:<br/>
    * <ol>
    * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
@@ -132,6 +132,22 @@ public final class MuleVersion {
   public String toCompleteNumericVersion() {
     return this.semver.getMajor() + "." + semver.getMinor() + "."
         + (this.semver.getPatch() != null ? this.semver.getPatch() : 0);
+  }
+
+  /**
+   * Returns a {@link MuleVersion} representing the complete numeric version, without suffixes. If revision is not present, then
+   * it will be set to 0 (zero).<br/>
+   * Examples:<br/>
+   * <ol>
+   * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
+   * <li>3.4 -> returns 3.4.0</li>
+   * <li>3.4.1 -> returns 3.4.1</li>
+   * </ol>
+   *
+   * @return Complete numeric version: major.minor.revision
+   */
+  public MuleVersion withoutSuffixes() {
+    return new MuleVersion(this.toCompleteNumericVersion());
   }
 
   public boolean hasSuffix() {
