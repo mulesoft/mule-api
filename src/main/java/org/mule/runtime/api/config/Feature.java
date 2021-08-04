@@ -9,38 +9,45 @@ package org.mule.runtime.api.config;
 import java.util.Optional;
 
 /**
- * A feature that can be enabled or disabled according to a certain configuration
+ * A feature that can be enabled or disabled according to a certain configuration.
  * 
  * @since 4.4.0 4.3.1
  */
 public interface Feature {
 
   /**
-   * Brief description of the feature.
+   * Description of the feature. This description will be part of end user documentation.
    * 
-   * @return The feature description
+   * @return The feature description.
    */
   String getDescription();
 
   /**
-   * The issue that caused this feature was added. For instance <code>MULE-1234</code>
+   * The issue that caused this feature was added. For instance <code>MULE-1234</code>.
    * 
    * @return Issue that motivated the feature.
    */
   String getIssueId();
 
-
   /**
-   * A comma-separated list of versions since this feature exists.
-   * 
-   * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0"</code>
+   * @deprecated Misleading name, use {@link #getEnabledByDefaultSince()} instead.
    */
+  @Deprecated
   String getSince();
 
   /**
+   * A comma-separated list of versions (must include all the different minors) since this feature will be enabled by default.
+   * Any relevant artifact (application, policy... etc) with a minMuleVersion matching this list will have this {@link Feature} enabled by default.
+   *
+   * @return A comma-separated list of versions, ex <code>"4.4.0, 4.3.0-202103"</code>.
+   * @since 4.4.0
+   */
+  String getEnabledByDefaultSince();
+
+  /**
    * <p>
-   * System Property name to be used to decide whether the feature has to be enabled or disabled for the whole Runtime instance
-   * without considering any other condition related to the deployment context. The feature will be enabled according to the value
+   * System Property name to be used to decide whether the feature has to be enabled or disabled for the whole Runtime instance,
+   * without considering any other condition. The feature will be enabled according to the value
    * provided, by parsing it as a boolean.
    * </p>
    * 
@@ -71,7 +78,6 @@ public interface Feature {
    * <li>If {@link #getOverridingSystemPropertyName()} is not set, then the feature flagging configuration will be applied to
    * decide whether the feature is enabled or disabled.</li></li>
    * </ol>
-   * 
    *
    * @return The name of a System Property to configure the feature.
    */

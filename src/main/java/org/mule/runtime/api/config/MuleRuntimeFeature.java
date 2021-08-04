@@ -21,16 +21,12 @@ import java.util.Optional;
 
 /**
  * <p>
- * List of {@link Feature}s that can be configured to be enabled or disabled per application depending on the deployment context.
+ * List of {@link Feature}s that will be enabled or disabled per application depending on the deployment context.
  * </p>
  *
  * <p>
  * When some Mule runtime feature needs to be flagged, it should be added here as a new enum constant. Each entry must have a
- * meaningful name, clear enough to understand what it represents, a description with enough information to know how the runtime
- * will work whether the feature is enabled or disabled, the issue that motivated this feature, and a list of Runtime versions
- * from when it exists. Each enum constant has to have its Javadoc with further information about how the feature is configured.
- * </p>
- *
+ * meaningful, client oriented name, and must provide values for all the {@link Feature} fields.
  * <p>
  * For example:
  * </p>
@@ -40,14 +36,12 @@ import java.util.Optional;
  *      ...
  *
  *     {@code /}**
- *       * An application shouldn't override reserved properties, but it was possible until MULE-17659. This behaviour has
- *       * to be fixed by default to any application developed for 4.3.0+ Runtime but can be overridden by setting
- *       * &lcub;@link MuleSystemProperties#HONOUR_RESERVED_PROPERTIES_PROPERTY&rcub; System Property.
+ *       * When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).
  *       *
- *       * @since 4.4.0, 4.3.1
+ *       * @since 4.4.0, 4.3.0-202103
  *       *
  *      {@code *}/
- *      HONOUR_RESERVED_PROPERTIES("Whether reserved properties such as 'app.name' can't be overridden by global properties.",
+ *      HONOUR_RESERVED_PROPERTIES("When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).",
  *            "MULE-19083", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
  *
  *      ...
@@ -55,7 +49,9 @@ import java.util.Optional;
  *    }
  * </pre>
  *
- * @since 4.4.0 4.3.0-202102
+ * @see Feature
+ * @see FeatureFlaggingService
+ * @since 4.4.0 4.3.1
  */
 public enum MuleRuntimeFeature implements Feature {
 
@@ -154,17 +150,13 @@ public enum MuleRuntimeFeature implements Feature {
 
   private final String description;
   private final String issueId;
-  private final String since;
+  private final String enabledByDefaultSince;
   private final String overridingSystemPropertyName;
 
-  MuleRuntimeFeature(String description, String issue, String since) {
-    this(description, issue, since, null);
-  }
-
-  MuleRuntimeFeature(String description, String issueId, String since, String overridingSystemPropertyName) {
+  MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince, String overridingSystemPropertyName) {
     this.description = description;
     this.issueId = issueId;
-    this.since = since;
+    this.enabledByDefaultSince = enabledByDefaultSince;
     this.overridingSystemPropertyName = overridingSystemPropertyName;
   }
 
@@ -180,7 +172,12 @@ public enum MuleRuntimeFeature implements Feature {
 
   @Override
   public String getSince() {
-    return since;
+    return getEnabledByDefaultSince();
+  }
+
+  @Override
+  public String getEnabledByDefaultSince() {
+    return enabledByDefaultSince;
   }
 
   @Override
