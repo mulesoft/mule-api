@@ -118,8 +118,8 @@ public final class MuleVersion {
   }
 
   /**
-   * Returns a string representing the complete numeric version,without suffixes. If revision is not present, then it will be set
-   * to 0 (zero).<br/>
+   * Returns a string representing the complete numeric version, without suffixes. If the revision is not present, then it will be
+   * set to 0 (zero).<br/>
    * Examples:<br/>
    * <ol>
    * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
@@ -135,8 +135,8 @@ public final class MuleVersion {
   }
 
   /**
-   * Returns a {@link MuleVersion} representing the complete numeric version, without suffixes. If revision is not present, then
-   * it will be set to 0 (zero).<br/>
+   * Returns a {@link MuleVersion} representing the complete numeric version, without suffixes. If the revision is not present,
+   * then it will be set to 0 (zero).<br/>
    * Examples:<br/>
    * <ol>
    * <li>3.4.1-SNAPSHOT -> returns 3.4.1</li>
