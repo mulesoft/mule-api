@@ -132,12 +132,12 @@ public enum MuleRuntimeFeature implements Feature {
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
 
   /**
-   * When enabled, profiling data will be emitted.
+   * When enabled, runtime profiling capabilities will become available.
    *
    * @since 4.4.0
    */
   ENABLE_PROFILING_SERVICE(
-      "When enabled, profiling data will be emitted.",
+      "When enabled, runtime profiling capabilities will become available.",
       "MULE-19588",
       "4.5.0",
       ENABLE_PROFILING_SERVICE_PROPERTY),
