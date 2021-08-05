@@ -82,7 +82,7 @@ public enum MuleRuntimeFeature implements Feature {
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
       "When enabled, fixed batch aggregators will only commit when a full block is processed. See EE-7443 for more information.",
       "MULE-19218",
-      "4.4.0, 4.3.1, 4.2.3", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
+      "", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
 
   /**
    * When enabled, Connection errors will be computed as part of alerts triggering.
@@ -92,7 +92,7 @@ public enum MuleRuntimeFeature implements Feature {
   COMPUTE_CONNECTION_ERRORS_IN_STATS(
       "When enabled, Connection errors will be computed as part of alerts triggering.",
       "MULE-19020",
-      "4.4.0, 4.3.1", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
+      "4.4.0", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
 
   /**
    * When enabled, managed cursor iterators transformed to Strings will show the representation of the elements instead of the
@@ -116,7 +116,7 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_POLICY_ISOLATION(
       "When enabled, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
       "MULE-19226",
-      "4.4.0, 4.3.1", ENABLE_POLICY_ISOLATION_PROPERTY),
+      "4.4.0", ENABLE_POLICY_ISOLATION_PROPERTY),
 
   /**
    * When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located.
