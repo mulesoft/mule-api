@@ -23,7 +23,7 @@ public interface Feature {
   String getDescription();
 
   /**
-   * The issue that caused this feature was added. For instance <code>MULE-1234</code>.
+   * The issue that caused this feature addition. For instance, <code>MULE-1234</code>.
    * 
    * @return Issue that motivated the feature.
    */

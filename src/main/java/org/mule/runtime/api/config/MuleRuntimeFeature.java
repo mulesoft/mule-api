@@ -65,12 +65,13 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-17659", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
-   * When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues.
+   * When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information, see
+   * DW-383.
    *
    * @since 4.4.0
    */
   HANDLE_SPLITTER_EXCEPTION(
-      "When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information see DW-383.",
+      "When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information, see DW-383.",
       "MULE-19197",
       "4.4.0", HANDLE_SPLITTER_EXCEPTION_PROPERTY),
 
