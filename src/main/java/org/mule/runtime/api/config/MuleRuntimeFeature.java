@@ -62,7 +62,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_RESERVED_PROPERTIES(
       "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).",
-      "MULE-17659", "4.4.0, 4.3.1", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+      "MULE-17659", "4.4.0, 4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
    * When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information, see
