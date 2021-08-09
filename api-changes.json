@@ -2,7 +2,16 @@
   "1.3.1": {
     "revapi": {
       "ignore": [
-         {
+        {
+           "code": "java.method.added",
+           "new": "method org.mule.runtime.api.meta.MuleVersion org.mule.runtime.api.meta.MuleVersion::withoutSuffixes()",
+           "package": "org.mule.runtime.api.meta",
+           "classSimpleName": "MuleVersion",
+           "methodName": "withoutSuffixes",
+           "elementKind": "method",
+           "justification": "MULE-19682: Feature flags evaluation must ignore semver suffixes"
+        },
+        {
            "code": "java.field.addedStaticField",
            "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY",
            "package": "org.mule.runtime.api.util",
