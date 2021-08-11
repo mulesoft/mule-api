@@ -10,6 +10,7 @@ import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
 import org.mule.runtime.api.config.MuleRuntimeFeature;
+import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.streaming.CursorProvider;
 
@@ -133,6 +134,15 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
   public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
+  /**
+   * Comma-separated list of packages to force as registrable.
+   * <p>
+   * Refer to {@link ExtensionDeclarer#isTypeRegistrable}.
+   * 
+   * @since 1.4
+   */
+  public static final String MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES =
+      SYSTEM_PROPERTY_PREFIX + "extension.forceRegistrableType.packages";
 
   /**
    * @deprecated Since 4.4.0 this feature was removed.
