@@ -26,7 +26,7 @@ import java.util.Optional;
  *
  * <p>
  * When some Mule runtime feature needs to be flagged, it should be added here as a new enum constant. Each entry must have a
- * meaningful, client oriented name, and must provide values for all the {@link Feature} fields.
+ * meaningful, customer facing name, and must provide values for all the {@link Feature} fields.
  * <p>
  * For example:
  * </p>
@@ -65,14 +65,13 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-17659", "4.4.0, 4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
-   * When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information, see
-   * DW-383.
+   * When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.
    *
    * @since 4.4.0
    */
   HANDLE_SPLITTER_EXCEPTION(
-      "When enabled, DataWeave will correctly handle split exceptions, avoiding some serialization issues. For more information, see DW-383.",
-      "MULE-19197",
+      "When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.",
+      "DW-383",
       "4.4.0", HANDLE_SPLITTER_EXCEPTION_PROPERTY),
 
   /**
