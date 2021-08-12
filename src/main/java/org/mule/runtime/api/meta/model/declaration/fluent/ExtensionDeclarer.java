@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.lang.System.getProperty;
 import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.Category;
@@ -34,6 +39,12 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
+  // Allow to configure this through system property to avoid releasing a new version if some other scenario other than the
+  // gateway one is detected.
+  private static final List<String> FORCE_REGISTERED_PACKAGES =
+      stream(getProperty(MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES, "com.mulesoft.mule.runtime.gw").split(","))
+          .map(p -> p + ".")
+          .collect(toList());
 
   /**
    * Constructor for this descriptor
@@ -123,6 +134,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   /**
    * {@inheritDoc}
    */
+  @Override
   public ConstructDeclarer withConstruct(String name) {
     ConstructDeclaration component = new ConstructDeclaration(name);
     declaration.addConstruct(component);
@@ -282,7 +294,9 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
 
   private boolean isTypeRegistrable(ObjectType objectType) {
     String typeId = getTypeId(objectType).orElse(null);
-    return typeId != null && !typeId.trim().isEmpty() && UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith);
+    return typeId != null && !typeId.trim().isEmpty()
+        && (FORCE_REGISTERED_PACKAGES.stream().anyMatch(typeId::startsWith)
+            || UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith));
   }
 
   /**
