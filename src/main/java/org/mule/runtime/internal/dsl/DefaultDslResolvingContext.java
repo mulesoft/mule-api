@@ -13,11 +13,13 @@ import static java.util.stream.Collectors.toMap;
 import org.mule.runtime.api.dsl.DslResolvingContext;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
+import org.mule.runtime.api.util.LazyValue;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Supplier;
 
 /**
  * Default implementation of {@link DslResolvingContext} that uses the {@link Set} of {@link ExtensionModel} to provide the
@@ -27,14 +29,14 @@ import java.util.Set;
  */
 public final class DefaultDslResolvingContext implements DslResolvingContext {
 
-  private final TypeCatalog typeCatalog;
+  private final Supplier<TypeCatalog> typeCatalog;
   private final Set<ExtensionModel> extensions;
   private final Map<String, ExtensionModel> extensionsByName;
 
   public DefaultDslResolvingContext(Set<ExtensionModel> extensions) {
     this.extensions = extensions;
     this.extensionsByName = extensions.stream().collect(toMap(ExtensionModel::getName, e -> e, (u, v) -> v, LinkedHashMap::new));
-    this.typeCatalog = TypeCatalog.getDefault(extensions);
+    this.typeCatalog = new LazyValue<>(() -> TypeCatalog.getDefault(extensions));
   }
 
   /**
@@ -50,7 +52,7 @@ public final class DefaultDslResolvingContext implements DslResolvingContext {
    */
   @Override
   public Optional<ExtensionModel> getExtensionForType(String typeId) {
-    return typeCatalog.getDeclaringExtension(typeId).map(extensionsByName::get);
+    return getTypeCatalog().getDeclaringExtension(typeId).map(extensionsByName::get);
   }
 
   /**
@@ -66,7 +68,7 @@ public final class DefaultDslResolvingContext implements DslResolvingContext {
    */
   @Override
   public TypeCatalog getTypeCatalog() {
-    return typeCatalog;
+    return typeCatalog.get();
   }
 
   @Override
