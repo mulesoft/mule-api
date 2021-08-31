@@ -6,12 +6,8 @@
  */
 package org.mule.runtime.api.streaming.bytes;
 
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
-
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -40,89 +36,11 @@ import java.io.InputStream;
  *
  * @since 1.3.0
  */
-public final class ImmutableFileRepeatableInputStream extends InputStream {
+public final class ImmutableFileRepeatableInputStream
+    extends org.mule.sdk.api.streaming.bytes.ImmutableFileRepeatableInputStream {
 
-  private final InputStream delegate;
-  private final File file;
-  private final boolean autoDelete;
-
-  /**
-   * Creates a new instance
-   *
-   * @param file       the File that contains the stream's contents
-   * @param autoDelete if {@code true}, the file will be deleted when {@link #close()} is invoked.
-   * @throws IllegalArgumentException if the file cannot be found
-   */
   public ImmutableFileRepeatableInputStream(File file, boolean autoDelete) {
-    checkArgument(file != null, "File cannot be null");
-    try {
-      delegate = new FileInputStream(file);
-    } catch (FileNotFoundException e) {
-      throw new IllegalArgumentException("File " + file.getAbsolutePath() + " does not exists", e);
-    }
-    this.file = file;
-    this.autoDelete = autoDelete;
+    super(file, autoDelete);
   }
 
-  /**
-   * @return The {@link File} backing this stream
-   */
-  public File getFile() {
-    return file;
-  }
-
-  /**
-   * @return Whether the file will be deleted upon {@link #close()} or not.
-   */
-  public boolean isAutoDelete() {
-    return autoDelete;
-  }
-
-  @Override
-  public void close() throws IOException {
-    delegate.close();
-    if (autoDelete) {
-      file.delete();
-    }
-  }
-
-  @Override
-  public int read() throws IOException {
-    return delegate.read();
-  }
-
-  @Override
-  public int read(byte[] b) throws IOException {
-    return delegate.read(b);
-  }
-
-  @Override
-  public int read(byte[] b, int off, int len) throws IOException {
-    return delegate.read(b, off, len);
-  }
-
-  @Override
-  public long skip(long n) throws IOException {
-    return delegate.skip(n);
-  }
-
-  @Override
-  public int available() throws IOException {
-    return delegate.available();
-  }
-
-  @Override
-  public void mark(int readlimit) {
-    delegate.mark(readlimit);
-  }
-
-  @Override
-  public void reset() throws IOException {
-    delegate.reset();
-  }
-
-  @Override
-  public boolean markSupported() {
-    return delegate.markSupported();
-  }
 }
