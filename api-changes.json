@@ -12,7 +12,7 @@
           "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
           "methodName": "discover",
           "elementKind": "method",
-          "justification": "Experimental API"
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
         },
         {
           "code": "java.generics.formalTypeParameterRemoved",
@@ -22,7 +22,7 @@
           "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
           "methodName": "discover",
           "elementKind": "method",
-          "justification": "Experimental API"
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
         },
         {
           "code": "java.generics.formalTypeParameterRemoved",
@@ -32,7 +32,7 @@
           "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
           "methodName": "discover",
           "elementKind": "method",
-          "justification": "Experimental API"
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
         }
       ]
     }
