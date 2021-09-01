@@ -1,5 +1,5 @@
 {
-  "1.4.0": {
+  "1.5.0": {
     "revapi": {
       "ignore": [
         {
@@ -33,7 +33,13 @@
           "methodName": "discover",
           "elementKind": "method",
           "justification": "Experimental API"
-       },
+        }
+      ]
+    }
+  },
+  "1.4.0": {
+    "revapi": {
+      "ignore": [
        {
          "code": "java.field.constantValueChanged",
          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
