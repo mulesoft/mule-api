@@ -29,6 +29,6 @@ public interface ProfilingDataConsumerDiscoveryStrategy {
    * @param <T> the type for the event context which will have the profiling event context data.
    * @return the discovered {@link ProfilingDataProducer}'s.
    */
-  <S extends ProfilingDataConsumer<T>, T extends ProfilingEventContext> Set<S> discover();
+  Set<ProfilingDataConsumer<? extends ProfilingEventContext>> discover();
 
 }
