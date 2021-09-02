@@ -82,7 +82,21 @@ public interface TypedComponentIdentifier {
      *
      * @since 1.4
      */
-    CHAIN
+    CHAIN,
+
+    /**
+     * A definition to be used by sources and operations.
+     *
+     * @since 1.5
+     */
+    CONFIG,
+
+    /**
+     * A connection provider within a {@link #CONFIG}.
+     *
+     * @since 1.5
+     */
+    CONNECTION
   }
 
   /**
