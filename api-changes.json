@@ -1,4 +1,42 @@
 {
+  "1.5.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.returnTypeTypeParametersChanged",
+          "old": "method <S extends org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>, T extends org.mule.runtime.api.profiling.ProfilingEventContext> java.util.Set<S> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "new": "method java.util.Set<org.mule.runtime.api.profiling.ProfilingDataConsumer<? extends org.mule.runtime.api.profiling.ProfilingEventContext>> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "oldType": "java.util.Set<S extends org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>>",
+          "newType": "java.util.Set<org.mule.runtime.api.profiling.ProfilingDataConsumer<? extends org.mule.runtime.api.profiling.ProfilingEventContext>>",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
+          "methodName": "discover",
+          "elementKind": "method",
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
+        },
+        {
+          "code": "java.generics.formalTypeParameterRemoved",
+          "old": "method <S extends org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>, T extends org.mule.runtime.api.profiling.ProfilingEventContext> java.util.Set<S> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "new": "method java.util.Set<org.mule.runtime.api.profiling.ProfilingDataConsumer<? extends org.mule.runtime.api.profiling.ProfilingEventContext>> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
+          "methodName": "discover",
+          "elementKind": "method",
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
+        },
+        {
+          "code": "java.generics.formalTypeParameterRemoved",
+          "old": "method <S extends org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>, T extends org.mule.runtime.api.profiling.ProfilingEventContext> java.util.Set<S> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "new": "method java.util.Set<org.mule.runtime.api.profiling.ProfilingDataConsumer<? extends org.mule.runtime.api.profiling.ProfilingEventContext>> org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy::discover()",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
+          "methodName": "discover",
+          "elementKind": "method",
+          "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
+        }
+      ]
+    }
+  },
   "1.4.0": {
     "revapi": {
       "ignore": [
