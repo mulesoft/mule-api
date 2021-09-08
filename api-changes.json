@@ -3,6 +3,78 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataConsumer",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.ProfilingDataConsumerDiscoveryStrategy",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataConsumerDiscoveryStrategy",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.ProfilingDataProducer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingDataProducer",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.ProfilingEventContext",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingEventContext",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.ProfilingService",
+          "package": "org.mule.runtime.api.profiling",
+          "classSimpleName": "ProfilingService",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "class org.mule.runtime.api.profiling.type.ProcessingStrategyProfilingEventType",
+          "package": "org.mule.runtime.api.profiling.type",
+          "classSimpleName": "ProcessingStrategyProfilingEventType",
+          "elementKind": "class",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.type.ProfilingEventType<T extends org.mule.runtime.api.profiling.ProfilingEventContext>",
+          "package": "org.mule.runtime.api.profiling.type",
+          "classSimpleName": "ProfilingEventType",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "class org.mule.runtime.api.profiling.type.RuntimeProfilingEventTypes",
+          "package": "org.mule.runtime.api.profiling.type",
+          "classSimpleName": "RuntimeProfilingEventTypes",
+          "elementKind": "class",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.api.profiling.type.context.ProcessingStrategyProfilingEventContext",
+          "package": "org.mule.runtime.api.profiling.type.context",
+          "classSimpleName": "ProcessingStrategyProfilingEventContext",
+          "elementKind": "interface",
+          "justification": "MULE-19749: new module for profiling API"
+        },
+        {
           "code": "java.method.added",
           "new": "method org.mule.runtime.api.meta.MuleVersion org.mule.runtime.api.meta.MuleVersion::withoutSuffixes()",
           "package": "org.mule.runtime.api.meta",
