@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collector;
 
 /**
  * Implementation of a multi-map that allows the aggregation of keys and access to the aggregated list or a single value (the
@@ -91,6 +92,28 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     } else {
       return new UnmodifiableMultiMap<>(m);
     }
+  }
+
+  /**
+   * Returns a {@code Collector} that accumulates elements into a {@code Map} whose keys and values are the result of applying the
+   * provided mapping functions to the input elements.
+   * <p>
+   * If the mapped keys contains duplicates (according to {@link Object#equals(Object)}), the value mapping function is applied to
+   * each equal element, and the results are added to the values collection.
+   * 
+   * @param <T>         the type of the input elements
+   * @param <K>         the output type of the key mapping function
+   * @param <U>         the output type of the value mapping function
+   * @param keyMapper   a mapping function to produce keys
+   * @param valueMapper a mapping function to produce values
+   * @return a {@code Collector} which collects elements into a {@code MultiMap} whose keys and values are the result of applying
+   *         mapping functions to the input elements.
+   * 
+   * @since 1.5
+   */
+  public static <T, K, U> Collector<T, ?, MultiMap<K, U>> toMultiMap(Function<? super T, ? extends K> keyMapper,
+                                                                     Function<? super T, ? extends U> valueMapper) {
+    return toMap(keyMapper, valueMapper, (u, v) -> v, () -> new MultiMap<>());
   }
 
   protected Map<K, LinkedList<V>> paramsMap;

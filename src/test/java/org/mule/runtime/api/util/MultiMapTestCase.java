@@ -16,6 +16,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static org.mule.runtime.api.util.MultiMap.toMultiMap;
 import static org.mule.runtime.api.util.MultiMap.unmodifiableMultiMap;
 
 import org.mule.runtime.api.util.MultiMap.StringMultiMap;
@@ -27,13 +28,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
-import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
 
 @RunWith(Parameterized.class)
 public class MultiMapTestCase {
@@ -54,14 +57,12 @@ public class MultiMapTestCase {
     });
   }
 
-  private final Supplier<MultiMap<String, String>> mapSupplier;
   private final Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier;
 
   protected MultiMap<String, String> multiMap;
 
   public MultiMapTestCase(Supplier<MultiMap<String, String>> mapSupplier,
                           Function<MultiMap<String, String>, MultiMap<String, String>> mapCopier) {
-    this.mapSupplier = mapSupplier;
     this.multiMap = mapSupplier.get();
     this.mapCopier = mapCopier;
   }
@@ -228,6 +229,19 @@ public class MultiMapTestCase {
     assertThat(map.entryList(), contains(
                                          new EntryMatcher(KEY_2, VALUE_1),
                                          new EntryMatcher(KEY_2, VALUE_2)));
+  }
+
+  @Test
+  public void multiMapCollector() {
+    multiMap = Stream.of(new Pair<>(KEY_1, VALUE_1),
+                         new Pair<>(KEY_1, VALUE_2),
+                         new Pair<>(KEY_2, VALUE_2))
+        .collect(toMultiMap(p -> p.getFirst(), p -> p.getSecond()));
+
+    assertThat(multiMap.get(KEY_1), is(VALUE_1));
+    assertThat(multiMap.getAll(KEY_1), is(asList(VALUE_1, VALUE_2)));
+    assertThat(multiMap.get(KEY_2), is(VALUE_2));
+    assertThat(multiMap.getAll(KEY_2), is(asList(VALUE_2)));
   }
 
   private class EntryMatcher extends TypeSafeMatcher<Map.Entry<String, String>> {
