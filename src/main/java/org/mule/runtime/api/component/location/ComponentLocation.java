@@ -10,6 +10,7 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.component.TypedComponentIdentifier;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -54,6 +55,20 @@ public interface ComponentLocation {
    * @return the config file of the artifact where this component is defined, if it was defined in a config file.
    */
   Optional<String> getFileName();
+
+  /**
+   * If the component with this location is in a root config file (not obtained through an {@code import} tag), the returned list
+   * will be empty.
+   * <p>
+   * If the component with this location is obtained through an import, the location of the first import will be the first element
+   * of the returned list. Any other nested imported locations will be the subsequent elements of the returned list.
+   * 
+   * @return a {@link List} containing an element for every {@code import} location leading to the file containing the owning
+   *         component.
+   * 
+   * @since 1.5
+   */
+  List<URI> getImportChain();
 
   /**
    * @return the line number in the config file of the artifact where this component is defined, if it was defined in a config
