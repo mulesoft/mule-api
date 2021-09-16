@@ -10,6 +10,8 @@ import static java.lang.Boolean.getBoolean;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableList;
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -55,7 +57,10 @@ public final class DefaultTypeCatalog implements TypeCatalog {
 
   public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
     extensions.forEach(e -> {
-      mappings.add(new SubTypesMappingContainer(e.getSubTypes()));
+      Set<SubTypesModel> subTypes = e.getSubTypes();
+      if (!subTypes.isEmpty()) {
+        mappings.add(new SubTypesMappingContainer(subTypes));
+      }
 
       e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> {
         if (types.containsKey(e.getName())) {
@@ -78,9 +83,9 @@ public final class DefaultTypeCatalog implements TypeCatalog {
   public Optional<ObjectType> getType(String typeId) {
     String extensionName = extensionTypesInvertedIndex.get(typeId);
     if (extensionName == null) {
-      return Optional.empty();
+      return empty();
     }
-    return Optional.ofNullable(types.get(extensionName).get(typeId));
+    return ofNullable(types.get(extensionName).get(typeId));
   }
 
   @Override
@@ -102,7 +107,7 @@ public final class DefaultTypeCatalog implements TypeCatalog {
 
   @Override
   public Optional<String> getDeclaringExtension(String typeId) {
-    return Optional.ofNullable(extensionTypesInvertedIndex.get(typeId));
+    return ofNullable(extensionTypesInvertedIndex.get(typeId));
   }
 
   @Override
