@@ -9,7 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +25,7 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
 
 
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
-  private Set<ErrorModel> errorModels = new HashSet<>();
+  private Set<ErrorModel> errorModels = new LinkedHashSet<>();
 
   /**
    * {@inheritDoc}
