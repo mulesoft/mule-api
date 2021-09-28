@@ -8,10 +8,12 @@ package org.mule.runtime.api.exception;
 
 import io.qameta.allure.Issue;
 import org.junit.Test;
+import org.mule.runtime.internal.exception.SuppressedMuleException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.junit.Assert.assertThat;
+import static org.mule.runtime.internal.exception.SuppressedMuleException.suppressIfPresent;
 
 public class MuleExceptionTestCase {
 
@@ -27,6 +29,15 @@ public class MuleExceptionTestCase {
   public void verboseMessageMustIncludeAllInformation() {
     TestException testException = new TestException();
     assertThat(testException.getVerboseMessage(), containsString("Additional info value"));
+  }
+
+  @Test
+  @Issue("MULE-19811")
+  public void summaryMessageWithNullRootMuleException() {
+    MuleException muleException =
+        (MuleException) suppressIfPresent(new DefaultMuleException("Suppressed exception", new TestException()),
+                                          DefaultMuleException.class);
+    assertThat(muleException.getSummaryMessage(), containsString("Suppressed exception"));
   }
 
   private static class TestException extends MuleException {

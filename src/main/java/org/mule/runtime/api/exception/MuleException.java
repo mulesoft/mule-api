@@ -230,7 +230,7 @@ public abstract class MuleException extends Exception {
 
   public String getSummaryMessage() {
     MuleException e = getRootMuleException(this);
-    if (e != null && !e.equals(this)) {
+    if (!Objects.equals(e, this)) {
       return getMessage();
     }
     StringBuilder buf = new StringBuilder(1024);
