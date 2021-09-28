@@ -19,7 +19,7 @@ public class MuleExceptionTestCase {
   @Issue("MULE-19811")
   public void summaryMessageWithNullRootMuleException() {
     MuleException muleException =
-            new SuppressedMuleException(new DefaultMuleException("Suppressed exception", new TestException()));
+        new SuppressedMuleException(new DefaultMuleException("Suppressed exception", new TestException()));
     assertThat(muleException.getSummaryMessage(), containsString("Suppressed exception"));
   }
 
