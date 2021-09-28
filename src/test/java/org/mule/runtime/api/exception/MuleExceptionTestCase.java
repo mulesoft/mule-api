@@ -8,7 +8,6 @@ package org.mule.runtime.api.exception;
 
 import io.qameta.allure.Issue;
 import org.junit.Test;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
