@@ -364,7 +364,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0, 4.3.1
    */
   public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "loadExtensionWithArtifact";
+      SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
 
   static {
     // Maintain compatibility after fix for MULE-19406
