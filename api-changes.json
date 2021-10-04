@@ -3,6 +3,25 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER",
+          "elementKind": "enumConstant",
+          "justification": "MULE-19815: start extension components with ArtifactClassLoader"
+
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19815: start extension components with ArtifactClassLoader"
+        },
+        {
           "code": "java.class.removed",
           "old": "interface org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>",
           "package": "org.mule.runtime.api.profiling",
