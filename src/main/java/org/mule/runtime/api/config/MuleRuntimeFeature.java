@@ -159,7 +159,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER(
-      "When enabled, extensions will be loaded with an artifact classloader.",
+      "When enabled, extensions will be loaded with a deployable artifact (app, domain or policy) classloader.",
       "MULE-19443",
       "4.4.0",
       START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
