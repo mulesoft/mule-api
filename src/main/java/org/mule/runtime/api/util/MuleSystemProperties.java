@@ -358,6 +358,14 @@ public final class MuleSystemProperties {
   public static final String ENABLE_PROFILING_SERVICE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
 
+  /**
+   * If set to true, extensions will be loaded with an artifact classloader.
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
