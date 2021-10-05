@@ -154,12 +154,13 @@ public enum MuleRuntimeFeature implements Feature {
       SET_VARIABLE_WITH_NULL_VALUE_PROPERTY),
 
   /**
-   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (app, policy, domain).
+   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
+   * domain).
    *
    * @since 4.4.0
    */
   START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER(
-      "When enabled, extensions will only be able to load exported resources from the deployable artifacts (app, policy, domain).",
+      "When enabled, extensions will only be able to load exported resources from the deployable artifacts (application, policy, domain).",
       "MULE-19815",
       "4.4.0",
       START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
