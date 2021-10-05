@@ -359,7 +359,7 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
 
   /**
-   * If set to true, extensions will be loaded with an artifact classloader.
+   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (app, policy, domain).
    *
    * @since 4.4.0, 4.3.1
    */
