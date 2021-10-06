@@ -277,6 +277,15 @@ public final class MuleSystemProperties {
   public static final String SET_VARIABLE_WITH_NULL_VALUE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
 
+  /**
+   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
+   * domain).
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");

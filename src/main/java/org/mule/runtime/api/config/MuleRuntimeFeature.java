@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -103,7 +104,19 @@ public enum MuleRuntimeFeature implements Feature {
       "If set to true, the set variable will create a variable even if the value is null",
       "MULE-19443",
       "4.4.0",
-      SET_VARIABLE_WITH_NULL_VALUE_PROPERTY);
+      SET_VARIABLE_WITH_NULL_VALUE_PROPERTY),
+
+  /**
+   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
+   * domain).
+   *
+   * @since 4.4.0
+   */
+  START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER(
+      "When enabled, extensions will only be able to load exported resources from the deployable artifacts (application, policy, domain).",
+      "MULE-19815",
+      "4.4.0",
+      START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
 
   private final String description;
   private final String issueId;
