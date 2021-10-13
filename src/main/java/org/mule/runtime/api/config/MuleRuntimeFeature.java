@@ -62,7 +62,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.0-202102
    */
   HONOUR_RESERVED_PROPERTIES(
-      "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides will be ignored).",
+      "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides are be ignored).",
       "MULE-17659", "4.4.0, 4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
@@ -71,7 +71,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   HANDLE_SPLITTER_EXCEPTION(
-      "When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.",
+      "When enabled, DataWeave correctly handles internal exceptions while splitting a payload, preventing subsequent serialization errors.",
       "DW-383",
       "4.4.0", HANDLE_SPLITTER_EXCEPTION_PROPERTY),
 
@@ -81,7 +81,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.0-202103, 4.2.2-202103"
    */
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
-      "When enabled, fixed batch aggregators will only commit when a full block is processed. See EE-7443 for more information.",
+      "When enabled, batch aggregators with fixed size aggregators commit only when a full block is processed.",
       "MULE-19218",
       "", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
 
@@ -91,7 +91,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.0-202103
    */
   COMPUTE_CONNECTION_ERRORS_IN_STATS(
-      "When enabled, Connection errors will be computed as part of alerts triggering.",
+      "When enabled, connection errors are computed as part of alerts triggering.",
       "MULE-19020",
       "4.4.0", COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY),
 
@@ -102,7 +102,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS(
-      "When enabled, managed cursor iterators transformed to Strings will show the representation of the elements instead of the generic 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.",
+      "When enabled, managed cursor iterators transformed to strings show the representation of the elements instead of generic value `org.mule.runtime.core.internal.streaming.object.-ManagedCursorIteratorProvider$ManagedCursorIterator@.`",
       "MULE-19323",
       "4.4.0",
       TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY),
@@ -115,7 +115,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0, 4.3.0-202107
    */
   ENABLE_POLICY_ISOLATION(
-      "When enabled, extensions imported by a policy will be managed in complete isolation from the extensions imported by the application that is being applied to, and validations will prevent the usage of explicit configurations declared by the application as part of the policy initialization.",
+      "When enabled, Mule manages extensions imported by a policy in complete isolation from the extensions imported by the Mule application. Also, validations prevent the use of explicit configurations that the application declared as part of the policy initialization.",
       "MULE-19226",
       "4.4.0", ENABLE_POLICY_ISOLATION_PROPERTY),
 
@@ -126,7 +126,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR(
-      "When enabled, the Mule XML DSL parser will fail when deploying an application that declares a schema that cannot be located. Otherwise, it will fail if the application also makes use of the namespace that such schema is bound to.",
+      "When enabled, the Mule XML DSL parser fails when deploying an application that declares a schema that cannot be located. Otherwise, the parser fails if the application also makes use of the namespace to which such a schema is bound.",
       "EE-7827",
       "4.4.0",
       ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY),
@@ -137,7 +137,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   ENABLE_PROFILING_SERVICE(
-      "When enabled, runtime profiling capabilities will become available.",
+      "When enabled, Mule runtime profiling capabilities become available.",
       "MULE-19588",
       "4.5.0",
       ENABLE_PROFILING_SERVICE_PROPERTY),
@@ -148,7 +148,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   SET_VARIABLE_WITH_NULL_VALUE(
-      "When enabled, the Set Variable component will create a variable even if it's value is null.",
+      "When enabled, the Set Variable component creates a variable even if its value is `null`.",
       "MULE-19443",
       "4.4.0",
       SET_VARIABLE_WITH_NULL_VALUE_PROPERTY),
@@ -160,7 +160,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0
    */
   START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER(
-      "When enabled, extensions will only be able to load exported resources from the deployable artifacts (application, policy, domain).",
+      "When enabled, extensions can load exported resources only from the deployable artifacts (application, policy, domain).",
       "MULE-19815",
       "4.4.0",
       START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
@@ -203,5 +203,3 @@ public enum MuleRuntimeFeature implements Feature {
   }
 
 }
-
-
