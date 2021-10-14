@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "DW_REMOVE_SHADOWED_IMPLICIT_INPUTS",
+          "elementKind": "enumConstant",
+          "justification": "DW-893: Allow to overwrite implicit inputs"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY",
+          "elementKind": "field",
+          "justification": "DW-893: Allow to overwrite implicit inputs"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
