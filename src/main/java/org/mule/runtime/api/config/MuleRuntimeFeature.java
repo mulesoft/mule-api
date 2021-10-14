@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
@@ -167,7 +168,17 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, extensions will only be able to load exported resources from the deployable artifacts (application, policy, domain).",
       "MULE-19815",
       "4.4.0",
-      START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
+      START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY),
+
+  /**
+   * When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.
+   *
+   * @since 4.4.0-202111
+   */
+  DW_REMOVE_SHADOWED_IMPLICIT_INPUTS(
+      "When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.",
+      "DW-893",
+      "4.4.0", DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY);
 
   private final String description;
   private final String issueId;
