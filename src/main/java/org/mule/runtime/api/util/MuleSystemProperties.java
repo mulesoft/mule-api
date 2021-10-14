@@ -309,6 +309,13 @@ public final class MuleSystemProperties {
   public static final String HANDLE_SPLITTER_EXCEPTION_PROPERTY = "mule.dw.handle_splitter_exception";
 
   /**
+   * If set to true, then DW will remove implicit inputs when a variable with the same name is declared.
+   *
+   * @since 4.4.0
+   */
+  public static final String DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY = "mule.dw.remove_shadowed_implicit_inputs";
+
+  /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
    *
    * @since 4.4.0, 4.3.1, 4.2.3
