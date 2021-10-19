@@ -81,6 +81,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
   public static final String OPERATION_PARAMETER_GROUP = "Operation parameters";
   public static final String CONNECTION_PROVIDER_PARAMETER_GROUP = "Connection Provider parameters";
   public static final String SOURCE_PARAMETER_GROUP = "Source parameters";
+  public static final String DSL_PREFIX = "wsc";
 
   public static final int DEFAULT_PORT = 8080;
 
@@ -115,7 +116,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
         .fromVendor(MULESOFT)
         .withCategory(Category.SELECT)
         .withModelProperty(EXTENSION_MODEL_PROPERTY)
-        .withXmlDsl(XmlDslModel.builder().build())
+        .withXmlDsl(XmlDslModel.builder().setPrefix(DSL_PREFIX).build())
         .withExternalLibrary(EXTERNAL_LIBRARY_MODEL);
 
     ConfigurationDeclarer config =
