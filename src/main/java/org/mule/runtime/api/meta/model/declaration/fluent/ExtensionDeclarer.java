@@ -38,7 +38,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
-      asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
+      asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "org.mule.sdk.api.", "com.sun.");
   // Allow to configure this through system property to avoid releasing a new version if some other scenario other than the
   // gateway one is detected.
   private static final List<String> FORCE_REGISTERED_PACKAGES =
