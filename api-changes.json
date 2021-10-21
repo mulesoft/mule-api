@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.interception.ProcessorInterceptor::isErrorMappingRequired(org.mule.runtime.api.component.location.ComponentLocation)",
+          "package": "org.mule.runtime.api.interception",
+          "classSimpleName": "ProcessorInterceptor",
+          "methodName": "isErrorMappingRequired",
+          "elementKind": "method",
+          "justification": "MULE-19866: interceptors should be able to decide whether to perform an extra error mapping when operation fails"
+        },
+        {
           "code": "java.class.removed",
           "old": "interface org.mule.runtime.api.profiling.ProfilingDataConsumer<T extends org.mule.runtime.api.profiling.ProfilingEventContext>",
           "package": "org.mule.runtime.api.profiling",
