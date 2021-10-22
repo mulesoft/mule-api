@@ -112,4 +112,14 @@ public interface ProcessorInterceptor {
    * @param thrown the exception thrown by the intercepted component, if any.
    */
   default void after(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
+
+  /**
+   * Determines if the intercepted component requires the error mapping to be performed.
+   *
+   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @return {@code true} if the error mapping is required, {@code false} otherwise.
+   */
+  default boolean isErrorMappingRequired(ComponentLocation location) {
+    return false;
+  }
 }
