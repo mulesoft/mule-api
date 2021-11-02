@@ -54,6 +54,7 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
   public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
   public static final ObjectType COMPLEX_TYPE = create(JAVA).objectType().id("COMPLEX_TYPE").build();
   public static final ObjectType ANOTHER_COMPLEX_TYPE = create(JAVA).objectType().id("ANOTHER_COMPLEX_TYPE").build();
+  public static final String DSL_PREFIX = "http";
 
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 
@@ -69,7 +70,7 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
         .withCategory(COMMUNITY)
         .withType(COMPLEX_TYPE)
         .withType(ANOTHER_COMPLEX_TYPE)
-        .withXmlDsl(XmlDslModel.builder().build());
+        .withXmlDsl(XmlDslModel.builder().setPrefix(DSL_PREFIX).build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
     staticResource.supportsStreaming(true).withOutput().ofType(getBinaryType());
     staticResource.withOutputAttributes().ofType(getObjectType(Object.class));
