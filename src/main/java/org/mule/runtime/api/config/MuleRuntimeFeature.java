@@ -6,18 +6,19 @@
  */
 package org.mule.runtime.api.config;
 
-import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
+
+import static java.util.Optional.ofNullable;
 
 import java.util.Optional;
 
@@ -174,12 +175,26 @@ public enum MuleRuntimeFeature implements Feature {
   DW_REMOVE_SHADOWED_IMPLICIT_INPUTS(
       "When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.",
       "DW-893",
-      "4.4.0", DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY);
+      "4.4.0", DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY),
+
+  /**
+   * When enabled,
+   *
+   * @since 4.4.0-202201
+   */
+  ENFORCE_ERROR_TYPES_VALIDATION(
+      "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",
+      "MULE-19879",
+      "4.4.0");
 
   private final String description;
   private final String issueId;
   private final String enabledByDefaultSince;
   private final String overridingSystemPropertyName;
+
+  MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince) {
+    this(description, issueId, enabledByDefaultSince, null);
+  }
 
   MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince, String overridingSystemPropertyName) {
     this.description = description;

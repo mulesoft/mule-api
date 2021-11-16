@@ -79,10 +79,11 @@ public interface Feature {
    * </ol>
    * </li>
    * <li>If {@link #getOverridingSystemPropertyName()} is not set, then the feature flagging configuration will be applied to
-   * decide whether the feature is enabled or disabled.</li></li>
+   * decide whether the feature is enabled or disabled.</li>
    * </ol>
    *
-   * @return The name of a System Property to configure the feature.
+   * @return The name of a System Property to configure the feature, or {@link Optional#empty()} if it cannot be configured by
+   *         system property.
    */
   Optional<String> getOverridingSystemPropertyName();
 }
