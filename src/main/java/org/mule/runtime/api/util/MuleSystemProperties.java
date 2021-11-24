@@ -379,8 +379,8 @@ public final class MuleSystemProperties {
    *
    * @since 4.4.1, 4.3.1
    */
-  public static final String ENABLE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "enable.parameter.whitespace.trimming";
+  public static final String DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.attribute.parameter.whitespace.trimming";
 
   static {
     // Maintain compatibility after fix for MULE-19406
