@@ -374,15 +374,13 @@ public final class MuleSystemProperties {
   public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
 
-
   /**
-   * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
-   * it
+   * When enabled, the Runtime will trim whitespaces from parameter values defined at the attribute level in the dsl.
    *
-   * @since 4.5.0, 4.4.1, 4.3.1
+   * @since 4.4.1, 4.3.1
    */
-  public static final String DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "enable.default.errorhandler.not.rollback.incorrect.tx";
+  public static final String DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.attribute.parameter.whitespace.trimming";
 
   static {
     // Maintain compatibility after fix for MULE-19406
