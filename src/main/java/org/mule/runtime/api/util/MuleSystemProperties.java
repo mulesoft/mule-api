@@ -374,6 +374,14 @@ public final class MuleSystemProperties {
   public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
 
+  /**
+   * When enabled, the Runtime will trim whitespaces from parameter values defined at the attribute level in the dsl.
+   *
+   * @since 4.4.1, 4.3.1
+   */
+  public static final String DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.attribute.parameter.whitespace.trimming";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
