@@ -17,6 +17,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PRO
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 
 import static java.util.Optional.ofNullable;
 
@@ -185,7 +186,17 @@ public enum MuleRuntimeFeature implements Feature {
   ENFORCE_ERROR_TYPES_VALIDATION(
       "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",
       "MULE-19879",
-      "4.4.0");
+      "4.4.0"),
+
+  /**
+   * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
+   * it
+   *
+   * @since 4.4.0-202201
+   */
+  DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
+      "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
+      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY);
 
   private final String description;
   private final String issueId;
