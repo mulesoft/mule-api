@@ -13,6 +13,12 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLA
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
+<<<<<<< HEAD
+=======
+import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
+>>>>>>> 4beef68f... MULE-19919: adding feature flag (#909)
 
 import org.mule.runtime.api.util.MuleSystemProperties;
 
@@ -116,7 +122,17 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, extensions will only be able to load exported resources from the deployable artifacts (application, policy, domain).",
       "MULE-19815",
       "4.4.0",
-      START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY);
+      START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY),
+
+  /**
+   * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
+   * it
+   *
+   * @since 4.4.0-202201
+   */
+  DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
+      "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
+      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY);
 
   private final String description;
   private final String issueId;
