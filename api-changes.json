@@ -272,6 +272,15 @@
           "fieldName": "BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY",
           "elementKind": "field",
           "justification": "MULE-19218: Add feature flag to Remove intermediate commits from batch:aggregator"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19919: allows default error handler not to rollback txs that it shouldn't"
         }
       ]
     }
