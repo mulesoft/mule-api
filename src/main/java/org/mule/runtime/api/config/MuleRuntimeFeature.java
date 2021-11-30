@@ -186,7 +186,7 @@ public enum MuleRuntimeFeature implements Feature {
   ENFORCE_ERROR_TYPES_VALIDATION(
       "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",
       "MULE-19879",
-      "4.4.0"),
+      "4.5.0"),
 
   /**
    * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
@@ -203,10 +203,21 @@ public enum MuleRuntimeFeature implements Feature {
   private final String enabledByDefaultSince;
   private final String overridingSystemPropertyName;
 
+  /**
+   * @param description           Description of the feature. This description will be part of end user documentation.
+   * @param issueId               The issue that caused this feature addition. For instance, <code>MULE-1234</code>.
+   * @param enabledByDefaultSince See {@link Feature#getEnabledByDefaultSince()}.
+   */
   MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince) {
     this(description, issueId, enabledByDefaultSince, null);
   }
 
+  /**
+   * @param description                  Description of the feature. This description will be part of end user documentation.
+   * @param issueId                      The issue that caused this feature addition. For instance, <code>MULE-1234</code>.
+   * @param enabledByDefaultSince        See {@link Feature#getEnabledByDefaultSince()}.
+   * @param overridingSystemPropertyName See {@link Feature#getOverridingSystemPropertyName()}.
+   */
   MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince, String overridingSystemPropertyName) {
     this.description = description;
     this.issueId = issueId;
