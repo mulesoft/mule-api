@@ -189,7 +189,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
       "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
-      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY);
+      "MULE-19919", "4.5.0, 4.4.1", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY);
 
   private final String description;
   private final String issueId;
