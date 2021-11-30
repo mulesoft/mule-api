@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING",
+          "elementKind": "enumConstant",
+          "justification": "MULE-19919: allows to make default error handler not rollback tx that it shouldn't"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19919: allows to make default error handler not rollback tx that it shouldn't"
+        },
+        {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method boolean org.mule.runtime.api.interception.ProcessorInterceptor::isErrorMappingRequired(org.mule.runtime.api.component.location.ComponentLocation)",
           "package": "org.mule.runtime.api.interception",
