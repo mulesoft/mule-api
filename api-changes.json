@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19803: allows to disable whitespace trimming for parameters defined at the attribute level in the dsl"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
