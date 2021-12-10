@@ -12,7 +12,6 @@ package org.mule.runtime.api.connection;
  * @param <C> the generic type for the pooled connection
  * @since 1.0
  */
-// TODO: MULE-10174: Review where do ConnectionProvide specializations belong
 public interface PoolingListener<C> {
 
   /**
