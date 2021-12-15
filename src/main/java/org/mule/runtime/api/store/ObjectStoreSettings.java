@@ -84,6 +84,18 @@ public class ObjectStoreSettings {
     }
 
     /**
+     * Sets whether the entries should always be expired when the expiration thread runs. It will only be used by the runtime if
+     * expiration is configured (i.e., {@link #entryTtl(Long)} or {@link #maxEntries(Integer)} were also invoked).
+     *
+     * @param alwaysExpire whether old entries should be expired every time the expiration thread runs
+     * @return {@code this} builder
+     */
+    public Builder alwaysExpire(boolean alwaysExpire) {
+      product.alwaysExpire = alwaysExpire;
+      return this;
+    }
+
+    /**
      * Returns the built settings object. {@code this} instance should be discarded and no longer used after invoking this method
      *
      * @return the built {@link ObjectStoreSettings} object
@@ -122,6 +134,7 @@ public class ObjectStoreSettings {
   private Integer maxEntries = null;
   private Long entryTTL;
   private long expirationInterval = DEFAULT_EXPIRATION_INTERVAL;
+  private boolean alwaysExpire = false;
 
   private ObjectStoreSettings() {}
 
@@ -154,5 +167,12 @@ public class ObjectStoreSettings {
    */
   public long getExpirationInterval() {
     return expirationInterval;
+  }
+
+  /**
+   * Whether old entries should be expired every time the expiration thread runs.
+   */
+  public boolean isAlwaysExpire() {
+    return alwaysExpire;
   }
 }
