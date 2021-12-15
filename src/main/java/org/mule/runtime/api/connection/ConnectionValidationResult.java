@@ -8,6 +8,7 @@ package org.mule.runtime.api.connection;
 
 import static java.util.Optional.ofNullable;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.api.annotation.NoInstantiate;
 import org.mule.runtime.api.message.ErrorType;
 
@@ -18,6 +19,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
+@NoExtend
 public class ConnectionValidationResult {
 
   private boolean validationStatus;
@@ -25,6 +27,9 @@ public class ConnectionValidationResult {
   private ErrorType errorType;
   private Exception exception;
 
+  /**
+   * For internal use only. This class is not part of the API. Do not use.
+   */
   @NoInstantiate
   protected ConnectionValidationResult() {}
 

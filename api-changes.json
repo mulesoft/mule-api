@@ -82,6 +82,17 @@
           "classSimpleName": "ProcessingStrategyProfilingEventContext",
           "elementKind": "interface",
           "justification": "MULE-19749: new module for profiling API"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.connection.ConnectionValidationResult",
+          "new": "class org.mule.runtime.api.connection.ConnectionValidationResult",
+          "annotationType": "org.mule.api.annotation.NoExtend",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "package": "org.mule.runtime.api.connection",
+          "classSimpleName": "ConnectionValidationResult",
+          "elementKind": "class",
+          "justification": "Class was final in prior versions so no actual change."
         }
       ]
     }
