@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.store.ObjectStoreSettings.Builder org.mule.runtime.api.store.ObjectStoreSettings.Builder::alwaysExpire(boolean)",
+          "package": "org.mule.runtime.api.store",
+          "classSimpleName": "Builder",
+          "methodName": "alwaysExpire",
+          "elementKind": "method",
+          "justification": "MULE-19992: private object stores should be able to be expired in secondary node"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method boolean org.mule.runtime.api.store.ObjectStoreSettings::isAlwaysExpire()",
+          "package": "org.mule.runtime.api.store",
+          "classSimpleName": "ObjectStoreSettings",
+          "methodName": "isAlwaysExpire",
+          "elementKind": "method",
+          "justification": "MULE-19992: private object stores should be able to be expired in secondary node"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY",
           "package": "org.mule.runtime.api.util",
