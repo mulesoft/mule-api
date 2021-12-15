@@ -89,6 +89,8 @@ public class ObjectStoreSettings {
      *
      * @param alwaysExpire whether old entries should be expired every time the expiration thread runs
      * @return {@code this} builder
+     *
+     * @since 1.3
      */
     public Builder alwaysExpire(boolean alwaysExpire) {
       product.alwaysExpire = alwaysExpire;
@@ -171,6 +173,8 @@ public class ObjectStoreSettings {
 
   /**
    * Whether old entries should be expired every time the expiration thread runs.
+   *
+   * @since 1.3
    */
   public boolean isAlwaysExpire() {
     return alwaysExpire;
