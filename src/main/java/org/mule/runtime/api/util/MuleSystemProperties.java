@@ -391,6 +391,14 @@ public final class MuleSystemProperties {
   public static final String DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.default.errorhandler.not.rollback.incorrect.tx";
 
+  /**
+   * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
+   *
+   * @since 4.4.0-202202
+   */
+  public static final String ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY =
+          SYSTEM_PROPERTY_PREFIX + "disable.expression.validation";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
