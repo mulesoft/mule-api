@@ -182,7 +182,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled,
    *
-   * @since 4.4.0-202201
+   * @since 4.4.0-202202
    */
   ENFORCE_ERROR_TYPES_VALIDATION(
       "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",

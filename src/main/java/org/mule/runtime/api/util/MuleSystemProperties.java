@@ -397,7 +397,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0-202202
    */
   public static final String ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY =
-          SYSTEM_PROPERTY_PREFIX + "disable.expression.validation";
+          SYSTEM_PROPERTY_PREFIX + "enforce.expression.validation";
 
   static {
     // Maintain compatibility after fix for MULE-19406
