@@ -205,8 +205,8 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0-202202
    */
   ENFORCE_REQUIRED_EXPRESSION_VALIDATION(
-          "When enabled, expression validations will be enforced for targetValue, not allowing a literal value.",
-          "MULE-19987", "4.5.0", ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY);
+      "When enabled, expression validations will be enforced for targetValue, not allowing a literal value.",
+      "MULE-19987", "4.5.0", ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY);
 
   private final String description;
   private final String issueId;
