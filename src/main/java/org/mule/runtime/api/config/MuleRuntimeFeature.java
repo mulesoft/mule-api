@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
@@ -196,7 +197,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
       "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
-      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY);
+      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
+
+  /**
+   * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
+   *
+   * @since 4.4.0-202202
+   */
+  ENFORCE_REQUIRED_EXPRESSION_VALIDATION(
+      "When enabled, expression validations will be enforced for targetValue, not allowing a literal value.",
+      "MULE-19987", "4.5.0", ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY);
 
   private final String description;
   private final String issueId;
