@@ -26,7 +26,7 @@ public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {
   /**
    * @param size the required size.
    *
-   * @return Allocated Buffer at least of the provided size.
+   * @return allocated buffer at least of the provided size.
    */
   T allocateAtLeast(int size);
 
@@ -34,7 +34,7 @@ public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {
    * @param newSize   the required size.
    * @param oldBuffer the old buffer.
    *
-   * @return Reallocate Buffer to a required size.
+   * @return reallocate buffer to a required size.
    */
   T reallocate(T oldBuffer, int newSize);
 
@@ -50,7 +50,7 @@ public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {
   byte[] getByteArray(int size);
 
   /**
-   * Disposes the bute buffer provider
+   * Disposes the byte buffer provider
    */
   void dispose();
 }
