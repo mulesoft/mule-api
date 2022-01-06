@@ -19,10 +19,4 @@ public interface ByteBufferProviderConfiguration {
    */
   ByteBufferType getByteBufferType();
 
-
-  /**
-   * @return the configuration for the created pools.
-   */
-  ByteBufferPoolConfiguration getByteBufferPoolConfiguration();
-
 }

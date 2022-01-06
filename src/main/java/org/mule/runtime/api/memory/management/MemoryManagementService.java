@@ -8,8 +8,10 @@ package org.mule.runtime.api.memory.management;
 
 import org.mule.runtime.api.lifecycle.Disposable;
 import org.mule.runtime.api.lifecycle.Initialisable;
+import org.mule.runtime.api.memory.provider.ByteBufferPoolConfiguration;
 import org.mule.runtime.api.memory.provider.ByteBufferProvider;
 import org.mule.runtime.api.memory.provider.ByteBufferProviderConfiguration;
+import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 
 /**
  * Provides resources for memory management to the runtime.
@@ -17,10 +19,30 @@ import org.mule.runtime.api.memory.provider.ByteBufferProviderConfiguration;
 public interface MemoryManagementService extends Initialisable, Disposable {
 
   /**
+   * Get a buffer provider with a
    *
-   * @param name          name for the the registration of the {@link ByteBufferProvider}
-   * @param configuration a {@link ByteBufferProviderConfiguration}
+   * @param name              name for the the registration of the {@link ByteBufferProvider}
+   * @param type              the {@link ByteBufferType}
+   * @param poolConfiguration the {@link ByteBufferPoolConfiguration}
+   * @param maxBufferSize     the max buffer size
    * @return a {@link ByteBufferProvider}
    */
-  ByteBufferProvider getByteBufferProvider(String name, ByteBufferProviderConfiguration configuration);
+  ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type, int maxBufferSize,
+                                           ByteBufferPoolConfiguration poolConfiguration);
+
+  /**
+   * Get a buffer provider with a
+   *
+   * @param name name for the the registration of the {@link ByteBufferProvider}
+   * @param type the {@link ByteBufferType}
+   * @return a {@link ByteBufferProvider}
+   */
+  ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type);
+
+  /**
+   * Disposes a me
+   *
+   * @param name name of the {@link ByteBufferProvider}
+   */
+  void disposeByteBufferProvider(String name);
 }

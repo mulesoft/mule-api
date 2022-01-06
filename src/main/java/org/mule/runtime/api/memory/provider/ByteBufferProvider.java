@@ -11,7 +11,7 @@ import org.mule.runtime.api.lifecycle.Disposable;
 import java.nio.ByteBuffer;
 
 /**
- * A Provider Responsible for allocating and releasing memory, required during application runtime.
+ * A Provider relocating for allocating and releasing memory, required during application runtime.
  */
 public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {
 

@@ -12,7 +12,7 @@ package org.mule.runtime.api.memory.provider;
 public interface ByteBufferPoolConfiguration {
 
   /**
-   * @return the starting buffer size to have on creation of the pool.
+   * @return the starting buffer size to have on creation of each of the pool.
    */
   int getBaseByteBufferSize();
 
@@ -25,10 +25,5 @@ public interface ByteBufferPoolConfiguration {
    * @return the growth factor for the creation of the different pools.
    */
   int getGrowthFactor();
-
-  /**
-   * @return the max size of the pool.
-   */
-  int maxSize();
 
 }
