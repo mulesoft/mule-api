@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.memory.provider;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.lifecycle.Disposable;
 
 import java.nio.ByteBuffer;
@@ -13,6 +14,7 @@ import java.nio.ByteBuffer;
 /**
  * A Provider relocating for allocating and releasing memory, required during application runtime.
  */
+@Experimental
 public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {
 
 

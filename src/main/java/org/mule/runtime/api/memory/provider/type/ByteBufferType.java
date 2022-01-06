@@ -6,11 +6,13 @@
  */
 package org.mule.runtime.api.memory.provider.type;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.memory.provider.ByteBufferProvider;
 
 /**
  * Represents the type of a {@link java.nio.ByteBuffer} that a {@link ByteBufferProvider} provides.
  */
+@Experimental
 public enum ByteBufferType {
 
   /**

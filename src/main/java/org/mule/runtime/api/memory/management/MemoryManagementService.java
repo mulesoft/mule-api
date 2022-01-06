@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.memory.management;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.lifecycle.Disposable;
 import org.mule.runtime.api.lifecycle.Initialisable;
 import org.mule.runtime.api.memory.provider.ByteBufferPoolConfiguration;
@@ -16,6 +17,7 @@ import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 /**
  * Provides resources for memory management to the runtime.
  */
+@Experimental
 public interface MemoryManagementService extends Initialisable, Disposable {
 
   /**

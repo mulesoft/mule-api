@@ -7,11 +7,13 @@
 package org.mule.runtime.api.memory.provider;
 
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 
 /**
  * A Configuration for a {@link ByteBufferProvider}
  */
+@Experimental
 public interface ByteBufferProviderConfiguration {
 
   /**
