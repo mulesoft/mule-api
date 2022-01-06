@@ -23,19 +23,18 @@ import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 public interface MemoryManagementService extends Initialisable, Disposable {
 
   /**
-   * Get a buffer provider according to a configuration.
+   * Get a named buffer provider according to a configuration
    *
    * @param name              name for the the registration of the {@link ByteBufferProvider}
    * @param type              the {@link ByteBufferType}
    * @param poolConfiguration the {@link ByteBufferPoolConfiguration}
-   * @param maxBufferSize     the max buffer size
    * @return a {@link ByteBufferProvider}
    */
   ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type,
                                            ByteBufferPoolConfiguration poolConfiguration);
 
   /**
-   * Get a buffer provider according to a configuration.
+   * Get a default named buffer provider.
    *
    * @param name name for the the registration of the {@link ByteBufferProvider}
    * @param type the {@link ByteBufferType}
