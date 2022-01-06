@@ -6,13 +6,18 @@
  */
 package org.mule.runtime.api.memory.provider;
 
+import org.mule.api.annotation.Experimental;
+
 /**
  * A list of properties that are configurable for a byte buffer pool.
+ *
+ * @since 4.5.0
  */
+@Experimental
 public interface ByteBufferPoolConfiguration {
 
   /**
-   * @return the starting buffer size to have on creation of the pool.
+   * @return the starting buffer size to have on creation of each of the pool.
    */
   int getBaseByteBufferSize();
 
@@ -27,8 +32,7 @@ public interface ByteBufferPoolConfiguration {
   int getGrowthFactor();
 
   /**
-   * @return the max size of the pool.
+   * @return the max buffer size for the pool
    */
-  int maxSize();
-
+  int getMaxBufferSize();
 }
