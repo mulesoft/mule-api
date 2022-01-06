@@ -44,7 +44,7 @@ public interface MemoryManagementService extends Initialisable, Disposable {
   ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type);
 
   /**
-   * Disposes a me
+   * Disposes a byte buffer provider.
    *
    * @param name name of the {@link ByteBufferProvider}
    */
