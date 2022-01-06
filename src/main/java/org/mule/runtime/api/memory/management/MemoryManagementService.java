@@ -23,7 +23,7 @@ import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 public interface MemoryManagementService extends Initialisable, Disposable {
 
   /**
-   * Get a named buffer provider according to a configuration
+   * Gets a named buffer provider according to a configuration.
    *
    * @param name              name for the the registration of the {@link ByteBufferProvider}
    * @param type              the {@link ByteBufferType}
@@ -34,7 +34,7 @@ public interface MemoryManagementService extends Initialisable, Disposable {
                                            ByteBufferPoolConfiguration poolConfiguration);
 
   /**
-   * Get a default named buffer provider.
+   * Gets a default named buffer provider.
    *
    * @param name name for the the registration of the {@link ByteBufferProvider}
    * @param type the {@link ByteBufferType}
