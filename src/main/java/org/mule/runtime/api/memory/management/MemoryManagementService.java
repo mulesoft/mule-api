@@ -16,6 +16,8 @@ import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 
 /**
  * Provides resources for memory management to the runtime.
+ *
+ * @since 4.5.0
  */
 @Experimental
 public interface MemoryManagementService extends Initialisable, Disposable {

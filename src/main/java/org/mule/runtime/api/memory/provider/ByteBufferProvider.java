@@ -13,6 +13,8 @@ import java.nio.ByteBuffer;
 
 /**
  * A Provider responsible for allocating and releasing memory, required during application runtime.
+ *
+ * @since 4.5.0
  */
 @Experimental
 public interface ByteBufferProvider<T extends ByteBuffer> extends Disposable {

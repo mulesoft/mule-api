@@ -11,6 +11,8 @@ import org.mule.runtime.api.memory.provider.ByteBufferProvider;
 
 /**
  * Represents the type of a {@link java.nio.ByteBuffer} that a {@link ByteBufferProvider} provides.
+ *
+ * @since 4.5.0
  */
 @Experimental
 public enum ByteBufferType {

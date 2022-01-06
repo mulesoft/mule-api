@@ -12,6 +12,8 @@ import org.mule.runtime.api.memory.provider.type.ByteBufferType;
 
 /**
  * A Configuration for a {@link ByteBufferProvider}
+ *
+ * @since 4.5.0
  */
 @Experimental
 public interface ByteBufferProviderConfiguration {

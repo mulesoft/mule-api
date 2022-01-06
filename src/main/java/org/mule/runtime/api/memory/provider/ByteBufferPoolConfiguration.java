@@ -10,6 +10,8 @@ import org.mule.api.annotation.Experimental;
 
 /**
  * A list of properties that are configurable for a byte buffer pool.
+ *
+ * @since 4.5.0
  */
 @Experimental
 public interface ByteBufferPoolConfiguration {
