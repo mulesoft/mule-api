@@ -35,7 +35,7 @@ public interface MemoryManagementService extends Initialisable, Disposable {
                                            ByteBufferPoolConfiguration poolConfiguration);
 
   /**
-   * Get a buffer provider defined by a name.
+   * Get a buffer provider according to a configuration.
    *
    * @param name name for the the registration of the {@link ByteBufferProvider}
    * @param type the {@link ByteBufferType}
