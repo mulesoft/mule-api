@@ -31,4 +31,8 @@ public interface ByteBufferPoolConfiguration {
    */
   int getGrowthFactor();
 
+  /**
+   * @return the max buffer size for the pool
+   */
+  int getMaxBufferSize();
 }

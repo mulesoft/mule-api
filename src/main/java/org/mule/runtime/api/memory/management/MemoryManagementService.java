@@ -31,7 +31,7 @@ public interface MemoryManagementService extends Initialisable, Disposable {
    * @param maxBufferSize     the max buffer size
    * @return a {@link ByteBufferProvider}
    */
-  ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type, int maxBufferSize,
+  ByteBufferProvider getByteBufferProvider(String name, ByteBufferType type,
                                            ByteBufferPoolConfiguration poolConfiguration);
 
   /**
