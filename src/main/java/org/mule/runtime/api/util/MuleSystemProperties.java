@@ -430,7 +430,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
    */
-  public static final String ENABLE_MULE_REDIRECT_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
+  public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
