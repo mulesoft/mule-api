@@ -399,6 +399,14 @@ public final class MuleSystemProperties {
   public static final String ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enforce.expression.validation";
 
+  /**
+   * When enabled, expression validations will be enforced for all DataWeave expressions.
+   *
+   * @since 4.5.0
+   */
+  public static final String ENFORCE_EXPRESSION_VALIDATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enforce.dw.expression.validation";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
