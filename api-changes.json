@@ -187,6 +187,15 @@
           "methodName": "discover",
           "elementKind": "method",
           "justification": "Old type was not adding any value due to type erasure, and was causing issues when working with Collection utils"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_MULE_REDIRECT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_MULE_REDIRECT_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-19942: add system property to make Mule handle redirects."
         }
       ]
     }
