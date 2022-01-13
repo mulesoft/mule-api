@@ -167,12 +167,14 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
 
       CaseInsensitiveMapKey value = cache.get(key);
       if (value == null) {
-        value = cache.computeIfAbsent(key, k -> new CaseInsensitiveMapKey(k));
-      }
+        value = cache.computeIfAbsent(key, CaseInsensitiveMapKey::new);
 
-      if (cache.size() > MAX_CACHE_SIZE) {
-        usingCache.set(false);
-        cache.clear();
+        // we do the size check only if the value was not present and needed to be computed
+        // being this a ConcurrentHashMap, getting the size is not as cheap as it looks
+        if (cache.size() > MAX_CACHE_SIZE) {
+          usingCache.set(false);
+          cache.clear();
+        }
       }
 
       return value;
