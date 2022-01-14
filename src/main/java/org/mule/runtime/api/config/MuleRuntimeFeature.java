@@ -15,6 +15,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SE
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
@@ -216,7 +217,19 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ENFORCE_EXPRESSION_VALIDATION(
       "When enabled, expression validations will be enforced for all DataWeave expressions.",
-      "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY);
+      "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY),
+
+  /**
+   * When set to true, profiling consumers implemented by the runtime will be enabled by default. The idea is that in 4.6.0, no
+   * default profiling consumers will be present in the mule runtime (they will be implemented in server plugins). That is why
+   * this will be enabled by default in 4.6.0
+   *
+   * @since 4.4.0-202202
+   */
+  FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT(
+      "When enabled, profiling consumers will be enabled by default.",
+      "MULE-19967", "4.6.0", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY),
+      ;
 
 
   private final String description;
