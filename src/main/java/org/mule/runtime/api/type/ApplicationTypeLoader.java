@@ -12,7 +12,7 @@ import org.mule.runtime.api.metadata.MediaType;
 
 import java.util.Optional;
 
-public interface ApplicationTypeLoader  extends TypeLoader {
+public interface ApplicationTypeLoader extends TypeLoader {
 
   Optional<MetadataType> load(String typeIdentifier, String mediaType);
 
