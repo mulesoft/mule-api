@@ -383,6 +383,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.attribute.parameter.whitespace.trimming";
 
   /**
+   * When enabled, the Runtime will trim whitespaces from CDATA text parameter of pojos in the dsl.
+   *
+   * @since 4.5
+   */
+  public static final String DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.pojo.text.parameter.whitespace.trimming";
+
+  /**
    * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
    * it
    *

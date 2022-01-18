@@ -9,6 +9,8 @@ package org.mule.runtime.api.config;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
@@ -189,6 +191,24 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",
       "MULE-19879",
       "4.5.0"),
+
+  /**
+   * When enabled, the Runtime will trim whitespaces from parameter values defined at the attribute level in the dsl.
+   *
+   * @since 4.5.0
+   */
+  DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING(
+      "When enabled, the Runtime will trim whitespaces from parameter values defined at the attribute level in the dsl",
+      "MULE-19803", "4.5.0", DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY),
+
+  /**
+   * When enabled, the Runtime will trim whitespaces from CDATA text parameter of pojos in the dsl.
+   *
+   * @since 4.5.0
+   */
+  DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING(
+      "When enabled, the Runtime will trim whitespaces from CDATA text parameter of pojos in the dsl",
+      "MULE-20048", "4.5.0", DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY),
 
   /**
    * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
