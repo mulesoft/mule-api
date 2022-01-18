@@ -225,7 +225,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.4.0-202202
    */
   FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT(
-      "When enabled, profiling consumers will be enabled by default.",
+      "When enabled, profiling consumers implemented by the runtime will be enabled by default.",
       "MULE-19967", "", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY);
 
 
