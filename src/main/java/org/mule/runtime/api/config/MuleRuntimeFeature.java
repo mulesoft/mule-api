@@ -220,16 +220,13 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY),
 
   /**
-   * When set to true, profiling consumers implemented by the runtime will be enabled by default. The idea is that in 4.6.0, no
-   * default profiling consumers will be present in the mule runtime (they will be implemented in server plugins). That is why
-   * this will be enabled by default in 4.6.0
+   * When set to true, profiling consumers implemented by the runtime will be enabled by default.
    *
    * @since 4.4.0-202202
    */
   FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT(
       "When enabled, profiling consumers will be enabled by default.",
-      "MULE-19967", "4.6.0", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY),
-      ;
+      "MULE-19967", "", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY);
 
 
   private final String description;
