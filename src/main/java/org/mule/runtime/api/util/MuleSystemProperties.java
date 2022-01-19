@@ -415,6 +415,14 @@ public final class MuleSystemProperties {
   public static final String ENFORCE_EXPRESSION_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enforce.dw.expression.validation";
 
+  /**
+   * When set to true, profiling consumers implemented by the runtime will be enabled by default.
+   *
+   * @since 4.4.0-202202
+   */
+  public static final String FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "force.runtime.profiling.consumers.enablement";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
