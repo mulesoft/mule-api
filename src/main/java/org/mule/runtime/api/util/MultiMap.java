@@ -201,13 +201,14 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @param values collection of values to be associated with the specified key
    */
   public void put(K key, Collection<V> values) {
-    LinkedList<V> newValue = paramsMap.get(key);
-    if (newValue == null) {
-      newValue = new LinkedList<>(values);
-      paramsMap.put(key, newValue);
-    } else {
-      newValue.addAll(values);
-    }
+    paramsMap.compute(key, (k, curVal) -> {
+      if (curVal == null) {
+        return new LinkedList<>(values);
+      } else {
+        curVal.addAll(values);
+        return curVal;
+      }
+    });
   }
 
   @Override
@@ -252,10 +253,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * @since 1.1.1
    */
   public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
-    Set<? extends K> keySet = aMultiMap.keySet();
-    for (K key : keySet) {
-      put(key, (Collection<V>) aMultiMap.paramsMap.get(key));
-    }
+    aMultiMap.paramsMap.forEach((k, v) -> put(k, (Collection<V>) v));
   }
 
   @Override
