@@ -20,6 +20,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
@@ -240,13 +241,25 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY),
 
   /**
-   * When set to true, profiling consumers implemented by the runtime will be enabled by default.
+   * When enabled, profiling consumers implemented by the runtime will be enabled by default.
    *
    * @since 4.4.0-202202
    */
   FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT(
       "When enabled, profiling consumers implemented by the runtime will be enabled by default.",
-      "MULE-19967", "", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY);
+      "MULE-19967", "", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY),
+
+
+  /**
+   * When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that
+   * returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.
+   *
+   * @since 4.3.0-202203
+   */
+  PARALLEL_FOREACH_FLATTEN_MESSAGE(
+      "When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.",
+      "MULE-20067", "4.5.0", PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY),
+      ;
 
 
   private final String description;
