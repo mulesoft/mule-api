@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT",
+          "elementKind": "enumConstant",
+          "justification": "Experimental Profiling API - Enable all the profiling consumers for testing"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY",
+          "elementKind": "field",
+          "justification": "Experimental Profiling API - - Enable all the profiling consumers for testing"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
