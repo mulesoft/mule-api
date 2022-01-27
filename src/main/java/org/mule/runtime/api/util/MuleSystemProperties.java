@@ -296,6 +296,15 @@ public final class MuleSystemProperties {
   public static final String DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.default.errorhandler.not.rollback.incorrect.tx";
 
+  /**
+   * When set to true, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation
+   * that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.
+   *
+   * @since 4.3.0-202203
+   */
+  public static final String PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "parallelForeach.flattenMessage";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
