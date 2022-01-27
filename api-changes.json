@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.PARALLEL_FOREACH_FLATTEN_MESSAGE",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "PARALLEL_FOREACH_FLATTEN_MESSAGE",
+          "elementKind": "enumConstant",
+          "justification": "MULE-20067: Parallel-foreach doesn't flatten Message items"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY",
+          "elementKind": "field",
+          "justification": "MULE-20067: Parallel-foreach doesn't flatten Message items"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
