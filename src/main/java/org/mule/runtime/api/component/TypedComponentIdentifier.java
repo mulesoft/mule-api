@@ -105,8 +105,18 @@ public interface TypedComponentIdentifier {
      */
     OPERATION_DEF,
 
+    /**
+     * A Component's output payload definition
+     *
+     * @since 1.5
+     */
     OUTPUT_PAYLOAD_TYPE,
 
+    /**
+     * A Component's output attributes definition
+     *
+     * @since 1.5
+     */
     OUTPUT_ATTRIBUTES_TYPE
   }
 
