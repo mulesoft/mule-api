@@ -212,4 +212,28 @@ public interface SchedulerService extends Service {
    */
   List<SchedulerView> getSchedulers();
 
+  /**
+   * Determines if the current thread needs to be switched out from when processing an error.
+   *
+   * @return whether {@link Thread#currentThread()} belongs to a ThreadGroup indicating that needs to be switched out from when
+   *         processing an error.
+   *
+   * @since 1.5, 1.4.1, 1.3.1
+   */
+  default boolean isCurrentThreadSwitchOnErrorRequired() {
+    return false;
+  }
+
+  /**
+   * Determines if the current thread needs to be switched out from when processing an error.
+   *
+   * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
+   * @return whether {@link Thread#currentThread()} belongs to a ThreadGroup indicating that needs to be switched out from when
+   *         processing an error.
+   *
+   * @since 1.5, 1.4.1, 1.3.1
+   */
+  default boolean isCurrentThreadSwitchOnErrorRequired(SchedulerPoolsConfigFactory poolsConfigFactory) {
+    return false;
+  }
 }
