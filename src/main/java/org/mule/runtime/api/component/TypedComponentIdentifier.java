@@ -106,14 +106,14 @@ public interface TypedComponentIdentifier {
     OPERATION_DEF,
 
     /**
-     * A Component's output payload definition
+     * The output payload definition of a Mule DSL operation or source
      *
      * @since 1.5
      */
     OUTPUT_PAYLOAD_TYPE,
 
     /**
-     * A Component's output attributes definition
+     * The output attributes definition of a Mule DSL operation or source
      *
      * @since 1.5
      */
