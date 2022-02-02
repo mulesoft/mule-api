@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadSwitchOnErrorRequired()",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadSwitchOnErrorRequired",
+          "elementKind": "method",
+          "justification": "MULE-19537: non-blocking operations need to switch out from the selector thread on error"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadSwitchOnErrorRequired(org.mule.runtime.api.scheduler.SchedulerPoolsConfigFactory)",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadSwitchOnErrorRequired",
+          "elementKind": "method",
+          "justification": "MULE-19537: non-blocking operations need to switch out from the selector thread on error"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
           "new": "method boolean org.mule.runtime.api.interception.ProcessorInterceptor::isErrorMappingRequired(org.mule.runtime.api.component.location.ComponentLocation)",
           "package": "org.mule.runtime.api.interception",
           "classSimpleName": "ProcessorInterceptor",
