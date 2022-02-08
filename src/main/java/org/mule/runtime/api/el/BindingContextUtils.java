@@ -8,7 +8,6 @@ package org.mule.runtime.api.el;
 
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
-import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
 import static org.mule.runtime.api.metadata.DataType.STRING;
@@ -86,7 +85,6 @@ public class BindingContextUtils {
       .build();
 
   private static final DataType PARAMS_DATA_TYPE = VARS_DATA_TYPE;
-
   private static final DataType ITEM_SEQUENCE_INFO_DATA_TYPE = fromType(ItemSequenceInfoBindingWrapper.class);
   private static final DataType MESAGE_DATA_TYPE = fromType(Message.class);
   private static final DataType DATA_TYPE_DATA_TYPE = fromType(DataType.class);
@@ -123,9 +121,9 @@ public class BindingContextUtils {
    * @param event       the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
-   * to the given {@code event}.
+   *         to the given {@code event}.
    */
-  public static BindingContext.Builder createBindingContextBuilder(Event event, BindingContext baseContext) {
+  public static BindingContext.Builder addEventBuindingsToBuilder(Event event, BindingContext baseContext) {
     requireNonNull(event);
     requireNonNull(baseContext);
 
@@ -139,13 +137,13 @@ public class BindingContextUtils {
     }
 
     contextBuilder.addBinding(CORRELATION_ID,
-        new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
+                              new LazyValue<>(() -> new TypedValue<>(event.getContext().getCorrelationId(), STRING)));
 
     if (event.getItemSequenceInfo().isPresent()) {
       contextBuilder.addBinding(ITEM_SEQUENCE_INFO,
-          new LazyValue<>(() -> new TypedValue<>(new ItemSequenceInfoBindingWrapper(event
-              .getItemSequenceInfo().get()),
-              ITEM_SEQUENCE_INFO_DATA_TYPE)));
+                                new LazyValue<>(() -> new TypedValue<>(new ItemSequenceInfoBindingWrapper(event
+                                    .getItemSequenceInfo().get()),
+                                                                       ITEM_SEQUENCE_INFO_DATA_TYPE)));
     } else {
       contextBuilder.addBinding(ITEM_SEQUENCE_INFO, NULL_TYPED_VALUE_SUPPLIER);
     }
@@ -153,24 +151,24 @@ public class BindingContextUtils {
     Message message = event.getMessage();
     contextBuilder
         .addBinding(MESSAGE,
-            new LazyValue<>(() -> new TypedValue<>(event.getError()
-                .map(error -> new MessageWrapper(message, error.getCause(), error.getFailingComponent()))
-                .orElseGet(() -> new MessageWrapper(message, null, null)),
-                MESAGE_DATA_TYPE)));
+                    new LazyValue<>(() -> new TypedValue<>(event.getError()
+                        .map(error -> new MessageWrapper(message, error.getCause(), error.getFailingComponent()))
+                        .orElseGet(() -> new MessageWrapper(message, null, null)),
+                                                           MESAGE_DATA_TYPE)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
     contextBuilder.addBinding(PAYLOAD, message.getPayload());
     contextBuilder.addBinding(DATA_TYPE,
-        new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(), DATA_TYPE_DATA_TYPE)));
+                              new LazyValue<>(() -> new TypedValue<>(message.getPayload().getDataType(), DATA_TYPE_DATA_TYPE)));
 
     if (event.getError().isPresent()) {
       contextBuilder.addBinding(ERROR,
-          new LazyValue<>(() -> new TypedValue<>(event.getError().get(), ERROR_DATA_TYPE)));
+                                new LazyValue<>(() -> new TypedValue<>(event.getError().get(), ERROR_DATA_TYPE)));
     } else {
       contextBuilder.addBinding(ERROR, NULL_TYPED_VALUE_SUPPLIER);
     }
     if (event.getAuthentication().isPresent()) {
       contextBuilder.addBinding(AUTHENTICATION,
-          new LazyValue<>(() -> new TypedValue<>(event.getAuthentication().get(), AUTH_DATA_TYPE)));
+                                new LazyValue<>(() -> new TypedValue<>(event.getAuthentication().get(), AUTH_DATA_TYPE)));
     } else {
       contextBuilder.addBinding(AUTHENTICATION, NULL_TYPED_VALUE_SUPPLIER);
     }
@@ -178,29 +176,10 @@ public class BindingContextUtils {
     return contextBuilder;
   }
 
-  public static BindingContext.Builder addParametersToBuilder(BindingContext.Builder builder, Map<String, Object> parameters) {
-    return builder.addBinding(PARAMS, new TypedValue(unmodifiableMap(parameters), PARAMS_DATA_TYPE));
-  }
-
-  /**
-   * Creates a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
-   * to the given {@code event}.
-   *
-   * @param event       the event to build the new bindings for. Not-null.
-   * @param baseContext the context whose copy the event bindings will be added to. Not-null.
-   * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
-   * to the given {@code event}.
-   * @deprecated since 4.5.0. Use {@link #createBindingContextBuilder(Event, BindingContext)} instead.
-   */
-  @Deprecated
-  public static BindingContext.Builder addEventBuindingsToBuilder(Event event, BindingContext baseContext) {
-    return createBindingContextBuilder(event, baseContext);
-  }
-
   public static BindingContext.Builder addFlowNameBindingsToBuilder(ComponentLocation location,
                                                                     BindingContext.Builder contextBuilder) {
     return contextBuilder.addBinding(FLOW, () -> new TypedValue<>(new FlowVariablesAccessor(location.getRootContainerName()),
-        FLOW_DATA_TYPE));
+                                                                  FLOW_DATA_TYPE));
   }
 
   /**

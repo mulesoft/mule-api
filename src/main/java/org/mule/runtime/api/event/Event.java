@@ -32,6 +32,8 @@ public interface Event {
    */
   Map<String, TypedValue<?>> getVariables();
 
+  Map<String, TypedValue<?>> getParameters();
+
   /**
    * Returns the message payload for this event
    *
@@ -86,6 +88,4 @@ public interface Event {
    * @return a {@link BindingContext} created from the event content.
    */
   BindingContext asBindingContext();
-
-  BindingContext.Builder asBindingContextBuilder();
 }
