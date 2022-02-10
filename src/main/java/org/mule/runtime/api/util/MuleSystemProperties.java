@@ -245,7 +245,9 @@ public final class MuleSystemProperties {
    * only read on deploying an app.
    *
    * @since 4.4, 4.3.1
+   * @deprecated since 4.4.1, 4.5.0. Payload statistics are no longer supported, so this property will be ignored.
    */
+  @Deprecated
   public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
 
   /**
