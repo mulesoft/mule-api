@@ -212,4 +212,26 @@ public interface SchedulerService extends Service {
    */
   List<SchedulerView> getSchedulers();
 
+  /**
+   * Determines if the current thread belongs to a {@link ThreadGroup} indicating that waiting is allowed.
+   *
+   * @return whether {@link Thread#currentThread()} belongs to a {@link ThreadGroup} indicating that waiting is allowed.
+   *
+   * @since 1.5, 1.4.1, 1.3.1
+   */
+  default boolean isCurrentThreadInWaitGroup() {
+    return true;
+  }
+
+  /**
+   * Determines if the current thread belongs to a {@link ThreadGroup} indicating that waiting is allowed.
+   *
+   * @param poolsConfigFactory the configuration to use for the thread pools that the schedulers use.
+   * @return whether {@link Thread#currentThread()} belongs to a {@link ThreadGroup} indicating that waiting is allowed.
+   *
+   * @since 1.5, 1.4.1, 1.3.1
+   */
+  default boolean isCurrentThreadInWaitGroup(SchedulerPoolsConfigFactory poolsConfigFactory) {
+    return true;
+  }
 }
