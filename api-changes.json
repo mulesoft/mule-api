@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadInWaitGroup()",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadInWaitGroup",
+          "elementKind": "method",
+          "justification": "MULE-19537: non-blocking operations need to switch out from the selector thread on error"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadInWaitGroup(org.mule.runtime.api.scheduler.SchedulerPoolsConfigFactory)",
+          "package": "org.mule.runtime.api.scheduler",
+          "classSimpleName": "SchedulerService",
+          "methodName": "isCurrentThreadInWaitGroup",
+          "elementKind": "method",
+          "justification": "MULE-19537: non-blocking operations need to switch out from the selector thread on error"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.PARALLEL_FOREACH_FLATTEN_MESSAGE",
           "package": "org.mule.runtime.api.config",
