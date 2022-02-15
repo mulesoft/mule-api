@@ -94,6 +94,10 @@ public class BindingContextUtils {
 
   public final static TypedValue EMPTY_VARS = new TypedValue<>(emptyMap(), VARS_DATA_TYPE);
   private final static Supplier<TypedValue> EMPTY_VARS_SUPPLIER = () -> EMPTY_VARS;
+
+  public final static TypedValue EMPTY_PARAMS = new TypedValue<>(emptyMap(), PARAMS_DATA_TYPE);
+  private final static Supplier<TypedValue> EMPTY_PARAMS_SUPPLIER = () -> EMPTY_PARAMS;
+
   public static final TypedValue NULL_TYPED_VALUE = new TypedValue<>(null, DataType.OBJECT);
   private static final Supplier<TypedValue> NULL_TYPED_VALUE_SUPPLIER = () -> NULL_TYPED_VALUE;
 
@@ -134,6 +138,12 @@ public class BindingContextUtils {
       contextBuilder.addBinding(VARS, new LazyValue<>(() -> new TypedValue<>(event.getVariables(), VARS_DATA_TYPE)));
     } else {
       contextBuilder.addBinding(VARS, EMPTY_VARS_SUPPLIER);
+    }
+
+    if (!event.getParameters().isEmpty()) {
+      contextBuilder.addBinding(PARAMS, new LazyValue<>(() -> new TypedValue<>(event.getParameters(), PARAMS_DATA_TYPE)));
+    } else {
+      contextBuilder.addBinding(PARAMS, EMPTY_PARAMS_SUPPLIER);
     }
 
     contextBuilder.addBinding(CORRELATION_ID,
