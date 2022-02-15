@@ -33,8 +33,7 @@ public interface ExecutableComponent extends Component {
   /**
    * Executes the component based on a {@link Event} that may have been provided by another component execution.
    * <p>
-   * Streams will be closed and resources cleaned up when the existing root {@link EventContext}
-   * completes.
+   * Streams will be closed and resources cleaned up when the existing root {@link EventContext} completes.
    * 
    * @param event the input to execute the component
    * @return a {@link Event} with the content of the result
