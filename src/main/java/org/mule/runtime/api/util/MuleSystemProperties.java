@@ -9,6 +9,7 @@ package org.mule.runtime.api.util;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.streaming.CursorProvider;
@@ -220,7 +221,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, the defined categories of logging will result in a blocking processing type.
    * Categories must be comma separated. For instance: {@code some.category,other.category}.
-   * 
+   *
    * @since 4.2.0, 4.1.6
    */
   public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
@@ -247,7 +248,7 @@ public final class MuleSystemProperties {
   /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
    * isn't set, the behaviour will depend on {@link MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES}.
-   * 
+   *
    * @see MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES
    * @since 4.4.0, 4.3.1
    */
@@ -255,7 +256,7 @@ public final class MuleSystemProperties {
 
   /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY =
@@ -263,7 +264,7 @@ public final class MuleSystemProperties {
 
   /**
    * If set to true, the connection exceptions will be computed to trigger alerts.
-   * 
+   *
    * @since 4.4.0, 4.3.1
    */
   public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
@@ -329,6 +330,15 @@ public final class MuleSystemProperties {
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
    */
   public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
+
+  /**
+   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
