@@ -260,14 +260,14 @@ public enum MuleRuntimeFeature implements Feature {
       "MULE-20067", "4.5.0", PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY),
 
   /**
-   * When enabled, entries marked as `optional` in a `registry-bootstrap.properties` file that cannot be created will fail the
-   * deployment instead of being ignored.
+   * When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.
    * 
    * @since 4.5.0
    */
-  DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_LAX_INSTANTIATION(
-      "When enabled, entries marked as `optional` in a `registry-bootstrap.properties` file that cannot be created will fail the deployment instead of being ignored.",
-      "W-", "4.5.0"),
+  // TODO W-10736276 Remove this feature flag along with the work for W-10736276
+  DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
+      "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
+      "W-10736301", "4.5.0"),
       ;
 
   private final String description;
