@@ -9,6 +9,7 @@ package org.mule.runtime.api.util;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.metadata.MediaType;
@@ -432,6 +433,15 @@ public final class MuleSystemProperties {
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
    */
   public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
+
+  /**
+   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
