@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "elementKind": "field",
+          "justification": "MULE-19984: Add system property for the new sorter"
+        },
+        {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method boolean org.mule.runtime.api.scheduler.SchedulerService::isCurrentThreadInWaitGroup()",
           "package": "org.mule.runtime.api.scheduler",
