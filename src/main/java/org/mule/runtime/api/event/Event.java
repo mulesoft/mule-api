@@ -32,6 +32,17 @@ public interface Event {
    */
   Map<String, TypedValue<?>> getVariables();
 
+  /**
+   * The event parameters are set when a Mule operation is executed.
+   * <p>
+   * These parameters do not escape the scope of the executed operation. If in turn the operation invokes another one, the second
+   * operation's event will only contain its own parameters and will have no visibility to the original ones.
+   * <p>
+   * This map is always empty for an event circulating through a traditional flow.
+   *
+   * @return a map of {@link TypedValue} containing the parameter's names and values.
+   * @since 1.5.0
+   */
   Map<String, TypedValue<?>> getParameters();
 
   /**
