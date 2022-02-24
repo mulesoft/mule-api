@@ -32,6 +32,10 @@ public interface DslConstants {
    */
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
 
+  String THIS_PREFIX = "this";
+
+  String THIS_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, THIS_PREFIX);
+
   /**
    * Namespace for Mule core elements
    */
