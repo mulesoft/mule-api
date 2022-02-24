@@ -249,7 +249,6 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, profiling consumers implemented by the runtime will be enabled by default.",
       "MULE-19967", "", FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY),
 
-
   /**
    * When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that
    * returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.
@@ -259,8 +258,17 @@ public enum MuleRuntimeFeature implements Feature {
   PARALLEL_FOREACH_FLATTEN_MESSAGE(
       "When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.",
       "MULE-20067", "4.5.0", PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY),
-      ;
 
+  /**
+   * When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.
+   * 
+   * @since 4.5.0
+   */
+  // TODO W-10736276 Remove this feature flag along with the work for W-10736276
+  DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
+      "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
+      "W-10736301", "4.5.0"),
+      ;
 
   private final String description;
   private final String issueId;
