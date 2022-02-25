@@ -268,6 +268,17 @@ public enum MuleRuntimeFeature implements Feature {
   DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
       "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
       "W-10736301", "4.5.0"),
+
+  /**
+   * When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects
+   * registered into the `SimpleRegistry`.
+   * 
+   * @since 4.5.0
+   */
+  // TODO W- Remove this feature flag along with the work for W-
+  DISABLE_APPLY_OBJECT_PROCESSOR(
+      "When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects registered into the `SimpleRegistry`.",
+      "W-", "4.5.0"),
       ;
 
   private final String description;
