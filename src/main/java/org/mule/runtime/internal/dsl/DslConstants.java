@@ -32,8 +32,18 @@ public interface DslConstants {
    */
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
 
+  /**
+   * The prefix for components (operations, sources, etc) defined in the current application
+   *
+   * @since 1.5.0
+   */
   String THIS_PREFIX = "this";
 
+  /**
+   * The namespace for components (operations, sources, etc) defined in the current application
+   *
+   * @since 1.5.0
+   */
   String THIS_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, THIS_PREFIX);
 
   /**
