@@ -275,10 +275,10 @@ public enum MuleRuntimeFeature implements Feature {
    * 
    * @since 4.5.0
    */
-  // TODO W- Remove this feature flag along with the work for W-
+  // TODO W-10781591 Remove this feature flag along with the work for W-10781591
   DISABLE_APPLY_OBJECT_PROCESSOR(
       "When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects registered into the `SimpleRegistry`.",
-      "W-", "4.5.0"),
+      "MULE-11737", "4.5.0"),
       ;
 
   private final String description;
