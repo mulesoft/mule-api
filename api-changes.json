@@ -93,6 +93,18 @@
           "classSimpleName": "ConnectionValidationResult",
           "elementKind": "class",
           "justification": "Class was final in prior versions so no actual change."
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
+          "annotationType": "org.mule.api.annotation.Experimental",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_DISABLE_PAYLOAD_STATISTICS",
+          "elementKind": "field",
+          "justification": "Field should have been annotated as experimental to start with. It is deprecated now and will be removed soon."
         }
       ]
     }
