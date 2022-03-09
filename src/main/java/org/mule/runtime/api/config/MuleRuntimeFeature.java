@@ -147,6 +147,7 @@ public enum MuleRuntimeFeature implements Feature {
    *
    * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
    */
+  // TODO W-10815440 Remove this feature flag along with the work for W-10815440.
   ENABLE_BYTE_BUDDY_OBJECT_CREATION(
       "When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.",
       "W-10672687", "4.5.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
