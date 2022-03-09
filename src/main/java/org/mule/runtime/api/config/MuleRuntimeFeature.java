@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDL
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_VALIDATION_PROPERTY;
@@ -279,6 +280,15 @@ public enum MuleRuntimeFeature implements Feature {
   DISABLE_APPLY_OBJECT_PROCESSOR(
       "When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects registered into the `SimpleRegistry`.",
       "MULE-11737", "4.5.0"),
+
+  /**
+   * When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.
+   *
+   * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
+   */
+  ENABLE_BYTE_BUDDY_OBJECT_CREATION(
+      "When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.",
+      "W-10672687", "4.5.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
       ;
 
   private final String description;
