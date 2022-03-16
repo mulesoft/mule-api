@@ -335,6 +335,24 @@
           "fieldName": "ENABLE_MULE_REDIRECT_PROPERTY",
           "elementKind": "field",
           "justification": "MULE-19942: add system property to make Mule handle redirects."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.ENABLE_BYTE_BUDDY_OBJECT_CREATION",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "ENABLE_BYTE_BUDDY_OBJECT_CREATION",
+          "elementKind": "enumConstant",
+          "justification": "W-10672687: When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-10672687: When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB."
         }
       ]
     }

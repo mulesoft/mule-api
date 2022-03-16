@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
@@ -140,6 +141,16 @@ public enum MuleRuntimeFeature implements Feature {
   PARALLEL_FOREACH_FLATTEN_MESSAGE(
       "When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.",
       "MULE-20067", "4.5.0", PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY),
+
+  /**
+   * When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.
+   *
+   * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
+   */
+  // TODO W-10815440 Remove this feature flag along with the work for W-10815440.
+  ENABLE_BYTE_BUDDY_OBJECT_CREATION(
+      "When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.",
+      "W-10672687", "4.5.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
       ;
 
   private final String description;
