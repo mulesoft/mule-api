@@ -500,6 +500,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
 
   /**
+   * If set to true, whenever an application has an HTTP requester configured to use TLS, Grizzly will use the
+   * WorkerThreadIOStrategy.
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED =
+      SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
