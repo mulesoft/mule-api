@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
+          "elementKind": "field",
+          "justification": "W-10711033: adding system property to force Grizzly's WorkerThreadIOStrategy when TLS is enabled."
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
