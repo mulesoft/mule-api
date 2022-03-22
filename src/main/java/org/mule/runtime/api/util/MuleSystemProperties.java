@@ -509,6 +509,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * If set to true, attribute in entries in a `registry-bootstrap.properties` will be ignored.
+   *
+   * @since 4.5.0
+   */
+  public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
+          SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
