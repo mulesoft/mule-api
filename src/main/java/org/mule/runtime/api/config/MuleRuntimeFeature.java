@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
@@ -237,6 +238,7 @@ public enum MuleRuntimeFeature implements Feature {
    *
    * @since 4.5.0
    */
+  // TODO W-10883564 Remove this feature flag along with the work for W-10883564.
   ENFORCE_EXPRESSION_VALIDATION(
       "When enabled, expression validations will be enforced for all DataWeave expressions.",
       "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY),
@@ -268,7 +270,7 @@ public enum MuleRuntimeFeature implements Feature {
   // TODO W-10736276 Remove this feature flag along with the work for W-10736276
   DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
       "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
-      "W-10736301", "4.5.0"),
+      "W-10736301", "4.5.0", DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY),
 
   /**
    * When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects
