@@ -238,6 +238,7 @@ public enum MuleRuntimeFeature implements Feature {
    *
    * @since 4.5.0
    */
+  // TODO W-10883564 Remove this feature flag along with the work for W-10883564.
   ENFORCE_EXPRESSION_VALIDATION(
       "When enabled, expression validations will be enforced for all DataWeave expressions.",
       "MULE-19967", "4.5.0", ENFORCE_EXPRESSION_VALIDATION_PROPERTY),
