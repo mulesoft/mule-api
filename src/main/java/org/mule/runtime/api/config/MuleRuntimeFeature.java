@@ -28,6 +28,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COM
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 
 import static java.util.Optional.ofNullable;
+import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import java.util.Optional;
 
@@ -292,6 +293,17 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_BYTE_BUDDY_OBJECT_CREATION(
       "When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.",
       "W-10672687", "4.5.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
+
+  /**
+   * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
+   * the application classloader.
+   *
+   * @since 4.5.0
+   */
+  // TODO W-10855416 Remove this feature flag along with the work for W-10855416.
+  VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER(
+      "When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with the application classloader.",
+      "W-10808757", "4.5.0", VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY),
       ;
 
   private final String description;

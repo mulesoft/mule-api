@@ -517,6 +517,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
+   * the application classloader.
+   * 
+   * @since 4.5.0
+   */
+  public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
