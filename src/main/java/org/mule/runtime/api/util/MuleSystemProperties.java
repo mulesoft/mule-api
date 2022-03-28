@@ -363,7 +363,7 @@ public final class MuleSystemProperties {
    * @since 4.5.0, 4.4.1, 4.3.1
    */
   public static final String REVERT_SIGLETON_ERROR_HANDLER_PROPERTY =
-          SYSTEM_PROPERTY_PREFIX + "revert.singletonErrorHandler";
+      SYSTEM_PROPERTY_PREFIX + "revert.singletonErrorHandler";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
