@@ -6,7 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.runtime.api.meta.model.ComponentVisibility.PUBLIC;
+
 import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.ComponentVisibility;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 
 import java.util.LinkedHashSet;
@@ -26,6 +29,7 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
 
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
   private Set<ErrorModel> errorModels = new LinkedHashSet<>();
+  private ComponentVisibility visibility = PUBLIC;
 
   /**
    * {@inheritDoc}
@@ -51,4 +55,11 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
     return errorModels;
   }
 
+  public ComponentVisibility getVisibility() {
+    return visibility;
+  }
+
+  public void setVisibility(ComponentVisibility visibility) {
+    this.visibility = visibility;
+  }
 }

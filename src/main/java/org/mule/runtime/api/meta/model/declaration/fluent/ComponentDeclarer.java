@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ComponentVisibility;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
@@ -128,6 +129,11 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
   @Override
   public T withSemanticTerm(String semanticTerm) {
     declaration.addSemanticTerm(semanticTerm);
+    return (T) this;
+  }
+
+  public T withVisibility(ComponentVisibility visibility) {
+    declaration.setVisibility(visibility);
     return (T) this;
   }
 }

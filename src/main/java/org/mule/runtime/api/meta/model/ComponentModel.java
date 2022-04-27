@@ -33,4 +33,6 @@ public interface ComponentModel
    * @param visitor a {@link ComponentModelVisitor}
    */
   void accept(ComponentModelVisitor visitor);
+
+  ComponentVisibility getVisibility();
 }
