@@ -15,6 +15,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRA
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
+import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
@@ -35,7 +36,7 @@ import java.util.List;
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
-    HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer> {
+    HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer>, HasArtifactCoordinatesDeclarer<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "org.mule.sdk.api.", "com.sun.");
@@ -379,6 +380,12 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
+    return this;
+  }
+
+  @Override
+  public ExtensionDeclarer withArtifactCoordinates(ArtifactCoordinates artifactCoordinates) {
+    declaration.withArtifactCoordinates(artifactCoordinates);
     return this;
   }
 }
