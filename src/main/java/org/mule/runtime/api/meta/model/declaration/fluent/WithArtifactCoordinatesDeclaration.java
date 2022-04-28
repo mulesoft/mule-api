@@ -15,18 +15,18 @@ import java.util.Optional;
 /**
  * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link ArtifactCoordinates} objects
  *
- * @since 1.2
+ * @since 1.5
  */
 @NoImplement
 public interface WithArtifactCoordinatesDeclaration {
 
   /**
-   * @return {@code this} components {@link ArtifactCoordinates}
+   * @return {@code this} component's {@link ArtifactCoordinates}
    */
   Optional<ArtifactCoordinates> getArtifactCoordinates();
 
   /**
-   * @param artifactCoordinates {@code this} components {@link ArtifactCoordinates}
+   * @param artifactCoordinates {@code this} component's {@link ArtifactCoordinates}
    */
   void withArtifactCoordinates(ArtifactCoordinates artifactCoordinates);
 

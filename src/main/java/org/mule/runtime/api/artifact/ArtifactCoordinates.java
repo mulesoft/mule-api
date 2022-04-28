@@ -9,7 +9,7 @@ package org.mule.runtime.api.artifact;
 /**
  * The coordinates that identify an artifact, in the form of a Maven GAV
  *
- * @since 4.5.0
+ * @since 1.5
  */
 public interface ArtifactCoordinates {
 
