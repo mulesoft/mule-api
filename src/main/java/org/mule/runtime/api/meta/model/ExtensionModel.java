@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.ObjectType;
+import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.DescribedObject;
 import org.mule.runtime.api.meta.NamedObject;
@@ -211,4 +212,10 @@ public interface ExtensionModel
    * @since 1.4.0
    */
   Optional<ComponentModel> findComponentModel(String componentName);
+
+  /**
+   * @return a {@link ArtifactCoordinates} if the extension model belongs to a mule plugin or empty if not.
+   */
+  Optional<ArtifactCoordinates> getArtifactCoordinates();
+
 }
