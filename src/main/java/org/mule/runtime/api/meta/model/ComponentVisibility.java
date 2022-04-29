@@ -13,5 +13,13 @@ package org.mule.runtime.api.meta.model;
  */
 public enum ComponentVisibility {
 
-  PRIVATE, PUBLIC;
+  /**
+   * The {@link ComponentModel} will be visible for third parties
+   */
+  PUBLIC,
+  /**
+   * The {@link ComponentModel} will not be visible for third parties
+   */
+  PRIVATE
+
 }

@@ -55,10 +55,16 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
     return errorModels;
   }
 
+  /**
+   * @return this {@link ComponentDeclaration}'s {@link ComponentVisibility}.
+   */
   public ComponentVisibility getVisibility() {
     return visibility;
   }
 
+  /**
+   * @param visibility to set to this {@link ComponentDeclaration}.
+   */
   public void setVisibility(ComponentVisibility visibility) {
     this.visibility = visibility;
   }
