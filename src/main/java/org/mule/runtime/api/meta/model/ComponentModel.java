@@ -34,5 +34,8 @@ public interface ComponentModel
    */
   void accept(ComponentModelVisitor visitor);
 
+  /**
+   * @return the {@link ComponentVisibility} corresponding to this ComponentModel
+   */
   ComponentVisibility getVisibility();
 }

@@ -20,7 +20,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
     implements HasModelProperties<T>, HasNestedComponentsDeclarer,
-    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T>, HasSemanticTermsDeclarer<T> {
+    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T>, HasSemanticTermsDeclarer<T>, HasVisibility<T> {
 
   /**
    * Creates a new instance
@@ -132,6 +132,11 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
     return (T) this;
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.5.0
+   */
   public T withVisibility(ComponentVisibility visibility) {
     declaration.setVisibility(visibility);
     return (T) this;
