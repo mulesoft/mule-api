@@ -158,7 +158,8 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.5.0
    */
   REUSE_GLOBAL_ERROR_HANDLER(
-          "When enabled, the global error handlers will be reused instead of creating local copies.",
+      "When enabled, the global error handlers will be reused instead of creating local copies.",
+      "W-10888504", "4.5.0", REUSE_GLOBAL_ERROR_HANDLER_PROPERTY),
       ;
 
   private final String description;
