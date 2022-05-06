@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.REUSE_GLOBAL_ERROR_HANDLER",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER",
+          "elementKind": "enumConstant",
+          "justification": "W-10888504: adding feature flag to reuse global error handlers."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-10888504: adding system property to reuse global error handlers."
+        },
+        {
         "code": "java.field.addedStaticField",
         "new": "field org.mule.runtime.api.util.MuleSystemProperties.REVERT_SIGLETON_ERROR_HANDLER_PROPERTY",
         "package": "org.mule.runtime.api.util",
