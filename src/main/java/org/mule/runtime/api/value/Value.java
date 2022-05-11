@@ -13,8 +13,7 @@ import java.util.Set;
 /**
  * Represents a possible and valid value for a parameter.
  * <p>
- * Also this {@link Value} can be composed by other {@link Value Options}
- * to form a composed option.
+ * Also this {@link Value} can be composed by other {@link Value Options} to form a composed option.
  *
  * @since 1.0
  */

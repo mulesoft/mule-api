@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * Represents a Map from String to {@link T} where the key's case is not taken into account when looking for it, but remembered
  * when the key set is retrieved from the map. The backing map used will be the {@link Map} instance passed to the constructor.
- * This allows to make case insensitive different kinds of Map implementations, particularly a ConcurrentHashMap,
- * used to achieve high concurrence.
+ * This allows to make case insensitive different kinds of Map implementations, particularly a ConcurrentHashMap, used to achieve
+ * high concurrence.
  * <p/>
  * When a key/value pair is put in the map the key case is remembered so when the key set or the entry set is retrieved the
  * correct case is returned. This is useful to store, for example, camel case keys. However, two keys that only differ in their
@@ -71,8 +71,8 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
   }
 
   /**
-   * Creates a shallow copy of this instance. This is the recommended way of creating copy instances as this is optimized
-   * and usually much faster than using the {@link CaseInsensitiveMapWrapper#CaseInsensitiveMapWrapper(Map)} constructor.
+   * Creates a shallow copy of this instance. This is the recommended way of creating copy instances as this is optimized and
+   * usually much faster than using the {@link CaseInsensitiveMapWrapper#CaseInsensitiveMapWrapper(Map)} constructor.
    *
    * @return a shallow copy of {@code this} instance
    * @since 1.3.0
@@ -167,12 +167,14 @@ public class CaseInsensitiveMapWrapper<T> extends AbstractMap<String, T> impleme
 
       CaseInsensitiveMapKey value = cache.get(key);
       if (value == null) {
-        value = cache.computeIfAbsent(key, k -> new CaseInsensitiveMapKey(k));
-      }
+        value = cache.computeIfAbsent(key, CaseInsensitiveMapKey::new);
 
-      if (cache.size() > MAX_CACHE_SIZE) {
-        usingCache.set(false);
-        cache.clear();
+        // we do the size check only if the value was not present and needed to be computed
+        // being this a ConcurrentHashMap, getting the size is not as cheap as it looks
+        if (cache.size() > MAX_CACHE_SIZE) {
+          usingCache.set(false);
+          cache.clear();
+        }
       }
 
       return value;

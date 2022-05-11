@@ -24,26 +24,25 @@ import java.util.Optional;
 public interface HasOutputModel {
 
   /**
-   * Returns a {@link MetadataType} for the value that this component sets
-   * on the output {@link Message#getPayload()} field.
+   * Returns a {@link MetadataType} for the value that this component sets on the output {@link Message#getPayload()} field.
    * <p>
-   * If this executable component does not modify the payload of the {@link Message},
-   * then a {@link org.mule.metadata.api.model.VoidType} will be associated to the returned {@link OutputModel}.
-   * This, however, <b>does not</b> mean that the property will be set to {@code null} on the message,
-   * it means that whatever value it had before the component was executed will be preserved after it returns.
+   * If this executable component does not modify the payload of the {@link Message}, then a
+   * {@link org.mule.metadata.api.model.VoidType} will be associated to the returned {@link OutputModel}. This, however, <b>does
+   * not</b> mean that the property will be set to {@code null} on the message, it means that whatever value it had before the
+   * component was executed will be preserved after it returns.
    *
    * @return a {@link MetadataType} representing the content type for the output messages
    */
   OutputModel getOutput();
 
   /**
-   * Returns a {@link OutputModel} for the value that this component sets
-   * on the output {@link Message#getAttributes() attributes} of the message.
+   * Returns a {@link OutputModel} for the value that this component sets on the output {@link Message#getAttributes() attributes}
+   * of the message.
    * <p>
-   * If this executable component does not modify the attributes of the {@link Message},
-   * then a {@link org.mule.metadata.api.model.VoidType} will be associated to the returned {@link OutputModel}.
-   * This, however, <b>does not</b> mean that the property will be set to {@code null} on the message,
-   * it means that whatever value it had before the component was executed will be preserved after it returns.
+   * If this executable component does not modify the attributes of the {@link Message}, then a
+   * {@link org.mule.metadata.api.model.VoidType} will be associated to the returned {@link OutputModel}. This, however, <b>does
+   * not</b> mean that the property will be set to {@code null} on the message, it means that whatever value it had before the
+   * component was executed will be preserved after it returns.
    *
    * @return a {@link OutputModel} representing the attribute types for the output messages
    */

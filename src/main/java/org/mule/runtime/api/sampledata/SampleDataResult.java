@@ -28,7 +28,7 @@ public interface SampleDataResult {
   }
 
   /**
-   * Creates  a new {@link SampleDataResult} with a failure result containing the associated {@link SampleDataFailure failure}
+   * Creates a new {@link SampleDataResult} with a failure result containing the associated {@link SampleDataFailure failure}
    *
    * @param failure The generated failure occurred trying to resolve the sample data
    * @return a {@link SampleDataResult} with the {@link SampleDataFailure}
@@ -43,8 +43,7 @@ public interface SampleDataResult {
   Optional<Message> getSampleData();
 
   /**
-   * @return An {@link Optional} {@link SampleDataFailure failure} with the error that occurred trying to resolve the
-   * sample data
+   * @return An {@link Optional} {@link SampleDataFailure failure} with the error that occurred trying to resolve the sample data
    */
   Optional<SampleDataFailure> getFailure();
 

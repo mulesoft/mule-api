@@ -15,8 +15,7 @@ import org.mule.runtime.api.lifecycle.Disposable;
 import java.util.Optional;
 
 /**
- * Metadata resolving context, provides access to the Config and Connection used during
- * metadata fetch invocation.
+ * Metadata resolving context, provides access to the Config and Connection used during metadata fetch invocation.
  *
  * @since 1.0
  */

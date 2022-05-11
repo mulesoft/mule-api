@@ -13,9 +13,8 @@ import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 
 /**
- * This interface allows a Component that processes a {@link Message} to expose
- * its metadata descriptor, containing all the {@link MetadataType} information associated
- * to the Component's input and output elements
+ * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
+ * {@link MetadataType} information associated to the Component's input and output elements
  *
  * @since 1.0
  */

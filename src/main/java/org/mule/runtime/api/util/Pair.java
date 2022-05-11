@@ -34,7 +34,7 @@ public final class Pair<K, V> implements Serializable {
   /**
    * Creates a new pair
    *
-   * @param first The first element of this pair
+   * @param first  The first element of this pair
    * @param second The second element of this pair
    */
   public Pair(K first, V second) {

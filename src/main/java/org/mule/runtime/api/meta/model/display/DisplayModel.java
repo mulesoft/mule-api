@@ -129,8 +129,8 @@ public final class DisplayModel {
   }
 
   /**
-   * @return an {@link Optional} with a {@link PathModel} if the parameter is a Path to a file or directory,\
-   * an {@link Optional#empty()} if its not.
+   * @return an {@link Optional} with a {@link PathModel} if the parameter is a Path to a file or directory,\ an
+   *         {@link Optional#empty()} if its not.
    */
   public Optional<PathModel> getPathModel() {
     return ofNullable(pathModel);

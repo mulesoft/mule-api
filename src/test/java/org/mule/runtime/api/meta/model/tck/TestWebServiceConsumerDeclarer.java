@@ -27,15 +27,13 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
 import java.io.Serializable;
 
 /**
- * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
- * which represents a theoretical &quot;Web Service Consumer&quot; extension.
+ * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents a
+ * theoretical &quot;Web Service Consumer&quot; extension.
  * <p>
- * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()}
- * method plus some other getters which provides access to other declaration components
- * that you might want to make tests against.
+ * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()} method plus
+ * some other getters which provides access to other declaration components that you might want to make tests against.
  * <p>
- * This case focuses on the scenario in which all sources, providers and operations are available
- * on all configs
+ * This case focuses on the scenario in which all sources, providers and operations are available on all configs
  *
  * @since 1.0
  */
@@ -83,6 +81,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
   public static final String OPERATION_PARAMETER_GROUP = "Operation parameters";
   public static final String CONNECTION_PROVIDER_PARAMETER_GROUP = "Connection Provider parameters";
   public static final String SOURCE_PARAMETER_GROUP = "Source parameters";
+  public static final String DSL_PREFIX = "wsc";
 
   public static final int DEFAULT_PORT = 8080;
 
@@ -117,7 +116,7 @@ public class TestWebServiceConsumerDeclarer extends TestBaseDeclarer {
         .fromVendor(MULESOFT)
         .withCategory(Category.SELECT)
         .withModelProperty(EXTENSION_MODEL_PROPERTY)
-        .withXmlDsl(XmlDslModel.builder().build())
+        .withXmlDsl(XmlDslModel.builder().setPrefix(DSL_PREFIX).build())
         .withExternalLibrary(EXTERNAL_LIBRARY_MODEL);
 
     ConfigurationDeclarer config =

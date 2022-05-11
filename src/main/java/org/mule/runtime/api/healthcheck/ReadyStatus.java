@@ -16,14 +16,13 @@ import java.util.Optional;
 public interface ReadyStatus {
 
   /**
-   * @return true if the application is ready to receive traffic
-   *  false otherwise
+   * @return true if the application is ready to receive traffic false otherwise
    */
   boolean isReady();
 
   /**
-   * @return A human-readable description of the current status of the application.
-   * In case of errors, expect a brief summary of what is wrong.
+   * @return A human-readable description of the current status of the application. In case of errors, expect a brief summary of
+   *         what is wrong.
    */
   default Optional<String> statusDescription() {
     return empty();

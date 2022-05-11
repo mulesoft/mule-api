@@ -58,10 +58,11 @@ public interface ExpressionLanguage {
   /**
    * Evaluates an expression according to a given {@link BindingContext} and the global one.
    *
-   * The evaluation of this script will do a best effort to avoid failing when the result value can not be represented in the corresponding format.
+   * The evaluation of this script will do a best effort to avoid failing when the result value can not be represented in the
+   * corresponding format.
    *
-   * @param expression         the EL expression
-   * @param context            the current dynamic binding context to consider
+   * @param expression the EL expression
+   * @param context    the current dynamic binding context to consider
    * @return the result of the expression plus its type
    * @throws ExpressionExecutionException when an error occurs during evaluation
    */
@@ -77,8 +78,8 @@ public interface ExpressionLanguage {
   ValidationResult validate(String expression);
 
   /**
-   * Splits using the specified expression. The expression should return a collection of elements or an object.
-   * In case of the object it will iterate through the entries
+   * Splits using the specified expression. The expression should return a collection of elements or an object. In case of the
+   * object it will iterate through the entries
    *
    * @param expression the expression to be used to split
    * @param context    the current dynamic binding context to consider
@@ -117,11 +118,10 @@ public interface ExpressionLanguage {
 
 
   /**
-   * Compiles a specified expression with a given binding context and a name.
-   * It returns the compiled expression
+   * Compiles a specified expression with a given binding context and a name. It returns the compiled expression
    *
-   * @param expression The expression
-   * @param context    The context to compile against
+   * @param expression     The expression
+   * @param context        The context to compile against
    * @param nameIdentifier The nameIdentifier to be given to the compiled expression
    * @return The compiled expression
    * @throws ExpressionCompilationException when an error occurs during compilation

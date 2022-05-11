@@ -12,7 +12,7 @@ import java.util.Optional;
  * Represents the configuration properties defined in the artifact.
  * <p>
  * An artifact has a set of configuration properties defined by using the <configuration-properties> element, system properties or
- * deployment time properties. Each artifact (application, domain, etc) providas an implementation of
+ * deployment time properties. Each artifact (application, domain, etc) provides an implementation of
  * {@link ConfigurationProperties} that can be injected to access it programmatically.
  *
  * @since 1.0

@@ -113,8 +113,8 @@ public interface SchedulerPoolsConfig {
   /**
    * Only applies when {@link #getSchedulerPoolStrategy()} is {@link SchedulerPoolStrategy#UBER}
    *
-   * @return when the number of threads in the {@code Uber} pool is greater than {@link #getUberCorePoolSize()}, this is the maximum
-   *         time (in milliseconds) that excess idle threads will wait for new tasks before terminating.
+   * @return when the number of threads in the {@code Uber} pool is greater than {@link #getUberCorePoolSize()}, this is the
+   *         maximum time (in milliseconds) that excess idle threads will wait for new tasks before terminating.
    */
   OptionalLong getUberKeepAlive();
 

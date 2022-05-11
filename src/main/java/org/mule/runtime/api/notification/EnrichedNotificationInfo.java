@@ -21,8 +21,8 @@ public final class EnrichedNotificationInfo {
   /**
    * Extract information from the event and exception to provide notification data.
    *
-   * @param event the event to extract information from
-   * @param e the exception that occurred
+   * @param event     the event to extract information from
+   * @param e         the exception that occurred
    * @param component the component (processor, source, etc) that triggered the notification
    * @return
    */

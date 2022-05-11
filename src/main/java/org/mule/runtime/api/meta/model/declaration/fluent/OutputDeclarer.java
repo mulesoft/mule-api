@@ -25,8 +25,7 @@ public class OutputDeclarer<T extends OutputDeclarer>
   }
 
   /**
-   * Specifies that the {@link OutputModel} has a {@link MetadataType type}
-   * of <b>static</b> kind.
+   * Specifies that the {@link OutputModel} has a {@link MetadataType type} of <b>static</b> kind.
    *
    * @param type the type of the parameter
    * @return

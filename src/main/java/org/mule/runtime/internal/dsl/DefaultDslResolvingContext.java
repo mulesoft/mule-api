@@ -20,8 +20,8 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Default implementation of {@link DslResolvingContext} that uses the {@link Set} of {@link ExtensionModel} to provide
- * the required {@link ExtensionModel}s
+ * Default implementation of {@link DslResolvingContext} that uses the {@link Set} of {@link ExtensionModel} to provide the
+ * required {@link ExtensionModel}s
  *
  * @since 1.0
  */

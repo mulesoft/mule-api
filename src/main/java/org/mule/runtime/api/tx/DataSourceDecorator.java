@@ -12,6 +12,7 @@ import javax.sql.DataSource;
 
 /**
  * Decorates {@link DataSource} if required in order to work with XA transactions
+ * 
  * @since 1.0
  */
 public interface DataSourceDecorator {
@@ -19,8 +20,8 @@ public interface DataSourceDecorator {
   /**
    * Decorates a dataSource
    *
-   * @param dataSource dataSource to decorate. Non null
-   * @param dataSourceName dataSource bean name
+   * @param dataSource       dataSource to decorate. Non null
+   * @param dataSourceName   dataSource bean name
    * @param dbPoolingProfile pooling profile use to create the wrapped dataSource
    * @return
    */

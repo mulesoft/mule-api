@@ -54,7 +54,8 @@ public interface TypedComponentIdentifier {
      * @deprecated Intercepting processors are a Mule 3 feature that is deprecated in Mule 4. Use interception API instead (ref:
      *             {@link ProcessorInterceptorFactory}).
      */
-    @Deprecated INTERCEPTING,
+    @Deprecated
+    INTERCEPTING,
 
     /**
      * Error handler component type
@@ -81,7 +82,42 @@ public interface TypedComponentIdentifier {
      *
      * @since 1.4
      */
-    CHAIN
+    CHAIN,
+
+    /**
+     * A definition to be used by sources and operations.
+     *
+     * @since 1.5
+     */
+    CONFIG,
+
+    /**
+     * A connection provider within a {@link #CONFIG}.
+     *
+     * @since 1.5
+     */
+    CONNECTION,
+
+    /**
+     * Definition of an operation though the Mule DSL
+     *
+     * @since 1.5
+     */
+    OPERATION_DEF,
+
+    /**
+     * The output payload definition of a Mule DSL operation or source
+     *
+     * @since 1.5
+     */
+    OUTPUT_PAYLOAD_TYPE,
+
+    /**
+     * The output attributes definition of a Mule DSL operation or source
+     *
+     * @since 1.5
+     */
+    OUTPUT_ATTRIBUTES_TYPE
   }
 
   /**

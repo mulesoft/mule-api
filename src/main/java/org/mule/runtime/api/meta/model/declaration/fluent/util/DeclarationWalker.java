@@ -85,7 +85,7 @@ public abstract class DeclarationWalker {
    * Invoked when an {@link OperationDeclaration} is found in the traversed {@code extensionDeclaration}.
    * <p>
    * 
-   * @param owner The declaration that owns the operation
+   * @param owner       The declaration that owns the operation
    * @param declaration the {@link WithOperationsDeclaration}
    */
   protected void onOperation(WithOperationsDeclaration owner, OperationDeclaration declaration) {}
@@ -103,7 +103,7 @@ public abstract class DeclarationWalker {
    * Invoked when a {@link ConstructDeclaration} is found in the traversed {@code extensionDeclaration}.
    * <p>
    *
-   * @param owner The declaration that owns the operation
+   * @param owner       The declaration that owns the operation
    * @param declaration the {@link WithOperationsDeclaration}
    */
   protected void onConstruct(WithConstructsDeclaration owner, ConstructDeclaration declaration) {}
@@ -111,7 +111,7 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link ConnectedDeclaration} is found in the traversed {@code extensionDeclaration}
    *
-   * @param owner The declaration that owns the provider
+   * @param owner       The declaration that owns the provider
    * @param declaration the {@link ConnectionProviderDeclaration}
    */
   protected void onConnectionProvider(ConnectedDeclaration owner, ConnectionProviderDeclaration declaration) {}
@@ -119,7 +119,7 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link SourceDeclaration} is found in the traversed {@code extensionDeclaration}
    *
-   * @param owner The declaration that owns the source
+   * @param owner       The declaration that owns the source
    * @param declaration the {@link SourceDeclaration}
    */
   protected void onSource(WithSourcesDeclaration owner, SourceDeclaration declaration) {}
@@ -127,7 +127,7 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link ParameterGroupDeclaration} is found in the traversed {@code extensionDeclaration}
    *
-   * @param owner The declaration that owns the parameter
+   * @param owner       The declaration that owns the parameter
    * @param declaration the {@link ParameterGroupDeclaration}
    */
   protected void onParameterGroup(ParameterizedDeclaration owner, ParameterGroupDeclaration declaration) {}
@@ -135,9 +135,9 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link ParameterDeclaration} is found in the traversed {@code extensionDeclaration}
    *
-   * @param owner The declaration that owns the parameter
+   * @param owner          The declaration that owns the parameter
    * @param parameterGroup the group to which the declaration belongs
-   * @param declaration the {@link ParameterDeclaration}
+   * @param declaration    the {@link ParameterDeclaration}
    */
   protected void onParameter(ParameterizedDeclaration owner, ParameterGroupDeclaration parameterGroup,
                              ParameterDeclaration declaration) {}

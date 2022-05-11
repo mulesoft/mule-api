@@ -22,7 +22,7 @@ public class MediaTypeSerializationTestCase {
 
   @Test
   public void readFromV10() throws Exception {
-    //The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
+    // The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
     final InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("media_type/mediaTypeV10.ser");
     final ObjectInputStream objectInputStream = new ObjectInputStream(resourceAsStream);
     final Object o = objectInputStream.readObject();
@@ -41,7 +41,7 @@ public class MediaTypeSerializationTestCase {
 
   @Test
   public void readFromV11() throws Exception {
-    //The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
+    // The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
     final InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("media_type/mediaTypeV11.ser");
     final ObjectInputStream objectInputStream = new ObjectInputStream(resourceAsStream);
     final Object o = objectInputStream.readObject();
@@ -61,7 +61,7 @@ public class MediaTypeSerializationTestCase {
 
   @Test
   public void readFromV11DefinedInApp() throws Exception {
-    //The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
+    // The media type is "m/s; param1=value1; param2=value2; charset=UTF-8"
     final InputStream resourceAsStream =
         getClass().getClassLoader().getResourceAsStream("media_type/mediaTypeV11DefinedInApp.ser");
     final ObjectInputStream objectInputStream = new ObjectInputStream(resourceAsStream);

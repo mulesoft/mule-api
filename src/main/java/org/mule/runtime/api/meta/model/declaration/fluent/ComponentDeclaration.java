@@ -6,18 +6,20 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.model.ComponentModel;
-import org.mule.runtime.api.meta.model.error.ErrorModel;
-import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
+import static org.mule.runtime.api.meta.model.ComponentVisibility.PUBLIC;
 
-import java.util.HashSet;
+import org.mule.runtime.api.meta.model.ComponentModel;
+import org.mule.runtime.api.meta.model.ComponentVisibility;
+import org.mule.runtime.api.meta.model.error.ErrorModel;
+
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 /**
- * A declaration object for a {@link ComponentModel}. It contains raw, unvalidated
- * data which is used to declare the structure of a {@link ComponentModel}
+ * A declaration object for a {@link ComponentModel}. It contains raw, unvalidated data which is used to declare the structure of
+ * a {@link ComponentModel}
  *
  * @since 1.0
  */
@@ -26,7 +28,8 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
 
 
   private List<NestableElementDeclaration> nestedComponents = new LinkedList<>();
-  private Set<ErrorModel> errorModels = new HashSet<>();
+  private Set<ErrorModel> errorModels = new LinkedHashSet<>();
+  private ComponentVisibility visibility = PUBLIC;
 
   /**
    * {@inheritDoc}
@@ -52,4 +55,17 @@ public class ComponentDeclaration<T extends ComponentDeclaration> extends Stereo
     return errorModels;
   }
 
+  /**
+   * @return this {@link ComponentDeclaration}'s {@link ComponentVisibility}.
+   */
+  public ComponentVisibility getVisibility() {
+    return visibility;
+  }
+
+  /**
+   * @param visibility to set to this {@link ComponentDeclaration}.
+   */
+  public void setVisibility(ComponentVisibility visibility) {
+    this.visibility = visibility;
+  }
 }

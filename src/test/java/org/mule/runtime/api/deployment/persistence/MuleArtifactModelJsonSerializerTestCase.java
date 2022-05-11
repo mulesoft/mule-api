@@ -22,17 +22,17 @@ import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.MIN
 import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.NAME;
 import static org.mule.runtime.api.deployment.meta.AbstractMuleArtifactModel.REQUIRED_PRODUCT;
 import static org.mule.runtime.api.deployment.meta.Product.MULE;
+
 import org.mule.runtime.api.deployment.meta.MuleDeployableModel;
 import org.mule.runtime.api.deployment.meta.MuleServerPluginModel;
 import org.mule.runtime.api.deployment.meta.MuleServiceModel;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import java.util.Collection;
 import java.util.List;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -99,6 +99,13 @@ public class MuleArtifactModelJsonSerializerTestCase {
     MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{\'configs\':[]}");
     assertThat(muleArtifactModel.getConfigs(), is(notNullValue()));
     assertThat(muleArtifactModel.getConfigs(), is(empty()));
+  }
+
+  @Test
+  public void logConfigFileAttributeIsDeserializedCorrectly() throws Exception {
+    String logConfigFile = "../../../test-classes/resources/logging/custom-log4j2.xml";
+    MuleDeployableModel muleArtifactModel = this.serializer.deserialize("{\"logConfigFile\":\"" + logConfigFile + "\"}");
+    assertThat(muleArtifactModel.getLogConfigFile(), is(logConfigFile));
   }
 
   @Test

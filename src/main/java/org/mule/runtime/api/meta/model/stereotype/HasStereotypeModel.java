@@ -9,8 +9,7 @@ package org.mule.runtime.api.meta.model.stereotype;
 import org.mule.api.annotation.NoImplement;
 
 /**
- * A model which can be qualified with a set of {@link StereotypeModel}s that correspond
- * to {@code this} model definition.
+ * A model which can be qualified with a set of {@link StereotypeModel}s that correspond to {@code this} model definition.
  *
  * @since 1.0
  */

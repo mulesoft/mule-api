@@ -11,8 +11,7 @@ import org.mule.runtime.api.metadata.MetadataService;
 import org.mule.runtime.api.meta.model.ComponentModel;
 
 /**
- * A contract interface for a declarer capable of adding a dynamic {@link MetadataType type}
- * to the described Element
+ * A contract interface for a declarer capable of adding a dynamic {@link MetadataType type} to the described Element
  *
  * @param <T> the type of the implementing type. Used to allow method chaining
  * @since 1.0
@@ -20,10 +19,9 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 interface HasDynamicType<T> {
 
   /**
-   * Specifies that the Element being described has a {@link MetadataType type}
-   * of <b>dynamic</b> kind, meaning that this Element's type is
-   * bounded to the {@link ComponentModel component}'s configuration during
-   * application design time and should be discovered using the {@link MetadataService} service
+   * Specifies that the Element being described has a {@link MetadataType type} of <b>dynamic</b> kind, meaning that this
+   * Element's type is bounded to the {@link ComponentModel component}'s configuration during application design time and should
+   * be discovered using the {@link MetadataService} service
    *
    * @param type the type of the Element being described
    * @return {@code this} declarer

@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api;
 
+import io.qameta.allure.Issue;
 import org.junit.Test;
 import org.mule.runtime.api.meta.MuleVersion;
 
@@ -95,6 +96,19 @@ public class MuleVersionTestCase {
 
     assertThat(new MuleVersion("3.4.1").priorTo("3.4.1"), is(false));
     assertThat(new MuleVersion("3.5.0-ANDES").priorTo("3.5.0-ANDES"), is(false));
+  }
+
+  @Test
+  @Issue("MULE-19682")
+  public void testWithoutSuffixes() {
+    assertThat("3.3.1", is(new MuleVersion("3.3.1").withoutSuffixes().toString()));
+    assertThat("3.4.0", is(new MuleVersion("3.4").withoutSuffixes().toString()));
+    assertThat("3.4.0", is(new MuleVersion("3.4-RC1").withoutSuffixes().toString()));
+    assertThat("3.4.1", is(new MuleVersion("3.4.1-SNAPSHOT").withoutSuffixes().toString()));
+    assertThat("3.4.0", is(new MuleVersion("3.4-M3-SNAPSHOT").withoutSuffixes().toString()));
+    assertThat("4.0.1", is(new MuleVersion("4.0.1").withoutSuffixes().toString()));
+    assertThat("4.2.1", is(new MuleVersion("4.2.1-prerelease+meta").withoutSuffixes().toString()));
+    assertThat("4.9.5", is(new MuleVersion("4.9.5----RC-SNAPSHOT.12.9.1--.12+788").withoutSuffixes().toString()));
   }
 
 }

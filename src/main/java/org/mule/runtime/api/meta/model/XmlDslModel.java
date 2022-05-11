@@ -7,11 +7,9 @@
 package org.mule.runtime.api.meta.model;
 
 /**
- * Represents an extension's capability to be mapped and usable
- * from a Mule XML config.
+ * Represents an extension's capability to be mapped and usable from a Mule XML config.
  * <p>
- * Instances of this interface are to be created by the builder
- * obtained through {@link #builder()}
+ * Instances of this interface are to be created by the builder obtained through {@link #builder()}
  *
  * @since 1.0
  */

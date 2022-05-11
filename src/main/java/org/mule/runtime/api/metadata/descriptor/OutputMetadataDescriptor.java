@@ -60,7 +60,7 @@ public final class OutputMetadataDescriptor {
      * the component.
      *
      * @param returnTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output return
-     *        type
+     *                         type
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for return type
      */
     public OutputMetadataDescriptorBuilder withReturnType(TypeMetadataDescriptor returnTypeResult) {
@@ -73,7 +73,7 @@ public final class OutputMetadataDescriptor {
      * {@link Message#getAttributes} {@link MetadataType}.
      *
      * @param attributesTypeResult a {@link MetadataResult} of {@link TypeMetadataDescriptor} describing the component output
-     *        attributes type.
+     *                             attributes type.
      * @return the builder instance enriched with the {@link TypeMetadataDescriptor} for message attributes
      */
     public OutputMetadataDescriptorBuilder withAttributesType(TypeMetadataDescriptor attributesTypeResult) {
@@ -107,8 +107,8 @@ public final class OutputMetadataDescriptor {
     /**
      * @return a {@link OutputMetadataDescriptor} instance with the metadata description for the output of a
      *         {@link MetadataProvider} component
-     * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set
-     *         during building
+     * @throws IllegalArgumentException if the {@link Message#getPayload} or {@link Message#getAttributes} were not set during
+     *                                  building
      */
     public OutputMetadataDescriptor build() {
       if (returnTypeResult == null) {

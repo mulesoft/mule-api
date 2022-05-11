@@ -19,12 +19,9 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 /**
  * A definition of an function in a {@link ExtensionModel}.
  * <p>
- * Function models implement the flyweight pattern. This means
- * that a given function should only be represented by only
- * one instance of this class. Thus, if the same function is
- * contained by different {@link HasFunctionModels} instances,
- * then each of those containers should reference the same
- * function model instance.
+ * Function models implement the flyweight pattern. This means that a given function should only be represented by only one
+ * instance of this class. Thus, if the same function is contained by different {@link HasFunctionModels} instances, then each of
+ * those containers should reference the same function model instance.
  *
  * @since 1.0
  */
@@ -32,8 +29,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 public interface FunctionModel extends ParameterizedModel, EnrichableModel, HasDisplayModel, DeprecableModel {
 
   /**
-   * Returns a {@link MetadataType} for the value that this component sets
-   * on the output {@link Message#getPayload()} field.
+   * Returns a {@link MetadataType} for the value that this component sets on the output {@link Message#getPayload()} field.
    *
    * @return a {@link MetadataType} representing the content type for the output messages
    */

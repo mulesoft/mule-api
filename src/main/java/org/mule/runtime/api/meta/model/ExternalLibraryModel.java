@@ -25,8 +25,7 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   /**
    * A Builder for creating instances of {@link ExternalLibraryModel}.
    * <p>
-   * Instances are to be created through the {@link ExternalLibraryModel#builder()} method.
-   * Instances are not reusable.
+   * Instances are to be created through the {@link ExternalLibraryModel#builder()} method. Instances are not reusable.
    *
    * @since 1.0
    */
@@ -94,8 +93,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
     }
 
     /**
-     * Suggests Maven coordinates where the required library can be found. This coordinates should
-     * follow the Maven convention: {@code groupId:artifactId:packaging:classifier:version}.
+     * Suggests Maven coordinates where the required library can be found. This coordinates should follow the Maven convention:
+     * {@code groupId:artifactId:packaging:classifier:version}.
      * <p>
      * Keep in mind that not all the values of the coordinates are required, for example:
      * {@code org.mule.modules:a-required-lib:1.0.0} are valid coordinates, which communicates the {@code groupId},
@@ -104,7 +103,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
      * By default, the packaging is {@code jar}, so if is required to use a native library, like a .DLL, you will provide:
      * {@code org.mule.module:a-native-lib:dll:1.0.0} where {@code dll} is the packaging of the library.
      * <p>
-     * More information in: <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
+     * More information in:
+     * <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
      *
      * @param coordinates The library coordinates
      * @return {@code this} builder
@@ -187,8 +187,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
   }
 
   /**
-   * If provided, suggests Maven coordinates where the required library can be found. These coordinates should
-   * follow the Maven convention: {@code groupId:artifactId:packaging:classifier:version}.
+   * If provided, suggests Maven coordinates where the required library can be found. These coordinates should follow the Maven
+   * convention: {@code groupId:artifactId:packaging:classifier:version}.
    * <p>
    * Keep in mind that not all the values of the coordinates are required, for example:
    * {@code org.mule.modules:a-required-lib:1.0.0} are valid coordinates, which communicates the {@code groupId},
@@ -197,7 +197,8 @@ public final class ExternalLibraryModel implements NamedObject, DescribedObject 
    * By default, the packaging is {@code jar}, so if is required to use a native library, like a .DLL, you will provide:
    * {@code org.mule.module:a-native-lib:dll:1.0.0} where {@code dll} is the packaging of the library.
    * <p>
-   * More information in: <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
+   * More information in:
+   * <a href="https://maven.apache.org/pom.html#Maven_Coordinates">https://maven.apache.org/pom.html#Maven_Coordinates</a>
    *
    * @return The optional maven coordinates.
    */

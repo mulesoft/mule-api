@@ -9,8 +9,8 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 
 /**
- * Abstract declaration object for parameters. It contains raw,
- * unvalidated data which is used to declare the common structure of both parameters and parameter groups.
+ * Abstract declaration object for parameters. It contains raw, unvalidated data which is used to declare the common structure of
+ * both parameters and parameter groups.
  * <p>
  *
  * @since 1.0

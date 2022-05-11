@@ -6,10 +6,16 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.lang.System.getProperty;
 import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
+import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
@@ -23,18 +29,24 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * A builder object which allows creating an {@link ExtensionDeclaration}
- * through a fluent API.
+ * A builder object which allows creating an {@link ExtensionDeclaration} through a fluent API.
  *
  * @since 1.0
  */
 public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
-    HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer> {
+    HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer>,
+    HasArtifactCoordinatesDeclarer {
 
   private static final List<String> UNREGISTERED_PACKAGES =
-      asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "com.sun.");
+      asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "org.mule.sdk.api.", "com.sun.");
+  // Allow to configure this through system property to avoid releasing a new version if some other scenario other than the
+  // gateway one is detected.
+  private static final List<String> FORCE_REGISTERED_PACKAGES =
+      stream(getProperty(MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES, "com.mulesoft.mule.runtime.gw").split(","))
+          .map(p -> p + ".")
+          .collect(toList());
 
   /**
    * Constructor for this descriptor
@@ -124,6 +136,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   /**
    * {@inheritDoc}
    */
+  @Override
   public ConstructDeclarer withConstruct(String name) {
     ConstructDeclaration component = new ConstructDeclaration(name);
     declaration.addConstruct(component);
@@ -187,8 +200,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Adds the given {@code objectType} to the list of types declared
-   * by the extension being built.
+   * Adds the given {@code objectType} to the list of types declared by the extension being built.
    *
    * @param objectType an {@link ObjectType}
    * @return {@code this} declarer
@@ -226,8 +238,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Adds the given {@code resourcePath} to the list of resources
-   * declared by the extension being built
+   * Adds the given {@code resourcePath} to the list of resources declared by the extension being built
    *
    * @param resourcePath the relative path to the extension's resource
    * @return {@code this} declarer
@@ -238,8 +249,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Declares that the extension is importing a type from another
-   * extension
+   * Declares that the extension is importing a type from another extension
    *
    * @param importedType a {@link ImportedTypeModel} with the import information
    * @return {@code this} declarer
@@ -286,7 +296,9 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
 
   private boolean isTypeRegistrable(ObjectType objectType) {
     String typeId = getTypeId(objectType).orElse(null);
-    return typeId != null && !typeId.trim().isEmpty() && UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith);
+    return typeId != null && !typeId.trim().isEmpty()
+        && (FORCE_REGISTERED_PACKAGES.stream().anyMatch(typeId::startsWith)
+            || UNREGISTERED_PACKAGES.stream().noneMatch(typeId::startsWith));
   }
 
   /**
@@ -312,8 +324,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Registers an {@link ErrorModel} that could be thrown by one their
-   * operations
+   * Registers an {@link ErrorModel} that could be thrown by one their operations
    *
    * @param errorModel to add
    * @return {@code this} descriptor
@@ -370,6 +381,12 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
+    return this;
+  }
+
+  @Override
+  public ExtensionDeclarer withArtifactCoordinates(ArtifactCoordinates artifactCoordinates) {
+    declaration.withArtifactCoordinates(artifactCoordinates);
     return this;
   }
 }

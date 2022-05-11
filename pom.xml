@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.4.0-SNAPSHOT</version>
+    <version>1.5.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -106,22 +106,21 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <metadataModelApiVersion>1.4.0-SNAPSHOT</metadataModelApiVersion>
-        <artifactDeclarationVersion>1.4.0-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.3.0-SNAPSHOT</muleModuleMavenPluginVersion>
+        <metadataModelApiVersion>1.5.0-SNAPSHOT</metadataModelApiVersion>
+        <artifactDeclarationVersion>1.5.0-SNAPSHOT</artifactDeclarationVersion>
+        <muleModuleMavenPluginVersion>1.4.0-SNAPSHOT</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.30</slf4jVersion>
         <commonsIoVersion>2.8.0</commonsIoVersion>
         <mockitoVersion>2.23.4</mockitoVersion>
         <junitVersion>4.12</junitVersion>
         <hamcrestVersion>1.3</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
-        <javaFormatter.plugin.version>2.0.1</javaFormatter.plugin.version>
+        <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
         <javax.activation.version>1.2.0</javax.activation.version>
         <javax.inject.version>1</javax.inject.version>
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <guavaVersion>25.1-jre</guavaVersion>
         <caffeineVersion>2.8.0</caffeineVersion>
         <commonsLangVersion>3.7</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
@@ -133,13 +132,26 @@
         <jacoco.version>0.8.6</jacoco.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
-        <oldMuleArtifactVersion>1.3.0</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.4.0-SNAPSHOT</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.3.0-SNAPSHOT</muleApiAnnotationsVersion>
+        <oldMuleArtifactVersion>1.4.0</oldMuleArtifactVersion>
+        <muleRevapiExtensionVersion>1.5.0-SNAPSHOT</muleRevapiExtensionVersion>
+        <muleApiAnnotationsVersion>1.4.0-SNAPSHOT</muleApiAnnotationsVersion>
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
+        <muleBomVersion>4.5.0-SNAPSHOT</muleBomVersion>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mule</groupId>
+                <artifactId>mule-runtime-bom</artifactId>
+                <version>${muleBomVersion}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -179,7 +191,6 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>${guavaVersion}</version>
         </dependency>
         <dependency>
             <groupId>com.github.ben-manes.caffeine</groupId>
@@ -271,11 +282,9 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
+                    <version>3.8.1</version>
                     <configuration>
                         <encoding>ISO-8859-1</encoding>
-                        <fork>true</fork>
-                        <maxmem>512m</maxmem>
                         <source>${javaVersion}</source>
                         <target>${javaVersion}</target>
                         <proc>none</proc>
@@ -553,7 +562,7 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>jar-no-fork</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -561,7 +570,7 @@
             <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
-                <version>4.0.0</version>
+                <version>4.0.4</version>
                 <executions>
                     <execution>
                         <id>get-the-git-infos</id>
@@ -570,6 +579,9 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <useNativeGit>true</useNativeGit>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -615,7 +627,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.5</version>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -627,10 +639,6 @@
                         </executions>
                         <configuration>
                             <skip>${skipGpg}</skip>
-                            <gpgArguments>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                            </gpgArguments>
                         </configuration>
                     </plugin>
                     <plugin>

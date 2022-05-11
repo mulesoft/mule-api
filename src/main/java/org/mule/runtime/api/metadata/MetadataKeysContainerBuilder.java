@@ -30,7 +30,7 @@ public final class MetadataKeysContainerBuilder {
   /**
    * @param name {@link Class#getSimpleName()} or alias of the {@link TypeKeysResolver} class
    * @param keys {@link Set<MetadataKey>} associated to the category.
-   *                                     @return {@code} this builder
+   * @return {@code} this builder
    */
   public MetadataKeysContainerBuilder add(String name, Set<MetadataKey> keys) {
     keyMap.put(name, keys);

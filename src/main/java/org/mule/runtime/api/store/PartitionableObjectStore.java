@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * An {@link ObjectStore} which has native support for partitioning. All the methods inherited from the
- * {@link ObjectStore} interface are executed against the {@link #DEFAULT_PARTITION_NAME}. Plus, this interface
- * adds methods to obtain the same behaviour against specific partitions.
+ * An {@link ObjectStore} which has native support for partitioning. All the methods inherited from the {@link ObjectStore}
+ * interface are executed against the {@link #DEFAULT_PARTITION_NAME}. Plus, this interface adds methods to obtain the same
+ * behaviour against specific partitions.
  * <p>
- * The Mule Runtime will automatically decide when to invoke each version of each method and the partition name
- * to use.
+ * The Mule Runtime will automatically decide when to invoke each version of each method and the partition name to use.
  *
  * @param <T> the generic type of the store's items.
  * @since 1.0
@@ -57,7 +56,7 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
    *
    * @param key the identifier of the object to retrieve.
    * @return the object associated with the given key. If no object for the given key was found this method throws an
-   * {@link ObjectDoesNotExistException}.
+   *         {@link ObjectDoesNotExistException}.
    * @throws ObjectStoreException             if the given key is <code>null</code>.
    * @throws ObjectStoreNotAvailableException if the store is not available or any other implementation-specific error occured.
    * @throws ObjectDoesNotExistException      if no value for the given key was previously stored.
@@ -105,14 +104,15 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
 
   /**
    * Closes the partition of the give {@code partitionName}
+   * 
    * @param partitionName the name of the partition to close
    * @throws ObjectStoreException if an exception occurred while closing the partition
    */
   void close(String partitionName) throws ObjectStoreException;
 
   /**
-   * Disposes the given partition, releasing all associated resources and storage. Contents of the partition
-   * will be lost as a result of executing this method.
+   * Disposes the given partition, releasing all associated resources and storage. Contents of the partition will be lost as a
+   * result of executing this method.
    *
    * @param partitionName the name of the partition to dispose
    * @throws ObjectStoreException if an exception occurred while disposing the partition
@@ -121,6 +121,7 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
 
   /**
    * Clears the contents of the partition, but the partition itself remains functional
+   * 
    * @param partitionName the name of the partition
    * @throws ObjectStoreException if an exception occurred while clearing the partition
    */

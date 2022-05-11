@@ -39,7 +39,7 @@ public abstract class MuleException extends Exception {
 
   public static final String MULE_VERBOSE_EXCEPTIONS = "mule.verbose.exceptions";
 
-  //Info keys for logging
+  // Info keys for logging
   /**
    * @deprecated this is a property in an object now, no more need for a key
    */
@@ -91,7 +91,7 @@ public abstract class MuleException extends Exception {
 
   /**
    * @param message the exception message
-   * @param cause the exception that cause this exception to be thrown
+   * @param cause   the exception that cause this exception to be thrown
    */
   public MuleException(I18nMessage message, Throwable cause) {
     super(null, ExceptionHelper.unwrap(cause), true, isVerboseExceptions());
@@ -201,7 +201,8 @@ public abstract class MuleException extends Exception {
     // Info about the root mule exception is obtained and logged
     MuleException rootMuleException = getRootMuleException(this);
     rootMuleException.getExceptionInfo().addToSummaryMessage(buf);
-    // For verbose messages, additional entries from suppressed MuleExceptions and any other Throwable in the causes list are logged
+    // For verbose messages, additional entries from suppressed MuleExceptions and any other Throwable in the causes list are
+    // logged
     rootMuleException.addAllInfo(ExceptionHelper.getExceptionInfo(this));
     Map<String, Object> additionalInfo = rootMuleException.getAdditionalInfo();
     for (String key : additionalInfo.keySet().stream().sorted().collect(toList())) {
@@ -229,7 +230,7 @@ public abstract class MuleException extends Exception {
 
   public String getSummaryMessage() {
     MuleException e = getRootMuleException(this);
-    if (!e.equals(this)) {
+    if (!Objects.equals(e, this)) {
       return getMessage();
     }
     StringBuilder buf = new StringBuilder(1024);

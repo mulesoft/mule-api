@@ -25,17 +25,15 @@ public interface HasConstructModels {
   /**
    * Returns a {@link List} of {@link ConstructModel}s defined at the extension level.
    * <p>
-   * Each construct is guaranteed to have a unique name which will not
-   * overlap with any {@link OperationModel}, {@link ConnectionProviderModel} nor {@link SourceModel}
-   * defined at any level.
+   * Each construct is guaranteed to have a unique name which will not overlap with any {@link OperationModel},
+   * {@link ConnectionProviderModel} nor {@link SourceModel} defined at any level.
    *
    * @return an immutable {@link List} of {@link ConstructModel}
    */
   List<ConstructModel> getConstructModels();
 
   /**
-   * Returns the {@link ConstructModel} that matches
-   * the given name.
+   * Returns the {@link ConstructModel} that matches the given name.
    *
    * @param name case sensitive operation name
    * @return an {@link Optional} {@link ConstructModel}

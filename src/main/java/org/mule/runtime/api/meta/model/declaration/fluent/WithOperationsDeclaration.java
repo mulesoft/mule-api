@@ -11,8 +11,7 @@ import org.mule.api.annotation.NoImplement;
 import java.util.List;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which
- * it's possible to add/get {@link OperationDeclaration} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link OperationDeclaration} objects
  *
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0
@@ -29,8 +28,7 @@ public interface WithOperationsDeclaration<T extends BaseDeclaration> {
   T addOperation(OperationDeclaration operation);
 
   /**
-   * @return a {@link List} with the {@link OperationDeclaration} which have been
-   * added to {@code this} declaration
+   * @return a {@link List} with the {@link OperationDeclaration} which have been added to {@code this} declaration
    */
   List<OperationDeclaration> getOperations();
 

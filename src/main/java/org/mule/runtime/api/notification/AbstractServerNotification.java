@@ -45,7 +45,8 @@ public abstract class AbstractServerNotification extends EventObject implements 
   protected static final int ASYNC_MESSAGE_EVENT_ACTION_START_RANGE = 1900;
   protected static final int EXCEPTION_STRATEGY_MESSAGE_EVENT_ACTION_START_RANGE = 2000;
   protected static final int POLICY_MESSAGE_EVENT_ACTION_START_RANGE = 2100;
-  protected static final int POLLING_SOURCE_EVENT_ACTION_START_RANGE = 2200;
+  protected static final int PROFILING_ACTION_START_RANGE = 2200;
+  protected static final int POLLING_SOURCE_EVENT_ACTION_START_RANGE = 2300;
 
   public static final int CUSTOM_EVENT_ACTION_START_RANGE = 100000;
 

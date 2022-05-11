@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.ComponentVisibility;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
@@ -18,8 +19,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  */
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
     extends ParameterizedDeclarer<T, D>
-    implements HasModelProperties<ComponentDeclarer>, HasNestedComponentsDeclarer,
-    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T> {
+    implements HasModelProperties<T>, HasNestedComponentsDeclarer,
+    HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T>, HasSemanticTermsDeclarer<T>, HasVisibility<T> {
 
   /**
    * Creates a new instance
@@ -83,7 +84,7 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
   /**
    * Adds the given {@code stereotype}
    *
-   * @param stereotype a {@link org.mule.runtime.api.meta.model.stereotype.StereotypeModel}
+   * @param stereotype a {@link StereotypeModel}
    * @return {@code this} declarer
    */
   public T withStereotype(StereotypeModel stereotype) {
@@ -117,6 +118,27 @@ public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends C
   @Override
   public T withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
+    return (T) this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public T withSemanticTerm(String semanticTerm) {
+    declaration.addSemanticTerm(semanticTerm);
+    return (T) this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.5.0
+   */
+  public T withVisibility(ComponentVisibility visibility) {
+    declaration.setVisibility(visibility);
     return (T) this;
   }
 }

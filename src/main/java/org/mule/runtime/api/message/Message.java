@@ -128,7 +128,7 @@ public interface Message extends Serializable {
      * <p>
      * If you already have a {@link Collection} instance, use {@link #collectionValue(Collection, Class)} instead.
      *
-     * @param value the iterator for the collection content
+     * @param value    the iterator for the collection content
      * @param itemType the collection item type
      * @return this builder
      * @throws NullPointerException if the payload is null

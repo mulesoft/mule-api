@@ -10,6 +10,8 @@ import static java.lang.Boolean.getBoolean;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableCollection;
 import static java.util.Collections.unmodifiableList;
+import static java.util.Optional.empty;
+import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -55,7 +57,10 @@ public final class DefaultTypeCatalog implements TypeCatalog {
 
   public DefaultTypeCatalog(Set<ExtensionModel> extensions) {
     extensions.forEach(e -> {
-      mappings.add(new SubTypesMappingContainer(e.getSubTypes()));
+      Set<SubTypesModel> subTypes = e.getSubTypes();
+      if (!subTypes.isEmpty()) {
+        mappings.add(new SubTypesMappingContainer(subTypes));
+      }
 
       e.getTypes().forEach(t -> getTypeId(t).ifPresent(id -> {
         if (types.containsKey(e.getName())) {
@@ -78,9 +83,9 @@ public final class DefaultTypeCatalog implements TypeCatalog {
   public Optional<ObjectType> getType(String typeId) {
     String extensionName = extensionTypesInvertedIndex.get(typeId);
     if (extensionName == null) {
-      return Optional.empty();
+      return empty();
     }
-    return Optional.ofNullable(types.get(extensionName).get(typeId));
+    return ofNullable(types.get(extensionName).get(typeId));
   }
 
   @Override
@@ -102,7 +107,7 @@ public final class DefaultTypeCatalog implements TypeCatalog {
 
   @Override
   public Optional<String> getDeclaringExtension(String typeId) {
-    return Optional.ofNullable(extensionTypesInvertedIndex.get(typeId));
+    return ofNullable(extensionTypesInvertedIndex.get(typeId));
   }
 
   @Override
@@ -155,11 +160,11 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Returns a {@link List} with all the declared {@link MetadataType} subtypes
-     * for the indicated {@link MetadataType} {@code type}.
+     * Returns a {@link List} with all the declared {@link MetadataType} subtypes for the indicated {@link MetadataType}
+     * {@code type}.
      * <p>
-     * Lookup will be performed first by {@link TypeIdAnnotation typeId},
-     * defaulting to {@link MetadataType type} comparison if no {@link TypeIdAnnotation typeId} was found
+     * Lookup will be performed first by {@link TypeIdAnnotation typeId}, defaulting to {@link MetadataType type} comparison if no
+     * {@link TypeIdAnnotation typeId} was found
      *
      * @param type the {@link MetadataType} for which to retrieve its declared subTypes
      * @return a {@link List} with all the declared subtypes for the indicated {@link MetadataType}
@@ -170,16 +175,14 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Returns a {@link List} with all the declared {@link MetadataType} that are considered super
-     * types from the given {@link MetadataType} {@code type}.
+     * Returns a {@link List} with all the declared {@link MetadataType} that are considered super types from the given
+     * {@link MetadataType} {@code type}.
      * <p>
-     * The lookup will be performed by looking recursively all the mappings that contains the given
-     * {@code type} as subtype and storing the base type and again looking the super type of the
-     * found base type.
+     * The lookup will be performed by looking recursively all the mappings that contains the given {@code type} as subtype and
+     * storing the base type and again looking the super type of the found base type.
      *
      * @param type {@link MetadataType} to look for their super types
-     * @return a {@link List} with all the declared supertypes for the indicated {@link
-     * MetadataType}
+     * @return a {@link List} with all the declared supertypes for the indicated {@link MetadataType}
      */
     List<ObjectType> getSuperTypes(MetadataType type) {
       final List<ObjectType> types = new LinkedList<>();
@@ -195,11 +198,11 @@ public final class DefaultTypeCatalog implements TypeCatalog {
     }
 
     /**
-     * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping.
-     * If a {@link TypeIdAnnotation typeId} is available for the given {@code type},
-     * the lookup will be performed by {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its
-     * full extent, which includes type generics and interfaces implementations, and
-     * defaulting to {@link MetadataType#equals} comparison if no {@link TypeIdAnnotation typeId} was found
+     * Type comparison will be performed first by {@link TypeIdAnnotation typeId} in the context of subTypes mapping. If a
+     * {@link TypeIdAnnotation typeId} is available for the given {@code type}, the lookup will be performed by
+     * {@link TypeIdAnnotation#getValue()} disregarding {@link MetadataType} equality in its full extent, which includes type
+     * generics and interfaces implementations, and defaulting to {@link MetadataType#equals} comparison if no
+     * {@link TypeIdAnnotation typeId} was found
      *
      * @param type the {@link MetadataType} for which to retrieve its declared subTypes
      * @return <tt>true</tt> if this map contains a mapping for the specified key {@link MetadataType type}

@@ -7,8 +7,7 @@
 package org.mule.runtime.api.metadata.resolving;
 
 /**
- * Standard error codes to describe common errors that may occur during
- * Metadata fetching operations
+ * Standard error codes to describe common errors that may occur during Metadata fetching operations
  *
  * @since 1.0
  */

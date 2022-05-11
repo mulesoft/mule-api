@@ -33,6 +33,20 @@ public interface DslConstants {
   String CORE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "core");
 
   /**
+   * The prefix for components (operations, sources, etc) defined in the current application
+   *
+   * @since 1.5.0
+   */
+  String THIS_PREFIX = "this";
+
+  /**
+   * The namespace for components (operations, sources, etc) defined in the current application
+   *
+   * @since 1.5.0
+   */
+  String THIS_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, THIS_PREFIX);
+
+  /**
    * Namespace for Mule core elements
    */
   String CORE_SCHEMA_LOCATION = format("%s/%s/%s.xsd", CORE_NAMESPACE, "current", CORE_PREFIX);
@@ -182,6 +196,11 @@ public interface DslConstants {
    * The identifier name of the {@code schedulingStrategy} infrastructure parameter
    */
   String CRON_STRATEGY_ELEMENT_IDENTIFIER = "cron";
+
+  /**
+   * The identifier name of the {@code errorMappings} infrastructure parameter
+   */
+  String ERROR_MAPPINGS_ELEMENT_IDENTIFIER = "error-mappings";
 
   /**
    * The identifier name of the {@code errorMapping} infrastructure parameter

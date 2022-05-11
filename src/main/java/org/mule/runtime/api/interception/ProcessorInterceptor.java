@@ -48,11 +48,11 @@ public interface ProcessorInterceptor {
    * This method is called before the intercepted component has run. It may modify the event to be used down in the chain and the
    * component via the given {@code event}.
    *
-   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param location   the location and identification properties of the intercepted component in the mule app configuration.
    * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
-   *        they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
-   * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
-   *        mutator methods.
+   *                   they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
+   * @param event      an object that contains the state of the event to be sent to the component. It may be modified by calling
+   *                   its mutator methods.
    */
   default void before(ComponentLocation location, Map<String, ProcessorParameterValue> parameters, InterceptionEvent event) {};
 
@@ -78,13 +78,14 @@ public interface ProcessorInterceptor {
    * <li>To perform non-blocking operations in the interception.</li>
    * </ul>
    *
-   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @param location   the location and identification properties of the intercepted component in the mule app configuration.
    * @param parameters the parameters of the component as defined in the configuration. All the values are lazily evaluated so
-   *        they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
-   * @param event an object that contains the state of the event to be sent to the component. It may be modified by calling its
-   *        mutator methods.
-   * @param action when something other than continuing the interception is desired, the corresponding method on this object must
-   *        be called. The methods on this object return a {@link CompletableFuture} that may be used to return from this method.
+   *                   they will be calculated when {@link ProcessorParameterValue#resolveValue()} method gets invoked.
+   * @param event      an object that contains the state of the event to be sent to the component. It may be modified by calling
+   *                   its mutator methods.
+   * @param action     when something other than continuing the interception is desired, the corresponding method on this object
+   *                   must be called. The methods on this object return a {@link CompletableFuture} that may be used to return
+   *                   from this method.
    * @return a non-null {@link CompletableFuture} for modifying the intercepted {@link InterceptionEvent event} after this method
    *         returns.
    */
@@ -108,8 +109,18 @@ public interface ProcessorInterceptor {
    * will still be called.
    *
    * @param location the location and identification properties of the intercepted component in the mule app configuration.
-   * @param event the result of the component.
-   * @param thrown the exception thrown by the intercepted component, if any.
+   * @param event    the result of the component.
+   * @param thrown   the exception thrown by the intercepted component, if any.
    */
   default void after(ComponentLocation location, InterceptionEvent event, Optional<Throwable> thrown) {}
+
+  /**
+   * Determines if the intercepted component requires the error mapping to be performed.
+   *
+   * @param location the location and identification properties of the intercepted component in the mule app configuration.
+   * @return {@code true} if the error mapping is required, {@code false} otherwise.
+   */
+  default boolean isErrorMappingRequired(ComponentLocation location) {
+    return false;
+  }
 }

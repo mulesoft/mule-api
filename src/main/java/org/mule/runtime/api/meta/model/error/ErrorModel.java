@@ -12,8 +12,7 @@ import org.mule.runtime.api.meta.model.ComponentModel;
 import java.util.Optional;
 
 /**
- * A model which represents a possible error that could be thrown
- * by the component represented by the {@link ComponentModel}.
+ * A model which represents a possible error that could be thrown by the component represented by the {@link ComponentModel}.
  *
  * @since 1.0
  */
@@ -28,9 +27,8 @@ public interface ErrorModel {
   String getType();
 
   /**
-   * Gets the namespace of error.
-   * This namespace represent the origin or who declares this error, so it could be the namespace of an
-   * extension or the {@code MULE} namespace.
+   * Gets the namespace of error. This namespace represent the origin or who declares this error, so it could be the namespace of
+   * an extension or the {@code MULE} namespace.
    *
    * @return The namespace of the error
    */

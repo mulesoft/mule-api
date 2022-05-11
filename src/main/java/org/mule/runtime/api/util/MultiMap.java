@@ -33,6 +33,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collector;
 
 /**
  * Implementation of a multi-map that allows the aggregation of keys and access to the aggregated list or a single value (the
@@ -81,7 +82,7 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    *
    * @param <K> the class of the map keys
    * @param <V> the class of the map values
-   * @param m the multi-map for which an unmodifiable view is to be returned.
+   * @param m   the multi-map for which an unmodifiable view is to be returned.
    * @return an unmodifiable view of the specified multi-map.
    */
   public static <K, V> MultiMap<K, V> unmodifiableMultiMap(MultiMap<K, V> m) {
@@ -91,6 +92,28 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
     } else {
       return new UnmodifiableMultiMap<>(m);
     }
+  }
+
+  /**
+   * Returns a {@code Collector} that accumulates elements into a {@code Map} whose keys and values are the result of applying the
+   * provided mapping functions to the input elements.
+   * <p>
+   * If the mapped keys contains duplicates (according to {@link Object#equals(Object)}), the value mapping function is applied to
+   * each equal element, and the results are added to the values collection.
+   * 
+   * @param <T>         the type of the input elements
+   * @param <K>         the output type of the key mapping function
+   * @param <U>         the output type of the value mapping function
+   * @param keyMapper   a mapping function to produce keys
+   * @param valueMapper a mapping function to produce values
+   * @return a {@code Collector} which collects elements into a {@code MultiMap} whose keys and values are the result of applying
+   *         mapping functions to the input elements.
+   * 
+   * @since 1.5
+   */
+  public static <T, K, U> Collector<T, ?, MultiMap<K, U>> toMultiMap(Function<? super T, ? extends K> keyMapper,
+                                                                     Function<? super T, ? extends U> valueMapper) {
+    return toMap(keyMapper, valueMapper, (u, v) -> v, () -> new MultiMap<>());
   }
 
   protected Map<K, LinkedList<V>> paramsMap;
@@ -197,17 +220,18 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * Associates the specified value with the specified key in this map (optional operation). If the map previously contained
    * mappings for the key, the new values are aggregated to the old.
    *
-   * @param key key with which the specified values are to be associated
+   * @param key    key with which the specified values are to be associated
    * @param values collection of values to be associated with the specified key
    */
   public void put(K key, Collection<V> values) {
-    LinkedList<V> newValue = paramsMap.get(key);
-    if (newValue == null) {
-      newValue = new LinkedList<>(values);
-      paramsMap.put(key, newValue);
-    } else {
-      newValue.addAll(values);
-    }
+    paramsMap.compute(key, (k, curVal) -> {
+      if (curVal == null) {
+        return new LinkedList<>(values);
+      } else {
+        curVal.addAll(values);
+        return curVal;
+      }
+    });
   }
 
   @Override
@@ -243,18 +267,16 @@ public class MultiMap<K, V> implements Map<K, V>, Serializable {
    * key.
    *
    * @param aMultiMap mappings to be stored in this map
-   * @throws ClassCastException if the class of a key or value in the specified map prevents it from being stored in this map
-   * @throws NullPointerException if the specified map is null, or if this map does not permit null keys or values, and the
-   *         specified map contains null keys or values
+   * @throws ClassCastException       if the class of a key or value in the specified map prevents it from being stored in this
+   *                                  map
+   * @throws NullPointerException     if the specified map is null, or if this map does not permit null keys or values, and the
+   *                                  specified map contains null keys or values
    * @throws IllegalArgumentException if some property of a key or value in the specified map prevents it from being stored in
-   *         this map
+   *                                  this map
    * @since 1.1.1
    */
   public void putAll(MultiMap<? extends K, ? extends V> aMultiMap) {
-    Set<? extends K> keySet = aMultiMap.keySet();
-    for (K key : keySet) {
-      put(key, (Collection<V>) aMultiMap.paramsMap.get(key));
-    }
+    aMultiMap.paramsMap.forEach((k, v) -> put(k, (Collection<V>) v));
   }
 
   @Override

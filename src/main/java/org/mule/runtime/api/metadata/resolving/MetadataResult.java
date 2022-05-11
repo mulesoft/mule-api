@@ -13,9 +13,9 @@ import org.mule.api.annotation.NoImplement;
 import java.util.List;
 
 /**
- * Container for the Metadata fetch operations provided by {@link TypeKeysResolver}, {@link InputTypeResolver}
- * and {@link OutputTypeResolver} results.
- * Allows to communicate errors without propagating exceptions to the Metadata fetching service
+ * Container for the Metadata fetch operations provided by {@link TypeKeysResolver}, {@link InputTypeResolver} and
+ * {@link OutputTypeResolver} results. Allows to communicate errors without propagating exceptions to the Metadata fetching
+ * service
  *
  * @param <T> return type of the Metadata resolving operation.
  * @since 1.0
@@ -86,11 +86,11 @@ public interface MetadataResult<T> {
   boolean isSuccess();
 
   /**
-   * If {@link this#isSuccess} is false, then a {@link MetadataFailure} instance is provided
-   * in order to describe the error that occurred during the invocation.
+   * If {@link this#isSuccess} is false, then a {@link MetadataFailure} instance is provided in order to describe the error that
+   * occurred during the invocation.
    *
-   * @return a {@link List} of {@link MetadataFailure}s describing the errors that occurred during the invocation
-   * if at least one occurred.
+   * @return a {@link List} of {@link MetadataFailure}s describing the errors that occurred during the invocation if at least one
+   *         occurred.
    */
   List<MetadataFailure> getFailures();
 

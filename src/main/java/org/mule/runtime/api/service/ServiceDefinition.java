@@ -23,7 +23,7 @@ public final class ServiceDefinition {
    * Defines a new service instance.
    *
    * @param serviceInterface interface defining the service. Non null.
-   * @param service implementation of the {@code serviceInterface}. Non null.
+   * @param service          implementation of the {@code serviceInterface}. Non null.
    */
   public ServiceDefinition(Class<? extends Service> serviceInterface, Service service) {
     requireNonNull(serviceInterface, "ServiceClass cannot be null");

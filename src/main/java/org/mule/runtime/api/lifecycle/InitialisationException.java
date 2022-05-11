@@ -9,9 +9,8 @@ package org.mule.runtime.api.lifecycle;
 import org.mule.runtime.api.i18n.I18nMessage;
 
 /**
- * {@code InitialisationException} is thrown by the initialise method defined in the
- * {@link Initialisable} interface. IinitialisationExceptions are fatal and will cause
- * the current Mule instance to shutdown.
+ * {@code InitialisationException} is thrown by the initialise method defined in the {@link Initialisable} interface.
+ * IinitialisationExceptions are fatal and will cause the current Mule instance to shutdown.
  *
  * @since 1.0
  */
@@ -21,7 +20,7 @@ public final class InitialisationException extends LifecycleException {
   private static final long serialVersionUID = 6423668077165119108L;
 
   /**
-   * @param message the exception message
+   * @param message   the exception message
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(I18nMessage message, Initialisable component) {
@@ -29,8 +28,8 @@ public final class InitialisationException extends LifecycleException {
   }
 
   /**
-   * @param message the exception message
-   * @param cause the exception that cause this exception to be thrown
+   * @param message   the exception message
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(I18nMessage message, Throwable cause, Initialisable component) {
@@ -38,7 +37,7 @@ public final class InitialisationException extends LifecycleException {
   }
 
   /**
-   * @param cause the exception that cause this exception to be thrown
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public InitialisationException(Throwable cause, Initialisable component) {

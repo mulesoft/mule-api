@@ -7,8 +7,8 @@
 package org.mule.runtime.api.lifecycle;
 
 /**
- * {@code Disposable} is a lifecycle interface that gets called at the dispose lifecycle stage of the implementing service as
- * the service is being destroyed.
+ * {@code Disposable} is a lifecycle interface that gets called at the dispose lifecycle stage of the implementing service as the
+ * service is being destroyed.
  *
  * @since 1.0
  */

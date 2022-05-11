@@ -23,20 +23,17 @@ import java.util.Optional;
 public interface HasConnectionProviderModels {
 
   /**
-   * Returns a {@link List} of {@link ConnectionProviderModel}s defined at the level
-   * of the component implementing this interface.
+   * Returns a {@link List} of {@link ConnectionProviderModel}s defined at the level of the component implementing this interface.
    *
-   * Each provider is guaranteed to have a unique name which will not
-   * overlap with any {@link OperationModel} or {@link SourceModel}
-   * defined in the same {@link ExtensionModel}
+   * Each provider is guaranteed to have a unique name which will not overlap with any {@link OperationModel} or
+   * {@link SourceModel} defined in the same {@link ExtensionModel}
    *
    * @return an immutable {@link List} of {@link ConnectionProviderModel}
    */
   List<ConnectionProviderModel> getConnectionProviders();
 
   /**
-   * Returns the {@link ConnectionProviderModel} that matches
-   * the given name.
+   * Returns the {@link ConnectionProviderModel} that matches the given name.
    *
    * @param name case sensitive provider name
    * @return an {@link Optional} {@link ConnectionProviderModel}

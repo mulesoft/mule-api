@@ -52,8 +52,8 @@ public interface MetadataService {
   MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location);
 
   /**
-   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver}
-   * associated to this Component.
+   * Returns the a {@link MetadataKeysContainer} with the {@link MetadataKey}s provided per {@link TypeKeysResolver} associated to
+   * this Component.
    *
    * @param partialKey {@link MetadataKey} to be considered for resolve the next key levels.
    * @return Successful {@link MetadataResult} if the keys are successfully resolved Failure {@link MetadataResult} if there is an
@@ -65,11 +65,10 @@ public interface MetadataService {
   /**
    * Resolves the dynamic {@link MetadataType} for the current component parameter with the given key.
    *
-   * @param key {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param key           {@link MetadataKey} of the type which's structure has to be resolved.
    * @param parameterName {@link String} name of the parameter to be resolved.
-   * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful
-   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
-   *         retrieval fails for any reason
+   * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @since 1.4
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
@@ -78,9 +77,8 @@ public interface MetadataService {
    * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
    *
    * @param key {@link MetadataKey} of the type which's structure has to be resolved.
-   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful
-   *         {@link MetadataResult} if the Metadata is successfully retrieved Failure {@link MetadataResult} when the Metadata
-   *         retrieval fails for any reason
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(Location location, MetadataKey key);
@@ -108,7 +106,7 @@ public interface MetadataService {
    * {@link this#getOperationMetadata}
    *
    * @param location the location of the {@link MetadataProvider} component to type dynamically
-   * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
+   * @param key      {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
    * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the
    *         Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element
    *         fails for any reason
@@ -138,7 +136,7 @@ public interface MetadataService {
    * {@link this#getOperationMetadata}
    *
    * @param location the location of the {@link MetadataProvider} component to type dynamically
-   * @param key {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
+   * @param key      {@link MetadataKey} of the type which's structure has to be resolved, used both for input and output types
    * @return a {@link MetadataResult} of {@link ComponentMetadataDescriptor} type with Successful {@link MetadataResult} if the
    *         Metadata is successfully retrieved and a Failed {@link MetadataResult} when the Metadata retrieval of any element
    *         fails for any reason
@@ -168,7 +166,7 @@ public interface MetadataService {
    * {@link Location}.
    *
    * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
-   * @param key {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
    * @return a {@link MetadataResult} of {@link TypeMetadataDescriptor} type with a successful {@link MetadataResult} if the
    *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
    *         a problem.

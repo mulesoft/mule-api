@@ -46,8 +46,8 @@ public class Either<L, R> {
    * Creates an {@code Either} with a left value.
    *
    * @param value the left value
-   * @param <L> the left value type
-   * @param <R> the right value type
+   * @param <L>   the left value type
+   * @param <R>   the right value type
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> left(L value) {
@@ -63,8 +63,8 @@ public class Either<L, R> {
    * This is useful because it avoids the casting afterwards which can clutter the code and affect its readability.
    *
    * @param value the left value
-   * @param <L> the left value type
-   * @param <R> the right value type
+   * @param <L>   the left value type
+   * @param <R>   the right value type
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> left(L value, Class<R> rightClass) {
@@ -75,8 +75,8 @@ public class Either<L, R> {
    * Creates an {@code Either} with a right value.
    *
    * @param value the right value
-   * @param <L> the left value type
-   * @param <R> the right value type
+   * @param <L>   the left value type
+   * @param <R>   the right value type
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> right(R value) {
@@ -92,8 +92,8 @@ public class Either<L, R> {
    * This is useful because it avoids the casting afterwards which can clutter the code and affect its readability.
    *
    * @param value the right value
-   * @param <L> the left value type
-   * @param <R> the right value type
+   * @param <L>   the left value type
+   * @param <R>   the right value type
    * @return the created {@code Either instance}
    */
   public static <L, R> Either<L, R> right(Class<L> leftClass, R value) {
@@ -111,9 +111,9 @@ public class Either<L, R> {
   /**
    * Allows to reduce to a single value using left and right functions with the same return type.
    *
-   * @param leftFunc the function to apply to the left value
+   * @param leftFunc  the function to apply to the left value
    * @param rightFunc the function to apply to the left value
-   * @param <T> the return type of the function.
+   * @param <T>       the return type of the function.
    * @return the result of applying the function on left of right values, or {@code null} if none were set.
    */
   public <T> T reduce(Function<? super L, ? extends T> leftFunc, Function<? super R, ? extends T> rightFunc) {
@@ -130,7 +130,7 @@ public class Either<L, R> {
    * Allows to execute a function over the left value if it is present
    *
    * @param func the function to apply to the left value
-   * @param <T> the return type of the function.
+   * @param <T>  the return type of the function.
    * @return a new {@code Either} created from the result of applying the function.
    */
   public <T> Either<T, R> mapLeft(Function<? super L, ? extends T> func) {
@@ -157,7 +157,7 @@ public class Either<L, R> {
    * Allows to execute a function over the right value if it is present
    *
    * @param func the function to apply to the right value
-   * @param <T> the return type of the function.
+   * @param <T>  the return type of the function.
    * @return a new {@code Either} created from the result of applying the function.
    */
   public <T> Either<L, T> mapRight(Function<? super R, ? extends T> func) {
@@ -171,7 +171,7 @@ public class Either<L, R> {
   /**
    * Receives a {@link Consumer} functions for both, the left and right value and applies the one over the value that is present.
    *
-   * @param leftConsumer the function to apply to the left value
+   * @param leftConsumer  the function to apply to the left value
    * @param rightConsumer the function to apply to the right value
    */
   public void apply(Consumer<? super L> leftConsumer, Consumer<? super R> rightConsumer) {

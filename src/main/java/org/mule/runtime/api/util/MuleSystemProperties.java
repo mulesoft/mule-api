@@ -7,8 +7,11 @@
 package org.mule.runtime.api.util;
 
 import static java.lang.System.getProperty;
+import static java.lang.System.setProperty;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
+import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.streaming.CursorProvider;
 
@@ -28,8 +31,8 @@ public final class MuleSystemProperties {
   public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
   /**
-   * A list of comma separated names of all known {@link org.mule.runtime.api.metadata.MediaType} param names. If they all match then
-   * {@link MediaType#isDefinedInApp()} returns true even if used the {@link MediaType#parse(String)} method.
+   * A list of comma separated names of all known {@link org.mule.runtime.api.metadata.MediaType} param names. If they all match
+   * then {@link MediaType#isDefinedInApp()} returns true even if used the {@link MediaType#parse(String)} method.
    *
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
@@ -40,7 +43,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.2.0
    */
-  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics";
+  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics";
 
   /**
    * System property key for the default size of a streaming buffer bucket
@@ -99,7 +102,8 @@ public final class MuleSystemProperties {
   public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
 
   /**
-   * When present, Polling Sources are enriched with a parameter for configuring the maximum number of items per poll to be processed.
+   * When present, Polling Sources are enriched with a parameter for configuring the maximum number of items per poll to be
+   * processed.
    *
    * @since 1.4.0
    */
@@ -109,11 +113,11 @@ public final class MuleSystemProperties {
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
 
   /**
-   * If specified, the log separation feature will be disabled, resulting in a performance boost.
-   * This makes sense in deployment models in which only one app will be deployed per runtime instance.
+   * If specified, the log separation feature will be disabled, resulting in a performance boost. This makes sense in deployment
+   * models in which only one app will be deployed per runtime instance.
    * <p>
-   * Log configuration file will only be fetched from {@code MULE_HOME/conf}. Deployed artifacts won't get their own file in
-   * the {@code MULE_HOME/logs/} automatically.
+   * Log configuration file will only be fetched from {@code MULE_HOME/conf}. Deployed artifacts won't get their own file in the
+   * {@code MULE_HOME/logs/} automatically.
    *
    * @since 1.3.0
    */
@@ -131,6 +135,15 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
   public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
+  /**
+   * Comma-separated list of packages to force as registrable.
+   * <p>
+   * Refer to {@link ExtensionDeclarer#isTypeRegistrable}.
+   * 
+   * @since 1.4
+   */
+  public static final String MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES =
+      SYSTEM_PROPERTY_PREFIX + "extension.forceRegistrableType.packages";
 
   /**
    * @deprecated Since 4.4.0 this feature was removed.
@@ -163,8 +176,8 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
-   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them
-   * cannot be compiled.
+   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
+   * be compiled.
    *
    * @since 1.3.0
    */
@@ -187,8 +200,8 @@ public final class MuleSystemProperties {
   public static final String DISABLE_SCHEDULER_SOURCES_PROPERTY = SYSTEM_PROPERTY_PREFIX + "config.scheduler.disabled";
 
   /**
-   * Allows to change the default value for the frequency property of the &lt;fixed-frequency&gt; element. Provided value must
-   * be coercible to a {@link Long} and be expressed in millis.
+   * Allows to change the default value for the frequency property of the &lt;fixed-frequency&gt; element. Provided value must be
+   * coercible to a {@link Long} and be expressed in millis.
    *
    * @since 1.3.0
    */
@@ -196,49 +209,52 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "config.scheduler.defaultFixedFrequency";
 
   /**
-   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called.
-   * It can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on
-   * an already closed cursor.
+   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called. It
+   * can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on an
+   * already closed cursor.
    *
    * @since 1.3.0
    */
   public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
-   * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for troubleshooting purposes
+   * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for
+   * troubleshooting purposes
    *
    * @since 1.4.0
    */
   public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
   /**
-   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then
-   * it's used the app ErrorType repository.
+   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then it's used the app
+   * ErrorType repository.
    *
    * @since 1.3.0
    */
   public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
 
   /**
-   * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated.
-   * This property is only read on deploying an app.
+   * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated. This property
+   * is only read on deploying an app.
    *
    * @since 4.4, 4.3.1
    */
   public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
 
   /**
-   * When enabled this System Property, the payload statistics are disabled independently of the statistics flag.
-   * This property is only read on deploying an app.
+   * When enabled this System Property, the payload statistics are disabled independently of the statistics flag. This property is
+   * only read on deploying an app.
    *
    * @since 4.4, 4.3.1
+   * @deprecated since 4.4.1, 4.5.0. Payload statistics are no longer supported, so this property will be ignored.
    */
+  @Experimental
+  @Deprecated
   public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
 
   /**
-   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to {@code false}, or not set all,
-   * schema resources will be cached.
-   * This property is only read on deploying an app.
+   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to
+   * {@code false}, or not set all, schema resources will be cached. This property is only read on deploying an app.
    *
    * @since 4.4
    */
@@ -253,9 +269,9 @@ public final class MuleSystemProperties {
   public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
 
   /**
-   * A flux sink drops an event if next() is called after complete() or error().
-   * When enabled, if there is an event dropped, a WARN will be logged on next(), showing the complete() or error() stack trace.
-   * Additionally, the accept() stack trace is logged in order to get a hint about how the chain is created or what is it intended for.
+   * A flux sink drops an event if next() is called after complete() or error(). When enabled, if there is an event dropped, a
+   * WARN will be logged on next(), showing the complete() or error() stack trace. Additionally, the accept() stack trace is
+   * logged in order to get a hint about how the chain is created or what is it intended for.
    *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
@@ -282,7 +298,7 @@ public final class MuleSystemProperties {
   /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
    * isn't set, the behaviour will depend on {@link MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES}.
-   * 
+   *
    * @see MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES
    * @since 4.4.0, 4.3.1
    */
@@ -291,10 +307,239 @@ public final class MuleSystemProperties {
   /**
    * If set to true, then DW will correctly handle Splitter's exceptions, avoiding some serialization issues. Be aware that when
    * enabled, this can make {@code error.cause} return a different exception. For more information see DW-383.
-   * 
+   *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
   public static final String HANDLE_SPLITTER_EXCEPTION_PROPERTY = "mule.dw.handle_splitter_exception";
+
+  /**
+   * If set to true, then DW will remove implicit inputs when a variable with the same name is declared.
+   *
+   * @since 4.4.0
+   */
+  public static final String DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY = "mule.dw.remove_shadowed_implicit_inputs";
+
+  /**
+   * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
+   *
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  public static final String BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "batch.fixed.aggregator.transaction.record.buffer";
+
+  /**
+   * If set to true, the connection exceptions will be computed to trigger alerts.
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "compute.connection.errors.in.stats";
+
+  /**
+   * If set to true, managed iterators transformed to Strings will show the representation of the elements instead of the generic
+   * 'org.mule.runtime.core.internal.streaming.object.ManagedCursorIteratorProvider$ManagedCursorIterator@######'.
+   *
+   * @since 4.4.0
+   */
+  public static final String TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "transformer.toString.transformIteratorElements";
+
+  /**
+   * If set to true, the entity resolver will fail if a namespace cannot be resolved, while previously it only failed after 10
+   * attempts were made.
+   *
+   * @since 4.4.0
+   */
+  public static final String ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "entityResolver.failOnFirstError";
+
+  /**
+   * If set to true, the set variable will create a variable even if the value is null.
+   *
+   * @since 4.4.0
+   */
+  public static final String SET_VARIABLE_WITH_NULL_VALUE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "setVariable.WithNullValue";
+
+  /**
+   * If set to true, profiling events will be produced.
+   *
+   * @since 4.4.0
+   */
+  public static final String ENABLE_PROFILING_SERVICE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
+
+  /**
+   * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
+   * domain).
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "startExtensionComponentsWithArtifactClassloader";
+
+  /**
+   * When enabled, the Runtime will trim whitespaces from parameter values defined at the attribute level in the dsl.
+   *
+   * @since 4.4.1, 4.3.1
+   */
+  public static final String DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.attribute.parameter.whitespace.trimming";
+
+  /**
+   * When enabled, the Runtime will trim whitespaces from CDATA text parameter of pojos in the dsl.
+   *
+   * @since 4.5
+   */
+  public static final String DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.pojo.text.parameter.whitespace.trimming";
+
+  /**
+   * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
+   * it
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.default.errorhandler.not.rollback.incorrect.tx";
+
+  /**
+   * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
+   *
+   * @since 4.4.0-202202
+   */
+  public static final String ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enforce.expression.validation";
+
+  /**
+   * When enabled, expression validations will be enforced for all DataWeave expressions.
+   *
+   * @since 4.5.0
+   */
+  public static final String ENFORCE_EXPRESSION_VALIDATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enforce.dw.expression.validation";
+
+  /**
+   * When set to true, profiling consumers implemented by the runtime will be enabled by default.
+   *
+   * @since 4.4.0-202202
+   */
+  public static final String FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "force.runtime.profiling.consumers.enablement";
+
+  /**
+   * When set to true, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation
+   * that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.
+   *
+   * @since 4.3.0-202203
+   */
+  public static final String PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "parallelForeach.flattenMessage";
+
+  static {
+    // Maintain compatibility after fix for MULE-19406
+    final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
+    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null && oldEnableStreamingStatisticsValue != null) {
+      setProperty(MULE_ENABLE_STREAMING_STATISTICS, oldEnableStreamingStatisticsValue);
+    }
+  }
+
+  /**
+   * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
+   * application that is being applied to, and validations will prevent the usage of explicit configurations declared by the
+   * application as part of the policy initialization."
+   *
+   * @since 4.4.0, 4.3.1
+   */
+  public static final String ENABLE_POLICY_ISOLATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
+
+  /**
+   * If set to true, Mule will handle redirect requests. If set to false, we will delegate the redirect to Grizzly.
+   *
+   * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
+   */
+  public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
+
+  /**
+   * Property used to change the deployment mode to deploy only the indicated applications with no redeployment.
+   * <p>
+   * <code>mule -M-Dmule.deploy.applications=app1:app2:app3</code>
+   * <p>
+   * Using this property will disable the directory polling to find new artifacts to deploy.
+   * 
+   * @since 4.0
+   */
+  public static final String DEPLOYMENT_APPLICATION_PROPERTY = SYSTEM_PROPERTY_PREFIX + "deploy.applications";
+
+  /**
+   * If set to true, the deployment process will ignore the serialized artifactAst included in the artifact (generated by version
+   * 3.6.+ of the <code>mule-maven-plugin</code>) and parse the config xml as it was in previous versions.
+   *
+   * @since 4.5.0
+   */
+  public static final String FORCE_PARSE_CONFIG_XMLS_ON_DEPLOYMENT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "deployment.forceParseConfigXmls";
+
+
+  /**
+   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
+
+  /**
+   * If set to true, the Objects factories will be created with Byte Buddy instead of CGLIB."
+   *
+   * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
+   */
+  public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
+
+  /**
+   * If set to true, whenever an application has an HTTP requester configured to use TLS, Grizzly will use the
+   * WorkerThreadIOStrategy.
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED =
+      SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+
+  /**
+   * If set to true, attribute in entries in a `registry-bootstrap.properties` will be ignored.
+   *
+   * @since 4.5.0
+   */
+  public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+
+  /**
+   * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
+   * the application classloader.
+   * 
+   * @since 4.5.0
+   */
+  public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
+
+  /**
+   * If set to true, error handler beans will be created with the prototype scope.
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String REVERT_SIGLETON_ERROR_HANDLER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "revert.singletonErrorHandler";
+
+  /**
+   * If set to true, the global error handlers will be reused instead of creating local copies.
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)

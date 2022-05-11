@@ -14,8 +14,8 @@ import org.mule.runtime.api.i18n.I18nMessage;
 import org.mule.runtime.api.meta.NameableObject;
 
 /**
- * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it
- * occurred in the application).
+ * {@code LocatedMuleException} is a general exception that adds context location about the Exception (i.e.: where it occurred in
+ * the application).
  *
  * @since 1.0
  */
@@ -35,7 +35,7 @@ public class LocatedMuleException extends MuleException {
   }
 
   /**
-   * @param message the exception message
+   * @param message   the exception message
    * @param component the object that failed during a lifecycle method call
    */
   public LocatedMuleException(I18nMessage message, Object component) {
@@ -44,8 +44,8 @@ public class LocatedMuleException extends MuleException {
   }
 
   /**
-   * @param message the exception message
-   * @param cause the exception that cause this exception to be thrown
+   * @param message   the exception message
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public LocatedMuleException(I18nMessage message, Throwable cause, Object component) {
@@ -54,7 +54,7 @@ public class LocatedMuleException extends MuleException {
   }
 
   /**
-   * @param cause the exception that cause this exception to be thrown
+   * @param cause     the exception that cause this exception to be thrown
    * @param component the object that failed during a lifecycle method call
    */
   public LocatedMuleException(Throwable cause, Object component) {

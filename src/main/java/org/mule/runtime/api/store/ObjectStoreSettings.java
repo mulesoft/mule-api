@@ -12,8 +12,7 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import java.util.Optional;
 
 /**
- * Immutable object which contains settings parameters regarding how should a particular {@link ObjectStore}
- * instance behave.
+ * Immutable object which contains settings parameters regarding how should a particular {@link ObjectStore} instance behave.
  *
  * @since 1.0
  */
@@ -71,8 +70,8 @@ public class ObjectStoreSettings {
     /**
      * Sets how frequently should the expiration thread run.
      * <p>
-     * If not set, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}, but will only be used by the runtime
-     * if {@link #entryTtl(Long)} or {@link #maxEntries(Integer)} was also invoked.
+     * If not set, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}, but will only be used by the runtime if
+     * {@link #entryTtl(Long)} or {@link #maxEntries(Integer)} was also invoked.
      * <p>
      * Setting this to a value lower or equal than zero is also equivalent to disabling expiration.
      *
@@ -85,8 +84,7 @@ public class ObjectStoreSettings {
     }
 
     /**
-     * Returns the built settings object. {@code this} instance should be discarded and no longer used
-     * after invoking this method
+     * Returns the built settings object. {@code this} instance should be discarded and no longer used after invoking this method
      *
      * @return the built {@link ObjectStoreSettings} object
      */
@@ -136,8 +134,8 @@ public class ObjectStoreSettings {
   }
 
   /**
-   * Returns the max number of entries allowed. Exceeding entries will be removed when expiration thread runs.
-   * If absent, then the described {@link ObjectStore} will have no size boundaries.
+   * Returns the max number of entries allowed. Exceeding entries will be removed when expiration thread runs. If absent, then the
+   * described {@link ObjectStore} will have no size boundaries.
    */
   public Optional<Integer> getMaxEntries() {
     return ofNullable(maxEntries);
@@ -151,8 +149,8 @@ public class ObjectStoreSettings {
   }
 
   /**
-   * How frequently (in milliseconds) should the expiration thread run.
-   * If not set through {@link Builder#expirationInterval(Long)}, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}
+   * How frequently (in milliseconds) should the expiration thread run. If not set through
+   * {@link Builder#expirationInterval(Long)}, it will default to {@link #DEFAULT_EXPIRATION_INTERVAL}
    */
   public long getExpirationInterval() {
     return expirationInterval;

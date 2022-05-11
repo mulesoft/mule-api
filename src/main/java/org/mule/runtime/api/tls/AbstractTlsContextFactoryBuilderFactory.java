@@ -41,12 +41,10 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
   private static final AbstractTlsContextFactoryBuilderFactory DEFAULT_FACTORY;
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during
-   * this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
    * <p>
-   * If more than one implementation is found, the classLoading order of those implementations
-   * will determine which one is used. Information about this will be logged to aid in the
-   * troubleshooting of those cases.
+   * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
+   * Information about this will be logged to aid in the troubleshooting of those cases.
    *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */

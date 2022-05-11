@@ -17,8 +17,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.validation.SchemaFactory;
 
 /**
- * Avoid configuring factories each time they are used. Since we started using setFeature to avoid security issues,
- * getting a new XML factory object is very expensive.
+ * Avoid configuring factories each time they are used. Since we started using setFeature to avoid security issues, getting a new
+ * XML factory object is very expensive.
  *
  * @since 1.4.0
  */

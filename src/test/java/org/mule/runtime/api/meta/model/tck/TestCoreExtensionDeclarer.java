@@ -10,14 +10,14 @@ import static org.mule.runtime.api.meta.Category.COMMUNITY;
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
+import org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclarer;
 
 /**
- * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
- * which represents an oversimplified &quot;core&quot; extension with Mule's main language elements.
+ * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents an
+ * oversimplified &quot;core&quot; extension with Mule's main language elements.
  * <p>
- * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()}
- * method plus some other getters which provides access to other declaration components
- * that you might want to make tests against.
+ * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()} method plus
+ * some other getters which provides access to other declaration components that you might want to make tests against.
  * <p>
  * This case focuses on the scenario of scopes and routers (although not necessarily limited to that)
  *
@@ -51,8 +51,13 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
         .withXmlDsl(XmlDslModel.builder().build());
 
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
-    router.withRoute(WHEN_ROUTE_NAME).withMinOccurs(1).withChain();
+
+    NestedRouteDeclarer whenDeclaration = router.withRoute(WHEN_ROUTE_NAME);
+    whenDeclaration.withMinOccurs(1).withChain();
+    whenDeclaration.withComponent("errorHandler")
+        .onDefaultParameterGroup().withRequiredParameter("type").ofType(getStringType());
     router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain();
+    router.withSemanticTerm("router");
     ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
 

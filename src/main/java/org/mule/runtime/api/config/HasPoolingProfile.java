@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface HasPoolingProfile {
 
   /**
-  * @returns an {@link Optional} {@link PoolingProfile} to configure the connection pool
-  */
+   * @returns an {@link Optional} {@link PoolingProfile} to configure the connection pool
+   */
   Optional<PoolingProfile> getPoolingProfile();
 }

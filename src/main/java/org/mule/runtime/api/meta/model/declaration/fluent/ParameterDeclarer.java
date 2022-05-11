@@ -14,6 +14,7 @@ import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.display.DisplayModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
+import org.mule.runtime.api.meta.model.parameter.FieldValueProviderModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
@@ -29,7 +30,7 @@ import java.util.List;
 public class ParameterDeclarer<T extends ParameterDeclarer>
     implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>,
     HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>>,
-    HasDeprecatedDeclarer<ParameterDeclarer<T>> {
+    HasDeprecatedDeclarer<ParameterDeclarer<T>>, HasSemanticTermsDeclarer<T> {
 
   private final ParameterDeclaration declaration;
 
@@ -164,6 +165,19 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
+   * Sets the given List of {@code FieldValueProviderModel}s
+   *
+   * @param fieldValueProviderModels List of {@link FieldValueProviderModel}s
+   * @return {@code this} declarer
+   * 
+   * @since 1.4.0
+   */
+  public T withFieldValueProviderModels(List<FieldValueProviderModel> fieldValueProviderModels) {
+    declaration.setFieldValueProviderModels(fieldValueProviderModels);
+    return (T) this;
+  }
+
+  /**
    * Sets the given {@link List} of {@link StereotypeModel}
    * 
    * @param stereotypeModels a {@link List} of {@link StereotypeModel}
@@ -187,5 +201,16 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   public ParameterDeclarer<T> withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 1.4.0
+   */
+  @Override
+  public T withSemanticTerm(String semanticTerm) {
+    declaration.addSemanticTerm(semanticTerm);
+    return (T) this;
   }
 }

@@ -60,8 +60,8 @@ public class IOUtils {
    *
    * @param resourceName The name of the resource to load
    * @param callingClass The Class object of the calling object
-   * @param tryAsFile - try to load the resource from the local file system
-   * @param tryAsUrl - try to load the resource as a Url string
+   * @param tryAsFile    - try to load the resource from the local file system
+   * @param tryAsUrl     - try to load the resource as a Url string
    * @return an URL to the resource or null if resource not found
    */
   public static URL getResourceAsUrl(final String resourceName, final Class callingClass, boolean tryAsFile, boolean tryAsUrl) {

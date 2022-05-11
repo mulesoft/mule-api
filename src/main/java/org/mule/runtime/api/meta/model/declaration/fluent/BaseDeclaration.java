@@ -34,12 +34,10 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
   private DisplayModel displayModel;
 
   /**
-   * Returns a {@link Set} with the currently added properties. Notice
-   * that this {@link Set} is mutable and not thread-safe.
+   * Returns a {@link Set} with the currently added properties. Notice that this {@link Set} is mutable and not thread-safe.
    * <p>
-   * This method is to be used when you need to access all the properties.
-   * For individual access use {@link #addModelProperty(ModelProperty)}}
-   * or {@link #getModelProperty(Class)} instead
+   * This method is to be used when you need to access all the properties. For individual access use
+   * {@link #addModelProperty(ModelProperty)}} or {@link #getModelProperty(Class)} instead
    *
    * @return a {@link Set} with the current model properties. Might be empty but will never by {@code null}
    */
@@ -59,9 +57,8 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
   }
 
   /**
-   * Adds the given {@param modelProperty}. If a property
-   * of the same {@link Class} has already been added, it will
-   * be overwritten.
+   * Adds the given {@param modelProperty}. If a property of the same {@link Class} has already been added, it will be
+   * overwritten.
    *
    * @param modelProperty a {@link ModelProperty}
    * @throws IllegalArgumentException if {@code modelProperty} is {@code null{}}
@@ -71,7 +68,7 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
       throw new IllegalArgumentException("Cannot add a null model property");
     }
 
-    //TODO: MULE-9581 take a look at MetadataKeyBuilder
+    // TODO: MULE-9581 take a look at MetadataKeyBuilder
 
     modelProperties.put(modelProperty.getClass(), modelProperty);
     return (T) this;
@@ -103,6 +100,7 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
 
   /**
    * Sets the {@link #displayModel} for this declaration
+   * 
    * @param displayModel a {@link DisplayModel}
    */
   public void setDisplayModel(DisplayModel displayModel) {

@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * A group is a logical way to display one or more parameters together. If no group is specified then
- * {@link #DEFAULT_GROUP_NAME} is used by default.
+ * A group is a logical way to display one or more parameters together. If no group is specified then {@link #DEFAULT_GROUP_NAME}
+ * is used by default.
  *
  * @since 1.0
  */
@@ -26,8 +26,7 @@ import java.util.Optional;
 public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDisplayModel, HasLayoutModel, EnrichableModel {
 
   /**
-   * Group name for parameters that are considered for general purposes and shouldn't belong to a particular
-   * group.
+   * Group name for parameters that are considered for general purposes and shouldn't belong to a particular group.
    */
   String DEFAULT_GROUP_NAME = "General";
 
@@ -52,34 +51,29 @@ public interface ParameterGroupModel extends NamedObject, DescribedObject, HasDi
   String ERROR_MAPPINGS = "Error Mappings";
 
   /**
-   * Returns the {@link ParameterModel parameterModels}
-   * available for {@code this} group
+   * Returns the {@link ParameterModel parameterModels} available for {@code this} group
    *
-   * @return a immutable {@link java.util.List} with {@link ParameterModel}
-   * instances. It will never be empty
+   * @return a immutable {@link java.util.List} with {@link ParameterModel} instances. It will never be empty
    */
   List<ParameterModel> getParameterModels();
 
   /**
-   * Returns a list of {@link ExclusiveParametersModel} which describe
-   * mutual exclusions between the {@link #getParameterModels() parameters}
+   * Returns a list of {@link ExclusiveParametersModel} which describe mutual exclusions between the {@link #getParameterModels()
+   * parameters}
    *
    * @return a {@link List} of {@link ExclusiveParametersModel}
    */
   List<ExclusiveParametersModel> getExclusiveParametersModels();
 
   /**
-   * Returns the {@link ParameterModel parameterModel} with the given {@code name}
-   * if one is present.
+   * Returns the {@link ParameterModel parameterModel} with the given {@code name} if one is present.
    *
-   * @return the {@link ParameterModel parameterModel} with the given {@code name}
-   * or {@link Optional#empty()} if none is found.
+   * @return the {@link ParameterModel parameterModel} with the given {@code name} or {@link Optional#empty()} if none is found.
    */
   Optional<ParameterModel> getParameter(String name);
 
   /**
-   * @return {@code true} if this group should be represented inline
-   * as a child element in the DSL
+   * @return {@code true} if this group should be represented inline as a child element in the DSL
    */
   boolean isShowInDsl();
 }

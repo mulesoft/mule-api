@@ -10,8 +10,8 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.model.OutputModel;
 
 /**
- * A declaration object for an {@link OutputModel}. It contains raw,
- * unvalidated data which is used to declare the structure of an {@link OutputModel}.
+ * A declaration object for an {@link OutputModel}. It contains raw, unvalidated data which is used to declare the structure of an
+ * {@link OutputModel}.
  *
  * @since 1.0
  */

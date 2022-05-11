@@ -23,12 +23,11 @@ import java.io.Serializable;
 
 
 /**
- * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer}
- * which represents a theoretical &quot;Http connector&quot; extension.
+ * A simple pojo containing reference information for making test around a {@link ExtensionDeclarer} which represents a
+ * theoretical &quot;Http connector&quot; extension.
  * <p>
- * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()}
- * method plus some other getters which provides access to other declaration components
- * that you might want to make tests against.
+ * It contains an actual {@link ExtensionDeclarer} that can be accessed through the {@link #getExtensionDeclarer()} method plus
+ * some other getters which provides access to other declaration components that you might want to make tests against.
  * <p>
  * This case focuses on the scenario in which each config has its own set of operations, providers and sources.
  *
@@ -55,6 +54,7 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
   public static final MuleVersion MIN_MULE_VERSION = new MuleVersion("4.0");
   public static final ObjectType COMPLEX_TYPE = create(JAVA).objectType().id("COMPLEX_TYPE").build();
   public static final ObjectType ANOTHER_COMPLEX_TYPE = create(JAVA).objectType().id("ANOTHER_COMPLEX_TYPE").build();
+  public static final String DSL_PREFIX = "http";
 
   private final ExtensionDeclarer extensionDeclarer = new ExtensionDeclarer();
 
@@ -70,7 +70,7 @@ public class TestHttpConnectorDeclarer extends TestBaseDeclarer {
         .withCategory(COMMUNITY)
         .withType(COMPLEX_TYPE)
         .withType(ANOTHER_COMPLEX_TYPE)
-        .withXmlDsl(XmlDslModel.builder().build());
+        .withXmlDsl(XmlDslModel.builder().setPrefix(DSL_PREFIX).build());
     OperationDeclarer staticResource = extensionDeclarer.withOperation(STATIC_RESOURCE_OPERATION_NAME);
     staticResource.supportsStreaming(true).withOutput().ofType(getBinaryType());
     staticResource.withOutputAttributes().ofType(getObjectType(Object.class));

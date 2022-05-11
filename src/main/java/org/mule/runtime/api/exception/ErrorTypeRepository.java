@@ -12,6 +12,7 @@ import org.mule.runtime.api.message.ErrorType;
 
 import java.util.Collection;
 import java.util.Optional;
+import java.util.Set;
 
 @NoImplement
 public interface ErrorTypeRepository {
@@ -21,7 +22,7 @@ public interface ErrorTypeRepository {
    * will be available for use in on-error components.
    *
    * @param errorTypeIdentifier the {@link ComponentIdentifier} for the error
-   * @param parentErrorType the {@link ErrorType} that will act as parent
+   * @param parentErrorType     the {@link ErrorType} that will act as parent
    * @return the created {@link ErrorType}
    */
   ErrorType addErrorType(ComponentIdentifier errorTypeIdentifier, ErrorType parentErrorType);
@@ -31,7 +32,7 @@ public interface ErrorTypeRepository {
    * it won't be available for use in on-error components.
    *
    * @param errorTypeIdentifier the {@link ComponentIdentifier} for the error
-   * @param parentErrorType the {@link ErrorType} that will act as parent
+   * @param parentErrorType     the {@link ErrorType} that will act as parent
    * @return the created {@link ErrorType}
    */
   ErrorType addInternalErrorType(ComponentIdentifier errorTypeIdentifier, ErrorType parentErrorType);
@@ -87,4 +88,20 @@ public interface ErrorTypeRepository {
    * @return the CRITICAL error type
    */
   ErrorType getCriticalErrorType();
+
+  /**
+   * Gets the {@link ErrorType} instances for handleable errors available in this repository.
+   *
+   * @return all the available error types.
+   * @since 1.4
+   */
+  Set<ErrorType> getErrorTypes();
+
+  /**
+   * Gets the {@link ErrorType} instances for un-handleable errors available in this repository.
+   *
+   * @return all the available error types.
+   * @since 1.4
+   */
+  Set<ErrorType> getInternalErrorTypes();
 }

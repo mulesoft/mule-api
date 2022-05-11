@@ -53,6 +53,13 @@ public class BindingContextUtils {
   public static final String FLOW = "flow";
   public static final String ITEM_SEQUENCE_INFO = "itemSequenceInfo";
 
+  /**
+   * Key for the event parameters binding
+   * 
+   * @since 1.5.0
+   */
+  public static final String PARAMS = "params";
+
   public static final BindingContext NULL_BINDING_CONTEXT = new BindingContext() {
 
     @Override
@@ -81,6 +88,13 @@ public class BindingContextUtils {
       .keyType(String.class)
       .valueType(TypedValue.class)
       .build();
+
+  /**
+   * {@link DataType} for the event parameters binding
+   * 
+   * @since 1.5.0
+   */
+  private static final DataType PARAMS_DATA_TYPE = VARS_DATA_TYPE;
   private static final DataType ITEM_SEQUENCE_INFO_DATA_TYPE = fromType(ItemSequenceInfoBindingWrapper.class);
   private static final DataType MESAGE_DATA_TYPE = fromType(Message.class);
   private static final DataType DATA_TYPE_DATA_TYPE = fromType(DataType.class);
@@ -90,6 +104,16 @@ public class BindingContextUtils {
 
   public final static TypedValue EMPTY_VARS = new TypedValue<>(emptyMap(), VARS_DATA_TYPE);
   private final static Supplier<TypedValue> EMPTY_VARS_SUPPLIER = () -> EMPTY_VARS;
+
+  /**
+   * {@link TypedValue} to use in the absence of event params.
+   * 
+   * @since 1.5.0
+   */
+  public final static TypedValue EMPTY_PARAMS = new TypedValue<>(emptyMap(), PARAMS_DATA_TYPE);
+
+  private final static Supplier<TypedValue> EMPTY_PARAMS_SUPPLIER = () -> EMPTY_PARAMS;
+
   public static final TypedValue NULL_TYPED_VALUE = new TypedValue<>(null, DataType.OBJECT);
   private static final Supplier<TypedValue> NULL_TYPED_VALUE_SUPPLIER = () -> NULL_TYPED_VALUE;
 
@@ -101,7 +125,7 @@ public class BindingContextUtils {
    * Creates a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    * given {@code event}.
    *
-   * @param event the event to build the new bindings for. Not-null.
+   * @param event       the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext} that contains the bindings from {@code baseContext} and the bindings that belong to the
    *         given {@code event}.
@@ -114,7 +138,7 @@ public class BindingContextUtils {
    * Creates a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
    * to the given {@code event}.
    *
-   * @param event the event to build the new bindings for. Not-null.
+   * @param event       the event to build the new bindings for. Not-null.
    * @param baseContext the context whose copy the event bindings will be added to. Not-null.
    * @return a new {@link BindingContext.Builder} that contains the bindings from {@code baseContext} and the bindings that belong
    *         to the given {@code event}.
@@ -130,6 +154,12 @@ public class BindingContextUtils {
       contextBuilder.addBinding(VARS, new LazyValue<>(() -> new TypedValue<>(event.getVariables(), VARS_DATA_TYPE)));
     } else {
       contextBuilder.addBinding(VARS, EMPTY_VARS_SUPPLIER);
+    }
+
+    if (event.getParameters().isEmpty()) {
+      contextBuilder.addBinding(PARAMS, EMPTY_PARAMS_SUPPLIER);
+    } else {
+      contextBuilder.addBinding(PARAMS, new LazyValue<>(() -> new TypedValue<>(event.getParameters(), PARAMS_DATA_TYPE)));
     }
 
     contextBuilder.addBinding(CORRELATION_ID,

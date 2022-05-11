@@ -11,8 +11,7 @@ import org.mule.api.annotation.NoImplement;
 import java.util.List;
 
 /**
- * Contract interface for a {@link BaseDeclaration} in which
- * it's possible to add/get {@link NestableElementDeclaration} objects
+ * Contract interface for a {@link BaseDeclaration} in which it's possible to add/get {@link NestableElementDeclaration} objects
  *
  * @param <T> the generic type of the {@link BaseDeclaration} which is implementing the interface
  * @since 1.0
@@ -29,8 +28,7 @@ public interface WithNestedComponentsDeclaration<T> {
   T addNestedComponent(NestableElementDeclaration nestedComponent);
 
   /**
-   * @return a {@link List} with the {@link NestableElementDeclaration}s which have been
-   * added to {@code this} declaration
+   * @return a {@link List} with the {@link NestableElementDeclaration}s which have been added to {@code this} declaration
    */
   List<NestableElementDeclaration> getNestedComponents();
 

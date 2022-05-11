@@ -22,7 +22,7 @@ public interface SchedulingStrategy {
    * Schedules a job.
    *
    * @param executor the corresponding {@link org.mule.runtime.api.scheduler.Scheduler} instance.
-   * @param job The {@link Runnable} job that has to be executed.
+   * @param job      The {@link Runnable} job that has to be executed.
    * @return the newly scheduled job.
    * @throws NullPointerException In case the scheduled job handler is null.
    */

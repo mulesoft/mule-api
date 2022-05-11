@@ -23,12 +23,9 @@ import java.util.Optional;
 /**
  * A definition of a message source in an {@link ExtensionModel}.
  * <p>
- * Source models implement the flyweight pattern. This means
- * that a given operation should only be represented by only
- * one instance of this class. Thus, if the same operation is
- * contained by different {@link HasSourceModels} instances,
- * then each of those containers should reference the same
- * operation model instance.
+ * Source models implement the flyweight pattern. This means that a given operation should only be represented by only one
+ * instance of this class. Thus, if the same operation is contained by different {@link HasSourceModels} instances, then each of
+ * those containers should reference the same operation model instance.
  *
  * @since 1.0
  */
@@ -41,28 +38,24 @@ public interface SourceModel extends ConnectableComponentModel, HasNotifications
   boolean hasResponse();
 
   /**
-   * Optionally returns a {@link SourceCallbackModel} which will listen
-   * for the values produced by the source owner each time it successfully
-   * processes any of the generated messages.
+   * Optionally returns a {@link SourceCallbackModel} which will listen for the values produced by the source owner each time it
+   * successfully processes any of the generated messages.
    *
    * @return an {@link Optional} {@link SourceCallbackModel}
    */
   Optional<SourceCallbackModel> getSuccessCallback();
 
   /**
-   * Optionally returns a {@link SourceCallbackModel} which will listen
-   * for errors thrown by the source owner each time it fails to process
-   * any of the generated messages
+   * Optionally returns a {@link SourceCallbackModel} which will listen for errors thrown by the source owner each time it fails
+   * to process any of the generated messages
    *
    * @return an {@link Optional} {@link SourceCallbackModel}
    */
   Optional<SourceCallbackModel> getErrorCallback();
 
   /**
-   * Optionally returns a {@link SourceCallbackModel} which will listen
-   * for the results of every generated message.
-   * This callback will be called after the {@link #getErrorCallback()}
-   * and {@link #getSuccessCallback()} as the last step to validate the
+   * Optionally returns a {@link SourceCallbackModel} which will listen for the results of every generated message. This callback
+   * will be called after the {@link #getErrorCallback()} and {@link #getSuccessCallback()} as the last step to validate the
    * result of the flow processing.
    *
    * @return an {@link Optional} {@link SourceCallbackModel}
@@ -75,8 +68,7 @@ public interface SourceModel extends ConnectableComponentModel, HasNotifications
   boolean runsOnPrimaryNodeOnly();
 
   /**
-   * Returns all the {@link ParameterModel} on all groups, including
-   * the ones declared on the success and error callbacks.
+   * Returns all the {@link ParameterModel} on all groups, including the ones declared on the success and error callbacks.
    * Parameters repeated among callbacks will be deduplicated.
    *
    * @return a flattened list of all the parameters in this model

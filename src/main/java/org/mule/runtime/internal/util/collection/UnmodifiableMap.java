@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * An unmodifiable view of the specified map. 
+ * An unmodifiable view of the specified map.
  * 
  * @param <K> the generic type of the keys
  * @param <V> the generic type of the values
@@ -29,8 +29,8 @@ public class UnmodifiableMap<K, V> implements Map<K, V>, Serializable {
   private final Map<K, V> delegate;
 
   /**
-   * Returns an unmodifiable view of the given {@code map}.
-   * This method avoid create a new {@link UnmodifiableMap} instance if current {@code map} it's an {@link UnmodifiableMap}
+   * Returns an unmodifiable view of the given {@code map}. This method avoid create a new {@link UnmodifiableMap} instance if
+   * current {@code map} it's an {@link UnmodifiableMap}
    *
    * @param <K> the class of the map keys
    * @param <V> the class of the map values

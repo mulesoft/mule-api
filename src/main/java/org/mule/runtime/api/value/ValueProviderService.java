@@ -31,4 +31,18 @@ public interface ValueProviderService {
    * @see ValueResult
    */
   ValueResult getValues(Location location, String providerName);
+
+  /**
+   * Resolves the {@link Value values} for a element's value provider located in the given {@link Location} of the parameter field
+   * with the given parameter name and using the given field target selector.
+   *
+   * @param location       The {@link Location} where the element is found.
+   * @param parameter      The name of the parameter to resolve the {@link Value values}.
+   * @param targetSelector The path to the field located in the parameter.
+   * @return the {@link ValueResult result} of the resolving of the values.
+   * @see ValueResult
+   *
+   * @since 1.4.0
+   */
+  ValueResult getFieldValues(Location location, String parameter, String targetSelector);
 }
