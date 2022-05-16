@@ -320,6 +320,15 @@ public final class MuleSystemProperties {
   public static final String DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY = "mule.dw.remove_shadowed_implicit_inputs";
 
   /**
+   * When this property is set to {@code true}, DataWeave retains a mixed-content structure instead of grouping text with mixed
+   * content into a single text field.
+   *
+   * @since 4.5.0
+   */
+  public static final String DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY =
+      "com.mulesoft.dw.xml_reader.honourMixedContentStructure";
+
+  /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
    *
    * @since 4.4.0, 4.3.1, 4.2.3
