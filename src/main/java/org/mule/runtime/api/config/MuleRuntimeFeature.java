@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDL
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
@@ -187,6 +188,17 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.",
       "DW-893",
       "4.4.0", DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY),
+
+  /**
+   * When this property is set to {@code true}, DataWeave retains a mixed-content structure instead of grouping text with mixed
+   * content into a single text field.
+   *
+   * @since 4.5.0
+   */
+  DW_HONOUR_MIXED_CONTENT_STRUCTURE(
+      "When this property is set to true, DataWeave retains a mixed-content structure instead of grouping text with mixed content into a single text field.",
+      "W-11071481",
+      "4.5.0", DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY),
 
   /**
    * When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.
