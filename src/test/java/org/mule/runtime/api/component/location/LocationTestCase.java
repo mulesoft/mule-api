@@ -7,6 +7,7 @@
 package org.mule.runtime.api.component.location;
 
 import static java.lang.String.format;
+
 import static org.junit.Assert.fail;
 
 import java.util.function.Consumer;
@@ -23,7 +24,7 @@ public class LocationTestCase {
 
   @Test
   public void invalidLocationPart() {
-    Consumer<String> locationBuilderConsumer = partLocationConsumer();
+    Consumer<String> locationBuilderConsumer = partLocationConsumer("globalName");
     testInvalidParts(locationBuilderConsumer);
   }
 
@@ -35,7 +36,13 @@ public class LocationTestCase {
 
   @Test
   public void validLocationPart() {
-    Consumer<String> locationBuilderConsumer = partLocationConsumer();
+    Consumer<String> locationBuilderConsumer = partLocationConsumer("globalName");
+    testValidParts(locationBuilderConsumer);
+  }
+
+  @Test
+  public void aPlaceholderIsAValidGlobalName() {
+    Consumer<String> locationBuilderConsumer = partLocationConsumer("${placeholder}");
     testValidParts(locationBuilderConsumer);
   }
 
@@ -52,8 +59,8 @@ public class LocationTestCase {
     return part -> Location.builder().globalName(part).build();
   }
 
-  private Consumer<String> partLocationConsumer() {
-    return part -> Location.builder().globalName("globalName").addPart(part).build();
+  private Consumer<String> partLocationConsumer(String globalName) {
+    return part -> Location.builder().globalName(globalName).addPart(part).build();
   }
 
   private void testInvalidParts(Consumer<String> locationBuilderConsumer) {
