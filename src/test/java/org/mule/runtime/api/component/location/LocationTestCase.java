@@ -12,6 +12,7 @@ import static org.junit.Assert.fail;
 
 import java.util.function.Consumer;
 
+import io.qameta.allure.Issue;
 import org.junit.Test;
 
 public class LocationTestCase {
@@ -41,6 +42,7 @@ public class LocationTestCase {
   }
 
   @Test
+  @Issue("W-10923083")
   public void aPlaceholderIsAValidGlobalName() {
     Consumer<String> locationBuilderConsumer = partLocationConsumer("${placeholder}");
     testValidParts(locationBuilderConsumer);
