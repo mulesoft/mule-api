@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.api.component.location;
 
-import static java.lang.String.join;
-import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import static org.mule.runtime.internal.util.NameValidationUtil.verifyStringDoesNotContainsReservedCharacters;
+
+import static java.lang.String.join;
+
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 import org.mule.api.annotation.NoImplement;
 
@@ -206,16 +208,24 @@ public interface Location {
 
   class LocationBuilder implements Builder {
 
+    private static final String PLACEHOLDER_PREFIX = "${";
+    private static final String PLACEHOLDER_SUFFIX = "}";
     private LocationImpl location = new LocationImpl();
     private boolean globalNameAlreadySet = false;
 
     @Override
     public Builder globalName(String globalName) {
       globalNameAlreadySet = true;
-      verifyStringDoesNotContainsReservedCharacters(globalName);
+      if (!isPlaceholder(globalName)) {
+        verifyStringDoesNotContainsReservedCharacters(globalName);
+      }
       LocationBuilder locationBuilder = builderCopy();
       locationBuilder.location.parts.add(0, globalName);
       return locationBuilder;
+    }
+
+    private static boolean isPlaceholder(String string) {
+      return string.startsWith(PLACEHOLDER_PREFIX) && string.endsWith(PLACEHOLDER_SUFFIX);
     }
 
     @Override
