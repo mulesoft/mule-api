@@ -217,8 +217,7 @@ public interface Location {
     @Override
     public Builder globalName(String globalName) {
       globalNameAlreadySet = true;
-      Boolean globalNameIsPlaceholder = isPlaceholder(globalName);
-      if (globalNameIsPlaceholder.equals(FALSE)) {
+      if (!isPlaceholder(globalName)) {
         verifyStringDoesNotContainsReservedCharacters(globalName);
       }
       LocationBuilder locationBuilder = builderCopy();
@@ -226,7 +225,7 @@ public interface Location {
       return locationBuilder;
     }
 
-    private static Boolean isPlaceholder(String string) {
+    private static boolean isPlaceholder(String string) {
       return string.startsWith(PLACEHOLDER_PREFIX) && string.endsWith(PLACEHOLDER_SUFFIX);
     }
 
