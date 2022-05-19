@@ -6,28 +6,53 @@
  */
 package org.mule.runtime.api.notification;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 public final class PollingSourceNotification extends AbstractServerNotification {
 
-  public static final int ITEM_DISPATCHED = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
-  public static final int ITEM_REJECTED_SOURCE_STOPPING = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
-  public static final int ITEM_REJECTED_IDEMPOTENCY = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 3;
-  public static final int ITEM_REJECTED_WATERMARK = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 4;
-  public static final int ITEM_REJECTED_LIMIT = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 5;
+  public static final int POLL_SUCCESS = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
+  public static final int POLL_FAILURE = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
+
+  private LocalDateTime startTime;
+  private LocalDateTime endTime;
+  private String pollId;
+  private List<PollingSourceNotificationInfo> acceptedItems;
+  private List<PollingSourceNotificationInfo> rejectedItems;
 
   static {
-    registerAction("Item dispatched to flow", ITEM_DISPATCHED);
-    registerAction("Item rejected because the source is stopping", ITEM_REJECTED_SOURCE_STOPPING);
-    registerAction("Item rejected due to idempotency", ITEM_REJECTED_IDEMPOTENCY);
-    registerAction("Item rejected due to watermark", ITEM_REJECTED_WATERMARK);
-    registerAction("Item rejected because it exceeded the item limit per poll", ITEM_REJECTED_LIMIT);
+    registerAction("Poll successfully completed", POLL_SUCCESS);
+    registerAction("Poll failed to complete", POLL_FAILURE);
   }
 
-  public PollingSourceNotification(Object message, int action, String resourceIdentifier) {
-    super(message, action, resourceIdentifier);
+  public PollingSourceNotification(int action, String resourceIdentifier, List<PollingSourceNotificationInfo> itemNotifications, LocalDateTime startTime, String pollId) {
+    super(itemNotifications, action, resourceIdentifier);
+    this.startTime = startTime;
+    this.endTime = LocalDateTime.now();
+    this.pollId = pollId;
+    processItems(itemNotifications);
   }
 
   @Override
   public String getEventName() {
     return "PollingSourceNotification";
+  }
+
+  public List<PollingSourceNotificationInfo> getAcceptedItems() {
+    return acceptedItems;
+  }
+
+  public List<PollingSourceNotificationInfo> getRejectedItems() {
+    return rejectedItems;
+  }
+
+  public void processItems(List<PollingSourceNotificationInfo> itemNotifications) {
+    for (PollingSourceNotificationInfo item : itemNotifications) {
+      if (item.getStatus().equals("ACCEPTED")) {
+        acceptedItems.add(item);
+      } else {
+        rejectedItems.add(item);
+      }
+    }
   }
 }

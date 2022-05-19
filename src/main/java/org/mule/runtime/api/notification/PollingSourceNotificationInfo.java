@@ -6,13 +6,38 @@
  */
 package org.mule.runtime.api.notification;
 
+import java.io.Serializable;
+import java.util.Optional;
+
 public class PollingSourceNotificationInfo {
 
-  private String pollId;
+  private static String NO_ID = "";
 
-  public PollingSourceNotificationInfo(String pollId) {
+  private String pollId;
+  private String itemId;
+  private Serializable watermark;
+  private String status;
+
+  public PollingSourceNotificationInfo(String pollId, Optional<String> itemId, Optional<Serializable> watermark, String status) {
     this.pollId = pollId;
-    // The notification already has the timestamp
-    // TODO: see what information is needed, it might be possible that this class is not necessary.
+    this.itemId = itemId.orElse(NO_ID);
+    this.watermark = watermark.orElse(null);
+    this.status = status;
+  }
+
+  public String getPollId() {
+    return pollId;
+  }
+
+  public String getItemId() {
+    return itemId;
+  }
+
+  public Serializable getWatermark() {
+    return watermark;
+  }
+
+  public String getStatus() {
+    return status;
   }
 }
