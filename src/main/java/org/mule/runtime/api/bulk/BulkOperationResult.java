@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used to provide item level information about a bulk operation. This master entity represents the bulk operation
+ * This class is used to provide item level information about a bulk operation. This entity represents the bulk operation
  * as a whole, while the detail entity {@link BulkItem} represents the operation status for each individual data piece. The
  * {@link #items} list defines a contract in which the ordering of those items needs to match the ordering of the original
  * objects. For example, if the bulk operation consisted of 10 person objects in which number X corresponded to the person 'John
