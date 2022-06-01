@@ -551,6 +551,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
+   * If set to true, messages for the exceptions that make up the composite exception won't be provided
+   *
+   * @since 4.5.0
+   */
+  public static final String MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG =
+      SYSTEM_PROPERTY_PREFIX + "legacyExceptionLog";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
