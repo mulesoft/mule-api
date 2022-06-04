@@ -534,6 +534,18 @@ public final class MuleSystemProperties {
   public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
 
+
+  /**
+   * If set to true, it will change the error handling behavior of the AbstractForkJoinRouter based processors, such as
+   * ParallelForEach, and ScatterGather routers, messages for the exceptions that make up the composite exception won't be
+   * provided as it was before.
+   *
+   * @since 4.5.0
+   */
+  public static final String MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG =
+          SYSTEM_PROPERTY_PREFIX + "legacyCompositeRoutingExceptionLog";
+
+
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
