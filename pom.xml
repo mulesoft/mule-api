@@ -121,7 +121,7 @@
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <caffeineVersion>2.8.0</caffeineVersion>
+        <caffeineVersion>2.9.2</caffeineVersion>
         <commonsLangVersion>3.7</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
