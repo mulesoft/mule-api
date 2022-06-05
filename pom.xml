@@ -122,7 +122,7 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <caffeineVersion>2.8.0</caffeineVersion>
-        <commonsLangVersion>3.7</commonsLangVersion>
+        <commonsLangVersion>3.12.0</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
         <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
