@@ -541,7 +541,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
-  public static final String MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG =
+  public static final String MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "legacyCompositeRoutingExceptionLog";
 
 
