@@ -327,7 +327,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG(
       "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will not show detailed error information for their failed routes.",
-      "W-10965130", "4.5.0", MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG_PROPERTY),
+      "W-10965130", "5.0.0", MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG_PROPERTY),
       ;
 
   private final String description;
