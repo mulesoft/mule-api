@@ -536,9 +536,8 @@ public final class MuleSystemProperties {
 
 
   /**
-   * If set to true, it will change the error handling behavior of the AbstractForkJoinRouter based processors, such as
-   * ParallelForEach, and ScatterGather routers, messages for the exceptions that make up the composite exception won't be
-   * provided as it was before.
+   * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will not show
+   * detailed error information for their failed routes.
    *
    * @since 4.5.0
    */
