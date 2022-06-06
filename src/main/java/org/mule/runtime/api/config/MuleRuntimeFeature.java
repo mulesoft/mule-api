@@ -23,7 +23,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
@@ -320,14 +320,14 @@ public enum MuleRuntimeFeature implements Feature {
 
 
   /**
-   * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will not show
-   * detailed error information for their failed routes.
+   * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed
+   * error information for their failed routes.
    *
    * @since 4.5.0
    */
-  MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG(
-      "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will not show detailed error information for their failed routes.",
-      "W-10965130", "5.0.0", MULE_PRINT_LEGACY_COMPOSITE_EXCEPTION_LOG_PROPERTY),
+  MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG(
+      "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed error information for their failed routes.",
+      "W-10965130", "5.0.0", MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY),
       ;
 
   private final String description;
