@@ -464,6 +464,16 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
+   * detailed error information for their failed routes.
+   *
+   * @since 4.5.0, 4.4.0-202207
+   */
+  public static final String MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
+
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
