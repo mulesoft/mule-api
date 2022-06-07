@@ -23,6 +23,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
@@ -316,6 +317,17 @@ public enum MuleRuntimeFeature implements Feature {
   VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER(
       "When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with the application classloader.",
       "W-10808757", "4.5.0", VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY),
+
+
+  /**
+   * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed
+   * error information for their failed routes.
+   *
+   * @since 4.5.0
+   */
+  MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG(
+      "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed error information for their failed routes.",
+      "W-10965130", "5.0.0", MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY),
       ;
 
   private final String description;
