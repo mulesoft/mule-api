@@ -536,13 +536,13 @@ public final class MuleSystemProperties {
 
 
   /**
-   * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will not show
+   * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
    * detailed error information for their failed routes.
    *
    * @since 4.5.0
    */
   public static final String MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "legacyCompositeRoutingExceptionLog";
+      SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
 
   /**
