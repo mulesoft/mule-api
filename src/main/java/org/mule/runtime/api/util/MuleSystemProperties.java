@@ -546,6 +546,15 @@ public final class MuleSystemProperties {
 
 
   /**
+   * If set to true, the critical section on AbstractCachingStrategy is reduced so that only the storing of the event in the cache
+   * is protected and deadlocks are avoided
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String CACHE_REDUCE_CRITICAL_SECTION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "cache.reduceCriticalSection";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
