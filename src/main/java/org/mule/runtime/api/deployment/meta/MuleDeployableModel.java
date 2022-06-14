@@ -95,8 +95,8 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    *
    * @since 1.0
    */
-  protected static abstract class MuleDeployableModelBuilder<T extends AbstractMuleArtifactModelBuilder, M extends MuleDeployableModel>
-      extends AbstractMuleArtifactModelBuilder<T, M> {
+  protected static abstract class MuleDeployableModelBuilder<T extends MuleArtifactModelBuilder<T, M>, M extends MuleDeployableModel>
+      extends AbstractMuleArtifactModelBuilder<T, M> implements MuleDeployableModelConfigurer<T, M> {
 
     private Set<String> configs = new HashSet<>();
     private Boolean redeploymentEnabled;
@@ -106,6 +106,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     /**
      * @param configs the set of artifact configuration files
      */
+    @Override
     public void setConfigs(Set<String> configs) {
       this.configs = configs;
     }
@@ -127,6 +128,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     /**
      * @param redeploymentEnabled true if the artifact supports redeployment, false otherwise.
      */
+    @Override
     public void setRedeploymentEnabled(boolean redeploymentEnabled) {
       this.redeploymentEnabled = redeploymentEnabled;
     }
@@ -135,6 +137,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
      * @return secureProperties the list of properties names that must be handled as secrets. Those properties names won't be
      *         shown in the runtime manager UI when looking at the deployment configuration of the artifact.
      */
+    @Override
     public void setSecureProperties(List<String> secureProperties) {
       this.secureProperties = secureProperties;
     }
@@ -142,6 +145,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     /**
      * @param logConfigFile the location of the file to use as the log4j configuration for this artifact instead of the default.
      */
+    @Override
     public void setLogConfigFile(String logConfigFile) {
       this.logConfigFile = logConfigFile;
     }

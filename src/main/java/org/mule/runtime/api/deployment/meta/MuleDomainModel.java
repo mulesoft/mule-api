@@ -32,7 +32,7 @@ public class MuleDomainModel extends MuleDeployableModel {
    * @since 1.0
    */
   public static class MuleDomainModelBuilder
-      extends MuleDeployableModelBuilder<MuleDomainModel.MuleDomainModelBuilder, MuleDomainModel> {
+      extends MuleDeployableModelBuilder<MuleDomainModelBuilder, MuleDomainModel> {
 
     @Override
     protected MuleDomainModelBuilder getThis() {

@@ -19,7 +19,8 @@ import org.mule.api.annotation.NoExtend;
  * @since 1.0
  */
 @NoExtend
-public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArtifactModelBuilder, M extends AbstractMuleArtifactModel> {
+public abstract class AbstractMuleArtifactModelBuilder<T extends MuleArtifactModelBuilder<T, M>, M extends AbstractMuleArtifactModel>
+    implements MuleArtifactModelBuilder<T, M> {
 
   private String name;
   private String minMuleVersion;
@@ -33,6 +34,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @param name the name the describer will have
    * @return {@code this} builder
    */
+  @Override
   public T setName(String name) {
     this.name = name;
 
@@ -45,15 +47,18 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @param product the required product for the artifact.
    * @return {@code this} builder
    */
+  @Override
   public T setRequiredProduct(Product product) {
     this.product = product;
     return getThis();
   }
 
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public Product getRequiredProduct() {
     return product;
   }
@@ -69,11 +74,13 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @param muleVersion of the describer
    * @return {@code this} builder
    */
+  @Override
   public T setMinMuleVersion(String muleVersion) {
     this.minMuleVersion = muleVersion;
     return getThis();
   }
 
+  @Override
   public String getMinMuleVersion() {
     return minMuleVersion;
   }
@@ -85,6 +92,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @return a {@link MuleArtifactLoaderDescriptor} to populate the {@link ClassLoader} describer with the ID and any additional
    *         attributes
    */
+  @Override
   public T withBundleDescriptorLoader(MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
     checkArgument(bundleDescriptorLoader != null, "bundleDescriptorLoader cannot be null");
     this.bundleDescriptorLoader = bundleDescriptorLoader;
@@ -99,6 +107,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
    * @return a {@link MuleArtifactLoaderDescriptor} to populate the {@link ClassLoader} describer with the ID and any additional
    *         attributes
    */
+  @Override
   public T withClassLoaderModelDescriptorLoader(MuleArtifactLoaderDescriptor classLoaderModelDescriptorLoader) {
     checkArgument(classLoaderModelDescriptorLoader != null, "classLoaderModelDescriptorLoader cannot be null");
     this.classLoaderModelDescriptorLoader = classLoaderModelDescriptorLoader;
@@ -106,11 +115,13 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
     return getThis();
   }
 
+  @Override
   public MuleArtifactLoaderDescriptor getBundleDescriptorLoader() {
     return bundleDescriptorLoader;
   }
 
 
+  @Override
   public MuleArtifactLoaderDescriptor getClassLoaderModelDescriptorLoader() {
     return classLoaderModelDescriptorLoader;
   }
@@ -118,5 +129,6 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
   /**
    * @return a well formed model of {@link M} type
    */
+  @Override
   public abstract M build();
 }
