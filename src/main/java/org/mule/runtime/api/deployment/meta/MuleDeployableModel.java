@@ -95,7 +95,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    *
    * @since 1.0
    */
-  protected static abstract class MuleDeployableModelBuilder<T extends MuleArtifactModelBuilder<T, M>, M extends MuleDeployableModel>
+  protected static abstract class MuleDeployableModelBuilder<T extends AbstractMuleArtifactModelBuilder<T, M>, M extends MuleDeployableModel>
       extends AbstractMuleArtifactModelBuilder<T, M> implements MuleDeployableModelConfigurer<T, M> {
 
     private Set<String> configs = new HashSet<>();

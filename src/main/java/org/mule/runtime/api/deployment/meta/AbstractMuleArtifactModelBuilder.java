@@ -19,7 +19,7 @@ import org.mule.api.annotation.NoExtend;
  * @since 1.0
  */
 @NoExtend
-public abstract class AbstractMuleArtifactModelBuilder<T extends MuleArtifactModelBuilder<T, M>, M extends AbstractMuleArtifactModel>
+public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArtifactModelBuilder<T, M>, M extends AbstractMuleArtifactModel>
     implements MuleArtifactModelBuilder<T, M> {
 
   private String name;
