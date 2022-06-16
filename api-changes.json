@@ -298,6 +298,24 @@
           "fieldName": "ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
           "elementKind": "field",
           "justification": "W-10672687: When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG",
+          "elementKind": "enumConstant",
+          "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
         }
       ]
     }
@@ -629,6 +647,24 @@
           "classSimpleName": "SourceDeclarer",
           "elementKind": "class",
           "justification": "False positive due to bogus generic declaration"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG",
+          "elementKind": "enumConstant",
+          "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
         }
       ]
     }
