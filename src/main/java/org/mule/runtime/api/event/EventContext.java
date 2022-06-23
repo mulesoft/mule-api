@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.event;
 
+import static org.mule.runtime.api.event.DistributedTraceContext.emptyDistributedEventContext;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.location.ComponentLocation;
 
@@ -38,6 +40,15 @@ public interface EventContext {
    * @return the correlation id.
    */
   String getCorrelationId();
+
+  /**
+   * @return the {@link DistributedTraceContext} associated with the event.
+   *
+   * @since 1.5.0
+   */
+  default DistributedTraceContext getDistributedTraceContext() {
+    return emptyDistributedEventContext();
+  }
 
   /**
    * @return a timestamp indicating when the message was received by the connector source
