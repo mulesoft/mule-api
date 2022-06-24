@@ -28,6 +28,7 @@ public final class MuleSystemProperties {
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
   public static final String MULE_SECURITY_PROVIDER_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.provider";
+  public static final String MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG = MULE_SECURITY_PROVIDER_PROPERTY + ".enableHybridDrbg";
   public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
   /**
@@ -320,6 +321,15 @@ public final class MuleSystemProperties {
   public static final String DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY = "mule.dw.remove_shadowed_implicit_inputs";
 
   /**
+   * When this property is set to {@code true}, DataWeave retains a mixed-content structure instead of grouping text with mixed
+   * content into a single text field.
+   *
+   * @since 4.5.0
+   */
+  public static final String DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY =
+      "com.mulesoft.dw.xml_reader.honourMixedContentStructure";
+
+  /**
    * If set to true, then fixed batch aggregator will only commit when a full block is processed. For more information see EE-7443
    *
    * @since 4.4.0, 4.3.1, 4.2.3
@@ -525,21 +535,16 @@ public final class MuleSystemProperties {
   public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
 
-  /**
-   * If set to true, error handler beans will be created with the prototype scope.
-   *
-   * @since 4.5.0, 4.4.1, 4.3.1
-   */
-  public static final String REVERT_SIGLETON_ERROR_HANDLER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "revert.singletonErrorHandler";
 
   /**
-   * If set to true, the global error handlers will be reused instead of creating local copies.
+   * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
+   * detailed error information for their failed routes.
    *
-   * @since 4.5.0, 4.4.1, 4.3.1
+   * @since 4.5.0
    */
-  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
+  public static final String MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
+
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)

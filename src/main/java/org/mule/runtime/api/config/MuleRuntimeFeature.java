@@ -12,6 +12,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDL
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
@@ -22,8 +23,8 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
@@ -189,6 +190,17 @@ public enum MuleRuntimeFeature implements Feature {
       "4.4.0", DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY),
 
   /**
+   * When this property is set to {@code true}, DataWeave retains a mixed-content structure instead of grouping text with mixed
+   * content into a single text field.
+   *
+   * @since 4.5.0
+   */
+  DW_HONOUR_MIXED_CONTENT_STRUCTURE(
+      "When this property is set to true, DataWeave retains a mixed-content structure instead of grouping text with mixed content into a single text field.",
+      "W-11071481",
+      "4.5.0", DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY),
+
+  /**
    * When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.
    *
    * @since 4.4.0-202201
@@ -305,14 +317,17 @@ public enum MuleRuntimeFeature implements Feature {
   VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER(
       "When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with the application classloader.",
       "W-10808757", "4.5.0", VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY),
+
+
   /**
-   * When enabled, the global error handlers will be reused instead of creating local copies.
+   * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed
+   * error information for their failed routes.
    *
    * @since 4.5.0
    */
-  REUSE_GLOBAL_ERROR_HANDLER(
-      "When enabled, the global error handlers will be reused instead of creating local copies.",
-      "W-10888504", "4.5.0", REUSE_GLOBAL_ERROR_HANDLER_PROPERTY),
+  MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG(
+      "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed error information for their failed routes.",
+      "W-10965130", "4.5.0", MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY),
       ;
 
   private final String description;
