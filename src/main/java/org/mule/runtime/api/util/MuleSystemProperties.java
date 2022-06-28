@@ -547,6 +547,16 @@ public final class MuleSystemProperties {
 
 
   /**
+   * When set to true, if an error is thrown in a processor inside a policy, the policy's error resolution is ignored so that the
+   * processor's error mappings are applied successfully (W-11147961)
+   *
+   * @since 4.5.0
+   */
+  public static final String APPLY_OPERATION_ERROR_MAPPINGS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "applyOperationErrorMappings";
+
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
