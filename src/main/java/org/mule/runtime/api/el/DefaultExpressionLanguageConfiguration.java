@@ -7,8 +7,10 @@
 package org.mule.runtime.api.el;
 
 import org.mule.runtime.api.config.FeatureFlaggingService;
+import org.mule.runtime.api.meta.MuleVersion;
 
 import java.nio.charset.Charset;
+import java.util.Optional;
 
 class DefaultExpressionLanguageConfiguration implements ExpressionLanguageConfiguration {
 
@@ -16,9 +18,16 @@ class DefaultExpressionLanguageConfiguration implements ExpressionLanguageConfig
 
   private final FeatureFlaggingService featureFlaggingService;
 
-  DefaultExpressionLanguageConfiguration(Charset charset, FeatureFlaggingService featureFlaggingService) {
+  private final String appId;
+
+  private final Optional<MuleVersion> minMuleVersion;
+
+  DefaultExpressionLanguageConfiguration(Charset charset, FeatureFlaggingService featureFlaggingService, String appId,
+                                         Optional<MuleVersion> minMuleVersion) {
     this.charset = charset;
     this.featureFlaggingService = featureFlaggingService;
+    this.appId = appId;
+    this.minMuleVersion = minMuleVersion;
   }
 
   @Override
@@ -29,5 +38,15 @@ class DefaultExpressionLanguageConfiguration implements ExpressionLanguageConfig
   @Override
   public FeatureFlaggingService getFeatureFlaggingService() {
     return featureFlaggingService;
+  }
+
+  @Override
+  public String getAppId() {
+    return appId;
+  }
+
+  @Override
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return minMuleVersion;
   }
 }
