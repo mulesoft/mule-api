@@ -547,13 +547,13 @@ public final class MuleSystemProperties {
 
 
   /**
-   * When set to true, if an error is thrown in a processor inside a policy, the policy's error resolution is ignored so that the
-   * processor's error mappings are applied successfully (W-11147961)
+   * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
+   * policy was applied are set successfully
    *
    * @since 4.5.0
    */
-  public static final String APPLY_OPERATION_ERROR_MAPPINGS_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "applyOperationErrorMappings";
+  public static final String APPLY_OPERATION_ERROR_MAPPINGS_WHEN_INSIDE_OPERATION_POLICY_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "applyOperationErrorMappingsWhenInsideOperationPolicy";
 
 
   /**
