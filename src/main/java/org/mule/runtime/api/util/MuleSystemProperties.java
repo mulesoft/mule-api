@@ -556,7 +556,7 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honorErrorMappingsWhenPolicyAppliedOnOperation";
 
   /**
-   * When set to true, it disables JDK version validation in JdkVersionUtils
+   * When set to true, it disables JDK vendor validation in JdkVersionUtils
    *
    * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
    */
