@@ -545,6 +545,14 @@ public final class MuleSystemProperties {
   public static final String MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
+  /**
+   * When set to true, the variableName identifier in SetVariable is set to support expressions in the Mule Extension Model (W-10998630)
+   *
+   * @since 4.5.0
+   */
+  public static final String SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "supportExpressionsInVariableNameInSetVariable";
+
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
