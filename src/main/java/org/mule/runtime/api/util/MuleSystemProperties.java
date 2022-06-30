@@ -358,6 +358,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
+   * policy was applied are set successfully
+   *
+   * @since 4.5.0
+   */
+  public static final String HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honorErrorMappingsWhenPolicyAppliedOnOperation";
+
+  /**
    * When set to true, it disables JDK vendor validation in JdkVersionUtils
    *
    * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
