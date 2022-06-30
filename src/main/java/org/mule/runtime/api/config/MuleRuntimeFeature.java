@@ -23,6 +23,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
@@ -328,7 +329,17 @@ public enum MuleRuntimeFeature implements Feature {
   MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG(
       "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed error information for their failed routes.",
       "W-10965130", "4.5.0", MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY),
-      ;
+
+
+  /**
+   * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
+   * policy was applied are set successfully
+   *
+   * @since 4.5.0
+   */
+  HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
+      "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
+      "W-11147961", "4.5.0", HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
 
   private final String description;
   private final String issueId;
