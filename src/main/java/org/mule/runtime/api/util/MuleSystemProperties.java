@@ -561,7 +561,7 @@ public final class MuleSystemProperties {
    * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
    */
   public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "disableJDKVersionValidation";
+      SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
