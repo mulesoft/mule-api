@@ -558,7 +558,7 @@ public final class MuleSystemProperties {
   /**
    * When set to true, it disables JDK version validation in JdkVersionUtils
    *
-   * @since 4.5.0
+   * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
    */
   public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disableJDKVersionValidation";
