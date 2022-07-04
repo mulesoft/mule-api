@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JDK_VENDOR_VALIDATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_JDK_VENDOR_VALIDATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11320853: adding system property to disables JDK vendor validation in JdkVersionUtils."
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
