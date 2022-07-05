@@ -362,6 +362,15 @@
           "fieldName": "ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
           "elementKind": "field",
           "justification": "W-10672687: When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB."
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11147961: Error Mapping not working while deploying Header Injection custom policy"
         }
       ]
     }
