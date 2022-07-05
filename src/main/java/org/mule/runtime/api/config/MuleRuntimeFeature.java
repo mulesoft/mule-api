@@ -335,7 +335,7 @@ public enum MuleRuntimeFeature implements Feature {
    * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
    * policy was applied are set successfully
    *
-   * @since 4.5.0
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
    */
   HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
