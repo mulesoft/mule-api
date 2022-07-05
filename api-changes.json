@@ -325,6 +325,24 @@
           "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
           "elementKind": "field",
           "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
+          "elementKind": "enumConstant",
+          "justification": "W-11147961: Error Mapping not working while deploying Header Injection custom policy"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11147961: Error Mapping not working while deploying Header Injection custom policy"
         }
       ]
     }
