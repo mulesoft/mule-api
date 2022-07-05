@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11117613: Duplicate application of lifecycle phases in Global Error Handlers."
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JDK_VENDOR_VALIDATION_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
