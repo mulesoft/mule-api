@@ -23,7 +23,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
@@ -335,11 +335,11 @@ public enum MuleRuntimeFeature implements Feature {
    * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
    * policy was applied are set successfully
    *
-   * @since 4.5.0
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
    */
-  HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
+  HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
-      "W-11147961", "4.5.0", HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
+      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
 
   private final String description;
   private final String issueId;
