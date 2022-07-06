@@ -486,8 +486,8 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
-  public static final String HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "honorErrorMappingsWhenPolicyAppliedOnOperation";
+  public static final String HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honourErrorMappingsWhenPolicyAppliedOnOperation";
 
 
   /**

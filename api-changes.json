@@ -337,19 +337,19 @@
         },
         {
           "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
-          "fieldName": "HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
+          "fieldName": "HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION",
           "elementKind": "enumConstant",
           "justification": "W-11147961: Error Mapping not working while deploying Header Injection custom policy"
         },
         {
           "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
-          "fieldName": "HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
+          "fieldName": "HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY",
           "elementKind": "field",
           "justification": "W-11147961: Error Mapping not working while deploying Header Injection custom policy"
         }
