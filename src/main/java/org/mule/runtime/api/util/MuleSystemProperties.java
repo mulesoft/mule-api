@@ -535,7 +535,6 @@ public final class MuleSystemProperties {
   public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
 
-
   /**
    * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
    * detailed error information for their failed routes.
@@ -546,9 +545,10 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
   /**
-   * When set to true, the variableName identifier in SetVariable is set to support expressions in the Mule Extension Model (W-10998630)
+   * When set to true, the variableName identifier in SetVariable is set to support expressions in the Mule Extension Model
+   * (W-10998630)
    *
-   * @since 4.5.0
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
    */
   public static final String SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "supportExpressionsInVariableNameInSetVariable";
