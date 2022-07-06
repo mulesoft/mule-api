@@ -363,8 +363,8 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
-  public static final String HONOR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "honorErrorMappingsWhenPolicyAppliedOnOperation";
+  public static final String HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honourErrorMappingsWhenPolicyAppliedOnOperation";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
