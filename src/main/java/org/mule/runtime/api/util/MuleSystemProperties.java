@@ -464,6 +464,23 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * If set to true, attribute in entries in a `registry-bootstrap.properties` will be ignored.
+   *
+   * @since 4.5.0
+   */
+  public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+
+  /**
+   * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
+   * the application classloader.
+   * 
+   * @since 4.5.0
+   */
+  public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
+
+  /**
    * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
    * detailed error information for their failed routes.
    *
@@ -479,6 +496,15 @@ public final class MuleSystemProperties {
    */
   public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
+  /**
+   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
+   * (W-10998630)
+   *
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
+   */
+  public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
+
 
   /**
    * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
