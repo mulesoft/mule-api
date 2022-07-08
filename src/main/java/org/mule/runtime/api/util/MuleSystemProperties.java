@@ -383,6 +383,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
+   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
+   * (W-10998630)
+   *
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
+   */
+  public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
