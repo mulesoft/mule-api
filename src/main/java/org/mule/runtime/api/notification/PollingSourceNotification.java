@@ -6,53 +6,33 @@
  */
 package org.mule.runtime.api.notification;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 public final class PollingSourceNotification extends AbstractServerNotification {
 
-  public static final int POLL_SUCCESS = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
-  public static final int POLL_FAILURE = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
+  public static final int POLL_STARTED = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
+  public static final int POLL_SUCCESS = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
+  public static final int POLL_FAILURE = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 3;
+  public static final int POLL_SOURCE_STOPPING = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 4;
 
-  private LocalDateTime startTime;
-  private LocalDateTime endTime;
   private String pollId;
-  private List<PollingSourceNotificationInfo> acceptedItems;
-  private List<PollingSourceNotificationInfo> rejectedItems;
 
   static {
+    registerAction("Poll started", POLL_STARTED);
     registerAction("Poll successfully completed", POLL_SUCCESS);
     registerAction("Poll failed to complete", POLL_FAILURE);
+    registerAction("Polling Source Stopping", POLL_SOURCE_STOPPING);
   }
 
-  public PollingSourceNotification(int action, String resourceIdentifier, List<PollingSourceNotificationInfo> itemNotifications, LocalDateTime startTime, String pollId) {
-    super(itemNotifications, action, resourceIdentifier);
-    this.startTime = startTime;
-    this.endTime = LocalDateTime.now();
+  public PollingSourceNotification(int action, String resourceIdentifier, String pollId) {
+    super("", action, resourceIdentifier);
     this.pollId = pollId;
-    processItems(itemNotifications);
+  }
+
+  public String getPollId() {
+    return pollId;
   }
 
   @Override
   public String getEventName() {
     return "PollingSourceNotification";
-  }
-
-  public List<PollingSourceNotificationInfo> getAcceptedItems() {
-    return acceptedItems;
-  }
-
-  public List<PollingSourceNotificationInfo> getRejectedItems() {
-    return rejectedItems;
-  }
-
-  public void processItems(List<PollingSourceNotificationInfo> itemNotifications) {
-    for (PollingSourceNotificationInfo item : itemNotifications) {
-      if (item.getStatus().equals("ACCEPTED")) {
-        acceptedItems.add(item);
-      } else {
-        rejectedItems.add(item);
-      }
-    }
   }
 }
