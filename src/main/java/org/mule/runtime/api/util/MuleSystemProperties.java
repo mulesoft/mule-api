@@ -479,7 +479,7 @@ public final class MuleSystemProperties {
    */
   public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
-  
+
   /**
    * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
    * (W-10998630)
