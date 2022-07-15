@@ -7,6 +7,7 @@
 package org.mule.runtime.api.memory.provider;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.runtime.api.memory.provider.type.ByteBufferPoolStrategy;
 
 /**
  * A list of properties that are configurable for a byte buffer pool.
@@ -35,4 +36,9 @@ public interface ByteBufferPoolConfiguration {
    * @return the max buffer size for the pool
    */
   int getMaxBufferSize();
+
+  /**
+   * @return the pooling strategy to use.
+   */
+  ByteBufferPoolStrategy getPoolStrategy();
 }
