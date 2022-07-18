@@ -580,6 +580,11 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
+   * When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite loop is ensured for poisonous messages
+   */
+  public static final String FINITE_REDELIVERY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "redelivery.finite";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
