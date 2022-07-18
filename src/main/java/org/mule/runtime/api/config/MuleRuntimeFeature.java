@@ -343,7 +343,9 @@ public enum MuleRuntimeFeature implements Feature {
       "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
 
   /**
-   * When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite loop is ensured for poisonous messages
+   * When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite
+   * loop is ensured for poisonous messages
+   * 
    * @since 4.5.0, 4.4.0-202209, 4.3.1-202209
    */
   HONOUR_REDELIVERY(
