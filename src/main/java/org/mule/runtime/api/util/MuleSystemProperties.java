@@ -535,7 +535,6 @@ public final class MuleSystemProperties {
   public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "deployment.validateAppModelWithRegionClassloader";
 
-
   /**
    * When set to true, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show
    * detailed error information for their failed routes.
@@ -545,6 +544,40 @@ public final class MuleSystemProperties {
   public static final String MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
+  /**
+   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
+   * (W-10998630)
+   *
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
+   */
+  public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
+
+
+  /**
+   * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
+   * policy was applied are set successfully
+   *
+   * @since 4.5.0
+   */
+  public static final String HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honourErrorMappingsWhenPolicyAppliedOnOperation";
+
+  /**
+   * When set to true, it disables JDK vendor validation in JdkVersionUtils
+   *
+   * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
+   */
+  public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
+
+  /**
+   * If set to true, the global error handlers will be reused instead of creating local copies.
+   *
+   * @since 4.5.0, 4.4.1, 4.3.1
+   */
+  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
