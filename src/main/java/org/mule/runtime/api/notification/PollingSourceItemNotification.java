@@ -36,8 +36,8 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
   private String eventId;
 
   public PollingSourceItemNotification(String pollId, String itemId, Optional<Serializable> watermark, int action,
-                                       String eventId, String resourceIdentifier) {
-    super("", action, resourceIdentifier);
+                                       String eventId, String componentLocation) {
+    super("", action, componentLocation);
     this.pollId = pollId;
     this.itemId = itemId;
     this.watermark = watermark;
