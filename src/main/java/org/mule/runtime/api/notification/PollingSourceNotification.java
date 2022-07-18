@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.notification;
 
+import org.mule.api.annotation.Experimental;
+
+@Experimental
 public final class PollingSourceNotification extends AbstractServerNotification {
 
   public static final int POLL_STARTED = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
@@ -22,8 +25,8 @@ public final class PollingSourceNotification extends AbstractServerNotification 
     registerAction("Polling Source Stopping", POLL_SOURCE_STOPPING);
   }
 
-  public PollingSourceNotification(int action, String resourceIdentifier, String pollId) {
-    super("", action, resourceIdentifier);
+  public PollingSourceNotification(int action, String componentLocation, String pollId) {
+    super("", action, componentLocation);
     this.pollId = pollId;
   }
 

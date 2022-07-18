@@ -8,9 +8,12 @@ package org.mule.runtime.api.notification;
 
 import static org.mule.runtime.api.notification.PollingSourceNotification.POLL_SOURCE_STOPPING;
 
+import org.mule.api.annotation.Experimental;
+
 import java.io.Serializable;
 import java.util.Optional;
 
+@Experimental
 public class PollingSourceItemNotification extends AbstractServerNotification {
 
   public static final int ITEM_DISPATCHED = POLL_SOURCE_STOPPING + 1;
