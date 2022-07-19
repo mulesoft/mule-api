@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.runtime.api.lifecycle.Disposable;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
@@ -20,7 +22,7 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public interface ExpressionLanguage {
+public interface ExpressionLanguage extends Disposable {
 
   /**
    * Includes the bindings in a given {@link BindingContext} as global ones, that should not change often and should be considered
@@ -152,6 +154,15 @@ public interface ExpressionLanguage {
       }
     };
   }
+
+  /**
+   * Dispose resources needed to be disposed at the DisposePhase.
+   * 
+   * @since 1.5.0
+   */
+  default void dispose() {
+    // Nothing to do
+  };
 
   /**
    * Returns an object that caches computation results. Provides better performance when evaluation multiple expressions on the
