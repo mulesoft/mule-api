@@ -24,7 +24,6 @@ import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFI
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.FINITE_REDELIVERY_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
@@ -340,17 +339,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
-      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
-
-  /**
-   * When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite
-   * loop is ensured for poisonous messages
-   * 
-   * @since 4.5.0, 4.4.0-202209, 4.3.1-202209
-   */
-  HONOUR_REDELIVERY(
-      "When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite loop is ensured for poisonous messages",
-      "MULE-19915", "4.3.0", FINITE_REDELIVERY_PROPERTY);
+      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
 
   private final String description;
   private final String issueId;

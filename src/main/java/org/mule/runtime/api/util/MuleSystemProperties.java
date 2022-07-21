@@ -580,12 +580,11 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
-   * When set to false, redelivery will be set to work infinitely, regardless of configuration for case of transaction. Infinite
-   * loop is ensured for poisonous messages
+   * When set to true, transactions will be committed in case of redelivery exhausted error.
    * 
    * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
    */
-  public static final String FINITE_REDELIVERY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "redelivery.finite";
+  public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
