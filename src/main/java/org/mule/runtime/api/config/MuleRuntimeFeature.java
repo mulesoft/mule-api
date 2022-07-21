@@ -160,7 +160,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, the Set Variable component will create a variable even if it's value is null.
    *
-   * @since 4.4.0
+   * @since 4.4.0, 4.3.0-202106
    */
   SET_VARIABLE_WITH_NULL_VALUE(
       "When enabled, the Set Variable component creates a variable even if its value is `null`.",
@@ -172,7 +172,7 @@ public enum MuleRuntimeFeature implements Feature {
    * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
    * domain).
    *
-   * @since 4.4.0
+   * @since 4.4.0, 4.3.0-202110
    */
   START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER(
       "When enabled, extensions can load exported resources only from the deployable artifacts (application, policy, domain).",
@@ -183,7 +183,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.
    *
-   * @since 4.4.0-202111
+   * @since 4.5.0, 4.4.0-202111
    */
   DW_REMOVE_SHADOWED_IMPLICIT_INPUTS(
       "When enabled, DataWeave will remove implicit inputs when a variable with the same name is declared at the root level.",
@@ -204,7 +204,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.
    *
-   * @since 4.4.0-202201
+   * @since 4.5.0
    */
   ENFORCE_ERROR_TYPES_VALIDATION(
       "When enabled, error types validations will be enforced, even for error handlers/components that are not being referenced.",
@@ -233,16 +233,16 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by
    * it
    *
-   * @since 4.4.0-202201
+   * @since 4.5.0, 4.4.0-202201, 4.3.0-202201
    */
   DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
       "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
-      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
+      "MULE-19919", "4.5.0, 4.4.1, 4.3.1", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
 
   /**
    * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
    *
-   * @since 4.4.0-202202
+   * @since 4.5.0
    */
   ENFORCE_REQUIRED_EXPRESSION_VALIDATION(
       "When enabled, expression validations will be enforced for targetValue, not allowing a literal value.",
@@ -261,7 +261,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, profiling consumers implemented by the runtime will be enabled by default.
    *
-   * @since 4.4.0-202202
+   * @since 4.5.0, 4.4.0-202202
    */
   FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT(
       "When enabled, profiling consumers implemented by the runtime will be enabled by default.",
@@ -271,7 +271,7 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that
    * returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.
    *
-   * @since 4.3.0-202203
+   * @since 4.5.0, 4.4.0-202202, 4.3.0-202202
    */
   PARALLEL_FOREACH_FLATTEN_MESSAGE(
       "When enabled, if the items to iterate over on a parallel-foreach scope are messages (such as the output of an operation that returns Result objects), they will be flattened in a way that is consistent with what the foreach scope does.",
@@ -301,7 +301,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.
    *
-   * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
+   * @since 4.5.0, 4.4.0-202203, 4.3.0-202203
    */
   // TODO W-10815440 Remove this feature flag along with the work for W-10815440.
   ENABLE_BYTE_BUDDY_OBJECT_CREATION(
@@ -324,7 +324,7 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed
    * error information for their failed routes.
    *
-   * @since 4.5.0
+   * @since 4.5.0, 4.4.0-202206
    */
   MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG(
       "When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed error information for their failed routes.",
