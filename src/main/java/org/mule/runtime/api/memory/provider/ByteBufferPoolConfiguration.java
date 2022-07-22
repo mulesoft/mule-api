@@ -40,5 +40,5 @@ public interface ByteBufferPoolConfiguration {
   /**
    * @return the pooling strategy to use.
    */
-  ByteBufferPoolStrategy getPoolStrategy();
+  ByteBufferPoolStrategy getByteBufferPoolStrategy();
 }

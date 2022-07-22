@@ -7,7 +7,6 @@
 package org.mule.runtime.api.el;
 
 import org.mule.runtime.api.lifecycle.Disposable;
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
@@ -156,8 +155,6 @@ public interface ExpressionLanguage extends Disposable {
   }
 
   /**
-   * Dispose resources needed to be disposed at the DisposePhase.
-   * 
    * @since 1.5.0
    */
   default void dispose() {
