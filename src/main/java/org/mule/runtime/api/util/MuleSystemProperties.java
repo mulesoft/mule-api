@@ -383,7 +383,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
-<<<<<<< HEAD
    * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
    * (W-10998630)
    *
@@ -391,12 +390,6 @@ public final class MuleSystemProperties {
    */
   public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
-  /*
-   * When set to true, transactions will be committed in case of redelivery exhausted error.
-   * 
-   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
-   */
-  public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
    * When set to true, transactions will be committed in case of redelivery exhausted error.
