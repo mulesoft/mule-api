@@ -361,6 +361,15 @@
           "fieldName": "REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY",
           "elementKind": "field",
           "justification": "W-10998630: Remove warning: \"An expression value was given for parameter 'variableName' but it doesn't support expressions\" from logging"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.COMMIT_REDELIVERY_EXHAUSTED",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "COMMIT_REDELIVERY_EXHAUSTED",
+          "elementKind": "field",
+          "justification": "MULE-19915: adding system property to keep previous behavior"
         }
       ]
     }
