@@ -383,6 +383,7 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
+<<<<<<< HEAD
    * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
    * (W-10998630)
    *
