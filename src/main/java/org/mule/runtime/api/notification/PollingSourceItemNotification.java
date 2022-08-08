@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.notification;
 
-import static org.mule.runtime.api.notification.PollingSourceNotification.POLL_SOURCE_STOPPING;
+import static org.mule.runtime.api.notification.PollingSourceNotification.POLL_FAILURE;
 
 import org.mule.api.annotation.Experimental;
 
@@ -16,11 +16,11 @@ import java.util.Optional;
 @Experimental
 public class PollingSourceItemNotification extends AbstractServerNotification {
 
-  public static final int ITEM_DISPATCHED = POLL_SOURCE_STOPPING + 1;
-  public static final int ITEM_REJECTED_SOURCE_STOPPING = POLL_SOURCE_STOPPING + 2;
-  public static final int ITEM_REJECTED_IDEMPOTENCY = POLL_SOURCE_STOPPING + 3;
-  public static final int ITEM_REJECTED_WATERMARK = POLL_SOURCE_STOPPING + 4;
-  public static final int ITEM_REJECTED_LIMIT = POLL_SOURCE_STOPPING + 5;
+  public static final int ITEM_DISPATCHED = POLL_FAILURE + 1;
+  public static final int ITEM_REJECTED_SOURCE_STOPPING = POLL_FAILURE + 2;
+  public static final int ITEM_REJECTED_IDEMPOTENCY = POLL_FAILURE + 3;
+  public static final int ITEM_REJECTED_WATERMARK = POLL_FAILURE + 4;
+  public static final int ITEM_REJECTED_LIMIT = POLL_FAILURE + 5;
 
   static {
     registerAction("Item dispatched to flow", ITEM_DISPATCHED);

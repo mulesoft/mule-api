@@ -14,7 +14,6 @@ public final class PollingSourceNotification extends AbstractServerNotification 
   public static final int POLL_STARTED = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 1;
   public static final int POLL_SUCCESS = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
   public static final int POLL_FAILURE = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 3;
-  public static final int POLL_SOURCE_STOPPING = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 4;
 
   private String pollId;
 
@@ -22,7 +21,6 @@ public final class PollingSourceNotification extends AbstractServerNotification 
     registerAction("Poll started", POLL_STARTED);
     registerAction("Poll successfully completed", POLL_SUCCESS);
     registerAction("Poll failed to complete", POLL_FAILURE);
-    registerAction("Polling Source Stopping", POLL_SOURCE_STOPPING);
   }
 
   public PollingSourceNotification(int action, String componentLocation, String pollId) {
