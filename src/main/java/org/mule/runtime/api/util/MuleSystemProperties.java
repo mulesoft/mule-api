@@ -580,6 +580,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
 
   /**
+   * If set to true, {@link org.mule.runtime.api.notification.Notification}s related to polling sources will be emitted.
+   *
+   * @since 4.5.0
+   */
+  public static final String EMIT_POLLING_SOURCE_NOTIFICATIONS =
+      SYSTEM_PROPERTY_PREFIX + "emit.polling.source.notifications";
+
+  /**
    * When set to true, transactions will be committed in case of redelivery exhausted error.
    * 
    * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
