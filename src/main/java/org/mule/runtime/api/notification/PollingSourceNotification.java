@@ -8,6 +8,12 @@ package org.mule.runtime.api.notification;
 
 import org.mule.api.annotation.Experimental;
 
+/**
+ * Notification fired by polling sources that communicate events related to the polling action (start, success, failure). It also
+ * carries information about the resourceId that triggered the poll as well as an identifier for that particular poll event.
+ *
+ * @since 1.5
+ */
 @Experimental
 public final class PollingSourceNotification extends AbstractServerNotification {
 

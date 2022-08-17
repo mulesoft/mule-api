@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.notification;
 
+import static java.util.Optional.of;
 import static org.mule.runtime.api.notification.PollingSourceNotification.POLL_FAILURE;
 
 import org.mule.api.annotation.Experimental;
@@ -13,6 +14,13 @@ import org.mule.api.annotation.Experimental;
 import java.io.Serializable;
 import java.util.Optional;
 
+/**
+ * Notifications of this type will be sent for each item processed during a poll indicating status, pollId, itemId, watermark,
+ * resourceIdentifier and Event Id. If the item is rejected, the Event Id will be an empty string and, if the item is dispatched
+ * to the runtime, the Event Id will be populated so that flow executions can be tied to a poll item, and it's originating poll.
+ *
+ * @since 1.5
+ */
 @Experimental
 public class PollingSourceItemNotification extends AbstractServerNotification {
 
@@ -32,10 +40,10 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
 
   private String pollId;
   private String itemId;
-  private Optional<Serializable> watermark;
+  private Serializable watermark;
   private String eventId;
 
-  public PollingSourceItemNotification(String pollId, String itemId, Optional<Serializable> watermark, int action,
+  public PollingSourceItemNotification(String pollId, String itemId, Serializable watermark, int action,
                                        String eventId, String componentLocation) {
     super("", action, componentLocation);
     this.pollId = pollId;
@@ -53,11 +61,11 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
   }
 
   public Optional<Serializable> getWatermark() {
-    return watermark;
+    return of(watermark);
   }
 
-  public String getEventId() {
-    return eventId;
+  public Optional<String> getEventId() {
+    return of(eventId);
   }
 
   public void setEventId(String eventId) {
