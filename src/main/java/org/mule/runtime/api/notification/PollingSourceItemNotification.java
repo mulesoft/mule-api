@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.notification;
 
-import static java.util.Optional.of;
+import static java.util.Optional.ofNullable;
 import static org.mule.runtime.api.notification.PollingSourceNotification.POLL_FAILURE;
 
 import org.mule.api.annotation.Experimental;
@@ -61,15 +61,11 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
   }
 
   public Optional<Serializable> getWatermark() {
-    return of(watermark);
+    return ofNullable(watermark);
   }
 
   public Optional<String> getEventId() {
-    return of(eventId);
-  }
-
-  public void setEventId(String eventId) {
-    this.eventId = eventId;
+    return ofNullable(eventId);
   }
 
   @Override
