@@ -10,6 +10,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_EXPLICIT_GC_WHEN_DISPOSING_ARTIFACT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY;
@@ -339,7 +340,17 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
-      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
+      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
+
+
+  /**
+   * When set to true, no explicit GC will be triggered when disposing an artifact.
+   *
+   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
+   */
+  DISABLE_EXPLICIT_GC_WHEN_DISPOSING_ARTIFACT(
+      "When set to true, no explicit GC will be triggered when disposing an artifact",
+      "W-11559075", "4.5.0", DISABLE_EXPLICIT_GC_WHEN_DISPOSING_ARTIFACT_PROPERTY);
 
   private final String description;
   private final String issueId;

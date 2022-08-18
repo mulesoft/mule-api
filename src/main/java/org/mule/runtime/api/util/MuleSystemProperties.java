@@ -587,6 +587,14 @@ public final class MuleSystemProperties {
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
+   * When set to true, no explicit GC will be triggered when disposing an artifact.
+   *
+   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
+   */
+  public static final String DISABLE_EXPLICIT_GC_WHEN_DISPOSING_ARTIFACT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disableExplicitGCWhenDisposingArtifact";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
