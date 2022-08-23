@@ -21,7 +21,7 @@ public final class PollingSourceNotification extends AbstractServerNotification 
   public static final int POLL_SUCCESS = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 2;
   public static final int POLL_FAILURE = POLLING_SOURCE_EVENT_ACTION_START_RANGE + 3;
 
-  private String pollId;
+  private final String pollId;
 
   static {
     registerAction("Poll started", POLL_STARTED);

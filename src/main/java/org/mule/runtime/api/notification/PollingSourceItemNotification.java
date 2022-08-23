@@ -38,12 +38,12 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
     registerAction("Item rejected because it exceeded the item limit per poll", ITEM_REJECTED_LIMIT);
   }
 
-  private String pollId;
-  private String itemId;
-  private Serializable watermark;
-  private String eventId;
+  private final String pollId;
+  private final String itemId;
+  private final Serializable watermark;
+  private final String eventId;
 
-  public PollingSourceItemNotification(String pollId, String itemId, Serializable watermark, int action,
+  public PollingSourceItemNotification(int action, String pollId, String itemId, Serializable watermark,
                                        String eventId, String componentLocation) {
     super("", action, componentLocation);
     this.pollId = pollId;
