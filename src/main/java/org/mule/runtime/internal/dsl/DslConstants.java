@@ -206,4 +206,9 @@ public interface DslConstants {
    * The identifier name of the {@code errorMapping} infrastructure parameter
    */
   String ERROR_MAPPING_ELEMENT_IDENTIFIER = "error-mapping";
+
+  /**
+   * The identifier name of the on-error-propagate element
+   */
+  String ON_ERROR_PROPAGATE_ELEMENT_IDENTIFIER = "on-error-propagate";
 }
