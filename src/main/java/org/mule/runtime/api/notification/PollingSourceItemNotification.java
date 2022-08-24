@@ -28,14 +28,12 @@ public class PollingSourceItemNotification extends AbstractServerNotification {
   public static final int ITEM_REJECTED_SOURCE_STOPPING = POLL_FAILURE + 2;
   public static final int ITEM_REJECTED_IDEMPOTENCY = POLL_FAILURE + 3;
   public static final int ITEM_REJECTED_WATERMARK = POLL_FAILURE + 4;
-  public static final int ITEM_REJECTED_LIMIT = POLL_FAILURE + 5;
 
   static {
     registerAction("Item dispatched to flow", ITEM_DISPATCHED);
     registerAction("Item rejected because the source is stopping", ITEM_REJECTED_SOURCE_STOPPING);
     registerAction("Item rejected due to idempotency", ITEM_REJECTED_IDEMPOTENCY);
     registerAction("Item rejected due to watermark", ITEM_REJECTED_WATERMARK);
-    registerAction("Item rejected because it exceeded the item limit per poll", ITEM_REJECTED_LIMIT);
   }
 
   private final String pollId;
