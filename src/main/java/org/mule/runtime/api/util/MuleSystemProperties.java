@@ -380,7 +380,8 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
 
   /**
-   * If set to true, the errors in tracing will be propagated.
+   * If set to true, the errors in tracing will be propagated to the application execution. If disabled, only a warning will be
+   * logged indicating the problem that occurred when tracing the app.
    *
    * @since 4.5.0
    */
