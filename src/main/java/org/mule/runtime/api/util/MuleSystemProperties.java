@@ -166,7 +166,10 @@ public final class MuleSystemProperties {
   /**
    * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
    * all, the extension client will cache resources.
+   *
+   * @deprecated Starting with Mule 4.5.0 this property no longer has any effect. Cache no longer needed.
    */
+  @Deprecated
   public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
 
   /**
