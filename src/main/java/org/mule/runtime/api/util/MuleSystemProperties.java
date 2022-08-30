@@ -380,6 +380,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.profiling.service";
 
   /**
+   * If set to true, the errors in tracing will be propagated to the application execution. If disabled, only a warning will be
+   * logged indicating the problem that occurred when tracing the app.
+   *
+   * @since 4.5.0
+   */
+  public static final String ENABLE_PROPAGATION_OF_EXCEPTIONS_IN_TRACING =
+      SYSTEM_PROPERTY_PREFIX + "enable.propagation.of.exceptions.in.tracing";
+
+  /**
    * If set to true, extensions will only be able to load exported resources from the deployable artifacts (application, policy,
    * domain).
    *
