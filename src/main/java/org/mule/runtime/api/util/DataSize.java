@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.util.Objects.hash;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 /**
@@ -20,7 +21,7 @@ public final class DataSize {
 
   /**
    * Creates a new instance
-   * 
+   *
    * @param size an scalar amount of data
    * @param unit the unit which qualifies the {@code size}
    */
@@ -70,5 +71,20 @@ public final class DataSize {
    */
   public DataUnit getUnit() {
     return unit;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o instanceof DataSize) {
+      DataSize dataSize = (DataSize) o;
+      return size == dataSize.size && unit == dataSize.unit;
+    }
+
+    return false;
+  }
+
+  @Override
+  public int hashCode() {
+    return hash(size, unit);
   }
 }
