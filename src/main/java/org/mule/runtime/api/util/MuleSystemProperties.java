@@ -604,6 +604,14 @@ public final class MuleSystemProperties {
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
+   * When set to false, no error suppression will happen. This will affect, for example, the Web Service Consumer connector and
+   * the Until Successful scope.
+   * 
+   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   */
+  public static final String SUPPRESS_MULE_EXCEPTIONS = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {

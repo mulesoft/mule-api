@@ -7,10 +7,17 @@
 package org.mule.runtime.api.internal.exception;
 
 import io.qameta.allure.Issue;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.internal.exception.SuppressedMuleException;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -18,10 +25,44 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.Is.is;
 
+import static java.util.Arrays.asList;
+
+@RunWith(Parameterized.class)
 public class SuppressedMuleExceptionTestCase {
+
+  private final boolean suppressExceptions;
+
+  @Parameterized.Parameters(name = "suppress exceptions: {0}")
+  public static Collection<Object[]> params() {
+    return asList(new Object[][] {{true}, {false}});
+  }
+
+  public SuppressedMuleExceptionTestCase(boolean suppressExceptions) {
+    this.suppressExceptions = suppressExceptions;
+  }
+
+  @Before
+  public void initializeClassUnderTest() throws NoSuchFieldException, IllegalAccessException {
+    setSuppressExceptionsValue(suppressExceptions);
+  }
+
+  @After
+  public void revertClassUnderTestChanges() throws IllegalAccessException, NoSuchFieldException {
+    setSuppressExceptionsValue(true);
+  }
+
+  private void setSuppressExceptionsValue(boolean suppressExceptions) throws NoSuchFieldException, IllegalAccessException {
+    Field suppressExceptionsField = SuppressedMuleException.class.getDeclaredField("SUPPRESS_EXCEPTIONS");
+    suppressExceptionsField.setAccessible(true);
+    Field modifiersField = Field.class.getDeclaredField("modifiers");
+    modifiersField.setAccessible(true);
+    modifiersField.setInt(suppressExceptionsField, suppressExceptionsField.getModifiers() & ~Modifier.FINAL);
+    suppressExceptionsField.set(null, suppressExceptions);
+  }
 
   @Test
   @Issue("MULE-18041")
@@ -36,22 +77,34 @@ public class SuppressedMuleExceptionTestCase {
     Throwable result =
         SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()),
                                                   ExceptionWithAdditionalInfo.class);
-    assertThat(result, is(instanceOf(SuppressedMuleException.class)));
+    if (suppressExceptions) {
+      assertThat(result, is(instanceOf(SuppressedMuleException.class)));
+    } else {
+      assertThat(result, is(instanceOf(SimpleException.class)));
+    }
   }
 
   @Test
   @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenIncludeSuppressedAdditionalProperties() {
+    SimpleException simpleException = new SimpleException(new ExceptionWithAdditionalInfo());
     Throwable suppressedTestException =
-        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()), SimpleException.class);
-    Map<String, Object> suppressedTestExceptionEntries = ((SuppressedMuleException) suppressedTestException).getInfo();
+        SuppressedMuleException.suppressIfPresent(simpleException, SimpleException.class);
     Throwable suppressedAnotherTestException =
-        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()),
+        SuppressedMuleException.suppressIfPresent(simpleException,
                                                   ExceptionWithAdditionalInfo.class);
-    Map<String, Object> suppressedAnotherTestExceptionEntries =
-        ((SuppressedMuleException) suppressedAnotherTestException).getInfo();
-    assertThat(suppressedTestExceptionEntries, hasEntry("Additional entry key", "Test additional entry value"));
-    assertThat(suppressedAnotherTestExceptionEntries, hasEntry("Additional entry key", "Test additional entry value"));
+    if (suppressExceptions) {
+      assertThat(suppressedTestException, is(instanceOf(SuppressedMuleException.class)));
+      assertThat(suppressedAnotherTestException, is(instanceOf(SuppressedMuleException.class)));
+      Map<String, Object> suppressedTestExceptionEntries = ((SuppressedMuleException) suppressedTestException).getInfo();
+      Map<String, Object> suppressedAnotherTestExceptionEntries =
+          ((SuppressedMuleException) suppressedAnotherTestException).getInfo();
+      assertThat(suppressedTestExceptionEntries, hasEntry("Additional entry key", "Test additional entry value"));
+      assertThat(suppressedAnotherTestExceptionEntries, hasEntry("Additional entry key", "Test additional entry value"));
+    } else {
+      assertThat(suppressedTestException, is(simpleException));
+      assertThat(suppressedAnotherTestException, is(simpleException));
+    }
   }
 
   @Test
@@ -62,52 +115,84 @@ public class SuppressedMuleExceptionTestCase {
         SuppressedMuleException.suppressIfPresent(new ExceptionWithAdditionalInfo(suppressedTestException),
                                                   ExceptionWithAdditionalInfo.class);
     List<MuleException> suppressions = ((MuleException) suppressedAnotherTestException).getExceptionInfo().getSuppressedCauses();
-    assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedAnotherTestException).getSuppressedException()),
-                        sameInstance(((SuppressedMuleException) suppressedTestException).getSuppressedException())));
+
+    if (suppressExceptions) {
+      assertThat(suppressions,
+                 contains(sameInstance(((SuppressedMuleException) suppressedAnotherTestException).getSuppressedException()),
+                          sameInstance(((SuppressedMuleException) suppressedTestException).getSuppressedException())));
+    } else {
+      assertThat(suppressions, is(empty()));
+    }
   }
 
   @Test
   public void selfCausedExceptionInMainLoopMustBeResolved() {
     Throwable suppressedSelfCausedException =
         SuppressedMuleException.suppressIfPresent(new SimpleException(new SelfCausedException()), SelfCausedException.class);
-    assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
     List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
-    assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+    if (suppressExceptions) {
+      assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
+      assertThat(suppressions,
+                 contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+    } else {
+      assertThat(suppressedSelfCausedException, is(instanceOf(SimpleException.class)));
+      assertThat(suppressions, is(empty()));
+    }
   }
 
   @Test
   public void selfCausedExceptionInSecondaryLoopMustBeResolved() {
     Throwable suppressedSelfCausedException =
         SuppressedMuleException.suppressIfPresent(new SimpleException(new SelfCausedException()), SimpleException.class);
-    assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
     List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
-    assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+    if (suppressExceptions) {
+      assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
+      assertThat(suppressions,
+                 contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+    } else {
+      assertThat(suppressedSelfCausedException, is(instanceOf(SimpleException.class)));
+      assertThat(suppressions, is(empty()));
+    }
   }
 
   @Test
   @Issue("MULE-18562")
   public void consecutiveSuppressionsMustNotBePossible() {
     SimpleException exception = new SimpleException(new ExceptionWithAdditionalInfo());
-    SuppressedMuleException suppression =
-        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(exception,
-                                                                            ExceptionWithAdditionalInfo.class);
-    SuppressedMuleException attemptedConsecutiveSuppression =
-        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(suppression,
-                                                                            SimpleException.class);
-    assertThat(attemptedConsecutiveSuppression, is(suppression));
+    MuleException suppression =
+        (MuleException) SuppressedMuleException.suppressIfPresent(exception,
+                                                                  ExceptionWithAdditionalInfo.class);
+    MuleException attemptedConsecutiveSuppression =
+        (MuleException) SuppressedMuleException.suppressIfPresent(suppression,
+                                                                  SimpleException.class);
+    if (suppressExceptions) {
+      assertThat(attemptedConsecutiveSuppression, is(instanceOf(SuppressedMuleException.class)));
+      assertThat(attemptedConsecutiveSuppression, is(suppression));
+    } else {
+      assertThat(attemptedConsecutiveSuppression, is(exception));
+    }
   }
 
   @Test
   @Issue("MULE-18562")
   public void suppressionMustBeUnwrapped() {
     SimpleException unwrappedException = new SimpleException();
-    SuppressedMuleException result =
-        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(new SimpleException(),
-                                                                            SimpleException.class);
-    assertThat(result.unwrap(), is(unwrappedException));
+    MuleException result = (MuleException) SuppressedMuleException.suppressIfPresent(new SimpleException(),
+                                                                                     SimpleException.class);
+    if (suppressExceptions) {
+      assertThat(((SuppressedMuleException) result).unwrap(), is(unwrappedException));
+    } else {
+      assertThat(result, is(unwrappedException));
+    }
+  }
+
+  private void assertSuppressionResult(MuleException actual, MuleException expectedWithSuppression,
+                                       MuleException expectedWithoutSuppression) {
+    if (suppressExceptions) {
+
+    } else {
+
+    }
   }
 
   private static class SimpleException extends MuleException {
