@@ -6,20 +6,7 @@
  */
 package org.mule.runtime.api.internal.exception;
 
-import io.qameta.allure.Issue;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import static java.util.Arrays.asList;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
@@ -29,7 +16,21 @@ import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.Is.is;
 
-import static java.util.Arrays.asList;
+import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.internal.exception.SuppressedMuleException;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import io.qameta.allure.Issue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 @RunWith(Parameterized.class)
 public class SuppressedMuleExceptionTestCase {
