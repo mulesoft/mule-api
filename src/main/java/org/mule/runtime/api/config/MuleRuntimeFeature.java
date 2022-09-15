@@ -28,10 +28,11 @@ import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import static java.util.Optional.ofNullable;
-import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import java.util.Optional;
 
@@ -332,14 +333,25 @@ public enum MuleRuntimeFeature implements Feature {
 
 
   /**
-   * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
+   * When enabled, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
    * policy was applied are set successfully
    *
    * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
    */
   HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
-      "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
-      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
+      "When enabled, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
+      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
+
+  /**
+   * When enabled, error suppression will happen. This will affect, for instance, the Web Service Consumer connector and the Until
+   * Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be
+   * treated as underlying causes.
+   *
+   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   */
+  SUPPRESS_ERRORS(
+      "When enabled, error suppression will happen. This will affect, for example, the Web Service Consumer connector and the Until Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be treated as underlying causes.",
+      "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY);
 
   private final String description;
   private final String issueId;
