@@ -6,13 +6,10 @@
  */
 package org.mule.runtime.internal.exception;
 
-import static java.lang.Boolean.parseBoolean;
-import static java.lang.System.getProperty;
 import static java.util.Objects.requireNonNull;
 
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.message.Error;
-import org.mule.runtime.api.util.MuleSystemProperties;
 
 /**
  * Wraps a provided exception, suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime
@@ -42,8 +39,6 @@ import org.mule.runtime.api.util.MuleSystemProperties;
 public class SuppressedMuleException extends MuleException {
 
   private static final long serialVersionUID = -2020531237382360468L;
-  private static final boolean SUPPRESS_EXCEPTIONS =
-      parseBoolean(getProperty(MuleSystemProperties.SUPPRESS_MULE_EXCEPTIONS, "true"));
 
   private final MuleException suppressedException;
 
@@ -107,17 +102,15 @@ public class SuppressedMuleException extends MuleException {
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
    */
   public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress) {
-    if (SUPPRESS_EXCEPTIONS) {
-      Throwable cause = exception;
-      while (cause != null && !(cause instanceof SuppressedMuleException)) {
-        if (causeToSuppress.isInstance(cause)) {
-          return new SuppressedMuleException(exception, (MuleException) cause);
-        }
-        if (cause.getCause() != cause) {
-          cause = cause.getCause();
-        } else {
-          break;
-        }
+    Throwable cause = exception;
+    while (cause != null && !(cause instanceof SuppressedMuleException)) {
+      if (causeToSuppress.isInstance(cause)) {
+        return new SuppressedMuleException(exception, (MuleException) cause);
+      }
+      if (cause.getCause() != cause) {
+        cause = cause.getCause();
+      } else {
+        break;
       }
     }
     return exception;
