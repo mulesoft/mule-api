@@ -30,9 +30,9 @@ import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_N
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import static java.util.Optional.ofNullable;
-import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import java.util.Optional;
 
@@ -342,7 +342,15 @@ public enum MuleRuntimeFeature implements Feature {
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
       "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
 
-  SUPPRESS_ERRORS("", "", SUPPRESS_ERRORS_PROPERTY);
+  /**
+   * When set to false, no error suppression will happen. This will affect, for example, the Web Service Consumer connector and
+   * the Until Successful scope.
+   *
+   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   */
+  SUPPRESS_ERRORS(
+      "When set to false, no error suppression will happen. This will affect, for example, the Web Service Consumer connector and the Until Successful scope.",
+      "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY);
 
   private final String description;
   private final String issueId;
