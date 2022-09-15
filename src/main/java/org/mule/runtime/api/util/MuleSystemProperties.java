@@ -609,7 +609,7 @@ public final class MuleSystemProperties {
    * 
    * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
    */
-  public static final String SUPPRESS_MULE_EXCEPTIONS = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
+  public static final String SUPPRESS_ERRORS_PROPERTY = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
