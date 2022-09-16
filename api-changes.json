@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.SUPPRESS_ERRORS",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "SUPPRESS_ERRORS",
+          "elementKind": "enumConstant",
+          "justification": "W-11308645, After calling an external SOAP endpoint, Error Objects are generated differently in MRT 4.3.0 and MRT 4.4.0"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "SUPPRESS_ERRORS_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11308645, After calling an external SOAP endpoint, Error Objects are generated differently in MRT 4.3.0 and MRT 4.4.0"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
