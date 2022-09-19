@@ -102,7 +102,7 @@ public final class MuleSystemProperties {
    * @since 1.3
    */
   public static final String MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION =
-          SYSTEM_PROPERTY_PREFIX + "disableXmlSdkImplicitConfigurationCreation";
+      SYSTEM_PROPERTY_PREFIX + "disableXmlSdkImplicitConfigurationCreation";
 
   /**
    * If specified, the log separation feature will be disabled, resulting in a performance boost.
