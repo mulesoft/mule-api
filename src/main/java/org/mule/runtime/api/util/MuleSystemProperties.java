@@ -97,6 +97,14 @@ public final class MuleSystemProperties {
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
 
   /**
+   * When present, implicit configuration for the XML SDK won't be created.
+   *
+   * @since 1.3
+   */
+  public static final String MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION =
+          SYSTEM_PROPERTY_PREFIX + "disableXmlSdkImplicitConfigurationCreation";
+
+  /**
    * If specified, the log separation feature will be disabled, resulting in a performance boost.
    * This makes sense in deployment models in which only one app will be deployed per runtime instance.
    * <p>
