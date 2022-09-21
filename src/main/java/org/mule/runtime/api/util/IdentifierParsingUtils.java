@@ -9,7 +9,7 @@ package org.mule.runtime.api.util;
 import static org.mule.runtime.api.component.ComponentIdentifier.builder;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import static java.util.Locale.ROOT;
+import static java.util.Locale.getDefault;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -72,8 +72,8 @@ public final class IdentifierParsingUtils {
     }
 
     if (toUpperCase) {
-      namespace = namespace.toUpperCase(ROOT);
-      identifier = identifier.toUpperCase(ROOT);
+      namespace = namespace.toUpperCase(getDefault());
+      identifier = identifier.toUpperCase(getDefault());
     }
 
     return builder().namespace(namespace).name(identifier).build();
