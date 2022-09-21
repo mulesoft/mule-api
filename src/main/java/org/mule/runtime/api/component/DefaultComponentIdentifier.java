@@ -9,6 +9,8 @@ package org.mule.runtime.api.component;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
 
+import org.mule.runtime.api.util.IdentifierParsingUtils;
+
 import java.io.Serializable;
 
 /**
@@ -51,6 +53,10 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   @Override
   public String getName() {
     return name;
+  }
+
+  static ComponentIdentifier parseComponentIdentifier(String componentIdentifier) {
+    return IdentifierParsingUtils.parseComponentIdentifier(componentIdentifier, CORE_PREFIX);
   }
 
   public static class Builder implements ComponentIdentifier.Builder {
