@@ -6,7 +6,8 @@
  */
 package org.mule.runtime.api.component;
 
-import static org.mule.runtime.api.component.DefaultComponentIdentifier.parseComponentIdentifier;
+import static org.mule.runtime.api.util.IdentifierParsingUtils.parseComponentIdentifier;
+import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
 
 import org.mule.api.annotation.NoImplement;
 
@@ -47,15 +48,15 @@ public interface ComponentIdentifier {
   }
 
   /**
-   * Creates a {@link ComponentIdentifier} from an string representation where the expected format is namespace:name. If the
-   * string doesn't contain the namespace then it just needs to be the name of the component and the namespace will default to the
-   * core namespace.
+   * Creates a {@link ComponentIdentifier} from a string representation where the expected format is namespace:name. If the string
+   * doesn't contain the namespace then it just needs to be the name of the component and the namespace will default to the core
+   * namespace.
    *
    * @param componentIdentifier the component identifier represented as a string
-   * @return the {@link ComponentIdentifier} created from it's string representation.
+   * @return the {@link ComponentIdentifier} created from its string representation.
    */
   static ComponentIdentifier buildFromStringRepresentation(String componentIdentifier) {
-    return parseComponentIdentifier(componentIdentifier);
+    return parseComponentIdentifier(componentIdentifier, CORE_PREFIX);
   }
 
   /**
