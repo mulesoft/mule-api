@@ -6,10 +6,10 @@
  */
 package org.mule.runtime.api.component;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
 import static org.mule.runtime.internal.dsl.DslConstants.CORE_PREFIX;
+
+import org.mule.runtime.api.util.IdentifierParsingUtils;
 
 import java.io.Serializable;
 
@@ -56,19 +56,7 @@ class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
   }
 
   static ComponentIdentifier parseComponentIdentifier(String componentIdentifier) {
-    // This is reading the alias of the namespace in a given xml, not the actual namespace
-    checkArgument(!isEmpty(componentIdentifier), "identifier cannot be an empty string or null");
-    String[] values = componentIdentifier.split(":");
-    String namespace;
-    String identifier;
-    if (values.length == 2) {
-      namespace = values[0];
-      identifier = values[1];
-    } else {
-      namespace = CORE_PREFIX;
-      identifier = values[0];
-    }
-    return new DefaultComponentIdentifier.Builder().namespace(namespace).name(identifier).build();
+    return IdentifierParsingUtils.parseComponentIdentifier(componentIdentifier, CORE_PREFIX);
   }
 
   public static class Builder implements ComponentIdentifier.Builder {
