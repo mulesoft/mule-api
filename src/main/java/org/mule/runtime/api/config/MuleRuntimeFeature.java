@@ -344,8 +344,8 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * <p>
-   * When enabled, error suppression will happen. This feature prevents component such as the Web Service Consumer connector and
-   * the Until Successful scope from reporting errors outside their namespaces.
+   * When enabled, error suppression occurs. This feature prevents component such as the Web Service Consumer connector and the
+   * Until Successful scope from reporting errors outside their namespaces.
    * </p>
    * <p>
    * Log extract for a connectivity error at the Web Service Consumer (HTTP:CONNECTIVITY is being suppressed):

@@ -605,7 +605,7 @@ public final class MuleSystemProperties {
 
   /**
    * <p>
-   * When enabled, error suppression will happen. This feature prevents component such as the Web Service Consumer connector and
+   * When set to true, error suppression occurs. This feature prevents component such as the Web Service Consumer connector and
    * the Until Successful scope from reporting errors outside their namespaces.
    * </p>
    * <p>
