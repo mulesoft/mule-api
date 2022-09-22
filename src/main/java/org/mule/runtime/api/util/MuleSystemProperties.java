@@ -620,7 +620,7 @@ public final class MuleSystemProperties {
    * Suppressed errors are treated as underlying causes that can also be matched by On Error handlers.
    * </p>
    *
-   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   * @since 4.5.0, 4.4.0-202210
    */
   public static final String SUPPRESS_ERRORS_PROPERTY = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
 
