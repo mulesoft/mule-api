@@ -614,7 +614,7 @@ public final class MuleSystemProperties {
    * 
    * <pre>
    * Error type : WSC:INVALID_WSDL
-   * Caused by : HTTP:CONNECTIVITY
+   * Caused by  : HTTP:CONNECTIVITY
    * </pre>
    * <p>
    * Suppressed errors are treated as underlying causes that can also be matched by On Error handlers.
