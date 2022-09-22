@@ -615,11 +615,23 @@ public final class MuleSystemProperties {
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
-   * When set to true, error suppression will happen. This will affect, for instance, the Web Service Consumer connector and the
-   * Until Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors
-   * will be treated as underlying causes.
+   * <p>
+   * When set to true, error suppression occurs. This feature prevents component such as the Web Service Consumer connector and
+   * the Until Successful scope from reporting errors outside their namespaces.
+   * </p>
+   * <p>
+   * Log extract for a connectivity error at the Web Service Consumer (HTTP:CONNECTIVITY is being suppressed):
+   * </p>
    * 
-   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   * <pre>
+   * Error type : WSC:INVALID_WSDL
+   * Caused by  : HTTP:CONNECTIVITY
+   * </pre>
+   * <p>
+   * Suppressed errors are treated as underlying causes that can also be matched by On Error handlers.
+   * </p>
+   *
+   * @since 4.5.0, 4.4.0-202210
    */
   public static final String SUPPRESS_ERRORS_PROPERTY = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
 

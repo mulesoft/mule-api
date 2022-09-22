@@ -343,11 +343,23 @@ public enum MuleRuntimeFeature implements Feature {
       "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
 
   /**
-   * When enabled, error suppression will happen. This will affect, for instance, the Web Service Consumer connector and the Until
-   * Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be
-   * treated as underlying causes.
+   * <p>
+   * When enabled, error suppression occurs. This feature prevents component such as the Web Service Consumer connector and the
+   * Until Successful scope from reporting errors outside their namespaces.
+   * </p>
+   * <p>
+   * Log extract for a connectivity error at the Web Service Consumer (HTTP:CONNECTIVITY is being suppressed):
+   * </p>
+   * 
+   * <pre>
+   * Error type : WSC:INVALID_WSDL
+   * Caused by  : HTTP:CONNECTIVITY
+   * </pre>
+   * <p>
+   * Suppressed errors are treated as underlying causes that can also be matched by On Error handlers.
+   * </p>
    *
-   * @since 4.5.0, 4.4.0-202210, 4.3.0-202210
+   * @since 4.5.0, 4.4.0-202210
    */
   SUPPRESS_ERRORS(
       "When enabled, error suppression will happen. This will affect, for example, the Web Service Consumer connector and the Until Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be treated as underlying causes.",
