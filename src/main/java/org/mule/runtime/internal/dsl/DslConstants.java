@@ -62,8 +62,24 @@ public interface DslConstants {
 
   /**
    * The name of the try scope.
+   *
+   * @since 1.5.0
    */
   String TRY_SCOPE_NAME = "try";
+
+  /**
+   * The name of the error handler section.
+   *
+   * @since 1.5.0
+   */
+  String ERROR_HANDLER_NAME = "error-handler";
+
+  /**
+   * The name of the error handler's ref parameter.
+   *
+   * @since 1.5.0
+   */
+  String ERROR_HANDLER_REF_PARAMETER_NAME = "ref";
 
   /**
    * Namespace for Mule core elements
