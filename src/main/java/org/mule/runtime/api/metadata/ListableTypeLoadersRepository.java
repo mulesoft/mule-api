@@ -19,10 +19,9 @@ import java.util.Map;
 public interface ListableTypeLoadersRepository {
 
   /**
-   * Retrieves all the available {@link ListableTypeLoader} for the different extensions, classified by the extension prefix.
-   * If you need a particular {@link ListableTypeLoader}, you should use {@link #getTypeLoaderByPrefix(String)} instead,
-   * so you take advantage of a possible optimization that only builds the {@link ListableTypeLoader} lazily, when it's
-   * requested.
+   * Retrieves all the available {@link ListableTypeLoader} for the different extensions, classified by the extension prefix. If
+   * you need a particular {@link ListableTypeLoader}, you should use {@link #getTypeLoaderByPrefix(String)} instead, so you take
+   * advantage of a possible optimization that only builds the {@link ListableTypeLoader} lazily, when it's requested.
    *
    * @return all the available {@link ListableTypeLoader} for the different extensions, classified by the extension prefix.
    */
