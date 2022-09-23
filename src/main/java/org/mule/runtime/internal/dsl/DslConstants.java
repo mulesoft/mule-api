@@ -47,6 +47,41 @@ public interface DslConstants {
   String THIS_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, THIS_PREFIX);
 
   /**
+   * The prefix for defining operations.
+   *
+   * @since 1.5.0
+   */
+  String OPERATION_PREFIX = "operation";
+
+  /**
+   * The name of an operation's body.
+   *
+   * @since 1.5.0
+   */
+  String BODY_NAME = "body";
+
+  /**
+   * The name of the try scope.
+   *
+   * @since 1.5.0
+   */
+  String TRY_SCOPE_NAME = "try";
+
+  /**
+   * The name of the error handler section.
+   *
+   * @since 1.5.0
+   */
+  String ERROR_HANDLER_NAME = "error-handler";
+
+  /**
+   * The name of the error handler's ref parameter.
+   *
+   * @since 1.5.0
+   */
+  String ERROR_HANDLER_REF_PARAMETER_NAME = "ref";
+
+  /**
    * Namespace for Mule core elements
    */
   String CORE_SCHEMA_LOCATION = format("%s/%s/%s.xsd", CORE_NAMESPACE, "current", CORE_PREFIX);
