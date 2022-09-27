@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.component;
 
+import org.mule.runtime.internal.component.NullConfigurationProperties;
+
 import java.util.Optional;
 
 /**
@@ -18,6 +20,16 @@ import java.util.Optional;
  * @since 1.0
  */
 public interface ConfigurationProperties {
+
+  /**
+   * Creates a no operation implementation of {@link ConfigurationProperties}.
+   *
+   * @return a no operation implementation of {@link ConfigurationProperties}.
+   * @since 1.5
+   */
+  static ConfigurationProperties nullConfigurationProperties() {
+    return new NullConfigurationProperties();
+  }
 
   /**
    * Lookups for a property and returns it's value as boolean.
