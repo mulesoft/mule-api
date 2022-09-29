@@ -105,6 +105,24 @@
           "fieldName": "MULE_DISABLE_PAYLOAD_STATISTICS",
           "elementKind": "field",
           "justification": "Field should have been annotated as experimental to start with. It is deprecated now and will be removed soon."
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.metadata.api.TypeLoader org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::createTypeLoader(java.lang.String, org.mule.metadata.api.model.MetadataFormat, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "ExpressionLanguageMetadataService",
+          "methodName": "createTypeLoader",
+          "elementKind": "method",
+          "justification": "Support for creating a type loader capable of resolving types that comes from an Extension using a collection of ModuleDefinition"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method java.util.Optional<org.mule.metadata.api.model.MetadataType> org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::evaluateTypeExpression(java.lang.String, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "ExpressionLanguageMetadataService",
+          "methodName": "evaluateTypeExpression",
+          "elementKind": "method",
+          "justification": "Support resolving type expressions using DW"
         }
       ]
     }
