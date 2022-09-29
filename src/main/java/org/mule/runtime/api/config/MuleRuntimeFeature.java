@@ -367,8 +367,7 @@ public enum MuleRuntimeFeature implements Feature {
       "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY),
 
   /**
-   * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
-   * the application classloader.
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
    *
    * @since 4.5.0
    */

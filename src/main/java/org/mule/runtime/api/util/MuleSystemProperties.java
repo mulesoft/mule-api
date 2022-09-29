@@ -636,7 +636,7 @@ public final class MuleSystemProperties {
   public static final String SUPPRESS_ERRORS_PROPERTY = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
 
   /**
-   * When set to true, transactions will be committed in case of redelivery exhausted error.
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
    *
    * @since 4.5.0
    */
