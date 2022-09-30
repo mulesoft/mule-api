@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * This service provides metadata interaction with the underlying expression language.
@@ -135,6 +136,18 @@ public interface ExpressionLanguageMetadataService extends Service {
 
 
   /**
+   * Returns a new type loader. Loads a script that contains a collections of types serialized with the language syntax.
+   *
+   * @param content        The script
+   * @param metadataFormat The format that will be used for the loaded types
+   * @param modules        Other modules available
+   * @return The type loader
+   * @since 1.5
+   */
+  TypeLoader createTypeLoader(String content, MetadataFormat metadataFormat, Collection<ModuleDefinition> modules);
+
+
+  /**
    * Returns a module definition from a given NameIdentifier.
    *
    * @param nameIdentifier The NameIdentifier for the modules core::test::MyModule
@@ -146,6 +159,16 @@ public interface ExpressionLanguageMetadataService extends Service {
   ModuleDefinition moduleDefinition(String nameIdentifier, Collection<ModuleDefinition> modules)
       throws ExpressionCompilationException;
 
+
+  /**
+   * Returns a MetadataType from a given type expression.
+   *
+   * @param typeExpression The type expression to evaluate
+   * @param modules        Other modules available
+   * @return The resolved MetadataType
+   * @since 1.5
+   */
+  Optional<MetadataType> evaluateTypeExpression(String typeExpression, Collection<ModuleDefinition> modules);
 
   /**
    * Serialize MetadataTypes in the type system of the given expression language
