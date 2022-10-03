@@ -405,6 +405,11 @@ public final class MuleSystemProperties {
    */
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
+  /**
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
+   *
+   * @since 4.5.0
+   */
   public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
