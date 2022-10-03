@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /**
  * This service provides metadata interaction with the underlying expression language.
@@ -166,9 +165,11 @@ public interface ExpressionLanguageMetadataService extends Service {
    * @param typeExpression The type expression to evaluate
    * @param modules        Other modules available
    * @return The resolved MetadataType
+   * @throws ExpressionCompilationException if any problem occurs while trying to resolve the type expression
    * @since 1.5
    */
-  Optional<MetadataType> evaluateTypeExpression(String typeExpression, Collection<ModuleDefinition> modules);
+  MetadataType evaluateTypeExpression(String typeExpression, Collection<ModuleDefinition> modules)
+      throws ExpressionCompilationException;
 
   /**
    * Serialize MetadataTypes in the type system of the given expression language
