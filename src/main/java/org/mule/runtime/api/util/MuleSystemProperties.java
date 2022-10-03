@@ -405,6 +405,9 @@ public final class MuleSystemProperties {
    */
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
+  public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
+    SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
+
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */

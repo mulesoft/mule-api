@@ -161,7 +161,11 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION(
       "When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the policy was applied are set successfully",
-      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY);
+      "W-11147961", "4.5.0", HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY),
+
+  HONOUR_INSECURE_TLS_CONFIGURATION(
+      "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
+        "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
 
   private final String description;
   private final String issueId;
