@@ -123,6 +123,15 @@
           "methodName": "evaluateTypeExpression",
           "elementKind": "method",
           "justification": "Support resolving type expressions using DW"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.metadata.api.model.MetadataType org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::evaluateTypeExpression(java.lang.String, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>) throws org.mule.runtime.api.el.ExpressionCompilationException",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "ExpressionLanguageMetadataService",
+          "methodName": "evaluateTypeExpression",
+          "elementKind": "method",
+          "justification": "Throw exception when couldn't resolve the type expression"
         }
       ]
     }
