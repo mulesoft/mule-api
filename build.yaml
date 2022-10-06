@@ -6,3 +6,4 @@ upstreamProjects:
 # "mavenSettingsXmlId" : "mule-runtime-maven-settings-MuleSettings",
 projectType: runtime
 jdkTool: OPEN-JDK17
+agentLabel: windows2019-heavy
