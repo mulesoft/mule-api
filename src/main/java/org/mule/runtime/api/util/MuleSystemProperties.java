@@ -533,6 +533,14 @@ public final class MuleSystemProperties {
   public static final String SUPPRESS_ERRORS_PROPERTY = SYSTEM_PROPERTY_PREFIX + "suppress.mule.exceptions";
 
   /**
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
+   *
+   * @since 4.5.0
+   */
+  public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
