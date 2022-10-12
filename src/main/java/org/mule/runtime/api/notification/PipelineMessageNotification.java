@@ -6,6 +6,14 @@
  */
 package org.mule.runtime.api.notification;
 
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
+
+import org.mule.runtime.api.component.Component;
+
+import java.lang.reflect.Field;
+import java.util.Optional;
+
 /**
  * <code>PipelineMessageNotification</code> is fired at key steps in the processing of {@link Pipeline}
  */
@@ -42,5 +50,18 @@ public final class PipelineMessageNotification extends EnrichedServerNotificatio
   @Override
   public String getEventName() {
     return "PipelineMessageNotification";
+  }
+
+  public Optional<Component> getFailingComponent() {
+    if (getException() == null) {
+      return empty();
+    }
+    try {
+      Field failingComponentField = getException().getClass().getDeclaredField("failingComponent");
+      failingComponentField.setAccessible(true);
+      return of((Component) failingComponentField.get(getException()));
+    } catch (NoSuchFieldException | IllegalAccessException e) {
+      return empty();
+    }
   }
 }
