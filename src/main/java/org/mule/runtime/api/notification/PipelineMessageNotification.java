@@ -52,6 +52,13 @@ public final class PipelineMessageNotification extends EnrichedServerNotificatio
     return "PipelineMessageNotification";
   }
 
+  /**
+   * Get the failing component from the exception in the {@link EnrichedNotificationInfo}.
+   * <p/>
+   * If the exception is null, an {@link Optional#empty()} will be returned.
+   *
+   * @return An optional with the failing component.
+   */
   public Optional<Component> getFailingComponent() {
     if (getException() == null) {
       return empty();
