@@ -6,13 +6,18 @@
  */
 package org.mule.runtime.api.notification;
 
+import static java.lang.String.format;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 import org.mule.runtime.api.component.Component;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Optional;
+
+import org.slf4j.Logger;
 
 /**
  * <code>PipelineMessageNotification</code> is fired at key steps in the processing of {@link Pipeline}
@@ -20,6 +25,8 @@ import java.util.Optional;
 public final class PipelineMessageNotification extends EnrichedServerNotification {
 
   private static final long serialVersionUID = 6065691696506216248L;
+
+  private static final Logger LOGGER = getLogger(PipelineMessageNotification.class);
 
   // Fired when processing of pipeline starts
   public static final int PROCESS_START = PIPELINE_MESSAGE_EVENT_ACTION_START_RANGE + 1;
@@ -53,9 +60,7 @@ public final class PipelineMessageNotification extends EnrichedServerNotificatio
   }
 
   /**
-   * Get the failing component from the exception in the {@link EnrichedNotificationInfo}.
-   * <p/>
-   * If the exception is null, an {@link Optional#empty()} will be returned.
+   * Get the failing component if the pipeline has failed.
    *
    * @return An optional with the failing component.
    */
@@ -64,10 +69,11 @@ public final class PipelineMessageNotification extends EnrichedServerNotificatio
       return empty();
     }
     try {
-      Field failingComponentField = getException().getClass().getDeclaredField("failingComponent");
-      failingComponentField.setAccessible(true);
-      return of((Component) failingComponentField.get(getException()));
-    } catch (NoSuchFieldException | IllegalAccessException e) {
+      return of((Component) getException().getClass().getMethod("getFailingComponent").invoke(getException()));
+    } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassCastException e) {
+      if (LOGGER.isDebugEnabled()) {
+        LOGGER.debug(format("Error accessing failing component for: %s", getException()), e);
+      }
       return empty();
     }
   }
