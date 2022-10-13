@@ -3,6 +3,15 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.added",
+          "new": "method java.util.Optional<org.mule.runtime.api.component.Component> org.mule.runtime.api.notification.PipelineMessageNotification::getFailingComponent()",
+          "package": "org.mule.runtime.api.notification",
+          "classSimpleName": "PipelineMessageNotification",
+          "methodName": "getFailingComponent",
+          "elementKind": "method",
+          "justification": "W-11861058: Allow obtaining the failing component from a PipelineMessageNotification"
+        },
+        {
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOUR_INSECURE_TLS_CONFIGURATION",
           "package": "org.mule.runtime.api.config",
