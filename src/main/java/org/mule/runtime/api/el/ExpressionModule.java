@@ -8,9 +8,11 @@ package org.mule.runtime.api.el;
 
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.TypedValue;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -55,10 +57,17 @@ public interface ExpressionModule {
 
   /**
    * Returns the namespace of this module
-   * 
+   *
    * @return The namespace
    */
   ModuleNamespace namespace();
+
+  /**
+   * Returns the declared types of this module
+   *
+   * @return a {@link List} of all declared types in the module
+   */
+  List<MetadataType> declaredTypes();
 
 
   interface Builder {
@@ -70,6 +79,13 @@ public interface ExpressionModule {
      * @param identifier the keyword to use in the EL to access the {@code value}
      */
     ExpressionModule.Builder addBinding(String identifier, TypedValue<?> value);
+
+    /**
+     * Will add the type to the list of declared types in the module.
+     *
+     * @param type the type to add
+     */
+    ExpressionModule.Builder addType(MetadataType type);
 
     ExpressionModule build();
   }

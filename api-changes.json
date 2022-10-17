@@ -132,6 +132,15 @@
           "methodName": "evaluateTypeExpression",
           "elementKind": "method",
           "justification": "Throw exception when couldn't resolve the type expression"
+        },
+        {
+          "code": "java.method.addedToInterface",
+          "new": "method org.mule.runtime.api.el.ExpressionModule.Builder org.mule.runtime.api.el.ExpressionModule.Builder::addType(org.mule.metadata.api.model.MetadataType)",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "Builder",
+          "methodName": "addType",
+          "elementKind": "method",
+          "justification": "Support resolving types coming from mule in DW transformations"
         }
       ]
     }
