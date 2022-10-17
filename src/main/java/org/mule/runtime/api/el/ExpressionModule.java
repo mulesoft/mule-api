@@ -62,6 +62,11 @@ public interface ExpressionModule {
    */
   ModuleNamespace namespace();
 
+  /**
+   * Returns the declared types of this module
+   *
+   * @return a {@link List} of all declared types in the module
+   */
   List<MetadataType> declaredTypes();
 
 
@@ -75,6 +80,11 @@ public interface ExpressionModule {
      */
     ExpressionModule.Builder addBinding(String identifier, TypedValue<?> value);
 
+    /**
+     * Will add the type to the list of declared types in the module.
+     *
+     * @param type the type to add
+     */
     ExpressionModule.Builder addType(MetadataType type);
 
     ExpressionModule build();
