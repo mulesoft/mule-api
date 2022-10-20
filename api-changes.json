@@ -141,6 +141,18 @@
           "methodName": "addType",
           "elementKind": "method",
           "justification": "Support resolving types coming from mule in DW transformations"
+        },
+        {
+          "code": "java.method.returnTypeChangedCovariantly",
+          "old": "method org.mule.metadata.api.TypeLoader org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::createTypeLoader(java.lang.String, org.mule.metadata.api.model.MetadataFormat)",
+          "new": "method org.mule.metadata.api.ListableTypeLoader org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::createTypeLoader(java.lang.String, org.mule.metadata.api.model.MetadataFormat)",
+          "oldType": "org.mule.metadata.api.TypeLoader",
+          "newType": "org.mule.metadata.api.ListableTypeLoader",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "ExpressionLanguageMetadataService",
+          "methodName": "createTypeLoader",
+          "elementKind": "method",
+          "justification": "Now DataWeave type loader can list all the types available on the script"
         }
       ]
     }

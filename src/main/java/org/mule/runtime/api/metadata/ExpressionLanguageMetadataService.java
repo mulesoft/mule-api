@@ -130,9 +130,9 @@ public interface ExpressionLanguageMetadataService extends Service {
    *
    * @param content        The script
    * @param metadataFormat The format that will be used for the loaded types
-   * @return The type loader
+   * @return The listable type loader
    */
-  TypeLoader createTypeLoader(String content, MetadataFormat metadataFormat);
+  ListableTypeLoader createTypeLoader(String content, MetadataFormat metadataFormat);
 
 
   /**
