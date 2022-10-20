@@ -108,7 +108,7 @@
         },
         {
           "code": "java.method.addedToInterface",
-          "new": "method org.mule.metadata.api.TypeLoader org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::createTypeLoader(java.lang.String, org.mule.metadata.api.model.MetadataFormat, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>)",
+          "new": "method org.mule.metadata.api.ListableTypeLoader org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::createTypeLoader(java.lang.String, org.mule.metadata.api.model.MetadataFormat, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>)",
           "package": "org.mule.runtime.api.metadata",
           "classSimpleName": "ExpressionLanguageMetadataService",
           "methodName": "createTypeLoader",

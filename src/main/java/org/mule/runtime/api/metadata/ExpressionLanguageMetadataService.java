@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.metadata.api.ListableTypeLoader;
 import org.mule.metadata.api.TypeLoader;
 import org.mule.metadata.api.model.MetadataFormat;
 import org.mule.metadata.api.model.MetadataType;
@@ -140,10 +141,10 @@ public interface ExpressionLanguageMetadataService extends Service {
    * @param content        The script
    * @param metadataFormat The format that will be used for the loaded types
    * @param modules        Other modules available
-   * @return The type loader
+   * @return The listable type loader
    * @since 1.5
    */
-  TypeLoader createTypeLoader(String content, MetadataFormat metadataFormat, Collection<ModuleDefinition> modules);
+  ListableTypeLoader createTypeLoader(String content, MetadataFormat metadataFormat, Collection<ModuleDefinition> modules);
 
 
   /**
