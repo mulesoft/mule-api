@@ -134,7 +134,7 @@
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.1.4</oldMuleArtifactVersion>
         <muleRevapiExtensionVersion>1.1.2-20221024</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.0.2-20221024</muleApiAnnotationsVersion>
+        <muleApiAnnotationsVersion>1.0.2-20221027</muleApiAnnotationsVersion>
 
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
     </properties>
