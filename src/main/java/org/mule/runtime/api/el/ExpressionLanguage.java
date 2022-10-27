@@ -6,14 +6,17 @@
  */
 package org.mule.runtime.api.el;
 
+import org.mule.metadata.message.api.el.TypeBindings;
 import org.mule.runtime.api.lifecycle.Disposable;
 import org.mule.runtime.api.metadata.DataType;
+import org.mule.runtime.api.metadata.ExpressionLanguageMetadataService;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.metadata.TypedValue;
 
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -77,6 +80,18 @@ public interface ExpressionLanguage extends Disposable {
    * @return a {@link ValidationResult} indicating whether the validation was successful or not
    */
   ValidationResult validate(String expression);
+
+  /**
+   * Verifies whether an expression is valid or not using on the scope check phase.
+   * 
+   * @param script   The expression to be validated
+   * @param name     The name of the resource
+   * @param bindings The script bindings
+   * @param listener The listener to handle the errors and warnings
+   */
+  default void validate(String script, String name, TypeBindings bindings, ValidationListener listener) {
+    // Nothing to do
+  }
 
   /**
    * Splits using the specified expression. The expression should return a collection of elements or an object. In case of the
@@ -232,5 +247,60 @@ public interface ExpressionLanguage extends Disposable {
         // Nothing to do
       }
     };
+  }
+
+  /**
+   * Validation listener called form the validation cycle
+   */
+  interface ValidationListener {
+
+    /**
+     * Is called when a warning message happens while validating metadata
+     *
+     * @param notification The notification
+     */
+    void onWarning(ValidationNotification notification);
+
+    /**
+     * Is called when an error message happens while validating the script
+     *
+     * @param notification The notification
+     */
+    void onError(ValidationNotification notification);
+  }
+
+  /**
+   * Represents a validation notification
+   */
+  class ValidationNotification {
+
+    private final String kind;
+    private final String message;
+    private final Map<String, String> params;
+    private final ExpressionLanguageMetadataService.MessageLocation location;
+
+    public ValidationNotification(String kind, String message, Map<String, String> params,
+                                  ExpressionLanguageMetadataService.MessageLocation location) {
+      this.kind = kind;
+      this.message = message;
+      this.params = params;
+      this.location = location;
+    }
+
+    public String getKind() {
+      return kind;
+    }
+
+    public String getMessage() {
+      return message;
+    }
+
+    public Map<String, String> getParams() {
+      return params;
+    }
+
+    public ExpressionLanguageMetadataService.MessageLocation getLocation() {
+      return location;
+    }
   }
 }

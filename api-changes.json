@@ -135,6 +135,15 @@
         },
         {
           "code": "java.method.addedToInterface",
+          "new": "method void org.mule.runtime.api.el.ExpressionLanguage::validate(java.lang.String, java.lang.String, org.mule.metadata.message.api.el.TypeBindings, org.mule.runtime.api.el.ExpressionLanguage.ValidationListener)",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguage",
+          "methodName": "validate",
+          "elementKind": "method",
+          "justification": "Support expressions validation on the scope check phase"
+        },
+        {
+          "code": "java.method.addedToInterface",
           "new": "method org.mule.runtime.api.el.ExpressionModule.Builder org.mule.runtime.api.el.ExpressionModule.Builder::addType(org.mule.metadata.api.model.MetadataType)",
           "package": "org.mule.runtime.api.el",
           "classSimpleName": "Builder",
