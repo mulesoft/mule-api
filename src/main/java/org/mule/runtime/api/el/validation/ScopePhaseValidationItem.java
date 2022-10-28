@@ -18,11 +18,23 @@ import java.util.Map;
 @NoImplement
 public interface ScopePhaseValidationItem {
 
+  /**
+   * @return The kind of the validation item. e.g: DeprecatedFeature
+   */
   String getKind();
 
+  /**
+   * @return The validation message
+   */
   String getMessage();
 
+  /**
+   * @return A key-value pairs of parameter relative to the validation item
+   */
   Map<String, String> getParams();
 
+  /**
+   * @return The location of validation item
+   */
   Location getLocation();
 }

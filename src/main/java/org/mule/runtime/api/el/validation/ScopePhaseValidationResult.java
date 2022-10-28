@@ -19,11 +19,6 @@ import java.util.List;
 public interface ScopePhaseValidationResult {
 
   /**
-   * @return true if the validation was ok, false otherwise
-   */
-  boolean isSuccess();
-
-  /**
    * @return a list of {@link ScopePhaseValidationItem} errors items while scope validation
    */
   List<ScopePhaseValidationItem> getErrors();
