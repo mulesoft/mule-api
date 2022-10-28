@@ -6,7 +6,7 @@
  */
 package org.mule.runtime.api.el.validation;
 
-import static java.util.Collections.emptyList;
+import org.mule.api.annotation.NoImplement;
 
 import java.util.List;
 
@@ -15,58 +15,21 @@ import java.util.List;
  *
  * @since 1.5.0
  */
-public final class ScopePhaseValidationResult {
-
-  public static ScopePhaseValidationResult success() {
-    return new ScopePhaseValidationResult(true);
-  }
-
-  public static ScopePhaseValidationResult success(List<ScopePhaseValidationItem> warnings) {
-    return new ScopePhaseValidationResult(true, emptyList(), warnings);
-  }
-
-  public static ScopePhaseValidationResult failure(List<ScopePhaseValidationItem> errors) {
-    return new ScopePhaseValidationResult(false, errors, emptyList());
-  }
-
-  public static ScopePhaseValidationResult failure(List<ScopePhaseValidationItem> errors,
-                                                   List<ScopePhaseValidationItem> warnings) {
-    return new ScopePhaseValidationResult(false, errors, warnings);
-  }
-
-  private final boolean success;
-  private List<ScopePhaseValidationItem> errors = emptyList();
-  private List<ScopePhaseValidationItem> warnings = emptyList();
-
-  private ScopePhaseValidationResult(boolean success) {
-    this.success = success;
-  }
-
-  private ScopePhaseValidationResult(boolean success, List<ScopePhaseValidationItem> errors,
-                                     List<ScopePhaseValidationItem> warnings) {
-    this.success = success;
-    this.errors = errors;
-    this.warnings = warnings;
-  }
+@NoImplement
+public interface ScopePhaseValidationResult {
 
   /**
    * @return true if the validation was ok, false otherwise
    */
-  public boolean isSuccess() {
-    return this.success;
-  }
+  boolean isSuccess();
 
   /**
    * @return a list of {@link ScopePhaseValidationItem} errors items while scope validation
    */
-  public List<ScopePhaseValidationItem> getErrors() {
-    return errors;
-  }
+  List<ScopePhaseValidationItem> getErrors();
 
   /**
    * @return a list of {@link ScopePhaseValidationItem} warnings items while scope validation
    */
-  public List<ScopePhaseValidationItem> getWarnings() {
-    return warnings;
-  }
+  List<ScopePhaseValidationItem> getWarnings();
 }

@@ -86,7 +86,8 @@ public interface ExpressionLanguage extends Disposable {
    * @param script         The expression to be validated
    * @param nameIdentifier The name identifier of the script to validate. It's used to filter the validation result items to the
    *                       given script.
-   * @param bindings       The script bindings
+   * @param bindings       The {@link TypeBindings} bindings required by the script. The {@link TypeBindings} instances can be
+   *                       created using a {@link TypeBindings#builder()} builder
    * @return a {@link ScopePhaseValidationResult} indicating whether the validation was successful or not
    * 
    * @since 1.5.0

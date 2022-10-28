@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.el.validation;
 
+import org.mule.api.annotation.NoImplement;
+
 import java.util.Map;
 
 /**
@@ -13,33 +15,14 @@ import java.util.Map;
  *
  * @since 1.5.0
  */
-public final class ScopePhaseValidationItem {
+@NoImplement
+public interface ScopePhaseValidationItem {
 
-  private final String kind;
-  private final String message;
-  private final Map<String, String> params;
-  private final Location location;
+  String getKind();
 
-  public ScopePhaseValidationItem(String kind, String message, Map<String, String> params, Location location) {
-    this.kind = kind;
-    this.message = message;
-    this.params = params;
-    this.location = location;
-  }
+  String getMessage();
 
-  public String getKind() {
-    return kind;
-  }
+  Map<String, String> getParams();
 
-  public String getMessage() {
-    return message;
-  }
-
-  public Map<String, String> getParams() {
-    return params;
-  }
-
-  public Location getLocation() {
-    return location;
-  }
+  Location getLocation();
 }
