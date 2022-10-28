@@ -7,7 +7,7 @@
 package org.mule.runtime.api.el;
 
 import org.mule.metadata.message.api.el.TypeBindings;
-import org.mule.runtime.api.el.validation.ScopeValidationResult;
+import org.mule.runtime.api.el.validation.ScopePhaseValidationResult;
 import org.mule.runtime.api.lifecycle.Disposable;
 import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.MediaType;
@@ -81,16 +81,19 @@ public interface ExpressionLanguage extends Disposable {
   ValidationResult validate(String expression);
 
   /**
-   * Verifies whether an expression is valid or not using on the scope check phase.
+   * Verifies whether an expression is valid or not using on the scope phase check.
    * 
-   * @param script   The expression to be validated
-   * @param name     The name of the script to validate
-   * @param bindings The script bindings
-   * @return a {@link ScopeValidationResult} indicating whether the validation was successful or not
+   * @param script         The expression to be validated
+   * @param nameIdentifier The name identifier of the script to validate. It's used to filter the validation result items to the
+   *                       given script.
+   * @param bindings       The script bindings
+   * @return a {@link ScopePhaseValidationResult} indicating whether the validation was successful or not
    * 
    * @since 1.5.0
    */
-  ScopeValidationResult validateScope(String script, String name, TypeBindings bindings);
+  default ScopePhaseValidationResult scopePhaseValidate(String script, String nameIdentifier, TypeBindings bindings) {
+    throw new UnsupportedOperationException("The current ExpressionLanguage does not support scopePhaseValidate() method. Please update the expression language version");
+  }
 
   /**
    * Splits using the specified expression. The expression should return a collection of elements or an object. In case of the

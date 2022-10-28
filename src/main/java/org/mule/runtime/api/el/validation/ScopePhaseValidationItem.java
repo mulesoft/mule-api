@@ -9,18 +9,18 @@ package org.mule.runtime.api.el.validation;
 import java.util.Map;
 
 /**
- * Represents a validation notification
+ * Represents a Scope phase validation item
  *
  * @since 1.5.0
  */
-public class ValidationNotification {
+public final class ScopePhaseValidationItem {
 
   private final String kind;
   private final String message;
   private final Map<String, String> params;
   private final Location location;
 
-  public ValidationNotification(String kind, String message, Map<String, String> params, Location location) {
+  public ScopePhaseValidationItem(String kind, String message, Map<String, String> params, Location location) {
     this.kind = kind;
     this.message = message;
     this.params = params;
