@@ -34,7 +34,7 @@ public interface ScopePhaseValidationItem {
   Map<String, String> getParams();
 
   /**
-   * @return The location of validation item
+   * @return The {@link Location} location of validation item
    */
   Location getLocation();
 }
