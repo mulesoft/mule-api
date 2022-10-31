@@ -19,7 +19,8 @@ import java.util.Map;
 public interface ScopePhaseValidationItem {
 
   /**
-   * @return The kind of the scope validation item
+   * @return The kind of the scope validation item. It may be null if it does not exist a proper
+   *         {@link ScopePhaseValidationItemKind} kind value to map from the expression language.
    */
   ScopePhaseValidationItemKind getKind();
 
