@@ -16,7 +16,7 @@ import java.util.List;
  * @since 1.5.0
  */
 @NoImplement
-public interface ScopePhaseValidationResult {
+public interface ScopePhaseValidationMessages {
 
   /**
    * @return a list of {@link ScopePhaseValidationItem} errors items while scope validation

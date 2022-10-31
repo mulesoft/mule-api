@@ -11,7 +11,7 @@ import org.mule.api.annotation.NoImplement;
 import java.util.Map;
 
 /**
- * Represents a Scope phase validation item
+ * Represents a scope phase validation item
  *
  * @since 1.5.0
  */
@@ -19,9 +19,9 @@ import java.util.Map;
 public interface ScopePhaseValidationItem {
 
   /**
-   * @return The kind of the validation item. e.g: DeprecatedFeature
+   * @return The kind of the scope validation item
    */
-  String getKind();
+  ScopePhaseValidationItemKind getKind();
 
   /**
    * @return The validation message
