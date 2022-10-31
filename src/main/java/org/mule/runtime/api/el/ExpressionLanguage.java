@@ -86,8 +86,8 @@ public interface ExpressionLanguage extends Disposable {
    * dependency, or a module these messages will not be collected.
    * 
    * @param script         The expression to be validated.
-   * @param nameIdentifier The name identifier of the script to validate. It's used to filter the validation messages and to build
-   *                       the message's location.
+   * @param nameIdentifier The name identifier of the script to validate. This name identifier allows the expression language to
+   *                       collect just validation messages from the given name identifier.
    * @param bindings       The {@link TypeBindings} bindings required by the script. The {@link TypeBindings} instances can be
    *                       created using a {@link TypeBindings#builder()} builder.
    * @return {@link ScopePhaseValidationMessages} a set of warning / errors messages for the given script.
