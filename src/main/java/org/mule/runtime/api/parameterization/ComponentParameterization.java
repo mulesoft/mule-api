@@ -9,6 +9,7 @@ package org.mule.runtime.api.parameterization;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -25,6 +26,7 @@ import org.mule.runtime.api.util.Pair;
  * 
  * @since 1.5
  */
+@NoImplement
 public interface ComponentParameterization<M extends ParameterizedModel> {
 
   /**

@@ -9,10 +9,12 @@ package org.mule.runtime.api.parameterization;
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
+import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@NoExtend
 public abstract class AbstractComponentParameterizationBuilderFactory<M extends ParameterizedModel> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractComponentParameterizationBuilderFactory.class);
