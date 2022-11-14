@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @NoExtend
-public abstract class AbstractComponentParameterizationBuilderFactory<M extends ParameterizedModel> {
+public abstract class AbstractComponentParameterizationBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractComponentParameterizationBuilderFactory.class);
 
