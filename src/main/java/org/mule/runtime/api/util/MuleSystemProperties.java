@@ -644,6 +644,21 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
+   * Prefix to mark experimental properties explicitly in the name.
+   *
+   * @since 4.5.0
+   */
+  public static final String EXPERIMENTAL_SYSTEM_PROPERTY_PREFIX = SYSTEM_PROPERTY_PREFIX + "experimental.";
+
+  /**
+   * Enables the Mule SDK experimental feature.
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String ENABLE_MULE_SDK_PROPERTY = EXPERIMENTAL_SYSTEM_PROPERTY_PREFIX + "enableMuleSdk";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
