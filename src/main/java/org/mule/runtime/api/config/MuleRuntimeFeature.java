@@ -221,7 +221,7 @@ public enum MuleRuntimeFeature implements Feature {
   // TODO W-10815440 Remove this feature flag along with the work for W-10815440.
   ENABLE_BYTE_BUDDY_OBJECT_CREATION(
       "When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.",
-      "W-10672687", "4.5.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
+      "W-10672687", "4.4.0", ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY),
 
   /**
    * When enabled, AbstractForkJoinRouter based processors, such as ParallelForEach and ScatterGather routers, will show detailed
