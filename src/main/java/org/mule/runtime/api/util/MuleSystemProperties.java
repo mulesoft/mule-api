@@ -671,6 +671,14 @@ public final class MuleSystemProperties {
   public static final String ENABLE_MULE_SDK_PROPERTY = EXPERIMENTAL_SYSTEM_PROPERTY_PREFIX + "enableMuleSdk";
 
   /**
+   * Enables the Dynamic Config References experimental feature.
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String ENABLE_DYNAMIC_CONFIG_REF_PROPERTY = EXPERIMENTAL_SYSTEM_PROPERTY_PREFIX + "enableDynamicConfigRef";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
