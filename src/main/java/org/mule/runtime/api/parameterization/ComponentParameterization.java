@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
@@ -29,6 +30,7 @@ import org.mule.runtime.api.util.Pair;
  * @since 1.5
  */
 @NoImplement
+@Experimental
 public interface ComponentParameterization<M extends ParameterizedModel> {
 
   /**

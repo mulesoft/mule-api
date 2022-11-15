@@ -8,6 +8,7 @@ package org.mule.runtime.api.parameterization.value;
 
 import java.util.function.Consumer;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 
 /**
@@ -18,6 +19,7 @@ import org.mule.api.annotation.NoImplement;
  * @since 1.5.0
  */
 @NoImplement
+@Experimental
 public interface ArrayValueDeclarer {
 
   /**
