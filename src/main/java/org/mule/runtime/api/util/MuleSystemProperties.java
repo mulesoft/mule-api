@@ -11,6 +11,7 @@ import static java.lang.System.setProperty;
 
 import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
+import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
 import org.mule.runtime.api.metadata.MediaType;
 import org.mule.runtime.api.streaming.CursorProvider;
@@ -642,6 +643,17 @@ public final class MuleSystemProperties {
    */
   public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
+
+  /**
+   * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
+   * <p>
+   * This feature is <b>EXPERIMENTAL</b>
+   *
+   * @since 4.5.0
+   */
+  @Experimental
+  public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
   /**
    * Prefix to mark experimental properties explicitly in the name.
