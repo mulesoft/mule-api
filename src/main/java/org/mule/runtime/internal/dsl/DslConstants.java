@@ -107,6 +107,16 @@ public interface DslConstants {
   String EE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/core");
 
   /**
+   * This is the namespace prefix for EE cluster elements in the configuration.
+   */
+  String CLUSTER_EE_PREFIX = "cluster";
+
+  /**
+   * Namespace for EE elements
+   */
+  String CLUSTER_EE_NAMESPACE = format(DEFAULT_NAMESPACE_URI_MASK, "ee/cluster");
+
+  /**
    * This is the namespace prefix for EE domain elements in the configuration.
    */
   String EE_DOMAIN_PREFIX = "ee-domain";
