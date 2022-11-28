@@ -367,13 +367,13 @@ public enum MuleRuntimeFeature implements Feature {
       "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY),
 
   /**
-   * When enabled, internal exceptions when processing an event in the IdempotentMessageValidator will be rethrown instead of
-   * throwing a general DuplicateMessageException.
+   * When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of
+   * raising a general MULE:DUPLICATE_MESSAGE.
    *
    * @since 4.5.0
    */
   RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR(
-    "When enabled, internal exceptions when processing an event in the IdempotentMessageValidator will be rethrown instead of throwing a general DuplicateMessageException.",
+    "When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of throwing a general MULE:DUPLICATE_MESSAGE.",
     "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY);
 
   private final String description;
