@@ -643,7 +643,7 @@ public final class MuleSystemProperties {
    * @since 4.5.0
    */
   public static final String RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY =
-    SYSTEM_PROPERTY_PREFIX + "rethrowExceptionsInIdempotentMessageValidator";
+      SYSTEM_PROPERTY_PREFIX + "rethrowExceptionsInIdempotentMessageValidator";
 
   /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
