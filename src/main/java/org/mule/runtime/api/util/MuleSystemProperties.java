@@ -655,6 +655,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "foreachRouterRejectsMapExpressions";
 
   /**
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
+   *
+   * @since 4.5.0
+   */
+  public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
+    SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
+
+  /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
    * <p>
    * This feature is <b>EXPERIMENTAL</b>
