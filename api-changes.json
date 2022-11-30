@@ -3,6 +3,24 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR",
+          "elementKind": "enumConstant",
+          "justification": "W-11529823: Idempotent Validation Filter does not cascade object store exception"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11529823: Idempotent Validation Filter does not cascade object store exception"
+        },
+        {
           "code": "java.method.added",
           "new": "method java.util.Optional<org.mule.runtime.api.component.Component> org.mule.runtime.api.notification.PipelineMessageNotification::getFailingComponent()",
           "package": "org.mule.runtime.api.notification",
