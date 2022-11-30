@@ -406,6 +406,15 @@ public final class MuleSystemProperties {
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
+   * When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of
+   * throwing a general MULE:DUPLICATE_MESSAGE.
+   *
+   * @since 4.5.0
+   */
+  public static final String RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY =
+    SYSTEM_PROPERTY_PREFIX + "rethrowExceptionsInIdempotentMessageValidator";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
