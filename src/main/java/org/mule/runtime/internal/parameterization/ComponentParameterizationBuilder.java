@@ -25,7 +25,15 @@ import org.mule.runtime.api.parameterization.ComponentParameterization;
 import org.mule.runtime.api.parameterization.ComponentParameterization.Builder;
 import org.mule.runtime.api.util.Pair;
 
-
+/**
+ * Builder class for creating {@link ComponentParameterization} instances.
+ *
+ * The created instances of {@link ComponentParameterization} are immutable.
+ *
+ * @param <M> the actual {@link ParameterizedModel} sub-type of the component being built.
+ *
+ * @since 1.5
+ */
 public class ComponentParameterizationBuilder<M extends ParameterizedModel> implements ComponentParameterization.Builder<M> {
 
   private M model;
