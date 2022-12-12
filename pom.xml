@@ -107,7 +107,7 @@
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.3.1-SNAPSHOT</metadataModelApiVersion>
-        <artifactDeclarationVersion>1.3.1-SNAPSHOT</artifactDeclarationVersion>
+        <artifactDeclarationVersion>1.3.0-20221212</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.2.1-SNAPSHOT</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.30</slf4jVersion>
         <gsonVersion>2.8.5</gsonVersion>
