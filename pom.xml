@@ -108,7 +108,7 @@
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.5.0-SNAPSHOT</metadataModelApiVersion>
         <artifactDeclarationVersion>1.5.0-rc1</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.4.0-SNAPSHOT</muleModuleMavenPluginVersion>
+        <muleModuleMavenPluginVersion>1.4.0-rc1</muleModuleMavenPluginVersion>
         <hamcrestVersion>1.3</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
