@@ -20,9 +20,11 @@ import java.util.Optional;
  * This component provides the capability to store data so future requests for that data can be served faster and accessed from
  * every {@link InputTypeResolver}, {@link TypeKeysResolver} and {@link OutputTypeResolver}
  *
+ * @deprecated since 1.5.0. Use {@link MetadataStorage} instead.
  * @since 1.0
  */
 @NoImplement
+@Deprecated
 public interface MetadataCache extends Serializable {
 
   /**
