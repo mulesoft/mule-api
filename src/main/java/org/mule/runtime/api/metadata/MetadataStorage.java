@@ -23,7 +23,7 @@ import java.io.Serializable;
 public interface MetadataStorage extends MetadataCache {
 
   /**
-   * Evicts de {@param key} in the storage.
+   * Evicts the key in the storage.
    * 
    * @return true if the key was in the storage, false if not.
    */
