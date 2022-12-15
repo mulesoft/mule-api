@@ -21,6 +21,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
@@ -374,7 +375,17 @@ public enum MuleRuntimeFeature implements Feature {
    */
   RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR(
       "When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of throwing a general MULE:DUPLICATE_MESSAGE.",
-      "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY);
+      "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY),
+
+  /**
+   * When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression is a
+   * {@link java.util.Map}.
+   *
+   * @since 4.5.0
+   */
+  FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS(
+      "When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression is a {@link java.util.Map}.",
+      "W-12207110", "4.5.0", FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY);
 
   private final String description;
   private final String issueId;

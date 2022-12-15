@@ -646,6 +646,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "rethrowExceptionsInIdempotentMessageValidator";
 
   /**
+   * When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression is a
+   * {@link java.util.Map}.
+   *
+   * @since 4.5.0
+   */
+  public static final String FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "rethrowExceptionsInIdempotentMessageValidator";
+
+  /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
    * <p>
    * This feature is <b>EXPERIMENTAL</b>
