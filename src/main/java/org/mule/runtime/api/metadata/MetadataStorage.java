@@ -11,35 +11,33 @@ import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
-
 import java.io.Serializable;
 import java.util.Map;
 import java.util.Optional;
 
 /**
  * This component provides the capability to store data so future requests for that data can be served faster and accessed from
- * every {@link InputTypeResolver}, {@link TypeKeysResolver} and {@link OutputTypeResolver}
- *
- * @deprecated since 1.5.0. Use {@link MetadataStorage} instead.
- * @since 1.0
+ * every {@link InputTypeResolver}, {@link TypeKeysResolver} and {@link OutputTypeResolver}. It also allows to evict entries in
+ * case recalculations are needed.
+ * 
+ * @since 1.5
  */
 @NoImplement
-@Deprecated
-public interface MetadataCache extends Serializable {
+public interface MetadataStorage {
 
   /**
-   * Associates the specified value with the specified key in the cache. if the cache previously contained a mapping for the
+   * Associates the specified value with the specified key in the storage. if the storage previously contained a mapping for the
    * specified key, the old value gets replaced
    *
    * @param key   a key to associate the specified value
-   * @param value the value to persist in the cache
+   * @param value the value to persist in the storage
    */
   void put(Serializable key, Serializable value);
 
   /**
-   * Copies all of the entries from the specified map to the cache.
+   * Copies all of the entries from the specified map to the storage.
    *
-   * @param values values to be stored in the cache
+   * @param values values to be stored in the storage
    */
   void putAll(Map<? extends Serializable, ? extends Serializable> values);
 
@@ -57,12 +55,19 @@ public interface MetadataCache extends Serializable {
    * @param key the key whose associated value is to be returned
    * @return the current (existing or computed) value associated with the specified key, or null if the computed value is null
    */
-  <T extends Serializable> T computeIfAbsent(Serializable key, MetadataCacheValueResolver mappingFunction)
+  <T extends Serializable> T computeIfAbsent(Serializable key, MetadataStorageValueResolver mappingFunction)
       throws MetadataResolvingException, ConnectionException;
 
   @FunctionalInterface
-  interface MetadataCacheValueResolver {
+  interface MetadataStorageValueResolver {
 
     Serializable compute(Serializable key) throws MetadataResolvingException, ConnectionException;
   }
+
+  /**
+   * Evicts the key in the storage.
+   * 
+   * @return true if the key was in the storage, false if not.
+   */
+  boolean evictEntry(Serializable key);
 }
