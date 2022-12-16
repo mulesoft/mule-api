@@ -378,13 +378,13 @@ public enum MuleRuntimeFeature implements Feature {
       "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY),
 
   /**
-   * When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression is a
-   * {@link java.util.Map}.
+   * When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression evaluates
+   * to a {@link java.util.Map}.
    *
    * @since 4.5.0
    */
   FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS(
-      "When enabled, the 'foreach' router will generate an {@link IllegalArgumentException} if the collection expression is a {@link java.util.Map}.",
+      "When enabled, the 'foreach' router will generate an IllegalArgumentException if the collection expression evaluates to a java.util.Map.",
       "W-12207110", "4.5.0", FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY);
 
   private final String description;
