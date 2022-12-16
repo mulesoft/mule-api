@@ -394,8 +394,8 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.5.0
    */
   HONOUR_INSECURE_TLS_CONFIGURATION(
-    "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
-    "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
+      "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
+      "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
 
   private final String description;
   private final String issueId;

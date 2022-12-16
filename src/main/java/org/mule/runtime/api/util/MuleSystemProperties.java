@@ -660,7 +660,7 @@ public final class MuleSystemProperties {
    * @since 4.5.0
    */
   public static final String HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY =
-    SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
+      SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
