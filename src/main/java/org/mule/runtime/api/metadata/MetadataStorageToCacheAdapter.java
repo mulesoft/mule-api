@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Adapter to go from {@link MetadataStorage} to {@link MetadataCache} to use in the APIs that are still depending
- * on {@link MetadataCache}.
+ * Adapter to go from {@link MetadataStorage} to {@link MetadataCache} to use in the APIs that are still depending on
+ * {@link MetadataCache}.
  *
  * @since 1.5.
  */
