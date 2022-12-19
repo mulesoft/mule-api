@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
@@ -172,7 +173,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR(
       "When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of throwing a general MULE:DUPLICATE_MESSAGE.",
-      "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY);
+      "W-11529823", "4.5.0", RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY),
+
+  /**
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
+   *
+   * @since 4.5.0
+   */
+  HONOUR_INSECURE_TLS_CONFIGURATION(
+      "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
+      "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
 
   private final String description;
   private final String issueId;
