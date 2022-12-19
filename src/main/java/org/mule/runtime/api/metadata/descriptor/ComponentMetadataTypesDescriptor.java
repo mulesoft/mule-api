@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
+import static java.util.Collections.emptyMap;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.ofNullable;
+import static java.util.stream.Collectors.toMap;
+
 import org.mule.metadata.api.model.MetadataType;
 
 import java.util.HashMap;
@@ -15,15 +18,18 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Represents the view of all the dynamic Metadata associated to an Component's.
+ * Represents the view of all the Metadata associated to an Component's.
+ * <p>
+ * By default, only dynamic metadata is available. Static metadata can be made available by calling
+ * {@link ComponentMetadataTypesDescriptorBuilder#keepNonDynamicMetadata}.
  *
  * @since 1.4
  */
 public class ComponentMetadataTypesDescriptor {
 
-  private Map<String, MetadataType> inputMetadata;
-  private MetadataType outputMetadata;
-  private MetadataType outputAttributesMetadata;
+  private final Map<String, MetadataType> inputMetadata;
+  private final MetadataType outputMetadata;
+  private final MetadataType outputAttributesMetadata;
 
   public ComponentMetadataTypesDescriptor(Map<String, MetadataType> inputMetadata, MetadataType outputMetadata,
                                           MetadataType outputAttributesMetadata) {
@@ -61,6 +67,7 @@ public class ComponentMetadataTypesDescriptor {
 
     private InputMetadataDescriptor inputMetadataDescriptor;
     private OutputMetadataDescriptor outputMetadataDescriptor;
+    private boolean keepNonDynamicMetadata = false;
 
     /**
      * Creates a new instance of {@link ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder}.
@@ -80,6 +87,20 @@ public class ComponentMetadataTypesDescriptor {
     }
 
     /**
+     * Allows to view not only the dynamic metadata of a component, but static metadata as well.
+     * 
+     * @param keepNonDynamicMetadata {@code true} if static metadata must be kept, {@code false} if only dynamic metadata is kept.
+     *                               Default value is {@code false}.
+     * @return this builder
+     * 
+     * @since 1.6
+     */
+    public ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder keepNonDynamicMetadata(boolean keepNonDynamicMetadata) {
+      this.keepNonDynamicMetadata = keepNonDynamicMetadata;
+      return this;
+    }
+
+    /**
      * @return a {@link ComponentMetadataTypesDescriptor} instance with the metadata description for the content, output, and type
      *         of each of the parameters of the Component
      */
@@ -88,23 +109,26 @@ public class ComponentMetadataTypesDescriptor {
         throw new IllegalArgumentException("Input or output metadata descriptor has to be defined");
       }
 
-      Map<String, MetadataType> input = new HashMap<>();
+      Map<String, MetadataType> input = emptyMap();
       if (inputMetadataDescriptor != null) {
-        inputMetadataDescriptor.getAllParameters().values().stream()
-            .filter(ParameterMetadataDescriptor::isDynamic).forEach(p -> input.put(p.getName(), p.getType()));
+        input = inputMetadataDescriptor.getAllParameters().values()
+            .stream()
+            .filter(keepNonDynamicMetadata
+                ? p -> true
+                : ParameterMetadataDescriptor::isDynamic)
+            .collect(toMap(ParameterMetadataDescriptor::getName, ParameterMetadataDescriptor::getType));
       }
 
       MetadataType output = null;
       MetadataType outputAttributes = null;
       if (outputMetadataDescriptor != null) {
         TypeMetadataDescriptor payloadMetadata = outputMetadataDescriptor.getPayloadMetadata();
-
-        if (payloadMetadata.isDynamic()) {
+        if (payloadMetadata.isDynamic() || keepNonDynamicMetadata) {
           output = payloadMetadata.getType();
         }
 
         TypeMetadataDescriptor attributesMetadata = outputMetadataDescriptor.getAttributesMetadata();
-        if (attributesMetadata.isDynamic()) {
+        if (attributesMetadata.isDynamic() || keepNonDynamicMetadata) {
           outputAttributes = attributesMetadata.getType();
         }
       }
