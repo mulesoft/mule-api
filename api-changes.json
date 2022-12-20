@@ -424,6 +424,15 @@
           "fieldName": "COMMIT_REDELIVERY_EXHAUSTED",
           "elementKind": "field",
           "justification": "MULE-19915: adding system property to keep previous behavior"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG",
+          "elementKind": "field",
+          "justification": "W-11178986: Need this static field added due to a change in FIPS logic for Java 11"
         }
       ]
     }
