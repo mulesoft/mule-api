@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOUR_INSECURE_TLS_CONFIGURATION",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "HONOUR_INSECURE_TLS_CONFIGURATION",
+          "elementKind": "enumConstant",
+          "justification": "W-10822938: Inconsistent behaviour when using insecure=true attribute of trust-store config"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-10822938: Inconsistent behaviour when using insecure=true attribute of trust-store config"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
