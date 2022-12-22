@@ -23,6 +23,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
@@ -385,7 +386,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS(
       "When enabled, the 'foreach' router will generate an IllegalArgumentException if the collection expression evaluates to a java.util.Map.",
-      "W-12207110", "4.5.0", FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY);
+      "W-12207110", "4.5.0", FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY),
+
+  /**
+   * When enabled, the insecure attribute of the trust-store element will be honoured even when other attributes are configured.
+   *
+   * @since 4.5.0
+   */
+  HONOUR_INSECURE_TLS_CONFIGURATION(
+      "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
+      "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
 
   private final String description;
   private final String issueId;
