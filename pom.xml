@@ -130,7 +130,7 @@
         <muleApiAnnotationsVersion>1.4.0-rc2</muleApiAnnotationsVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
-        <muleBomVersion>4.5.0-rc1</muleBomVersion>
+        <muleBomVersion>4.5.0-rc2</muleBomVersion>
     </properties>
 
     <dependencyManagement>
