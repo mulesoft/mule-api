@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-12218381: [Global Error Handling] remove the system property reuse.globalErrorHandler in 4.3/4.4 and replace with a kill switch"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOUR_INSECURE_TLS_CONFIGURATION",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
@@ -73,15 +82,6 @@
           "fieldName": "SUPPRESS_ERRORS_PROPERTY",
           "elementKind": "field",
           "justification": "W-11308645, After calling an external SOAP endpoint, Error Objects are generated differently in MRT 4.3.0 and MRT 4.4.0"
-        },
-        {
-          "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "package": "org.mule.runtime.api.util",
-          "classSimpleName": "MuleSystemProperties",
-          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "elementKind": "field",
-          "justification": "W-11117613: Duplicate application of lifecycle phases in Global Error Handlers."
         },
         {
           "code": "java.field.addedStaticField",

@@ -510,12 +510,13 @@ public final class MuleSystemProperties {
 
 
   /**
-   * If set to true, the global error handlers will be reused instead of creating local copies.
+   * If set to true, the global error handlers will create local copies instead of being reused. This is only for internal use in
+   * the runtime.
    *
-   * @since 4.5.0, 4.4.1, 4.3.1
+   * @since 4.4.1, 4.3.1
    */
-  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
+  public static final String DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disableGlobalErrorHandlerImprovements";
 
   /**
    * When set to true, transactions will be committed in case of redelivery exhausted error.
