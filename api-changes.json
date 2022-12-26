@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-12218381: [Global Error Handling] remove the system property reuse.globalErrorHandler in 4.3/4.4 and replace with a kill switch"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
@@ -446,7 +455,7 @@
         }
       ]
     }
-  }, 
+  },
   "1.3.0": {
     "revapi": {
       "ignore": [
