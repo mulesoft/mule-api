@@ -399,7 +399,7 @@ public final class MuleSystemProperties {
    * @since 4.4.1, 4.3.1
    */
   public static final String DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY =
-    SYSTEM_PROPERTY_PREFIX + "disableGlobalErrorHandlerImprovements";
+      SYSTEM_PROPERTY_PREFIX + "disableGlobalErrorHandlerImprovements";
 
   /*
    * When set to true, transactions will be committed in case of redelivery exhausted error.
