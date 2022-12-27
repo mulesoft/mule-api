@@ -593,14 +593,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
 
   /**
-   * If set to true, the global error handlers will be reused instead of creating local copies.
-   *
-   * @since 4.5.0, 4.4.1, 4.3.1
-   */
-  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
-
-  /**
    * If set to true, {@link org.mule.runtime.api.notification.Notification}s related to polling sources will be emitted.
    *
    * @since 4.5.0
