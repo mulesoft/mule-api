@@ -384,14 +384,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
 
   /**
-   * If set to true, the global error handlers will be reused instead of creating local copies.
-   *
-   * @since 4.5.0, 4.4.1, 4.3.1
-   */
-  public static final String REUSE_GLOBAL_ERROR_HANDLER_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "reuse.globalErrorHandler";
-
-  /**
    * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
    * (W-10998630)
    *
@@ -399,6 +391,16 @@ public final class MuleSystemProperties {
    */
   public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
+
+  /**
+   * If set to true, the global error handlers will create local copies instead of being reused. This is only for internal use in
+   * the runtime.
+   *
+   * @since 4.4.1, 4.3.1
+   */
+  public static final String DISABLE_GLOBAL_ERROR_HANDLER_IMPROVEMENTS_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disableGlobalErrorHandlerImprovements";
+
   /*
    * When set to true, transactions will be committed in case of redelivery exhausted error.
    * 
