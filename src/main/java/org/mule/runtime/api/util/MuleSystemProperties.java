@@ -545,7 +545,7 @@ public final class MuleSystemProperties {
    * @since 4.5.0
    */
   public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalentries";
+      SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalEntries";
 
   /**
    * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
