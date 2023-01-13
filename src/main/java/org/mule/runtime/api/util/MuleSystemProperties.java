@@ -540,12 +540,12 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
-   * If set to true, attribute in entries in a `registry-bootstrap.properties` will be ignored.
+   * If set to true, {@code optional} attribute in entries in a `registry-bootstrap.properties` will be ignored.
    *
    * @since 4.5.0
    */
   public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
+      SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalentries";
 
   /**
    * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
