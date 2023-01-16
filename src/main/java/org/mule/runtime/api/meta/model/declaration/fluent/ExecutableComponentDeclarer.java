@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 /**
@@ -16,7 +17,7 @@ import org.mule.runtime.api.meta.model.notification.NotificationModel;
  * @since 1.0
  */
 public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentDeclarer, D extends ExecutableComponentDeclaration>
-    extends ComponentDeclarer<T, D> {
+    extends ComponentDeclarer<T, D> implements HasMinMuleVersionDeclarer<T> {
 
   /**
    * {@inheritDoc}
@@ -93,4 +94,11 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
     return (T) this;
   }
 
+  /**
+   * ADD IMPLEMENTATION INHERIT JDOC
+   */
+  @Override
+  public T withMinMuleVersion(MuleVersion minMuleVersion) {
+    return null;
+  }
 }

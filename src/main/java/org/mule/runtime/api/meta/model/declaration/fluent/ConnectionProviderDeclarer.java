@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
@@ -19,7 +20,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 public final class ConnectionProviderDeclarer
     extends ParameterizedDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
     implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer>,
-    HasStereotypeDeclarer<ConnectionProviderDeclarer>, HasSemanticTermsDeclarer<ConnectionProviderDeclarer> {
+    HasStereotypeDeclarer<ConnectionProviderDeclarer>, HasSemanticTermsDeclarer<ConnectionProviderDeclarer>,
+    HasMinMuleVersionDeclarer<ConnectionProviderDeclarer> {
 
   /**
    * Creates a new instance
@@ -93,5 +95,16 @@ public final class ConnectionProviderDeclarer
   public ConnectionProviderDeclarer withSemanticTerm(String semanticTerm) {
     declaration.addSemanticTerm(semanticTerm);
     return this;
+  }
+
+  /**
+   * ADD IMPLEMENTATION AND INHERIT DOCS
+   * 
+   * @param minMuleVersion
+   * @return
+   */
+  @Override
+  public ConnectionProviderDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
+    return null;
   }
 }

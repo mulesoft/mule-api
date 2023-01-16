@@ -7,6 +7,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
@@ -19,7 +20,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
     implements HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
     HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer>, HasStereotypeDeclarer<ConfigurationDeclarer>,
-    HasConstructDeclarer<ConfigurationDeclarer> {
+    HasConstructDeclarer<ConfigurationDeclarer>, HasMinMuleVersionDeclarer<ConfigurationDeclarer> {
 
   /**
    * Creates a new instance
@@ -171,4 +172,12 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
     return this;
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ConfigurationDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
+    declaration.withMinMuleVersion(minMuleVersion);
+    return this;
+  }
 }

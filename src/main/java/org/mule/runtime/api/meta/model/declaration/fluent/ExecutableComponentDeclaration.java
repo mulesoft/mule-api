@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Optional.ofNullable;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
@@ -23,7 +24,7 @@ import java.util.Set;
  * @since 1.0
  */
 public abstract class ExecutableComponentDeclaration<T extends ExecutableComponentDeclaration>
-    extends ComponentDeclaration<T> implements WithOutputDeclaration {
+    extends ComponentDeclaration<T> implements WithOutputDeclaration, WithMinMuleVersionDeclaration {
 
   private boolean transactional = false;
   private boolean requiresConnection = false;
@@ -118,5 +119,25 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
 
   public Set<NotificationModel> getNotificationModels() {
     return notificationModels;
+  }
+
+  /**
+   * ADD IMPLEMENTATION INHERIT DOCS
+   * 
+   * @return
+   */
+  @Override
+  public MuleVersion getMinMuleVersion() {
+    return null;
+  }
+
+  /**
+   * ADD IMPLEMENTATION INHERIT DOCS
+   * 
+   * @return
+   */
+  @Override
+  public void withMinMuleVersion(MuleVersion minMuleVersion) {
+
   }
 }

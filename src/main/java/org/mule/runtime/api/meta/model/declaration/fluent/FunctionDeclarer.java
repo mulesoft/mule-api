@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 
@@ -16,7 +17,8 @@ import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
  * @since 1.0
  */
 public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, FunctionDeclaration>
-    implements HasModelProperties<FunctionDeclarer>, HasDeprecatedDeclarer<FunctionDeclarer> {
+    implements HasModelProperties<FunctionDeclarer>,
+    HasDeprecatedDeclarer<FunctionDeclarer>, HasMinMuleVersionDeclarer<FunctionDeclarer> {
 
   /**
    * Creates a new instance
@@ -57,5 +59,16 @@ public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, Fu
   public FunctionDeclarer withDeprecation(DeprecationModel deprecation) {
     declaration.withDeprecation(deprecation);
     return this;
+  }
+
+  /**
+   * ADD IMPLEMENTATION INHERIT JDOC
+   * 
+   * @param minMuleVersion
+   * @return
+   */
+  @Override
+  public FunctionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
+    return null;
   }
 }

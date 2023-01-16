@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Optional.ofNullable;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 
@@ -20,7 +21,8 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclaration> implements WithDeprecatedDeclaration {
+public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclaration>
+    implements WithDeprecatedDeclaration, WithMinMuleVersionDeclaration {
 
   private OutputDeclaration output;
   private DeprecationModel deprecation;
@@ -48,5 +50,25 @@ public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclar
   @Override
   public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
+  }
+
+  /**
+   * ADD IMPLEMENTATION INHERIT DOCS
+   * 
+   * @return
+   */
+  @Override
+  public MuleVersion getMinMuleVersion() {
+    return null;
+  }
+
+  /**
+   * ADD IMPLEMENTATION INHERIT DOCS
+   * 
+   * @return
+   */
+  @Override
+  public void withMinMuleVersion(MuleVersion minMuleVersion) {
+
   }
 }

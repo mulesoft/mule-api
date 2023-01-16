@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
@@ -21,11 +22,12 @@ import java.util.Set;
  * @since 1.0
  */
 public class ConnectionProviderDeclaration extends StereotypedDeclaration<ConnectionProviderDeclaration>
-    implements WithStereotypesDeclaration {
+    implements WithStereotypesDeclaration, WithMinMuleVersionDeclaration {
 
   private ConnectionManagementType connectionManagementType;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
   private boolean supportsConnectivityTesting = true;
+  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -74,5 +76,21 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
 
   public void setSupportsConnectivityTesting(boolean supportsConnectivityTesting) {
     this.supportsConnectivityTesting = supportsConnectivityTesting;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public MuleVersion getMinMuleVersion() {
+    return minMuleVersion;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void withMinMuleVersion(MuleVersion minMuleVersion) {
+    this.minMuleVersion = minMuleVersion;
   }
 }

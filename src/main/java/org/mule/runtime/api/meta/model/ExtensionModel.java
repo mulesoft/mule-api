@@ -25,6 +25,7 @@ import org.mule.runtime.api.meta.model.operation.HasOperationModels;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
 import org.mule.runtime.api.meta.model.source.SourceModel;
+import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +54,7 @@ import java.util.Set;
 @NoImplement
 public interface ExtensionModel
     extends NamedObject, DescribedObject, EnrichableModel, HasOperationModels, HasSourceModels, HasFunctionModels,
-    HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries, HasConstructModels, DeprecableModel {
+    HasConnectionProviderModels, HasDisplayModel, HasExternalLibraries, HasConstructModels, DeprecableModel, HasMinMuleVersion {
 
   /**
    * A simple name for this extension. Usually one or two simple words that describes the functionality. For example, for an

@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
+import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
 
 /**
  * A definition of an executable {@link ComponentModel} in an {@link ExtensionModel}. This model groups all the common contracts
@@ -18,7 +19,7 @@ import org.mule.runtime.api.meta.model.source.SourceModel;
  * @since 1.0
  */
 @NoImplement
-public interface ConnectableComponentModel extends ComponentModel, HasOutputModel {
+public interface ConnectableComponentModel extends ComponentModel, HasOutputModel, HasMinMuleVersion {
 
   /**
    * @return whether this component has the ability to execute while joining a transaction
