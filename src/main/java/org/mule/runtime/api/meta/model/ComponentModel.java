@@ -14,7 +14,7 @@ import org.mule.runtime.api.meta.model.error.ThrowsErrors;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
-import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;\
+import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 
 /**
  * A definition of a component in an {@link ExtensionModel}. This model groups all the common contracts between extension
