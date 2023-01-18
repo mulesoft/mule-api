@@ -98,13 +98,11 @@ public final class ConnectionProviderDeclarer
   }
 
   /**
-   * ADD IMPLEMENTATION AND INHERIT DOCS
-   * 
-   * @param minMuleVersion
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public ConnectionProviderDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
-    return null;
+    declaration.withMinMuleVersion(minMuleVersion);
+    return this;
   }
 }

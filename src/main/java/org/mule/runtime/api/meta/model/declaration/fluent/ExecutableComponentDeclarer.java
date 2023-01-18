@@ -95,10 +95,11 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT JDOC
+   * {@inheritDoc}
    */
   @Override
   public T withMinMuleVersion(MuleVersion minMuleVersion) {
-    return null;
+    declaration.withMinMuleVersion(minMuleVersion);
+    return (T) this;
   }
 }

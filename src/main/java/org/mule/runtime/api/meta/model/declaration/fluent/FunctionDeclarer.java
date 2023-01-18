@@ -62,13 +62,11 @@ public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, Fu
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT JDOC
-   * 
-   * @param minMuleVersion
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public FunctionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
-    return null;
+    declaration.withMinMuleVersion(minMuleVersion);
+    return this;
   }
 }

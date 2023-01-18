@@ -75,6 +75,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
+  private MuleVersion minMuleVersion;
 
   /**
    * Creates a new instance
@@ -443,22 +444,18 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return null;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
-
+    this.minMuleVersion = minMuleVersion;
   }
 }

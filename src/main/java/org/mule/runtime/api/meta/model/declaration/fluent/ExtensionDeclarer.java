@@ -392,13 +392,11 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT JDOC
-   * 
-   * @param minMuleVersion
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
-    return null;
+    declaration.withMinMuleVersion(minMuleVersion);
+    return this;
   }
 }

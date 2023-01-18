@@ -211,8 +211,8 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
    * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return minMuleVersion;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**

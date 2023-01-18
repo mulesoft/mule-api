@@ -216,13 +216,11 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   *
-   * @param minMuleVersion
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public T withMinMuleVersion(MuleVersion minMuleVersion) {
-    return null;
+    declaration.withMinMuleVersion(minMuleVersion);
+    return (T) this;
   }
 }

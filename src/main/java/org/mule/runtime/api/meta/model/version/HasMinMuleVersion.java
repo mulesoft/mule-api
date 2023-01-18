@@ -8,11 +8,13 @@ package org.mule.runtime.api.meta.model.version;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.model.OutputModel;
+import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 
 import java.util.Optional;
 
 /**
- * ADD JDOC
+ * Interface for a model which declares minimum mule version for its usage.
  *
  * @since 1.6
  */
@@ -20,9 +22,8 @@ import java.util.Optional;
 public interface HasMinMuleVersion {
 
   /**
-   * ADD JDOC
-   *
-   * @return
+   * @return an {@link Optional} of a {@link MuleVersion} which is the minimum mule version required for the usage of the model,
+   *         or {@link Optional#empty()} if none is required.
    */
   Optional<MuleVersion> getMinMuleVersion();
 

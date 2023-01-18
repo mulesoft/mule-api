@@ -13,7 +13,10 @@ import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 
 import java.util.LinkedHashSet;
+import java.util.Optional;
 import java.util.Set;
+
+import static java.util.Optional.ofNullable;
 
 /**
  * A declaration object for a {@link ConnectionProviderModel}. It contains raw, unvalidated data which is used to declare the
@@ -82,8 +85,8 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
    * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return minMuleVersion;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**

@@ -7,12 +7,14 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Comparator.comparing;
+import static java.util.Optional.ofNullable;
 
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -157,8 +159,8 @@ public class ConfigurationDeclaration extends StereotypedDeclaration<Configurati
    * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return minMuleVersion;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**

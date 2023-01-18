@@ -26,6 +26,7 @@ public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclar
 
   private OutputDeclaration output;
   private DeprecationModel deprecation;
+  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -53,22 +54,18 @@ public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclar
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return null;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
-
+    this.minMuleVersion = minMuleVersion;
   }
 }

@@ -33,6 +33,7 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   private OutputDeclaration outputAttributes;
   private SampleDataProviderModel sampleDataProviderModel;
   private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
+  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -122,22 +123,18 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
-  public MuleVersion getMinMuleVersion() {
-    return null;
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
   }
 
   /**
-   * ADD IMPLEMENTATION INHERIT DOCS
-   * 
-   * @return
+   * {@inheritDoc}
    */
   @Override
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
-
+    this.minMuleVersion = minMuleVersion;
   }
 }
