@@ -4,13 +4,23 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.exception.matcher;
+package org.mule.runtime.api.message.matcher;
 
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.message.ErrorType;
 
 import java.util.Objects;
 
+/**
+ * Implementation of {@link ErrorTypeMatcher} that checks if the {@link ErrorType} is part of the hierarchy, considering the usage
+ * of wildcards.
+ * 
+ * @since 1.6
+ */
+@NoImplement
+@NoExtend
 public class WildcardErrorTypeMatcher implements ErrorTypeMatcher {
 
   public static String WILDCARD_TOKEN = "*";

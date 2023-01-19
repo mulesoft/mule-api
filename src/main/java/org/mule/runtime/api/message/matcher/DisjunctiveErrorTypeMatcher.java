@@ -4,16 +4,25 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.exception.matcher;
+package org.mule.runtime.api.message.matcher;
 
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.ErrorType;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Implementation of {@link ErrorTypeMatcher} that is a composition of other {@link ErrorTypeMatcher}.
+ * 
+ * @since 1.6
+ */
+@NoImplement
+@NoExtend
 public class DisjunctiveErrorTypeMatcher implements ErrorTypeMatcher {
 
-  List<ErrorTypeMatcher> errorTypeMatchers;
+  private final List<ErrorTypeMatcher> errorTypeMatchers;
 
   public DisjunctiveErrorTypeMatcher(List<ErrorTypeMatcher> errorTypeMatchers) {
     this.errorTypeMatchers = new CopyOnWriteArrayList<>(errorTypeMatchers);
@@ -21,13 +30,7 @@ public class DisjunctiveErrorTypeMatcher implements ErrorTypeMatcher {
 
   @Override
   public boolean match(ErrorType errorType) {
-    for (ErrorTypeMatcher errorTypeMatcher : errorTypeMatchers) {
-      if (errorTypeMatcher.match(errorType)) {
-        return true;
-      }
-    }
-
-    return false;
+    return errorTypeMatchers.stream().anyMatch(matcher -> matcher.match(errorType));
   }
 }
 

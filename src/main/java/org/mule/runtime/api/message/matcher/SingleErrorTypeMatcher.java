@@ -4,10 +4,19 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.exception.matcher;
+package org.mule.runtime.api.message.matcher;
 
+import org.mule.api.annotation.NoExtend;
+import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.ErrorType;
 
+/**
+ * Simple implementation of {@link ErrorTypeMatcher} that just checks if this matches the given {@link ErrorType} or a parent one.
+ * 
+ * @since 1.6
+ */
+@NoImplement
+@NoExtend
 public class SingleErrorTypeMatcher implements ErrorTypeMatcher {
 
   private final ErrorType errorType;

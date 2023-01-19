@@ -4,12 +4,12 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.exception.matcher;
+package org.mule.runtime.api.message.matcher;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.component.ComponentIdentifier.buildFromStringRepresentation;
-import static org.mule.runtime.api.exception.matcher.WildcardErrorTypeMatcher.WILDCARD_TOKEN;
+import static org.mule.runtime.api.message.matcher.WildcardErrorTypeMatcher.WILDCARD_TOKEN;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
