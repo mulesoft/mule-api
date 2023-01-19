@@ -15,6 +15,7 @@ import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.exception.ErrorTypeRepository;
 import org.mule.runtime.api.exception.MuleRuntimeException;
+import org.mule.runtime.api.message.ErrorType;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +29,10 @@ public class ErrorTypeMatcherUtils {
 
   private ErrorTypeMatcherUtils() {
 
+  }
+
+  public static ErrorTypeMatcher createErrorTypeMatcher(ErrorType errorType) {
+    return new SingleErrorTypeMatcher(errorType);
   }
 
   public static ErrorTypeMatcher createErrorTypeMatcher(ErrorTypeRepository errorTypeRepository, String errorTypeNames) {
