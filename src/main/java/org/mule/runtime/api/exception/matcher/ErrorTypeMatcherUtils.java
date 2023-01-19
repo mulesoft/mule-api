@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Utils to create the corresponding {@link ErrorTypeMatcher} given an expression. 
+ * Utils to create the corresponding {@link ErrorTypeMatcher} given an expression.
  *
  * @since 1.6
  */
