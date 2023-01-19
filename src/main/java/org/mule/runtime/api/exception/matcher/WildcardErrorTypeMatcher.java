@@ -11,7 +11,7 @@ import org.mule.runtime.api.message.ErrorType;
 
 import java.util.Objects;
 
-public final class WildcardErrorTypeMatcher implements ErrorTypeMatcher {
+public class WildcardErrorTypeMatcher implements ErrorTypeMatcher {
 
   public static String WILDCARD_TOKEN = "*";
 

@@ -11,7 +11,7 @@ import org.mule.runtime.api.message.ErrorType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public final class DisjunctiveErrorTypeMatcher implements ErrorTypeMatcher {
+public class DisjunctiveErrorTypeMatcher implements ErrorTypeMatcher {
 
   List<ErrorTypeMatcher> errorTypeMatchers;
 
