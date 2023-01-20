@@ -4,12 +4,12 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.message.matcher;
+package org.mule.runtime.api.message.error.matcher;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.component.ComponentIdentifier.buildFromStringRepresentation;
-import static org.mule.runtime.api.message.matcher.WildcardErrorTypeMatcher.WILDCARD_TOKEN;
+import static org.mule.runtime.api.message.error.matcher.WildcardErrorTypeMatcher.WILDCARD_TOKEN;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
@@ -31,10 +31,20 @@ public class ErrorTypeMatcherUtils {
 
   }
 
+  /**
+   * @param errorType
+   * @return an {@link ErrorTypeMatcher} for a specific {@link ErrorType} (and its parents)
+   */
   public static ErrorTypeMatcher createErrorTypeMatcher(ErrorType errorType) {
     return new SingleErrorTypeMatcher(errorType);
   }
 
+  /**
+   * @param errorTypeRepository
+   * @param errorTypeNames
+   * @return an {@link ErrorTypeMatcher} that includes matches all the {@link ErrorType} in the expression, including its parents
+   *         and considering the usage of wildcards.
+   */
   public static ErrorTypeMatcher createErrorTypeMatcher(ErrorTypeRepository errorTypeRepository, String errorTypeNames) {
     if (errorTypeNames == null) {
       return null;

@@ -4,12 +4,12 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.message.matcher;
+package org.mule.runtime.api.message.error.matcher;
 
 import org.mule.runtime.api.message.ErrorType;
 
 /**
- * Decides whether an error type is acceptable.
+ * Decides whether an error type matches a criteria defined by the implementation.
  *
  * @since 1.6
  */
