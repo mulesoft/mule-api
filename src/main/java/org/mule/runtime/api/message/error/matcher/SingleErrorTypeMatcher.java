@@ -11,7 +11,8 @@ import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.message.ErrorType;
 
 /**
- * Simple implementation of {@link ErrorTypeMatcher} that just checks if this matches the given {@link ErrorType} or a parent one.
+ * Simple implementation of {@link ErrorTypeMatcher} that just checks if this matches the given {@link ErrorType} or an ancestor
+ * one.
  * 
  * @since 1.6
  */
@@ -26,12 +27,12 @@ public class SingleErrorTypeMatcher implements ErrorTypeMatcher {
   }
 
   @Override
-  public boolean match(ErrorType errorType) {
-    return this.errorType.equals(errorType) || isChild(errorType);
+  public boolean match(ErrorType error) {
+    return this.errorType.equals(error) || isChild(error);
   }
 
-  private boolean isChild(ErrorType errorType) {
-    ErrorType parentErrorType = errorType.getParentErrorType();
+  private boolean isChild(ErrorType error) {
+    ErrorType parentErrorType = error.getParentErrorType();
     return parentErrorType != null && this.match(parentErrorType);
   }
 }
