@@ -62,7 +62,7 @@ public class ErrorTypeMatcherUtils {
       } else {
         return new SingleErrorTypeMatcher(errorTypeRepository.lookupErrorType(errorTypeComponentIdentifier)
             .orElseThrow(() -> new IllegalArgumentException(format("Could not find ErrorType for the given identifier: '%s'",
-                                                                            parsedIdentifier))));
+                                                                   parsedIdentifier))));
       }
 
     }).collect(toList());
