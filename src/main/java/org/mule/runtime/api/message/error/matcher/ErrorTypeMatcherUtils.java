@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.message.error.matcher;
 
+import static java.lang.String.format;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 import static org.mule.runtime.api.component.ComponentIdentifier.buildFromStringRepresentation;
 import static org.mule.runtime.api.message.error.matcher.WildcardErrorTypeMatcher.WILDCARD_TOKEN;
-import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.exception.ErrorTypeRepository;
@@ -61,7 +61,7 @@ public class ErrorTypeMatcherUtils {
         return new WildcardErrorTypeMatcher(errorTypeComponentIdentifier);
       } else {
         return new SingleErrorTypeMatcher(errorTypeRepository.lookupErrorType(errorTypeComponentIdentifier)
-            .orElseThrow(() -> new MuleRuntimeException(createStaticMessage("Could not find ErrorType for the given identifier: '%s'",
+            .orElseThrow(() -> new IllegalArgumentException(format("Could not find ErrorType for the given identifier: '%s'",
                                                                             parsedIdentifier))));
       }
 
