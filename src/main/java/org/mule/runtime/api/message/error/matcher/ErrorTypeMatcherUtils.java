@@ -43,8 +43,8 @@ public class ErrorTypeMatcherUtils {
    * @param errorTypeRepository the {@link ErrorTypeRepository} to be used to resolve every {@link ErrorType} in the expression.
    *                            If the error is not found in the registry, a {@link MuleRuntimeException} will be thrown.
    * @param errorTypeNames      the expression to define the error types to match in the {@link ErrorTypeMatcher} to return. The
-   *                            expression can have {@link ErrorType}s separated by commas, as well as using wildcards (*) to
-   *                            match all errors that match.
+   *                            expression can have {@link ErrorType}s separated by commas, as well as using wildcards (*) in the
+   *                            error's namespace or name.
    * @return an {@link ErrorTypeMatcher} that includes matches all the {@link ErrorType} in the expression, including its parents
    *         and considering the usage of wildcards.
    */
