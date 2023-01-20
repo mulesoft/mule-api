@@ -7,6 +7,8 @@
 package org.mule.runtime.api.el;
 
 
+import static java.util.Collections.emptyList;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.metadata.TypedValue;
@@ -66,8 +68,11 @@ public interface ExpressionModule {
    * Returns the declared types of this module
    *
    * @return a {@link List} of all declared types in the module
+   * @since 4.5.0
    */
-  List<MetadataType> declaredTypes();
+  default List<MetadataType> declaredTypes() {
+    return emptyList();
+  }
 
 
   interface Builder {
