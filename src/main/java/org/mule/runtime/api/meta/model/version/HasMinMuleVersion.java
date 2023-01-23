@@ -22,8 +22,8 @@ import java.util.Optional;
 public interface HasMinMuleVersion {
 
   /**
-   * @return an {@link Optional} of a {@link MuleVersion} which is the minimum mule version required for the usage of the model,
-   *         or {@link Optional#empty()} if none is required.
+   * @return an {@link Optional} {@link MuleVersion} which is the minimum required for the usage of the model, or
+   *         {@link Optional#empty()} if none is required.
    */
   Optional<MuleVersion> getMinMuleVersion();
 

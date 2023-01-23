@@ -20,13 +20,13 @@ import java.util.Optional;
 public interface WithMinMuleVersionDeclaration {
 
   /**
-   * @return an {@link Optional} of a {@link MuleVersion} which is the minimum mule version required for the usage of the
-   *         declaration, or {@link Optional#empty()} if none is required.
+   * @return an {@link Optional} of a {@link MuleVersion} which is the minimum required for the usage of the declaration, or
+   *         {@link Optional#empty()} if none is required.
    */
   Optional<MuleVersion> getMinMuleVersion();
 
   /**
-   * Use this method to specify a {@link MuleVersion} which is the minimum mule version required for the usage of the declaration
+   * Use this method to specify a {@link MuleVersion} which is the minimum required for the usage of the declaration
    *
    * @param minMuleVersion the minimum mule version for the declaration
    */

@@ -16,7 +16,7 @@ import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
  *
  * @since 1.0
  */
-public class FunctionDeclarer extends ParameterizedDeclarer<FunctionDeclarer, FunctionDeclaration>
+public class FunctionDeclarer extends ParameterizedWithMinMuleVersionDeclarer<FunctionDeclarer, FunctionDeclaration>
     implements HasModelProperties<FunctionDeclarer>,
     HasDeprecatedDeclarer<FunctionDeclarer>, HasMinMuleVersionDeclarer<FunctionDeclarer> {
 

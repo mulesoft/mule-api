@@ -27,11 +27,10 @@ import java.util.TreeSet;
 public class ConfigurationDeclaration extends StereotypedDeclaration<ConfigurationDeclaration>
     implements ConnectedDeclaration<ConfigurationDeclaration>, WithSourcesDeclaration<ConfigurationDeclaration>,
     WithOperationsDeclaration<ConfigurationDeclaration>, WithFunctionsDeclaration<ConfigurationDeclaration>,
-    WithConstructsDeclaration<ConfigurationDeclaration>, WithMinMuleVersionDeclaration {
+    WithConstructsDeclaration<ConfigurationDeclaration> {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final Set<ExternalLibraryModel> externalLibraryModels = new TreeSet<>(comparing(ExternalLibraryModel::getName));
-  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -153,21 +152,5 @@ public class ConfigurationDeclaration extends StereotypedDeclaration<Configurati
   public ConfigurationDeclaration addConstruct(ConstructDeclaration declaration) {
     subDeclarations.addConstruct(declaration);
     return this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Optional<MuleVersion> getMinMuleVersion() {
-    return ofNullable(minMuleVersion);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withMinMuleVersion(MuleVersion minMuleVersion) {
-    this.minMuleVersion = minMuleVersion;
   }
 }

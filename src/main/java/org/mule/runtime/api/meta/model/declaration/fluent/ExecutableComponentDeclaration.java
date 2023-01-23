@@ -24,7 +24,7 @@ import java.util.Set;
  * @since 1.0
  */
 public abstract class ExecutableComponentDeclaration<T extends ExecutableComponentDeclaration>
-    extends ComponentDeclaration<T> implements WithOutputDeclaration, WithMinMuleVersionDeclaration {
+    extends ComponentDeclaration<T> implements WithOutputDeclaration {
 
   private boolean transactional = false;
   private boolean requiresConnection = false;
@@ -33,7 +33,6 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
   private OutputDeclaration outputAttributes;
   private SampleDataProviderModel sampleDataProviderModel;
   private Set<NotificationModel> notificationModels = new LinkedHashSet<>();
-  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -120,21 +119,5 @@ public abstract class ExecutableComponentDeclaration<T extends ExecutableCompone
 
   public Set<NotificationModel> getNotificationModels() {
     return notificationModels;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Optional<MuleVersion> getMinMuleVersion() {
-    return ofNullable(minMuleVersion);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withMinMuleVersion(MuleVersion minMuleVersion) {
-    this.minMuleVersion = minMuleVersion;
   }
 }

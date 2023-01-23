@@ -19,7 +19,7 @@ import org.mule.runtime.api.meta.MuleVersion;
 public interface HasMinMuleVersionDeclarer<T> {
 
   /**
-   * Use this method to specify a {@link MuleVersion} which is the minimum mule version required for the usage of the declarer
+   * Use this method to specify a {@link MuleVersion} which is the minimum required for the usage of the declarer
    *
    * @param minMuleVersion the minimum mule version for the declarer
    * @return {@code this} declarer

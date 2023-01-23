@@ -17,7 +17,7 @@ import org.mule.runtime.api.meta.model.notification.NotificationModel;
  * @since 1.0
  */
 public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentDeclarer, D extends ExecutableComponentDeclaration>
-    extends ComponentDeclarer<T, D> implements HasMinMuleVersionDeclarer<T> {
+    extends ComponentDeclarer<T, D> {
 
   /**
    * {@inheritDoc}
@@ -91,15 +91,6 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
    */
   public T withNotificationModel(NotificationModel notification) {
     declaration.addNotificationModel(notification);
-    return (T) this;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public T withMinMuleVersion(MuleVersion minMuleVersion) {
-    declaration.withMinMuleVersion(minMuleVersion);
     return (T) this;
   }
 }

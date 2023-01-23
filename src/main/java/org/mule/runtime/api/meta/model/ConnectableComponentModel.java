@@ -19,7 +19,7 @@ import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
  * @since 1.0
  */
 @NoImplement
-public interface ConnectableComponentModel extends ComponentModel, HasOutputModel, HasMinMuleVersion {
+public interface ConnectableComponentModel extends ComponentModel, HasOutputModel {
 
   /**
    * @return whether this component has the ability to execute while joining a transaction

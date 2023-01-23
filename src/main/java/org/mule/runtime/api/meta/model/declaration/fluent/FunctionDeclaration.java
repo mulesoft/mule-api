@@ -21,12 +21,11 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclaration>
-    implements WithDeprecatedDeclaration, WithMinMuleVersionDeclaration {
+public class FunctionDeclaration extends ParameterizedWithMinMuleVersionDeclaration<FunctionDeclaration>
+    implements WithDeprecatedDeclaration {
 
   private OutputDeclaration output;
   private DeprecationModel deprecation;
-  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -51,21 +50,5 @@ public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclar
   @Override
   public void withDeprecation(DeprecationModel deprecation) {
     this.deprecation = deprecation;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Optional<MuleVersion> getMinMuleVersion() {
-    return ofNullable(minMuleVersion);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withMinMuleVersion(MuleVersion minMuleVersion) {
-    this.minMuleVersion = minMuleVersion;
   }
 }

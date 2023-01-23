@@ -25,12 +25,11 @@ import static java.util.Optional.ofNullable;
  * @since 1.0
  */
 public class ConnectionProviderDeclaration extends StereotypedDeclaration<ConnectionProviderDeclaration>
-    implements WithStereotypesDeclaration, WithMinMuleVersionDeclaration {
+    implements WithStereotypesDeclaration {
 
   private ConnectionManagementType connectionManagementType;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
   private boolean supportsConnectivityTesting = true;
-  private MuleVersion minMuleVersion;
 
   /**
    * {@inheritDoc}
@@ -79,21 +78,5 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
 
   public void setSupportsConnectivityTesting(boolean supportsConnectivityTesting) {
     this.supportsConnectivityTesting = supportsConnectivityTesting;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Optional<MuleVersion> getMinMuleVersion() {
-    return ofNullable(minMuleVersion);
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public void withMinMuleVersion(MuleVersion minMuleVersion) {
-    this.minMuleVersion = minMuleVersion;
   }
 }
