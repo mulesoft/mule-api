@@ -62,8 +62,12 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   }
 
   /**
-   * @return the deployable configuration files. In case no configuration files are present, the returned value will be either
-   *         {@code null} or an empty {@link Set}.
+   * Returns the configuration files for the deployable artifact if they have been analyzed, i.e. they were provided at creation
+   * time. It could be an empty {@link Set} in case no configuration files were present.
+   * <p>
+   * In case configuration files analysis was deferred to a later time, the returned value will be {@code null}.
+   *
+   * @return the configuration files for the deployable artifact if they have been analyzed, or {@code null} if not.
    */
   public Set<String> getConfigs() {
     return configs == null ? null : unmodifiableSet(this.configs);
@@ -105,7 +109,8 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     private String logConfigFile;
 
     /**
-     * @param configs the set of artifact configuration files
+     * @param configs the set of artifact configuration files, or {@code null} if the configuration files analysis will be made at
+     *                a later time.
      */
     public void setConfigs(Set<String> configs) {
       this.configs = configs;
