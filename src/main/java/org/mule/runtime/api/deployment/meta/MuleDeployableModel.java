@@ -62,8 +62,8 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   }
 
   /**
-   * @return the application configuration files, or {@code null} in case the {@link MuleDeployableModel} was created through
-   *         deserialization and the {@code configs} field was not present at all in the source file.
+   * @return the deployable configuration files. In case no configuration files are present, the returned value will be either
+   *         {@code null} or an empty {@link Set}.
    */
   public Set<String> getConfigs() {
     return configs == null ? null : unmodifiableSet(this.configs);
