@@ -62,7 +62,8 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
   }
 
   /**
-   * @return the application configuration files
+   * @return the application configuration files, or {@code null} in case the {@link MuleDeployableModel} was created through
+   *         deserialization and the {@code configs} field was not present at all in the source file.
    */
   public Set<String> getConfigs() {
     return configs == null ? null : unmodifiableSet(this.configs);
@@ -111,7 +112,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     }
 
     /**
-     * @return a well formed {@link MuleDomainModel}
+     * @return a well formed {@link MuleDeployableModel}.
      */
     @Override
     public final M build() {
