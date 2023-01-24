@@ -689,6 +689,16 @@ public final class MuleSystemProperties {
   public static final String ENABLE_DYNAMIC_CONFIG_REF_PROPERTY = EXPERIMENTAL_SYSTEM_PROPERTY_PREFIX + "enableDynamicConfigRef";
 
   /**
+   * Allows setting what classifiers should be identified as API definition artifacts by indicating them in a comma separated list
+   * (i.e., "raml,wsdl").
+   * <p>
+   * By default, classifiers are {@code raml}, {@code oas}, {@code raml-fragment} and {@code wsdl}.
+   *
+   * @since 4.5.0
+   */
+  public static final String API_CLASSIFIERS = SYSTEM_PROPERTY_PREFIX + "apiClassifiers";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
