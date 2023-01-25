@@ -17,6 +17,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
@@ -395,7 +396,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_INSECURE_TLS_CONFIGURATION(
       "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
-      "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY);
+      "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY),
+
+  /**
+   * When enabled, the tracer configuration packaged in the app will be retrieved
+   *
+   * @since 4.5.0
+   */
+  ENABLE_TRACER_CONFIGURATION_IN_APP(
+      "When enabled, the tracer configuration packaged in the app will be retrieved",
+      "W-12435158", "4.5.0", ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY);
 
   private final String description;
   private final String issueId;

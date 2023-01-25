@@ -655,6 +655,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
+   * When enabled, the tracer configuration packaged in the app will be retrieved.
+   *
+   * @since 4.5.0
+   */
+  public static final String ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.tracer.configuration.in.app.property";
+
+  /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
    * <p>
    * This feature is <b>EXPERIMENTAL</b>
