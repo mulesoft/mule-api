@@ -9,7 +9,6 @@ package org.mule.runtime.api.meta.model;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
-import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
 
 /**
  * A definition of an executable {@link ComponentModel} in an {@link ExtensionModel}. This model groups all the common contracts

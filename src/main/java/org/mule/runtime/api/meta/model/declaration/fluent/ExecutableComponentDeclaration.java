@@ -8,7 +8,6 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Optional.ofNullable;
 
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.data.sample.SampleDataProviderModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 import org.mule.runtime.api.meta.model.operation.OperationModel;

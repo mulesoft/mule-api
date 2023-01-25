@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 /**
@@ -93,4 +92,5 @@ public abstract class ExecutableComponentDeclarer<T extends ExecutableComponentD
     declaration.addNotificationModel(notification);
     return (T) this;
   }
+
 }

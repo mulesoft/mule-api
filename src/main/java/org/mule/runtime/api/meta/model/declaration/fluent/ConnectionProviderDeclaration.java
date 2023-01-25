@@ -6,17 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
 
 import java.util.LinkedHashSet;
-import java.util.Optional;
 import java.util.Set;
-
-import static java.util.Optional.ofNullable;
 
 /**
  * A declaration object for a {@link ConnectionProviderModel}. It contains raw, unvalidated data which is used to declare the
