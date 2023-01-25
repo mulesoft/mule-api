@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ModelProperty;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
@@ -30,7 +31,7 @@ import java.util.List;
 public class ParameterDeclarer<T extends ParameterDeclarer>
     implements HasModelProperties<ParameterDeclarer<T>>, HasType<ParameterDeclarer<T>>,
     HasDynamicType<ParameterDeclarer<T>>, HasDisplayModelDeclarer<ParameterDeclarer<T>>,
-    HasDeprecatedDeclarer<ParameterDeclarer<T>>, HasSemanticTermsDeclarer<T> {
+    HasDeprecatedDeclarer<ParameterDeclarer<T>>, HasSemanticTermsDeclarer<T>, HasMinMuleVersionDeclarer<T> {
 
   private final ParameterDeclaration declaration;
 
@@ -211,6 +212,15 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
   @Override
   public T withSemanticTerm(String semanticTerm) {
     declaration.addSemanticTerm(semanticTerm);
+    return (T) this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public T withMinMuleVersion(MuleVersion minMuleVersion) {
+    declaration.withMinMuleVersion(minMuleVersion);
     return (T) this;
   }
 }

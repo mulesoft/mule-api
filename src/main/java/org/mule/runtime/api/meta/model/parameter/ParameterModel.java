@@ -22,6 +22,7 @@ import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.display.HasLayoutModel;
 import org.mule.runtime.api.meta.model.display.LayoutModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
+import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
 import org.mule.runtime.api.value.Value;
 
 import java.util.List;
@@ -39,7 +40,7 @@ import java.util.Optional;
 @NoImplement
 public interface ParameterModel
     extends NamedObject, DescribedObject, EnrichableModel, Typed, HasDisplayModel, HasLayoutModel, DeprecableModel,
-    HasSemanticTerms {
+    HasSemanticTerms, HasMinMuleVersion {
 
   /**
    * Whether or not this parameter is required. This method is exclusive with {@link #getDefaultValue()} in the sense that a

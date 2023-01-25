@@ -3,6 +3,236 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ComponentDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ComponentDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConfigurationDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.ConfigurationDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConfigurationDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.ConnectionProviderDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConnectionProviderDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConstructDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ConstructDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ExecutableComponentDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.ExecutableComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ExecutableComponentDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "ExtensionDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "FunctionDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.FunctionDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "FunctionDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestableElementDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestableElementDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.NestedChainDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedChainDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<T extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclarer, D extends org.mule.runtime.api.meta.model.declaration.fluent.NestedComponentDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedComponentDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.NestedRouteDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "NestedRouteDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "OperationDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.OperationDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "OperationDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "SourceDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclarer<org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclarer, org.mule.runtime.api.meta.model.declaration.fluent.SourceDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "SourceDeclarer",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration>",
+          "new": "class org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration>",
+          "superClass": "org.mule.runtime.api.meta.model.declaration.fluent.ParameterizedWithMinMuleVersionDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.StereotypedDeclaration>",
+          "package": "org.mule.runtime.api.meta.model.declaration.fluent",
+          "classSimpleName": "StereotypedDeclaration",
+          "elementKind": "class",
+          "justification": "Base class is annotated with @NoExtend"
+        },
+        {
           "code": "java.field.removedWithConstant",
           "old": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
           "package": "org.mule.runtime.api.util",

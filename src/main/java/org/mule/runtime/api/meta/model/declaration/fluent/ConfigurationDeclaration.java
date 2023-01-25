@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static java.util.Comparator.comparing;
+
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 

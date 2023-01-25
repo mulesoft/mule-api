@@ -18,6 +18,7 @@ import org.mule.runtime.api.meta.model.deprecated.DeprecableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
+import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
 
 /**
  * Introspection model for {@link ConnectionProvider} types.
@@ -33,7 +34,7 @@ import org.mule.runtime.api.meta.model.stereotype.HasStereotypeModel;
 public interface ConnectionProviderModel
     extends NamedObject, DescribedObject, EnrichableModel, ParameterizedModel,
     HasDisplayModel, HasExternalLibraries, HasStereotypeModel, DeprecableModel,
-    HasSemanticTerms {
+    HasSemanticTerms, HasMinMuleVersion {
 
   /**
    * @return the type of connection management that the provider performs

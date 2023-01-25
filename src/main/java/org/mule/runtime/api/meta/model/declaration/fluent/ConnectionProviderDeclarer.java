@@ -17,7 +17,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  * @since 1.0
  */
 public final class ConnectionProviderDeclarer
-    extends ParameterizedDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
+    extends ParameterizedWithMinMuleVersionDeclarer<ConnectionProviderDeclarer, ConnectionProviderDeclaration>
     implements HasModelProperties<ConnectionProviderDeclarer>, DeclaresExternalLibraries<ConnectionProviderDeclarer>,
     HasStereotypeDeclarer<ConnectionProviderDeclarer>, HasSemanticTermsDeclarer<ConnectionProviderDeclarer> {
 

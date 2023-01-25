@@ -22,6 +22,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
@@ -53,7 +54,8 @@ import java.util.TreeSet;
 public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     implements ConnectedDeclaration<ExtensionDeclaration>, WithSourcesDeclaration<ExtensionDeclaration>,
     WithOperationsDeclaration<ExtensionDeclaration>, WithFunctionsDeclaration<ExtensionDeclaration>,
-    WithConstructsDeclaration<ExtensionDeclaration>, WithDeprecatedDeclaration, WithArtifactCoordinatesDeclaration {
+    WithConstructsDeclaration<ExtensionDeclaration>, WithDeprecatedDeclaration, WithArtifactCoordinatesDeclaration,
+    WithMinMuleVersionDeclaration {
 
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
@@ -73,6 +75,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private final Map<MetadataType, Set<MetadataType>> subTypes = new LinkedHashMap<>();
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
+  private MuleVersion minMuleVersion;
 
   /**
    * Creates a new instance
@@ -438,5 +441,21 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   @Override
   public void withArtifactCoordinates(ArtifactCoordinates artifactCoordinates) {
     this.artifactCoordinates = artifactCoordinates;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void withMinMuleVersion(MuleVersion minMuleVersion) {
+    this.minMuleVersion = minMuleVersion;
   }
 }

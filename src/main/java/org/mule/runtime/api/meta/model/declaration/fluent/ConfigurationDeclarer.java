@@ -16,7 +16,8 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  *
  * @since 1.0
  */
-public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
+public class ConfigurationDeclarer
+    extends ParameterizedWithMinMuleVersionDeclarer<ConfigurationDeclarer, ConfigurationDeclaration>
     implements HasOperationDeclarer, HasConnectionProviderDeclarer, HasSourceDeclarer, HasModelProperties<ConfigurationDeclarer>,
     HasFunctionDeclarer, DeclaresExternalLibraries<ConfigurationDeclarer>, HasStereotypeDeclarer<ConfigurationDeclarer>,
     HasConstructDeclarer<ConfigurationDeclarer> {
@@ -170,5 +171,4 @@ public class ConfigurationDeclarer extends ParameterizedDeclarer<ConfigurationDe
     declaration.withStereotype(stereotype);
     return this;
   }
-
 }

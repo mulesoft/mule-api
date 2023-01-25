@@ -18,7 +18,7 @@ import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
  * @since 1.0
  */
 public abstract class ComponentDeclarer<T extends ComponentDeclarer, D extends ComponentDeclaration>
-    extends ParameterizedDeclarer<T, D>
+    extends ParameterizedWithMinMuleVersionDeclarer<T, D>
     implements HasModelProperties<T>, HasNestedComponentsDeclarer,
     HasNestedRoutesDeclarer, HasStereotypeDeclarer<T>, HasDeprecatedDeclarer<T>, HasSemanticTermsDeclarer<T>, HasVisibility<T> {
 

@@ -15,6 +15,7 @@ import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ParameterDslConfiguration;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.parameter.FieldValueProviderModel;
@@ -38,7 +39,7 @@ import java.util.Set;
  * @since 1.0
  */
 public class ParameterDeclaration extends AbstractParameterDeclaration<ParameterDeclaration>
-    implements TypedDeclaration, WithDeprecatedDeclaration, WithSemanticTermsDeclaration {
+    implements TypedDeclaration, WithDeprecatedDeclaration, WithSemanticTermsDeclaration, WithMinMuleVersionDeclaration {
 
   private boolean required;
   private boolean isConfigOverride;
@@ -53,6 +54,7 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   private List<FieldValueProviderModel> fieldValueProviderModels = new ArrayList<>();
   private final List<StereotypeModel> allowedStereotypeModels = new ArrayList<>();
   private DeprecationModel deprecation;
+  private MuleVersion minMuleVersion;
   private final Set<String> semanticTerms = new LinkedHashSet<>();
 
   /**
@@ -203,5 +205,21 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   public void addSemanticTerm(String semanticTerm) {
     checkArgument(!isBlank(semanticTerm), "semantic terms cannot be blank");
     semanticTerms.add(semanticTerm);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public Optional<MuleVersion> getMinMuleVersion() {
+    return ofNullable(minMuleVersion);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public void withMinMuleVersion(MuleVersion minMuleVersion) {
+    this.minMuleVersion = minMuleVersion;
   }
 }

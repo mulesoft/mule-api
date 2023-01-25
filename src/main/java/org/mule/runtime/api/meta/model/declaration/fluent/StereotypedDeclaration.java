@@ -20,7 +20,8 @@ import java.util.Optional;
  * @param <T> the concrete type for {@code this} declaration
  * @since 1.0
  */
-public abstract class StereotypedDeclaration<T extends StereotypedDeclaration> extends ParameterizedDeclaration<T>
+public abstract class StereotypedDeclaration<T extends StereotypedDeclaration>
+    extends ParameterizedWithMinMuleVersionDeclaration<T>
     implements WithStereotypesDeclaration, WithDeprecatedDeclaration {
 
   private StereotypeModel stereotype;

@@ -20,7 +20,8 @@ import java.util.Optional;
  *
  * @since 1.0
  */
-public class FunctionDeclaration extends ParameterizedDeclaration<FunctionDeclaration> implements WithDeprecatedDeclaration {
+public class FunctionDeclaration extends ParameterizedWithMinMuleVersionDeclaration<FunctionDeclaration>
+    implements WithDeprecatedDeclaration {
 
   private OutputDeclaration output;
   private DeprecationModel deprecation;

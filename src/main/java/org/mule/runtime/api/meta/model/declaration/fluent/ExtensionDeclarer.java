@@ -17,6 +17,7 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
+import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
 import org.mule.runtime.api.meta.model.ModelProperty;
@@ -37,7 +38,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     implements HasModelProperties<ExtensionDeclarer>, HasOperationDeclarer, HasFunctionDeclarer,
     HasConnectionProviderDeclarer, HasSourceDeclarer, DeclaresExternalLibraries<ExtensionDeclarer>,
     HasConstructDeclarer<ExtensionDeclarer>, HasDeprecatedDeclarer<ExtensionDeclarer>,
-    HasArtifactCoordinatesDeclarer {
+    HasArtifactCoordinatesDeclarer, HasMinMuleVersionDeclarer<ExtensionDeclarer> {
 
   private static final List<String> UNREGISTERED_PACKAGES =
       asList("java.", "javax.", "com.mulesoft.mule.runtime.", "org.mule.runtime.", "org.mule.sdk.api.", "com.sun.");
@@ -387,6 +388,15 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withArtifactCoordinates(ArtifactCoordinates artifactCoordinates) {
     declaration.withArtifactCoordinates(artifactCoordinates);
+    return this;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @Override
+  public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
+    declaration.withMinMuleVersion(minMuleVersion);
     return this;
   }
 }
