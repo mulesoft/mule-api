@@ -657,6 +657,8 @@ public final class MuleSystemProperties {
   /**
    * When enabled, the tracer configuration packaged in the app will be retrieved.
    *
+   * The purpose of this system property is to disable the feature in CH.
+   *
    * @since 4.5.0
    */
   public static final String ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY =

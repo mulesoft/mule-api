@@ -399,13 +399,15 @@ public enum MuleRuntimeFeature implements Feature {
       "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY),
 
   /**
-   * When enabled, the tracer configuration packaged in the app will be retrieved
+   * When enabled, the tracer configuration packaged in the app will be retrieved. This is enabled by default for any version in
+   * mule 4, no matter which min mule version the artifact defined when developed. That's why the min mule version is 4.0.0. The
+   * purpose of this feature flag is to disable the feature in CH.
    *
    * @since 4.5.0
    */
   ENABLE_TRACER_CONFIGURATION_IN_APP(
       "When enabled, the tracer configuration packaged in the app will be retrieved",
-      "W-12435158", "4.5.0", ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY);
+      "W-12435158", "4.0.0", ENABLE_TRACER_CONFIGURATION_IN_APP_PROPERTY);
 
   private final String description;
   private final String issueId;
