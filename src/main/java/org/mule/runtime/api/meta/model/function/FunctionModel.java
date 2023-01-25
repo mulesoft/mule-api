@@ -27,7 +27,7 @@ import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
  * @since 1.0
  */
 @NoImplement
-public interface FunctionModel extends ParameterizedModel, EnrichableModel, HasDisplayModel, DeprecableModel {
+public interface FunctionModel extends ParameterizedModel, EnrichableModel, HasDisplayModel, DeprecableModel, HasMinMuleVersion {
 
   /**
    * Returns a {@link MetadataType} for the value that this component sets on the output {@link Message#getPayload()} field.
