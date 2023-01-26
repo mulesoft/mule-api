@@ -406,7 +406,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL(
       "When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature configuration for that application.",
-      "W-12435158", "4.0.0", ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY);
+      "W-12435158", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY);
 
   private final String description;
   private final String issueId;
