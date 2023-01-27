@@ -655,6 +655,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
+   * When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature
+   * configuration for that application.
+   *
+   * @since 4.5.0
+   */
+  public static final String ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "tracing.configuration.enableTracerConfigurationAtApplicationLevel";
+
+  /**
    * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
    * <p>
    * This feature is <b>EXPERIMENTAL</b>
