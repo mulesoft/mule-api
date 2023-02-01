@@ -23,6 +23,7 @@ import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 public final class MuleVersion {
 
   public static final int NO_REVISION = -1;
+  public static final MuleVersion FIRST_MULE_VERSION = new MuleVersion("4.1.1");
 
   private Semver semver;
 
