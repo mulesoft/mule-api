@@ -398,6 +398,7 @@ public enum MuleRuntimeFeature implements Feature {
   HONOUR_INSECURE_TLS_CONFIGURATION(
       "When enabled, the insecure TLS configuration will be honoured even if there are fields of the TrustStore configured.",
       "W-10822938", "4.5.0", HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY),
+
   /**
    * When enabled, the tracer configuration packaged in the app will take part of the distributed tracing feature configuration
    * for that application.
@@ -407,6 +408,7 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL(
       "When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature configuration for that application.",
       "W-12435158", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY),
+
   /**
    * When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created
    * to avoid deadlock.
@@ -417,7 +419,7 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created\n"
           +
           "to avoid deadlock.",
-      "W-12128703", "4.0.0", USE_TRANSACTION_SINK_INDEX_PROPERTY);
+      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY);
 
   private final String description;
   private final String issueId;
