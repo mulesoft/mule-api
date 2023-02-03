@@ -663,7 +663,6 @@ public final class MuleSystemProperties {
   public static final String USE_TRANSACTION_SINK_INDEX_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transaction.sink.index";
 
-
   /**
    * When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature
    * configuration for that application.
