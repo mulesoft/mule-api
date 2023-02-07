@@ -655,6 +655,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
+   * When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created
+   * to avoid deadlock.
+   *
+   * @since 4.4.0
+   */
+  public static final String USE_TRANSACTION_SINK_INDEX_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "transaction.sink.index";
+
+  /**
    * When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature
    * configuration for that application.
    *
