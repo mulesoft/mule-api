@@ -429,7 +429,7 @@ public final class MuleSystemProperties {
    * When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created
    * to avoid deadlock.
    *
-   * @since 4.4.0
+   * @since 4.5.0, 4.4.0-202203, 4.3.0-202203
    */
   public static final String USE_TRANSACTION_SINK_INDEX_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "transaction.sink.index";
