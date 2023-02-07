@@ -34,6 +34,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_N
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.USE_TRANSACTION_SINK_INDEX_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import static java.util.Optional.ofNullable;
@@ -406,7 +407,19 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL(
       "When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature configuration for that application.",
-      "W-12435158", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY);
+      "W-12435158", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY),
+
+  /**
+   * When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created
+   * to avoid deadlock.
+   *
+   * @since 4.4.0
+   */
+  USE_TRANSACTION_SINK_INDEX(
+      "When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created\n"
+          +
+          "to avoid deadlock.",
+      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY);
 
   private final String description;
   private final String issueId;
