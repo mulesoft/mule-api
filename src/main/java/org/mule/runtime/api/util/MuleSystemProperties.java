@@ -426,6 +426,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.insecure.tls.configuration";
 
   /**
+   * When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created
+   * to avoid deadlock.
+   *
+   * @since 4.4.0
+   */
+  public static final String USE_TRANSACTION_SINK_INDEX_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "transaction.sink.index";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
