@@ -3,15 +3,6 @@
     "revapi": {
       "ignore": [
         {
-          "code": "java.field.removedWithConstant",
-          "old": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "package": "org.mule.runtime.api.util",
-          "classSimpleName": "MuleSystemProperties",
-          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "elementKind": "field",
-          "justification": "W-12181063: [Global Error Handling] remove the kill switch for enabling the memory fixes in 4.5"
-        },
-        {
           "code": "java.field.constantValueChanged",
           "old": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY",
@@ -22,22 +13,13 @@
           "fieldName": "DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY",
           "elementKind": "field",
           "justification": "W-10825584: Fix system properry name and documentation"
-        }        
+        }
       ]
     }
   },
   "1.5.0": {
     "revapi": {
       "ignore": [
-        {
-          "code": "java.field.removedWithConstant",
-          "old": "field org.mule.runtime.api.util.MuleSystemProperties.REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "package": "org.mule.runtime.api.util",
-          "classSimpleName": "MuleSystemProperties",
-          "fieldName": "REUSE_GLOBAL_ERROR_HANDLER_PROPERTY",
-          "elementKind": "field",
-          "justification": "W-12181063: [Global Error Handling] remove the kill switch for enabling the memory fixes in 4.5"
-        },
         {
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method boolean org.mule.runtime.api.interception.ProcessorInterceptor::isErrorMappingRequired(org.mule.runtime.api.component.location.ComponentLocation)",
