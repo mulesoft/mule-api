@@ -422,15 +422,17 @@ public enum MuleRuntimeFeature implements Feature {
       "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
 
   /**
-   * When enabled, the instances of {@link java.sql.Timestamp} will be serialized with nanoseconds precision. When disabled,
-   * the precision will be to milliseconds.
+   * When enabled, the instances of {@link java.sql.Timestamp} will be serialized with nanoseconds precision. When disabled, the
+   * precision will be to milliseconds.
    * <p>
    * Notice that if an instance of {@link java.sql.Timestamp} was serialized with this feature flag disabled, it can't be
    * deserialized with the feature flag enabled.
    *
    * @since 4.5.0
    */
-  ENABLE_TIMESTAMP_NANOSECONDS_SERIALIZATION("When enabled, the instances of Timestamp will be serialized with nanoseconds precision. When disabled, the precision will be to milliseconds.", "W-12516135", "4.6.0");
+  ENABLE_TIMESTAMP_NANOSECONDS_SERIALIZATION(
+      "When enabled, the instances of Timestamp will be serialized with nanoseconds precision. When disabled, the precision will be to milliseconds.",
+      "W-12516135", "4.6.0");
 
   private final String description;
   private final String issueId;
