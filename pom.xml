@@ -138,7 +138,7 @@
         <muleApiAnnotationsVersion>1.2.0-20230320</muleApiAnnotationsVersion>
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
-        <muleBomVersion>4.3.1-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.3.0-20230320</muleBomVersion>
     </properties>
 
     <dependencyManagement>
