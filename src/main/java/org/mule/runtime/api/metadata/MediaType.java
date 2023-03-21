@@ -6,12 +6,17 @@
  */
 package org.mule.runtime.api.metadata;
 
-import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
+import static java.lang.System.getProperty;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.list;
+import static java.util.Optional.ofNullable;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
+
 import org.mule.runtime.api.util.MuleSystemProperties;
 
-import javax.activation.MimeType;
-import javax.activation.MimeTypeParseException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -25,13 +30,11 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import static java.lang.System.getProperty;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.emptyMap;
-import static java.util.Collections.list;
-import static java.util.Optional.ofNullable;
-import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
+import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
