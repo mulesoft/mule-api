@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.util;
+package org.mule.runtime.api.util.tck;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.contains;
@@ -19,6 +19,8 @@ import static org.junit.Assert.assertThat;
 import static org.mule.runtime.api.util.MultiMap.toMultiMap;
 import static org.mule.runtime.api.util.MultiMap.unmodifiableMultiMap;
 
+import org.mule.runtime.api.util.MultiMap;
+import org.mule.runtime.api.util.Pair;
 import org.mule.runtime.api.util.MultiMap.StringMultiMap;
 
 import java.util.Arrays;
