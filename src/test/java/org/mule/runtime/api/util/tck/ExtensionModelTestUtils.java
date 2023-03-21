@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.util;
+package org.mule.runtime.api.util.tck;
 
 import static org.mockito.Mockito.lenient;
 import org.mule.runtime.api.meta.model.ComponentModel;
