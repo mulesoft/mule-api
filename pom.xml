@@ -90,7 +90,7 @@
         </developer>
     </developers>
     <contributors>
-        <!-- Refer to https://github.com/mulesoft/mule/graphs/contributors -->
+        <!-- TEST Refer to https://github.com/mulesoft/mule/graphs/contributors -->
     </contributors>
     <issueManagement>
         <system>jira</system>
