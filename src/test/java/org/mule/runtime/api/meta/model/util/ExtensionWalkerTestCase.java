@@ -6,13 +6,15 @@
  */
 package org.mule.runtime.api.meta.model.util;
 
+import static org.mule.runtime.api.util.tck.ExtensionModelTestUtils.visitableMock;
+
 import static java.util.Arrays.asList;
 import static java.util.Optional.of;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
-import static org.mule.runtime.api.util.ExtensionModelTestUtils.visitableMock;
+
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.config.ConfigurationModel;
 import org.mule.runtime.api.meta.model.connection.ConnectionProviderModel;
