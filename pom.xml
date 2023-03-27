@@ -106,13 +106,11 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <metadataModelApiVersion>1.6.0-SNAPSHOT</metadataModelApiVersion>
         <artifactDeclarationVersion>1.6.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.5.0-SNAPSHOT</muleModuleMavenPluginVersion>
         <hamcrestVersion>1.3</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
-        <javax.activation.version>1.2.0</javax.activation.version>
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
@@ -149,13 +147,11 @@
         <dependency>
             <groupId>org.mule.runtime</groupId>
             <artifactId>mule-metadata-model-api</artifactId>
-            <version>${metadataModelApiVersion}</version>
         </dependency>
 
         <dependency>
             <groupId>org.mule.runtime</groupId>
             <artifactId>mule-message-metadata-model</artifactId>
-            <version>${metadataModelApiVersion}</version>
         </dependency>
 
         <dependency>
@@ -188,7 +184,6 @@
         <dependency>
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
-            <version>${javax.activation.version}</version>
         </dependency>
 
         <dependency>
