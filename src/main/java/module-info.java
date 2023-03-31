@@ -115,6 +115,8 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.value;
   
   // Allow introspection for serialization/deserialization by Gson
+  opens org.mule.runtime.api.component to
+      com.google.gson;
   opens org.mule.runtime.api.deployment.meta to
       com.google.gson;
   opens org.mule.runtime.api.meta.model to
@@ -135,5 +137,20 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
+  
+  // Make DSL constants available to other Mule modules for reuse
+  exports org.mule.runtime.internal.dsl to
+      org.mule.runtime.extensions.api,
+      org.mule.runtime.dsl.api,
+      org.mule.runtime.artifact.ast,
+      org.mule.runtime.artifact.ast.xmlParser,
+      org.mule.runtime.artifact.ast.serialization,
+      org.mule.runtime.core.extension.model,
+      org.mule.runtime.artifact.ast.test,
+      org.mule.runtime.artifact.ast.serialization.test;
+
+  exports org.mule.runtime.internal.util to
+      org.mule.runtime.core.extension.model,
+      org.mule.runtime.artifact.ast.xmlParser.test;
 
 }
