@@ -25,6 +25,9 @@ public final class MuleSystemProperties {
 
   public static final String SYSTEM_PROPERTY_PREFIX = "mule.";
 
+  public static final String MULE_HOME_DIRECTORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "home";
+  public static final String MULE_BASE_DIRECTORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "base";
+
   public static final String MULE_CONTEXT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "context";
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
