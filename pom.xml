@@ -269,7 +269,7 @@
                         <execution>
                             <id>default-compile</id>
                             <configuration>
-                                <release>9</release>
+                                <release>11</release>
                                 <!-- no excludes: compile everything to ensure module-info contains right entries -->
                             </configuration>
                         </execution>
