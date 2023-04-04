@@ -414,7 +414,7 @@
                     <executions>
                         <execution>
                             <id>analyze</id>
-                            <phase>compile</phase>
+                            <phase>verify</phase>
                             <goals>
                                 <goal>analyze</goal>
                             </goals>
