@@ -7,7 +7,8 @@
 package org.mule.runtime.api.metadata;
 
 import static java.util.stream.Collectors.toCollection;
-import static org.mule.metadata.internal.utils.StringUtils.isNotEmpty;
+
+import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import org.mule.api.annotation.NoExtend;
 
@@ -26,8 +27,8 @@ public class MetadataKeyBuilder {
   private final Set<MetadataProperty> properties = new HashSet<>();
   private final String id;
   private String displayName;
-  private Set<MetadataKey> childs = new LinkedHashSet<>();
-  private Set<MetadataKeyBuilder> unbuiltChilds = new LinkedHashSet<>();
+  private final Set<MetadataKey> childs = new LinkedHashSet<>();
+  private final Set<MetadataKeyBuilder> unbuiltChilds = new LinkedHashSet<>();
   private String partName = "";
 
   protected MetadataKeyBuilder(String id) {

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
@@ -74,7 +72,7 @@
         </developer>
         <developer>
             <id>estebanwasinger</id>
-            <name>Esteban Wasinger Espro</name>     
+            <name>Esteban Wasinger Espro</name>
         </developer>
         <developer>
             <id>juandesi</id>
@@ -105,6 +103,7 @@
 
     <properties>
         <javaVersion>1.8</javaVersion>
+        <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <artifactDeclarationVersion>1.6.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.5.0-SNAPSHOT</muleModuleMavenPluginVersion>
@@ -115,7 +114,7 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
-        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
         <allureJunitVersion>2.8.1</allureJunitVersion>
         <allureReportVersion>2.8.1</allureReportVersion>
@@ -265,11 +264,31 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <version>3.11.0</version>
+                    <executions>
+                        <execution>
+                            <id>default-compile</id>
+                            <configuration>
+                                <release>11</release>
+                                <!-- no excludes: compile everything to ensure module-info contains right entries -->
+                            </configuration>
+                        </execution>
+                        <execution>
+                            <id>base-compile</id>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <release>${javaReleaseVersion}</release>
+                                <!-- recompile everything for target VM except the module-info.java -->
+                                <excludes>
+                                    <exclude>module-info.java</exclude>
+                                </excludes>
+                            </configuration>
+                        </execution>
+                    </executions>
                     <configuration>
                         <encoding>ISO-8859-1</encoding>
-                        <source>${javaVersion}</source>
-                        <target>${javaVersion}</target>
                         <proc>none</proc>
                     </configuration>
                 </plugin>
@@ -288,7 +307,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <phase>compile</phase>
+                            <phase>process-sources</phase>
                             <goals>
                                 <goal>${formatterGoal}</goal>
                             </goals>
@@ -335,7 +354,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <phase>compile</phase>
+                            <phase>process-sources</phase>
                             <goals>
                                 <goal>check</goal>
                             </goals>
@@ -395,7 +414,7 @@
                     <executions>
                         <execution>
                             <id>analyze</id>
-                            <phase>compile</phase>
+                            <phase>verify</phase>
                             <goals>
                                 <goal>analyze</goal>
                             </goals>
@@ -465,7 +484,7 @@
                 <executions>
                     <execution>
                         <id>analyze</id>
-                        <phase>compile</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>analyze</goal>
                         </goals>
@@ -505,7 +524,8 @@
                     <oldVersion>${oldMuleArtifactVersion}</oldVersion>
                     <failOnUnresolvedArtifacts>true</failOnUnresolvedArtifacts>
                     <failOnMissingConfigurationFiles>false</failOnMissingConfigurationFiles>
-                    <analysisConfiguration><![CDATA[
+                    <analysisConfiguration>
+                        <![CDATA[
                                 {
                                     "revapi" : {
                                         "java" : {
@@ -525,7 +545,8 @@
                                         }
                                     }
                                 }
-                            ]]></analysisConfiguration>
+                            ]]>
+                    </analysisConfiguration>
                     <analysisConfigurationFiles combine.children="append">
                         <configurationFile>
                             <path>api-changes.json</path>
@@ -540,7 +561,9 @@
                 <executions>
                     <execution>
                         <id>api-check</id>
-                        <goals><goal>check</goal></goals>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
