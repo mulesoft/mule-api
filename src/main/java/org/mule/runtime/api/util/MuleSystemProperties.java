@@ -722,7 +722,7 @@ public final class MuleSystemProperties {
    * @since 4.6.0
    */
   public static final String TRACING_LEVEL_CONFIGURATION_PATH =
-      SYSTEM_PROPERTY_PREFIX + "overridden.tracing.level.properties.file.path";
+      SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
