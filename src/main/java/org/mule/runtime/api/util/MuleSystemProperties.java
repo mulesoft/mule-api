@@ -717,6 +717,14 @@ public final class MuleSystemProperties {
   public static final String API_CLASSIFIERS = SYSTEM_PROPERTY_PREFIX + "apiClassifiers";
 
   /**
+   * A system property for modifying the default configuration file path for tracing level config.
+   *
+   * @since 4.6.0
+   */
+  public static final String TRACING_LEVEL_CONFIGURATION_PATH =
+      SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
