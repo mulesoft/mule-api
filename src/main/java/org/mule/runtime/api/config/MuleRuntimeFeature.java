@@ -29,6 +29,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PRO
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
@@ -419,7 +420,19 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created\n"
           +
           "to avoid deadlock.",
-      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY);
+      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
+
+  /**
+   * When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the
+   * application's Classloader.
+   *
+   * @since 4.5.0, 4.4.0-202305
+   */
+  SUPPORT_NATIVE_LIBRARY_DEPENDENCIES(
+      "When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the application's Classloader.",
+      "W-11855052",
+      "4.6.0",
+      SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY);
 
   private final String description;
   private final String issueId;
