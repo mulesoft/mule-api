@@ -672,6 +672,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "transaction.sink.index";
 
   /**
+   * When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the
+   * application's Classloader.
+   *
+   * @since 4.5.0, 4.4.0-202305
+   */
+  public static final String SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "support.native.library.dependencies";
+
+  /**
    * When enabled, the tracer configuration packaged as part of an application will take part of the distributed tracing feature
    * configuration for that application.
    *
