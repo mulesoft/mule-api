@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "SUPPORT_NATIVE_LIBRARY_DEPENDENCIES",
+          "elementKind": "enumConstant",
+          "justification": "W-11855052: Database Connector to connect to SQL Anywhere via the sajdbc4 driver"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-11855052: Database Connector to connect to SQL Anywhere via the sajdbc4 driver"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.USE_TRANSACTION_SINK_INDEX",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
