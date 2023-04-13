@@ -114,6 +114,10 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.util.xmlsecurity;
   exports org.mule.runtime.api.value;
   
+  // Exposed to other modules of the Mule Runtime, but internal to other users
+  exports org.mule.runtime.internal.dsl to
+      org.mule.runtime.dsl.api;
+  
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
       com.google.gson;
