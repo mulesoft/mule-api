@@ -105,6 +105,8 @@
 
     <properties>
         <javaVersion>1.8</javaVersion>
+        <javax.activation.version>1.2.0</javax.activation.version>
+        <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.1.1</metadataModelApiVersion>
         <artifactDeclarationVersion>1.1.1</artifactDeclarationVersion>
@@ -121,14 +123,14 @@
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
         <guavaVersion>23.5-jre</guavaVersion>
-        <commonsLangVersion>3.6</commonsLangVersion>
+        <commonsLangVersion>3.12.0</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
-        <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.8.10</aspectjVersion>
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
-        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.version>0.8.8</jacoco.version>
 
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.1.0</oldMuleArtifactVersion>
@@ -228,6 +230,16 @@
             <groupId>org.mule.runtime</groupId>
             <artifactId>api-annotations</artifactId>
             <version>${muleApiAnnotationsVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.activation</groupId>
+            <artifactId>javax.activation</artifactId>
+            <version>${javax.activation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${javax.jaxb-api.version}</version>
         </dependency>
     </dependencies>
 
@@ -500,6 +512,17 @@
                         <goals><goal>check</goal></goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Automatic-Module-Name>org.mule.runtime.api</Automatic-Module-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
