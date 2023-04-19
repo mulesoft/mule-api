@@ -105,8 +105,6 @@
 
     <properties>
         <javaVersion>1.8</javaVersion>
-        <javax.activation.version>1.2.0</javax.activation.version>
-        <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <metadataModelApiVersion>1.1.1</metadataModelApiVersion>
         <artifactDeclarationVersion>1.1.1</artifactDeclarationVersion>
@@ -230,16 +228,6 @@
             <groupId>org.mule.runtime</groupId>
             <artifactId>api-annotations</artifactId>
             <version>${muleApiAnnotationsVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.activation</groupId>
-            <artifactId>javax.activation</artifactId>
-            <version>${javax.activation.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${javax.jaxb-api.version}</version>
         </dependency>
     </dependencies>
 
