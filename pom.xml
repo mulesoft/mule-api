@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.1b</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -106,7 +106,7 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <metadataModelApiVersion>1.1.1</metadataModelApiVersion>
+        <metadataModelApiVersion>1.1.1b</metadataModelApiVersion>
         <artifactDeclarationVersion>1.1.1</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.0.1</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
@@ -123,12 +123,12 @@
         <guavaVersion>23.5-jre</guavaVersion>
         <commonsLangVersion>3.6</commonsLangVersion>
         <license.maven.plugin.version>2.11</license.maven.plugin.version>
-        <maven.surefire.plugin.version>2.20.1</maven.surefire.plugin.version>
+        <maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
         <aspectjVersion>1.8.10</aspectjVersion>
         <allureJunitVersion>2.0-BETA17</allureJunitVersion>
         <allureReportVersion>2.3.4</allureReportVersion>
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
-        <jacoco.version>0.7.9</jacoco.version>
+        <jacoco.version>0.8.8</jacoco.version>
 
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.1.0</oldMuleArtifactVersion>
@@ -493,6 +493,17 @@
                         <goals><goal>check</goal></goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Automatic-Module-Name>org.mule.runtime.api</Automatic-Module-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
