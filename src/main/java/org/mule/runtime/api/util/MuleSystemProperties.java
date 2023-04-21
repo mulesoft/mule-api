@@ -734,6 +734,22 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
 
   /**
+   * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the services
+   * ({@code true}) or a classloader will be used ({@code false}).
+   * <p>
+   * The default value will depend on the jvm version being used:
+   * <ul>
+   * <li><b>8</b>: this property is ignored, assumed {@code false}.</li>
+   * <li><b>11</b>: defaults to {@code false}.</li>
+   * <li><b>17 and higher</b>: defaults to {@code true}.</li>
+   * </ul>
+   * 
+   * @since 4.6.0
+   */
+  public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
+      SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
