@@ -523,6 +523,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
 
   /**
+   * If set to true, the Objects factories will be created with Byte Buddy instead of CGLIB."
+   *
+   * @since 4.5.0, 4.4.0-202204, 4.3.0-202204
+   */
+  public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
+
+  /**
    * If set to true, whenever an application has an HTTP requester configured to use TLS, Grizzly will use the
    * WorkerThreadIOStrategy.
    *
