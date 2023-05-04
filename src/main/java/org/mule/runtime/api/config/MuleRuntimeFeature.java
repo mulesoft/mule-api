@@ -308,7 +308,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, the Objects factories will be created with Byte Buddy instead of CGLIB.
    *
-   * @since 4.5.0, 4.4.0-202203, 4.3.0-202203
+   * @since 4.4.0-202203, 4.3.0-202203
    * @deprecated since 4.5.0, ByteBuddy is always used.
    */
   @Deprecated
