@@ -432,13 +432,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.5.0, 4.4.0-202305
    */
   SUPPORT_NATIVE_LIBRARY_DEPENDENCIES(
-      "When enabled, if an application access a native library, the rest of its declared native libraries will be also loaded. This "
-          +
-          "avoids errors of the class UnsatisfiedLinkError when the accessed native library depends on another. Preload order is equal "
-          +
-          "to the order of declaration at the application sharedLibraries configuration, and declaring the native libraries at a domain "
-          +
-          "is also supported.",
+      "When enabled, if an application access a native library, the rest of its declared native libraries will be also loaded. This avoids errors of the class UnsatisfiedLinkError when the accessed native library depends on another. Preload order is equal to the order of declaration at the application sharedLibraries configuration, and declaring the native libraries at a domain is also supported.",
       "W-11855052",
       "4.5.0",
       SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY);
