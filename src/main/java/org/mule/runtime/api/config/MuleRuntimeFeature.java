@@ -424,15 +424,23 @@ public enum MuleRuntimeFeature implements Feature {
       "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
 
   /**
-   * When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the
-   * application's Classloader.
+   * When enabled, if an application access a native library, the rest of its declared native libraries will be also loaded. This
+   * avoids errors of the class UnsatisfiedLinkError when the accessed native library depends on another. Preload order is equal
+   * to the order of declaration at the application sharedLibraries configuration, and declaring the native libraries at a domain
+   * is also supported.
    *
    * @since 4.5.0, 4.4.0-202305
    */
   SUPPORT_NATIVE_LIBRARY_DEPENDENCIES(
-      "When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the application's Classloader.",
+      "When enabled, if an application access a native library, the rest of its declared native libraries will be also loaded. This "
+          +
+          "avoids errors of the class UnsatisfiedLinkError when the accessed native library depends on another. Preload order is equal "
+          +
+          "to the order of declaration at the application sharedLibraries configuration, and declaring the native libraries at a domain "
+          +
+          "is also supported.",
       "W-11855052",
-      "4.6.0",
+      "4.5.0",
       SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY);
 
   private final String description;
