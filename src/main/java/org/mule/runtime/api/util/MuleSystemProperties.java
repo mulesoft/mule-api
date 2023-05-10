@@ -694,6 +694,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
   /**
+   * When enabled, the trace id and span id will be added to the MDC when available.
+   *
+   * @since 4.5.0
+   */
+  public static final String PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "put.trace.id.and.span.id.in.mdc";
+
+  /**
    * Prefix to mark experimental properties explicitly in the name.
    *
    * @since 4.5.0

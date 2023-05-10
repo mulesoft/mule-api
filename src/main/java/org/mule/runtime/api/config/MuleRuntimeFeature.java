@@ -30,6 +30,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPIN
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
@@ -435,7 +436,14 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, if an application access a native library, the rest of its declared native libraries are also loaded. This prevents errors like UnsatisfiedLinkError when the accessed native library depends on another native library. Libraries must be declared at the sharedLibraries configuration following the dependency order, meaning that if library A depends on library B, then A must be declared first. Declaring the native libraries at a domain is also supported.",
       "W-11855052",
       "4.5.0",
-      SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY);
+      SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY),
+  /**
+   * When enabled, the trace id and span id will be added to the MDC when available.
+   *
+   * @since 4.5.0
+   */
+  PUT_TRACE_ID_AND_SPAN_ID_IN_MDC("When enabled, the trace id and span id will be added to the MDC when available.",
+      "W-12979787", "4.5.0", PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY);
 
   private final String description;
   private final String issueId;
