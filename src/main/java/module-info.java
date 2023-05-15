@@ -123,8 +123,14 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.serialization.test,
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
-      org.mule.runtime.extension.model;
+      org.mule.runtime.extension.model,
+      org.mule.runtime.core,
+      org.mule.runtime.artifact.activation;
   
+  // Required by ErrorBuilder
+  exports org.mule.runtime.internal.exception to
+      org.mule.runtime.core;
+
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
       com.google.gson;
