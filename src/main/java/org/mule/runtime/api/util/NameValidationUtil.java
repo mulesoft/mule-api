@@ -4,7 +4,7 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.internal.util;
+package org.mule.runtime.api.util;
 
 import static java.lang.String.join;
 import org.mule.runtime.api.exception.MuleRuntimeException;

@@ -6,8 +6,8 @@
  */
 package org.mule.runtime.api.component.location;
 
+import static org.mule.runtime.api.util.NameValidationUtil.verifyStringDoesNotContainsReservedCharacters;
 import static org.mule.runtime.api.util.Preconditions.checkState;
-import static org.mule.runtime.internal.util.NameValidationUtil.verifyStringDoesNotContainsReservedCharacters;
 
 import static java.lang.String.join;
 
