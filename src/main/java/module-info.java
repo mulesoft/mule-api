@@ -117,13 +117,7 @@ module org.mule.runtime.api {
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
       org.mule.runtime.dsl.api,
-      org.mule.runtime.extensions.api,
-      org.mule.runtime.artifact.ast,
-      org.mule.runtime.artifact.ast.serialization,
-      org.mule.runtime.artifact.ast.serialization.test,
-      org.mule.runtime.artifact.ast.test,
-      org.mule.runtime.artifact.ast.xmlParser,
-      org.mule.runtime.extension.model;
+      org.mule.runtime.extensions.api;
   
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
