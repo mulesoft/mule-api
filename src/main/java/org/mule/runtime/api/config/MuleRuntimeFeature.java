@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.config;
 
+import static org.mule.runtime.api.util.MuleSystemProperties.ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
@@ -443,7 +444,15 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.5.0
    */
   PUT_TRACE_ID_AND_SPAN_ID_IN_MDC("When enabled, the trace id and span id will be added to the MDC when available.",
-      "W-12979787", "4.5.0", PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY);
+      "W-12979787", "4.5.0", PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY),
+  /**
+   * When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.
+   *
+   * @since 4.5.0
+   */
+  ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE(
+      "When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.",
+      "W-13215870", "4.5.0", ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY);
 
   private final String description;
   private final String issueId;
