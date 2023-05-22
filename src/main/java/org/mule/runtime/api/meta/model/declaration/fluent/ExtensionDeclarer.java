@@ -6,17 +6,19 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
+
 import static java.lang.System.getProperty;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
-import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
+import org.mule.runtime.api.meta.JavaVersion;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
@@ -28,6 +30,7 @@ import org.mule.runtime.api.meta.model.notification.NotificationModel;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * A builder object which allows creating an {@link ExtensionDeclaration} through a fluent API.
@@ -397,6 +400,11 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
     declaration.withMinMuleVersion(minMuleVersion);
+    return this;
+  }
+
+  public ExtensionDeclarer supportingJavaVersions(Set<JavaVersion> javaVersions) {
+    declaration.setSupportedJavaVersions(javaVersions);
     return this;
   }
 }

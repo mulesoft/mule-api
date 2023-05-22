@@ -6,6 +6,12 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.meta.JavaVersion.JAVA_11;
+import static org.mule.runtime.api.meta.JavaVersion.JAVA_8;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
@@ -14,14 +20,14 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
+import org.mule.runtime.api.meta.JavaVersion;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
@@ -57,6 +63,9 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     WithConstructsDeclaration<ExtensionDeclaration>, WithDeprecatedDeclaration, WithArtifactCoordinatesDeclaration,
     WithMinMuleVersionDeclaration {
 
+  private static final Set<JavaVersion> DEFAULT_SUPPORTED_JAVA_VERSIONS =
+      unmodifiableSet(new LinkedHashSet<>(asList(JAVA_8, JAVA_11)));
+
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
@@ -76,6 +85,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
   private MuleVersion minMuleVersion;
+  private Set<JavaVersion> supportedJavaVersions = DEFAULT_SUPPORTED_JAVA_VERSIONS;
 
   /**
    * Creates a new instance
@@ -457,5 +467,17 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   @Override
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
     this.minMuleVersion = minMuleVersion;
+  }
+
+  public Set<JavaVersion> getSupportedJavaVersions() {
+    return supportedJavaVersions;
+  }
+
+  public void setSupportedJavaVersions(Set<JavaVersion> supportedJavaVersions) {
+    if (supportedJavaVersions != null && !supportedJavaVersions.isEmpty()) {
+      this.supportedJavaVersions = unmodifiableSet(new LinkedHashSet<>(supportedJavaVersions));
+    } else {
+      this.supportedJavaVersions = DEFAULT_SUPPORTED_JAVA_VERSIONS;
+    }
   }
 }
