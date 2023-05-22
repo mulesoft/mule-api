@@ -133,7 +133,13 @@ module org.mule.runtime.api {
   exports org.mule.runtime.internal.connectivity to
       org.mule.runtime.core;
   exports org.mule.runtime.internal.util to
-      org.mule.runtime.core;
+    org.mule.runtime.core;
+
+  // Internals exposed to test module
+  exports org.mule.runtime.internal.exception to org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.util.xmlsecurity to org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.util.collection to org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.util to org.mule.runtime.api.test;
 
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
@@ -153,10 +159,12 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.meta.model.stereotype to
       com.google.gson;
   opens org.mule.runtime.api.metadata to
-      com.google.gson;
+      com.google.gson,
+      org.mule.runtime.api.test;
   opens org.mule.runtime.api.metadata.resolving to
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
+  
 
 }
