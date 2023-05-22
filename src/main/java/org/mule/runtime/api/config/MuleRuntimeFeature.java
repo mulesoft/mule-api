@@ -452,7 +452,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE(
       "When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.",
-      "W-13215870", "4.5.0", ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY);
+      "W-13215870", "", ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY);
 
   private final String description;
   private final String issueId;
