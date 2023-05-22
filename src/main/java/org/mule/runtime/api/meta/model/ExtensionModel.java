@@ -26,6 +26,7 @@ import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.HasSourceModels;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.meta.model.version.HasMinMuleVersion;
+import org.mule.runtime.api.meta.JavaVersion;
 
 import java.util.List;
 import java.util.Optional;
@@ -219,4 +220,5 @@ public interface ExtensionModel
    */
   Optional<ArtifactCoordinates> getArtifactCoordinates();
 
+  Set<JavaVersion> getSupportedJavaVersions();
 }
