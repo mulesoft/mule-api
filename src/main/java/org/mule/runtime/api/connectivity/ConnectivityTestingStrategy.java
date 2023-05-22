@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.connectivity;
 
+import static java.util.ServiceLoader.load;
+import static java.util.stream.StreamSupport.stream;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionValidationResult;
+
+import java.util.stream.Stream;
 
 /**
  * An strategy for doing connectivity testing.
@@ -37,4 +42,11 @@ public interface ConnectivityTestingStrategy {
    * @return true if this strategy can do connectivity testing over the provided component, false otherwise.
    */
   boolean accepts(Object connectivityTestingObject);
+
+  static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies(ClassLoader classLoader) {
+    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class, classLoader)
+        .iterator()).spliterator(),
+                  false);
+  }
+
 }
