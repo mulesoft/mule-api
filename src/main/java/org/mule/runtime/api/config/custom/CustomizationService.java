@@ -18,7 +18,10 @@ import org.mule.runtime.api.lifecycle.Lifecycle;
  * For replacing an existent service, the service identifier must be used. Make sure to use the same constants as the runtime.
  *
  * @since 1.0
+ * 
+ * @deprecated Since 1.5, use org.mule.runtime.core.api.config.custom.CustomizationService instead.
  */
+@Deprecated
 @NoImplement
 public interface CustomizationService {
 
