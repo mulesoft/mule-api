@@ -54,7 +54,8 @@ public class ArtifactDeclarationJsonSerializerTestCase {
   @Test
   public void serializationTest() {
     JsonParser parser = new JsonParser();
-    JsonReader reader = new JsonReader(new InputStreamReader(getClass().getResourceAsStream(getExpectedArtifactDeclarationJson())));
+    JsonReader reader =
+        new JsonReader(new InputStreamReader(getClass().getResourceAsStream(getExpectedArtifactDeclarationJson())));
     JsonElement expected = parser.parse(reader);
     JsonElement json = parser.parse(ArtifactDeclarationJsonSerializer.getDefault(true).serialize(applicationDeclaration));
     assertThat(json, is(equalTo(expected)));

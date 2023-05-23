@@ -30,6 +30,7 @@ module org.mule.runtime.api.test {
   requires org.hamcrest;
   requires io.qameta.allure.commons;
   requires org.mockito;
+  requires net.bytebuddy;
   requires org.json;
   requires jsonassert;
 
