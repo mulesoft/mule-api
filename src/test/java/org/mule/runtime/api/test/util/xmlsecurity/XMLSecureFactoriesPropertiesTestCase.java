@@ -14,7 +14,7 @@ import static javax.xml.XMLConstants.ACCESS_EXTERNAL_STYLESHEET;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
@@ -50,7 +50,7 @@ public class XMLSecureFactoriesPropertiesTestCase {
   @Test
   public void validatorProperties() throws Exception {
     SetPropertyAnswer setPropertyAnswer = new SetPropertyAnswer(schemaFactory.newSchema().newValidator());
-    doAnswer(setPropertyAnswer).when(validatorWrapper).setProperty(anyString(), anyObject());
+    doAnswer(setPropertyAnswer).when(validatorWrapper).setProperty(anyString(), any());
     defaultXMLSecureFactories.configureValidator(validatorWrapper);
     assertThat(setPropertyAnswer.exception, is(nullValue()));
     for (String property : VALIDATOR_PROPERTIES) {
@@ -61,7 +61,7 @@ public class XMLSecureFactoriesPropertiesTestCase {
   @Test
   public void schemaFactoryProperties() throws Exception {
     SetPropertyAnswer setPropertyAnswer = new SetPropertyAnswer(schemaFactory);
-    doAnswer(setPropertyAnswer).when(schemaFactoryWrapper).setProperty(anyString(), anyObject());
+    doAnswer(setPropertyAnswer).when(schemaFactoryWrapper).setProperty(anyString(), any());
     defaultXMLSecureFactories.configureSchemaFactory(schemaFactoryWrapper);
     assertThat(setPropertyAnswer.exception, is(nullValue()));
     for (String property : SCHEMA_FACTORY_PROPERTIES) {
@@ -72,7 +72,7 @@ public class XMLSecureFactoriesPropertiesTestCase {
   @Test
   public void transformerFactoryProperties() {
     SetPropertyAnswer setPropertyAnswer = new SetPropertyAnswer(transformerFactory);
-    doAnswer(setPropertyAnswer).when(transformerFactoryWrapper).setAttribute(anyString(), anyObject());
+    doAnswer(setPropertyAnswer).when(transformerFactoryWrapper).setAttribute(anyString(), any());
     defaultXMLSecureFactories.configureTransformerFactory(transformerFactoryWrapper);
     assertThat(setPropertyAnswer.exception, is(nullValue()));
     for (String property : FACTORY_ATTRIBUTES) {
