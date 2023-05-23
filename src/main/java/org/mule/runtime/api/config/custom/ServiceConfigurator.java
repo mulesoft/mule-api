@@ -8,11 +8,6 @@ package org.mule.runtime.api.config.custom;
 
 import org.mule.api.annotation.NoImplement;
 
-/**
- * 
- * @deprecated Since 1.5, use org.mule.runtime.api.config.custom.ServiceConfigurator instead.
- */
-@Deprecated
 @NoImplement
 public interface ServiceConfigurator {
 
