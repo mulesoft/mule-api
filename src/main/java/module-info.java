@@ -113,7 +113,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.util.concurrent;
   exports org.mule.runtime.api.util.xmlsecurity;
   exports org.mule.runtime.api.value;
-  
+
   uses org.mule.runtime.api.config.custom.ServiceConfigurator;
   uses org.mule.runtime.api.connectivity.ConnectivityTestingStrategy;
 
@@ -126,12 +126,13 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.serialization.test,
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
-      org.mule.runtime.extension.model;
-  
+      org.mule.runtime.extension.model,
+      org.mule.runtime.extensions.api.test;
+
   exports org.mule.runtime.internal.config.custom to
-      org.mule.runtime.spring.config;
+    org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
-      org.mule.runtime.core;
+    org.mule.runtime.core;
   exports org.mule.runtime.internal.util to
     org.mule.runtime.core;
 
@@ -165,6 +166,4 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
-  
-
 }

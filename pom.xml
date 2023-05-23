@@ -403,12 +403,6 @@
                             <goals>
                                 <goal>test-jar</goal>
                             </goals>
-                            <configuration>
-                            	<includes>
-                            		<include>org/mule/runtime/api/meta/model/tck/**</include>
-                            		<include>org/mule/runtime/api/util/tck/**</include>
-                            	</includes>
-                            </configuration>
                         </execution>
                     </executions>
                     <configuration>
