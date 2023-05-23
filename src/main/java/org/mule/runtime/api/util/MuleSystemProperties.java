@@ -702,6 +702,13 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "put.trace.id.and.span.id.in.mdc";
 
   /**
+   * When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.
+   *
+   * @since 4.5.0
+   */
+  public static final String ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.mule.specific.tracing.information";
+  /**
    * Prefix to mark experimental properties explicitly in the name.
    *
    * @since 4.5.0
