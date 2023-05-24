@@ -25,7 +25,6 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
-import org.mule.runtime.api.meta.JavaVersion;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
@@ -80,7 +79,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
   private MuleVersion minMuleVersion;
-  private Set<JavaVersion> supportedJavaVersions = emptySet();
+  private Set<String> supportedJavaVersions = emptySet();
 
   /**
    * Creates a new instance
@@ -464,11 +463,11 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     this.minMuleVersion = minMuleVersion;
   }
 
-  public Set<JavaVersion> getSupportedJavaVersions() {
+  public Set<String> getSupportedJavaVersions() {
     return supportedJavaVersions;
   }
 
-  public void setSupportedJavaVersions(Set<JavaVersion> supportedJavaVersions) {
+  public void setSupportedJavaVersions(Set<String> supportedJavaVersions) {
     this.supportedJavaVersions = supportedJavaVersions != null ? supportedJavaVersions : emptySet();
   }
 }

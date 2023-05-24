@@ -4,9 +4,13 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
-package org.mule.runtime.api.meta;
+package org.mule.runtime.api.util;
 
-public enum JavaVersion {
+public final class JavaConstants {
 
-  JAVA_8, JAVA_11, JAVA_17
+  public static final String JAVA_VERSION_8 = "1.8";
+  public static final String JAVA_VERSION_11 = "11";
+  public static final String JAVA_VERSION_17 = "17";
+
+  private JavaConstants() {}
 }
