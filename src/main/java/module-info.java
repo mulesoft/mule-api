@@ -114,6 +114,9 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.util.xmlsecurity;
   exports org.mule.runtime.api.value;
   
+  uses org.mule.runtime.api.config.custom.ServiceConfigurator;
+  uses org.mule.runtime.api.connectivity.ConnectivityTestingStrategy;
+
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
       org.mule.runtime.dsl.api,
@@ -124,6 +127,11 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
       org.mule.runtime.extension.model;
+  
+  exports org.mule.runtime.internal.config.custom to
+      org.mule.runtime.spring.config;
+  exports org.mule.runtime.internal.connectivity to
+      org.mule.runtime.core;
   
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to

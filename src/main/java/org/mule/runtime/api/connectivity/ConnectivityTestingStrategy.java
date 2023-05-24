@@ -37,4 +37,5 @@ public interface ConnectivityTestingStrategy {
    * @return true if this strategy can do connectivity testing over the provided component, false otherwise.
    */
   boolean accepts(Object connectivityTestingObject);
+
 }
