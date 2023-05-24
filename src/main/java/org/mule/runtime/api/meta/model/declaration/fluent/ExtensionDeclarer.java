@@ -18,7 +18,6 @@ import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.artifact.ArtifactCoordinates;
 import org.mule.runtime.api.meta.Category;
-import org.mule.runtime.api.meta.JavaVersion;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExternalLibraryModel;
 import org.mule.runtime.api.meta.model.ImportedTypeModel;
@@ -403,7 +402,7 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     return this;
   }
 
-  public ExtensionDeclarer supportingJavaVersions(Set<JavaVersion> javaVersions) {
+  public ExtensionDeclarer supportingJavaVersions(Set<String> javaVersions) {
     declaration.setSupportedJavaVersions(javaVersions);
     return this;
   }
