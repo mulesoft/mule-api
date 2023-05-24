@@ -7,11 +7,9 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
-import static org.mule.runtime.api.meta.JavaVersion.JAVA_11;
-import static org.mule.runtime.api.meta.JavaVersion.JAVA_8;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
@@ -63,9 +61,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     WithConstructsDeclaration<ExtensionDeclaration>, WithDeprecatedDeclaration, WithArtifactCoordinatesDeclaration,
     WithMinMuleVersionDeclaration {
 
-  private static final Set<JavaVersion> DEFAULT_SUPPORTED_JAVA_VERSIONS =
-      unmodifiableSet(new LinkedHashSet<>(asList(JAVA_8, JAVA_11)));
-
   private final SubDeclarationsContainer subDeclarations = new SubDeclarationsContainer();
   private final List<ConfigurationDeclaration> configurations = new LinkedList<>();
   private final Set<ImportedTypeModel> importedTypes = new TreeSet<>(comparing(t -> getTypeId(t.getImportedType()).orElse("")));
@@ -85,7 +80,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
   private MuleVersion minMuleVersion;
-  private Set<JavaVersion> supportedJavaVersions = DEFAULT_SUPPORTED_JAVA_VERSIONS;
+  private Set<JavaVersion> supportedJavaVersions = emptySet();
 
   /**
    * Creates a new instance
@@ -474,10 +469,6 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   public void setSupportedJavaVersions(Set<JavaVersion> supportedJavaVersions) {
-    if (supportedJavaVersions != null && !supportedJavaVersions.isEmpty()) {
-      this.supportedJavaVersions = unmodifiableSet(new LinkedHashSet<>(supportedJavaVersions));
-    } else {
-      this.supportedJavaVersions = DEFAULT_SUPPORTED_JAVA_VERSIONS;
-    }
+    this.supportedJavaVersions = supportedJavaVersions != null ? supportedJavaVersions : emptySet();
   }
 }
