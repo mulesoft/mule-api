@@ -132,7 +132,9 @@ module org.mule.runtime.api {
       org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
       org.mule.runtime.core;
-  
+  exports org.mule.runtime.internal.util to
+      org.mule.runtime.core;
+
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
       com.google.gson;
@@ -156,6 +158,5 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
-  
 
 }
