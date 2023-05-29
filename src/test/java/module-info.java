@@ -58,5 +58,6 @@ module org.mule.runtime.api.test {
   exports org.mule.runtime.api.test.util.tck;
   exports org.mule.runtime.api.test.util.xmlsecurity;
 
+  opens org.mule.runtime.api.test.exception to org.mockito;
   opens org.mule.runtime.api.test.meta.model.util to org.mockito;
 }
