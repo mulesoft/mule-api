@@ -104,6 +104,8 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <javaReleaseVersion>8</javaReleaseVersion>
+        <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
+        <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <artifactDeclarationVersion>1.6.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.5.0-SNAPSHOT</muleModuleMavenPluginVersion>
@@ -287,6 +289,20 @@
                                 </excludes>
                             </configuration>
                         </execution>
+                        <execution>
+                            <id>compile-java-11</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                            <configuration>
+                                <release>11</release>
+                                <compileSourceRoots>
+                                    <compileSourceRoot>${project.build.java11SourceDirectory}</compileSourceRoot>
+                                </compileSourceRoots>
+                                <multiReleaseOutput>true</multiReleaseOutput>
+                            </configuration>
+                        </execution>
                     </executions>
                     <configuration>
                         <encoding>ISO-8859-1</encoding>
@@ -305,6 +321,12 @@
                         <configJsFile>${basedir}/${formatterConfigPath}</configJsFile>
                         <aggregator>false</aggregator>
                         <executionRoot>true</executionRoot>
+                        <directories>
+                            <directory>${project.build.sourceDirectory}</directory>
+                            <directory>${project.build.testSourceDirectory}</directory>
+                            <directory>${project.build.java11SourceDirectory}</directory>
+                            <directory>${project.build.java11TestSourceDirectory}</directory>
+                        </directories>
                     </configuration>
                     <executions>
                         <execution>
@@ -389,6 +411,7 @@
                                 <Git-commit-id>${git.commit.id}</Git-commit-id>
                                 <Git-commit-id-describe>${git.commit.id.describe}</Git-commit-id-describe>
                                 <Git-commit-time>${git.commit.time}</Git-commit-time>
+                                <Multi-Release>true</Multi-Release>
                             </manifestEntries>
                         </archive>
                     </configuration>
