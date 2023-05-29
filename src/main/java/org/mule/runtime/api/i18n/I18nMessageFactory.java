@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.i18n;
 
+import static org.mule.runtime.internal.util.JpmsUtils.isMemberOfNamedModule;
+
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -66,7 +68,7 @@ public abstract class I18nMessageFactory {
   /**
    * Computes the bundle's full path ({@code META-INF/org/mule/i18n/&lt;bundleName&gt;-messages.properties}) from
    * {@code bundleName}.
-   * 
+   *
    * @param bundleName Name of the bundle without the &quot;messages&quot; suffix and without file extension.
    */
   protected static String getBundlePath(String bundleName) {
@@ -76,7 +78,7 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
    * from the resource bundle {@code bundlePath}.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arg
@@ -89,7 +91,7 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
    * from the resource bundle {@code bundlePath}.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arg1
@@ -103,7 +105,7 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
    * from the resource bundle {@code bundlePath}.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arg1
@@ -118,9 +120,9 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
    * from the resource bundle {@code bundlePath}.
-   * 
+   *
    * <b>Attention:</b> do not confuse this method with {@link this#createMessage}.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arguments
@@ -134,7 +136,7 @@ public abstract class I18nMessageFactory {
   /**
    * Factory method to create a new {@link I18nMessage} instance that is filled with the formatted message with id {@code code}
    * from the resource bundle {@code bundlePath}.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    */
@@ -166,7 +168,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to read the message with code {@code code} from the resource bundle.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @return formatted error message as {@link String}
@@ -177,7 +179,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to read the message with code {@code code} from the resource bundle.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arg
@@ -190,7 +192,7 @@ public abstract class I18nMessageFactory {
 
   /**
    * Factory method to read the message with code {@code code} from the resource bundle.
-   * 
+   *
    * @param bundlePath complete path to the resource bundle for lookup
    * @param code       numeric code of the message
    * @param arg1
@@ -229,7 +231,12 @@ public abstract class I18nMessageFactory {
     if (logger.isTraceEnabled()) {
       logger.trace("Loading resource bundle: " + bundlePath + " for locale " + locale);
     }
-    return ResourceBundle.getBundle(bundlePath, locale, getClassLoader(), getReloadControl());
+
+    if (isMemberOfNamedModule(I18nMessageFactory.class)) {
+      return ResourceBundle.getBundle(bundlePath, locale, getClassLoader());
+    } else {
+      return ResourceBundle.getBundle(bundlePath, locale, getClassLoader(), getReloadControl());
+    }
   }
 
   /**
@@ -242,6 +249,9 @@ public abstract class I18nMessageFactory {
   /**
    * Subclasses should override to customize the bundle reload control. Implementations must save the instance in a field for
    * stateful reload control. Return null to fallback to default JVM behavior (permanent cache).
+   *
+   * Note: this method has no use when running on the module-path, as {@link ResourceBundle.Control} is not used for named
+   * modules.
    *
    * @see #DEFAULT_RELOAD_CONTROL
    */
