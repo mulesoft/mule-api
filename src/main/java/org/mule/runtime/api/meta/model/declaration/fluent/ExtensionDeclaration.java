@@ -465,18 +465,33 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * @return The Java versions supported by the declared extension
-   * @see {@link JavaConstants}
+   * Returns the Java versions this extension is compatible with.
+   *
+   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
+   * versions.
+   *
+   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
+   *
+   * @return The versions of Java supported by this extension
    * @since 1.5.0
+   * @see {@link JavaConstants}
    */
   public Set<String> getSupportedJavaVersions() {
     return supportedJavaVersions;
   }
 
   /**
+   * Indicates the Java versions this extension is compatible with.
+   *
+   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
+   * versions.
+   *
+   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
+   *
    * @param supportedJavaVersions sets the Java versions supported by the declared extension
-   * @see {@link JavaConstants}
+   * @return The versions of Java supported by this extension
    * @since 1.5.0
+   * @see {@link JavaConstants}
    */
   public void setSupportedJavaVersions(Set<String> supportedJavaVersions) {
     this.supportedJavaVersions = supportedJavaVersions != null ? supportedJavaVersions : emptySet();
