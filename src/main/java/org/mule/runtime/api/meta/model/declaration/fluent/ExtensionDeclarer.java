@@ -26,6 +26,7 @@ import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
+import org.mule.runtime.api.util.JavaConstants;
 
 import java.util.Collection;
 import java.util.List;
@@ -402,6 +403,14 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
     return this;
   }
 
+  /**
+   * Specifies the Java versions supported by the declared extension
+   *
+   * @param javaVersions the supported versions
+   * @return {@code this} declarer
+   * @since 1.5.0
+   * @see {@link JavaConstants}
+   */
   public ExtensionDeclarer supportingJavaVersions(Set<String> javaVersions) {
     declaration.setSupportedJavaVersions(javaVersions);
     return this;
