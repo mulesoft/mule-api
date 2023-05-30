@@ -219,5 +219,9 @@ public interface ExtensionModel
    */
   Optional<ArtifactCoordinates> getArtifactCoordinates();
 
+  /**
+   * @return The versions of Java supported by this extension
+   * @since 1.5.0
+   */
   Set<String> getSupportedJavaVersions();
 }
