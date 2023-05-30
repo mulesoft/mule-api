@@ -130,12 +130,12 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.api.test;
 
   exports org.mule.runtime.internal.config.custom to
-    org.mule.runtime.spring.config;
+      org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
-    org.mule.runtime.core;
+      org.mule.runtime.core;
   exports org.mule.runtime.internal.util to
-    org.mule.runtime.core,
-    org.mule.runtime.api.test;
+      org.mule.runtime.core,
+      org.mule.runtime.api.test;
 
   // Internals exposed to test module
   exports org.mule.runtime.internal.exception to org.mule.runtime.api.test;

@@ -404,7 +404,12 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   }
 
   /**
-   * Specifies the Java versions supported by the declared extension
+   * Sets the Java versions this extension is compatible with.
+   *
+   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
+   * versions.
+   *
+   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
    *
    * @param javaVersions the supported versions
    * @return {@code this} declarer
