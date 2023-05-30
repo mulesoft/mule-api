@@ -9,28 +9,28 @@ package org.mule.runtime.api.test.metadata;
 import static org.mule.runtime.api.metadata.MetadataKeyBuilder.newKey;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.core.Is.is;
 
 import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataKeyBuilder;
 
-import org.hamcrest.Matchers;
-import org.hamcrest.core.Is;
 import org.junit.Test;
 
 public class DefaultMetadataKeyTestCase {
 
   @Test
   public void equalKeys() {
-    assertThat(europeKey(true).build(), Is.is(europeKey(true).build()));
+    assertThat(europeKey(true).build(), is(europeKey(true).build()));
   }
 
   @Test
   public void differentKeys() {
     MetadataKey enrichedEurope = europeKey(false).withChild(newKey("Germany")).build();
-    assertThat(enrichedEurope, Is.is(Matchers.not(europeKey(false).build())));
+    assertThat(enrichedEurope, is(not(europeKey(false).build())));
 
     enrichedEurope = europeKey(true).build();
-    assertThat(enrichedEurope, Is.is(Matchers.not(europeKey(false).build())));
+    assertThat(enrichedEurope, is(not(europeKey(false).build())));
   }
 
   private MetadataKeyBuilder europeKey(boolean withManchester) {

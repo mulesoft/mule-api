@@ -8,19 +8,18 @@ package org.mule.runtime.api.test.persistence;
 
 
 import static java.util.Collections.emptyMap;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
+
 import org.mule.runtime.api.deployment.meta.MuleArtifactLoaderDescriptor;
 import org.mule.runtime.api.deployment.meta.MulePolicyModel;
 import org.mule.runtime.api.deployment.meta.MulePolicyModel.MulePolicyModelBuilder;
 import org.mule.runtime.api.deployment.persistence.MulePolicyModelJsonSerializer;
-
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,8 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.apache.commons.io.IOUtils;
-import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,7 +69,7 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
     assertThat(classLoaderModelDescriptor.get(ATTRIBUTES).getAsJsonObject().entrySet(), is(empty()));
 
     JsonObject bundleDescriptor = actualElement.get("bundleDescriptorLoader").getAsJsonObject();
-    assertThat(bundleDescriptor.get("id").getAsString(), Is.is(BUNDLE_DESCRIPTOR_LOADER_ID));
+    assertThat(bundleDescriptor.get("id").getAsString(), is(BUNDLE_DESCRIPTOR_LOADER_ID));
     assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().entrySet().size(), equalTo(2));
     assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_1).getAsString(),
                equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_1));
