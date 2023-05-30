@@ -6,13 +6,14 @@
  */
 package org.mule.runtime.api.test.metadata;
 
+import static org.mule.runtime.api.metadata.MetadataKeyBuilder.newKey;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.Is.is;
-import static org.mule.runtime.api.metadata.MetadataKeyBuilder.newKey;
 
 import org.mule.runtime.api.metadata.MetadataKey;
 import org.mule.runtime.api.metadata.MetadataKeyBuilder;
@@ -20,7 +21,6 @@ import org.mule.runtime.api.metadata.MetadataProperty;
 
 import java.util.Optional;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 public class MetadataKeyBuilderTestCase {
@@ -42,7 +42,7 @@ public class MetadataKeyBuilderTestCase {
     assertThat(key.getDisplayName(), is(DESCRIPTION));
     assertThat(key.getMetadataProperty(TestMetadataProperty.class).isPresent(), is(true));
     assertThat(key.getMetadataProperty(TestMetadataProperty.class).get(), is(testMetadataProperty));
-    MatcherAssert.assertThat(key.getMetadataProperty(InvalidMetadataProperty.class), is(Optional.empty()));
+    assertThat(key.getMetadataProperty(InvalidMetadataProperty.class), is(Optional.empty()));
     assertThat(key.getProperties(), hasSize(1));
     assertThat(key.getProperties(), contains(testMetadataProperty));
   }
