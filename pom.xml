@@ -292,7 +292,7 @@
                         <execution>
                         <id>default-testCompile</id>
                         <configuration>
-                            <release>11</release>
+                            <testRelease>11</testRelease>
                             <!-- no excludes: compile everything to ensure module-info contains right entries -->
                         </configuration>
                     </execution>
@@ -302,7 +302,7 @@
                                 <goal>testCompile</goal>
                             </goals>
                             <configuration>
-                                <release>${javaReleaseVersion}</release>
+                                <testRelease>${javaReleaseVersion}</testRelease>
                                 <!-- recompile everything for target VM except the module-info.java -->
                                 <testExcludes>
                                     <testExclude>module-info.java</testExclude>
