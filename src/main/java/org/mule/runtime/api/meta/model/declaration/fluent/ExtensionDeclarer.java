@@ -26,11 +26,9 @@ import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
-import org.mule.runtime.api.util.JavaConstants;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A builder object which allows creating an {@link ExtensionDeclaration} through a fluent API.
@@ -400,24 +398,6 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   @Override
   public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
     declaration.withMinMuleVersion(minMuleVersion);
-    return this;
-  }
-
-  /**
-   * Sets the Java versions this extension is compatible with.
-   * <p>
-   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
-   * versions.
-   * <p>
-   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
-   *
-   * @param javaVersions the supported versions
-   * @return {@code this} declarer
-   * @see {@link JavaConstants}
-   * @since 1.5.0
-   */
-  public ExtensionDeclarer supportingJavaVersions(Set<String> javaVersions) {
-    declaration.setSupportedJavaVersions(javaVersions);
     return this;
   }
 }
