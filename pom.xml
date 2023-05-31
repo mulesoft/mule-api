@@ -123,7 +123,7 @@
         <allure.maven.plugin.version>2.9</allure.maven.plugin.version>
         <jacoco.version>0.8.8</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
-        <oldMuleArtifactVersion>1.5.0-SNAPSHOT</oldMuleArtifactVersion>
+        <oldMuleArtifactVersion>1.4.0</oldMuleArtifactVersion>
         <muleRevapiExtensionVersion>1.6.0-SNAPSHOT</muleRevapiExtensionVersion>
         <muleApiAnnotationsVersion>1.5.0-SNAPSHOT</muleApiAnnotationsVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
