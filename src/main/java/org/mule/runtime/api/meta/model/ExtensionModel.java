@@ -222,15 +222,15 @@ public interface ExtensionModel
 
   /**
    * Indicates the Java versions this extension is compatible with.
-   *
+   * <p>
    * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
    * versions.
-   *
+   * <p>
    * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
    *
    * @return The versions of Java supported by this extension
-   * @since 1.5.0
    * @see {@link JavaConstants}
+   * @since 1.5.0
    */
   Set<String> getSupportedJavaVersions();
 }
