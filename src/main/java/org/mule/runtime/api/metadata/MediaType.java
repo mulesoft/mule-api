@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES;
+
 import static java.lang.System.getProperty;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -14,8 +16,6 @@ import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
 
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
-
-import org.mule.runtime.api.util.MuleSystemProperties;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -83,8 +83,8 @@ public final class MediaType implements Serializable {
   public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
 
   private static List<String> KNOWN_PARAM_NAMES =
-      getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
-          ? asList(getProperty(MuleSystemProperties.MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(","))
+      getProperty(MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
+          ? asList(getProperty(MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES).split(","))
           : emptyList();
 
   private final String primaryType;

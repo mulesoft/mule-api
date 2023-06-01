@@ -52,7 +52,7 @@ public final class MuleExceptionInfo implements Serializable {
   private Serializable flowStack;
   private final SmallMap<String, Object> additionalEntries = new SmallMap<>();
 
-  void addToSummaryMessage(StringBuilder buf) {
+  public void addToSummaryMessage(StringBuilder buf) {
     buf
         .append(INFO_LOCATION_KEY_MSG)
         .append(location != null ? location : MISSING_DEFAULT_VALUE)
