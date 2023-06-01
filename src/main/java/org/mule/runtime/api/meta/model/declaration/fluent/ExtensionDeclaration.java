@@ -9,6 +9,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
@@ -33,6 +34,7 @@ import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
+import org.mule.runtime.api.util.JavaConstants;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -78,6 +80,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   private DeprecationModel deprecation;
   private ArtifactCoordinates artifactCoordinates;
   private MuleVersion minMuleVersion;
+  private Set<String> supportedJavaVersions = emptySet();
 
   /**
    * Creates a new instance
@@ -459,5 +462,38 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   @Override
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
     this.minMuleVersion = minMuleVersion;
+  }
+
+  /**
+   * Returns the Java versions this extension is compatible with.
+   *
+   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
+   * versions.
+   *
+   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
+   *
+   * @return The versions of Java supported by this extension
+   * @since 1.5.0
+   * @see {@link JavaConstants}
+   */
+  public Set<String> getSupportedJavaVersions() {
+    return supportedJavaVersions;
+  }
+
+  /**
+   * Indicates the Java versions this extension is compatible with.
+   * <p>
+   * This is modeled as a set of String in order to accommodate changes in Java versioning, custom vendor schemes or even patch
+   * versions.
+   * <p>
+   * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
+   *
+   * @param supportedJavaVersions sets the Java versions supported by the declared extension
+   * @return The versions of Java supported by this extension
+   * @see {@link JavaConstants}
+   * @since 1.5.0
+   */
+  public void setSupportedJavaVersions(Set<String> supportedJavaVersions) {
+    this.supportedJavaVersions = supportedJavaVersions != null ? supportedJavaVersions : emptySet();
   }
 }
