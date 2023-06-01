@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * This is the default exception reader used if there is no specific one registered for the current exception.
  */
-final class DefaultExceptionReader implements ExceptionReader {
+public final class DefaultExceptionReader implements ExceptionReader {
 
   @Override
   public String getMessage(Throwable t) {

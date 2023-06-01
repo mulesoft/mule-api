@@ -6,12 +6,13 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
+
 import static java.lang.System.getProperty;
 import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
-import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
-import static org.mule.runtime.api.util.MuleSystemProperties.MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;

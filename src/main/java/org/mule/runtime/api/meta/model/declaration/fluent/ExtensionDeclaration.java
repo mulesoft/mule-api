@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import static java.util.Collections.singletonList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
@@ -14,9 +17,8 @@ import static java.util.Comparator.comparing;
 import static java.util.Comparator.naturalOrder;
 import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toCollection;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.mule.metadata.api.utils.MetadataTypeUtils.getTypeId;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.api.model.ObjectType;
