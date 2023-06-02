@@ -227,6 +227,8 @@ public interface ExtensionModel
    * versions.
    * <p>
    * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
+   * <p>
+   * It cannot be null or empty.
    *
    * @return The versions of Java supported by this extension
    * @see {@link JavaConstants}
