@@ -493,6 +493,17 @@
                     </dependencies>
                 </plugin>
                 <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco.version}</version>
+                    <configuration>
+                        <!-- Exclude alternate versions for multi-release modules-->
+                        <excludes>
+                            <exclude>META-INF/**/*</exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>io.qameta.allure</groupId>
                     <artifactId>allure-maven</artifactId>
                     <version>${allure.maven.plugin.version}</version>
