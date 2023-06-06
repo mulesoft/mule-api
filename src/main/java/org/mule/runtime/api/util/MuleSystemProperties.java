@@ -709,6 +709,14 @@ public final class MuleSystemProperties {
   public static final String ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.mule.specific.tracing.information";
   /**
+   * When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
+   * and Async.
+   * 
+   * @since 4.5.0, 4.4.0-202306
+   */
+  public static final String CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.policy.context.parallel.scopes";
+  /**
    * Prefix to mark experimental properties explicitly in the name.
    *
    * @since 4.5.0
