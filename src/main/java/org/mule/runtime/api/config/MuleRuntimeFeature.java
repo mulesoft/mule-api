@@ -8,6 +8,7 @@ package org.mule.runtime.api.config;
 
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
@@ -300,7 +301,18 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, and the application needs to load a native library, the rest of the native libraries are preloaded in the application's Classloader.",
       "W-11855052",
       "4.6.0",
-      SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY);
+      SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY),
+
+  /**
+   * "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
+   * and Async"
+   *
+   * @since 4.5.0, 4.4.0-202306
+   */
+  CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES(
+      "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather and Async",
+      "W-13509911", "4.5.0", CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY);
+
 
   private final String description;
   private final String issueId;

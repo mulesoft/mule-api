@@ -570,6 +570,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "support.native.library.dependencies";
 
   /**
+   * When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
+   * and Async.
+   *
+   * @since 4.5.0, 4.4.0-202306
+   */
+  public static final String CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.policy.context.parallel.scopes";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {

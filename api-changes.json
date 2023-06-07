@@ -487,6 +487,24 @@
           "fieldName": "MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG",
           "elementKind": "field",
           "justification": "W-11178986: Need this static field added due to a change in FIPS logic for Java 11"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES",
+          "elementKind": "enumConstant",
+          "justification": "W-13509911: Policies' Variables are being overriden in parallel scenario (race condition)"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-13509911: Policies' Variables are being overriden in parallel scenario (race condition)"
         }
       ]
     }
