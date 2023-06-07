@@ -127,7 +127,8 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
       org.mule.runtime.extension.model,
-      org.mule.runtime.extensions.api.test;
+      org.mule.runtime.extensions.api.test,
+      com.mulesoft.mule.runtime.ee.extension.model;
 
   exports org.mule.runtime.internal.config.custom to
       org.mule.runtime.spring.config;
