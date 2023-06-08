@@ -17,7 +17,7 @@ import java.util.Objects;
  * Implementation of {@link ErrorTypeMatcher} that checks if the {@link ErrorType} is part of the hierarchy, considering the usage
  * of wildcards.
  * 
- * @since 1.6
+ * @since 1.5
  */
 @NoImplement
 @NoExtend

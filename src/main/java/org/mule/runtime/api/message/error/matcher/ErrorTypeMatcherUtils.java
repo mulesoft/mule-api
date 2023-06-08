@@ -23,7 +23,7 @@ import java.util.Objects;
 /**
  * Utils to create the corresponding {@link ErrorTypeMatcher} given an expression.
  *
- * @since 1.6
+ * @since 1.5
  */
 public class ErrorTypeMatcherUtils {
 

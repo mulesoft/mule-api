@@ -9,7 +9,7 @@
  * API for Mule Runtime.
  * 
  * @moduleGraph
- * @since 1.6
+ * @since 1.5
  */
 module org.mule.runtime.api {
 
