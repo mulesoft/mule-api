@@ -16,7 +16,7 @@ import java.util.Optional;
 /**
  * Interface for a model which declares minimum mule version for its usage.
  *
- * @since 1.6
+ * @since 1.5
  */
 @NoImplement
 public interface HasMinMuleVersion {

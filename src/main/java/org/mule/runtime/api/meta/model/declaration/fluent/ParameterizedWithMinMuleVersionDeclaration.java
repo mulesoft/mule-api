@@ -18,7 +18,7 @@ import static java.util.Optional.ofNullable;
  * <p>
  *
  * @param <T> the concrete type for {@code this} declaration
- * @since 1.6
+ * @since 1.5
  */
 public abstract class ParameterizedWithMinMuleVersionDeclaration<T extends ParameterizedWithMinMuleVersionDeclaration>
     extends ParameterizedDeclaration<T>

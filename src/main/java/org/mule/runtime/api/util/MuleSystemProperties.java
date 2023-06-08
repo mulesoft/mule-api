@@ -752,7 +752,7 @@ public final class MuleSystemProperties {
   /**
    * A system property for modifying the default configuration file path for tracing level config.
    *
-   * @since 4.6.0
+   * @since 4.5.0
    */
   public static final String TRACING_LEVEL_CONFIGURATION_PATH =
       SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
@@ -768,7 +768,7 @@ public final class MuleSystemProperties {
    * <li><b>17 and higher</b>: defaults to {@code true}.</li>
    * </ul>
    * 
-   * @since 4.6.0
+   * @since 4.5.0
    */
   public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";

@@ -93,7 +93,7 @@ public class ComponentMetadataTypesDescriptor {
      *                               Default value is {@code false}.
      * @return this builder
      * 
-     * @since 1.6
+     * @since 1.5
      */
     public ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder keepNonDynamicMetadata(boolean keepNonDynamicMetadata) {
       this.keepNonDynamicMetadata = keepNonDynamicMetadata;

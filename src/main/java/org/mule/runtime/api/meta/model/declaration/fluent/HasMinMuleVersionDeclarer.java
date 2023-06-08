@@ -13,7 +13,7 @@ import org.mule.runtime.api.meta.MuleVersion;
  * Interface for a declarer which declares minimum mule version for its usage.
  *
  * @param <T> the type of the implementing type. Used to allow method chaining
- * @since 1.6
+ * @since 1.5
  */
 @NoImplement
 public interface HasMinMuleVersionDeclarer<T> {

@@ -13,7 +13,7 @@ import org.mule.runtime.api.meta.MuleVersion;
  * usage.
  *
  * @param <T> the generic type of {@link BaseDeclaration} to be created
- * @since 1.6
+ * @since 1.5
  */
 public class ParameterizedWithMinMuleVersionDeclarer<T extends ParameterizedWithMinMuleVersionDeclarer, D extends ParameterizedWithMinMuleVersionDeclaration>
     extends ParameterizedDeclarer<T, D> implements HasMinMuleVersionDeclarer<T> {

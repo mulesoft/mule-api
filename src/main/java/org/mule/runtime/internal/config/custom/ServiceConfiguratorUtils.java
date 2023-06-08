@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * Provides utilities for the Runtime to discover {@link ServiceConfigurator} implementations.
  * 
- * @since 1.6.0
+ * @since 1.5.0
  */
 public class ServiceConfiguratorUtils {
 

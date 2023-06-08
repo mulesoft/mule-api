@@ -11,7 +11,7 @@ import org.mule.runtime.api.message.ErrorType;
 /**
  * Decides whether an error type matches a criteria defined by the implementation.
  *
- * @since 1.6
+ * @since 1.5
  */
 public interface ErrorTypeMatcher {
 

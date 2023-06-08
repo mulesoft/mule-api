@@ -16,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Implementation of {@link ErrorTypeMatcher} that is a composition of other {@link ErrorTypeMatcher}.
  * 
- * @since 1.6
+ * @since 1.5
  */
 @NoImplement
 @NoExtend

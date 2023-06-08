@@ -14,7 +14,7 @@ import org.mule.runtime.api.message.ErrorType;
  * Simple implementation of {@link ErrorTypeMatcher} that just checks if this matches the given {@link ErrorType} or an ancestor
  * one.
  * 
- * @since 1.6
+ * @since 1.5
  */
 @NoImplement
 @NoExtend
