@@ -130,6 +130,8 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.xmlParser,
       org.mule.runtime.extension.model,
       org.mule.runtime.extensions.api.test,
+      org.mule.runtime.extensions.support,
+      org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model;
 
   exports org.mule.runtime.internal.config.custom to
@@ -146,6 +148,12 @@ module org.mule.runtime.api {
   // Internals exposed to test module
   exports org.mule.runtime.internal.exception to org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.xmlsecurity to org.mule.runtime.api.test;
+
+  // Allow extensions-support to create objects from these packages dynamically
+  opens org.mule.runtime.api.connection to
+      org.mule.runtime.extensions.support;
+  opens org.mule.runtime.api.exception to
+      org.mule.runtime.extensions.support;
 
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
@@ -165,6 +173,7 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.meta.model.stereotype to
       com.google.gson;
   opens org.mule.runtime.api.metadata to
+      org.mule.runtime.extensions.support,
       com.google.gson,
       org.mule.runtime.api.test;
   opens org.mule.runtime.api.metadata.resolving to
