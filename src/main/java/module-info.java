@@ -19,7 +19,7 @@ module org.mule.runtime.api {
   requires org.mule.runtime.artifact.declaration;
   requires org.mule.runtime.artifact.declaration.persistence;
   
-  requires java.activation;
+  requires jakarta.activation;
   requires java.naming;
   requires java.sql;
   
