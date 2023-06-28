@@ -26,8 +26,9 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
 
   static {
     try {
-      final AbstractTlsContextFactoryBuilderFactory factory =
-          load(AbstractTlsContextFactoryBuilderFactory.class).iterator().next();
+      final AbstractTlsContextFactoryBuilderFactory factory = load(AbstractTlsContextFactoryBuilderFactory.class,
+                                                                   AbstractTlsContextFactoryBuilderFactory.class.getClassLoader())
+                                                                       .iterator().next();
       LOGGER.info(format("Loaded TlsContextFactoryBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
