@@ -157,6 +157,7 @@ module org.mule.runtime.api {
 
   // Allow introspection for serialization/deserialization by Gson
   opens org.mule.runtime.api.component to
+      org.mule.runtime.extensions.support,
       com.google.gson;
   opens org.mule.runtime.api.deployment.meta to
       com.google.gson;
