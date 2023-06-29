@@ -117,7 +117,9 @@ module org.mule.runtime.api {
   uses org.mule.runtime.api.config.custom.ServiceConfigurator;
   uses org.mule.runtime.api.connectivity.ConnectivityTestingStrategy;
   uses org.mule.runtime.api.el.AbstractBindingContextBuilderFactory;
+  uses org.mule.runtime.api.message.AbstractMuleMessageBuilderFactory;
   uses org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
+  uses org.mule.runtime.api.tls.AbstractTlsContextFactoryBuilderFactory;
 
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
