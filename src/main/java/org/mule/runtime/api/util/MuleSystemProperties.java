@@ -3,8 +3,12 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
+
+import static org.apache.commons.lang3.JavaVersion.JAVA_17;
+import static org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast;
 
 import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
@@ -525,6 +529,7 @@ public final class MuleSystemProperties {
    * @since 4.4.0-202204, 4.3.0-202204
    * @deprecated since 4.5.0, ByteBuddy is always used.
    */
+  @Deprecated
   public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
 
@@ -778,6 +783,34 @@ public final class MuleSystemProperties {
    */
   public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
+
+  /**
+   * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the container
+   * and the services ({@code true}) or a classLoader will be used ({@code false}).
+   * <p>
+   * The default value will depend on the JVM version being used:
+   * <ul>
+   * <li><b>8</b>: this property is ignored, assumed {@code false}.</li>
+   * <li><b>11</b>: defaults to {@code false}.</li>
+   * <li><b>17 and higher</b>: defaults to {@code true}.</li>
+   * </ul>
+   * 
+   * @since 4.6.0
+   */
+  public static final String CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER =
+      SYSTEM_PROPERTY_PREFIX + "classloader.container.jpmsModuleLayer";
+
+  /**
+   * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
+   * container and the services ({@code true}) or a classLoader will be used ({@code false}).
+   * <p>
+   * Ref: {@link #CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER}
+   * 
+   * @since 4.6.0
+   */
+  public static boolean classloaderContainerJpmsModuleLayer() {
+    return parseBoolean(getProperty(CLASSLOADER_SERVICE_JPMS_MODULE_LAYER, "" + isJavaVersionAtLeast(JAVA_17)));
+  }
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
