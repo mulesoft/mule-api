@@ -6,7 +6,7 @@
     <version>1.5.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
-    <description>API for Mule Runtime</description>
+    <description>API for Mule Runtime - TEST W-13546899 PR Hawk PR</description>
     <url>https://github.com/mulesoft/mule-api</url>
     <organization>
         <name>MuleSoft, Inc.</name>
