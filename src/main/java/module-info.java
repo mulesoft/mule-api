@@ -135,6 +135,7 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       org.mule.runtime.extensions.spring.support,
       org.mule.runtime.extensions.xml.support,
+      org.mule.runtime.core,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model;
 
