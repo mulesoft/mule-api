@@ -3,6 +3,14 @@
     "revapi": {
       "ignore": [
         {
+          "code": "java.method.visibilityIncreased",
+          "old": "method void org.mule.runtime.api.exception.MuleExceptionInfo::addToSummaryMessage(java.lang.StringBuilder)",
+          "new": "method void org.mule.runtime.api.exception.MuleExceptionInfo::addToSummaryMessage(java.lang.StringBuilder)",
+          "oldVisibility": "package",
+          "newVisibility": "public",
+          "justification": "W-13742675: Upgrade revapi version"
+        },
+        {
           "code": "java.class.nonFinalClassInheritsFromNewClass",
           "old": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
           "new": "class org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration<T extends org.mule.runtime.api.meta.model.declaration.fluent.ComponentDeclaration>",
