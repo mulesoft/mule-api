@@ -693,6 +693,8 @@ public final class MuleSystemProperties {
   public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
+  public static final String EXTENSION_JVM_ENFORCEMENT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "jvm.version.extension.enforcement";
+
   /**
    * When enabled, the trace id and span id will be added to the MDC when available.
    *
