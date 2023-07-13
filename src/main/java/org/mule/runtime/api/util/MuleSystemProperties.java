@@ -693,6 +693,11 @@ public final class MuleSystemProperties {
   public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
+  /**
+   * Specifies the policy to validate that all registered extensions are compatible with the Java version Mule is running on
+   *
+   * @since 4.5.0
+   */
   public static final String EXTENSION_JVM_ENFORCEMENT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "jvm.version.extension.enforcement";
 
   /**
