@@ -133,6 +133,9 @@ module org.mule.runtime.api {
       org.mule.runtime.extension.model,
       org.mule.runtime.extensions.api.test,
       org.mule.runtime.extensions.support,
+      org.mule.runtime.extensions.spring.support,
+      org.mule.runtime.extensions.xml.support,
+      org.mule.runtime.core,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model;
 
@@ -140,6 +143,9 @@ module org.mule.runtime.api {
       org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
       org.mule.runtime.core;
+  exports org.mule.runtime.internal.exception to
+      org.mule.runtime.core,
+      org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
       org.mule.runtime.core,
       org.mule.runtime.api.test;
@@ -148,13 +154,15 @@ module org.mule.runtime.api {
       org.mule.runtime.api.test;
 
   // Internals exposed to test module
-  exports org.mule.runtime.internal.exception to org.mule.runtime.api.test;
-  exports org.mule.runtime.internal.util.xmlsecurity to org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.util.xmlsecurity to
+      org.mule.runtime.api.test;
 
   // Allow extensions-support to create objects from these packages dynamically
   opens org.mule.runtime.api.connection to
       org.mule.runtime.extensions.support;
   opens org.mule.runtime.api.exception to
+      org.mule.runtime.extensions.support;
+  opens org.mule.runtime.api.util to
       org.mule.runtime.extensions.support;
 
   // Allow introspection for serialization/deserialization by Gson
