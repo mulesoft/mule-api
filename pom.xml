@@ -115,7 +115,12 @@
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
         <formatterConfigPath>formatter.xml</formatterConfigPath>
         <formatterGoal>validate</formatterGoal>
-        <license.maven.plugin.version>2.11</license.maven.plugin.version>
+        
+        <mulesoftLicenseVersion>1.1.0</mulesoftLicenseVersion>
+        <license.maven.plugin.version>4.2</license.maven.plugin.version>
+        <licensePath>LICENSE_HEADER_80.txt</licensePath>
+        <licenseYear>2023</licenseYear>
+
         <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
         <aspectjVersion>1.9.2</aspectjVersion>
         <allureJunitVersion>2.22.0</allureJunitVersion>
@@ -364,30 +369,18 @@
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
                     <version>${license.maven.plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.mulesoft.license</groupId>
+                            <artifactId>license</artifactId>
+                            <version>${mulesoftLicenseVersion}</version>
+                        </dependency>
+                    </dependencies>
                     <configuration>
-                        <skip>${skipVerifications}</skip>
-                        <header>com/mycila/maven/plugin/license/templates/CPAL.txt</header>
+                        <header>${licensePath}</header>
                         <properties>
-                            <owner>MuleSoft, Inc</owner>
-                            <project.url>http://www.mulesoft.com</project.url>
+                            <year>${licenseYear}</year>
                         </properties>
-                        <excludes>
-                            <exclude>target/**</exclude>
-                            <exclude>**/.gitignore</exclude>
-                            <exclude>**/*.txt</exclude>
-                            <exclude>**/*.groovy</exclude>
-                            <exclude>**/*.sh</exclude>
-                            <exclude>**/*.bat</exclude>
-                            <exclude>**/*.ftl</exclude>
-                            <exclude>**/*.xml</exclude>
-                            <exclude>**/*.properties</exclude>
-                            <exclude>**/*.sample</exclude>
-                            <exclude>**/*.md</exclude>
-                            <exclude>**/*.xsl</exclude>
-                            <exclude>**/*.html</exclude>
-                            <exclude>**/*.css</exclude>
-                            <exclude>**/build-number.txt</exclude>
-                        </excludes>
                         <includes>
                             <include>**/*.java</include>
                         </includes>
@@ -397,7 +390,7 @@
                     </configuration>
                     <executions>
                         <execution>
-                            <phase>process-sources</phase>
+                            <phase>compile</phase>
                             <goals>
                                 <goal>check</goal>
                             </goals>
