@@ -132,6 +132,7 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.spring.support,
       org.mule.runtime.extensions.xml.support,
       org.mule.runtime.core,
+      org.mule.runtime.spring.config,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model;
 
@@ -189,4 +190,8 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
+
+  // TODO RD- remove these
+  opens org.mule.runtime.api.el;
+
 }
