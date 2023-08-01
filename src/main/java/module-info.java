@@ -131,9 +131,13 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       org.mule.runtime.extensions.spring.support,
       org.mule.runtime.extensions.xml.support,
+      org.mule.runtime.extensions.mule.support,
       org.mule.runtime.core,
+      org.mule.runtime.artifact.activation,
+      org.mule.runtime.spring.config,
       org.mule.test.runner,
-      com.mulesoft.mule.runtime.ee.extension.model;
+      com.mulesoft.mule.runtime.ee.extension.model,
+      com.mulesoft.mule.runtime.cluster;
 
   exports org.mule.runtime.internal.config.custom to
       org.mule.runtime.spring.config;
@@ -141,6 +145,8 @@ module org.mule.runtime.api {
       org.mule.runtime.core;
   exports org.mule.runtime.internal.exception to
       org.mule.runtime.core,
+      org.mule.runtime.core.components,
+      org.mule.runtime.extensions.support,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
       org.mule.runtime.core,
@@ -157,14 +163,19 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.connection to
       org.mule.runtime.extensions.support;
   opens org.mule.runtime.api.exception to
-      org.mule.runtime.extensions.support;
+      org.mule.runtime.extensions.support,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   opens org.mule.runtime.api.util to
       org.mule.runtime.extensions.support;
 
-  // Allow introspection for serialization/deserialization by Gson
+  // Allow introspection for serialization/deserialization by Gson and Kryo
   opens org.mule.runtime.api.component to
       org.mule.runtime.extensions.support,
-      com.google.gson;
+      com.google.gson,
+      kryo.shaded;
+  opens org.mule.runtime.api.i18n to
+      kryo.shaded;
   opens org.mule.runtime.api.deployment.meta to
       com.google.gson;
   opens org.mule.runtime.api.meta.model to
@@ -187,4 +198,8 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
+
+  // TODO TD-0144819 add these:
+  // open org.mule.runtime.api.el, org.mule.runtime.api.component to DW;
+
 }
