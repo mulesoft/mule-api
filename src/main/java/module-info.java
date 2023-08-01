@@ -133,6 +133,7 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.xml.support,
       org.mule.runtime.extensions.mule.support,
       org.mule.runtime.core,
+      org.mule.runtime.artifact.activation,
       org.mule.runtime.spring.config,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model,
@@ -169,12 +170,10 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support;
 
   // Allow introspection for serialization/deserialization by Gson and Kryo
-  // TODO RD- change this
-  opens org.mule.runtime.api.component;
-//  opens org.mule.runtime.api.component to
-//      org.mule.runtime.extensions.support,
-//      com.google.gson,
-//      kryo.shaded;
+  opens org.mule.runtime.api.component to
+      org.mule.runtime.extensions.support,
+      com.google.gson,
+      kryo.shaded;
   opens org.mule.runtime.api.i18n to
       kryo.shaded;
   opens org.mule.runtime.api.deployment.meta to
@@ -200,7 +199,7 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.value to
       com.google.gson;
 
-  // TODO RD- remove these
-  opens org.mule.runtime.api.el;
+  // TODO TD-0144819 add these:
+  // open org.mule.runtime.api.el, org.mule.runtime.api.component to DW;
 
 }
