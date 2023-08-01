@@ -27,9 +27,10 @@ public class ConnectivityTestingStrategyUtils {
    * @param classLoader the classlaoder to use for loading the services through SPI.
    * @return the discovered {@link ConnectivityTestingStrategy}.
    */
-  public static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies(ClassLoader classLoader) {
-    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class, classLoader)
-        .iterator()).spliterator(),
+  public static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies() {
+    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class,
+                                                                      ConnectivityTestingStrategy.class.getClassLoader())
+                                                                          .iterator()).spliterator(),
                   false);
   }
 
