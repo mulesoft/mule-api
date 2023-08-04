@@ -1,8 +1,5 @@
 /*
- * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
- * The software in this package is published under the terms of the CPAL v1.0
- * license, a copy of which has been included with this distribution in the
- * LICENSE.txt file.
+ * Copyright 2023 Salesforce, Inc. All rights reserved.
  */
 package org.mule.runtime.internal.connectivity;
 
@@ -30,9 +27,10 @@ public class ConnectivityTestingStrategyUtils {
    * @param classLoader the classlaoder to use for loading the services through SPI.
    * @return the discovered {@link ConnectivityTestingStrategy}.
    */
-  public static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies(ClassLoader classLoader) {
-    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class, classLoader)
-        .iterator()).spliterator(),
+  public static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies() {
+    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class,
+                                                                      ConnectivityTestingStrategy.class.getClassLoader())
+                                                                          .iterator()).spliterator(),
                   false);
   }
 

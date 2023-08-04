@@ -1,10 +1,6 @@
 /*
- * Copyright (c) MuleSoft, Inc.  All rights reserved.  http://www.mulesoft.com
- * The software in this package is published under the terms of the CPAL v1.0
- * license, a copy of which has been included with this distribution in the
- * LICENSE.txt file.
+ * Copyright 2023 Salesforce, Inc. All rights reserved.
  */
-
 /**
  * API for Mule Runtime.
  * 
@@ -117,7 +113,9 @@ module org.mule.runtime.api {
   uses org.mule.runtime.api.config.custom.ServiceConfigurator;
   uses org.mule.runtime.api.connectivity.ConnectivityTestingStrategy;
   uses org.mule.runtime.api.el.AbstractBindingContextBuilderFactory;
+  uses org.mule.runtime.api.message.AbstractMuleMessageBuilderFactory;
   uses org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
+  uses org.mule.runtime.api.tls.AbstractTlsContextFactoryBuilderFactory;
 
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
@@ -131,13 +129,25 @@ module org.mule.runtime.api {
       org.mule.runtime.extension.model,
       org.mule.runtime.extensions.api.test,
       org.mule.runtime.extensions.support,
+      org.mule.runtime.extensions.spring.support,
+      org.mule.runtime.extensions.xml.support,
+      org.mule.runtime.extensions.mule.support,
+      org.mule.runtime.core,
+      org.mule.runtime.artifact.activation,
+      org.mule.runtime.spring.config,
       org.mule.test.runner,
-      com.mulesoft.mule.runtime.ee.extension.model;
+      com.mulesoft.mule.runtime.ee.extension.model,
+      com.mulesoft.mule.runtime.cluster;
 
   exports org.mule.runtime.internal.config.custom to
       org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
       org.mule.runtime.core;
+  exports org.mule.runtime.internal.exception to
+      org.mule.runtime.core,
+      org.mule.runtime.core.components,
+      org.mule.runtime.extensions.support,
+      org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
       org.mule.runtime.core,
       org.mule.runtime.api.test;
@@ -146,19 +156,26 @@ module org.mule.runtime.api {
       org.mule.runtime.api.test;
 
   // Internals exposed to test module
-  exports org.mule.runtime.internal.exception to org.mule.runtime.api.test;
-  exports org.mule.runtime.internal.util.xmlsecurity to org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.util.xmlsecurity to
+      org.mule.runtime.api.test;
 
   // Allow extensions-support to create objects from these packages dynamically
   opens org.mule.runtime.api.connection to
       org.mule.runtime.extensions.support;
   opens org.mule.runtime.api.exception to
+      org.mule.runtime.extensions.support,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
+  opens org.mule.runtime.api.util to
       org.mule.runtime.extensions.support;
 
-  // Allow introspection for serialization/deserialization by Gson
+  // Allow introspection for serialization/deserialization by Gson and Kryo
   opens org.mule.runtime.api.component to
       org.mule.runtime.extensions.support,
-      com.google.gson;
+      com.google.gson,
+      kryo.shaded;
+  opens org.mule.runtime.api.i18n to
+      kryo.shaded;
   opens org.mule.runtime.api.deployment.meta to
       com.google.gson;
   opens org.mule.runtime.api.meta.model to
@@ -181,4 +198,8 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
+
+  // TODO TD-0144819 add these:
+  // open org.mule.runtime.api.el, org.mule.runtime.api.component to DW;
+
 }
