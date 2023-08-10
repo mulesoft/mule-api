@@ -137,7 +137,8 @@ module org.mule.runtime.api {
       org.mule.runtime.spring.config,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model,
-      com.mulesoft.mule.runtime.cluster;
+      com.mulesoft.mule.runtime.cluster,
+      com.mulesoft.anypoint.gw.module.autodiscovery;
 
   exports org.mule.runtime.internal.config.custom to
       org.mule.runtime.spring.config;
@@ -153,6 +154,7 @@ module org.mule.runtime.api {
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.collection to
       org.mule.runtime.core,
+      org.mule.runtime.artifact.activation,
       org.mule.runtime.api.test;
 
   // Internals exposed to test module
