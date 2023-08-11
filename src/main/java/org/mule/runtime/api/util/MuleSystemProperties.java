@@ -546,6 +546,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalEntries";
 
   /**
+   * If set to true, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects
+   * registered into the `SimpleRegistry`..
+   *
+   * @since 4.6.0
+   */
+  public static final String DISABLE_APPLY_OBJECT_PROCESSOR_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.applyObjectProcessor";
+
+  /**
    * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
    * the application classloader.
    * 
