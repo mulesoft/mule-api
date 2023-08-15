@@ -784,6 +784,13 @@ public final class MuleSystemProperties {
   public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
+  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
+      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
+
+  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
+    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+  }
+
   /**
    * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the container
    * and the services ({@code true}) or a classLoader will be used ({@code false}).
