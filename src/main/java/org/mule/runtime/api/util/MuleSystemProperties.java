@@ -809,7 +809,7 @@ public final class MuleSystemProperties {
    * @since 4.6.0
    */
   public static boolean classloaderContainerJpmsModuleLayer() {
-    return parseBoolean(getProperty(CLASSLOADER_SERVICE_JPMS_MODULE_LAYER, "" + isJavaVersionAtLeast(JAVA_17)));
+    return parseBoolean(getProperty(CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER, "" + isJavaVersionAtLeast(JAVA_17)));
   }
 
   /**
