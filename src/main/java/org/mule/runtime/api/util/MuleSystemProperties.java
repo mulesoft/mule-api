@@ -3,6 +3,7 @@
  */
 package org.mule.runtime.api.util;
 
+import static java.lang.Boolean.parseBoolean;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
@@ -769,6 +770,20 @@ public final class MuleSystemProperties {
    */
   public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
+
+  /**
+   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
+   * expression.
+   */
+  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
+          SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
+
+  /**
+   * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
+   */
+  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
+    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+  }
 
   /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
