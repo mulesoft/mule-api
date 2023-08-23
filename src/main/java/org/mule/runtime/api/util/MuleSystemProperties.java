@@ -785,6 +785,20 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
   /**
+   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
+   * expression.
+   */
+  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
+      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
+
+  /**
+   * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
+   */
+  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
+    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+  }
+
+  /**
    * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the container
    * and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
