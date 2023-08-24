@@ -4,6 +4,24 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "elementKind": "field",
+          "justification": " W-13588449: Parse template target value breaking change."
+        },
+        {
+          "code": "java.method.added",
+          "new": "method boolean org.mule.runtime.api.util.MuleSystemProperties::isParseTemplateUseLegacyDefaultTargetValue()",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "methodName": "isParseTemplateUseLegacyDefaultTargetValue",
+          "elementKind": "method",
+          "justification": "W-13588449: Parse template target value breaking change."
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
