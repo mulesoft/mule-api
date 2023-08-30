@@ -31,6 +31,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FL
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.SINGLE_APP_MODE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
@@ -450,7 +451,18 @@ public enum MuleRuntimeFeature implements Feature {
    */
   CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES(
       "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather and Async",
-      "W-13509911", "4.5.0", CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY);
+      "W-13509911", "4.5.0", CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY),
+
+
+  /**
+   * The single app mode which introduces optimizations regarding performance, in memory footprint and startup time for
+   * environments which only deploys one app.
+   *
+   * @since 4.6.0
+   */
+  SINGLE_APP_MODE(
+      "When enabled, optimizations regarding performance, in memory footprint and startup time for environments which only deploys one app",
+      "W-12356160", "4.5.0", SINGLE_APP_MODE_PROPERTY);
 
   private final String description;
   private final String issueId;
