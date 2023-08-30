@@ -772,6 +772,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
 
   /**
+   * A system property for setting the single app mode which introduces optimizations regarding performance, in memory footprint
+   * and startup time for environments which only deploys one app.
+   *
+   * @since 4.6.0
+   */
+  public static final String SINGLE_APP_MODE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "single.app.mode";
+
+  /**
    * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the services
    * ({@code true}) or a classloader will be used ({@code false}).
    * <p>
