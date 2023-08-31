@@ -10,12 +10,8 @@ import static java.util.Collections.unmodifiableMap;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
@@ -24,6 +20,14 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.parameterization.ComponentParameterization;
 import org.mule.runtime.api.parameterization.ComponentParameterization.Builder;
 import org.mule.runtime.api.util.Pair;
+import org.mule.runtime.api.util.Reference;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import com.github.benmanes.caffeine.cache.LoadingCache;
 
 /**
  * Builder class for creating {@link ComponentParameterization} instances.
@@ -36,57 +40,40 @@ import org.mule.runtime.api.util.Pair;
  */
 public class ComponentParameterizationBuilder<M extends ParameterizedModel> implements ComponentParameterization.Builder<M> {
 
+  private static final LoadingCache<ParameterizedModel, ComponentCache> CACHE = newBuilder()
+      .weakValues()
+      .build(ComponentCache::new);
+
   private M model;
 
   private final Map<Pair<ParameterGroupModel, ParameterModel>, Object> parameters = new HashMap<>();
+  private final Map<Pair<String, String>, Object> parametersByNames = new HashMap<>();
   private Optional<ComponentIdentifier> identifier = empty();
 
   public ComponentParameterization.Builder<M> withModel(M model) {
     this.model = model;
-
     return this;
   }
 
   @Override
-  public Builder<M> withParameter(String paramGroupName, String paramName, Object paramValue) throws IllegalArgumentException {
-    ParameterGroupModel paramGroup = model.getParameterGroupModels()
-        .stream()
-        .filter(pgm -> pgm.getName().equals(paramGroupName))
-        .findAny()
-        .orElseThrow(() -> new IllegalArgumentException("ParameterGroup does not exist: " + paramGroupName));
+  public Builder<M> withParameter(String groupName, String paramName, Object value) throws IllegalArgumentException {
+    parameters.put(CACHE.get(model).getPair(groupName, paramName), value);
+    parametersByNames.put(new Pair<>(groupName, paramName), value);
+    return this;
+  }
 
-    ParameterModel parameter = paramGroup.getParameter(paramName)
-        .orElseThrow(() -> new IllegalArgumentException("Parameter does not exist in group '" + paramGroupName + "': "
-            + paramName));
 
-    parameters.put(new Pair<>(paramGroup, parameter), paramValue);
-
+  @Override
+  public Builder<M> withParameter(ParameterGroupModel groupModel, ParameterModel paramModel, Object value) {
+    parameters.put(new Pair<>(groupModel, paramModel), value);
+    parametersByNames.put(new Pair<>(groupModel.getName(), paramModel.getName()), value);
     return this;
   }
 
   @Override
-  public Builder<M> withParameter(ParameterGroupModel paramGroup, ParameterModel paramModel, Object paramValue) {
-    parameters.put(new Pair<>(paramGroup, paramModel), paramValue);
-    return this;
-  }
-
-  @Override
-  public Builder<M> withParameter(String paramName, Object paramValue) throws IllegalArgumentException {
-    List<ParameterGroupModel> paramGroupsWithParamNamed = model.getParameterGroupModels()
-        .stream()
-        .filter(pgm -> pgm.getParameter(paramName).isPresent())
-        .collect(toList());
-
-    if (paramGroupsWithParamNamed.isEmpty()) {
-      throw new IllegalArgumentException("Parameter does not exist in any group: " + paramName);
-    } else if (paramGroupsWithParamNamed.size() > 1) {
-      throw new IllegalArgumentException("Parameter exists in more than one group ("
-          + paramGroupsWithParamNamed.stream().map(pgm -> pgm.getName()).collect(toList()) + "): " + paramName);
-    }
-
-    ParameterGroupModel paramGroup = paramGroupsWithParamNamed.get(0);
-    ParameterModel paramModel = paramGroupsWithParamNamed.get(0).getParameter(paramName).get();
-    return this.withParameter(paramGroup, paramModel, paramValue);
+  public Builder<M> withParameter(String paramName, Object value) throws IllegalArgumentException {
+    Pair<ParameterGroupModel, ParameterModel> pair = CACHE.get(model).getPair(paramName);
+    return withParameter(pair.getFirst(), pair.getSecond(), value);
   }
 
   @Override
@@ -99,7 +86,8 @@ public class ComponentParameterizationBuilder<M extends ParameterizedModel> impl
   public ComponentParameterization<M> build() {
     // TODO W-11214382 validate all required params are present
     // TODO W-11214382 set values for unset params with default values
-    return new DefaultComponentParameterization<>(model, unmodifiableMap(parameters), identifier);
+    return new DefaultComponentParameterization<>(model, unmodifiableMap(parameters), unmodifiableMap(parametersByNames),
+                                                  identifier);
   }
 
   private static class DefaultComponentParameterization<M extends ParameterizedModel> implements ComponentParameterization<M> {
@@ -110,15 +98,14 @@ public class ComponentParameterizationBuilder<M extends ParameterizedModel> impl
     private final Map<Pair<String, String>, Object> parametersByNames;
     private final Optional<ComponentIdentifier> identifier;
 
-    public DefaultComponentParameterization(M model, Map<Pair<ParameterGroupModel, ParameterModel>, Object> parameters,
+    public DefaultComponentParameterization(M model,
+                                            Map<Pair<ParameterGroupModel, ParameterModel>, Object> parameters,
+                                            Map<Pair<String, String>, Object> parametersByNames,
                                             Optional<ComponentIdentifier> identifier) {
       this.model = model;
       this.parameters = parameters;
+      this.parametersByNames = parametersByNames;
       this.identifier = identifier;
-
-      parametersByNames = unmodifiableMap(parameters.entrySet().stream()
-          .collect(toMap(e -> new Pair<>(e.getKey().getFirst().getName(), e.getKey().getSecond().getName()),
-                         e -> e.getValue())));
     }
 
     @Override
@@ -151,5 +138,72 @@ public class ComponentParameterizationBuilder<M extends ParameterizedModel> impl
       return identifier;
     }
 
+  }
+
+  private static class ComponentCache {
+
+    private final ParameterizedModel model;
+    private final LoadingCache<String, ParameterGroupModel> groups;
+    private final LoadingCache<Pair<String, String>, Pair<ParameterGroupModel, ParameterModel>> params;
+    private final LoadingCache<String, Pair<ParameterGroupModel, ParameterModel>> defaultParams;
+
+    public ComponentCache(ParameterizedModel model) {
+      this.model = model;
+      groups = newBuilder().build(this::getGroupByName);
+      params = newBuilder().build(this::toModelPair);
+      defaultParams = newBuilder().build(this::findDefaultParamByName);
+    }
+
+    public Pair<ParameterGroupModel, ParameterModel> getPair(String groupName, String paramName) {
+      return params.get(new Pair<>(groupName, paramName));
+    }
+
+    public Pair<ParameterGroupModel, ParameterModel> getPair(String paramName) {
+      return defaultParams.get(paramName);
+    }
+
+    private ParameterGroupModel getGroupByName(String paramGroupName) {
+      return model.getParameterGroupModels()
+          .stream()
+          .filter(pgm -> pgm.getName().equals(paramGroupName))
+          .findAny()
+          .orElseThrow(() -> new IllegalArgumentException("ParameterGroup does not exist: " + paramGroupName));
+    }
+
+    private Pair<ParameterGroupModel, ParameterModel> findDefaultParamByName(String paramName) {
+      Reference<ParameterModel> firstFound = new Reference<>();
+      List<ParameterGroupModel> paramGroupsWithParamNamed = model.getParameterGroupModels()
+          .stream()
+          .filter(pgm -> {
+            Optional<ParameterModel> parameter = pgm.getParameter(paramName);
+            if (parameter.isPresent()) {
+              if (firstFound.get() == null) {
+                firstFound.set(parameter.get());
+              }
+              return true;
+            }
+
+            return false;
+          }).collect(toList());
+
+      if (paramGroupsWithParamNamed.isEmpty()) {
+        throw new IllegalArgumentException("Parameter does not exist in any group: " + paramName);
+      } else if (paramGroupsWithParamNamed.size() > 1) {
+        throw new IllegalArgumentException("Parameter exists in more than one group ("
+            + paramGroupsWithParamNamed.stream().map(pgm -> pgm.getName()).collect(toList()) + "): " + paramName);
+      }
+
+      return new Pair<>(paramGroupsWithParamNamed.get(0), firstFound.get());
+    }
+
+    private Pair<ParameterGroupModel, ParameterModel> toModelPair(Pair<String, String> pair) {
+      ParameterGroupModel paramGroup = groups.get(pair.getFirst());
+      String paramName = pair.getSecond();
+
+      return paramGroup.getParameter(paramName)
+          .map(p -> new Pair<>(paramGroup, p))
+          .orElseThrow(() -> new IllegalArgumentException("Parameter does not exist in group '" + paramGroup.getName() + "': "
+              + paramName));
+    }
   }
 }
