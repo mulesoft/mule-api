@@ -9,7 +9,6 @@ package org.mule.runtime.internal.parameterization;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
-import static java.util.stream.Collectors.toList;
 
 import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 
@@ -20,10 +19,8 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.parameterization.ComponentParameterization;
 import org.mule.runtime.api.parameterization.ComponentParameterization.Builder;
 import org.mule.runtime.api.util.Pair;
-import org.mule.runtime.api.util.Reference;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -171,29 +168,29 @@ public class ComponentParameterizationBuilder<M extends ParameterizedModel> impl
     }
 
     private Pair<ParameterGroupModel, ParameterModel> findDefaultParamByName(String paramName) {
-      Reference<ParameterModel> firstFound = new Reference<>();
-      List<ParameterGroupModel> paramGroupsWithParamNamed = model.getParameterGroupModels()
-          .stream()
-          .filter(pgm -> {
-            Optional<ParameterModel> parameter = pgm.getParameter(paramName);
-            if (parameter.isPresent()) {
-              if (firstFound.get() == null) {
-                firstFound.set(parameter.get());
-              }
-              return true;
-            }
+      ParameterGroupModel groupModel = null;
+      ParameterModel parameterModel = null;
 
-            return false;
-          }).collect(toList());
-
-      if (paramGroupsWithParamNamed.isEmpty()) {
-        throw new IllegalArgumentException("Parameter does not exist in any group: " + paramName);
-      } else if (paramGroupsWithParamNamed.size() > 1) {
-        throw new IllegalArgumentException("Parameter exists in more than one group ("
-            + paramGroupsWithParamNamed.stream().map(pgm -> pgm.getName()).collect(toList()) + "): " + paramName);
+      for (ParameterGroupModel searchModel : model.getParameterGroupModels()) {
+        Optional<ParameterModel> parameter = searchModel.getParameter(paramName);
+        if (parameter.isPresent()) {
+          if (groupModel == null) {
+            groupModel = searchModel;
+          } else {
+            throw new IllegalArgumentException(
+                                               "Parameter '" + paramName + "' exists in more than one group for component '"
+                                                   + model.getName() + "'");
+          }
+          if (parameterModel == null) {
+            parameterModel = parameter.get();
+          }
+        }
       }
 
-      return new Pair<>(paramGroupsWithParamNamed.get(0), firstFound.get());
+      if (parameterModel == null) {
+        throw new IllegalArgumentException("Parameter does not exist in any group: " + paramName);
+      }
+      return new Pair<>(groupModel, parameterModel);
     }
 
     private Pair<ParameterGroupModel, ParameterModel> toModelPair(Pair<String, String> pair) {
