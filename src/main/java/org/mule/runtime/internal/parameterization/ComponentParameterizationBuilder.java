@@ -38,7 +38,7 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
 public class ComponentParameterizationBuilder<M extends ParameterizedModel> implements ComponentParameterization.Builder<M> {
 
   private static final LoadingCache<ParameterizedModel, ComponentCache> CACHE = newBuilder()
-      .weakValues()
+      .softValues()
       .build(ComponentCache::new);
 
   private M model;
