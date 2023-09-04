@@ -13,6 +13,7 @@ import static java.util.Optional.of;
 import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 
 import org.mule.runtime.api.component.ComponentIdentifier;
+import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterGroupModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -38,6 +39,14 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
  */
 public class ComponentParameterizationBuilder<M extends ParameterizedModel> implements ComponentParameterization.Builder<M> {
 
+  /**
+   * Wrap the key in a {@link Reference} so that keys are match by identity instead of relying on in their {@code equals}
+   * implementation. This avoids conflicts when a model is wrapped in a decorator or when then equals implementation may be
+   * ambiguous (e.g: two components from different extension that share the same component name).
+   * <p>
+   * This heavily relies on the assumption of the {@link ExtensionModel} implementing the flyweight pattern. Should that
+   * assumption be broken, the amount of cache misses would increase significantly.
+   */
   private static final LoadingCache<Reference<ParameterizedModel>, ComponentCache> CACHE = newBuilder()
       .softValues()
       .build(ref -> new ComponentCache(ref.get()));
