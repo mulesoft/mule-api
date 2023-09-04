@@ -19,6 +19,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.parameterization.ComponentParameterization;
 import org.mule.runtime.api.parameterization.ComponentParameterization.Builder;
 import org.mule.runtime.api.util.Pair;
+import org.mule.runtime.api.util.Reference;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,18 +38,18 @@ import com.github.benmanes.caffeine.cache.LoadingCache;
  */
 public class ComponentParameterizationBuilder<M extends ParameterizedModel> implements ComponentParameterization.Builder<M> {
 
-  private static final LoadingCache<ParameterizedModel, ComponentCache> CACHE = newBuilder()
+  private static final LoadingCache<Reference<ParameterizedModel>, ComponentCache> CACHE = newBuilder()
       .softValues()
-      .build(ComponentCache::new);
+      .build(ref -> new ComponentCache(ref.get()));
 
-  private M model;
+  private Reference<ParameterizedModel> model;
 
   private final Map<Pair<ParameterGroupModel, ParameterModel>, Object> parameters = new HashMap<>();
   private final Map<Pair<String, String>, Object> parametersByNames = new HashMap<>();
   private Optional<ComponentIdentifier> identifier = empty();
 
   public ComponentParameterization.Builder<M> withModel(M model) {
-    this.model = model;
+    this.model = new Reference<>(model);
     return this;
   }
 
@@ -83,7 +84,9 @@ public class ComponentParameterizationBuilder<M extends ParameterizedModel> impl
   public ComponentParameterization<M> build() {
     // TODO W-11214382 validate all required params are present
     // TODO W-11214382 set values for unset params with default values
-    return new DefaultComponentParameterization<>(model, unmodifiableMap(parameters), unmodifiableMap(parametersByNames),
+    return new DefaultComponentParameterization<>((M) model.get(),
+                                                  unmodifiableMap(parameters),
+                                                  unmodifiableMap(parametersByNames),
                                                   identifier);
   }
 
