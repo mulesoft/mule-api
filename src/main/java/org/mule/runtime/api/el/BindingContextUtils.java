@@ -6,12 +6,14 @@
  */
 package org.mule.runtime.api.el;
 
+import static org.mule.runtime.api.metadata.DataType.STRING;
+import static org.mule.runtime.api.metadata.DataType.fromType;
+
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
-import static org.mule.runtime.api.metadata.DataType.STRING;
-import static org.mule.runtime.api.metadata.DataType.fromType;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
@@ -223,7 +225,8 @@ public class BindingContextUtils {
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
 
-  private static class FlowVariablesAccessor {
+  // This is public so that DataWeave can get and invoke its methods and not fallback to change the accessibility of its fields
+  public static class FlowVariablesAccessor {
 
     private final String name;
 
