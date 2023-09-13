@@ -815,12 +815,12 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "classloader.container.jpmsModuleLayer";
 
   /**
-   * When set to "true", MBeans will not be registered for commons-pool2.
+   * When set to true, MBeans will not be registered for commons-pool2.
    *
    * @since 4.6.0
    */
-  public static final String COMMONS_POOL2_DISABLEJMX_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "commons.pool2.disableJmx";
+  public static final String DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disableJmx.for.commons.pool2";
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
