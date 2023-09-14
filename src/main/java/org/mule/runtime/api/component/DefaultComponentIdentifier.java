@@ -21,7 +21,8 @@ import java.io.Serializable;
  *
  * @since 4.0
  */
-class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
+// This is public so that DataWeave can get and invoke its methods and not fallback to change the accessibility of its fields
+public class DefaultComponentIdentifier implements ComponentIdentifier, Serializable {
 
   private static final long serialVersionUID = -7904681927277956932L;
 

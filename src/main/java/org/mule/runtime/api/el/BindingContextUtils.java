@@ -6,12 +6,14 @@
  */
 package org.mule.runtime.api.el;
 
+import static org.mule.runtime.api.metadata.DataType.STRING;
+import static org.mule.runtime.api.metadata.DataType.fromType;
+
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.emptySet;
 import static java.util.Objects.requireNonNull;
 import static java.util.Optional.empty;
-import static org.mule.runtime.api.metadata.DataType.STRING;
-import static org.mule.runtime.api.metadata.DataType.fromType;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
@@ -223,7 +225,8 @@ public class BindingContextUtils {
         .addBinding(ATTRIBUTES, message.getAttributes()).build();
   }
 
-  private static class FlowVariablesAccessor {
+  // This is public so that DataWeave can get and invoke its methods and not fallback to change the accessibility of its fields
+  public static class FlowVariablesAccessor {
 
     private final String name;
 
@@ -237,7 +240,8 @@ public class BindingContextUtils {
 
   }
 
-  private static class MessageWrapper implements Message {
+  // This is public so that DataWeave can get and invoke its methods and not fallback to change the accessibility of its fields
+  public static class MessageWrapper implements Message {
 
     private static final long serialVersionUID = -8097230480930728693L;
 
@@ -245,6 +249,10 @@ public class BindingContextUtils {
 
     public MessageWrapper(Message message, Throwable exceptionPayload, String location) {
       this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location);
+    }
+
+    public Message getMessage() {
+      return message;
     }
 
     @Override
@@ -267,7 +275,8 @@ public class BindingContextUtils {
   /**
    * This exists only for maintaining backwards compatibility with some expressions that were possible before 4.3
    */
-  private static class MessageExceptionInfoWrapper implements Message {
+  // This is public so that DataWeave can get and invoke its methods and not fallback to change the accessibility of its fields
+  public static class MessageExceptionInfoWrapper implements Message {
 
     private static final long serialVersionUID = 5854772290551915468L;
 
@@ -290,6 +299,10 @@ public class BindingContextUtils {
         this.exceptionPayload = new DefaultMuleException(exceptionPayload.getMessage(), exceptionPayload);
         this.exceptionPayload.getExceptionInfo().setLocation(location);
       }
+    }
+
+    public Message getMessage() {
+      return message;
     }
 
     @Override
