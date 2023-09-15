@@ -204,7 +204,4 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.value to
       com.google.gson;
 
-  // TODO TD-0144819 add these:
-  // open org.mule.runtime.api.el, org.mule.runtime.api.component to DW;
-
 }
