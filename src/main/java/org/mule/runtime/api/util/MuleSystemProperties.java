@@ -10,6 +10,9 @@ import static java.lang.Boolean.parseBoolean;
 import static java.lang.System.getProperty;
 import static java.lang.System.setProperty;
 
+import static org.apache.commons.lang3.JavaVersion.JAVA_17;
+import static org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast;
+
 import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.meta.model.ExtensionModel;
@@ -831,8 +834,7 @@ public final class MuleSystemProperties {
    * @since 4.6.0
    */
   public static boolean classloaderContainerJpmsModuleLayer() {
-    // TODO W-13829761, W-13205329, W-13829740 Change default to `isJavaVersionAtLeast(JAVA_17)`
-    return parseBoolean(getProperty(CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER, "false"));
+    return parseBoolean(getProperty(CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER, "" + isJavaVersionAtLeast(JAVA_17)));
   }
 
   /**
