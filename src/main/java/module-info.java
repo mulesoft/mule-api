@@ -171,8 +171,13 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       // Introspection by kryo used by mule serializer
       kryo.shaded;
+  opens org.mule.runtime.api.message to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   opens org.mule.runtime.api.util to
-      org.mule.runtime.extensions.support;
+      org.mule.runtime.extensions.support,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
 
   // Allow introspection for serialization/deserialization by Gson and Kryo
   opens org.mule.runtime.api.component to
