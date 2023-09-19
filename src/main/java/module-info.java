@@ -137,6 +137,8 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       org.mule.runtime.extensions.xml.support,
       org.mule.runtime.dsl.api,
+      org.mule.runtime.properties.config,
+      org.mule.runtime.metadata.support,
       org.mule.runtime.spring.config,
       org.mule.runtime.tls,
       org.mule.test.runner,
