@@ -122,22 +122,25 @@ module org.mule.runtime.api {
 
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
-      org.mule.runtime.dsl.api,
-      org.mule.runtime.extensions.api,
+      org.mule.runtime.artifact.activation,
       org.mule.runtime.artifact.ast,
       org.mule.runtime.artifact.ast.serialization,
       org.mule.runtime.artifact.ast.serialization.test,
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
-      org.mule.runtime.extension.model,
-      org.mule.runtime.extensions.api.test,
-      org.mule.runtime.extensions.support,
-      org.mule.runtime.extensions.spring.support,
-      org.mule.runtime.extensions.xml.support,
-      org.mule.runtime.extensions.mule.support,
       org.mule.runtime.core,
-      org.mule.runtime.artifact.activation,
+      org.mule.runtime.extensions.api,
+      org.mule.runtime.extensions.api.test,
+      org.mule.runtime.extension.model,
+      org.mule.runtime.extensions.mule.support,
+      org.mule.runtime.extensions.spring.support,
+      org.mule.runtime.extensions.support,
+      org.mule.runtime.extensions.xml.support,
+      org.mule.runtime.dsl.api,
+      org.mule.runtime.properties.config,
+      org.mule.runtime.metadata.support,
       org.mule.runtime.spring.config,
+      org.mule.runtime.tls,
       org.mule.test.runner,
       com.mulesoft.mule.runtime.ee.extension.model,
       com.mulesoft.mule.runtime.cluster,
@@ -171,8 +174,13 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       // Introspection by kryo used by mule serializer
       kryo.shaded;
+  opens org.mule.runtime.api.message to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   opens org.mule.runtime.api.util to
-      org.mule.runtime.extensions.support;
+      org.mule.runtime.extensions.support,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
 
   // Allow introspection for serialization/deserialization by Gson and Kryo
   opens org.mule.runtime.api.component to
