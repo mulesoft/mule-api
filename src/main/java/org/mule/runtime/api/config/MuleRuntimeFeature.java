@@ -9,6 +9,7 @@ package org.mule.runtime.api.config;
 import static org.mule.runtime.api.util.MuleSystemProperties.ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
@@ -463,7 +464,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_JMX_FOR_COMMONS_POOL2(
       "When enabled, MBeans will not be registered for commons-pool2.",
-      "W-12422473", "4.6.0", DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY);
+      "W-12422473", "4.6.0", DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY),
+
+  /**
+   * When enabled, the Scheduler does not log exceptions.
+   *
+   * @since 4.6.0
+   */
+  DISABLE_SCHEDULER_LOGGING(
+      "When enabled, the Scheduler does not log exceptions.",
+      "W-13881167", "4.6.0", DISABLE_SCHEDULER_LOGGING_PROPERTY);
 
   private final String description;
   private final String issueId;

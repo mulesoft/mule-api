@@ -823,6 +823,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disableJmx.for.commons.pool2";
 
   /**
+   * When enabled, the Scheduler does not log exceptions.
+   *
+   * @since 4.6.0
+   */
+  public static final String DISABLE_SCHEDULER_LOGGING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.scheduler.logging";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
