@@ -1,5 +1,5 @@
 {
-  "1.5.0": {
+  "1.5.1": {
     "revapi": {
       "ignore": [
         {
@@ -19,7 +19,13 @@
           "fieldName": "DISABLE_SCHEDULER_LOGGING_PROPERTY",
           "elementKind": "field",
           "justification": "W-13881167: Error handler with logException=false is still logging the exception when using Scheduler"
-        },
+        }
+      ]
+    }
+  },
+  "1.5.0": {
+    "revapi": {
+      "ignore": [
         {
           "code": "java.method.visibilityIncreased",
           "old": "method void org.mule.runtime.api.exception.MuleExceptionInfo::addToSummaryMessage(java.lang.StringBuilder)",
@@ -2858,4 +2864,4 @@
       ]
     }
   }
-}
+},
