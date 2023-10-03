@@ -7,6 +7,7 @@
 package org.mule.runtime.api.config;
 
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
@@ -311,8 +312,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES(
       "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather and Async",
-      "W-13509911", "4.5.0", CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY);
+      "W-13509911", "4.5.0", CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY),
 
+  /**
+   * When enabled, the Scheduler does not log exceptions.
+   *
+   * @since 4.6.0
+   */
+  DISABLE_SCHEDULER_LOGGING(
+      "When enabled, the Scheduler does not log exceptions.",
+      "W-13881167", "4.6.0", DISABLE_SCHEDULER_LOGGING_PROPERTY);
 
   private final String description;
   private final String issueId;
