@@ -587,6 +587,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
+   * When enabled, the Scheduler does not log exceptions.
+   *
+   * @since 4.6.0
+   */
+  public static final String DISABLE_SCHEDULER_LOGGING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.scheduler.logging";
+
+  /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
