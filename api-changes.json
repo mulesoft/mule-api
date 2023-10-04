@@ -1,4 +1,28 @@
 {
+  "1.5.1": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DISABLE_SCHEDULER_LOGGING",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "DISABLE_SCHEDULER_LOGGING",
+          "elementKind": "enumConstant",
+          "justification": "W-13881167: Error handler with logException=false is still logging the exception when using Scheduler"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_SCHEDULER_LOGGING_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-13881167: Error handler with logException=false is still logging the exception when using Scheduler"
+        }
+      ]
+    }
+  },
   "1.5.0": {
     "revapi": {
       "ignore": [
@@ -2840,4 +2864,4 @@
       ]
     }
   }
-}
+},
