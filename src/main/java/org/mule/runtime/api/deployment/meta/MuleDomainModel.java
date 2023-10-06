@@ -17,12 +17,26 @@ import java.util.Set;
 @NoExtend
 public class MuleDomainModel extends MuleDeployableModel {
 
-  private MuleDomainModel(String name, String minMuleVersion, Product product,
+  private MuleDomainModel(String name,
+                          String minMuleVersion,
+                          Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
-                          MuleArtifactLoaderDescriptor bundleDescriptor, Set<String> configs,
-                          Optional<Boolean> redeploymentEnabled, List<String> secureProperties, String logConfigFile) {
-    super(name, minMuleVersion, product, classLoaderModelLoaderDescriptor, bundleDescriptor, configs, redeploymentEnabled,
-          secureProperties, logConfigFile);
+                          MuleArtifactLoaderDescriptor bundleDescriptor,
+                          Set<String> configs,
+                          Optional<Boolean> redeploymentEnabled,
+                          List<String> secureProperties,
+                          Set<String> supportedJavaVersions,
+                          String logConfigFile) {
+    super(name,
+          minMuleVersion,
+          product,
+          classLoaderModelLoaderDescriptor,
+          bundleDescriptor,
+          configs,
+          redeploymentEnabled,
+          secureProperties,
+          supportedJavaVersions,
+          logConfigFile);
   }
 
   /**
@@ -39,10 +53,20 @@ public class MuleDomainModel extends MuleDeployableModel {
     }
 
     @Override
-    protected MuleDomainModel doCreateModel(Set<String> configs, Boolean redeploymentEnabled, List<String> secureProperties,
+    protected MuleDomainModel doCreateModel(Set<String> configs,
+                                            Boolean redeploymentEnabled,
+                                            List<String> secureProperties,
+                                            Set<String> supportedJavaVersions,
                                             String logConfigFile) {
-      return new MuleDomainModel(getName(), getMinMuleVersion(), getRequiredProduct(), getClassLoaderModelDescriptorLoader(),
-                                 getBundleDescriptorLoader(), configs, ofNullable(redeploymentEnabled), secureProperties,
+      return new MuleDomainModel(getName(),
+                                 getMinMuleVersion(),
+                                 getRequiredProduct(),
+                                 getClassLoaderModelDescriptorLoader(),
+                                 getBundleDescriptorLoader(),
+                                 configs,
+                                 ofNullable(redeploymentEnabled),
+                                 secureProperties,
+                                 supportedJavaVersions,
                                  logConfigFile);
     }
   }
