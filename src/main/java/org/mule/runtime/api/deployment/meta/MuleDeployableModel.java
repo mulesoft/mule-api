@@ -8,7 +8,9 @@ package org.mule.runtime.api.deployment.meta;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import static java.util.Collections.emptySet;
 import static java.util.Collections.unmodifiableSet;
+import static java.util.Objects.requireNonNull;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;
 
@@ -111,14 +113,14 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
    * <p>
    * Items should ideally conform to the versions defined in {@link JavaConstants} but this is not mandatory.
    * <p>
-   * It may be empty, indication that any Java version is supported.
+   * It may be empty, indicating that any Java version is supported.
    *
    * @return The versions of Java supported by this deployable artifact
    * @see {@link JavaConstants}
    * @since 1.6
    */
   public Set<String> getSupportedJavaVersions() {
-    return supportedJavaVersions;
+    return supportedJavaVersions == null ? emptySet() : unmodifiableSet(supportedJavaVersions);
   }
 
   /**
@@ -139,7 +141,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
     private Set<String> configs = new HashSet<>();
     private Boolean redeploymentEnabled;
     private List<String> secureProperties = new ArrayList<>();
-    private Set<String> supportedJavaVersions;
+    private Set<String> supportedJavaVersions = emptySet();
     private String logConfigFile;
 
     /**
@@ -187,7 +189,7 @@ public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
      * @since 1.6
      */
     public void setSupportedJavaVersions(Set<String> supportedJavaVersions) {
-      this.supportedJavaVersions = supportedJavaVersions;
+      this.supportedJavaVersions = requireNonNull(supportedJavaVersions);
     }
 
     /**
