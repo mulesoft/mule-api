@@ -39,7 +39,6 @@ public interface Error extends Serializable {
 
   /**
    * @return the DSL source
-   *
    */
   default String getDslSource() {
     return null;

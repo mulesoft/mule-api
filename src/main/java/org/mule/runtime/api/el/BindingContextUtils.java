@@ -296,14 +296,7 @@ public class BindingContextUtils {
     private transient final MuleException exceptionPayload;
 
     public MessageExceptionInfoWrapper(Message message, Throwable exceptionPayload, String location) {
-      this.message = message;
-
-      if (exceptionPayload == null || exceptionPayload instanceof MuleException) {
-        this.exceptionPayload = (MuleException) exceptionPayload;
-      } else {
-        this.exceptionPayload = new DefaultMuleException(exceptionPayload.getMessage(), exceptionPayload);
-        this.exceptionPayload.getExceptionInfo().setLocation(location);
-      }
+      this(message, exceptionPayload, location, "");
     }
 
     public MessageExceptionInfoWrapper(Message message, Throwable exceptionPayload, String location, String dslSource) {
