@@ -38,6 +38,13 @@ public interface Error extends Serializable {
   }
 
   /**
+   * @return the DSL source
+   */
+  default String getDslSource() {
+    return null;
+  }
+
+  /**
    * Returns the type of the error. @see {@link ErrorType}.
    *
    * @return the type of the error
