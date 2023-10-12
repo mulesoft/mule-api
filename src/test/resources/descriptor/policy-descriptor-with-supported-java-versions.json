@@ -1,0 +1,29 @@
+{
+  "name": "plugin-name",
+  "minMuleVersion": "4.2.3",
+  "bundleDescriptorLoader": {
+    "id": "bundleDescriptorLoaderId",
+    "attributes": {
+      "bundleDescriptorLoaderKey1": "bundleDescriptorLoaderValue1",
+      "bundleDescriptorLoaderKey2": "bundleDescriptorLoaderValue2"
+    }
+  },
+  "classLoaderModelLoaderDescriptor": {
+    "id": "maven",
+    "attributes": {
+      "exportedPackages": [
+        "org.mule.extension.api",
+        "org.mule.extension.api.exception"
+      ],
+      "exportedResources": [
+        "/META-INF/some.file",
+        "/META-INF/other.file"
+      ]
+    }
+  },
+  "supportedJavaVersions": [
+    "1.8",
+    "11",
+    "17"
+  ]
+}
