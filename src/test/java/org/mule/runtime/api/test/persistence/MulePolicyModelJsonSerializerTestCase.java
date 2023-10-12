@@ -8,6 +8,7 @@ package org.mule.runtime.api.test.persistence;
 
 
 import static java.util.Collections.emptyMap;
+import static java.util.Collections.singleton;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -27,9 +28,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 import org.apache.commons.io.IOUtils;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,11 +57,14 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
     bundleDescriptorAttributes.put(BUNDLE_DESCRIPTOR_LOADER_KEY_2, BUNDLE_DESCRIPTOR_LOADER_VALUE_2);
 
     final MulePolicyModelBuilder mulePolicyModelBuilder =
-        new MulePolicyModelBuilder().setName(describerName).setMinMuleVersion(describerMinMuleVersion)
+        new MulePolicyModelBuilder()
+            .setName(describerName)
+            .setMinMuleVersion(describerMinMuleVersion)
             .withBundleDescriptorLoader(new MuleArtifactLoaderDescriptor(BUNDLE_DESCRIPTOR_LOADER_ID,
                                                                          bundleDescriptorAttributes));
     mulePolicyModelBuilder
         .withClassLoaderModelDescriptorLoader(new MuleArtifactLoaderDescriptor(describerClassLoaderModelId, emptyMap()));
+    mulePolicyModelBuilder.setSupportedJavaVersions(singleton("17"));
 
     String actual = mulePolicyModelJsonSerializer.serialize(mulePolicyModelBuilder.build());
     final JsonObject actualElement = new JsonParser().parse(actual).getAsJsonObject();
@@ -75,6 +82,9 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
                equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_1));
     assertThat(bundleDescriptor.get(ATTRIBUTES).getAsJsonObject().get(BUNDLE_DESCRIPTOR_LOADER_KEY_2).getAsString(),
                equalTo(BUNDLE_DESCRIPTOR_LOADER_VALUE_2));
+
+    final JsonArray supportedJavaVersions = actualElement.getAsJsonArray("supportedJavaVersions");
+    assertThat(supportedJavaVersions.get(0).getAsString(), equalTo("17"));
   }
 
   @Test
@@ -86,6 +96,15 @@ public class MulePolicyModelJsonSerializerTestCase extends AbstractMuleArtifactM
     assertNameAndMinMuleVersion(deserialized);
     assertClassLoaderModel(deserialized);
     assertBundleDescriptorLoader(deserialized.getBundleDescriptorLoader());
+  }
+
+  @Test
+  public void deserializesModelWithSupportedJavaVersions() throws IOException {
+    InputStream resource = getClass().getResourceAsStream("/descriptor/policy-descriptor-with-supported-java-versions.json");
+
+    MulePolicyModel deserialized = mulePolicyModelJsonSerializer.deserialize(IOUtils.toString(resource));
+
+    assertThat(deserialized.getSupportedJavaVersions(), containsInAnyOrder("1.8", "11", "17"));
   }
 
   private void assertNameAndMinMuleVersion(MulePolicyModel deserialize) {
