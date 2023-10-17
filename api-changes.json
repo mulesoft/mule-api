@@ -541,6 +541,15 @@
           "fieldName": "CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY",
           "elementKind": "field",
           "justification": "W-13509911: Policies' Variables are being overriden in parallel scenario (race condition)"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.message.Error::getDslSource()",
+          "package": "org.mule.runtime.api.message",
+          "classSimpleName": "Error",
+          "methodName": "getDslSource",
+          "elementKind": "method",
+          "justification": "W-14067135: make Element DSL available in ExceptionPayload"
         }
       ]
     }
@@ -890,6 +899,15 @@
           "fieldName": "MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY",
           "elementKind": "field",
           "justification": "W-10965130: to provide more detailed log for CompositeRoutingExceptions"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.message.Error::getDslSource()",
+          "package": "org.mule.runtime.api.message",
+          "classSimpleName": "Error",
+          "methodName": "getDslSource",
+          "elementKind": "method",
+          "justification": "W-14067135: make Element DSL available in ExceptionPayload"
         }
       ]
     }
