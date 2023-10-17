@@ -178,7 +178,8 @@ public class BindingContextUtils {
     contextBuilder
         .addBinding(MESSAGE,
                     new LazyValue<>(() -> new TypedValue<>(event.getError()
-                        .map(error -> new MessageWrapper(message, error.getCause(), error.getFailingComponent()))
+                        .map(error -> new MessageWrapper(message, error.getCause(), error.getFailingComponent(),
+                                                         error.getDslSource()))
                         .orElseGet(() -> new MessageWrapper(message, null, null)),
                                                            MESAGE_DATA_TYPE)));
     contextBuilder.addBinding(ATTRIBUTES, message.getAttributes());
@@ -247,6 +248,14 @@ public class BindingContextUtils {
       this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location);
     }
 
+    public Message getMessage() {
+      return message;
+    }
+
+    public MessageWrapper(Message message, Throwable exceptionPayload, String location, String dslSource) {
+      this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location, dslSource);
+    }
+
     @Override
     public <T> TypedValue<T> getPayload() {
       return message.getPayload();
@@ -282,6 +291,10 @@ public class BindingContextUtils {
     private transient final MuleException exceptionPayload;
 
     public MessageExceptionInfoWrapper(Message message, Throwable exceptionPayload, String location) {
+      this(message, exceptionPayload, location, "");
+    }
+
+    public MessageExceptionInfoWrapper(Message message, Throwable exceptionPayload, String location, String dslSource) {
       this.message = message;
 
       if (exceptionPayload == null || exceptionPayload instanceof MuleException) {
@@ -289,6 +302,7 @@ public class BindingContextUtils {
       } else {
         this.exceptionPayload = new DefaultMuleException(exceptionPayload.getMessage(), exceptionPayload);
         this.exceptionPayload.getExceptionInfo().setLocation(location);
+        this.exceptionPayload.getExceptionInfo().setDslSource(dslSource);
       }
     }
 

@@ -19,6 +19,15 @@
           "fieldName": "DISABLE_SCHEDULER_LOGGING_PROPERTY",
           "elementKind": "field",
           "justification": "W-13881167: Error handler with logException=false is still logging the exception when using Scheduler"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.message.Error::getDslSource()",
+          "package": "org.mule.runtime.api.message",
+          "classSimpleName": "Error",
+          "methodName": "getDslSource",
+          "elementKind": "method",
+          "justification": "W-14067135: make Element DSL available in ExceptionPayload"
         }
       ]
     }
@@ -433,6 +442,15 @@
           "methodName": "addType",
           "elementKind": "method",
           "justification": "Support resolving types coming from mule in DW transformations"
+        },
+        {
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.lang.String org.mule.runtime.api.message.Error::getDslSource()",
+          "package": "org.mule.runtime.api.message",
+          "classSimpleName": "Error",
+          "methodName": "getDslSource",
+          "elementKind": "method",
+          "justification": "W-14067135: make Element DSL available in ExceptionPayload"
         }
       ]
     }
