@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.6.0-rc1</version>
+    <version>1.6.0-rc2</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
