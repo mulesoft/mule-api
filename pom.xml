@@ -443,11 +443,11 @@
                     <artifactId>mule-module-maven-plugin</artifactId>
                     <version>${muleModuleMavenPluginVersion}</version>
                     <executions>
-	                    <execution>
-	                        <goals>
-	                            <goal>generate</goal>
-	                        </goals>
-	                    </execution>
+                        <execution>
+                            <goals>
+                                <goal>generate</goal>
+                            </goals>
+                        </execution>
                         <execution>
                             <id>analyze</id>
                             <phase>verify</phase>
