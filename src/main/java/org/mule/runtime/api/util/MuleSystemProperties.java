@@ -471,6 +471,13 @@ public final class MuleSystemProperties {
   public static final String PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallelForeach.flattenMessage";
 
+  /**
+   * When set to true, the runtime will run in single app mode.
+   *
+   * @since 4.7.0
+   */
+  public static final String MULE_SINGLE_APP_MODE = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
