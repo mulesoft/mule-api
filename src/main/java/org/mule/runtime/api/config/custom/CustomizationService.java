@@ -35,6 +35,7 @@ public interface CustomizationService {
    * @param serviceId   identifier of the services implementation to customize.
    * @param serviceImpl the service implementation instance
    * @param <T>         the service type
+   * @deprecated since 4.6, use {@link #overrideDefaultServiceImpl(String, Consumer)}.
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
