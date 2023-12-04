@@ -9,6 +9,9 @@ package org.mule.runtime.api.config.custom;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.lifecycle.Lifecycle;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 /**
  * Interface that allows to customize the set of services provided by the {@code MuleContext}.
  * <p>
@@ -35,6 +38,20 @@ public interface CustomizationService {
    * @param <T>         the service type
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
+
+  /**
+   * Allows to override a service provided by default on a mule context by decorating it.
+   * <p>
+   * The service implementation resulting from the decoration can be annotated with @Inject and implement methods from
+   * {@link Lifecycle}.
+   * <p>
+   * The service identifier can be used to locate the service in the mule registry.
+   *
+   * @param serviceId        identifier of the service implementation to customize.
+   * @param serviceDecorator the decorator to apply on the default service implementation.
+   * @since 4.6
+   */
+  void decorateDefaultServiceImpl(String serviceId, Function<Object, Optional<Object>> serviceDecorator);
 
   /**
    * Allows to override a service provided by default on a mule context. The provided class will be used to instantiate the
@@ -73,4 +90,5 @@ public interface CustomizationService {
    * @param <T>          the service type
    */
   <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass);
+
 }
