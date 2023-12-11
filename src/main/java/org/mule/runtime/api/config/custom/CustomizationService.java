@@ -9,6 +9,7 @@ package org.mule.runtime.api.config.custom;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.lifecycle.Lifecycle;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -40,42 +41,44 @@ public interface CustomizationService {
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
   /**
-   * Allows to override a service provided by default on a mule context.
+   * Allows to intercept a service provided by default on a mule context.
    * <p>
    * The new service implementation can be annotated with {@code @Inject} and implement methods from {@link Lifecycle}.
    * <p>
    * The service identifier can be used to locate the service in the mule registry.
    *
-   * @param serviceId        identifier of the service implementation to override.
-   * @param serviceOverrider a {@link Consumer} that will use a {@link ServiceOverrider} to override the default service
-   *                         implementation.
+   * @param serviceId          identifier of the service implementation to override.
+   * @param serviceInterceptor a {@link Consumer} that will use a {@link ServiceInterceptor} to intercept the default service
+   *                           implementation.
    * @since 4.6
    */
-  void overrideDefaultServiceImpl(String serviceId, Consumer<ServiceOverrider> serviceOverrider);
+  void interceptDefaultServiceImpl(String serviceId, Consumer<ServiceInterceptor> serviceInterceptor);
 
   /**
-   * Handles the override of a service implementation, which means either using a different one or flagging it to be removed.
+   * Handles the interception of a service implementation, allowing to customize it, using a different one or flagging it to be
+   * removed.
    *
    * @since 4.6
    */
-  interface ServiceOverrider {
+
+  interface ServiceInterceptor {
 
     /**
      * @return the default service implementation that is going to be overridden.
      */
-    Object getOverridee();
+    Optional<Object> getDefaultServiceImpl();
 
     /**
      * Sets the new service implementation that overrides the default one.
      * 
-     * @param overrider the new service implementation.
+     * @param newServiceImpl the new service implementation.
      */
-    void override(Object overrider);
+    void newServiceImpl(Object newServiceImpl);
 
     /**
-     * Flags that no implementation of the current service must be added to the registry.
+     * Flags that the implementation of the current service must not be added to the registry.
      */
-    void remove();
+    void skip();
 
   }
 
