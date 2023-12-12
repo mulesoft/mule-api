@@ -36,7 +36,7 @@ public interface CustomizationService {
    * @param serviceId   identifier of the services implementation to customize.
    * @param serviceImpl the service implementation instance
    * @param <T>         the service type
-   * @deprecated since 4.6, use {@link #overrideDefaultServiceImpl(String, Consumer)}.
+   * @deprecated since 4.6, use {@link #interceptDefaultServiceImpl(String, Consumer)}.
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
@@ -60,7 +60,6 @@ public interface CustomizationService {
    *
    * @since 4.6
    */
-
   interface ServiceInterceptor {
 
     /**
@@ -106,7 +105,6 @@ public interface CustomizationService {
    * @param <T>         the service type
    */
   <T> void registerCustomServiceImpl(String serviceId, T serviceImpl);
-
 
   /**
    * Allows to define a custom service on a mule context. The provided class will be used to instantiate the service that replaces
