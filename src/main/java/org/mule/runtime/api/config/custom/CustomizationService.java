@@ -63,7 +63,8 @@ public interface CustomizationService {
   interface ServiceInterceptor {
 
     /**
-     * @return the default service implementation that is going to be overridden.
+     * @return the default service implementation that is going to be overridden, or {@link Optional#empty()} if no default
+     *         implementation is present (it's up to the caller to decide what to do in such case).
      */
     Optional<Object> getDefaultServiceImpl();
 
@@ -72,7 +73,7 @@ public interface CustomizationService {
      * 
      * @param newServiceImpl the new service implementation.
      */
-    void newServiceImpl(Object newServiceImpl);
+    void overrideServiceImpl(Object newServiceImpl);
 
     /**
      * Flags that the implementation of the current service must not be added to the registry.
