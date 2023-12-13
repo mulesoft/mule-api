@@ -58,6 +58,8 @@ public interface CustomizationService {
    * Handles the interception of a service implementation, allowing to customize it, using a different one or flagging it to be
    * removed.
    *
+   * @param <T> the type of the service being intercepted.
+   *
    * @since 4.6
    */
   interface ServiceInterceptor<T> {
