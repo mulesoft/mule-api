@@ -50,16 +50,16 @@ public interface CustomizationService {
    * @param serviceId          identifier of the service implementation to override.
    * @param serviceInterceptor a {@link Consumer} that will use a {@link ServiceInterceptor} to intercept the default service
    *                           implementation.
+   * @param <T>                the type of the service to intercept.
    * @since 4.6
    */
-  void interceptDefaultServiceImpl(String serviceId, Consumer<ServiceInterceptor> serviceInterceptor);
+  <T> void interceptDefaultServiceImpl(String serviceId, Consumer<ServiceInterceptor<T>> serviceInterceptor);
 
   /**
    * Handles the interception of a service implementation, allowing to customize it, using a different one or flagging it to be
    * removed.
    *
    * @param <T> the type of the service being intercepted.
-   *
    * @since 4.6
    */
   interface ServiceInterceptor<T> {
