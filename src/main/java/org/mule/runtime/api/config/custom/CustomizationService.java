@@ -36,7 +36,7 @@ public interface CustomizationService {
    * @param serviceId   identifier of the services implementation to customize.
    * @param serviceImpl the service implementation instance
    * @param <T>         the service type
-   * @deprecated since 4.6, use {@link #interceptDefaultServiceImpl(String, Consumer)}.
+   * @deprecated since 1.6, use {@link #interceptDefaultServiceImpl(String, Consumer)}.
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
@@ -51,7 +51,7 @@ public interface CustomizationService {
    * @param serviceInterceptor a {@link Consumer} that will use a {@link ServiceInterceptor} to intercept the default service
    *                           implementation.
    * @param <T>                the type of the service to intercept.
-   * @since 4.6
+   * @since 1.6
    */
   <T> void interceptDefaultServiceImpl(String serviceId, Consumer<ServiceInterceptor<T>> serviceInterceptor);
 
@@ -60,7 +60,7 @@ public interface CustomizationService {
    * removed.
    *
    * @param <T> the type of the service being intercepted.
-   * @since 4.6
+   * @since 1.6
    */
   interface ServiceInterceptor<T> {
 
@@ -80,7 +80,7 @@ public interface CustomizationService {
     /**
      * Flags that the implementation of the current service must not be added to the registry.
      */
-    void skip();
+    void remove();
 
   }
 
