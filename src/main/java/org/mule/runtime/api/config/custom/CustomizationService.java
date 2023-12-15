@@ -9,6 +9,9 @@ package org.mule.runtime.api.config.custom;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.lifecycle.Lifecycle;
 
+import java.util.Optional;
+import java.util.function.Consumer;
+
 /**
  * Interface that allows to customize the set of services provided by the {@code MuleContext}.
  * <p>
@@ -33,8 +36,53 @@ public interface CustomizationService {
    * @param serviceId   identifier of the services implementation to customize.
    * @param serviceImpl the service implementation instance
    * @param <T>         the service type
+   * @deprecated since 1.6, use {@link #interceptDefaultServiceImpl(String, Consumer)}.
    */
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
+
+  /**
+   * Allows to intercept a service provided by default on a mule context.
+   * <p>
+   * The new service implementation can be annotated with {@code @Inject} and implement methods from {@link Lifecycle}.
+   * <p>
+   * The service identifier can be used to locate the service in the mule registry.
+   *
+   * @param serviceId          identifier of the service implementation to override.
+   * @param serviceInterceptor a {@link Consumer} that will use a {@link ServiceInterceptor} to intercept the default service
+   *                           implementation.
+   * @param <T>                the type of the service to intercept.
+   * @since 1.6
+   */
+  <T> void interceptDefaultServiceImpl(String serviceId, Consumer<ServiceInterceptor<T>> serviceInterceptor);
+
+  /**
+   * Handles the interception of a service implementation, allowing to customize it, using a different one or flagging it to be
+   * removed.
+   *
+   * @param <T> the type of the service being intercepted.
+   * @since 1.6
+   */
+  interface ServiceInterceptor<T> {
+
+    /**
+     * @return the default service implementation that is going to be overridden, or {@link Optional#empty()} if no default
+     *         implementation is present (it's up to the caller to decide what to do in such case).
+     */
+    Optional<T> getDefaultServiceImpl();
+
+    /**
+     * Sets the new service implementation that overrides the default one.
+     * 
+     * @param newServiceImpl the new service implementation.
+     */
+    void overrideServiceImpl(T newServiceImpl);
+
+    /**
+     * Flags that the implementation of the current service must not be added to the registry.
+     */
+    void remove();
+
+  }
 
   /**
    * Allows to override a service provided by default on a mule context. The provided class will be used to instantiate the
@@ -61,7 +109,6 @@ public interface CustomizationService {
    */
   <T> void registerCustomServiceImpl(String serviceId, T serviceImpl);
 
-
   /**
    * Allows to define a custom service on a mule context. The provided class will be used to instantiate the service that replaces
    * the default one if it's replacing an existent service.
@@ -73,4 +120,5 @@ public interface CustomizationService {
    * @param <T>          the service type
    */
   <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass);
+
 }
