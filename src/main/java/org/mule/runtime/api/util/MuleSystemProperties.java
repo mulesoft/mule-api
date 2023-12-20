@@ -834,6 +834,17 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.scheduler.logging";
 
   /**
+   * Property used to change the deployment mode to deploy only one application.
+   * <p>
+   * <code>mule -M-Dmule.single.app.mode</code>
+   * <p>
+   * Using this property will deploy only one artifact, even if new artifacts are found to deploy.
+   *
+   * @since 4.0
+   */
+  public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
