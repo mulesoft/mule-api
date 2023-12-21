@@ -31,6 +31,7 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.util.HashMap;
 import java.util.List;
 
+import io.qameta.allure.Issue;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -364,5 +365,15 @@ public class MediaTypeTestCase {
 
     assertThat(withParam.withoutParameters(), sameInstance(withoutParam));
   }
+
+  @Test
+  @Issue("W-14490182")
+  public void avoidDoSUsingMimeTypeCaching() {
+    for (int i = 0; i < 50; i++) {
+      MediaType.parse("attack/" + i);
+    }
+    assertThat(MediaType.getCacheSize(), is(32));
+  }
+
 
 }

@@ -443,5 +443,9 @@ public final class MediaType implements Serializable {
     }
     return buffer.toString();
   }
+
+  public static int getCacheSize() {
+    return cache.size();
+  }
 }
 
