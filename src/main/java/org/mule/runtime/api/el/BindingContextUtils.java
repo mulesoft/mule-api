@@ -248,10 +248,6 @@ public class BindingContextUtils {
       this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location);
     }
 
-    public Message getMessage() {
-      return message;
-    }
-
     public MessageWrapper(Message message, Throwable exceptionPayload, String location, String dslSource) {
       this.message = new MessageExceptionInfoWrapper(message, exceptionPayload, location, dslSource);
     }
