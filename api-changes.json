@@ -1,4 +1,20 @@
 {
+  "1.5.3": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method int org.mule.runtime.api.metadata.MediaType::getCacheSize()",
+          "package": "org.mule.runtime.api.metadata",
+          "classQualifiedName": "org.mule.runtime.api.metadata.MediaType",
+          "classSimpleName": "MediaType",
+          "methodName": "getCacheSize",
+          "elementKind": "method",
+          "justification": "W-14490182: Set maximum cache size for MediaType to prevent attacks/OOM"
+        }
+      ]
+    }
+  },
   "1.5.1": {
     "revapi": {
       "ignore": [
