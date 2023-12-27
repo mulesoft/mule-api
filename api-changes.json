@@ -550,6 +550,15 @@
           "methodName": "getDslSource",
           "elementKind": "method",
           "justification": "W-14067135: make Element DSL available in ExceptionPayload"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method int org.mule.runtime.api.metadata.MediaType::getCacheSize()",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "getCacheSize",
+          "elementKind": "method",
+          "justification": "W-14490182: Set maximum cache size for MediaType to prevent attacks/OOM"
         }
       ]
     }
