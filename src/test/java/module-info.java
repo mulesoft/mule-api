@@ -50,6 +50,7 @@ module org.mule.runtime.api.test {
   exports org.mule.runtime.api.test.metadata;
   exports org.mule.runtime.api.test.metadata.descriptor;
   exports org.mule.runtime.api.test.persistence;
+  exports org.mule.runtime.api.test.scheduler;
   exports org.mule.runtime.api.test.store;
   exports org.mule.runtime.api.test.streaming;
   exports org.mule.runtime.api.test.util;
