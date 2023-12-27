@@ -15,6 +15,7 @@ import static java.util.Collections.emptyMap;
 import static java.util.Collections.list;
 import static java.util.Optional.ofNullable;
 
+import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
 import static org.apache.commons.lang3.StringUtils.isNotEmpty;
 
 import java.io.ObjectInputStream;
@@ -27,14 +28,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import javax.activation.MimeType;
 import javax.activation.MimeTypeParseException;
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 
 /**
  * Immutable representation of Media Types as defined in <a href="https://www.ietf.org/rfc/rfc2046.txt">RFC-2046 Part Two</a>.
@@ -61,7 +59,8 @@ public final class MediaType implements Serializable {
   private static final String SUBTYPE_FORM_DATA = "form-data";
   private static final String SUBTYPE_RELATED = "related";
 
-  private static final ConcurrentMap<String, MediaType> cache = new ConcurrentHashMap<>();
+  private static final Cache<String, MediaType> cache = newBuilder().maximumSize(32).build();
+
 
   public static final MediaType ANY = create("*", "*");
 
@@ -106,12 +105,9 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    MediaType cachedMediaType = cache.get(mediaType);
-    if (cachedMediaType != null) {
-      return cachedMediaType;
-    }
+    MediaType cachedMediaType = parseMediaType(mediaType, false);
 
-    return parseMediaType(mediaType, false);
+    return cachedMediaType;
   }
 
   /**
@@ -126,12 +122,9 @@ public final class MediaType implements Serializable {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
-    MediaType cachedMediaType = cache.get(mediaType);
-    if (cachedMediaType != null) {
-      return cachedMediaType;
-    }
+    MediaType cachedMediaType = parseMediaType(mediaType, true);
 
-    return parseMediaType(mediaType, true);
+    return cachedMediaType;
   }
 
   private static MediaType parseMediaType(String mediaType, boolean definedInApp) {
@@ -210,18 +203,19 @@ public final class MediaType implements Serializable {
     // in caching them).
     // In order to make the cache take into account other similar scenarios, we use the presence of other parameters to
     // determine if the value is cached or not.
-    MediaType cachedMediaType = cache.get(value.toRfcString());
+    MediaType cachedMediaType = cacheMediaType(value, value.toRfcString(), false);
 
-    if (cachedMediaType != null) {
-      return cachedMediaType;
-    }
-
-    return cacheMediaType(value, value.toRfcString(), false);
+    return cachedMediaType;
   }
 
   private static MediaType cacheMediaType(final MediaType type, String rfcString, boolean definedInApp) {
-    final MediaType oldValue = cache.putIfAbsent(rfcString, type);
-    return oldValue == null ? type : oldValue;
+    final MediaType oldValue = cache.getIfPresent(rfcString);
+    if (oldValue == null) {
+      cache.put(rfcString, type);
+      cache.cleanUp();
+      return type;
+    }
+    return oldValue;
   }
 
   private MediaType(String primaryType, String subType, Map<String, String> params, Charset charset, boolean definedInApp) {
@@ -233,7 +227,7 @@ public final class MediaType implements Serializable {
     this.rfcString = calculateRfcString();
   }
 
-  private transient Cache<Optional<Charset>, MediaType> withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
+  private transient Cache<Optional<Charset>, MediaType> withCharsetCache = newBuilder().maximumSize(16).build();
 
   /**
    * Creates a new {@link MediaType} instance keeping the {@code type} and {@code sub-type} but replacing the {@code charset} with
@@ -386,7 +380,7 @@ public final class MediaType implements Serializable {
       charset = Charset.forName(charsetStr);
     }
 
-    this.withCharsetCache = Caffeine.newBuilder().maximumSize(16).build();
+    this.withCharsetCache = newBuilder().maximumSize(16).build();
     this.withoutParamsLock = new Object();
     this.rfcString = calculateRfcString();
   }
@@ -442,6 +436,10 @@ public final class MediaType implements Serializable {
       buffer.append(c);
     }
     return buffer.toString();
+  }
+
+  public static int getCacheSize() {
+    return cache.asMap().size();
   }
 }
 
