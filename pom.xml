@@ -109,7 +109,11 @@
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <artifactDeclarationVersion>1.7.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.7.0-SNAPSHOT</muleModuleMavenPluginVersion>
+
+        <junitVersion>4.13.2</junitVersion>
         <hamcrestVersion>2.2</hamcrestVersion>
+        <mockitoVersion>2.26.0</mockitoVersion>
+
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
         <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
@@ -147,6 +151,33 @@
                 <version>${muleBomVersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junitVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockitoVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.hamcrest</groupId>
+                        <artifactId>hamcrest-core</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest</artifactId>
+                <version>${hamcrestVersion}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
