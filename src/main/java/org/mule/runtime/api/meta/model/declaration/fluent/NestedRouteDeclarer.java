@@ -7,7 +7,9 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static org.mule.runtime.api.meta.model.parameter.ParameterGroupModel.DEFAULT_GROUP_NAME;
+
 import org.mule.runtime.api.meta.model.ModelProperty;
+import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
 
 /**
  * Allows configuring a {@link NestedComponentDeclaration} through a fluent API.
@@ -18,7 +20,8 @@ import org.mule.runtime.api.meta.model.ModelProperty;
  * @since 1.0
  */
 public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
-    implements HasModelProperties<NestedRouteDeclarer>, HasNestedComponentsDeclarer, HasParametersDeclarer {
+    implements HasModelProperties<NestedRouteDeclarer>, HasStereotypeDeclarer<NestedRouteDeclarer>, HasNestedComponentsDeclarer,
+    HasParametersDeclarer {
 
   /**
    * Creates a new instance
@@ -123,6 +126,20 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
   @Override
   public NestedRouteDeclarer withModelProperty(ModelProperty modelProperty) {
     declaration.addModelProperty(modelProperty);
+    return this;
+  }
+
+  /**
+   * Adds the given {@code stereotype}
+   *
+   * @param stereotype a {@link StereotypeModel}
+   * @return {@code this} declarer
+   * 
+   * @since 1.7
+   */
+  @Override
+  public NestedRouteDeclarer withStereotype(StereotypeModel stereotype) {
+    declaration.withStereotype(stereotype);
     return this;
   }
 
