@@ -476,6 +476,12 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, the Scheduler does not log exceptions.",
       "W-13881167", "4.6.0", DISABLE_SCHEDULER_LOGGING_PROPERTY),
 
+  /**
+   * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
+   * handling.
+   *
+   * @since 4.6.0
+   */
   ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT(
       "When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error handling",
       "W-14608096", "4.6.0", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY);

@@ -833,6 +833,12 @@ public final class MuleSystemProperties {
   public static final String DISABLE_SCHEDULER_LOGGING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disable.scheduler.logging";
 
+  /**
+   * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
+   * handling.
+   *
+   * @since 4.6.0
+   */
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
@@ -845,7 +851,6 @@ public final class MuleSystemProperties {
    * @since 4.0
    */
   public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
-
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
