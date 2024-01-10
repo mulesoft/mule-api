@@ -480,7 +480,7 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
    * handling.
    *
-   * @since 4.6.0
+   * @since 4.6.1
    */
   ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT(
       "When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error handling",
