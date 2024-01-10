@@ -837,7 +837,7 @@ public final class MuleSystemProperties {
    * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
    * handling.
    *
-   * @since 4.6.0
+   * @since 4.6.1
    */
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
