@@ -110,7 +110,7 @@
         <artifactDeclarationVersion>1.1.4-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.0.3-SNAPSHOT</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.25</slf4jVersion>
-        <gsonVersion>2.8.1</gsonVersion>
+        <gsonVersion>2.8.9</gsonVersion>
         <commonsIoVersion>2.6</commonsIoVersion>
         <mockitoVersion>1.9.5</mockitoVersion>
         <junitVersion>4.12</junitVersion>
