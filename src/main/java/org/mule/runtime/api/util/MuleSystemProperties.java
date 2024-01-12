@@ -834,6 +834,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.scheduler.logging";
 
   /**
+   * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
+   * handling.
+   *
+   * @since 4.6.1
+   */
+  public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
+
+  /**
    * Property used to change the deployment mode to deploy only one application.
    * <p>
    * <code>mule -M-Dmule.single.app.mode</code>

@@ -25,6 +25,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SE
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
@@ -473,7 +474,17 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_SCHEDULER_LOGGING(
       "When enabled, the Scheduler does not log exceptions.",
-      "W-13881167", "4.6.0", DISABLE_SCHEDULER_LOGGING_PROPERTY);
+      "W-13881167", "4.6.0", DISABLE_SCHEDULER_LOGGING_PROPERTY),
+
+  /**
+   * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
+   * handling.
+   *
+   * @since 4.6.1
+   */
+  ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT(
+      "When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error handling",
+      "W-14608096", "4.6.1", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY);
 
   private final String description;
   private final String issueId;
