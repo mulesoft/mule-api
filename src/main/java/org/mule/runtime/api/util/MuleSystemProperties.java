@@ -596,8 +596,8 @@ public final class MuleSystemProperties {
 
   /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
-   * When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error
-   * handling.
+   *         When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using
+   *         error handling.
    *
    * @since 4.5.4
    */
