@@ -108,7 +108,7 @@
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <artifactDeclarationVersion>1.6.0-rc5</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.5.1-rc4</muleModuleMavenPluginVersion>
+        <muleModuleMavenPluginVersion>1.5.1-rc5</muleModuleMavenPluginVersion>
         <hamcrestVersion>2.2</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
