@@ -603,6 +603,8 @@ public final class MuleSystemProperties {
    */
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
+  public static final String HONOUR_EXTENSION_ERROR_NAMESPACE = SYSTEM_PROPERTY_PREFIX + "honour.extension.error.namespace";
+
   /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */

@@ -577,6 +577,15 @@
           "fieldName": "ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY",
           "elementKind": "field",
           "justification": "W-14608096: timeout is not being considered for local transactions and rollbacks are being silently executed"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_EXTENSION_ERROR_NAMESPACE",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOUR_EXTENSION_ERROR_NAMESPACE",
+          "elementKind": "field",
+          "justification": "W-10617943: Fix namespace read while picking up connector error type as seen for SAP S4hana Odata connector"
         }
       ]
     }
