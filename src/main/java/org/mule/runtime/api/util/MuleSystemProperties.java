@@ -846,15 +846,15 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
-   * Property used to change the deployment mode to deploy only one application.
+   * Property used to change the deployment model to deploy only one application if set to false.
    * <p>
-   * <code>mule -M-Dmule.single.app.mode</code>
+   * <code>mule -M-Dmule.appServerModel</code>
    * <p>
-   * Using this property will deploy only one artifact, even if new artifacts are found to deploy.
+   * Using this property in false will deploy only one artifact, even if new artifacts are found to deploy.
    *
    * @since 4.0
    */
-  public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
+  public static final String APP_SERVER_MODEL_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "appServerModel";
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
