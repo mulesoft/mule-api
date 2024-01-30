@@ -129,7 +129,7 @@
         <jacoco.version>0.8.10</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.6.0-rc5</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.6.1-SNAPSHOT</muleRevapiExtensionVersion>
+        <muleRevapiExtensionVersion>1.6.2-SNAPSHOT</muleRevapiExtensionVersion>
         <muleApiAnnotationsVersion>1.5.2-SNAPSHOT</muleApiAnnotationsVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
