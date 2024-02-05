@@ -475,6 +475,13 @@ public final class MuleSystemProperties {
   public static final String PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallelForeach.flattenMessage";
 
+  /**
+   * When set with a route, fatal errors that prompt the container shutdown will be sent to it.
+   *
+   * @since 4.7.0
+   */
+  public static final String MULE_TERMINATION_LOG_ROUTE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "termination.log.route";
+
   static {
     // Maintain compatibility after fix for MULE-19406
     final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
