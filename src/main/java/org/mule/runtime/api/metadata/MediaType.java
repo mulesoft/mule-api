@@ -105,9 +105,11 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    MediaType cachedMediaType = parseMediaType(mediaType, false);
-
-    return cachedMediaType;
+    MediaType cachedMediaType = cache.getIfPresent(mediaType);
+    if (cachedMediaType != null) {
+      return cachedMediaType;
+    }
+    return parseMediaType(mediaType, false);
   }
 
   /**
@@ -122,9 +124,11 @@ public final class MediaType implements Serializable {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
-    MediaType cachedMediaType = parseMediaType(mediaType, true);
-
-    return cachedMediaType;
+    MediaType cachedMediaType = cache.getIfPresent(mediaType);
+    if (cachedMediaType != null) {
+      return cachedMediaType;
+    }
+    return parseMediaType(mediaType, true);
   }
 
   private static MediaType parseMediaType(String mediaType, boolean definedInApp) {
