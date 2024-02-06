@@ -84,6 +84,7 @@ public final class MediaType implements Serializable {
   private static Map<String, MediaType> predefined;
 
   static {
+    // Create a set of predefined (constant) types, so that we don't have to create them when someone calls parse().
     predefined = new HashMap<>(16);
 
     ANY = createConstant("*", "*");
@@ -130,7 +131,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    return getCached(mediaType).orElseGet(() -> parseMediaType(mediaType, false));
+    return getKnown(mediaType).orElseGet(() -> parseMediaType(mediaType, false));
   }
 
   /**
@@ -145,18 +146,23 @@ public final class MediaType implements Serializable {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
-    return getCached(mediaType).orElseGet(() -> parseMediaType(mediaType, true));
+    return getKnown(mediaType).orElseGet(() -> parseMediaType(mediaType, true));
   }
 
-  private static Optional<MediaType> getCached(String mediaType) {
+  private static Optional<MediaType> getKnown(String mediaType) {
+    // Check if it's one of the constant types
     MediaType predefinedFound = predefined.get(mediaType);
     if (predefinedFound != null) {
       return of(predefinedFound);
     }
+
+    // Check if we already parsed this type
     MediaType cachedFound = cache.getIfPresent(mediaType);
     if (cachedFound != null) {
       return of(cachedFound);
     }
+
+    // We don't have this type memorized
     return empty();
   }
 
