@@ -13,6 +13,9 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.list;
+import static java.util.Collections.unmodifiableMap;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 
 import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
@@ -62,24 +65,46 @@ public final class MediaType implements Serializable {
   private static final Cache<String, MediaType> cache = newBuilder().maximumSize(32).build();
 
 
-  public static final MediaType ANY = create("*", "*");
+  public static final MediaType ANY;
+  public static final MediaType JSON;
+  public static final MediaType APPLICATION_JSON;
+  public static final MediaType APPLICATION_JAVA;
+  public static final MediaType ATOM;
+  public static final MediaType RSS;
+  public static final MediaType APPLICATION_XML;
+  public static final MediaType XML;
+  public static final MediaType TEXT;
+  public static final MediaType HTML;
+  public static final MediaType BINARY;
+  public static final MediaType UNKNOWN;
+  public static final MediaType MULTIPART_MIXED;
+  public static final MediaType MULTIPART_FORM_DATA;
+  public static final MediaType MULTIPART_RELATED;
+  public static final MediaType MULTIPART_X_MIXED_REPLACE;
+  private static Map<String, MediaType> predefined;
 
-  public static final MediaType JSON = create(TYPE_TEXT, SUBTYPE_JSON);
-  public static final MediaType APPLICATION_JSON = create(TYPE_APPLICATION, SUBTYPE_JSON);
-  public static final MediaType APPLICATION_JAVA = create(TYPE_APPLICATION, "java");
-  public static final MediaType ATOM = create(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
-  public static final MediaType RSS = create(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
-  public static final MediaType APPLICATION_XML = create(TYPE_APPLICATION, SUBTYPE_XML);
-  public static final MediaType XML = create(TYPE_TEXT, SUBTYPE_XML);
-  public static final MediaType TEXT = create(TYPE_TEXT, SUBTYPE_PLAIN);
-  public static final MediaType HTML = create(TYPE_TEXT, SUBTYPE_HTML);
+  static {
+    predefined = new HashMap<>(16);
 
-  public static final MediaType BINARY = create(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
-  public static final MediaType UNKNOWN = create("content", "unknown");
-  public static final MediaType MULTIPART_MIXED = create(TYPE_MULTIPART, SUBTYPE_MIXED);
-  public static final MediaType MULTIPART_FORM_DATA = create(TYPE_MULTIPART, SUBTYPE_FORM_DATA);
-  public static final MediaType MULTIPART_RELATED = create(TYPE_MULTIPART, SUBTYPE_RELATED);
-  public static final MediaType MULTIPART_X_MIXED_REPLACE = create(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
+    ANY = createConstant("*", "*");
+    JSON = createConstant(TYPE_TEXT, SUBTYPE_JSON);
+    APPLICATION_JSON = createConstant(TYPE_APPLICATION, SUBTYPE_JSON);
+    APPLICATION_JAVA = createConstant(TYPE_APPLICATION, "java");
+    ATOM = createConstant(TYPE_APPLICATION, "atom+" + SUBTYPE_XML);
+    RSS = createConstant(TYPE_APPLICATION, "rss+" + SUBTYPE_XML);
+    APPLICATION_XML = createConstant(TYPE_APPLICATION, SUBTYPE_XML);
+    XML = createConstant(TYPE_TEXT, SUBTYPE_XML);
+    TEXT = createConstant(TYPE_TEXT, SUBTYPE_PLAIN);
+    HTML = createConstant(TYPE_TEXT, SUBTYPE_HTML);
+    BINARY = createConstant(TYPE_APPLICATION, SUBTYPE_OCTET_STREAM);
+    UNKNOWN = createConstant("content", "unknown");
+    MULTIPART_MIXED = createConstant(TYPE_MULTIPART, SUBTYPE_MIXED);
+    MULTIPART_FORM_DATA = createConstant(TYPE_MULTIPART, SUBTYPE_FORM_DATA);
+    MULTIPART_RELATED = createConstant(TYPE_MULTIPART, SUBTYPE_RELATED);
+    MULTIPART_X_MIXED_REPLACE = createConstant(TYPE_MULTIPART, "x-" + SUBTYPE_MIXED + "-replace");
+
+    predefined = unmodifiableMap(predefined);
+  }
 
   private static List<String> KNOWN_PARAM_NAMES =
       getProperty(MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES) != null
@@ -105,11 +130,7 @@ public final class MediaType implements Serializable {
    * @return {@link MediaType} instance for the parsed {@code mediaType} string.
    */
   public static MediaType parse(String mediaType) {
-    MediaType cachedMediaType = cache.getIfPresent(mediaType);
-    if (cachedMediaType != null) {
-      return cachedMediaType;
-    }
-    return parseMediaType(mediaType, false);
+    return getCached(mediaType).orElseGet(() -> parseMediaType(mediaType, false));
   }
 
   /**
@@ -124,11 +145,19 @@ public final class MediaType implements Serializable {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static MediaType parseDefinedInApp(String mediaType) {
-    MediaType cachedMediaType = cache.getIfPresent(mediaType);
-    if (cachedMediaType != null) {
-      return cachedMediaType;
+    return getCached(mediaType).orElseGet(() -> parseMediaType(mediaType, true));
+  }
+
+  private static Optional<MediaType> getCached(String mediaType) {
+    MediaType predefinedFound = predefined.get(mediaType);
+    if (predefinedFound != null) {
+      return of(predefinedFound);
     }
-    return parseMediaType(mediaType, true);
+    MediaType cachedFound = cache.getIfPresent(mediaType);
+    if (cachedFound != null) {
+      return of(cachedFound);
+    }
+    return empty();
   }
 
   private static MediaType parseMediaType(String mediaType, boolean definedInApp) {
@@ -189,6 +218,12 @@ public final class MediaType implements Serializable {
    */
   public static MediaType create(String primaryType, String subType) {
     return create(primaryType, subType, null);
+  }
+
+  private static MediaType createConstant(String primaryType, String subType) {
+    final MediaType value = new MediaType(primaryType, subType, emptyMap(), null, true);
+    predefined.put(value.toRfcString(), value);
+    return value;
   }
 
   /**
