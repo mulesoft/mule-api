@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -337,6 +339,31 @@ public class MediaTypeTestCase {
   }
 
   @Test
+  @Issue("W-14678431")
+  public void constantsAndParsedSameInstance() {
+    final MediaType appXml = APPLICATION_XML;
+    assertThat(MediaType.parse(appXml.toRfcString()), sameInstance(appXml));
+  }
+
+  @Test
+  @Issue("W-14678431")
+  public void sameParsedWithParamsNotSameInstance() {
+    final MediaType withParam1 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+    final MediaType withParam2 = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+
+    assertThat(withParam1, not(sameInstance(withParam2)));
+  }
+
+  @Test
+  @Issue("W-14678431")
+  public void withoutParametersCached() {
+    final MediaType withParam = MediaType.parse("multipart/lalala; boundary=\"---- next message ----\"");
+    final MediaType withoutParam = MediaType.parse("multipart/lalala");
+
+    assertThat(withParam.withoutParameters(), sameInstance(withoutParam));
+  }
+
+  @Test
   @Issue("W-14490182")
   public void avoidDoSUsingMimeTypeCaching() {
     for (int i = 0; i < 100; i++) {
@@ -344,5 +371,4 @@ public class MediaTypeTestCase {
     }
     assertThat(MediaType.getCacheSize(), is(32));
   }
-
 }
