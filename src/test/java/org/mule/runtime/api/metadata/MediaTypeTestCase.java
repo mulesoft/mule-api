@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.metadata.MediaType.APPLICATION_XML;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
