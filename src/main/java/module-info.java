@@ -93,6 +93,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.metadata.resolving;
   exports org.mule.runtime.api.notification;
   exports org.mule.runtime.api.parameterization;
+  exports org.mule.runtime.api.retry.policy;
   exports org.mule.runtime.api.sampledata;
   exports org.mule.runtime.api.scheduler;
   exports org.mule.runtime.api.security;
