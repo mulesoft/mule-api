@@ -597,6 +597,9 @@ public final class MuleSystemProperties {
   /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
+
+  public static final String HONOUR_EXTENSION_ERROR_NAMESPACE = SYSTEM_PROPERTY_PREFIX + "honour.extension.error.namespace";
+
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
     return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
   }
