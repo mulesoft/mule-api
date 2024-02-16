@@ -562,6 +562,24 @@
         },
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT",
+          "elementKind": "enumConstant",
+          "justification": "W-14608096: timeout is not being considered for local transactions and rollbacks are being silently executed"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-14608096: timeout is not being considered for local transactions and rollbacks are being silently executed"
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_EXTENSION_ERROR_NAMESPACE",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
