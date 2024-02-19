@@ -18,7 +18,7 @@ import java.util.function.Supplier;
  * A {@code RetryPolicyTemplate} creates a new policy instance each time the retry goes into effect, thereby resetting any state
  * the policy may have (counters, etc.)
  *
- * @since 4.7
+ * @since 1.7
  */
 public interface RetryPolicyTemplate {
 
