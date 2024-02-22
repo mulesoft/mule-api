@@ -124,6 +124,11 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     return subDeclarations.getConstructs();
   }
 
+  /**
+   * Removes the {@link ConstructDeclaration}.
+   * 
+   * @param constructDeclaration
+   */
   public void removeConstruct(ConstructDeclaration constructDeclaration) {
     subDeclarations.removeConstruct(constructDeclaration);
   }

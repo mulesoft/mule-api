@@ -73,6 +73,11 @@ final class SubDeclarationsContainer {
     constructs.add(declaration);
   }
 
+  /**
+   * Removes the {@link ConstructDeclaration}.
+   * 
+   * @param declaration
+   */
   void removeConstruct(ConstructDeclaration declaration) {
     constructs.remove(declaration);
   }
