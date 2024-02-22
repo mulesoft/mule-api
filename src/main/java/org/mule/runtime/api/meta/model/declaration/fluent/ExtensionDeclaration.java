@@ -124,6 +124,10 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
     return subDeclarations.getConstructs();
   }
 
+  public void removeConstruct(ConstructDeclaration constructDeclaration) {
+    subDeclarations.removeConstruct(constructDeclaration);
+  }
+
   /**
    * {@inheritDoc}
    */

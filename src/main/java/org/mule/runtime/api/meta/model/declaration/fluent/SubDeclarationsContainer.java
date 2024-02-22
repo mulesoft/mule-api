@@ -73,6 +73,10 @@ final class SubDeclarationsContainer {
     constructs.add(declaration);
   }
 
+  void removeConstruct(ConstructDeclaration declaration) {
+    constructs.remove(declaration);
+  }
+
   /**
    * Adds a {@link ConnectionProviderDeclaration}
    *
