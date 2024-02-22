@@ -1,4 +1,19 @@
 {
+  "1.7.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.method.visibilityIncreased",
+          "old": "method void org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration::<init>(java.lang.String)",
+          "new": "method void org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration::<init>(java.lang.String)",
+          "oldVisibility": "package",
+          "newVisibility": "protected",
+          "justification": "W-15090480: Aggregators' special case for enrichers when changing routers to be Operations"
+        }
+      ]
+    }
+  },
   "1.5.0": {
     "revapi": {
       "ignore": [
