@@ -21,7 +21,7 @@ public class ConstructDeclaration extends ComponentDeclaration<ConstructDeclarat
   /**
    * {@inheritDoc}
    */
-  ConstructDeclaration(String name) {
+  protected ConstructDeclaration(String name) {
     super(name);
   }
 
