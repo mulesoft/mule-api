@@ -125,12 +125,12 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
   }
 
   /**
-   * Removes the {@link ConstructDeclaration}.
+   * Set the {@link ConstructDeclaration}s of this declaration to be the ones defined in {@code constructs}.
    * 
-   * @param constructDeclaration
+   * @param constructs
    */
-  public void removeConstruct(ConstructDeclaration constructDeclaration) {
-    subDeclarations.removeConstruct(constructDeclaration);
+  public void setConstructs(List<ConstructDeclaration> constructs) {
+    subDeclarations.setConstructs(constructs);
   }
 
   /**

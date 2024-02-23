@@ -25,7 +25,7 @@ import java.util.Set;
  */
 final class SubDeclarationsContainer {
 
-  private final Set<ConstructDeclaration> constructs = new LinkedHashSet<>();
+  private Set<ConstructDeclaration> constructs = new LinkedHashSet<>();
   private final Set<FunctionDeclaration> functions = new LinkedHashSet<>();
   private final Set<OperationDeclaration> operations = new LinkedHashSet<>();
   private final Set<SourceDeclaration> messageSources = new LinkedHashSet<>();
@@ -74,12 +74,12 @@ final class SubDeclarationsContainer {
   }
 
   /**
-   * Removes the {@link ConstructDeclaration}.
+   * Sets the {@link ConstructDeclaration}s to be the ones in {@code declarations}
    * 
-   * @param declaration
+   * @param declarations
    */
-  void removeConstruct(ConstructDeclaration declaration) {
-    constructs.remove(declaration);
+  public void setConstructs(List<ConstructDeclaration> declarations) {
+    this.constructs = new LinkedHashSet<>(declarations);
   }
 
   /**
