@@ -7,6 +7,8 @@
 package org.mule.runtime.api.test.meta.model.tck;
 
 import static org.mule.runtime.api.meta.Category.COMMUNITY;
+import static org.mule.runtime.api.meta.model.nested.ChainExecutionOccurrence.ONCE_OR_NONE;
+
 import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclarer;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
@@ -53,10 +55,10 @@ public class TestCoreExtensionDeclarer extends TestBaseDeclarer {
     ConstructDeclarer router = extensionDeclarer.withConstruct(CHOICE_OPERATION_NAME);
 
     NestedRouteDeclarer whenDeclaration = router.withRoute(WHEN_ROUTE_NAME);
-    whenDeclaration.withMinOccurs(1).withChain();
+    whenDeclaration.withMinOccurs(1).withChain().setExecutionOccurrence(ONCE_OR_NONE);
     whenDeclaration.withComponent("errorHandler")
         .onDefaultParameterGroup().withRequiredParameter("type").ofType(getStringType());
-    router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain();
+    router.withRoute(OTHERWISE_ROUTE_NAME).withMinOccurs(0).withMaxOccurs(1).withChain().setExecutionOccurrence(ONCE_OR_NONE);
     router.withSemanticTerm("router");
     ConstructDeclarer scope = extensionDeclarer.withConstruct(FOREACH_OPERATION_NAME);
     scope.onDefaultParameterGroup().withOptionalParameter(FOREACH_EXPRESSION_PARAMETER_NAME).ofType(getStringType());
