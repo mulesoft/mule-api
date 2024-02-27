@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
@@ -19,6 +20,9 @@ import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Provides access to the Metadata of any {@link MetadataProvider} and {@link EntityMetadataProvider} components in the
@@ -172,4 +176,25 @@ public interface MetadataService {
    *         a problem.
    */
   MetadataResult<TypeMetadataDescriptor> getEntityMetadata(Location location, MetadataKey key);
+
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location, MetadataKey key,
+                                                                  ScopePropagationContext ctx);
+
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
+                                                                   RouterPropagationContext ctx);
+
+  interface ScopePropagationContext {
+
+    Supplier<MetadataType> getInnerChainResolver();
+
+    Supplier<MessageMetadataType> getMessageTypeResolver();
+  }
+  interface RouterPropagationContext {
+
+    Map<String, Supplier<MetadataType>> getRouteResolvers();
+
+    Supplier<MessageMetadataType> getMessageTypeResolver();
+  }
+
+
 }
