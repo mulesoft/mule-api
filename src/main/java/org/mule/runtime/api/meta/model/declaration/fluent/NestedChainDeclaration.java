@@ -6,6 +6,10 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static org.mule.runtime.api.meta.model.nested.ChainExecutionOccurrence.UNKNOWN;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import org.mule.runtime.api.meta.model.nested.ChainExecutionOccurrence;
 import org.mule.runtime.api.meta.model.nested.NestedChainModel;
 
 /**
@@ -15,6 +19,8 @@ import org.mule.runtime.api.meta.model.nested.NestedChainModel;
  * @since 1.0
  */
 public class NestedChainDeclaration extends NestedComponentDeclaration<NestedChainDeclaration> {
+
+  private ChainExecutionOccurrence occurrence = UNKNOWN;
 
   /**
    * Creates a new instance
@@ -26,4 +32,12 @@ public class NestedChainDeclaration extends NestedComponentDeclaration<NestedCha
     setRequired(true);
   }
 
+  public ChainExecutionOccurrence getOccurrence() {
+    return occurrence;
+  }
+
+  public void setOccurrence(ChainExecutionOccurrence occurrence) {
+    checkArgument(occurrence != null, "occurrence cannot be null");
+    this.occurrence = occurrence;
+  }
 }

@@ -18,6 +18,6 @@ import org.mule.runtime.api.meta.model.ComponentModel;
  * @since 1.0
  */
 @NoImplement
-public interface NestedChainModel extends NestedComponentModel {
+public interface NestedChainModel extends NestedComponentModel, HasChainExecutionOccurrence {
 
 }
