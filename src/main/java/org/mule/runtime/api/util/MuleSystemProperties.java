@@ -476,11 +476,11 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parallelForeach.flattenMessage";
 
   /**
-   * When set with a route, fatal errors that prompt the container shutdown will be sent to it.
+   * When set with a path, fatal errors that prompt the container shutdown will be sent to it.
    *
    * @since 4.7.0
    */
-  public static final String MULE_TERMINATION_LOG_ROUTE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "termination.log.route";
+  public static final String MULE_TERMINATION_LOG_PATH_PROPERTY = SYSTEM_PROPERTY_PREFIX + "termination.log.path";
 
   static {
     // Maintain compatibility after fix for MULE-19406
