@@ -8,6 +8,7 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
@@ -16,6 +17,9 @@ import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
+
+import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
@@ -77,6 +81,27 @@ public interface MetadataProvider<T extends ComponentModel> {
    * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
+
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(MetadataKey key,
+                                                                  ScopePropagationContext scopePropagationContext)
+      throws MetadataResolvingException;
+
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
+                                                                   RouterPropagationContext scopePropagationContext)
+      throws MetadataResolvingException;
+
+  interface ScopePropagationContext {
+
+    Supplier<MetadataType> getInnerChainResolver();
+
+    Supplier<MessageMetadataType> getMessageTypeResolver();
+  }
+  interface RouterPropagationContext {
+
+    Map<String, Supplier<MetadataType>> getRouteResolvers();
+
+    Supplier<MessageMetadataType> getMessageTypeResolver();
+  }
 
 }
 

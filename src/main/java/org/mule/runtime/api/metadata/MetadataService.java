@@ -6,9 +6,11 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.metadata.MetadataProvider.RouterPropagationContext;
+import static org.mule.runtime.api.metadata.MetadataProvider.ScopePropagationContext;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
@@ -183,18 +185,6 @@ public interface MetadataService {
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
                                                                    RouterPropagationContext ctx);
 
-  interface ScopePropagationContext {
-
-    Supplier<MetadataType> getInnerChainResolver();
-
-    Supplier<MessageMetadataType> getMessageTypeResolver();
-  }
-  interface RouterPropagationContext {
-
-    Map<String, Supplier<MetadataType>> getRouteResolvers();
-
-    Supplier<MessageMetadataType> getMessageTypeResolver();
-  }
 
 
 }
