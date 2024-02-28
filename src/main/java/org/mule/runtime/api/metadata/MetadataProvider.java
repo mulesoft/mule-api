@@ -87,7 +87,7 @@ public interface MetadataProvider<T extends ComponentModel> {
       throws MetadataResolvingException;
 
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
-                                                                   RouterPropagationContext scopePropagationContext)
+                                                                   RouterPropagationContext routerPropagationContext)
       throws MetadataResolvingException;
 
   interface ScopePropagationContext {
