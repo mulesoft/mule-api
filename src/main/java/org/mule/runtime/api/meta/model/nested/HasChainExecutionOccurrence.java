@@ -6,7 +6,15 @@
  */
 package org.mule.runtime.api.meta.model.nested;
 
+/**
+ * A model which contains a {@link ChainExecutionOccurrence}
+ *
+ * @since 1.7.0
+ */
 public interface HasChainExecutionOccurrence {
 
+  /**
+   * @return a {@link ChainExecutionOccurrence}
+   */
   ChainExecutionOccurrence getChainExecutionOccurrence();
 }

@@ -29,6 +29,12 @@ public class NestedChainDeclarer extends NestedComponentDeclarer<NestedChainDecl
     return this;
   }
 
+  /**
+   * Sets the chain's {@link ChainExecutionOccurrence}
+   * 
+   * @param occurrence an occurrence. Cannot be {@code null}
+   * @return {@code this} declarer
+   */
   public NestedChainDeclarer setExecutionOccurrence(ChainExecutionOccurrence occurrence) {
     declaration.setOccurrence(occurrence);
     return this;

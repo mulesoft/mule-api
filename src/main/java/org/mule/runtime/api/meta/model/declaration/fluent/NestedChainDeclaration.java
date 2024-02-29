@@ -32,10 +32,20 @@ public class NestedChainDeclaration extends NestedComponentDeclaration<NestedCha
     setRequired(true);
   }
 
+  /**
+   * @return the chain's {@link ChainExecutionOccurrence}
+   * @since 1.7.0
+   */
   public ChainExecutionOccurrence getOccurrence() {
     return occurrence;
   }
 
+  /**
+   * Sets the chain's {@link ChainExecutionOccurrence}
+   * 
+   * @param occurrence an occurrence. Cannot be {@code null}
+   * @since 1.7.0
+   */
   public void setOccurrence(ChainExecutionOccurrence occurrence) {
     checkArgument(occurrence != null, "occurrence cannot be null");
     this.occurrence = occurrence;
