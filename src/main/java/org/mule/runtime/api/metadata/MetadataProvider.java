@@ -82,24 +82,68 @@ public interface MetadataProvider<T extends ComponentModel> {
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
 
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   *
+   * @param key                     {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param scopePropagationContext the context of the propagation of the inner chain of the scope.
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.7
+   */
   MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(MetadataKey key,
                                                                   ScopePropagationContext scopePropagationContext)
       throws MetadataResolvingException;
 
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   *
+   * @param key                      {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param routerPropagationContext the context of the propagation of the router's routes' inner chains.
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.7
+   */
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
                                                                    RouterPropagationContext routerPropagationContext)
       throws MetadataResolvingException;
 
+  /**
+   * Models the propagation context of a Scope.
+   * 
+   * @since 1.7
+   */
   interface ScopePropagationContext {
 
+    /**
+     * @return an {@link Supplier} for the {@link MetadataType} of the inner chain of the scope.
+     */
     Supplier<MetadataType> getInnerChainResolver();
 
+    /**
+     * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
+     */
     Supplier<MessageMetadataType> getMessageTypeResolver();
   }
+
+  /**
+   * Models the propagation context of a Router.
+   * 
+   * @since 1.7
+   */
   interface RouterPropagationContext {
 
+    /**
+     * @return a {@link Map} which keys are the location corresponding to each route of the router. As value, a {@link Supplier}
+     *         that supplies a {@link MetadataType} of that given route.
+     */
     Map<String, Supplier<MetadataType>> getRouteResolvers();
 
+    /**
+     * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
+     */
     Supplier<MessageMetadataType> getMessageTypeResolver();
   }
 
