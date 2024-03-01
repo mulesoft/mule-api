@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import org.mule.runtime.api.meta.model.nested.ChainExecutionOccurrence;
+
 /**
  * Allows configuring a {@link NestedComponentDeclaration} through a fluent API
  *
@@ -24,6 +26,17 @@ public class NestedChainDeclarer extends NestedComponentDeclarer<NestedChainDecl
 
   public NestedChainDeclarer setRequired(boolean required) {
     declaration.setRequired(required);
+    return this;
+  }
+
+  /**
+   * Sets the chain's {@link ChainExecutionOccurrence}
+   * 
+   * @param occurrence an occurrence. Cannot be {@code null}
+   * @return {@code this} declarer
+   */
+  public NestedChainDeclarer setExecutionOccurrence(ChainExecutionOccurrence occurrence) {
+    declaration.setOccurrence(occurrence);
     return this;
   }
 
