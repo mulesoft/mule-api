@@ -58,16 +58,13 @@ public interface MetadataContext extends Disposable {
   MetadataCache getCache();
 
   /**
-   * @return an {@link Optional} with a {@link Supplier} of the {@link MetadataType} corresponding to the output of the inner
-   *         chain of the Scope. If this context does not correspond to a scope, then the result is {@code Optional#empty}.
+   * @return For scope components, describes the inner chain's output type.
    * @since 1.7
    */
   Optional<Supplier<MetadataType>> getInnerChainOutputType();
 
   /**
-   * @return a {@link Map} with the location of each route of the router, with value a {@link Supplier} of the
-   *         {@link MetadataType} corresponding to the output of the inner chain of that route. If this context does not
-   *         correspond to a router, then the result will en an empty map.
+   * @return For router components, describes the inner chains' output type. The {@link Map}'s key is the route's name.
    * @since 1.7
    */
   Map<String, Supplier<MetadataType>> getInnerRoutesOutputType();

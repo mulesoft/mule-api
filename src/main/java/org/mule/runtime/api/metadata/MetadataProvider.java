@@ -8,7 +8,6 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
@@ -17,9 +16,6 @@ import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
-
-import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
@@ -109,43 +105,6 @@ public interface MetadataProvider<T extends ComponentModel> {
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
                                                                    RouterPropagationContext routerPropagationContext)
       throws MetadataResolvingException;
-
-  /**
-   * Models the propagation context of a Scope.
-   * 
-   * @since 1.7
-   */
-  interface ScopePropagationContext {
-
-    /**
-     * @return an {@link Supplier} for the {@link MetadataType} of the inner chain of the scope.
-     */
-    Supplier<MetadataType> getInnerChainResolver();
-
-    /**
-     * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
-     */
-    Supplier<MessageMetadataType> getMessageTypeResolver();
-  }
-
-  /**
-   * Models the propagation context of a Router.
-   * 
-   * @since 1.7
-   */
-  interface RouterPropagationContext {
-
-    /**
-     * @return a {@link Map} which keys are the location corresponding to each route of the router. As value, a {@link Supplier}
-     *         that supplies a {@link MetadataType} of that given route.
-     */
-    Map<String, Supplier<MetadataType>> getRouteResolvers();
-
-    /**
-     * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
-     */
-    Supplier<MessageMetadataType> getMessageTypeResolver();
-  }
 
 }
 

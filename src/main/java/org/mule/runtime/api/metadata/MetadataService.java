@@ -6,9 +6,6 @@
  */
 package org.mule.runtime.api.metadata;
 
-import static org.mule.runtime.api.metadata.MetadataProvider.RouterPropagationContext;
-import static org.mule.runtime.api.metadata.MetadataProvider.ScopePropagationContext;
-
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.component.location.Location;
@@ -22,9 +19,6 @@ import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
-
-import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Provides access to the Metadata of any {@link MetadataProvider} and {@link EntityMetadataProvider} components in the
@@ -181,7 +175,7 @@ public interface MetadataService {
 
   /**
    * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}.
+   * {@link Location}. This is to be used only on Scope Operations.
    *
    * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
    * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
@@ -195,7 +189,7 @@ public interface MetadataService {
 
   /**
    * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}.
+   * {@link Location}. This is to be used only on Router Operations.
    *
    * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
    * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
