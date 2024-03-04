@@ -172,4 +172,35 @@ public interface MetadataService {
    *         a problem.
    */
   MetadataResult<TypeMetadataDescriptor> getEntityMetadata(Location location, MetadataKey key);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Scope Operations.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a scope.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   */
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location, MetadataKey key,
+                                                                  ScopePropagationContext ctx);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Router Operations.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a router.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   */
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
+                                                                   RouterPropagationContext ctx);
+
+
+
 }

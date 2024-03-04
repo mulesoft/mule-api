@@ -78,5 +78,33 @@ public interface MetadataProvider<T extends ComponentModel> {
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
 
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   *
+   * @param key                     {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param scopePropagationContext the context of the propagation of the inner chain of the scope.
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.7
+   */
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(MetadataKey key,
+                                                                  ScopePropagationContext scopePropagationContext)
+      throws MetadataResolvingException;
+
+  /**
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   *
+   * @param key                      {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param routerPropagationContext the context of the propagation of the router's routes' inner chains.
+   * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
+   *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
+   * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
+   * @since 1.7
+   */
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
+                                                                   RouterPropagationContext routerPropagationContext)
+      throws MetadataResolvingException;
+
 }
 
