@@ -2,48 +2,6 @@
   "1.7.0": {
     "revapi": {
       "ignore": [
-{
-  "ignore": true,
-  "code": "java.annotation.removed",
-  "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
-  "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
-  "annotation": "@org.mule.api.annotation.Experimental",
-  "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
-  /*  "annotationType": "org.mule.api.annotation.Experimental",
-  "package": "org.mule.runtime.api.util",
-  "classQualifiedName": "org.mule.runtime.api.util.MuleSystemProperties",
-  "classSimpleName": "MuleSystemProperties",
-  "fieldName": "MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
-  "elementKind": "field",
-  "oldArchive": "org.mule.runtime:mule-api:jar:1.6.0-rc1",
-  "oldArchiveRole": "primary",
-  "newArchive": "org.mule.runtime:mule-api:jar:1.7.0-SNAPSHOT",
-  "newArchiveRole": "primary",
-  "breaksSemanticVersioning": "true",
-  */
-
-},
-{
-  "ignore": true,
-  "code": "java.annotation.removed",
-  "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
-  "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
-  "annotation": "@org.mule.api.annotation.Experimental",
-  "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
-  /*  "annotationType": "org.mule.api.annotation.Experimental",
-  "package": "org.mule.runtime.api.util",
-  "classQualifiedName": "org.mule.runtime.api.util.MuleSystemProperties",
-  "classSimpleName": "MuleSystemProperties",
-  "fieldName": "PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
-  "elementKind": "field",
-  "oldArchive": "org.mule.runtime:mule-api:jar:1.6.0-rc1",
-  "oldArchiveRole": "primary",
-  "newArchive": "org.mule.runtime:mule-api:jar:1.7.0-SNAPSHOT",
-  "newArchiveRole": "primary",
-  "breaksSemanticVersioning": "true",
-  */
-
-},
         {
           "ignore": true,
           "code": "java.method.visibilityIncreased",
