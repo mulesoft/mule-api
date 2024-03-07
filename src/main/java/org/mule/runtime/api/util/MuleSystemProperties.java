@@ -274,14 +274,6 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
 
   /**
-   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to
-   * {@code false}, or not set all, schema resources will be cached. This property is only read on deploying an app.
-   *
-   * @since 4.4
-   */
-  public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
-
-  /**
    * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
    * separated. For instance: {@code some.category,other.category}.
    *
@@ -305,16 +297,6 @@ public final class MuleSystemProperties {
    * @since 4.4
    */
   public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
-
-  /**
-   * When set to {@code true}, fields annotated with {@code org.mule.sdk.api.annotation.param.reference.FlowReference} or
-   * {@code org.mule.runtime.extension.api.annotation.param.reference.FlowReference} will match not only {@code flow} elements,
-   * but any element with the name provided in the annotated field (for instance, a {@code sub-flow}).
-   *
-   * @since 4.4, 4.3.1
-   */
-  // MULE-19110
-  public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
 
   /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
@@ -862,6 +844,34 @@ public final class MuleSystemProperties {
    * @since 4.0
    */
   public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
+
+  // >>>>>>>>>>
+  // Deprecated system properties.
+  // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
+
+  /**
+   * When set to {@code true}, fields annotated with {@code org.mule.sdk.api.annotation.param.reference.FlowReference} or
+   * {@code org.mule.runtime.extension.api.annotation.param.reference.FlowReference} will match not only {@code flow} elements,
+   * but any element with the name provided in the annotated field (for instance, a {@code sub-flow}).
+   *
+   * @since 4.4, 4.3.1
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  // MULE-19110
+  @Deprecated
+  public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
+
+  /**
+   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to
+   * {@code false}, or not set all, schema resources will be cached. This property is only read on deploying an app.
+   *
+   * @since 4.4
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
+
+  // <<<<<<<<<<
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
