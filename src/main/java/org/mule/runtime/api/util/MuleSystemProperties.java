@@ -29,10 +29,22 @@ public final class MuleSystemProperties {
 
   public static final String SYSTEM_PROPERTY_PREFIX = "mule.";
 
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
   public static final String MULE_CONTEXT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "context";
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
   public static final String MULE_SECURITY_PROVIDER_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.provider";
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
   public static final String MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG = MULE_SECURITY_PROVIDER_PROPERTY + ".enableHybridDrbg";
   public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
@@ -101,10 +113,9 @@ public final class MuleSystemProperties {
   public static final String FORCE_EXTENSION_VALIDATION_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "forceExtensionValidation";
 
   /**
-   * Disables the {@code ignore} directive when loading an Extension.
-   *
-   * @since 1.4.0
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
 
   /**
@@ -119,10 +130,9 @@ public final class MuleSystemProperties {
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
 
   /**
-   * When present, implicit configuration for the XML SDK won't be created.
-   *
-   * @since 1.3
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION =
       SYSTEM_PROPERTY_PREFIX + "disableXmlSdkImplicitConfigurationCreation";
 
@@ -135,15 +145,22 @@ public final class MuleSystemProperties {
    *
    * @since 1.3.0
    */
+  // feature flag
   public static final String MULE_LOG_SEPARATION_DISABLED = SYSTEM_PROPERTY_PREFIX + "disableLogSeparation";
 
+  // feature flag
   public static final String MULE_FORCE_CONSOLE_LOG = SYSTEM_PROPERTY_PREFIX + "forceConsoleLog";
   public static final String MULE_LOG_CONTEXT_DISPOSE_DELAY_MILLIS = SYSTEM_PROPERTY_PREFIX + "log.context.dispose.delay.millis";
   public static final String MULE_LOG_DEFAULT_POLICY_INTERVAL =
       SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.timeBasedTriggerPolicy.interval";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MAX = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.max";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MIN = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.min";
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
   public static final String MULE_FLOW_TRACE = SYSTEM_PROPERTY_PREFIX + "flowTrace";
+  // feature flag
   public static final String MULE_LOG_VERBOSE_CLASSLOADING = SYSTEM_PROPERTY_PREFIX + "classloading.verbose";
   /**
    * @deprecated since 4.7 MEL is removed, this property is no longer used.
@@ -151,6 +168,10 @@ public final class MuleSystemProperties {
   @Deprecated
   public static final String MULE_MEL_AS_DEFAULT = SYSTEM_PROPERTY_PREFIX + "test.mel.default";
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
   public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
   /**
@@ -197,11 +218,9 @@ public final class MuleSystemProperties {
   public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
 
   /**
-   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
-   * be compiled.
-   *
-   * @since 1.3.0
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String MULE_EXPRESSIONS_COMPILATION_FAIL_DEPLOYMENT =
       SYSTEM_PROPERTY_PREFIX + "expressionCompilationFailDeployment";
 
@@ -211,6 +230,7 @@ public final class MuleSystemProperties {
    *
    * @since 1.3.0
    */
+  // feature-flag
   public static final String MULE_LIFECYCLE_FAIL_ON_FIRST_DISPOSE_ERROR =
       SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
 
@@ -236,6 +256,7 @@ public final class MuleSystemProperties {
    *
    * @since 1.3.0
    */
+  // feature-flag
   public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
 
   /**
@@ -244,14 +265,13 @@ public final class MuleSystemProperties {
    *
    * @since 1.4.0
    */
+  // feature-flag
   public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
   /**
-   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then it's used the app
-   * ErrorType repository.
-   *
-   * @since 1.3.0
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
 
   /**
@@ -260,6 +280,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.4, 4.3.1
    */
+  // feature-flag
   public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
 
   /**
@@ -274,11 +295,9 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
 
   /**
-   * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to
-   * {@code false}, or not set all, schema resources will be cached. This property is only read on deploying an app.
-   *
-   * @since 4.4
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
 
   /**
@@ -296,24 +315,19 @@ public final class MuleSystemProperties {
    *
    * @since 4.4.0, 4.3.1, 4.2.3
    */
+  // feature flag?
   public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
 
   /**
-   * When set to {@code true}, if an error type is found that does not exist in the error type repository of the application (for
-   * instance, an error handler for a random error that no component raises), a WARN is logged instead of failing the deployment.
-   *
-   * @since 4.4
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
 
   /**
-   * When set to {@code true}, fields annotated with {@code org.mule.sdk.api.annotation.param.reference.FlowReference} or
-   * {@code org.mule.runtime.extension.api.annotation.param.reference.FlowReference} will match not only {@code flow} elements,
-   * but any element with the name provided in the annotated field (for instance, a {@code sub-flow}).
-   *
-   * @since 4.4, 4.3.1
+   * @deprecated since 4.7 setting its value does not have any effect
    */
-  // MULE-19110
+  @Deprecated
   public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
 
   /**
@@ -405,6 +419,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
+  // TODO: killswitch?
   public static final String ENABLE_PROPAGATION_OF_EXCEPTIONS_IN_TRACING =
       SYSTEM_PROPERTY_PREFIX + "enable.propagation.of.exceptions.in.tracing";
 
@@ -501,10 +516,11 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
 
   /**
-   * If set to true, Mule will handle redirect requests. If set to false, we will delegate the redirect to Grizzly.
+   * If set to true (default), Mule will handle redirect requests. If set to false, we will delegate the redirect to Grizzly.
    *
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
    */
+  // TODO killswitch?
   public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
 
   /**
@@ -524,16 +540,14 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
+  // feature-flag; this is used by Studio when redeploying withput repackaging the app, just replacing the configs.
   public static final String FORCE_PARSE_CONFIG_XMLS_ON_DEPLOYMENT_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "deployment.forceParseConfigXmls";
 
-
   /**
-   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
-   *
-   * @since 4.5.0
+   * @deprecated since 4.7 setting its value does not have any effect
    */
-  @Experimental
+  @Deprecated
   public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
       SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
 
@@ -553,6 +567,7 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0, 4.4.1, 4.3.1
    */
+  // killswitch?
   public static final String FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED =
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
@@ -592,11 +607,9 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
   /**
-   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
-   * (W-10998630)
-   *
-   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
 
@@ -611,26 +624,23 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honourErrorMappingsWhenPolicyAppliedOnOperation";
 
   /**
-   * When set to true, it disables JDK vendor validation in JdkVersionUtils
-   *
-   * @since 4.5.0, 4.4.0-202208, 4.3.0-202208
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String DISABLE_JDK_VENDOR_VALIDATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
 
   /**
-   * If set to true, {@link org.mule.runtime.api.notification.Notification}s related to polling sources will be emitted.
-   *
-   * @since 4.5.0
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String EMIT_POLLING_SOURCE_NOTIFICATIONS =
       SYSTEM_PROPERTY_PREFIX + "emit.polling.source.notifications";
 
   /**
-   * When set to true, transactions will be committed in case of redelivery exhausted error.
-   * 
-   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
@@ -704,17 +714,16 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0
    */
+  // TODO killswitch?
   public static final String ENABLE_TRACER_CONFIGURATION_AT_APPLICATION_LEVEL_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "tracing.configuration.enableTracerConfigurationAtApplicationLevel";
 
   /**
-   * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
-   * <p>
-   * This feature is <b>EXPERIMENTAL</b>
+   * When set to {@code false}, {@link ExtensionModel} discovery and loading will happen sequentially.
    *
    * @since 4.5.0
    */
-  @Experimental
+  // killswitch
   public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
@@ -799,17 +808,18 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
   /**
-   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
-   * expression.
+   * @deprecated since 4.7 setting its value does not have any effect
    */
+  @Deprecated
   public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
       SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
-   * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
+   * @deprecated since 4.7 is a no-op
    */
+  @Deprecated
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
-    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+    return false;
   }
 
   /**
