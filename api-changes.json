@@ -4,6 +4,30 @@
       "ignore": [
         {
           "ignore": true,
+          "code": "java.annotation.removed",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "justification": "W-14572236: Remove killswitches - Experimental features switches removed"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.removed",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "justification": "W-14572236: Remove killswitches - Experimental features switches removed"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.removed",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "justification": "W-14572236: Remove killswitches - Experimental features switches removed"
+        },
+        {
+          "ignore": true,
           "code": "java.method.visibilityIncreased",
           "old": "method void org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration::<init>(java.lang.String)",
           "new": "method void org.mule.runtime.api.meta.model.declaration.fluent.ConstructDeclaration::<init>(java.lang.String)",

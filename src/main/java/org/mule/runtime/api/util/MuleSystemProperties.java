@@ -143,17 +143,7 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.timeBasedTriggerPolicy.interval";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MAX = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.max";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MIN = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.min";
-  /**
-   * @deprecated since 4.7 setting its value does not have any effect
-   */
-  @Deprecated
-  public static final String MULE_FLOW_TRACE = SYSTEM_PROPERTY_PREFIX + "flowTrace";
   public static final String MULE_LOG_VERBOSE_CLASSLOADING = SYSTEM_PROPERTY_PREFIX + "classloading.verbose";
-  /**
-   * @deprecated since 4.7 MEL is removed, this property is no longer used.
-   */
-  @Deprecated
-  public static final String MULE_MEL_AS_DEFAULT = SYSTEM_PROPERTY_PREFIX + "test.mel.default";
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
   public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
@@ -168,14 +158,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "extension.forceRegistrableType.packages";
 
   /**
-   * @deprecated Since 4.4.0 this feature was removed.
-   */
-  @Deprecated
-  public static final String MULE_LOGGING_INTERVAL_SCHEDULERS_LATENCY_REPORT =
-      SYSTEM_PROPERTY_PREFIX + "schedulers.latency.report.interval";
-
-
-  /**
    * This is the timeout in milliseconds to wait before we detect that the test connectivity is done in case the test connectivity
    * is asynchronously done.
    *
@@ -183,15 +165,6 @@ public final class MuleSystemProperties {
    */
   public static final String ASYNC_TEST_CONNECTIVITY_TIMEOUT_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "async.test.connectivity.timeout";
-
-  /**
-   * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
-   * all, the extension client will cache resources.
-   *
-   * @deprecated Starting with Mule 4.5.0 this property no longer has any effect. Cache no longer needed.
-   */
-  @Deprecated
-  public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
 
   /**
    * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
@@ -265,17 +238,6 @@ public final class MuleSystemProperties {
    * @since 4.4, 4.3.1
    */
   public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
-
-  /**
-   * When enabled this System Property, the payload statistics are disabled independently of the statistics flag. This property is
-   * only read on deploying an app.
-   *
-   * @since 4.4, 4.3.1
-   * @deprecated since 4.4.1, 4.5.0. Payload statistics are no longer supported, so this property will be ignored.
-   */
-  @Experimental
-  @Deprecated
-  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
 
   /**
    * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
@@ -515,25 +477,6 @@ public final class MuleSystemProperties {
 
 
   /**
-   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
-   *
-   * @since 4.5.0
-   */
-  @Experimental
-  public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
-      SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
-
-  /**
-   * If set to true, the Objects factories will be created with Byte Buddy instead of CGLIB."
-   *
-   * @since 4.4.0-202204, 4.3.0-202204
-   * @deprecated since 4.5.0, ByteBuddy is always used.
-   */
-  @Deprecated
-  public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
-
-  /**
    * If set to true, whenever an application has an HTTP requester configured to use TLS, Grizzly will use the
    * WorkerThreadIOStrategy.
    *
@@ -694,17 +637,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "tracing.configuration.enableTracerConfigurationAtApplicationLevel";
 
   /**
-   * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
-   * <p>
-   * This feature is <b>EXPERIMENTAL</b>
-   *
-   * @since 4.5.0
-   */
-  @Experimental
-  public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
-
-  /**
    * When enabled, the trace id and span id will be added to the MDC when available.
    *
    * @since 4.5.0
@@ -854,6 +786,54 @@ public final class MuleSystemProperties {
   // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
 
   /**
+   * @deprecated Since 4.4.0 this feature was removed.
+   */
+  @Deprecated
+  public static final String MULE_LOGGING_INTERVAL_SCHEDULERS_LATENCY_REPORT =
+      SYSTEM_PROPERTY_PREFIX + "schedulers.latency.report.interval";
+
+  /**
+   * When enabled this System Property, the payload statistics are disabled independently of the statistics flag. This property is
+   * only read on deploying an app.
+   *
+   * @since 4.4, 4.3.1
+   * @deprecated since 4.4.1, 4.5.0. Payload statistics are no longer supported, so this property will be ignored.
+   */
+  @Deprecated
+  public static final String MULE_DISABLE_PAYLOAD_STATISTICS = SYSTEM_PROPERTY_PREFIX + "disable.payload.statistics";
+
+  /**
+   * If set to true, the Objects factories will be created with Byte Buddy instead of CGLIB."
+   *
+   * @since 4.4.0-202204, 4.3.0-202204
+   * @deprecated since 4.5.0, ByteBuddy is always used.
+   */
+  @Deprecated
+  public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
+
+  /**
+   * If set to true, the extension client will not use any cache to reuse resources between calls. If set to false, or not set at
+   * all, the extension client will cache resources.
+   *
+   * @deprecated Starting with Mule 4.5.0 this property no longer has any effect. Cache no longer needed.
+   */
+  @Deprecated
+  public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
+
+  /**
+   * @deprecated since 4.7 MEL is removed, this property is no longer used.
+   */
+  @Deprecated
+  public static final String MULE_MEL_AS_DEFAULT = SYSTEM_PROPERTY_PREFIX + "test.mel.default";
+
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_FLOW_TRACE = SYSTEM_PROPERTY_PREFIX + "flowTrace";
+
+  /**
    * When set to {@code true}, fields annotated with {@code org.mule.sdk.api.annotation.param.reference.FlowReference} or
    * {@code org.mule.runtime.extension.api.annotation.param.reference.FlowReference} will match not only {@code flow} elements,
    * but any element with the name provided in the annotated field (for instance, a {@code sub-flow}).
@@ -874,6 +854,27 @@ public final class MuleSystemProperties {
    */
   @Deprecated
   public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
+
+  /**
+   * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
+   *
+   * @since 4.5.0
+   * 
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
+
+  /**
+   * When set to {@code true}, {@link ExtensionModel} discovery and loading will happen in parallel.
+   *
+   * @since 4.5.0
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
   // <<<<<<<<<<
 
