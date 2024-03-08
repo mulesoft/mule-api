@@ -513,16 +513,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "detailedCompositeRoutingExceptionLog";
 
   /**
-   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
-   * (W-10998630)
-   *
-   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
-   */
-  public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
-      SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
-
-
-  /**
    * When set to true, the operation policy's error resolution is ignored so that the error mappings of the processor on which the
    * policy was applied are set successfully
    *
@@ -709,20 +699,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
   /**
-   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
-   * expression.
-   */
-  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
-      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
-
-  /**
-   * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
-   */
-  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
-    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
-  }
-
-  /**
    * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the container
    * and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
@@ -776,6 +752,16 @@ public final class MuleSystemProperties {
   // >>>>>>>>>>
   // Deprecated system properties.
   // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
+
+  /**
+   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
+   * expression.
+   * 
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
+      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
    * @deprecated Since 4.4.0 this feature was removed.
@@ -858,6 +844,17 @@ public final class MuleSystemProperties {
   public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
 
   /**
+   * When set to true, the variableName identifier in SetVariable is set to not support expressions in the Mule Extension Model
+   * (W-10998630)
+   *
+   * @since 4.5.0, 4.4.0-202207, 4.3.0-202207
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
+
+  /**
    * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
    *
    * @since 4.5.0
@@ -904,6 +901,14 @@ public final class MuleSystemProperties {
    */
   public static boolean isForceExtensionValidation() {
     return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
+  }
+
+  /**
+   * @return {@code false}
+   */
+  @Deprecated
+  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
+    return false;
   }
 
   private MuleSystemProperties() {}
