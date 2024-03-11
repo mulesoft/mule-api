@@ -34,7 +34,6 @@ public final class MuleSystemProperties {
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
   public static final String MULE_SECURITY_PROVIDER_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.provider";
   public static final String MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG = MULE_SECURITY_PROVIDER_PROPERTY + ".enableHybridDrbg";
-  public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
 
   /**
    * A list of comma separated names of all known {@link org.mule.runtime.api.metadata.MediaType} param names. If they all match
@@ -43,55 +42,6 @@ public final class MuleSystemProperties {
    * @since 1.4, 1.3.1, 1.2.4, 1.1.7
    */
   public static final String MULE_KNOWN_MEDIA_TYPE_PARAM_NAMES = SYSTEM_PROPERTY_PREFIX + "mediatype.paramNames";
-
-  /**
-   * Enables streaming statistics
-   *
-   * @since 4.2.0
-   */
-  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics";
-
-  /**
-   * System property key for the default size of a streaming buffer bucket
-   */
-  public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
-
-  /**
-   * System property key for the max percentage of the total heap memory that can be assigned to repeatable streaming memory.
-   * <p>
-   * Valid values are doubles between 0 and 1 (inclusive)
-   *
-   * @since 1.3.0
-   */
-  public static final String MULE_STREAMING_MAX_HEAP_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxHeapPercentage";
-
-  /**
-   * System property key for the max size of byte buffer pools used for repeatable streaming
-   *
-   * @since 1.3.0
-   */
-  public static final String MULE_STREAMING_MAX_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolMaxSize";
-
-  /**
-   * System property key to set the maximum allowed flowStack entries for an event context, before raising a {@code MULE:CRITICAL}
-   * error.
-   * <p>
-   * By default, the value is set to 50.
-   *
-   * @since 1.3.0
-   */
-  public static final String MULE_FLOW_STACK_MAX_DEPTH = SYSTEM_PROPERTY_PREFIX + "flowStack.maxDepth";
-
-  /**
-   * System property key to set the maximum nested sub-flow calls to create a single execution chain with. For the nth nested
-   * sub-flow (n being the value of this variable), a new execution chain will be created, as was the default behavior until
-   * 4.2.1.
-   * <p>
-   * By default, the value is set to 10.
-   *
-   * @since 1.4.0, 1.3.1
-   */
-  public static final String MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN = SYSTEM_PROPERTY_PREFIX + "flowRef.maxSubFlowsSingleChain";
 
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
@@ -107,15 +57,6 @@ public final class MuleSystemProperties {
    */
   public static final String DISABLE_SDK_IGNORE_COMPONENT = SYSTEM_PROPERTY_PREFIX + "disableSdkComponentIgnore";
 
-  /**
-   * When present, Polling Sources are enriched with a parameter for configuring the maximum number of items per poll to be
-   * processed.
-   *
-   * @since 1.4.0
-   */
-  public static final String ENABLE_SDK_POLLING_SOURCE_LIMIT = SYSTEM_PROPERTY_PREFIX + "enablePollingSourceLimit";
-
-  public static final String MULE_STREAMING_MAX_MEMORY = SYSTEM_PROPERTY_PREFIX + "max.streaming.memory";
   public static final String MULE_SIMPLE_LOG = SYSTEM_PROPERTY_PREFIX + "simpleLog";
 
   /**
@@ -143,7 +84,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.timeBasedTriggerPolicy.interval";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MAX = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.max";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MIN = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.min";
-  public static final String MULE_LOG_VERBOSE_CLASSLOADING = SYSTEM_PROPERTY_PREFIX + "classloading.verbose";
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
   public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
@@ -167,31 +107,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "async.test.connectivity.timeout";
 
   /**
-   * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
-   * <p>
-   * Possible values are the enums in {@code ProcessingType}.
-   */
-  public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
-
-  /**
-   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
-   * be compiled.
-   *
-   * @since 1.3.0
-   */
-  public static final String MULE_EXPRESSIONS_COMPILATION_FAIL_DEPLOYMENT =
-      SYSTEM_PROPERTY_PREFIX + "expressionCompilationFailDeployment";
-
-  /**
-   * If set, Mule will propagate any exception caught during the stop/dispose phase instead of just logging it. This is useful for
-   * testing shutdown behavior.
-   *
-   * @since 1.3.0
-   */
-  public static final String MULE_LIFECYCLE_FAIL_ON_FIRST_DISPOSE_ERROR =
-      SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
-
-  /**
    * This is a configuration property that can be set at deployment time to disable the scheduler message sources to be started
    * when deploying an application.
    */
@@ -205,23 +120,6 @@ public final class MuleSystemProperties {
    */
   public static final String DEFAULT_SCHEDULER_FIXED_FREQUENCY =
       SYSTEM_PROPERTY_PREFIX + "config.scheduler.defaultFixedFrequency";
-
-  /**
-   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called. It
-   * can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on an
-   * already closed cursor.
-   *
-   * @since 1.3.0
-   */
-  public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
-
-  /**
-   * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for
-   * troubleshooting purposes
-   *
-   * @since 1.4.0
-   */
-  public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
 
   /**
    * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then it's used the app
@@ -238,23 +136,6 @@ public final class MuleSystemProperties {
    * @since 4.4, 4.3.1
    */
   public static final String MULE_ENABLE_STATISTICS = SYSTEM_PROPERTY_PREFIX + "enable.statistics";
-
-  /**
-   * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
-   * separated. For instance: {@code some.category,other.category}.
-   *
-   * @since 4.2.0, 4.1.6
-   */
-  public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
-
-  /**
-   * A flux sink drops an event if next() is called after complete() or error(). When enabled, if there is an event dropped, a
-   * WARN will be logged on next(), showing the complete() or error() stack trace. Additionally, the accept() stack trace is
-   * logged in order to get a hint about how the chain is created or what is it intended for.
-   *
-   * @since 4.4.0, 4.3.1, 4.2.3
-   */
-  public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
 
   /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
@@ -421,14 +302,6 @@ public final class MuleSystemProperties {
    * @since 4.7.0
    */
   public static final String MULE_TERMINATION_LOG_PATH_PROPERTY = SYSTEM_PROPERTY_PREFIX + "termination.log.path";
-
-  static {
-    // Maintain compatibility after fix for MULE-19406
-    final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
-    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null && oldEnableStreamingStatisticsValue != null) {
-      setProperty(MULE_ENABLE_STREAMING_STATISTICS, oldEnableStreamingStatisticsValue);
-    }
-  }
 
   /**
    * If set to true, extensions imported by a policy will be managed in complete isolation from the extensions imported by the
@@ -774,6 +647,137 @@ public final class MuleSystemProperties {
   public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
 
   // >>>>>>>>>>
+  // Troubleshooting flags
+
+  public static final String MULE_LOG_VERBOSE_CLASSLOADING = SYSTEM_PROPERTY_PREFIX + "classloading.verbose";
+
+  /**
+   * Enables streaming statistics
+   *
+   * @since 4.2.0
+   */
+  public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics";
+
+  /**
+   * If set, Mule will precompile DataWeave expressions at application startup time and fail the deployment if any of them cannot
+   * be compiled.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_EXPRESSIONS_COMPILATION_FAIL_DEPLOYMENT =
+      SYSTEM_PROPERTY_PREFIX + "expressionCompilationFailDeployment";
+
+  /**
+   * If set, Mule will propagate any exception caught during the stop/dispose phase instead of just logging it. This is useful for
+   * testing shutdown behavior.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_LIFECYCLE_FAIL_ON_FIRST_DISPOSE_ERROR =
+      SYSTEM_PROPERTY_PREFIX + "lifecycle.failOnFirstDisposeError";
+
+  /**
+   * When enabled, this System Property tracks the stacktrace from where the {@link CursorProvider#close()} method was called. It
+   * can be used for troubleshooting purposes (for example, if someone tries to call {@link CursorProvider#openCursor()} on an
+   * already closed cursor.
+   *
+   * @since 1.3.0
+   */
+  public static final String TRACK_CURSOR_PROVIDER_CLOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "track.cursorProvider.close";
+
+  /**
+   * When set to {@code true} this System Property, more information about streaming will be logged. It can be used for
+   * troubleshooting purposes
+   *
+   * @since 1.4.0
+   */
+  public static final String STREAMING_VERBOSE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "streaming.verbose";
+
+  /**
+   * A flux sink drops an event if next() is called after complete() or error(). When enabled, if there is an event dropped, a
+   * WARN will be logged on next(), showing the complete() or error() stack trace. Additionally, the accept() stack trace is
+   * logged in order to get a hint about how the chain is created or what is it intended for.
+   *
+   * @since 4.4.0, 4.3.1, 4.2.3
+   */
+  public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
+
+  // <<<<<<<<<<
+
+  // >>>>>>>>>>
+  // Tuning parameters flags
+
+  public static final String MULE_STREAMING_BUFFER_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferSize";
+  public static final String MULE_STREAMING_MAX_MEMORY = SYSTEM_PROPERTY_PREFIX + "max.streaming.memory";
+
+  /**
+   * If set, `ee:transform` and `ee:dynamic-evaluate` will execute in the specified scheduler instead of its default.
+   * <p>
+   * Possible values are the enums in {@code ProcessingType}.
+   */
+  public static final String DATA_WEAVE_SCRIPT_PROCESSING_TYPE = SYSTEM_PROPERTY_PREFIX + "dwScript.processingType";
+
+  /**
+   * System property key for the default size of a streaming buffer bucket
+   */
+  public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
+
+  /**
+   * When enabled, the defined categories of logging will result in a blocking processing type. Categories must be comma
+   * separated. For instance: {@code some.category,other.category}.
+   *
+   * @since 4.2.0, 4.1.6
+   */
+  public static final String MULE_LOGGING_BLOCKING_CATEGORIES = SYSTEM_PROPERTY_PREFIX + "logging.blockingCategories";
+
+  /**
+   * System property key for the max percentage of the total heap memory that can be assigned to repeatable streaming memory.
+   * <p>
+   * Valid values are doubles between 0 and 1 (inclusive)
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_STREAMING_MAX_HEAP_PERCENTAGE = SYSTEM_PROPERTY_PREFIX + "streaming.maxHeapPercentage";
+
+  /**
+   * System property key for the max size of byte buffer pools used for repeatable streaming
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_STREAMING_MAX_BUFFER_POOL_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bufferPoolMaxSize";
+
+  /**
+   * System property key to set the maximum allowed flowStack entries for an event context, before raising a {@code MULE:CRITICAL}
+   * error.
+   * <p>
+   * By default, the value is set to 50.
+   *
+   * @since 1.3.0
+   */
+  public static final String MULE_FLOW_STACK_MAX_DEPTH = SYSTEM_PROPERTY_PREFIX + "flowStack.maxDepth";
+
+  /**
+   * System property key to set the maximum nested sub-flow calls to create a single execution chain with. For the nth nested
+   * sub-flow (n being the value of this variable), a new execution chain will be created, as was the default behavior until
+   * 4.2.1.
+   * <p>
+   * By default, the value is set to 10.
+   *
+   * @since 1.4.0, 1.3.1
+   */
+  public static final String MULE_FLOW_REF_MAX_SUB_FLOWS_SINGLE_CHAIN = SYSTEM_PROPERTY_PREFIX + "flowRef.maxSubFlowsSingleChain";
+
+  /**
+   * When present, Polling Sources are enriched with a parameter for configuring the maximum number of items per poll to be
+   * processed.
+   *
+   * @since 1.4.0
+   */
+  public static final String ENABLE_SDK_POLLING_SOURCE_LIMIT = SYSTEM_PROPERTY_PREFIX + "enablePollingSourceLimit";
+
+  // <<<<<<<<<<
+
+  // >>>>>>>>>>
   // Deprecated system properties.
   // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
 
@@ -879,6 +883,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
   // <<<<<<<<<<
+
+  static {
+    // Maintain compatibility after fix for MULE-19406
+    final String oldEnableStreamingStatisticsValue = getProperty(SYSTEM_PROPERTY_PREFIX + ".enableStreamingStatistics");
+    if (getProperty(MULE_ENABLE_STREAMING_STATISTICS) == null && oldEnableStreamingStatisticsValue != null) {
+      setProperty(MULE_ENABLE_STREAMING_STATISTICS, oldEnableStreamingStatisticsValue);
+    }
+  }
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the

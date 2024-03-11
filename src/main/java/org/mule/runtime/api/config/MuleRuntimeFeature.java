@@ -8,15 +8,15 @@ package org.mule.runtime.api.config;
 
 import static org.mule.runtime.api.util.MuleSystemProperties.ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_APPLY_OBJECT_PROCESSOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_HONOUR_MIXED_CONTENT_STRUCTURE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_IMPLICIT_INPUTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
@@ -32,6 +32,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXC
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
@@ -484,7 +485,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT(
       "When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error handling",
-      "W-14608096", "4.6.1", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY);
+      "W-14608096", "4.6.1", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY),
+
+  /**
+   * When enabled, implicit configuration for the XML SDK won't be created.
+   *
+   * @since 4.7.0
+   */
+  DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
+      "When enabled, implicit configuration for the XML SDK won't be created.",
+      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION);
 
   private final String description;
   private final String issueId;
