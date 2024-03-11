@@ -295,14 +295,6 @@ public final class MuleSystemProperties {
   public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
 
   /**
-   * When set to {@code true}, if an error type is found that does not exist in the error type repository of the application (for
-   * instance, an error handler for a random error that no component raises), a WARN is logged instead of failing the deployment.
-   *
-   * @since 4.4
-   */
-  public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
-
-  /**
    * When set to {@code true} an application won't be able to override reserved properties such as <code>app.name</code>. If it
    * isn't set, the behaviour will depend on {@link MuleRuntimeFeature#HONOUR_RESERVED_PROPERTIES}.
    *
@@ -864,6 +856,16 @@ public final class MuleSystemProperties {
   // MULE-19110
   @Deprecated
   public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
+
+  /**
+   * When set to {@code true}, if an error type is found that does not exist in the error type repository of the application (for
+   * instance, an error handler for a random error that no component raises), a WARN is logged instead of failing the deployment.
+   *
+   * @since 4.4
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
 
   /**
    * When set to {@code true}, will not use any cache to reuse preparsed schema resources on deployment phase. If set to
