@@ -403,21 +403,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disableJDKVendorValidation";
 
   /**
-   * If set to true, {@link org.mule.runtime.api.notification.Notification}s related to polling sources will be emitted.
-   *
-   * @since 4.5.0
-   */
-  public static final String EMIT_POLLING_SOURCE_NOTIFICATIONS =
-      SYSTEM_PROPERTY_PREFIX + "emit.polling.source.notifications";
-
-  /**
-   * When set to true, transactions will be committed in case of redelivery exhausted error.
-   * 
-   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
-   */
-  public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
-
-  /**
    * <p>
    * When set to true, error suppression occurs. This feature prevents component such as the Web Service Consumer connector and
    * the Until Successful scope from reporting errors outside their namespaces.
@@ -859,6 +844,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
 
   /**
+   * When set to true, transactions will be committed in case of redelivery exhausted error.
+   * 
+   * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
+
+  /**
    * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
    *
    * @since 4.5.0
@@ -878,6 +872,16 @@ public final class MuleSystemProperties {
   @Deprecated
   public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
+
+  /**
+   * If set to true, {@link org.mule.runtime.api.notification.Notification}s related to polling sources will be emitted.
+   *
+   * @since 4.5.0
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String EMIT_POLLING_SOURCE_NOTIFICATIONS =
+      SYSTEM_PROPERTY_PREFIX + "emit.polling.source.notifications";
 
   // <<<<<<<<<<
 
