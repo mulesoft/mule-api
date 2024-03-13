@@ -6,24 +6,26 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
-import static org.mule.runtime.api.metadata.resolving.FailureCode.INVALID_CONFIGURATION;
-
+import org.mule.metadata.api.builder.ObjectTypeBuilder;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
-
-public class PassThroughScopeResolver<K> implements OutputTypeResolver<K> {
+public class AllOfRoutesOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override
   public String getCategoryName() {
-    return "OUTPUT_SCOPE_DYNAMIC";
+    return "OUTPUT_ROUTER_DYNAMIC";
   }
 
   @Override
-  public MetadataType getOutputType(MetadataContext context, K key) throws MetadataResolvingException, ConnectionException {
-    return context.getInnerChainOutputType()
-        .orElseThrow(() -> new MetadataResolvingException("Invalid Chain output.", INVALID_CONFIGURATION)).get();
+  public MetadataType getOutputType(MetadataContext context, Void key) throws MetadataResolvingException, ConnectionException {
+    ObjectTypeBuilder builder = context.getTypeBuilder().objectType();
+    context.getInnerRoutesOutputType().forEach((routeName, type) -> {
+      builder.addField().key(routeName).value(type.get());
+    });
+
+    return builder.build();
   }
 }

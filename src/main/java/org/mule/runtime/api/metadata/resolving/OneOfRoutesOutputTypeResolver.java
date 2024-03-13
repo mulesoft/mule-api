@@ -16,7 +16,7 @@ import org.mule.runtime.api.metadata.MetadataResolvingException;
 import static org.mule.metadata.api.model.MetadataFormat.JAVA;
 import static org.mule.runtime.api.metadata.resolving.FailureCode.INVALID_CONFIGURATION;
 
-public class UnionOfRoutesOutputTypeResolver implements OutputTypeResolver<Object> {
+public class OneOfRoutesOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override
   public String getCategoryName() {
@@ -24,11 +24,11 @@ public class UnionOfRoutesOutputTypeResolver implements OutputTypeResolver<Objec
   }
 
   @Override
-  public MetadataType getOutputType(MetadataContext context, Object key) throws MetadataResolvingException, ConnectionException {
+  public MetadataType getOutputType(MetadataContext context, Void key) throws MetadataResolvingException, ConnectionException {
     if (context.getInnerRoutesOutputType().isEmpty()) {
       throw new MetadataResolvingException("Invalid Routes output.", INVALID_CONFIGURATION);
     }
-    UnionTypeBuilder builder = BaseTypeBuilder.create(JAVA).unionType();
+    UnionTypeBuilder builder = context.getTypeBuilder().unionType();
     context.getInnerRoutesOutputType().values().forEach(metadataSupplier -> builder.of(metadataSupplier.get()));
     return builder.build();
   }
