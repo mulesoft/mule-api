@@ -12,6 +12,14 @@ import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
+/**
+ * {@link OutputTypeResolver} implementation for Routers.
+ * <p>
+ * This {@link OutputTypeResolver} propagates the metadata the combination of the output of every route of the router. This
+ * symbolizes that the metadata has the result of all the routes.
+ *
+ * @since 1.7
+ */
 public class AllOfRoutesOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override

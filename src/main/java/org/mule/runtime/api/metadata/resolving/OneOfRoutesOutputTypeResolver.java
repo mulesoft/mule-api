@@ -6,16 +6,20 @@
  */
 package org.mule.runtime.api.metadata.resolving;
 
-import org.mule.metadata.api.builder.BaseTypeBuilder;
 import org.mule.metadata.api.builder.UnionTypeBuilder;
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
-import static org.mule.metadata.api.model.MetadataFormat.JAVA;
-import static org.mule.runtime.api.metadata.resolving.FailureCode.INVALID_CONFIGURATION;
-
+/**
+ * {@link OutputTypeResolver} implementation for Routers.
+ * <p>
+ * This {@link OutputTypeResolver} propagates the metadata the union of the output of every route of the router. This symbolizes
+ * that the metadata can be either of the results of any of the routes.
+ *
+ * @since 1.7
+ */
 public class OneOfRoutesOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override
@@ -25,9 +29,6 @@ public class OneOfRoutesOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override
   public MetadataType getOutputType(MetadataContext context, Void key) throws MetadataResolvingException, ConnectionException {
-    if (context.getInnerRoutesOutputType().isEmpty()) {
-      throw new MetadataResolvingException("Invalid Routes output.", INVALID_CONFIGURATION);
-    }
     UnionTypeBuilder builder = context.getTypeBuilder().unionType();
     context.getInnerRoutesOutputType().values().forEach(metadataSupplier -> builder.of(metadataSupplier.get()));
     return builder.build();

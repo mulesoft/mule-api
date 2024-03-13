@@ -10,10 +10,17 @@ import static org.mule.runtime.api.metadata.resolving.FailureCode.INVALID_CONFIG
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
+import org.mule.runtime.api.meta.model.OutputModel;
 import org.mule.runtime.api.metadata.MetadataContext;
 import org.mule.runtime.api.metadata.MetadataResolvingException;
 
-
+/**
+ * {@link OutputTypeResolver} implementation for Scopes.
+ * <p>
+ * This {@link OutputTypeResolver} propagates the metadata result of the inner chain of the scope, without any modification.
+ *
+ * @since 1.7
+ */
 public class SameAsChainOutputTypeResolver implements OutputTypeResolver<Void> {
 
   @Override
