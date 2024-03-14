@@ -46,11 +46,6 @@ public final class MuleSystemProperties {
   public static final String TESTING_MODE_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "testingMode";
 
   /**
-   * Forces the validation of all loaded extension models
-   */
-  public static final String FORCE_EXTENSION_VALIDATION_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "forceExtensionValidation";
-
-  /**
    * Disables the {@code ignore} directive when loading an Extension.
    *
    * @since 1.4.0
@@ -120,14 +115,6 @@ public final class MuleSystemProperties {
    */
   public static final String DEFAULT_SCHEDULER_FIXED_FREQUENCY =
       SYSTEM_PROPERTY_PREFIX + "config.scheduler.defaultFixedFrequency";
-
-  /**
-   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then it's used the app
-   * ErrorType repository.
-   *
-   * @since 1.3.0
-   */
-  public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
 
   /**
    * When enabled this System Property, the statistics are enabled even if the monitoring service is not acivated. This property
@@ -753,6 +740,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
+   * Forces the validation of all loaded extension models
+   * 
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String FORCE_EXTENSION_VALIDATION_PROPERTY_NAME = SYSTEM_PROPERTY_PREFIX + "forceExtensionValidation";
+
+  /**
    * @deprecated Since 4.4.0 this feature was removed.
    */
   @Deprecated
@@ -799,6 +794,16 @@ public final class MuleSystemProperties {
    */
   @Deprecated
   public static final String MULE_FLOW_TRACE = SYSTEM_PROPERTY_PREFIX + "flowTrace";
+
+  /**
+   * When enabled this System Property, if an ErrorType is not found in the policy ErrorType repository, then it's used the app
+   * ErrorType repository.
+   *
+   * @since 1.3.0
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String SHARE_ERROR_TYPE_REPOSITORY_PROPERTY = SYSTEM_PROPERTY_PREFIX + "share.errorTypeRepository";
 
   /**
    * When set to {@code true}, fields annotated with {@code org.mule.sdk.api.annotation.param.reference.FlowReference} or
@@ -913,14 +918,18 @@ public final class MuleSystemProperties {
   }
 
   /**
-   * @return {@code true} if the {@link #FORCE_EXTENSION_VALIDATION_PROPERTY_NAME} property has been set (regardless of the value)
+   * @return {@code false}
+   * 
+   * @deprecated since 4.7 this is a no-op
    */
+  @Deprecated
   public static boolean isForceExtensionValidation() {
-    return getProperty(FORCE_EXTENSION_VALIDATION_PROPERTY_NAME) != null;
+    return false;
   }
 
   /**
    * @return {@code false}
+   * @deprecated since 4.7 this is a no-op
    */
   @Deprecated
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
