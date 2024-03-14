@@ -4,6 +4,125 @@
       "ignore": [
         {
           "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.CLASSLOADER_SERVICE_JPMS_MODULE_LAYER",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.CLASSLOADER_SERVICE_JPMS_MODULE_LAYER",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.COMMIT_REDELIVERY_EXHAUSTED",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.COMMIT_REDELIVERY_EXHAUSTED",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.EMIT_POLLING_SOURCE_NOTIFICATIONS",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.EMIT_POLLING_SOURCE_NOTIFICATIONS",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_MULE_REDIRECT_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_MULE_REDIRECT_PROPERTY",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_MULE_REDIRECT_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_MULE_REDIRECT_PROPERTY",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
+          "annotation": "@org.mule.api.annotation.Experimental",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_LAX_ERROR_TYPES",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_LAX_ERROR_TYPES",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-14572236: Review killswitches"
+        },
+        {
+          "ignore": true,
           "code": "java.annotation.removed",
           "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_PAYLOAD_STATISTICS",
