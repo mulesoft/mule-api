@@ -14,6 +14,7 @@ import static org.apache.commons.lang3.JavaVersion.JAVA_17;
 import static org.apache.commons.lang3.SystemUtils.isJavaVersionAtLeast;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.api.annotation.properties.KillSwitch;
 import org.mule.runtime.api.config.MuleRuntimeFeature;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.model.declaration.fluent.ExtensionDeclarer;
@@ -31,9 +32,17 @@ public final class MuleSystemProperties {
 
   public static final String MULE_CONTEXT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "context";
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
+
+  // >>>>>>>>>>
+  // FIPS system properties
+  // These are declared here for visibility, but the actual reading of these properties does not use this constants to prevent
+  // that code from depending on this module (refer to com.mulesoft.mule.runtime.module.reboot.FipsSecurityManager).
+
   public static final String MULE_SECURITY_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.model";
   public static final String MULE_SECURITY_PROVIDER_PROPERTY = SYSTEM_PROPERTY_PREFIX + "security.provider";
   public static final String MULE_SECURITY_PROVIDER_ENABLE_HYBRID_DRBG = MULE_SECURITY_PROVIDER_PROPERTY + ".enableHybridDrbg";
+
+  // <<<<<<<<<<
 
   /**
    * A list of comma separated names of all known {@link org.mule.runtime.api.metadata.MediaType} param names. If they all match
@@ -85,8 +94,6 @@ public final class MuleSystemProperties {
   public static final String MULE_LOG_DEFAULT_STRATEGY_MAX = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.max";
   public static final String MULE_LOG_DEFAULT_STRATEGY_MIN = SYSTEM_PROPERTY_PREFIX + "log.defaultAppender.rolloverStrategy.min";
   public static final String MULE_DISABLE_RESPONSE_TIMEOUT = SYSTEM_PROPERTY_PREFIX + "timeout.disable";
-  public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
-  public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
   /**
    * Comma-separated list of packages to force as registrable.
    * <p>
@@ -318,6 +325,10 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
    */
+  // This was introduced originally to work around an issue (W-10822777). There should be no reason to set this property with that
+  // fix available.
+  @Experimental
+  @KillSwitch
   public static final String ENABLE_MULE_REDIRECT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "http.enableMuleRedirect";
 
   /**
@@ -347,6 +358,9 @@ public final class MuleSystemProperties {
    *
    * @since 4.5.0, 4.4.1, 4.3.1
    */
+  // This is not enabled by default because there are some HTTP scenarios that have a performance degradation with this enabled.
+  // This should only be activated to address the specific issue this handles.
+  @Experimental
   public static final String FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED =
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
@@ -541,22 +555,6 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "tracing.level.configuration.path";
 
   /**
-   * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the services
-   * ({@code true}) or a classloader will be used ({@code false}).
-   * <p>
-   * The default value will depend on the jvm version being used:
-   * <ul>
-   * <li><b>8</b>: this property is ignored, assumed {@code false}.</li>
-   * <li><b>11</b>: defaults to {@code false}.</li>
-   * <li><b>17 and higher</b>: defaults to {@code true}.</li>
-   * </ul>
-   * 
-   * @since 4.5.0
-   */
-  public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
-      SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
-
-  /**
    * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the container
    * and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
@@ -743,12 +741,25 @@ public final class MuleSystemProperties {
   // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
 
   /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_ALLOW_JRE_EXTENSION = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension";
+
+  /**
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
+
+  /**
    * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
    * expression.
    * 
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
       SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
@@ -776,6 +787,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.5.0, ByteBuddy is always used.
    */
   @Deprecated
+  @KillSwitch
   public static final String ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.byteBuddy.objectCreation";
 
@@ -786,6 +798,7 @@ public final class MuleSystemProperties {
    * @deprecated Starting with Mule 4.5.0 this property no longer has any effect. Cache no longer needed.
    */
   @Deprecated
+  @KillSwitch
   public static final String MULE_EXTENSIONS_CLIENT_CACHE_IS_DISABLED = SYSTEM_PROPERTY_PREFIX + "extensionsClient.disableCache";
 
   /**
@@ -810,6 +823,7 @@ public final class MuleSystemProperties {
    */
   // MULE-19110
   @Deprecated
+  @KillSwitch
   public static final String MULE_FLOW_REFERERENCE_FIELDS_MATCH_ANY = SYSTEM_PROPERTY_PREFIX + "flowReference.matchesAny";
 
   /**
@@ -820,6 +834,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String MULE_LAX_ERROR_TYPES = SYSTEM_PROPERTY_PREFIX + "errorTypes.lax";
 
   /**
@@ -830,6 +845,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String MULE_DISABLE_DEPLOYMENT_SCHEMA_CACHE = SYSTEM_PROPERTY_PREFIX + "disable.deployment.schema.cache";
 
   /**
@@ -840,6 +856,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String REVERT_SUPPORT_EXPRESSIONS_IN_VARIABLE_NAME_IN_SET_VARIABLE_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "revertSupportExpressionsInVariableNameInSetVariable";
 
@@ -850,6 +867,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
@@ -860,6 +878,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String MULE_USE_LEGACY_LIFECYCLE_OBJECT_SORTER =
       SYSTEM_PROPERTY_PREFIX + "lifecycle.useLegacyObjectSorter";
 
@@ -870,6 +889,7 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String PARALLEL_EXTENSION_MODEL_LOADING_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "parallel.extension.model.loading";
 
@@ -880,8 +900,28 @@ public final class MuleSystemProperties {
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
+  @KillSwitch
   public static final String EMIT_POLLING_SOURCE_NOTIFICATIONS =
       SYSTEM_PROPERTY_PREFIX + "emit.polling.source.notifications";
+
+  /**
+   * Determines if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the services
+   * ({@code true}) or a classloader will be used ({@code false}).
+   * <p>
+   * The default value will depend on the jvm version being used:
+   * <ul>
+   * <li><b>8</b>: this property is ignored, assumed {@code false}.</li>
+   * <li><b>11</b>: defaults to {@code false}.</li>
+   * <li><b>17 and higher</b>: defaults to {@code true}.</li>
+   * </ul>
+   * 
+   * @since 4.5.0
+   * @deprecated since 4.7 setting its value does not have any effect
+   */
+  @Deprecated
+  @KillSwitch
+  public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
+      SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
   // <<<<<<<<<<
 
