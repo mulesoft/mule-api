@@ -749,6 +749,9 @@ public final class MuleSystemProperties {
    */
   public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
 
+  public static final String MAX_COMPONENTS_PER_REACTIVE_SUBSCRIPTION_THREAD =
+      SYSTEM_PROPERTY_PREFIX + "reactive.subscription.thread.max.components";
+
   // >>>>>>>>>>
   // Deprecated system properties.
   // These are no longer read, kept just to avoid breaking compatibility in case there is some reference somewhere
