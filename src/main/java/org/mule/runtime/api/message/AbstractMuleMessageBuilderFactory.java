@@ -23,22 +23,25 @@ public abstract class AbstractMuleMessageBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMuleMessageBuilderFactory.class);
 
-  static {
-    try {
-      final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class,
-                                                             currentThread().getContextClassLoader())
-                                                                 .iterator().next();
-      LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
-                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+  private static AbstractMuleMessageBuilderFactory loadFactory(ClassLoader classLoader) {
+    if (DEFAULT_FACTORY == null) {
+      try {
+        final AbstractMuleMessageBuilderFactory factory =
+            load(AbstractMuleMessageBuilderFactory.class, classLoader).iterator().next();
+        LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
+                           factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-      DEFAULT_FACTORY = factory;
-    } catch (Throwable t) {
-      LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", t);
-      throw t;
+        DEFAULT_FACTORY = factory;
+      } catch (Throwable t) {
+        LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", t);
+        throw t;
+      }
     }
+
+    return DEFAULT_FACTORY;
   }
 
-  private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
+  private static AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
@@ -48,8 +51,23 @@ public abstract class AbstractMuleMessageBuilderFactory {
    *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
-  static final AbstractMuleMessageBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+  static AbstractMuleMessageBuilderFactory getDefaultFactory() {
+    return getDefaultFactory(currentThread().getContextClassLoader());
+  }
+
+  /**
+   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * <p>
+   * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
+   * Information about this will be logged to aid in the troubleshooting of those cases.
+   * <p>
+   * <b>NOTE</b>: this method is for internal use only.
+   *
+   * @param classLoader the class loader where the implementation will be looked up.
+   * @return the implementation of this builder factory provided by the Mule Runtime.
+   */
+  static AbstractMuleMessageBuilderFactory getDefaultFactory(ClassLoader classLoader) {
+    return loadFactory(classLoader);
   }
 
   /**

@@ -47,6 +47,31 @@ public interface Message extends Serializable {
   }
 
   /**
+   * Provides a builder to create {@link Message} objects.
+   * <p>
+   * <b>NOTE</b>: this method is for internal use only.
+   *
+   * @param classLoader the class loader where the builder implementation will be looked up.
+   * @return a new {@link Builder}.
+   */
+  static PayloadBuilder builder(ClassLoader classLoader) {
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory(classLoader).create();
+  }
+
+  /**
+   * Provides a builder to create {@link Message} objects based on an existing {@link Message} instance.
+   * <p>
+   * <b>NOTE</b>: this method is for internal use only.
+   *
+   * @param message     existing {@link Message} to use as a template to create a new {@link Builder} instance.
+   * @param classLoader the class loader where the builder implementation will be looked up.
+   * @return a new {@link Builder} based on the template {@code message} provided.
+   */
+  static Builder builder(Message message, ClassLoader classLoader) {
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory(classLoader).create(message);
+  }
+
+  /**
    * Gets a {@link TypedValue} with the payload of this message.
    *
    * @param <T> the type of the payload.
@@ -75,6 +100,20 @@ public interface Message extends Serializable {
    */
   static Message of(Object payload) {
     return builder().value(payload).build();
+  }
+
+  /**
+   * Create a new {@link Message instance} with the given payload.
+   * <p>
+   * <b>NOTE</b>: this method is for internal use only.
+   *
+   * @param classLoader the class loader where the builder implementation will be looked up.
+   *
+   * @param payload     the message payload
+   * @return new message instance
+   */
+  static Message of(Object payload, ClassLoader classLoader) {
+    return builder(classLoader).value(payload).build();
   }
 
   /**
