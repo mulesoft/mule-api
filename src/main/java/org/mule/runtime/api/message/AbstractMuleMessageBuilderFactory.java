@@ -7,6 +7,7 @@
 package org.mule.runtime.api.message;
 
 import static java.lang.String.format;
+import static java.lang.Thread.currentThread;
 import static java.util.ServiceLoader.load;
 import org.mule.runtime.api.message.Message.Builder;
 
@@ -25,8 +26,8 @@ public abstract class AbstractMuleMessageBuilderFactory {
   static {
     try {
       final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class,
-                                                             AbstractMuleMessageBuilderFactory.class.getClassLoader()).iterator()
-                                                                 .next();
+                                                             currentThread().getContextClassLoader())
+                                                                 .iterator().next();
       LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 

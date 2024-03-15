@@ -7,6 +7,7 @@
 package org.mule.runtime.api.el;
 
 import static java.lang.String.format;
+import static java.lang.Thread.currentThread;
 import static java.util.ServiceLoader.load;
 
 import org.mule.api.annotation.NoImplement;
@@ -27,7 +28,7 @@ public abstract class AbstractBindingContextBuilderFactory {
   static {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
-                                                                AbstractBindingContextBuilderFactory.class.getClassLoader())
+                                                                currentThread().getContextClassLoader())
                                                                     .iterator().next();
       LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import static java.lang.String.format;
+import static java.lang.Thread.currentThread;
 import static java.util.ServiceLoader.load;
 
 import org.mule.api.annotation.NoExtend;
@@ -27,7 +28,7 @@ public abstract class AbstractDataTypeBuilderFactory {
   static {
     try {
       final AbstractDataTypeBuilderFactory factory = load(AbstractDataTypeBuilderFactory.class,
-                                                          AbstractDataTypeBuilderFactory.class.getClassLoader())
+                                                          currentThread().getContextClassLoader())
                                                               .iterator().next();
       LOGGER.debug(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
                           factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
