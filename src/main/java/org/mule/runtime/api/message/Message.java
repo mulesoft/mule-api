@@ -55,7 +55,8 @@ public interface Message extends Serializable {
    * @return a new {@link Builder}.
    */
   static PayloadBuilder builder(ClassLoader classLoader) {
-    return AbstractMuleMessageBuilderFactory.getDefaultFactory(classLoader).create();
+    // TODO: remove after test if successful
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory().create();
   }
 
   /**
@@ -68,7 +69,8 @@ public interface Message extends Serializable {
    * @return a new {@link Builder} based on the template {@code message} provided.
    */
   static Builder builder(Message message, ClassLoader classLoader) {
-    return AbstractMuleMessageBuilderFactory.getDefaultFactory(classLoader).create(message);
+    // TODO: remove after test if successful
+    return AbstractMuleMessageBuilderFactory.getDefaultFactory().create(message);
   }
 
   /**

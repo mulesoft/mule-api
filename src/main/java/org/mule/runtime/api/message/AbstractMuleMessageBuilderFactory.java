@@ -6,9 +6,13 @@
  */
 package org.mule.runtime.api.message;
 
+import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import static java.lang.String.format;
 import static java.lang.Thread.currentThread;
 import static java.util.ServiceLoader.load;
+
+import org.mule.runtime.api.exception.MuleRuntimeException;
 import org.mule.runtime.api.message.Message.Builder;
 
 import org.slf4j.Logger;
@@ -44,7 +48,7 @@ public abstract class AbstractMuleMessageBuilderFactory {
   private static AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
@@ -52,11 +56,24 @@ public abstract class AbstractMuleMessageBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static AbstractMuleMessageBuilderFactory getDefaultFactory() {
-    return getDefaultFactory(currentThread().getContextClassLoader());
+    try {
+      return getDefaultFactory(currentThread().getContextClassLoader());
+    } catch (Throwable t) {
+      ClassLoader classLoader;
+      try {
+        classLoader = currentThread().getContextClassLoader().loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
+      } catch (ClassNotFoundException e) {
+        throw new MuleRuntimeException(createStaticMessage(format("Failed obtaining class loader to load %s",
+                                                                  AbstractMuleMessageBuilderFactory.class.getName())),
+                                       e);
+      }
+
+      return getDefaultFactory(classLoader);
+    }
   }
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
