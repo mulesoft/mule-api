@@ -63,8 +63,7 @@ public abstract class AbstractMuleMessageBuilderFactory {
       try {
         classLoader = currentThread().getContextClassLoader().loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
       } catch (ClassNotFoundException e) {
-        throw new MuleRuntimeException(createStaticMessage(format("Failed obtaining class loader to load %s",
-                                                                  AbstractMuleMessageBuilderFactory.class.getName())),
+        throw new MuleRuntimeException(createStaticMessage("Failed obtaining class loader to load MuleMessageBuilderFactory implementation"),
                                        e);
       }
 

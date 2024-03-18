@@ -33,12 +33,12 @@ public abstract class AbstractExpressionModuleBuilderFactory {
       try {
         final AbstractExpressionModuleBuilderFactory factory =
             load(AbstractExpressionModuleBuilderFactory.class, classLoader).iterator().next();
-        LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
+        LOGGER.info(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
                            factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
         DEFAULT_FACTORY = factory;
       } catch (Throwable t) {
-        LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", t);
+        LOGGER.error("Error loading ExpressionModuleBuilderFactory implementation.", t);
         throw t;
       }
     }
@@ -64,8 +64,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
       try {
         classLoader = currentThread().getContextClassLoader().loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
       } catch (ClassNotFoundException e) {
-        throw new MuleRuntimeException(createStaticMessage(format("Failed obtaining class loader to load %s",
-                                                                  AbstractExpressionModuleBuilderFactory.class.getName())),
+        throw new MuleRuntimeException(createStaticMessage("Failed obtaining class loader to load ExpressionModuleBuilderFactory implementation"),
                                        e);
       }
 

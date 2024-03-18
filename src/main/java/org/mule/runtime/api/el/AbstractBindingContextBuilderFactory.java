@@ -33,12 +33,12 @@ public abstract class AbstractBindingContextBuilderFactory {
       try {
         final AbstractBindingContextBuilderFactory factory =
             load(AbstractBindingContextBuilderFactory.class, classLoader).iterator().next();
-        LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
+        LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                            factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
         DEFAULT_FACTORY = factory;
       } catch (Throwable t) {
-        LOGGER.error("Error loading MuleMessageBuilderFactory implementation.", t);
+        LOGGER.error("Error loading BindingContextBuilderFactory implementation.", t);
         throw t;
       }
     }
@@ -64,8 +64,7 @@ public abstract class AbstractBindingContextBuilderFactory {
       try {
         classLoader = currentThread().getContextClassLoader().loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
       } catch (ClassNotFoundException e) {
-        throw new MuleRuntimeException(createStaticMessage(format("Failed obtaining class loader to load %s",
-                                                                  AbstractBindingContextBuilderFactory.class.getName())),
+        throw new MuleRuntimeException(createStaticMessage("Failed obtaining class loader to load BindingContextBuilderFactory implementation"),
                                        e);
       }
 
