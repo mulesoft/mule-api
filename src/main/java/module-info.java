@@ -131,6 +131,7 @@ module org.mule.runtime.api {
       org.mule.runtime.artifact.ast.test,
       org.mule.runtime.artifact.ast.xmlParser,
       org.mule.runtime.core,
+      org.mule.runtime.errors,
       org.mule.runtime.extensions.api,
       org.mule.runtime.extensions.api.test,
       org.mule.runtime.extension.model,
