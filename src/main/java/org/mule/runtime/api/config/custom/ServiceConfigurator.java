@@ -20,6 +20,7 @@ public interface ServiceConfigurator {
    * Looks up implementations of {@link ServiceConfigurator}.
    *
    * @return the discovered {@link ServiceConfigurator}s.
+   * @since 1.7
    */
   static Stream<ServiceConfigurator> lookupServiceConfigurators() {
     return stream(((Iterable<ServiceConfigurator>) () -> load(ServiceConfigurator.class,
