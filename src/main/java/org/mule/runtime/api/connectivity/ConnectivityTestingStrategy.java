@@ -30,14 +30,13 @@ public interface ConnectivityTestingStrategy {
   /**
    * Looks up implementations of {@link ConnectivityTestingStrategy} with the provided classloader.
    *
+   * @param classLoader class loader from where to load the {@link ServiceConfigurator}s.
    * @return the discovered {@link ConnectivityTestingStrategy}.
    * @since 1.7
    */
-  static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies() {
-    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class,
-                                                                      ConnectivityTestingStrategy.class.getClassLoader())
-                                                                          .iterator()).spliterator(),
-                  false);
+  static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies(ClassLoader classLoader) {
+    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class, classLoader).iterator())
+        .spliterator(), false);
   }
 
   /**

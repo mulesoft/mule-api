@@ -19,13 +19,12 @@ public interface ServiceConfigurator {
   /**
    * Looks up implementations of {@link ServiceConfigurator}.
    *
+   * @param classLoader class loader from where to load the {@link ServiceConfigurator}s.
    * @return the discovered {@link ServiceConfigurator}s.
    * @since 1.7
    */
-  static Stream<ServiceConfigurator> lookupServiceConfigurators() {
-    return stream(((Iterable<ServiceConfigurator>) () -> load(ServiceConfigurator.class,
-                                                              ServiceConfigurator.class.getClassLoader())
-                                                                  .iterator()).spliterator(),
+  static Stream<ServiceConfigurator> lookupServiceConfigurators(ClassLoader classLoader) {
+    return stream(((Iterable<ServiceConfigurator>) () -> load(ServiceConfigurator.class, classLoader).iterator()).spliterator(),
                   false);
   }
 
