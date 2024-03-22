@@ -126,8 +126,6 @@ module org.mule.runtime.api {
   exports org.mule.runtime.internal.dsl to
       com.mulesoft.anypoint.gw.module.autodiscovery;
 
-  exports org.mule.runtime.internal.config.custom to
-      org.mule.runtime.spring.config;
   exports org.mule.runtime.internal.connectivity to
       org.mule.runtime.core;
   exports org.mule.runtime.internal.exception to
