@@ -185,7 +185,7 @@ public interface MetadataService {
    *         a problem.
    */
   MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location, MetadataKey key,
-                                                                  ScopePropagationContext ctx);
+                                                                  ChainPropagationContext ctx);
 
   /**
    * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
