@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.message.api.MessageMetadataType;
 
 import java.util.function.Supplier;
@@ -16,15 +15,16 @@ import java.util.function.Supplier;
  *
  * @since 1.7
  */
-public interface ScopePropagationContext {
+public interface ChainPropagationContext {
 
   /**
-   * @return an {@link Supplier} for the {@link MetadataType} of the inner chain of the scope.
+   * @return a {@link Supplier} describing the typed message that will enter the scope inner chain
    */
-  Supplier<MetadataType> getInnerChainResolver();
+  Supplier<MessageMetadataType> getChainInputResolver();
 
   /**
-   * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
+   * @return a {@link Supplier} describing the typed message that exits the scope inner chain
    */
-  Supplier<MessageMetadataType> getMessageTypeResolver();
+  Supplier<MessageMetadataType> getChainOutputResolver();
+
 }

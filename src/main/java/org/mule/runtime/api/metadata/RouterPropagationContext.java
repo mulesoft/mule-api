@@ -6,11 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
-import org.mule.metadata.api.model.MetadataType;
-import org.mule.metadata.message.api.MessageMetadataType;
-
 import java.util.Map;
-import java.util.function.Supplier;
 
 /**
  * Models the propagation context of a Router.
@@ -20,13 +16,11 @@ import java.util.function.Supplier;
 public interface RouterPropagationContext {
 
   /**
-   * @return a {@link Map} which keys are the location corresponding to each route of the router. As value, a {@link Supplier}
-   *         that supplies a {@link MetadataType} of that given route.
+   * Returns an unmodifiable {@link Map} in which keys map to the route names and the values are a {@link ChainPropagationContext}
+   * with the propagation context of the route inner chain.
+   *
+   * @return an unmodifiable {@link Map}
    */
-  Map<String, Supplier<MetadataType>> getRouteResolvers();
+  Map<String, ChainPropagationContext> getRoutesPropagationContext();
 
-  /**
-   * @return a {@link Supplier} for the {@link MessageMetadataType} of the Message output.
-   */
-  Supplier<MessageMetadataType> getMessageTypeResolver();
 }
