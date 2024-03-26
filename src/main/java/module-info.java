@@ -127,9 +127,6 @@ module org.mule.runtime.api {
       com.mulesoft.anypoint.gw.module.autodiscovery;
 
   exports org.mule.runtime.internal.exception to
-      org.mule.runtime.core,
-      org.mule.runtime.core.components,
-      org.mule.runtime.extensions.support,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
       org.mule.runtime.api.test;
