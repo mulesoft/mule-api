@@ -132,7 +132,6 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
-      org.mule.runtime.core,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.collection to
       org.mule.runtime.core,
