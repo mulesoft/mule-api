@@ -134,8 +134,6 @@ module org.mule.runtime.api {
   exports org.mule.runtime.internal.util to
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.collection to
-      org.mule.runtime.core,
-      org.mule.runtime.artifact.activation,
       org.mule.runtime.api.test;
 
   // Internals exposed to test module
