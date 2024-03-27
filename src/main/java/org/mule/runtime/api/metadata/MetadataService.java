@@ -8,12 +8,15 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.RouterInputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ScopeInputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
@@ -73,6 +76,12 @@ public interface MetadataService {
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
 
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(Location location, MetadataKey key,
+                                                                     MessageMetadataType scopeInputMessageType);
+
+  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(Location location, MetadataKey key,
+                                                                       MessageMetadataType routerInputMessageType);
+
   /**
    * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
    *
@@ -82,6 +91,36 @@ public interface MetadataService {
    * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(Location location, MetadataKey key);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Scope Operations.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a scope.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   */
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location,
+                                                                  MetadataKey key,
+                                                                  ScopeOutputMetadataContext ctx);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Router Operations.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a router.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   */
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
+                                                                   RouterOutputMetadataContext ctx);
+
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
@@ -172,35 +211,4 @@ public interface MetadataService {
    *         a problem.
    */
   MetadataResult<TypeMetadataDescriptor> getEntityMetadata(Location location, MetadataKey key);
-
-  /**
-   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}. This is to be used only on Scope Operations.
-   *
-   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
-   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
-   * @param ctx      the context for the propagation within a scope.
-   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
-   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
-   *         a problem.
-   */
-  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location, MetadataKey key,
-                                                                  ChainPropagationContext ctx);
-
-  /**
-   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}. This is to be used only on Router Operations.
-   *
-   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
-   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
-   * @param ctx      the context for the propagation within a router.
-   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
-   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
-   *         a problem.
-   */
-  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
-                                                                   RouterPropagationContext ctx);
-
-
-
 }
