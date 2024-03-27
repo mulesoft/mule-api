@@ -11,6 +11,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.BATCH_FIXED_AGGREGA
 import static org.mule.runtime.api.util.MuleSystemProperties.COMPUTE_CONNECTION_ERRORS_IN_STATS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_ALTERNATING_BACKSLASH_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_APPLY_OBJECT_PROCESSOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY;
@@ -494,7 +495,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
       "When enabled, implicit configuration for the XML SDK won't be created.",
-      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION);
+      "W-10634129", "4.7.0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
+
+  /**
+   * When enabled, template parser will error out on alternating backslash
+   *
+   * @since 4.4.0-202404, 4.6.2, 4.7.0
+   */
+  ENABLE_ALTERNATING_BACKSLASH_VALIDATION(
+      "When enabled, template parser will error out on alternating backslash",
+      "W-15141905", "4.3.0", ENABLE_ALTERNATING_BACKSLASH_VALIDATION_PROPERTY);
 
   private final String description;
   private final String issueId;
