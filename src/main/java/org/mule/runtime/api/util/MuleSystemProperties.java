@@ -582,6 +582,14 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
+   * When enabled, template parser will error out on alternating backslash
+   *
+   * @since 4.4.0-202404, 4.6.2, 4.7.0
+   */
+  public static final String ENABLE_ALTERNATING_BACKSLASH_VALIDATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "enable.alternating.backslash.validation";
+
+  /**
    * Property used to change the deployment mode to deploy only one application.
    * <p>
    * <code>mule -M-Dmule.single.app.mode</code>
