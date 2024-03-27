@@ -122,14 +122,13 @@ module org.mule.runtime.api {
   uses org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
   uses org.mule.runtime.api.tls.AbstractTlsContextFactoryBuilderFactory;
 
+  // Internals exposed to test module
   exports org.mule.runtime.internal.exception to
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.collection to
       org.mule.runtime.api.test;
-
-  // Internals exposed to test module
   exports org.mule.runtime.internal.util.xmlsecurity to
       org.mule.runtime.api.test;
 
