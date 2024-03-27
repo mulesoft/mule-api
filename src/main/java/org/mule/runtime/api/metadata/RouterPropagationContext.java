@@ -12,8 +12,8 @@ import org.mule.metadata.message.api.MessageMetadataType;
 import java.util.Map;
 
 /**
- * Contains DataSense propagation information for routers, by using a {@link MessageMetadataType} to describe
- * the typed message that enters each {@code Route} (input) and the message that exits them (output)
+ * Contains DataSense propagation information for routers, by using a {@link MessageMetadataType} to describe the typed message
+ * that enters each {@code Route} (input) and the message that exits them (output)
  * <p>
  * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
  *
