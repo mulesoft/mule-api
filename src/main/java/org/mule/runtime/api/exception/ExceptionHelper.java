@@ -247,6 +247,38 @@ public class ExceptionHelper {
     return buf.toString();
   }
 
+  /**
+   * Wraps the provided exception, suppressing the exception itself or the first cause that is an instance of the provided class.
+   * The search will stop if an already suppressed exception is found, making no suppression.
+   *
+   * @param exception       Exception that will be wrapped, suppressing the exception itself or one of its causes.
+   * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
+   * @return a {@link MuleException} with the exception suppressed if the cause to suppress is found, or the provided exception
+   *         otherwise.
+   * @since 1.7
+   */
+  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress) {
+    return SuppressedMuleException.suppressIfPresent(exception, causeToSuppress);
+  }
+
+  /**
+   * @param exception exception to determine whether it contains a suppressed exception within.
+   * @return whether the given {@code exception} contains a suppressed exception within.
+   * @since 1.7
+   */
+  public static boolean containsSuppressedException(Throwable exception) {
+    return exception instanceof SuppressedMuleException;
+  }
+
+  /**
+   * @param exception exception to unwrap.
+   * @return the first exception that is not suppressed.
+   * @since 1.7
+   */
+  public static Throwable unwrapSuppressedException(Throwable exception) {
+    return ((SuppressedMuleException) exception).unwrap();
+  }
+
   private static void initialise() {
     if (initialised) {
       return;

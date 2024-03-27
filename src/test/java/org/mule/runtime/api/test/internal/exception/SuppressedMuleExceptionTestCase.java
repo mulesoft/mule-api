@@ -34,7 +34,7 @@ public class SuppressedMuleExceptionTestCase {
   @Issue("MULE-18041")
   public void whenClassToSuppressIsFoundThenSuppressionIsAdded() {
     Throwable result =
-        SuppressedMuleException.suppressIfPresent(new SimpleException(new ExceptionWithAdditionalInfo()),
+        SuppressedMuleException.suppressIfPresent(new SimpleException(new SimpleException(new ExceptionWithAdditionalInfo())),
                                                   ExceptionWithAdditionalInfo.class);
     assertThat(result, is(instanceOf(SuppressedMuleException.class)));
   }

@@ -6,8 +6,13 @@
  */
 package org.mule.runtime.api.connectivity;
 
+import static java.util.ServiceLoader.load;
+import static java.util.stream.StreamSupport.stream;
+
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionValidationResult;
+
+import java.util.stream.Stream;
 
 /**
  * An strategy for doing connectivity testing.
@@ -21,6 +26,18 @@ import org.mule.runtime.api.connection.ConnectionValidationResult;
  */
 @NoImplement
 public interface ConnectivityTestingStrategy {
+
+  /**
+   * Looks up implementations of {@link ConnectivityTestingStrategy} with the provided classloader.
+   *
+   * @param classLoader class loader from where to load the {@link ServiceConfigurator}s.
+   * @return the discovered {@link ConnectivityTestingStrategy}.
+   * @since 1.7
+   */
+  static Stream<ConnectivityTestingStrategy> lookupConnectivityTestingStrategies(ClassLoader classLoader) {
+    return stream(((Iterable<ConnectivityTestingStrategy>) () -> load(ConnectivityTestingStrategy.class, classLoader).iterator())
+        .spliterator(), false);
+  }
 
   /**
    * Does connectivity validation over the provided mule component.
