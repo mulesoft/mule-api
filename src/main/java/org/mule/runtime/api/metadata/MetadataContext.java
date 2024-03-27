@@ -62,7 +62,7 @@ public interface MetadataContext extends Disposable {
    * @since 1.7
    */
   @Experimental
-  Optional<ChainPropagationContext> getScopePropagationContext();
+  Optional<ScopeOutputMetadataContext> getScopeOutputMetadataContext();
 
   /**
    * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
@@ -71,5 +71,5 @@ public interface MetadataContext extends Disposable {
    * @since 1.7
    */
   @Experimental
-  Optional<RouterPropagationContext> getRouterPropagationContext();
+  Optional<RouterOutputMetadataContext> getRouterOutputMetadataContext();
 }

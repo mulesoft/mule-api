@@ -23,16 +23,16 @@ import java.util.function.Supplier;
  * @since 1.7.0
  */
 @Experimental
-public interface ChainPropagationContext {
+public interface ScopeOutputMetadataContext {
 
   /**
-   * @return a {@link Supplier} describing the typed message that will enter the scope inner chain
+   * @return a {@link Supplier} describing the typed message that exits the scope's inner chain
    */
-  Supplier<MessageMetadataType> getChainInputResolver();
+  Supplier<MessageMetadataType> getInnerChainOutputMessageType();
 
   /**
-   * @return a {@link Supplier} describing the typed message that exits the scope inner chain
+   * @return a {@link Supplier} describing the typed message that initially entered the scope
    */
-  Supplier<MessageMetadataType> getChainOutputResolver();
+  Supplier<MessageMetadataType> getScopeInputMessageType();
 
 }

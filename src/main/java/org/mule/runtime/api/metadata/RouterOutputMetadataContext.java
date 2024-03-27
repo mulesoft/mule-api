@@ -10,6 +10,7 @@ import org.mule.api.annotation.Experimental;
 import org.mule.metadata.message.api.MessageMetadataType;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Contains DataSense propagation information for routers, by using a {@link MessageMetadataType} to describe the typed message
@@ -20,14 +21,13 @@ import java.util.Map;
  * @since 1.7.0
  */
 @Experimental
-public interface RouterPropagationContext {
+public interface RouterOutputMetadataContext {
+
+  Map<String, Supplier<MessageMetadataType>> getRouteOutputMessageTypes();
 
   /**
-   * Returns an unmodifiable {@link Map} in which keys map to the route names and the values are a {@link ChainPropagationContext}
-   * with the propagation context of the route inner chain.
-   *
-   * @return an unmodifiable {@link Map}
+   * @return a {@link Supplier} describing the typed message that initially entered the scope
    */
-  Map<String, ChainPropagationContext> getRoutesPropagationContext();
+  Supplier<MessageMetadataType> getRouterInputMessageType();
 
 }

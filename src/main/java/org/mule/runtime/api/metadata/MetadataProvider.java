@@ -8,11 +8,14 @@ package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.RouterInputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ScopeInputMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
@@ -67,6 +70,13 @@ public interface MetadataProvider<T extends ComponentModel> {
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(MetadataKey key) throws MetadataResolvingException;
 
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(MetadataKey key, MessageMetadataType scopeInputMessageType)
+      throws MetadataResolvingException;
+
+  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(MetadataKey key,
+                                                                       MessageMetadataType routerInputMessageType)
+      throws MetadataResolvingException;
+
   /**
    * Resolves the dynamic {@link MetadataType} for the current component output and attrubutes with the given key.
    *
@@ -81,29 +91,29 @@ public interface MetadataProvider<T extends ComponentModel> {
   /**
    * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
    *
-   * @param key                     {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param chainPropagationContext the context of the propagation of the inner chain of the scope.
+   * @param key                        {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param scopeOutputMetadataContext the context of the propagation of the inner chain of the scope.
    * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    * @since 1.7
    */
   MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(MetadataKey key,
-                                                                  ChainPropagationContext chainPropagationContext)
+                                                                  ScopeOutputMetadataContext scopeOutputMetadataContext)
       throws MetadataResolvingException;
 
   /**
    * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
    *
-   * @param key                      {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param routerPropagationContext the context of the propagation of the router's routes' inner chains.
+   * @param key                         {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param routerOutputMetadataContext the context of the propagation of the router's routes' inner chains.
    * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    * @since 1.7
    */
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
-                                                                   RouterPropagationContext routerPropagationContext)
+                                                                   RouterOutputMetadataContext routerOutputMetadataContext)
       throws MetadataResolvingException;
 
 }
