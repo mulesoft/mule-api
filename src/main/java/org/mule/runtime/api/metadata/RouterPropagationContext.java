@@ -6,13 +6,20 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.Experimental;
+import org.mule.metadata.message.api.MessageMetadataType;
+
 import java.util.Map;
 
 /**
- * Models the propagation context of a Router.
+ * Contains DataSense propagation information for routers, by using a {@link MessageMetadataType} to describe
+ * the typed message that enters each {@code Route} (input) and the message that exits them (output)
+ * <p>
+ * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
  *
- * @since 1.7
+ * @since 1.7.0
  */
+@Experimental
 public interface RouterPropagationContext {
 
   /**

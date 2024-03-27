@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
@@ -55,14 +56,20 @@ public interface MetadataContext extends Disposable {
   MetadataCache getCache();
 
   /**
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
    * @return For scope components, describes the inner chain's input and output types.
    * @since 1.7
    */
+  @Experimental
   Optional<ChainPropagationContext> getScopePropagationContext();
 
   /**
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
    * @return For router components, describes the inner routes input and output types.
    * @since 1.7
    */
+  @Experimental
   Optional<RouterPropagationContext> getRouterPropagationContext();
 }
