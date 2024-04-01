@@ -42,7 +42,7 @@ public final class ScopeInputMetadataDescriptor extends BaseInputMetadataDescrip
 
     @Override
     public ScopeInputMetadataDescriptor build() {
-      checkArgument(chainInputMessageType != null, "chainInputMessageType is required");
+      checkArgument(chainInputMessageType != null, "chainInputMessageType cannot be null");
       return new ScopeInputMetadataDescriptor(parameters, chainInputMessageType);
     }
   }

@@ -23,6 +23,8 @@ import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 
+import java.util.function.Supplier;
+
 /**
  * Provides access to the Metadata of any {@link MetadataProvider} and {@link EntityMetadataProvider} components in the
  * application and the {@link MetadataKey} of the {@link MetadataKeyProvider} components, using it's {@link Location} It also
@@ -76,11 +78,13 @@ public interface MetadataService {
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
 
-  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(Location location, MetadataKey key,
-                                                                     MessageMetadataType scopeInputMessageType);
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(Location location,
+                                                                     MetadataKey key,
+                                                                     Supplier<MessageMetadataType> scopeInputMessageType);
 
-  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(Location location, MetadataKey key,
-                                                                       MessageMetadataType routerInputMessageType);
+  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(Location location,
+                                                                       MetadataKey key,
+                                                                       Supplier<MessageMetadataType> routerInputMessageType);
 
   /**
    * Resolves the dynamic {@link MetadataType} for the current component output with the given key.

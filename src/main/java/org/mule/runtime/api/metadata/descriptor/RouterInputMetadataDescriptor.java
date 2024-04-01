@@ -6,7 +6,11 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import static java.util.Collections.unmodifiableMap;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import org.mule.metadata.message.api.MessageMetadataType;
 
@@ -38,12 +42,21 @@ public final class RouterInputMetadataDescriptor extends BaseInputMetadataDescri
 
     public RouterInputMetadataDescriptorBuilder withRouteInputMessageType(String routeName,
                                                                           MessageMetadataType routeInputMessageType) {
+      checkArgument(isBlank(routeName), "routeName cannot be null or blank");
+      checkArgument(routeInputMessageType != null, "routeInputMessageType cannot be null");
+
       this.routeInputMessageTypes.put(routeName, routeInputMessageType);
+      return this;
+    }
+
+    public RouterInputMetadataDescriptorBuilder withRoutesInputMessageTypes(Map<String, MessageMetadataType> routesInputTypes) {
+      this.routeInputMessageTypes.putAll(routesInputTypes);
       return this;
     }
 
     @Override
     public RouterInputMetadataDescriptor build() {
+      checkArgument(!routeInputMessageTypes.isEmpty(), "routeInputMessageTypes cannot be empty");
       return new RouterInputMetadataDescriptor(parameters, routeInputMessageTypes);
     }
   }

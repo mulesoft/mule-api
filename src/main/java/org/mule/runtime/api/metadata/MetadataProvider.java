@@ -20,6 +20,8 @@ import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 
+import java.util.function.Supplier;
+
 /**
  * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
  * {@link MetadataType} information associated to the Component's input and output elements
@@ -70,11 +72,12 @@ public interface MetadataProvider<T extends ComponentModel> {
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(MetadataKey key) throws MetadataResolvingException;
 
-  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(MetadataKey key, MessageMetadataType scopeInputMessageType)
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(MetadataKey key,
+                                                                     Supplier<MessageMetadataType> scopeInputMessageType)
       throws MetadataResolvingException;
 
   MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(MetadataKey key,
-                                                                       MessageMetadataType routerInputMessageType)
+                                                                       Supplier<MessageMetadataType> routerInputMessageType)
       throws MetadataResolvingException;
 
   /**
