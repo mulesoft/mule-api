@@ -66,10 +66,10 @@ public interface MetadataService {
   MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location, MetadataKey partialKey);
 
   /**
-   * Resolves the dynamic {@link MetadataType} for the current component parameter with the given key.
+   * Resolves the {@link MetadataType} for the input parameters of the component at the given {@code location}
    *
-   * @param key           {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param parameterName {@link String} name of the parameter to be resolved.
+   * @param location the {@link Location} of the component which input types are being resolved
+   * @param key      {@link MetadataKey} for resolving dynamic types
    * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @since 1.4
