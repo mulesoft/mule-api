@@ -8,9 +8,22 @@ package org.mule.runtime.api.metadata.descriptor;
 
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
+import org.mule.api.annotation.NoExtend;
+
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Base class for builders that produce instances of {@link BaseInputMetadataDescriptor}.
+ *
+ * <b>NOTE:</b> This class is to ONLY be implemented by Mule Runtime. No customer or external component should
+ * extend it.
+ *
+ * @param <T> the generic type of the produced descriptor
+ * @param <B> the generic type of the builder concrete implementation
+ * @since 1.7.0
+ */
+@NoExtend
 abstract class BaseInputMetadataDescriptorBuilder<T extends BaseInputMetadataDescriptor, B extends BaseInputMetadataDescriptorBuilder> {
 
   protected Map<String, ParameterMetadataDescriptor> parameters = new HashMap<>();

@@ -6,7 +6,6 @@
  */
 package org.mule.runtime.api.metadata.descriptor;
 
-import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.metadata.MetadataProvider;
 
@@ -32,8 +31,7 @@ public final class InputMetadataDescriptor extends BaseInputMetadataDescriptor {
    *
    * @since 1.0
    */
-  @NoExtend
-  public static class InputMetadataDescriptorBuilder
+  public static final class InputMetadataDescriptorBuilder
       extends BaseInputMetadataDescriptorBuilder<InputMetadataDescriptor, InputMetadataDescriptorBuilder> {
 
     /**

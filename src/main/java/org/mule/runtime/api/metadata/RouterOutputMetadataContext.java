@@ -23,10 +23,15 @@ import java.util.function.Supplier;
 @Experimental
 public interface RouterOutputMetadataContext {
 
+  /**
+   * Describes the payload and attribute types that exit each route through a {@link Map} which keys are the route name
+   * and the value a {@link MessageMetadataType} supplier.
+   * @return an unmodifiable {@link Map}, could be empty may not be {@code null}
+   */
   Map<String, Supplier<MessageMetadataType>> getRouteOutputMessageTypes();
 
   /**
-   * @return a {@link Supplier} describing the typed message that initially entered the scope
+   * @return a {@link Supplier} describing the typed message that initially entered the router
    */
   Supplier<MessageMetadataType> getRouterInputMessageType();
 

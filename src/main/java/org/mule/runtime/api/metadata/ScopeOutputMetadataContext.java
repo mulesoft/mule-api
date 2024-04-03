@@ -12,11 +12,8 @@ import org.mule.metadata.message.api.MessageMetadataType;
 import java.util.function.Supplier;
 
 /**
- * Contains DataSense propagation information by using a {@link MessageMetadataType} to describe the typed message that enters a
- * {@code Chain} (input) and the message that exits it (output)
- * <p>
- * This context represents chains generically. It can be used to describe the single inner chain of a scope, or the inner chain of
- * the multiple routes in a router component.
+ * Contains DataSense propagation information by using a {@link MessageMetadataType} to describe the typed message that enters
+ * a scope's inner chain (input) and the message that exits that chain
  * <p>
  * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
  *
