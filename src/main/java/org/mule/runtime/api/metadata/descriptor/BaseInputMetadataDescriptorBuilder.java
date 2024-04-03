@@ -16,8 +16,7 @@ import java.util.Map;
 /**
  * Base class for builders that produce instances of {@link BaseInputMetadataDescriptor}.
  *
- * <b>NOTE:</b> This class is to ONLY be implemented by Mule Runtime. No customer or external component should
- * extend it.
+ * <b>NOTE:</b> This class is to ONLY be implemented by Mule Runtime. No customer or external component should extend it.
  *
  * @param <T> the generic type of the produced descriptor
  * @param <B> the generic type of the builder concrete implementation

@@ -12,8 +12,8 @@ import org.mule.metadata.message.api.MessageMetadataType;
 import java.util.function.Supplier;
 
 /**
- * Contains DataSense propagation information by using a {@link MessageMetadataType} to describe the typed message that enters
- * a scope's inner chain (input) and the message that exits that chain
+ * Contains DataSense propagation information by using a {@link MessageMetadataType} to describe the typed message that enters a
+ * scope's inner chain (input) and the message that exits that chain
  * <p>
  * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
  *

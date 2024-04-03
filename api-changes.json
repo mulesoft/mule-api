@@ -176,7 +176,14 @@
           "old": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
           "new": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
           "superClass": "org.mule.runtime.api.metadata.descriptor.BaseInputMetadataDescriptorBuilder<org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor, org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder>",
-          "justification": "W-14969942: Non breaking change"
+          "justification": "W-14969942: Non breaking change."
+        },
+        {
+          "ignore": true,
+          "code": "java.class.nowFinal",
+          "old": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "new": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "justification": "W-14969942: Non breaking change."
         },
         {
           "ignore": true,

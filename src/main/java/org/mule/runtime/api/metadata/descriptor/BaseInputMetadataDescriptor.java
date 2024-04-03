@@ -17,8 +17,7 @@ import java.util.Map;
 /**
  * Base class for input metadata descriptors.
  *
- * <b>NOTE:</b> This class is to ONLY be implemented by Mule Runtime. No customer or external component should
- * extend it.
+ * <b>NOTE:</b> This class is to ONLY be implemented by Mule Runtime. No customer or external component should extend it.
  *
  * @since 1.7.0
  */

@@ -44,8 +44,8 @@ public final class RouterInputMetadataDescriptor extends BaseInputMetadataDescri
   }
 
   /**
-   * Describes the payload and attribute types of the message that enters each route through a {@link Map} in which
-   * the entries are the route names and the values the corresponding {@link MessageMetadataType}
+   * Describes the payload and attribute types of the message that enters each route through a {@link Map} in which the entries
+   * are the route names and the values the corresponding {@link MessageMetadataType}
    *
    * @return an unmodifiable map. Could be empty but cannot be {@code null}
    */
@@ -81,9 +81,11 @@ public final class RouterInputMetadataDescriptor extends BaseInputMetadataDescri
     }
 
     /**
-     * Adds information for several routes. All entries must comply with the rules defined in {@link #withRouteInputMessageType(String, MessageMetadataType)}
+     * Adds information for several routes. All entries must comply with the rules defined in
+     * {@link #withRouteInputMessageType(String, MessageMetadataType)}
      *
-     * @param routesInputTypes a {@link Map} which keys are the route names and the values their corresponding {@link MessageMetadataType}.
+     * @param routesInputTypes a {@link Map} which keys are the route names and the values their corresponding
+     *                         {@link MessageMetadataType}.
      * @return {@code this} argument
      * @throws IllegalArgumentException if any of the entries are invalid
      */
