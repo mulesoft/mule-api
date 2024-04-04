@@ -153,6 +153,45 @@
           "oldVisibility": "package",
           "newVisibility": "protected",
           "justification": "W-15090480: Aggregators' special case for enrichers when changing routers to be Operations"
+        },
+        {
+          "ignore": true,
+          "code": "java.method.visibilityIncreased",
+          "old": "method void org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder::<init>()",
+          "new": "method void org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder::<init>()",
+          "oldVisibility": "private",
+          "newVisibility": "protected",
+          "justification": "W-14969942: Non breaking change. API surface not publicly increased"
+        },
+        {
+          "ignore": true,
+          "code": "java.method.returnTypeErasureChanged",
+          "old": "method org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder::withParameter(java.lang.String, org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor)",
+          "new": "method B org.mule.runtime.api.metadata.descriptor.BaseInputMetadataDescriptorBuilder<T extends org.mule.runtime.api.metadata.descriptor.BaseInputMetadataDescriptor, B extends org.mule.runtime.api.metadata.descriptor.BaseInputMetadataDescriptorBuilder>::withParameter(java.lang.String, org.mule.runtime.api.metadata.descriptor.ParameterMetadataDescriptor) @ org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "justification": "W-14969942: Non breaking change. API surface not publicly increased"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.nonFinalClassInheritsFromNewClass",
+          "old": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "new": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "superClass": "org.mule.runtime.api.metadata.descriptor.BaseInputMetadataDescriptorBuilder<org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor, org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder>",
+          "justification": "W-14969942: Non breaking change."
+        },
+        {
+          "ignore": true,
+          "code": "java.class.nowFinal",
+          "old": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "new": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "justification": "W-14969942: Non breaking change."
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "new": "class org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor.InputMetadataDescriptorBuilder",
+          "annotation": "@org.mule.api.annotation.NoExtend",
+          "justification": "W-14969942: Non breaking change. Class not for publicly extending. Alternative would be making it final"
         }
       ]
     }

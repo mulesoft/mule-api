@@ -6,19 +6,25 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.component.location.Location;
 import org.mule.runtime.api.meta.model.operation.OperationModel;
 import org.mule.runtime.api.meta.model.source.SourceModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.RouterInputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ScopeInputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.TypeMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
+
+import java.util.function.Supplier;
 
 /**
  * Provides access to the Metadata of any {@link MetadataProvider} and {@link EntityMetadataProvider} components in the
@@ -63,15 +69,57 @@ public interface MetadataService {
   MetadataResult<MetadataKeysContainer> getMetadataKeys(Location location, MetadataKey partialKey);
 
   /**
-   * Resolves the dynamic {@link MetadataType} for the current component parameter with the given key.
+   * Resolves the {@link MetadataType} for the input parameters of the component at the given {@code location}
    *
-   * @param key           {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param parameterName {@link String} name of the parameter to be resolved.
+   * @param location the {@link Location} of the component which input types are being resolved
+   * @param key      {@link MetadataKey} for resolving dynamic types
    * @return A {@link MetadataType} of {@link InputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @since 1.4
    */
   MetadataResult<InputMetadataDescriptor> getInputMetadata(Location location, MetadataKey key);
+
+  /**
+   * Resolves the input metadata for the scope at the given {@code location}. It not only resolves input parameter types, but also
+   * the payload and attribute types of the message that will enter the inner chain.
+   * <p>
+   * Tip: Don't confuse the scope's input message (the one that enters the scope operation itself) with the inner chain input
+   * message (the one that enters the scope's chain).
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param location              the {@link Location} of the component which input types are being resolved
+   * @param key                   {@link MetadataKey} for resolving dynamic types
+   * @param scopeInputMessageType a typed {@link MessageMetadataType} supplier describing the message that originally entered the
+   *                              scope
+   * @return a {@link MetadataResult} wrapping a {@link ScopeInputMetadataDescriptor}
+   * @since 1.7.0
+   */
+  @Experimental
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(Location location,
+                                                                     MetadataKey key,
+                                                                     Supplier<MessageMetadataType> scopeInputMessageType);
+
+  /**
+   * Resolves the input metadata for the router at the given {@code location}. It not only resolves input parameter types, but
+   * also the payload and attribute types of the message that will enter each route.
+   * <p>
+   * Tip: Don't confuse the scope's input message (the one that enters the scope operation itself) with the routes input message
+   * (the one that enters the scope's chain).
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param location               the {@link Location} of the component which input types are being resolved
+   * @param key                    {@link MetadataKey} for resolving dynamic types
+   * @param routerInputMessageType a typed {@link MessageMetadataType} supplier describing the message that originally entered the
+   *                               router
+   * @return a {@link MetadataResult} wrapping a {@link ScopeInputMetadataDescriptor}
+   * @since 1.7.0
+   */
+  @Experimental
+  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(Location location,
+                                                                       MetadataKey key,
+                                                                       Supplier<MessageMetadataType> routerInputMessageType);
 
   /**
    * Resolves the dynamic {@link MetadataType} for the current component output with the given key.
@@ -82,6 +130,43 @@ public interface MetadataService {
    * @since 1.4
    */
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(Location location, MetadataKey key);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Scope Operations.
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a scope.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   * @since 1.7.0
+   */
+  @Experimental
+  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location,
+                                                                  MetadataKey key,
+                                                                  ScopeOutputMetadataContext ctx);
+
+  /**
+   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
+   * {@link Location}. This is to be used only on Router Operations.
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
+   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
+   * @param ctx      the context for the propagation within a router.
+   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
+   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
+   *         a problem.
+   */
+  @Experimental
+  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location,
+                                                                   MetadataKey key,
+                                                                   RouterOutputMetadataContext ctx);
 
   /**
    * Resolves the {@link ComponentMetadataDescriptor} for the {@link MetadataProvider} Component identified by the
@@ -172,35 +257,4 @@ public interface MetadataService {
    *         a problem.
    */
   MetadataResult<TypeMetadataDescriptor> getEntityMetadata(Location location, MetadataKey key);
-
-  /**
-   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}. This is to be used only on Scope Operations.
-   *
-   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
-   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
-   * @param ctx      the context for the propagation within a scope.
-   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
-   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
-   *         a problem.
-   */
-  MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(Location location, MetadataKey key,
-                                                                  ScopePropagationContext ctx);
-
-  /**
-   * Resolves an entity {@link OutputMetadataDescriptor} for the {@link EntityMetadataProvider} component identified by the
-   * {@link Location}. This is to be used only on Router Operations.
-   *
-   * @param location the location of the {@link EntityMetadataProvider} component to query for its available keys
-   * @param key      {@link MetadataKey} representing an entity of the type which's structure has to be resolved
-   * @param ctx      the context for the propagation within a router.
-   * @return a {@link MetadataResult} of {@link OutputMetadataDescriptor} type with a successful {@link MetadataResult} if the
-   *         metadata is successfully retrieved and a failed {@link MetadataResult} when the metadata retrieval of the entity had
-   *         a problem.
-   */
-  MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(Location location, MetadataKey key,
-                                                                   RouterPropagationContext ctx);
-
-
-
 }

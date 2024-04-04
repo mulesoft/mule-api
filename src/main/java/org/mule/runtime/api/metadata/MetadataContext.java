@@ -6,16 +6,14 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.ClassTypeLoader;
 import org.mule.metadata.api.builder.BaseTypeBuilder;
-import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.connection.ConnectionException;
 import org.mule.runtime.api.lifecycle.Disposable;
 
-import java.util.Map;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 /**
  * Metadata resolving context, provides access to the Config and Connection used during metadata fetch invocation.
@@ -58,16 +56,20 @@ public interface MetadataContext extends Disposable {
   MetadataCache getCache();
 
   /**
-   * @return For scope components, describes the inner chain's output type.
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @return For scope components, describes the inner chain's input and output types.
    * @since 1.7
    */
-  Optional<Supplier<MetadataType>> getInnerChainOutputType();
+  @Experimental
+  Optional<ScopeOutputMetadataContext> getScopeOutputMetadataContext();
 
   /**
-   * @return For router components, describes the inner chains' output type. The {@link Map}'s key is the route's name.
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @return For router components, describes the inner routes input and output types.
    * @since 1.7
    */
-  Map<String, Supplier<MetadataType>> getInnerRoutesOutputType();
-
-
+  @Experimental
+  Optional<RouterOutputMetadataContext> getRouterOutputMetadataContext();
 }

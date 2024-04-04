@@ -6,16 +6,22 @@
  */
 package org.mule.runtime.api.metadata;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.metadata.api.model.MetadataType;
+import org.mule.metadata.message.api.MessageMetadataType;
 import org.mule.runtime.api.message.Message;
 import org.mule.runtime.api.meta.model.ComponentModel;
 import org.mule.runtime.api.metadata.descriptor.ComponentMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.InputMetadataDescriptor;
 import org.mule.runtime.api.metadata.descriptor.OutputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.RouterInputMetadataDescriptor;
+import org.mule.runtime.api.metadata.descriptor.ScopeInputMetadataDescriptor;
 import org.mule.runtime.api.metadata.resolving.InputTypeResolver;
 import org.mule.runtime.api.metadata.resolving.MetadataResult;
 import org.mule.runtime.api.metadata.resolving.OutputTypeResolver;
+
+import java.util.function.Supplier;
 
 /**
  * This interface allows a Component that processes a {@link Message} to expose its metadata descriptor, containing all the
@@ -68,6 +74,46 @@ public interface MetadataProvider<T extends ComponentModel> {
   MetadataResult<InputMetadataDescriptor> getInputMetadata(MetadataKey key) throws MetadataResolvingException;
 
   /**
+   * Resolves the input metadata for the scope at the given {@code location}. It not only resolves input parameter types, but also
+   * the payload and attribute types of the message that will enter the inner chain.
+   * <p>
+   * Tip: Don't confuse the scope's input message (the one that enters the scope operation itself) with the inner chain input
+   * message (the one that enters the scope's chain).
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param key                   {@link MetadataKey} for resolving dynamic types
+   * @param scopeInputMessageType a typed {@link MessageMetadataType} supplier describing the message that originally entered the
+   *                              scope
+   * @return a {@link MetadataResult} wrapping a {@link ScopeInputMetadataDescriptor}
+   * @since 1.7.0
+   */
+  @Experimental
+  MetadataResult<ScopeInputMetadataDescriptor> getScopeInputMetadata(MetadataKey key,
+                                                                     Supplier<MessageMetadataType> scopeInputMessageType)
+      throws MetadataResolvingException;
+
+  /**
+   * Resolves the input metadata for the router at the given {@code location}. It not only resolves input parameter types, but
+   * also the payload and attribute types of the message that will enter each route.
+   * <p>
+   * Tip: Don't confuse the scope's input message (the one that enters the scope operation itself) with the routes input message
+   * (the one that enters the scope's chain).
+   *
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param key                    {@link MetadataKey} for resolving dynamic types
+   * @param routerInputMessageType a typed {@link MessageMetadataType} supplier describing the message that originally entered the
+   *                               router
+   * @return a {@link MetadataResult} wrapping a {@link ScopeInputMetadataDescriptor}
+   * @since 1.7.0
+   */
+  @Experimental
+  MetadataResult<RouterInputMetadataDescriptor> getRouterInputMetadata(MetadataKey key,
+                                                                       Supplier<MessageMetadataType> routerInputMessageType)
+      throws MetadataResolvingException;
+
+  /**
    * Resolves the dynamic {@link MetadataType} for the current component output and attrubutes with the given key.
    *
    * @param key {@link MetadataKey} of the type which's structure has to be resolved.
@@ -79,31 +125,37 @@ public interface MetadataProvider<T extends ComponentModel> {
   MetadataResult<OutputMetadataDescriptor> getOutputMetadata(MetadataKey key) throws MetadataResolvingException;
 
   /**
-   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attributes with the given key.
    *
-   * @param key                     {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param scopePropagationContext the context of the propagation of the inner chain of the scope.
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param key                        {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param scopeOutputMetadataContext the context of the propagation of the inner chain of the scope.
    * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    * @since 1.7
    */
+  @Experimental
   MetadataResult<OutputMetadataDescriptor> getScopeOutputMetadata(MetadataKey key,
-                                                                  ScopePropagationContext scopePropagationContext)
+                                                                  ScopeOutputMetadataContext scopeOutputMetadataContext)
       throws MetadataResolvingException;
 
   /**
-   * Resolves the dynamic {@link MetadataType} for the current scope component output and attrubutes with the given key.
+   * Resolves the dynamic {@link MetadataType} for the current scope component output and attributes with the given key.
    *
-   * @param key                      {@link MetadataKey} of the type which's structure has to be resolved.
-   * @param routerPropagationContext the context of the propagation of the router's routes' inner chains.
+   * <b>NOTE:</b> Experimental feature. Backwards compatibility is not guaranteed.
+   *
+   * @param key                         {@link MetadataKey} of the type which's structure has to be resolved.
+   * @param routerOutputMetadataContext the context of the propagation of the router's routes' inner chains.
    * @return A {@link MetadataType} of {@link OutputMetadataDescriptor}. Successful {@link MetadataResult} if the Metadata is
    *         successfully retrieved Failure {@link MetadataResult} when the Metadata retrieval fails for any reason
    * @throws MetadataResolvingException if an error occurs while creating the {@link MetadataContext}
    * @since 1.7
    */
+  @Experimental
   MetadataResult<OutputMetadataDescriptor> getRouterOutputMetadata(MetadataKey key,
-                                                                   RouterPropagationContext routerPropagationContext)
+                                                                   RouterOutputMetadataContext routerOutputMetadataContext)
       throws MetadataResolvingException;
 
 }
