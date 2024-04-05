@@ -11,6 +11,7 @@ import org.mule.metadata.api.model.ObjectType;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 import org.mule.runtime.api.meta.type.TypeCatalog;
 import org.mule.runtime.internal.dsl.DefaultDslResolvingContext;
+import org.mule.runtime.internal.dsl.NullDslResolvingContext;
 
 import java.util.Optional;
 import java.util.Set;
@@ -22,6 +23,14 @@ import java.util.Set;
  */
 @NoImplement
 public interface DslResolvingContext {
+
+  /**
+   * @return a null implementation of {@link DslResolvingContext}.
+   * @since 1.7
+   */
+  static DslResolvingContext nullDslResolvingContext() {
+    return new NullDslResolvingContext();
+  }
 
   /**
    * Provides the default implementation of {@link DslResolvingContext} based on a given {@link Set} of {@link ExtensionModel}

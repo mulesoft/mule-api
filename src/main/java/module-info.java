@@ -122,51 +122,13 @@ module org.mule.runtime.api {
   uses org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
   uses org.mule.runtime.api.tls.AbstractTlsContextFactoryBuilderFactory;
 
-  // Exposed to other modules of the Mule Runtime, but internal to other users
-  exports org.mule.runtime.internal.dsl to
-      org.mule.runtime.artifact.activation,
-      org.mule.runtime.artifact.ast,
-      org.mule.runtime.artifact.ast.serialization,
-      org.mule.runtime.artifact.ast.serialization.test,
-      org.mule.runtime.artifact.ast.test,
-      org.mule.runtime.artifact.ast.xmlParser,
-      org.mule.runtime.core,
-      org.mule.runtime.errors,
-      org.mule.runtime.extensions.api,
-      org.mule.runtime.extensions.api.test,
-      org.mule.runtime.extension.model,
-      org.mule.runtime.extensions.mule.support,
-      org.mule.runtime.extensions.spring.support,
-      org.mule.runtime.extensions.support,
-      org.mule.runtime.extensions.xml.support,
-      org.mule.runtime.dsl.api,
-      org.mule.runtime.properties.config,
-      org.mule.runtime.metadata.support,
-      org.mule.runtime.spring.config,
-      org.mule.runtime.tls,
-      org.mule.test.runner,
-      com.mulesoft.mule.runtime.ee.extension.model,
-      com.mulesoft.mule.runtime.cluster,
-      com.mulesoft.anypoint.gw.module.autodiscovery;
-
-  exports org.mule.runtime.internal.config.custom to
-      org.mule.runtime.spring.config;
-  exports org.mule.runtime.internal.connectivity to
-      org.mule.runtime.core;
+  // Internals exposed to test module
   exports org.mule.runtime.internal.exception to
-      org.mule.runtime.core,
-      org.mule.runtime.core.components,
-      org.mule.runtime.extensions.support,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util to
-      org.mule.runtime.core,
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.collection to
-      org.mule.runtime.core,
-      org.mule.runtime.artifact.activation,
       org.mule.runtime.api.test;
-
-  // Internals exposed to test module
   exports org.mule.runtime.internal.util.xmlsecurity to
       org.mule.runtime.api.test;
 
