@@ -782,6 +782,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
+   * When set to "true", the template parser will switch to compatibility mode
+   *
+   * @since 4.3.0-202404, 4.4.0-202404, 4.5.4
+   */
+  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
+      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
+
+  /**
    * When enabled, the Scheduler does not log exceptions.
    *
    * @since 4.6.0
