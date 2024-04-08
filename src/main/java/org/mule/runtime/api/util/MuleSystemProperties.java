@@ -604,6 +604,14 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
+   * When set to "true", the template parser will switch to compatibility mode
+   *
+   * @since 4.3.0-202404, 4.4.0-202404
+   */
+  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
+      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
+
+  /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
