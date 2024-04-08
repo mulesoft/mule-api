@@ -4,6 +4,15 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "elementKind": "field",
+          "justification": "W-15141905: Adding flag for TP compatibility mode."
+        },
+        {
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORCE_WORKER_THREAD_IO_STRATEGY_WHEN_TLS_ENABLED",
           "package": "org.mule.runtime.api.util",
           "classSimpleName": "MuleSystemProperties",
