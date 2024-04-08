@@ -1,5 +1,46 @@
 {
+  "1.5.5": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "elementKind": "field",
+          "justification": "W-15141905: Adding flag for TP compatibility mode."
+        },
+        {
+          "code": "java.method.added",
+          "new": "method int org.mule.runtime.api.metadata.MediaType::getCacheSize()",
+          "package": "org.mule.runtime.api.metadata",
+          "classQualifiedName": "org.mule.runtime.api.metadata.MediaType",
+          "classSimpleName": "MediaType",
+          "methodName": "getCacheSize",
+          "elementKind": "method",
+          "justification": "W-14490182: Set maximum cache size for MediaType to prevent attacks/OOM"
+        }
+      ]
+    }
+  },
   "1.5.4": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.method.added",
+          "new": "method int org.mule.runtime.api.metadata.MediaType::getCacheSize()",
+          "package": "org.mule.runtime.api.metadata",
+          "classQualifiedName": "org.mule.runtime.api.metadata.MediaType",
+          "classSimpleName": "MediaType",
+          "methodName": "getCacheSize",
+          "elementKind": "method",
+          "justification": "W-14490182: Set maximum cache size for MediaType to prevent attacks/OOM"
+        }
+      ]
+    }
+  },
+  "1.5.3": {
     "revapi": {
       "ignore": [
         {
@@ -474,58 +515,58 @@
   "1.4.0": {
     "revapi": {
       "ignore": [
-       {
-         "code": "java.field.constantValueChanged",
-         "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
-         "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
-         "oldValue": "mule..enableStreamingStatistics",
-         "newValue": "mule.streaming.enableStatistics",
-         "package": "org.mule.runtime.api.util",
-         "classSimpleName": "MuleSystemProperties",
-         "fieldName": "MULE_ENABLE_STREAMING_STATISTICS",
-         "elementKind": "field",
-         "justification": "MULE-19406 - Added code to honor the property with the old value if set"
-       },
-       {
-         "code": "java.annotation.added",
-         "old": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
-         "new": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
-         "annotationType": "org.mule.api.annotation.NoImplement",
-         "annotation": "@org.mule.api.annotation.NoImplement",
-         "package": "org.mule.runtime.api.el",
-         "classSimpleName": "ExpressionLanguageConfiguration",
-         "elementKind": "interface",
-         "justification": "MULE-19197"
-       },
-       {
-         "code": "java.field.serialVersionUIDUnchanged",
-         "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
-         "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
-         "serialVersionUID": "-3626429370741009489",
-         "package": "org.mule.runtime.api.metadata",
-         "classSimpleName": "MediaType",
-         "fieldName": "serialVersionUID",
-         "elementKind": "field",
-         "justification": "MULE-19140"
-       },
-       {
-         "code": "java.method.added",
-         "new": "method boolean org.mule.runtime.api.metadata.MediaType::isDefinedInApp()",
-         "package": "org.mule.runtime.api.metadata",
-         "classSimpleName": "MediaType",
-         "methodName": "isDefinedInApp",
-         "elementKind": "method",
-         "justification": "MULE-19140"
-       },
-       {
-         "code": "java.method.added",
-         "new": "method org.mule.runtime.api.metadata.MediaType org.mule.runtime.api.metadata.MediaType::parseDefinedInApp(java.lang.String)",
-         "package": "org.mule.runtime.api.metadata",
-         "classSimpleName": "MediaType",
-         "methodName": "parseDefinedInApp",
-         "elementKind": "method",
-         "justification": "MULE-19140"
-       },
+        {
+          "code": "java.field.constantValueChanged",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.MULE_ENABLE_STREAMING_STATISTICS",
+          "oldValue": "mule..enableStreamingStatistics",
+          "newValue": "mule.streaming.enableStatistics",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "MULE_ENABLE_STREAMING_STATISTICS",
+          "elementKind": "field",
+          "justification": "MULE-19406 - Added code to honor the property with the old value if set"
+        },
+        {
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
+          "new": "interface org.mule.runtime.api.el.ExpressionLanguageConfiguration",
+          "annotationType": "org.mule.api.annotation.NoImplement",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "package": "org.mule.runtime.api.el",
+          "classSimpleName": "ExpressionLanguageConfiguration",
+          "elementKind": "interface",
+          "justification": "MULE-19197"
+        },
+        {
+          "code": "java.field.serialVersionUIDUnchanged",
+          "old": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "new": "field org.mule.runtime.api.metadata.MediaType.serialVersionUID",
+          "serialVersionUID": "-3626429370741009489",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "fieldName": "serialVersionUID",
+          "elementKind": "field",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method boolean org.mule.runtime.api.metadata.MediaType::isDefinedInApp()",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "isDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
+        {
+          "code": "java.method.added",
+          "new": "method org.mule.runtime.api.metadata.MediaType org.mule.runtime.api.metadata.MediaType::parseDefinedInApp(java.lang.String)",
+          "package": "org.mule.runtime.api.metadata",
+          "classSimpleName": "MediaType",
+          "methodName": "parseDefinedInApp",
+          "elementKind": "method",
+          "justification": "MULE-19140"
+        },
         {
           "code": "java.method.addedToInterface",
           "new": "method org.mule.metadata.message.api.el.ModuleDefinition org.mule.runtime.api.metadata.ExpressionLanguageMetadataService::moduleDefinition(java.lang.String, java.util.Collection<org.mule.metadata.message.api.el.ModuleDefinition>) throws org.mule.runtime.api.el.ExpressionCompilationException",
