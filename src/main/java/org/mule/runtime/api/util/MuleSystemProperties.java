@@ -842,6 +842,14 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
+   * When set to "true", the template parser will switch to compatibility mode
+   *
+   * @since 4.3.0-202404, 4.4.0-202404, 4.5.4, 4.6.2
+   */
+  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
+      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>

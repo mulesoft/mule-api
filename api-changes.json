@@ -1,4 +1,19 @@
 {
+  "1.6.3": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
+          "elementKind": "field",
+          "justification": "W-15141905: Adding flag for TP compatibility mode."
+        }
+      ]
+    }
+  },
   "1.5.0": {
     "revapi": {
       "ignore": [
