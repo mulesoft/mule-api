@@ -928,6 +928,15 @@ public final class MuleSystemProperties {
   public static final String CLASSLOADER_SERVICE_JPMS_MODULE_LAYER =
       SYSTEM_PROPERTY_PREFIX + "classloader.service.jpmsModuleLayer";
 
+  /**
+   * When set to "true", the template parser will switch to compatibility mode
+   *
+   * @since 4.3.0-202404, 4.4.0-202404, 4.5.4, 4.6.2, 4.7.0
+   */
+  @KillSwitch
+  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
+      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
+
   // <<<<<<<<<<
 
   static {
