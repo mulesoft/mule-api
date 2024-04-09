@@ -358,6 +358,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "https.forceWorkerThreadIoStrategy";
 
   /**
+   * When set to "true", the template parser will switch to compatibility mode
+   *
+   * @since 4.3.0-202206
+   */
+  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
+      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
+
+  /**
    * @return {@code true} if the {@link #TESTING_MODE_PROPERTY_NAME} property has been set (regardless of the value)
    */
   public static boolean isTestingMode() {
