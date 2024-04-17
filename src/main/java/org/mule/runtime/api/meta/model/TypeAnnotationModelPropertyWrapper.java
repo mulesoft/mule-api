@@ -8,10 +8,20 @@ package org.mule.runtime.api.meta.model;
 
 import org.mule.metadata.api.annotation.TypeAnnotation;
 
+/**
+ * Wraps a {@link ModelProperty} adding type information.
+ *
+ * @since 1.8
+ */
 public interface TypeAnnotationModelPropertyWrapper extends TypeAnnotation {
 
   static TypeAnnotationModelPropertyWrapper defaultTypeAnnotationModelPropertyWrapper(ModelProperty modelProperty) {
     return new DefaultTypeAnnotationModelPropertyWrapper(modelProperty);
   }
+
+  /**
+   * @return the wrapped {@link ModelProperty}.
+   */
+  ModelProperty asModelProperty();
 
 }

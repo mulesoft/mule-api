@@ -15,6 +15,7 @@ public class DefaultTypeAnnotationModelPropertyWrapper implements TypeAnnotation
     this.modelProperty = modelProperty;
   }
 
+  @Override
   public ModelProperty asModelProperty() {
     return modelProperty;
   }
