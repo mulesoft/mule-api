@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model;
 
 import org.mule.metadata.api.annotation.TypeAnnotation;
+import org.mule.runtime.internal.meta.model.DefaultTypeAnnotationModelPropertyWrapper;
 
 /**
  * Wraps a {@link ModelProperty} adding type information.
