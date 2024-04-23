@@ -597,8 +597,8 @@ public final class MuleSystemProperties {
    *
    * @since 4.7.0
    */
-  public static final String USE_APP_LOG4J_CONFIGURATION_ON_SINGLE_APP_DEPLOYMENT =
-      SYSTEM_PROPERTY_PREFIX + "use.app.log4j.configuration.on.single.app.deployment";
+  public static final String SINGLE_APP_MODE_CONTAINER_USE_APP_LOG4J_CONFIGURATION =
+      SYSTEM_PROPERTY_PREFIX + "single.app.mode.container.use.app.log4j.configuration";
 
   // >>>>>>>>>>
   // Troubleshooting flags
