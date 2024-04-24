@@ -592,6 +592,14 @@ public final class MuleSystemProperties {
    */
   public static final String SINGLE_APP_MODE_PROPERTY = SYSTEM_PROPERTY_PREFIX + "single.app.mode";
 
+  /**
+   * Property to use the log4j configuration for all the logs both of the container and the single app when the app is deployed.
+   *
+   * @since 4.7.0
+   */
+  public static final String SINGLE_APP_MODE_CONTAINER_USE_APP_LOG4J_CONFIGURATION =
+      SYSTEM_PROPERTY_PREFIX + "single.app.mode.container.use.app.log4j.configuration";
+
   // >>>>>>>>>>
   // Troubleshooting flags
 
