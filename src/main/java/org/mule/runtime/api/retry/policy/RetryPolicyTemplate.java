@@ -7,6 +7,7 @@
 package org.mule.runtime.api.retry.policy;
 
 import org.mule.runtime.api.scheduler.Scheduler;
+import org.mule.runtime.internal.retry.policy.NoRetryPolicyTemplate;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
@@ -21,6 +22,11 @@ import java.util.function.Supplier;
  * @since 1.7
  */
 public interface RetryPolicyTemplate {
+
+  /**
+   * This policy is basically a placeholder. It does not attempt to retry at all.
+   */
+  public static final RetryPolicyTemplate NO_RETRY_POLICY = new NoRetryPolicyTemplate();
 
   /**
    * Indicates if this policy is currently enabled or not.
