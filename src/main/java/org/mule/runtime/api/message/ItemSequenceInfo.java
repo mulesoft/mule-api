@@ -74,6 +74,4 @@ public final class ItemSequenceInfo implements Serializable {
     return buf.toString();
   }
 
-
-
 }

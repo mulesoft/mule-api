@@ -26,7 +26,7 @@ import org.mule.runtime.api.metadata.DataType;
 import org.mule.runtime.api.metadata.TypedValue;
 import org.mule.runtime.api.security.Authentication;
 import org.mule.runtime.api.util.LazyValue;
-import org.mule.runtime.internal.event.ItemSequenceInfoBindingWrapper;
+import org.mule.runtime.privileged.event.ItemSequenceInfoBindingWrapper;
 
 import java.util.Collection;
 import java.util.Map;
