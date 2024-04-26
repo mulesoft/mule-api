@@ -4,12 +4,19 @@
  * license, a copy of which has been included with this distribution in the
  * LICENSE.txt file.
  */
+import org.mule.api.annotation.jpms.PrivilegedApi;
+
 /**
  * API for Mule Runtime.
  * 
  * @moduleGraph
  * @since 1.5
  */
+@PrivilegedApi(
+    privilegedPackages = {
+        "org.mule.runtime.privileged.event"
+    },
+    privilegedArtifactIds = {})
 module org.mule.runtime.api {
 
   requires transitive org.mule.runtime.api.annotations;
@@ -120,6 +127,9 @@ module org.mule.runtime.api {
   uses org.mule.runtime.api.message.AbstractMuleMessageBuilderFactory;
   uses org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
   uses org.mule.runtime.api.tls.AbstractTlsContextFactoryBuilderFactory;
+
+  // for DataWeave
+  exports org.mule.runtime.privileged.event;
 
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
