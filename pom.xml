@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.4.1-SNAPSHOT</version>
+    <version>1.4.0-20240503</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -106,9 +106,9 @@
     <properties>
         <javaVersion>1.8</javaVersion>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <metadataModelApiVersion>1.4.1-SNAPSHOT</metadataModelApiVersion>
-        <artifactDeclarationVersion>1.4.1-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.3.1-SNAPSHOT</muleModuleMavenPluginVersion>
+        <metadataModelApiVersion>1.4.0-20240503</metadataModelApiVersion>
+        <artifactDeclarationVersion>1.4.0-20240503</artifactDeclarationVersion>
+        <muleModuleMavenPluginVersion>1.3.0-20240503</muleModuleMavenPluginVersion>
         <slf4jVersion>1.7.30</slf4jVersion>
         <commonsIoVersion>2.8.0</commonsIoVersion>
         <mockitoVersion>2.23.4</mockitoVersion>
@@ -133,12 +133,12 @@
         <jsonassert.version>1.5.0</jsonassert.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.4.0</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.4.1-SNAPSHOT</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.3.1-SNAPSHOT</muleApiAnnotationsVersion>
+        <muleRevapiExtensionVersion>1.4.0-20240503</muleRevapiExtensionVersion>
+        <muleApiAnnotationsVersion>1.3.0-20240503</muleApiAnnotationsVersion>
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
-        <muleBomVersion>4.4.1-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.4.0-20240503</muleBomVersion>
     </properties>
 
     <dependencyManagement>
