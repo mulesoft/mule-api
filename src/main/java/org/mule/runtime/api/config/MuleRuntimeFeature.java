@@ -35,6 +35,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PRO
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
@@ -504,7 +505,17 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ENABLE_XML_SDK_MDC_RESET(
       "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
-      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
+      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY),
+  
+  /**
+   * When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String,
+   * OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.
+   * 
+   * @since 1.8
+   */
+  UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC(
+      "When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String, OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.",
+      "W-15399821", "4.8.0", MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC);
 
   private final String description;
   private final String issueId;

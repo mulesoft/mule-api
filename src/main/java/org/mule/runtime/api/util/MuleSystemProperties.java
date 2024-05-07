@@ -72,6 +72,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disableXmlSdkImplicitConfigurationCreation";
 
   /**
+   * When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String,
+   * OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.
+   * 
+   * @since 1.8
+   */
+  public static final String MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC =
+      SYSTEM_PROPERTY_PREFIX + "unsupportedExtensionsClientRunAsync";
+
+  /**
    * If specified, the log separation feature will be disabled, resulting in a performance boost. This makes sense in deployment
    * models in which only one app will be deployed per runtime instance.
    * <p>
