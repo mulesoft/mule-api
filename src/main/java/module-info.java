@@ -141,6 +141,8 @@ module org.mule.runtime.api {
       org.mule.runtime.api.test;
   exports org.mule.runtime.internal.util.xmlsecurity to
       org.mule.runtime.api.test;
+  exports org.mule.runtime.internal.meta.model to
+      org.mule.runtime.artifact.ast;
 
   // Allow extensions-support to create objects from these packages dynamically
   opens org.mule.runtime.api.connection to
