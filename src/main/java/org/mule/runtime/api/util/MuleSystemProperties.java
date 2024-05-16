@@ -582,6 +582,13 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
+   * When enabled, the MDC context will reset after XML SDK Operation has been executed.
+   *
+   * @since 4.4.0-202306, 4.6.4, 4.7.0
+   */
+  public static final String ENABLE_XML_SDK_MDC_RESET_PROPERTY = SYSTEM_PROPERTY_PREFIX + "enable.xml.sdk.mdc.reset";
+
+  /**
    * Property used to change the deployment mode to deploy only one application.
    * <p>
    * <code>mule -M-Dmule.single.app.mode</code>
