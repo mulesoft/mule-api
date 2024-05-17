@@ -584,7 +584,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, the MDC context will reset after XML SDK Operation has been executed.
    *
-   * @since 4.4.0-202306, 4.6.4, 4.7.0
+   * @since 4.8.0
    */
   public static final String ENABLE_XML_SDK_MDC_RESET_PROPERTY = SYSTEM_PROPERTY_PREFIX + "enable.xml.sdk.mdc.reset";
 

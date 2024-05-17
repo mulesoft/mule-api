@@ -500,11 +500,11 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, the MDC context will reset after XML SDK Operation has been executed.
    *
-   * @since 4.4.0-202306, 4.6.4, 4.7.0
+   * @since 4.8.0
    */
   ENABLE_XML_SDK_MDC_RESET(
       "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
-      "W-15206528", "4.4.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
+      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
 
   private final String description;
   private final String issueId;
