@@ -33,6 +33,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPIN
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
@@ -494,7 +495,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
       "When enabled, implicit configuration for the XML SDK won't be created.",
-      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION);
+      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
+
+  /**
+   * When enabled, the MDC context will reset after XML SDK Operation has been executed.
+   *
+   * @since 4.8.0, 4.7.1, 4.6.4, 4.4.0-202406
+   */
+  ENABLE_XML_SDK_MDC_RESET(
+      "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
+      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
 
   private final String description;
   private final String issueId;
