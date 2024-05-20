@@ -842,6 +842,13 @@ public final class MuleSystemProperties {
   public static final String ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "tx.error.when.timeout";
 
   /**
+   * When enabled, the MDC context will reset after XML SDK Operation has been executed.
+   *
+   * @since 4.8.0, 4.7.1, 4.6.4, 4.4.0-202406
+   */
+  public static final String ENABLE_XML_SDK_MDC_RESET_PROPERTY = SYSTEM_PROPERTY_PREFIX + "enable.xml.sdk.mdc.reset";
+
+  /**
    * When set to "true", the template parser will switch to compatibility mode
    *
    * @since 4.3.0-202404, 4.4.0-202404, 4.5.4, 4.6.2
