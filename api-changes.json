@@ -1,4 +1,28 @@
 {
+  "1.6.4": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "ENABLE_XML_SDK_MDC_RESET_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-15206528: Adding flag to clear MDC context for XML SDK operations"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.ENABLE_XML_SDK_MDC_RESET",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "ENABLE_XML_SDK_MDC_RESET",
+          "elementKind": "enumConstant",
+          "justification": "W-15206528: Adding flag to clear MDC context for XML SDK operations"
+        }
+      ]
+    }
+  },
   "1.6.3": {
     "revapi": {
       "ignore": [
