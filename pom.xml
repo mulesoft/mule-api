@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mule</groupId>
+        <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
+        <version>4.8.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
     <version>1.8.0-SNAPSHOT</version>
@@ -106,7 +113,6 @@
         <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
-        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
         <artifactDeclarationVersion>1.8.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.8.0-SNAPSHOT</muleModuleMavenPluginVersion>
 
@@ -114,31 +120,13 @@
         <hamcrestVersion>2.2</hamcrestVersion>
         <mockitoVersion>2.26.0</mockitoVersion>
 
-        <xDocLint>-Xdoclint:none</xDocLint>
-        <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
-        <javax.jaxb-api.version>2.3.0</javax.jaxb-api.version>
-        <formatterConfigPath>formatter.xml</formatterConfigPath>
-        <formatterGoal>validate</formatterGoal>
-        
-        <mulesoftLicenseVersion>1.4.0</mulesoftLicenseVersion>
-        <license.maven.plugin.version>4.2</license.maven.plugin.version>
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
 
-        <maven.surefire.plugin.version>3.0.0</maven.surefire.plugin.version>
-        <aspectjVersion>1.9.2</aspectjVersion>
-        <allureJunitVersion>2.22.0</allureJunitVersion>
-        <allureReportVersion>2.8.1</allureReportVersion>
-        <allure.maven.plugin.version>2.12.0</allure.maven.plugin.version>
-        <jacoco.version>0.8.11</jacoco.version>
-        <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
         <oldMuleArtifactVersion>1.7.0-rc1</oldMuleArtifactVersion>
         <muleRevapiExtensionVersion>1.8.0-SNAPSHOT</muleRevapiExtensionVersion>
         <muleApiAnnotationsVersion>1.7.0-SNAPSHOT</muleApiAnnotationsVersion>
 
-        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
-        <maven.jar.plugin.version>3.3.0</maven.jar.plugin.version>
-        <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
         <muleBomVersion>4.8.0-SNAPSHOT</muleBomVersion>
         <jsonassert.version>1.5.2</jsonassert.version>
     </properties>
@@ -249,9 +237,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>${javax.jaxb-api.version}</version>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -268,7 +255,6 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit4</artifactId>
-            <version>${allureJunitVersion}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -305,7 +291,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
                     <executions>
                         <execution>
                             <id>default-compile</id>
@@ -328,12 +313,12 @@
                             </configuration>
                         </execution>
                         <execution>
-                        <id>default-testCompile</id>
-                        <configuration>
-                            <testRelease>11</testRelease>
-                            <!-- no excludes: compile everything to ensure module-info contains right entries -->
-                        </configuration>
-                    </execution>
+                            <id>default-testCompile</id>
+                            <configuration>
+                                <testRelease>11</testRelease>
+                                <!-- no excludes: compile everything to ensure module-info contains right entries -->
+                            </configuration>
+                        </execution>
                         <execution>
                             <id>base-testCompile</id>
                             <goals>
@@ -363,14 +348,12 @@
                         </execution>
                     </executions>
                     <configuration>
-                        <encoding>ISO-8859-1</encoding>
                         <proc>none</proc>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>${javaFormatter.plugin.version}</version>
                     <configuration>
                         <compilerCompliance>${javaVersion}</compilerCompliance>
                         <compilerSource>${javaVersion}</compilerSource>
@@ -386,54 +369,20 @@
                             <directory>${project.build.java11TestSourceDirectory}</directory>
                         </directories>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <phase>process-sources</phase>
-                            <goals>
-                                <goal>${formatterGoal}</goal>
-                            </goals>
-                            <configuration>
-                                <skipFormatting>${skipVerifications}</skipFormatting>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>${license.maven.plugin.version}</version>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.mulesoft.license</groupId>
-                            <artifactId>license</artifactId>
-                            <version>${mulesoftLicenseVersion}</version>
-                        </dependency>
-                    </dependencies>
                     <configuration>
                         <header>${licensePath}</header>
                         <properties>
                             <year>${licenseYear}</year>
                         </properties>
-                        <includes>
-                            <include>**/*.java</include>
-                        </includes>
-                        <mapping>
-                            <java>SLASHSTAR_STYLE</java>
-                        </mapping>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <phase>compile</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>${maven.jar.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-test-jar</id>
@@ -458,21 +407,6 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-javadoc-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>attach-javadocs</id>
-                            <goals>
-                                <goal>jar</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <additionalparam>${xDocLint}</additionalparam>
-                    </configuration>
-                </plugin>
-                <plugin>
                     <groupId>org.mule.tools.maven</groupId>
                     <artifactId>mule-module-maven-plugin</artifactId>
                     <version>${muleModuleMavenPluginVersion}</version>
@@ -492,39 +426,6 @@
                     </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven.surefire.plugin.version}</version>
-                    <configuration>
-                        <argLine>-Dfile.encoding=UTF-8 -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectjVersion}/aspectjweaver-${aspectjVersion}.jar -javaagent:${settings.localRepository}/org/jacoco/org.jacoco.agent/${jacoco.version}/org.jacoco.agent-${jacoco.version}-runtime.jar=destfile='${session.executionRootDirectory}/target/jacoco.exec'</argLine>
-                        <properties>
-                            <property>
-                                <name>listener</name>
-                                <value>io.qameta.allure.junit4.AllureJunit4</value>
-                            </property>
-                        </properties>
-                        <systemProperties>
-                            <property>
-                                <name>allure.results.directory</name>
-                                <value>${project.build.directory}/allure-results</value>
-                            </property>
-                        </systemProperties>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.aspectj</groupId>
-                            <artifactId>aspectjweaver</artifactId>
-                            <version>${aspectjVersion}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.jacoco</groupId>
-                            <artifactId>org.jacoco.agent</artifactId>
-                            <version>${jacoco.version}</version>
-                            <classifier>runtime</classifier>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
                     <groupId>org.jacoco</groupId>
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco.version}</version>
@@ -535,21 +436,12 @@
                         </excludes>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>io.qameta.allure</groupId>
-                    <artifactId>allure-maven</artifactId>
-                    <version>${allure.maven.plugin.version}</version>
-                    <configuration>
-                        <reportVersion>${allureReportVersion}</reportVersion>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
-                <version>${maven.site.plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
@@ -570,102 +462,17 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${build.helper.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>parse-version</id>
-                        <goals>
-                            <goal>parse-version</goal>
-                        </goals>
-                        <phase>validate</phase>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.revapi</groupId>
                 <artifactId>revapi-maven-plugin</artifactId>
-                <version>0.15.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.mule.tools.maven</groupId>
-                        <artifactId>mule-revapi-extension</artifactId>
-                        <version>${muleRevapiExtensionVersion}</version>
-                    </dependency>
-                </dependencies>
                 <configuration>
                     <oldVersion>${oldMuleArtifactVersion}</oldVersion>
-                    <failOnUnresolvedArtifacts>true</failOnUnresolvedArtifacts>
-                    <failOnMissingConfigurationFiles>false</failOnMissingConfigurationFiles>
-                    <analysisConfiguration>
-                        <![CDATA[
-                                {
-                                    "revapi" : {
-                                        "java" : {
-                                            "missing-classes" : {
-                                                "behavior" : "report"
-                                            }
-                                        },
-                                        "semver": {
-                                          "ignore": {
-                                            "enabled": true,
-                                            "versionIncreaseAllows" : {
-                                              "major" : "breaking",
-                                              "minor" : "nonBreaking",
-                                              "patch" : "equivalent"
-                                            }
-                                          }
-                                        },
-                                        "ignore": [
-                                          {
-                                            "code": "java.annotation.removed",
-                                            "annotationType": "jdk.internal.HotSpotIntrinsicCandidate",
-                                            "annotation": "@jdk.internal.HotSpotIntrinsicCandidate",
-                                            "elementKind": "method",
-                                            "justification": "This annotation is in jdk class, this is a false positive."
-                                          },
-                                          {
-                                            "code": "java.annotation.removed",
-                                            "annotationType": "jdk.internal.vm.annotation.IntrinsicCandidate",
-                                            "annotation": "@jdk.internal.vm.annotation.IntrinsicCandidate",
-                                            "elementKind": "method",
-                                            "justification": "This annotation is in jdk class, this is a false positive."
-                                          }
-                                        ]
-                                    }
-                                }
-                            ]]>
-                    </analysisConfiguration>
-                    <analysisConfigurationFiles combine.children="append">
-                        <configurationFile>
-                            <path>api-changes.json</path>
-                            <roots>
-                                <root>
-                                    ${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}
-                                </root>
-                            </roots>
-                        </configurationFile>
-                    </analysisConfigurationFiles>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>api-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>pl.project13.maven</groupId>
@@ -712,22 +519,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>attach-javadocs</id>
-                                <goals>
-                                    <goal>jar</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <additionalparam>${xDocLint}</additionalparam>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -744,7 +539,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
-                        <version>${maven.enforcer.plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>enforce-no-snapshots-in-deps</id>
