@@ -22,6 +22,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXC
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY;
@@ -332,7 +333,16 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT(
       "When enabled, when a (local or xa) transaction reached timeout, an error will be thrown that can be handled using error handling",
-      "W-14608096", "4.6.1", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY);
+      "W-14608096", "4.6.1", ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY),
+
+  /**
+   * When enabled, the MDC context will reset after XML SDK Operation has been executed.
+   *
+   * @since 4.8.0, 4.7.1, 4.6.4, 4.4.0-202406
+   */
+  ENABLE_XML_SDK_MDC_RESET(
+      "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
+      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
 
   private final String description;
   private final String issueId;
