@@ -1,4 +1,22 @@
 {
+  "1.7.1": {
+    "revapi": {
+      "ignore": [
+        {
+        "ignore": true,
+        "code": "java.field.addedStaticField",
+        "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.ENABLE_XML_SDK_MDC_RESET",
+        "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY",
+          "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
+        }
+      ]
+    }
+  },
   "1.7.0": {
     "revapi": {
       "ignore": [
@@ -3037,4 +3055,4 @@
       ]
     }
   }
-}
+},
