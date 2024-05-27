@@ -1,2 +1,2 @@
-@Library('mule-runtime-library@integration/W-15691199-v2-changecase-onpremb') _
+@Library('mule-runtime-library@W-14722284-rtf-pipeline-to-change-cases') _
 runtimeBuild()
