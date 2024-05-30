@@ -124,7 +124,6 @@
         <licenseYear>2023</licenseYear>
 
         <oldMuleArtifactVersion>1.7.0-rc1</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.8.0-SNAPSHOT</muleRevapiExtensionVersion>
         <muleApiAnnotationsVersion>1.7.0-SNAPSHOT</muleApiAnnotationsVersion>
 
         <muleBomVersion>4.8.0-SNAPSHOT</muleBomVersion>
@@ -523,55 +522,10 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>sign-artifacts</id>
-                                <phase>verify</phase>
-                                <goals>
-                                    <goal>sign</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <configuration>
-                            <skip>${skipGpg}</skip>
-                        </configuration>
                     </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-enforcer-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <id>enforce-no-snapshots-in-deps</id>
-                                <goals>
-                                    <goal>enforce</goal>
-                                </goals>
-                                <configuration>
-                                    <rules>
-                                        <requireReleaseDeps>
-                                            <message>No Snapshots Allowed in Deps!</message>
-                                        </requireReleaseDeps>
-                                        <requireReleaseVersion>
-                                            <message>No Snapshots Allowed in Project Version!</message>
-                                        </requireReleaseVersion>
-                                        <requirePluginVersions>
-                                            <message>Best Practice is to always define plugin versions!</message>
-                                            <unCheckedPluginList>
-                                                org.apache.maven.plugins:maven-source-plugin,
-                                                org.apache.maven.plugins:maven-site-plugin,
-                                                org.apache.maven.plugins:maven-javadoc-plugin,
-                                                org.apache.maven.plugins:maven-resources-plugin,
-                                                org.apache.maven.plugins:maven-surefire-plugin,
-                                                org.apache.maven.plugins:maven-jar-plugin,
-                                                org.apache.maven.plugins:maven-clean-plugin,
-                                                org.apache.maven.plugins:maven-install-plugin,
-                                                org.apache.maven.plugins:maven-deploy-plugin
-                                            </unCheckedPluginList>
-                                        </requirePluginVersions>
-                                    </rules>
-                                    <skip>${skipNoSnapshotsEnforcerPluginRule}</skip>
-                                </configuration>
-                            </execution>
-                        </executions>
                     </plugin>
                 </plugins>
             </build>
