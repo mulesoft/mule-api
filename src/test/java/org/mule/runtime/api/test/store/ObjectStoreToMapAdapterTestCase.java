@@ -10,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
+import org.mule.runtime.api.map.EntryListener;
 import org.mule.runtime.api.store.ObjectStore;
 import org.mule.runtime.api.store.ObjectStoreToMapAdapter;
 import org.mule.runtime.api.store.SimpleMemoryObjectStore;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -43,6 +45,30 @@ public class ObjectStoreToMapAdapterTestCase {
     @Override
     public ObjectStore<T> getObjectStore() {
       return objectStore;
+    }
+
+    @Override public UUID addEntryListener(EntryListener<String, T> listener) {
+      return null;
+    }
+
+    @Override public boolean removeEntryListener(UUID id) {
+      return false;
+    }
+
+    @Override public T putIfAbsent(String key, T value) {
+      return null;
+    }
+
+    @Override public boolean remove(Object key, Object value) {
+      return false;
+    }
+
+    @Override public boolean replace(String key, T oldValue, T newValue) {
+      return false;
+    }
+
+    @Override public T replace(String key, T value) {
+      return null;
     }
   }
 

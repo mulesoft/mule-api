@@ -6,9 +6,12 @@
  */
 package org.mule.runtime.api.store;
 
+import org.mule.runtime.api.map.EntryListener;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * A generic object key value store
@@ -103,4 +106,16 @@ public interface ObjectStore<T extends Serializable> {
    * @throws ObjectStoreException if an exception occurred while collecting the values
    */
   Map<String, T> retrieveAll() throws ObjectStoreException;
+
+  UUID addEntryListener(EntryListener<String, String> listener);
+
+  /**
+   * Removes the specified entry listener.
+   * <p>
+   * Returns silently if there is no such listener added before.
+   *
+   * @param id ID of registered listener
+   * @return true if registration is removed, false otherwise
+   */
+  boolean removeEntryListener(UUID id);
 }

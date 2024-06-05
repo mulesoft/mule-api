@@ -40,7 +40,9 @@ module org.mule.runtime.api {
   requires org.apache.commons.io;
   requires org.apache.commons.lang3;
   requires semver4j;
-  
+  requires com.hazelcast.core;
+  requires ehcache;
+
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
   exports org.mule.runtime.api.bulk;
@@ -121,6 +123,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.util.concurrent;
   exports org.mule.runtime.api.util.xmlsecurity;
   exports org.mule.runtime.api.value;
+  exports org.mule.runtime.api.map;
 
   uses org.mule.runtime.api.config.custom.ServiceConfigurator;
   uses org.mule.runtime.api.connectivity.ConnectivityTestingStrategy;

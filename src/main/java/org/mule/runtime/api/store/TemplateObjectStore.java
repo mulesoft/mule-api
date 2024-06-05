@@ -8,7 +8,10 @@ package org.mule.runtime.api.store;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.map.EntryListener;
+
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Template for {@link ObjectStore} implementations so that it's easier to conform to the contract.
@@ -88,4 +91,12 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
    * that {@link #contains(String)} has already been invoked to verify that the key actually exists in this store. {@inheritDoc}
    */
   protected abstract T doRemove(String key) throws ObjectStoreException;
+
+  @Override public UUID addEntryListener(EntryListener<String, String> listener) {
+    return null;
+  }
+
+  @Override public boolean removeEntryListener(UUID id) {
+    return false;
+  }
 }
