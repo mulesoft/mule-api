@@ -495,7 +495,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
       "When enabled, implicit configuration for the XML SDK won't be created.",
-      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
+      "W-10634129", "4.7.0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
 
   /**
    * When enabled, the MDC context will reset after XML SDK Operation has been executed.
