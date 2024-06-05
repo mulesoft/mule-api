@@ -12,11 +12,11 @@ import com.hazelcast.core.HazelcastException;
 import com.hazelcast.map.IMap;
 import com.hazelcast.splitbrainprotection.SplitBrainProtectionException;
 
-public class HazelcastClusterMap<K, V> implements ObservableMap<K, V> {
+public class HazelcastMap<K, V> implements ObservableMap<K, V> {
 
   private final IMap<K, V> iMap;
 
-  public HazelcastClusterMap(IMap<K, V> hazelcastInstanceMap) {
+  public HazelcastMap(IMap<K, V> hazelcastInstanceMap) {
     iMap = hazelcastInstanceMap;
   }
 
