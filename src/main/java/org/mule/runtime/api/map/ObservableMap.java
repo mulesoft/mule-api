@@ -6,7 +6,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Concurrent, distributed and observable map.
+ * Concurrent and observable map.
  *
  * @param <K> the keys type.
  * @param <V> the values type.
