@@ -506,7 +506,7 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_XML_SDK_MDC_RESET(
       "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
       "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY),
-  
+
   /**
    * When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String,
    * OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.
