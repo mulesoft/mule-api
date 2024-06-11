@@ -7,8 +7,10 @@
 package org.mule.runtime.api.store;
 
 import java.io.Serializable;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * A generic object key value store
@@ -103,4 +105,8 @@ public interface ObjectStore<T extends Serializable> {
    * @throws ObjectStoreException if an exception occurred while collecting the values
    */
   Map<String, T> retrieveAll() throws ObjectStoreException;
+
+  UUID addEntryListener(EventListener listener);
+
+  boolean removeEntryListener(UUID key);
 }
