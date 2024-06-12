@@ -6,8 +6,9 @@
  */
 package org.mule.runtime.api.store;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
-import java.util.EventListener;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -106,7 +107,7 @@ public interface ObjectStore<T extends Serializable> {
    */
   Map<String, T> retrieveAll() throws ObjectStoreException;
 
-  UUID addEntryListener(EventListener listener);
+  UUID addEntryListener(ObjectStoreEntryListener listener);
 
   boolean removeEntryListener(UUID key);
 }

@@ -9,10 +9,14 @@ package org.mule.runtime.api.store;
 import static java.util.Collections.unmodifiableMap;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObjectStore<T> implements ObjectStore<T> {
@@ -51,6 +55,16 @@ public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObj
   @Override
   protected T doRemove(String key) {
     return map.remove(key);
+  }
+
+  @Override
+  protected UUID doAddEntryListener(ObjectStoreEntryListener listener) {
+    return null;
+  }
+
+  @Override
+  protected boolean doRemoveEntryListener(UUID key) {
+    return false;
   }
 
   @Override

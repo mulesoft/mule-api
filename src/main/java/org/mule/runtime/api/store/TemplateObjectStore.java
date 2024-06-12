@@ -8,8 +8,9 @@ package org.mule.runtime.api.store;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
-import java.util.EventListener;
 import java.util.UUID;
 
 /**
@@ -91,15 +92,18 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
    */
   protected abstract T doRemove(String key) throws ObjectStoreException;
 
-  @Override public UUID addEntryListener(EventListener listener) {
+  @Override
+  public UUID addEntryListener(ObjectStoreEntryListener listener) {
     return doAddEntryListener(listener);
   }
 
-  protected abstract UUID doAddEntryListener(EventListener listener);
-
-  @Override public boolean removeEntryListener(UUID key) {
+  @Override
+  public boolean removeEntryListener(UUID key) {
     return doRemoveEntryListener(key);
   }
+
+  protected abstract UUID doAddEntryListener(ObjectStoreEntryListener listener);
+
   protected abstract boolean doRemoveEntryListener(UUID key);
 
 }
