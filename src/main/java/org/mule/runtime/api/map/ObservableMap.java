@@ -12,7 +12,7 @@ import java.util.UUID;
 public interface ObservableMap<K, V> extends Map<K, V> {
 
 
-  UUID addEntryListener(ObjectStoreEntryListener listener);
+  String addEntryListener(ObjectStoreEntryListener listener);
 
   boolean removeEntryListener(String id);
 }

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.store;
 
 import org.mule.runtime.api.exception.MuleRuntimeException;
+import org.mule.runtime.api.map.ObservableMap;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -34,7 +35,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements Map<String, T> {
+public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements Map<String, T>, ObservableMap<String, T> {
 
   protected abstract ObjectStore<T> getObjectStore();
 
