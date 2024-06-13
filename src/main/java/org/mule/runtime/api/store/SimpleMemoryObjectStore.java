@@ -9,15 +9,36 @@ package org.mule.runtime.api.store;
 import static java.util.Collections.unmodifiableMap;
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObjectStore<T> implements ObjectStore<T> {
 
   private Map<String, T> map = new ConcurrentHashMap<>();
+  private Map<String, ObjectStoreEntryListener> listenerMap = new ConcurrentHashMap<>();
+  ObjectStoreEntryListener listener = new ObjectStoreEntryListener() {
+
+    @Override
+    public void entryAdded(Object key, Object value) {
+      listenerMap.put((String) key, (ObjectStoreEntryListener) value);
+    }
+
+    @Override
+    public void entryRemoved(Object key) {
+      listenerMap.remove((String) key);
+    }
+
+    @Override
+    public void entryUpdated(Object key, Object value) {
+      listenerMap.put((String) key, (ObjectStoreEntryListener) value);
+    }
+  };
 
   @Override
   public boolean isPersistent() {
@@ -34,7 +55,11 @@ public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObj
     if (value == null) {
       throw new ObjectStoreException(createStaticMessage("The required object/property \"value\" is null"));
     }
-
+    if (map.containsKey(key)) {
+      listener.entryUpdated(key, value);
+    } else {
+      listener.entryAdded(key, value);
+    }
     map.put(key, value);
   }
 
@@ -50,13 +75,33 @@ public class SimpleMemoryObjectStore<T extends Serializable> extends TemplateObj
 
   @Override
   protected T doRemove(String key) {
-    return map.remove(key);
+    T result = map.remove(key);
+    if (result != null) {
+      listener.entryRemoved(key);
+    }
+    return result;
   }
 
   @Override
   public Map<String, T> retrieveAll() throws ObjectStoreException {
     return unmodifiableMap(map);
   }
+
+  @Override
+  public String addEntryListener(ObjectStoreEntryListener listener) {
+    String id = UUID.randomUUID().toString();
+    listenerMap.put(id, listener);
+    return id;
+  }
+
+  @Override
+  public boolean removeEntryListener(String key) {
+    if (listenerMap.remove(key) == null) {
+      return false;
+    }
+    return true;
+  }
+
 
   @Override
   public void open() throws ObjectStoreException {
