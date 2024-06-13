@@ -75,6 +75,5 @@ public abstract class AbstractObjectStoreSupport<T extends Serializable> impleme
     }
     return true;
   }
-ab
 
 }
