@@ -10,6 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
 import org.mule.runtime.api.store.ObjectStore;
 import org.mule.runtime.api.store.ObjectStoreToMapAdapter;
 import org.mule.runtime.api.store.SimpleMemoryObjectStore;
@@ -43,6 +44,16 @@ public class ObjectStoreToMapAdapterTestCase {
     @Override
     public ObjectStore<T> getObjectStore() {
       return objectStore;
+    }
+
+    @Override
+    public String addEntryListener(ObjectStoreEntryListener listener) {
+      return "";
+    }
+
+    @Override
+    public boolean removeEntryListener(String id) {
+      return false;
     }
   }
 

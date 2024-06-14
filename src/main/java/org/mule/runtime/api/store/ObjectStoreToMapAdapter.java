@@ -7,6 +7,7 @@
 package org.mule.runtime.api.store;
 
 import org.mule.runtime.api.exception.MuleRuntimeException;
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
 import org.mule.runtime.api.map.ObservableMap;
 
 import java.io.Serializable;
@@ -164,5 +165,15 @@ public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements
   @Override
   public Set<Entry<String, T>> entrySet() {
     throw new UnsupportedOperationException("ObjectStoreToMapAdapter does not support entrySet() method");
+  }
+
+  @Override
+  public boolean removeEntryListener(String id) {
+    return getObjectStore().removeEntryListener(id);
+  }
+
+  @Override
+  public String addEntryListener(ObjectStoreEntryListener listener) {
+    return getObjectStore().addEntryListener(listener);
   }
 }
