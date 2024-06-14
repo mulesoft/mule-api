@@ -36,7 +36,7 @@ import java.util.Set;
  *
  * @since 1.0
  */
-public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements Map<String, T>, ObservableMap<String, T> {
+public abstract class ObjectStoreToMapAdapter<T extends Serializable> implements ObservableMap<String, T> {
 
   protected abstract ObjectStore<T> getObjectStore();
 
