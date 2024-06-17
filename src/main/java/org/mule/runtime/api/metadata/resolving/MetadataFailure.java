@@ -7,8 +7,6 @@
 package org.mule.runtime.api.metadata.resolving;
 
 import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
-import static org.apache.commons.lang3.builder.ToStringStyle.JSON_STYLE;
 import static org.mule.runtime.api.metadata.resolving.FailureCode.UNKNOWN;
 import static org.mule.runtime.api.metadata.resolving.MetadataComponent.COMPONENT;
 import static org.mule.runtime.api.metadata.resolving.MetadataComponent.ENTITY;
@@ -167,8 +165,15 @@ public final class MetadataFailure {
     }
   }
 
+
   @Override
   public String toString() {
-    return reflectionToString(this, JSON_STYLE);
+    return "{"
+        + "\"failingComponent\":" + ofNullable(getFailingComponent()).map(Enum::toString).orElse("null") + ", "
+        + "\"failingElement\":\"" + ofNullable(getFailingElement()).map(Optional::toString).orElse("null") + "\", "
+        + "\"message\":\"" + getMessage() + "\", "
+        + "\"reason\":\"" + getReason() + "\", "
+        + "\"failureCode\":" + ofNullable(getFailureCode()).map(FailureCode::toString).orElse("null")
+        + "}";
   }
 }
