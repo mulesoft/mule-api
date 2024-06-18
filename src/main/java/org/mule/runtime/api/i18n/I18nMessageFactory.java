@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.i18n;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
 import static org.mule.runtime.internal.util.JpmsUtils.isMemberOfNamedModule;
 
 import java.text.MessageFormat;
@@ -243,7 +244,7 @@ public abstract class I18nMessageFactory {
    * Override this method to return the classloader for the bundle/module which contains the needed resource files.
    */
   protected ClassLoader getClassLoader() {
-    return getClass().getClassLoader();
+    return getMuleImplementationsLoader();
   }
 
   /**

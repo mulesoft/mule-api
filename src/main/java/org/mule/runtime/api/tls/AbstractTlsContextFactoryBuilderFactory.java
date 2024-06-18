@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.tls;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
@@ -24,25 +26,23 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTlsContextFactoryBuilderFactory.class);
 
-  static {
+  private static AbstractTlsContextFactoryBuilderFactory loadFactory() {
     try {
       final AbstractTlsContextFactoryBuilderFactory factory = load(AbstractTlsContextFactoryBuilderFactory.class,
-                                                                   AbstractTlsContextFactoryBuilderFactory.class.getClassLoader())
+                                                                   getMuleImplementationsLoader())
                                                                        .iterator().next();
       LOGGER.info(format("Loaded TlsContextFactoryBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-      DEFAULT_FACTORY = factory;
+      return factory;
     } catch (Throwable t) {
       LOGGER.error("Error loading TlsContextFactoryBuilderFactory implementation. Seems there's none in the classpath.", t);
       throw t;
     }
   }
 
-  private static final AbstractTlsContextFactoryBuilderFactory DEFAULT_FACTORY;
-
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
@@ -50,7 +50,7 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractTlsContextFactoryBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+    return loadFactory();
   }
 
   /**

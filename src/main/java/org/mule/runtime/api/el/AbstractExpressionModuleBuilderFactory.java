@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.el;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
@@ -24,25 +26,24 @@ public abstract class AbstractExpressionModuleBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractExpressionModuleBuilderFactory.class);
 
-  static {
+  private static AbstractExpressionModuleBuilderFactory loadFactory() {
     try {
-      final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class).iterator().next();
+      final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class,
+                                                                  getMuleImplementationsLoader()).iterator().next();
       if (LOGGER.isDebugEnabled()) {
         LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
                             factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
       }
 
-      DEFAULT_FACTORY = factory;
+      return factory;
     } catch (Throwable t) {
       LOGGER.error("Error loading ExpressionModuleBuilderFactory implementation.", t);
       throw t;
     }
   }
 
-  private static final AbstractExpressionModuleBuilderFactory DEFAULT_FACTORY;
-
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
@@ -50,7 +51,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static AbstractExpressionModuleBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+    return loadFactory();
   }
 
   /**
