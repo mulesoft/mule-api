@@ -22,16 +22,6 @@ import java.io.Serializable;
  */
 public abstract class TemplateObjectStore<T extends Serializable> extends AbstractObjectStoreSupport<T> {
 
-  @Override
-  public String addEntryListener(ObjectStoreEntryListener listener) {
-    return super.addEntryListener(listener);
-  }
-
-  @Override
-  public boolean removeEntryListener(String key) {
-    return super.removeEntryListener(key);
-  }
-
   /**
    * {@inheritDoc}
    */

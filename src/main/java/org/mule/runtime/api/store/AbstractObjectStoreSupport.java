@@ -62,6 +62,18 @@ public abstract class AbstractObjectStoreSupport<T extends Serializable> impleme
   }
 
   @Override
+  public void store(String key, T value) throws ObjectStoreException {
+    listener.entryAdded(key, value);
+  }
+
+  @Override
+  public T remove(String key) throws ObjectStoreException {
+    listener.entryRemoved(key);
+    // todo : change return value
+    return (T) key;
+  }
+
+  @Override
   public String addEntryListener(ObjectStoreEntryListener listener) {
     String id = UUID.randomUUID().toString();
     listenerMap.put(id, listener);
