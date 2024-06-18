@@ -165,7 +165,6 @@ public final class MetadataFailure {
     }
   }
 
-
   @Override
   public String toString() {
     return "{"
