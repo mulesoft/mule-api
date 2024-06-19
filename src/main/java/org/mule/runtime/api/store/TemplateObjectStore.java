@@ -24,8 +24,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public abstract class TemplateObjectStore<T extends Serializable> extends AbstractObjectStoreSupport<T> {
 
-  private Map<String, ObjectStoreEntryListener> listenerMap = new ConcurrentHashMap<>();
-
   /**
    * {@inheritDoc}
    */
@@ -53,12 +51,6 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
     }
     doStore(key, value);
     entryAdded(key, value);
-  }
-
-  private void entryAdded(String key, T value) {
-    for (ObjectStoreEntryListener listener : listenerMap.values()) {
-      listener.entryAdded(key, value);
-    }
   }
 
   /**
@@ -94,12 +86,6 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
     }
     entryRemoved(key);
     return value;
-  }
-
-  private void entryRemoved(String key) {
-    for (ObjectStoreEntryListener listener : listenerMap.values()) {
-      listener.entryRemoved(key);
-    }
   }
 
   /**

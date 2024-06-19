@@ -29,23 +29,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public abstract class AbstractObjectStoreSupport<T extends Serializable> implements ObjectStore<T> {
 
   private Map<String, ObjectStoreEntryListener> listenerMap = new ConcurrentHashMap<>();
-  ObjectStoreEntryListener listener = new ObjectStoreEntryListener() {
-
-    @Override
-    public void entryAdded(Object key, Object value) {
-      listenerMap.put((String) key, (ObjectStoreEntryListener) value);
-    }
-
-    @Override
-    public void entryRemoved(Object key) {
-      listenerMap.remove((String) key);
-    }
-
-    @Override
-    public void entryUpdated(Object key, Object value) {
-      listenerMap.put((String) key, (ObjectStoreEntryListener) value);
-    }
-  };
 
   protected void validateKey(String key) throws ObjectStoreException {
     if (key == null || key.trim().length() == 0) {
@@ -76,4 +59,15 @@ public abstract class AbstractObjectStoreSupport<T extends Serializable> impleme
     return true;
   }
 
+  protected void entryAdded(String key, T value) {
+    for (ObjectStoreEntryListener listener : listenerMap.values()) {
+      listener.entryAdded(key, value);
+    }
+  }
+
+  protected void entryRemoved(String key) {
+    for (ObjectStoreEntryListener listener : listenerMap.values()) {
+      listener.entryRemoved(key);
+    }
+  }
 }
