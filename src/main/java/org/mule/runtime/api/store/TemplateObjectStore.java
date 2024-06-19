@@ -8,7 +8,11 @@ package org.mule.runtime.api.store;
 
 import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Template for {@link ObjectStore} implementations so that it's easier to conform to the contract.
@@ -19,6 +23,8 @@ import java.io.Serializable;
  * @since 1.0
  */
 public abstract class TemplateObjectStore<T extends Serializable> extends AbstractObjectStoreSupport<T> {
+
+  private Map<String, ObjectStoreEntryListener> listenerMap = new ConcurrentHashMap<>();
 
   /**
    * {@inheritDoc}
@@ -46,6 +52,13 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
       throw new ObjectAlreadyExistsException(createStaticMessage("ObjectStore already contains entry for key " + key));
     }
     doStore(key, value);
+    entryAdded(key, value);
+  }
+
+  private void entryAdded(String key, T value) {
+    for (ObjectStoreEntryListener listener : listenerMap.values()) {
+      listener.entryAdded(key, value);
+    }
   }
 
   /**
@@ -79,8 +92,14 @@ public abstract class TemplateObjectStore<T extends Serializable> extends Abstra
     if (value == null) {
       throw new ObjectDoesNotExistException(createStaticMessage("Object store does not contain a value for key " + key));
     }
-
+    entryRemoved(key);
     return value;
+  }
+
+  private void entryRemoved(String key) {
+    for (ObjectStoreEntryListener listener : listenerMap.values()) {
+      listener.entryRemoved(key);
+    }
   }
 
   /**

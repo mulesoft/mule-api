@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.store;
 
+import org.mule.runtime.api.map.ObjectStoreEntryListener;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -103,4 +105,8 @@ public interface ObjectStore<T extends Serializable> {
    * @throws ObjectStoreException if an exception occurred while collecting the values
    */
   Map<String, T> retrieveAll() throws ObjectStoreException;
+
+  String addEntryListener(ObjectStoreEntryListener listener);
+
+  boolean removeEntryListener(String key);
 }
