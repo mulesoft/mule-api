@@ -6,10 +6,17 @@
  */
 package org.mule.runtime.api.el;
 
+import static org.mule.runtime.api.i18n.I18nMessageFactory.createStaticMessage;
+
 import static java.lang.String.format;
+import static java.lang.Thread.currentThread;
 import static java.util.ServiceLoader.load;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.exception.MuleRuntimeException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,33 +31,60 @@ public abstract class AbstractBindingContextBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBindingContextBuilderFactory.class);
 
-  static {
+  private static AbstractBindingContextBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
-      final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
-                                                                AbstractBindingContextBuilderFactory.class.getClassLoader())
-                                                                    .iterator().next();
+      final AbstractBindingContextBuilderFactory factory =
+          load(AbstractBindingContextBuilderFactory.class, classLoader).iterator().next();
       LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-      DEFAULT_FACTORY = factory;
+      return factory;
     } catch (Throwable t) {
       LOGGER.error("Error loading BindingContextBuilderFactory implementation.", t);
       throw t;
     }
   }
 
-  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY;
+  private static final Map<ClassLoader, AbstractBindingContextBuilderFactory> factoriesMap = new HashMap<>();
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
    *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
-  static final AbstractBindingContextBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+  static AbstractBindingContextBuilderFactory getDefaultFactory() {
+    ClassLoader contextClassLoader = currentThread().getContextClassLoader();
+    try {
+      return getDefaultFactory(contextClassLoader);
+    } catch (Throwable t) {
+      ClassLoader classLoader;
+      try {
+        classLoader = contextClassLoader.loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
+      } catch (ClassNotFoundException e) {
+        throw new MuleRuntimeException(createStaticMessage("Failed obtaining class loader to load BindingContextBuilderFactory implementation"),
+                                       e);
+      }
+
+      AbstractBindingContextBuilderFactory defaultFactory = null;
+      try {
+        defaultFactory = getDefaultFactory(classLoader);
+      } finally {
+        // Next time this thread's context class loader is used to retrieve the factory, we return it instead of computing it
+        // again
+        if (defaultFactory != null) {
+          factoriesMap.put(contextClassLoader, defaultFactory);
+        }
+      }
+
+      return defaultFactory;
+    }
+  }
+
+  private static AbstractBindingContextBuilderFactory getDefaultFactory(ClassLoader classLoader) {
+    return factoriesMap.computeIfAbsent(classLoader, AbstractBindingContextBuilderFactory::loadFactory);
   }
 
   /**
