@@ -597,14 +597,6 @@ public final class MuleSystemProperties {
   public static final String HONOUR_EXTENSION_ERROR_NAMESPACE = SYSTEM_PROPERTY_PREFIX + "honour.extension.error.namespace";
 
   /**
-   * When set to "true", the template parser will switch to compatibility mode
-   *
-   * @since 4.3.0-202404, 4.4.0-202404
-   */
-  public static final String ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE =
-      SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
-
-  /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {

@@ -4,15 +4,6 @@
       "ignore": [
         {
           "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.util.MuleSystemProperties.ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
-          "package": "org.mule.runtime.api.util",
-          "classSimpleName": "MuleSystemProperties",
-          "fieldName": "ENABLE_TEMPLATE_PARSER_COMPATIBILITY_MODE",
-          "elementKind": "field",
-          "justification": "W-15141905: Adding flag for TP compatibility mode."
-        },
-        {
-          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DISABLE_SCHEDULER_LOGGING",
           "package": "org.mule.runtime.api.config",
           "classSimpleName": "MuleRuntimeFeature",
