@@ -7,6 +7,7 @@
 package org.mule.runtime.api.el;
 
 import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
@@ -26,7 +27,15 @@ public abstract class AbstractExpressionModuleBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractExpressionModuleBuilderFactory.class);
 
-  private static AbstractExpressionModuleBuilderFactory loadFactory() {
+  static {
+    if (!isResolveMuleImplementationLoadersDynamically()) {
+      DEFAULT_FACTORY = loadFactory(AbstractExpressionModuleBuilderFactory.class.getClassLoader());
+    } else {
+      DEFAULT_FACTORY = null;
+    }
+  }
+
+  private static AbstractExpressionModuleBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class,
                                                                   getMuleImplementationsLoader()).iterator().next();
@@ -42,6 +51,8 @@ public abstract class AbstractExpressionModuleBuilderFactory {
     }
   }
 
+  private static final AbstractExpressionModuleBuilderFactory DEFAULT_FACTORY;
+
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
@@ -51,7 +62,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static AbstractExpressionModuleBuilderFactory getDefaultFactory() {
-    return loadFactory();
+    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
   }
 
   /**

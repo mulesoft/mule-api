@@ -7,6 +7,7 @@
 package org.mule.runtime.api.tls;
 
 import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
@@ -26,7 +27,15 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTlsContextFactoryBuilderFactory.class);
 
-  private static AbstractTlsContextFactoryBuilderFactory loadFactory() {
+  static {
+    if (!isResolveMuleImplementationLoadersDynamically()) {
+      DEFAULT_FACTORY = loadFactory(AbstractTlsContextFactoryBuilderFactory.class.getClassLoader());
+    } else {
+      DEFAULT_FACTORY = null;
+    }
+  }
+
+  private static AbstractTlsContextFactoryBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
       final AbstractTlsContextFactoryBuilderFactory factory = load(AbstractTlsContextFactoryBuilderFactory.class,
                                                                    getMuleImplementationsLoader())
@@ -41,6 +50,8 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
     }
   }
 
+  private static final AbstractTlsContextFactoryBuilderFactory DEFAULT_FACTORY;
+
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
@@ -50,7 +61,7 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractTlsContextFactoryBuilderFactory getDefaultFactory() {
-    return loadFactory();
+    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
   }
 
   /**

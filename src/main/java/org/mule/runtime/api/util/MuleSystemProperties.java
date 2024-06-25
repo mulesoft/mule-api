@@ -567,6 +567,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "classloader.container.jpmsModuleLayer";
 
   /**
+   * Determines if the class loader used to look for Mule API's implementations and resources has to be dynamically resolved.
+   *
+   * @since 4.8
+   */
+  public static final String RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY =
+      SYSTEM_PROPERTY_PREFIX + "resolve.mule.implementations.loader.dynamically";
+
+  /**
    * When set to true, MBeans will not be registered for commons-pool2.
    *
    * @since 4.6.0

@@ -6,8 +6,11 @@
  */
 package org.mule.runtime.api.util.classloader;
 
+import static org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+
+import static java.lang.Boolean.getBoolean;
 
 import org.mule.runtime.internal.util.classloader.CallerClassUtils;
 
@@ -22,6 +25,8 @@ import java.util.Map;
  */
 public class MuleImplementationLoaderUtils {
 
+  private static final boolean DYNAMIC_RESOLUTION = getBoolean(RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY);
+
   private static final Map<ClassLoader, ClassLoader> muleImplementationsLoaders = new HashMap();
   private static ClassLoader muleImplementationsLoader;
   private static boolean forceLookup = false;
@@ -30,8 +35,12 @@ public class MuleImplementationLoaderUtils {
     // Nothing to do
   }
 
+  public static boolean isResolveMuleImplementationLoadersDynamically() {
+    return DYNAMIC_RESOLUTION;
+  }
+
   public static ClassLoader getMuleImplementationsLoader() {
-    if (muleImplementationsLoader == null && !forceLookup) {
+    if (!isResolveMuleImplementationLoadersDynamically()) {
       return MuleImplementationLoaderUtils.class.getClassLoader();
     }
 

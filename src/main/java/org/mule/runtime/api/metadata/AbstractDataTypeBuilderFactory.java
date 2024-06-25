@@ -7,6 +7,7 @@
 package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
@@ -26,7 +27,15 @@ public abstract class AbstractDataTypeBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataTypeBuilderFactory.class);
 
-  private static AbstractDataTypeBuilderFactory loadFactory() {
+  static {
+    if (!isResolveMuleImplementationLoadersDynamically()) {
+      DEFAULT_FACTORY = loadFactory(AbstractDataTypeBuilderFactory.class.getClassLoader());
+    } else {
+      DEFAULT_FACTORY = null;
+    }
+  }
+
+  private static AbstractDataTypeBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
       final AbstractDataTypeBuilderFactory factory =
           load(AbstractDataTypeBuilderFactory.class, getMuleImplementationsLoader()).iterator().next();
@@ -40,6 +49,8 @@ public abstract class AbstractDataTypeBuilderFactory {
     }
   }
 
+  private static final AbstractDataTypeBuilderFactory DEFAULT_FACTORY;
+
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
@@ -49,7 +60,7 @@ public abstract class AbstractDataTypeBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractDataTypeBuilderFactory getDefaultFactory() {
-    return loadFactory();
+    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
   }
 
   /**

@@ -7,6 +7,7 @@
 package org.mule.runtime.api.el;
 
 import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
@@ -26,7 +27,15 @@ public abstract class AbstractBindingContextBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBindingContextBuilderFactory.class);
 
-  private static AbstractBindingContextBuilderFactory loadFactory() {
+  static {
+    if (!isResolveMuleImplementationLoadersDynamically()) {
+      DEFAULT_FACTORY = loadFactory(AbstractBindingContextBuilderFactory.class.getClassLoader());
+    } else {
+      DEFAULT_FACTORY = null;
+    }
+  }
+
+  private static AbstractBindingContextBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
                                                                 getMuleImplementationsLoader())
@@ -41,6 +50,8 @@ public abstract class AbstractBindingContextBuilderFactory {
     }
   }
 
+  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY;
+
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
@@ -50,7 +61,7 @@ public abstract class AbstractBindingContextBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractBindingContextBuilderFactory getDefaultFactory() {
-    return loadFactory();
+    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
   }
 
   /**
