@@ -38,7 +38,7 @@ public abstract class AbstractBindingContextBuilderFactory {
   private static AbstractBindingContextBuilderFactory loadFactory(ClassLoader classLoader) {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
-                                                                getMuleImplementationsLoader())
+                                                                classLoader)
                                                                     .iterator().next();
       LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
