@@ -144,6 +144,9 @@ module org.mule.runtime.api {
   exports org.mule.runtime.internal.meta.model to
       org.mule.runtime.artifact.ast;
 
+  opens org.mule.runtime.api.bulk to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   // Allow extensions-support to create objects from these packages dynamically
   opens org.mule.runtime.api.connection to
       org.mule.runtime.extensions.support;
