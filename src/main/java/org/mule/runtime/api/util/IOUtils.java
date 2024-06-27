@@ -75,7 +75,7 @@ public class IOUtils {
       try {
         File file = newFile(resourceName);
         if (file.exists()) {
-          url = file.getAbsoluteFile().toURL();
+          url = file.getAbsoluteFile().toURI().toURL();
         } else {
           logger.debug("Unable to load resource from the file system: " + file.getAbsolutePath());
         }
