@@ -6,11 +6,13 @@
  */
 package org.mule.runtime.api.map;
 
+import java.io.Serializable;
+
 public interface ObjectStoreEntryListener {
 
-  void entryAdded(Object key, Object value);
+  void onEntryAdded(Object key, Serializable value);
 
-  void entryRemoved(Object key);
+  void onEntryRemoved(Serializable removedValue);
 
-  void entryUpdated(Object key, Object value);
+  void onEntryUpdated(Object key, Serializable value);
 }
