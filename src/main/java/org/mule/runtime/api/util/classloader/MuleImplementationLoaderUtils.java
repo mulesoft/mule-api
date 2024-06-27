@@ -41,7 +41,7 @@ public class MuleImplementationLoaderUtils {
 
   public static ClassLoader getMuleImplementationsLoader() {
     if (!isResolveMuleImplementationLoadersDynamically()) {
-      return MuleImplementationLoaderUtils.class.getClassLoader();
+      return muleImplementationsLoader != null ? muleImplementationsLoader : MuleImplementationLoaderUtils.class.getClassLoader();
     }
 
     if (forceLookup) {

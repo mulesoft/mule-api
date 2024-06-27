@@ -27,18 +27,10 @@ public abstract class AbstractExpressionModuleBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractExpressionModuleBuilderFactory.class);
 
-  static {
-    if (!isResolveMuleImplementationLoadersDynamically()) {
-      DEFAULT_FACTORY = loadFactory(AbstractExpressionModuleBuilderFactory.class.getClassLoader());
-    } else {
-      DEFAULT_FACTORY = null;
-    }
-  }
-
-  private static AbstractExpressionModuleBuilderFactory loadFactory(ClassLoader classLoader) {
+  private static AbstractExpressionModuleBuilderFactory loadFactory() {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class,
-                                                                  classLoader).iterator().next();
+                                                                  getMuleImplementationsLoader()).iterator().next();
       if (LOGGER.isDebugEnabled()) {
         LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
                             factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
@@ -51,7 +43,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
     }
   }
 
-  private static final AbstractExpressionModuleBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractExpressionModuleBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
@@ -62,7 +54,11 @@ public abstract class AbstractExpressionModuleBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static AbstractExpressionModuleBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**

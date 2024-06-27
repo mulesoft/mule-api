@@ -27,18 +27,10 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTlsContextFactoryBuilderFactory.class);
 
-  static {
-    if (!isResolveMuleImplementationLoadersDynamically()) {
-      DEFAULT_FACTORY = loadFactory(AbstractTlsContextFactoryBuilderFactory.class.getClassLoader());
-    } else {
-      DEFAULT_FACTORY = null;
-    }
-  }
-
-  private static AbstractTlsContextFactoryBuilderFactory loadFactory(ClassLoader classLoader) {
+  private static AbstractTlsContextFactoryBuilderFactory loadFactory() {
     try {
       final AbstractTlsContextFactoryBuilderFactory factory = load(AbstractTlsContextFactoryBuilderFactory.class,
-                                                                   classLoader)
+                                                                   getMuleImplementationsLoader())
                                                                        .iterator().next();
       LOGGER.info(format("Loaded TlsContextFactoryBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
@@ -50,7 +42,7 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
     }
   }
 
-  private static final AbstractTlsContextFactoryBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractTlsContextFactoryBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
@@ -61,7 +53,11 @@ public abstract class AbstractTlsContextFactoryBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractTlsContextFactoryBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**

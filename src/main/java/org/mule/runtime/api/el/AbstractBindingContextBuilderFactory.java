@@ -27,18 +27,10 @@ public abstract class AbstractBindingContextBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBindingContextBuilderFactory.class);
 
-  static {
-    if (!isResolveMuleImplementationLoadersDynamically()) {
-      DEFAULT_FACTORY = loadFactory(AbstractBindingContextBuilderFactory.class.getClassLoader());
-    } else {
-      DEFAULT_FACTORY = null;
-    }
-  }
-
-  private static AbstractBindingContextBuilderFactory loadFactory(ClassLoader classLoader) {
+  private static AbstractBindingContextBuilderFactory loadFactory() {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
-                                                                classLoader)
+                                                                getMuleImplementationsLoader())
                                                                     .iterator().next();
       LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
@@ -50,7 +42,7 @@ public abstract class AbstractBindingContextBuilderFactory {
     }
   }
 
-  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
@@ -61,7 +53,11 @@ public abstract class AbstractBindingContextBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractBindingContextBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**

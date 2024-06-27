@@ -25,18 +25,10 @@ public abstract class AbstractMuleMessageBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractMuleMessageBuilderFactory.class);
 
-  static {
-    if (!isResolveMuleImplementationLoadersDynamically()) {
-      DEFAULT_FACTORY = loadFactory(AbstractMuleMessageBuilderFactory.class.getClassLoader());
-    } else {
-      DEFAULT_FACTORY = null;
-    }
-  }
-
-  private static AbstractMuleMessageBuilderFactory loadFactory(ClassLoader classLoader) {
+  private static AbstractMuleMessageBuilderFactory loadFactory() {
     try {
       final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class,
-                                                             classLoader).iterator()
+                                                             getMuleImplementationsLoader()).iterator()
                                                                  .next();
       LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
@@ -48,7 +40,7 @@ public abstract class AbstractMuleMessageBuilderFactory {
     }
   }
 
-  private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractMuleMessageBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
    * The implementation of this abstract class is provided by the Mule Runtime.
@@ -59,7 +51,11 @@ public abstract class AbstractMuleMessageBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractMuleMessageBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY != null ? DEFAULT_FACTORY : loadFactory(getMuleImplementationsLoader());
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**
