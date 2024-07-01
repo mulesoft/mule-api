@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.metadata;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
+
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
@@ -24,25 +27,24 @@ public abstract class AbstractDataTypeBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataTypeBuilderFactory.class);
 
-  static {
+  private static AbstractDataTypeBuilderFactory loadFactory() {
     try {
-      final AbstractDataTypeBuilderFactory factory = load(AbstractDataTypeBuilderFactory.class,
-                                                          AbstractDataTypeBuilderFactory.class.getClassLoader())
-                                                              .iterator().next();
-      LOGGER.debug(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
-                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+      final AbstractDataTypeBuilderFactory factory =
+          load(AbstractDataTypeBuilderFactory.class, getMuleImplementationsLoader()).iterator().next();
+      LOGGER.info(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
+                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-      DEFAULT_FACTORY = factory;
+      return factory;
     } catch (Throwable t) {
       LOGGER.error("Error loading AbstractDataTypeBuilderFactory implementation.", t);
       throw t;
     }
   }
 
-  private static final AbstractDataTypeBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractDataTypeBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
@@ -50,7 +52,11 @@ public abstract class AbstractDataTypeBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractDataTypeBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**

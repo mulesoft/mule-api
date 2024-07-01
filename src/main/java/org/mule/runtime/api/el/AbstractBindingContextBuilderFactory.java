@@ -6,6 +6,9 @@
  */
 package org.mule.runtime.api.el;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
+
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
@@ -24,25 +27,25 @@ public abstract class AbstractBindingContextBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractBindingContextBuilderFactory.class);
 
-  static {
+  private static AbstractBindingContextBuilderFactory loadFactory() {
     try {
       final AbstractBindingContextBuilderFactory factory = load(AbstractBindingContextBuilderFactory.class,
-                                                                AbstractBindingContextBuilderFactory.class.getClassLoader())
+                                                                getMuleImplementationsLoader())
                                                                     .iterator().next();
       LOGGER.info(format("Loaded BindingContextBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
-      DEFAULT_FACTORY = factory;
+      return factory;
     } catch (Throwable t) {
       LOGGER.error("Error loading BindingContextBuilderFactory implementation.", t);
       throw t;
     }
   }
 
-  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY;
+  private static final AbstractBindingContextBuilderFactory DEFAULT_FACTORY = loadFactory();
 
   /**
-   * The implementation of this abstract class is provided by the Mule Runtime, and loaded during this class initialization.
+   * The implementation of this abstract class is provided by the Mule Runtime.
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
@@ -50,7 +53,11 @@ public abstract class AbstractBindingContextBuilderFactory {
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractBindingContextBuilderFactory getDefaultFactory() {
-    return DEFAULT_FACTORY;
+    if (isResolveMuleImplementationLoadersDynamically()) {
+      return loadFactory();
+    } else {
+      return DEFAULT_FACTORY;
+    }
   }
 
   /**

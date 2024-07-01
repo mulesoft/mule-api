@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.internal.util.xmlsecurity;
 
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+
 import static java.lang.String.format;
 import static javax.xml.XMLConstants.ACCESS_EXTERNAL_DTD;
 import static javax.xml.XMLConstants.ACCESS_EXTERNAL_SCHEMA;
@@ -63,7 +65,7 @@ public class DefaultXMLSecureFactories {
 
     if (System.getProperty(DOCUMENT_BUILDER_PROPERTY) == null) {
       try {
-        factory = DocumentBuilderFactory.newInstance(DOCUMENT_BUILDER_FACTORY, DefaultXMLSecureFactories.class.getClassLoader());
+        factory = DocumentBuilderFactory.newInstance(DOCUMENT_BUILDER_FACTORY, getMuleImplementationsLoader());
       } catch (FactoryConfigurationError e) {
         logCreationWarning(DocumentBuilderFactory.class.getName(), DOCUMENT_BUILDER_FACTORY, e);
         factory = DocumentBuilderFactory.newInstance();
@@ -90,7 +92,7 @@ public class DefaultXMLSecureFactories {
 
     if (System.getProperty(SAX_PARSER_PROPERTY) == null) {
       try {
-        factory = SAXParserFactory.newInstance(SAX_PARSER_FACTORY, DefaultXMLSecureFactories.class.getClassLoader());
+        factory = SAXParserFactory.newInstance(SAX_PARSER_FACTORY, getMuleImplementationsLoader());
       } catch (FactoryConfigurationError e) {
         logCreationWarning(SAXParserFactory.class.getName(), SAX_PARSER_FACTORY, e);
         factory = SAXParserFactory.newInstance();
@@ -120,7 +122,7 @@ public class DefaultXMLSecureFactories {
         final String propertyName = "_mule.XMLInputFactory";
 
         System.setProperty(propertyName, XML_INPUT_FACTORY);
-        factory = XMLInputFactory.newFactory(propertyName, DefaultXMLSecureFactories.class.getClassLoader());
+        factory = XMLInputFactory.newFactory(propertyName, getMuleImplementationsLoader());
       } catch (FactoryConfigurationError e) {
         logCreationWarning(XMLInputFactory.class.getName(), XML_INPUT_FACTORY, e);
         factory = XMLInputFactory.newInstance();
@@ -139,7 +141,7 @@ public class DefaultXMLSecureFactories {
 
     if (System.getProperty(TRANSFORMER_PROPERTY) == null) {
       try {
-        factory = TransformerFactory.newInstance(TRANSFORMER_FACTORY, DefaultXMLSecureFactories.class.getClassLoader());
+        factory = TransformerFactory.newInstance(TRANSFORMER_FACTORY, getMuleImplementationsLoader());
       } catch (FactoryConfigurationError e) {
         logCreationWarning(TransformerFactory.class.getName(), TRANSFORMER_FACTORY, e);
         factory = TransformerFactory.newInstance();
@@ -159,7 +161,7 @@ public class DefaultXMLSecureFactories {
 
     if (System.getProperty(schemaProperty) == null) {
       try {
-        factory = SchemaFactory.newInstance(schemaLanguage, SCHEMA_FACTORY, DefaultXMLSecureFactories.class.getClassLoader());
+        factory = SchemaFactory.newInstance(schemaLanguage, SCHEMA_FACTORY, getMuleImplementationsLoader());
       } catch (IllegalArgumentException e) {
         logCreationWarning(SchemaFactory.class.getName(), SCHEMA_FACTORY, e);
         factory = SchemaFactory.newInstance(schemaLanguage);
