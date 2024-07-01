@@ -22,7 +22,7 @@ import java.util.Map;
  * @since 1.7.0
  */
 @NoExtend
-abstract class BaseInputMetadataDescriptor {
+public abstract class BaseInputMetadataDescriptor {
 
   private final Map<String, ParameterMetadataDescriptor> parameters;
 
