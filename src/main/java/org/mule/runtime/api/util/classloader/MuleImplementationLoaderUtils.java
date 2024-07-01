@@ -18,8 +18,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 /**
- * Utility to determine the right {@link ClassLoader} from where API's implementations can be loaded through SPI and their
- * resources can be located.
+ * Utility to determine the {@link ClassLoader} from where API's implementations can be loaded through SPI and their resources can
+ * be located.
  *
  * @since 1.8
  */
@@ -37,10 +37,16 @@ public class MuleImplementationLoaderUtils {
     // Nothing to do
   }
 
+  /**
+   * @return whether the {@link ClassLoader} for API's implementations and their resources should be determined dynamically.
+   */
   public static boolean isResolveMuleImplementationLoadersDynamically() {
     return DYNAMIC_RESOLUTION;
   }
 
+  /**
+   * @return the {@link ClassLoader} from where to obtain API's implementations and their resources.
+   */
   public static ClassLoader getMuleImplementationsLoader() {
     if (!isResolveMuleImplementationLoadersDynamically()) {
       return muleImplementationsLoader != null ? muleImplementationsLoader : MuleImplementationLoaderUtils.class.getClassLoader();
