@@ -14,8 +14,8 @@ import static java.lang.Boolean.getBoolean;
 
 import org.mule.runtime.internal.util.classloader.CallerClassUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * Utility to determine the right {@link ClassLoader} from where API's implementations can be loaded through SPI and their
@@ -27,7 +27,9 @@ public class MuleImplementationLoaderUtils {
 
   private static final boolean DYNAMIC_RESOLUTION = getBoolean(RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY);
 
-  private static final Map<ClassLoader, ClassLoader> muleImplementationsLoaders = new HashMap();
+  private static final String MULE_RUNTIME_CORE_API_CLASS = "org.mule.runtime.core.api.MuleContext";
+
+  private static final ConcurrentMap<ClassLoader, ClassLoader> muleImplementationsLoaders = new ConcurrentHashMap<>();
   private static ClassLoader muleImplementationsLoader;
   private static boolean forceLookup = false;
 
@@ -45,19 +47,15 @@ public class MuleImplementationLoaderUtils {
     }
 
     if (forceLookup) {
-      ClassLoader nonMuleApiClassLoader = CallerClassUtils.getCallerClassClassLoader();
+      ClassLoader nonMuleApiClassLoader = CallerClassUtils.getCallerClassClassLoader(MULE_RUNTIME_CORE_API_CLASS);
 
-      ClassLoader muleImplLoader = muleImplementationsLoaders.get(nonMuleApiClassLoader);
-      if (muleImplLoader == null) {
+      return muleImplementationsLoaders.computeIfAbsent(nonMuleApiClassLoader, key -> {
         try {
-          muleImplLoader = nonMuleApiClassLoader.loadClass("org.mule.runtime.core.api.MuleContext").getClassLoader();
-          muleImplementationsLoaders.put(nonMuleApiClassLoader, muleImplLoader);
+          return nonMuleApiClassLoader.loadClass(MULE_RUNTIME_CORE_API_CLASS).getClassLoader();
         } catch (ClassNotFoundException e) {
           throw new RuntimeException(e);
         }
-      }
-
-      return muleImplLoader;
+      });
     } else {
       return muleImplementationsLoader;
     }
