@@ -22,6 +22,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DW_REMOVE_SHADOWED_
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_BYTE_BUDDY_OBJECT_CREATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SERVICE_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENFORCE_REQUIRED_EXPRESSION_VALIDATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
@@ -33,7 +34,6 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPIN
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
-import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
@@ -515,7 +515,17 @@ public enum MuleRuntimeFeature implements Feature {
    */
   UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC(
       "When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String, OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.",
-      "W-15399821", "4.8.0", MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC);
+      "W-15399821", "4.8.0", MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC),
+
+  /**
+   * When enabled, root element of `import` targets will validated to be the same as the importing config.
+   *
+   * @since 4.8
+   */
+  ENFORCE_IMPORT_TARGET_SAME_TYPE(
+      "When enabled, root element of `import` targets will validated to be the same as the importing config.",
+      "W-15509819",
+      "4.8.0");
 
   private final String description;
   private final String issueId;
