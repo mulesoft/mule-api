@@ -44,6 +44,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
   exports org.mule.runtime.api.bulk;
+  exports org.mule.runtime.api.util.classloader;
   exports org.mule.runtime.api.cluster;
   exports org.mule.runtime.api.component;
   exports org.mule.runtime.api.component.execution;
