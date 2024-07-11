@@ -621,6 +621,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
 
   /**
+   * When enabled, a System GC call can be performed when trying to delete the Native Libraries temporary folder.
+   *
+   * @since 4.8.0
+   */
+  public static final String DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
+
+  /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
