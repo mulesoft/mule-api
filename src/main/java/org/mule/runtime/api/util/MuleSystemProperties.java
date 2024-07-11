@@ -663,6 +663,14 @@ public final class MuleSystemProperties {
    */
   public static final String MULE_PRINT_STACK_TRACES_ON_DROP = SYSTEM_PROPERTY_PREFIX + "fluxSinkRecorder.printStackTracesOnDrop";
 
+  /**
+   * When enabled, a System GC call can be performed when trying to delete the Native Libraries temporary folder.
+   *
+   * @since 4.8.0
+   */
+  public static final String DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
+
   // <<<<<<<<<<
 
   // >>>>>>>>>>
