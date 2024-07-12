@@ -1,4 +1,19 @@
-{  "1.6.5": {
+{  "1.6.6": {
+    "revapi": {
+      "ignore": [
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-15894519: Deleting an App with DLL on Windows can cause a memory leak"
+        }
+      ]
+    }
+  },
+  "1.6.5": {
     "revapi": {
       "ignore": [
         {

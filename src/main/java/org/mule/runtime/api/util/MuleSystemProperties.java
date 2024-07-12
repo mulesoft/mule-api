@@ -857,6 +857,14 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enableTemplateParserCompatibilityMode";
 
   /**
+   * When enabled, a System GC call can be performed when trying to delete the Native Libraries temporary folder.
+   *
+   * @since 4.8.0
+   */
+  public static final String DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
