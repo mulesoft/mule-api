@@ -12,7 +12,6 @@ import static java.util.Optional.ofNullable;
 import static java.util.stream.Collectors.toMap;
 
 import org.mule.metadata.api.model.MetadataType;
-import org.mule.metadata.message.api.MessageMetadataType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,31 +28,18 @@ import java.util.Optional;
 public class ComponentMetadataTypesDescriptor {
 
   private final Map<String, MetadataType> inputMetadata;
-  private final MessageMetadataType inputChainMetadata;
   private final MetadataType outputMetadata;
   private final MetadataType outputAttributesMetadata;
 
   public ComponentMetadataTypesDescriptor(Map<String, MetadataType> inputMetadata, MetadataType outputMetadata,
                                           MetadataType outputAttributesMetadata) {
-    this(inputMetadata, null, outputMetadata, outputAttributesMetadata);
-  }
-
-  public ComponentMetadataTypesDescriptor(Map<String, MetadataType> inputMetadata,
-                                          MessageMetadataType inputChainMetadata,
-                                          MetadataType outputMetadata,
-                                          MetadataType outputAttributesMetadata) {
     this.inputMetadata = inputMetadata;
-    this.inputChainMetadata = inputChainMetadata;
     this.outputMetadata = outputMetadata;
     this.outputAttributesMetadata = outputAttributesMetadata;
   }
 
   public Map<String, MetadataType> getInputMetadata() {
     return new HashMap<>(inputMetadata);
-  }
-
-  public Optional<MessageMetadataType> getInputChainMetadata() {
-    return ofNullable(inputChainMetadata);
   }
 
   public Optional<MetadataType> getInputMetadata(String parameterName) {
@@ -137,11 +123,6 @@ public class ComponentMetadataTypesDescriptor {
             .collect(toMap(ParameterMetadataDescriptor::getName, ParameterMetadataDescriptor::getType));
       }
 
-      MessageMetadataType chainInputMessageType = null;
-      if (inputMetadataDescriptor instanceof ScopeInputMetadataDescriptor) {
-        chainInputMessageType = ((ScopeInputMetadataDescriptor) inputMetadataDescriptor).getChainInputMessageType();
-      }
-
       MetadataType output = null;
       MetadataType outputAttributes = null;
       if (outputMetadataDescriptor != null) {
@@ -156,7 +137,7 @@ public class ComponentMetadataTypesDescriptor {
         }
       }
 
-      return new ComponentMetadataTypesDescriptor(input, chainInputMessageType, output, outputAttributes);
+      return new ComponentMetadataTypesDescriptor(input, output, outputAttributes);
     }
 
   }
