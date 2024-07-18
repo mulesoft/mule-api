@@ -494,7 +494,18 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ENABLE_XML_SDK_MDC_RESET(
       "When enabled, the MDC context will reset after XML SDK Operation has been executed.",
-      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY);
+      "W-15206528", "4.8.0", ENABLE_XML_SDK_MDC_RESET_PROPERTY),
+
+  /**
+   * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
+   * the initial state.
+   *
+   * @since 4.8
+   */
+  HONOUR_PERSISTED_FLOW_STATE(
+    "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
+    "W-15750334",
+    "4.8.0");
 
   private final String description;
   private final String issueId;
