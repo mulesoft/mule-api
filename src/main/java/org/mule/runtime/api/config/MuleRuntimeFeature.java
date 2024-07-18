@@ -525,6 +525,17 @@ public enum MuleRuntimeFeature implements Feature {
   ENFORCE_IMPORT_TARGET_SAME_TYPE(
       "When enabled, root element of `import` targets will validated to be the same as the importing config.",
       "W-15509819",
+      "4.8.0"),
+
+  /**
+   * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
+   * the initial state.
+   *
+   * @since 4.8
+   */
+  HONOUR_PERSISTED_FLOW_STATE(
+      "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
+      "W-15750334",
       "4.8.0");
 
   private final String description;
