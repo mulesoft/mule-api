@@ -20,6 +20,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ERROR_AND_ROLLBACK_
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_PERSISTED_FLOW_STATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_XML_SDK_MDC_RESET_PROPERTY;
@@ -353,7 +354,7 @@ public enum MuleRuntimeFeature implements Feature {
   HONOUR_PERSISTED_FLOW_STATE(
       "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
         "W-15750334",
-        "4.8.0");
+        "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
 
   private final String description;
   private final String issueId;
