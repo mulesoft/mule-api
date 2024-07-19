@@ -32,6 +32,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.FOREACH_ROUTER_REJE
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_PERSISTED_FLOW_STATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PROPERTIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
@@ -536,7 +537,7 @@ public enum MuleRuntimeFeature implements Feature {
   HONOUR_PERSISTED_FLOW_STATE(
       "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
       "W-15750334",
-      "4.8.0");
+      "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
 
   private final String description;
   private final String issueId;
