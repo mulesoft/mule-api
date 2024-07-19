@@ -629,6 +629,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
 
   /**
+   * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
+   * the initial state.
+   *
+   * @since 4.8.0
+   */
+  public static final String HONOUR_PERSISTED_FLOW_STATE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honour.persisted.flow.state";
+
+  /**
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
