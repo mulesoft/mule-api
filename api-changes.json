@@ -10,6 +10,24 @@
           "fieldName": "DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY",
           "elementKind": "field",
           "justification": "W-15894519: Deleting an App with DLL on Windows can cause a memory leak"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.HONOUR_PERSISTED_FLOW_STATE",
+          "package": "org.mule.runtime.api.config",
+          "classSimpleName": "MuleRuntimeFeature",
+          "fieldName": "HONOUR_PERSISTED_FLOW_STATE",
+          "elementKind": "enumConstant",
+          "justification": "W-15750334: Flows with stopped initial state cannot maintain its status when restarting the application"
+        },
+        {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.HONOUR_PERSISTED_FLOW_STATE_PROPERTY",
+          "package": "org.mule.runtime.api.util",
+          "classSimpleName": "MuleSystemProperties",
+          "fieldName": "HONOUR_PERSISTED_FLOW_STATE_PROPERTY",
+          "elementKind": "field",
+          "justification": "W-15750334: Flows with stopped initial state cannot maintain its status when restarting the application"
         }
       ]
     }

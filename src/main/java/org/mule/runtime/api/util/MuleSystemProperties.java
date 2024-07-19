@@ -671,6 +671,15 @@ public final class MuleSystemProperties {
   public static final String DISABLE_NATIVE_LIBRARIES_FOLDER_DELETION_GC_CALL_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
 
+  /**
+   * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
+   * the initial state.
+   *
+   * @since 4.8.0
+   */
+  public static final String HONOUR_PERSISTED_FLOW_STATE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honour.persisted.flow.state";
+
   // <<<<<<<<<<
 
   // >>>>>>>>>>
