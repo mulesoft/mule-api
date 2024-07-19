@@ -17,8 +17,8 @@ import static java.lang.String.format;
  */
 public final class ExpressionLanguageUtils {
 
-  public static String DEFAULT_EXPRESSION_PREFIX = "#[";
-  public static String DEFAULT_EXPRESSION_POSTFIX = "]";
+  public static final String DEFAULT_EXPRESSION_PREFIX = "#[";
+  public static final String DEFAULT_EXPRESSION_POSTFIX = "]";
 
   private ExpressionLanguageUtils() {}
 
