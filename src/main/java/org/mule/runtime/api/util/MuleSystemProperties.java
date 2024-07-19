@@ -865,6 +865,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.nativeLibrariesFolderDeletion.gc.call";
 
   /**
+   * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
+   * the initial state.
+   *
+   * @since 4.8.0
+   */
+  public static final String HONOUR_PERSISTED_FLOW_STATE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "honour.persisted.flow.state";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
