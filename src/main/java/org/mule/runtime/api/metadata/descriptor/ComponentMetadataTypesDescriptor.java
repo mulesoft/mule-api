@@ -65,7 +65,7 @@ public class ComponentMetadataTypesDescriptor {
    */
   public static class ComponentMetadataTypesDescriptorBuilder {
 
-    private InputMetadataDescriptor inputMetadataDescriptor;
+    private BaseInputMetadataDescriptor inputMetadataDescriptor;
     private OutputMetadataDescriptor outputMetadataDescriptor;
     private boolean keepNonDynamicMetadata = false;
 
@@ -75,6 +75,10 @@ public class ComponentMetadataTypesDescriptor {
     private ComponentMetadataTypesDescriptorBuilder() {}
 
     public ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder withInputMetadataDescriptor(InputMetadataDescriptor inputMetadataDescriptor) {
+      return this.withInputMetadataDescriptor((BaseInputMetadataDescriptor) inputMetadataDescriptor);
+    }
+
+    public ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder withInputMetadataDescriptor(BaseInputMetadataDescriptor inputMetadataDescriptor) {
       requireNonNull(inputMetadataDescriptor, "inputMetadataDescriptor must not be null");
       this.inputMetadataDescriptor = inputMetadataDescriptor;
       return this;
