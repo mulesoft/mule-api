@@ -132,6 +132,7 @@ module org.mule.runtime.api {
 
   // for DataWeave
   exports org.mule.runtime.privileged.event;
+  exports org.mule.runtime.privileged.exception;
 
   // For runtime-extension-model and extensions-support
   exports org.mule.runtime.privileged.metadata;
