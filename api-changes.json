@@ -1,5 +1,5 @@
 {
-  "1.7.3": {
+  "1.7.2": {
     "revapi": {
       "ignore": [
         {
@@ -28,7 +28,13 @@
           "fieldName": "HONOUR_PERSISTED_FLOW_STATE_PROPERTY",
           "elementKind": "field",
           "justification": "W-15750334: Flows with stopped initial state cannot maintain its status when restarting the application"
-        },
+        }
+      ]
+    }
+  },
+  "1.7.1": {
+    "revapi": {
+      "ignore": [
         {
         "ignore": true,
         "code": "java.field.addedStaticField",
