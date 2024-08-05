@@ -6,20 +6,21 @@
  */
 package org.mule.runtime.api.test.internal.exception;
 
-import io.qameta.allure.Issue;
-import org.junit.Test;
-import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
-
-import java.util.List;
-import java.util.Map;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.Is.is;
+
+import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.privileged.exception.SuppressedMuleException;
+
+import java.util.List;
+import java.util.Map;
+
+import io.qameta.allure.Issue;
+import org.junit.Test;
 
 public class SuppressedMuleExceptionTestCase {
 
