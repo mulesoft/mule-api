@@ -14,6 +14,8 @@ import org.mule.runtime.api.exception.MuleException;
  */
 public class SuppressedMuleException extends org.mule.runtime.privileged.exception.SuppressedMuleException {
 
+  private static final long serialVersionUID = -2020531237382360468L;
+
   /**
    * Constructs a new {@link SuppressedMuleException}
    *
