@@ -117,7 +117,14 @@ public interface TypedComponentIdentifier {
      *
      * @since 1.5
      */
-    OUTPUT_ATTRIBUTES_TYPE
+    OUTPUT_ATTRIBUTES_TYPE,
+
+    /**
+     * Subflow component type
+     *
+     * @since 1.7
+     */
+    SUB_FLOW
   }
 
   /**
