@@ -38,7 +38,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class SuppressedMuleException extends MuleException {
 
-  private static final long serialVersionUID = -2020531237382360468L;
+  private static final long serialVersionUID = -2810315886149183162L;
 
   private final MuleException suppressedException;
 

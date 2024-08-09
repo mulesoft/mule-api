@@ -156,6 +156,12 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support,
       // Introspection by kryo used by mule serializer
       kryo.shaded;
+  opens org.mule.runtime.privileged.exception to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
+  opens org.mule.runtime.api.lifecycle to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   opens org.mule.runtime.api.message to
       // Introspection by kryo used by mule serializer
       kryo.shaded;
