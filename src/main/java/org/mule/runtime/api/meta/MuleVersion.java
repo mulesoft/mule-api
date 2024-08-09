@@ -7,10 +7,8 @@
 package org.mule.runtime.api.meta;
 
 import com.google.common.base.Joiner;
-import com.vdurmont.semver4j.Semver;
-import com.vdurmont.semver4j.SemverException;
 
-import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
+import org.semver4j.Semver;
 
 /**
  * This class represents Mule Software version scheme: {major}.{minor}.{revision}-{suffix}
@@ -36,12 +34,7 @@ public final class MuleVersion {
   }
 
   private void parse(String version) {
-    try {
-      this.semver = new Semver(version, LOOSE);
-      if (this.semver.getMajor() == null || this.semver.getMinor() == null) {
-        throw new IllegalArgumentException("Invalid version " + version);
-      }
-    } catch (SemverException sve) {
+    if (!Semver.isValid(version)) {
       throw new IllegalArgumentException("Invalid version " + version);
     }
   }
@@ -131,7 +124,7 @@ public final class MuleVersion {
    */
   public String toCompleteNumericVersion() {
     return this.semver.getMajor() + "." + semver.getMinor() + "."
-        + (this.semver.getPatch() != null ? this.semver.getPatch() : 0);
+        + this.semver.getPatch();
   }
 
   /**

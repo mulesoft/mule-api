@@ -24,7 +24,7 @@ module org.mule.runtime.api.test {
   requires com.google.gson;
   requires org.apache.commons.io;
   requires org.apache.commons.lang3;
-  requires semver4j;
+  requires org.semver4j;
   requires transitive junit;
   requires org.hamcrest;
   requires io.qameta.allure.commons;
