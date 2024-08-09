@@ -29,13 +29,6 @@ public interface TypedComponentIdentifier {
     FLOW,
 
     /**
-     * Subflow component type
-     *
-     * @since 1.7
-     */
-    SUB_FLOW,
-
-    /**
      * Receives something from an external system, transforms it into a {@link Message} and vice-versa.
      */
     SOURCE,
@@ -124,7 +117,14 @@ public interface TypedComponentIdentifier {
      *
      * @since 1.5
      */
-    OUTPUT_ATTRIBUTES_TYPE
+    OUTPUT_ATTRIBUTES_TYPE,
+
+    /**
+     * Subflow component type
+     *
+     * @since 1.7
+     */
+    SUB_FLOW
   }
 
   /**
