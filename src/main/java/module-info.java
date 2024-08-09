@@ -39,7 +39,7 @@ module org.mule.runtime.api {
   requires com.google.gson;
   requires org.apache.commons.io;
   requires org.apache.commons.lang3;
-  requires semver4j;
+  requires org.semver4j;
   
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
