@@ -130,6 +130,7 @@ module org.mule.runtime.api {
 
   // for DataWeave
   exports org.mule.runtime.privileged.event;
+  exports org.mule.runtime.privileged.exception;
 
   // Exposed to other modules of the Mule Runtime, but internal to other users
   exports org.mule.runtime.internal.dsl to
@@ -183,6 +184,12 @@ module org.mule.runtime.api {
       org.mule.runtime.extensions.support;
   opens org.mule.runtime.api.exception to
       org.mule.runtime.extensions.support,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
+  opens org.mule.runtime.privileged.exception to
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
+  opens org.mule.runtime.api.lifecycle to
       // Introspection by kryo used by mule serializer
       kryo.shaded;
   opens org.mule.runtime.api.message to
