@@ -6,27 +6,67 @@
  */
 package org.mule.runtime.api.internal.exception;
 
-import io.qameta.allure.Issue;
-import org.junit.Test;
-import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
-
-import java.util.List;
-import java.util.Map;
-
+import static java.lang.Boolean.parseBoolean;
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.collection.IsMapContaining.hasEntry;
 import static org.hamcrest.core.Is.is;
+import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.api.i18n.I18nMessage;
+import org.mule.runtime.api.i18n.I18nMessageFactory;
+import org.mule.runtime.privileged.exception.SuppressedMuleException;
+
+import java.util.List;
+import java.util.Map;
+
+import io.qameta.allure.Issue;
+import org.junit.Test;
+
+@RunWith(Parameterized.class)
 public class SuppressedMuleExceptionTestCase {
+
+  private final boolean isVerboseExceptions;
+  private boolean wasVerboseExceptions;
+
+  @Parameterized.Parameters(name = "Verbose exceptions: {0}")
+  public static List<Object[]> parameters() {
+    return asList(
+                  new Object[] {true},
+                  new Object[] {false});
+  }
+
+  public SuppressedMuleExceptionTestCase(boolean isVerboseExceptions) {
+    this.isVerboseExceptions = isVerboseExceptions;
+  }
+
+  @Before
+  public void setUp() throws Exception {
+    this.wasVerboseExceptions = parseBoolean(System.clearProperty(MULE_VERBOSE_EXCEPTIONS));
+    System.setProperty(MULE_VERBOSE_EXCEPTIONS, Boolean.toString(isVerboseExceptions));
+    MuleException.refreshVerboseExceptions();
+  }
+
+  @After
+  public void tearDown() throws Exception {
+    System.setProperty(MULE_VERBOSE_EXCEPTIONS, Boolean.toString(wasVerboseExceptions));
+  }
 
   @Test
   @Issue("MULE-18041")
   public void whenClassToSuppressIsNotFoundThenNoSuppressionIsAdded() {
-    Throwable result = SuppressedMuleException.suppressIfPresent(new SimpleException(), ExceptionWithAdditionalInfo.class);
+    Throwable result =
+        SuppressedMuleException.suppressIfPresent(new SimpleException(I18nMessageFactory.createStaticMessage("Test")),
+                                                  ExceptionWithAdditionalInfo.class);
     assertThat(result, is(instanceOf(SimpleException.class)));
   }
 
@@ -57,7 +97,8 @@ public class SuppressedMuleExceptionTestCase {
   @Test
   @Issue("MULE-18041")
   public void whenSuppressionIsAddedThenPreviousSuppressionsAreAdded() {
-    Throwable suppressedTestException = SuppressedMuleException.suppressIfPresent(new SimpleException(), SimpleException.class);
+    Throwable suppressedTestException = SuppressedMuleException
+        .suppressIfPresent(new SimpleException(I18nMessageFactory.createStaticMessage("Test")), SimpleException.class);
     Throwable suppressedAnotherTestException =
         SuppressedMuleException.suppressIfPresent(new ExceptionWithAdditionalInfo(suppressedTestException),
                                                   ExceptionWithAdditionalInfo.class);
@@ -105,21 +146,37 @@ public class SuppressedMuleExceptionTestCase {
   public void suppressionMustBeUnwrapped() {
     SimpleException unwrappedException = new SimpleException();
     SuppressedMuleException result =
-        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(new SimpleException(),
+        (SuppressedMuleException) SuppressedMuleException.suppressIfPresent(unwrappedException,
                                                                             SimpleException.class);
     assertThat(result.unwrap(), is(unwrappedException));
+  }
+
+  @Test
+  @Issue("W-15643200")
+  public void suppressionMustHaveItsOwnDetailedMessage() {
+    SimpleException unwrappedException = new SimpleException(I18nMessageFactory.createStaticMessage("Test"));
+    SuppressedMuleException result =
+        (SuppressedMuleException) SuppressedMuleException
+            .suppressIfPresent(new SimpleException(I18nMessageFactory.createStaticMessage("Test")),
+                               SimpleException.class);
+    assertThat(result.getDetailedMessage(), equalTo("Suppressed: " + unwrappedException.getMessage()));
   }
 
   private static class SimpleException extends MuleException {
 
     private static final long serialVersionUID = 21078091124109763L;
 
-    public SimpleException() {}
+    public SimpleException(I18nMessage test) {
+      super(test);
+    }
 
     public SimpleException(Throwable cause) {
       super(cause);
     }
 
+    public SimpleException() {
+      super();
+    }
   }
 
   private static class ExceptionWithAdditionalInfo extends MuleException {
