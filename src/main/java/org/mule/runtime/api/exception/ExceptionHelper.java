@@ -17,7 +17,7 @@ import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIO
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 import org.mule.runtime.api.util.collection.SmallMap;
-import org.mule.runtime.internal.exception.SuppressedMuleException;
+import org.mule.runtime.privileged.exception.SuppressedMuleException;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
