@@ -3,6 +3,15 @@
     "revapi": {  
       "ignore": [
         {
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.component.TypedComponentIdentifier.ComponentType.SUB_FLOW",
+          "package": "org.mule.runtime.api.component",
+          "classQualifiedName": "org.mule.runtime.api.component.TypedComponentIdentifier.ComponentType",
+          "classSimpleName": "ComponentType",
+          "fieldName": "SUB_FLOW",
+          "justification": "W-16230302: Adds a new value at the end of an enum, doesn't really break semver"
+        },
+        {
           "ignore": true,
           "code": "java.class.added",
           "new": "class org.mule.runtime.privileged.exception.SuppressedMuleException",
