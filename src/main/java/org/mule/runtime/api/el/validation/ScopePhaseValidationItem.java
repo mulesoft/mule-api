@@ -14,8 +14,10 @@ import java.util.Map;
  * Represents a scope phase validation item
  *
  * @since 1.5.0
+ * @deprecated since 1.9.0.
  */
 @NoImplement
+@Deprecated
 public interface ScopePhaseValidationItem {
 
   /**

@@ -10,7 +10,9 @@ package org.mule.runtime.api.el.validation;
  * The kind of {@link ScopePhaseValidationItem}
  * 
  * @since 1.5.0
+ * @deprecated since 1.9.0.
  */
+@Deprecated
 public enum ScopePhaseValidationItemKind {
   /**
    * Indicated that a function is deprecated. These functions are discouraged from using, typically because it is dangerous, or

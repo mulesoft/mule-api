@@ -14,8 +14,10 @@ import java.util.List;
  * Represents the result of the scope validation
  *
  * @since 1.5.0
+ * @deprecated since 1.9.0.
  */
 @NoImplement
+@Deprecated
 public interface ScopePhaseValidationMessages {
 
   /**
