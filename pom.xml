@@ -116,10 +116,8 @@
         <artifactDeclarationVersion>1.9.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.9.0-SNAPSHOT</muleModuleMavenPluginVersion>
 
-        <junitVersion>4.13.2</junitVersion>
-        <mockitoVersion>4.11.0</mockitoVersion>
-        <hamcrestVersion>2.2</hamcrestVersion>
-
+        <caffeine.java8.version>2.9.3</caffeine.java8.version>
+        
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
 
@@ -144,6 +142,13 @@
                 <version>${muleBomVersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Ensure this artifact still works with Java 8 -->
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.java8.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
