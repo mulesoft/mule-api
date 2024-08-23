@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.api.meta;
 
+import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
+
 import com.google.common.base.Joiner;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
-
-import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 
 /**
  * This class represents Mule Software version scheme: {major}.{minor}.{revision}-{suffix}
@@ -23,6 +23,14 @@ import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 public final class MuleVersion {
 
   public static final int NO_REVISION = -1;
+
+  public static final MuleVersion v4_3_0 = new MuleVersion("4.3.0");
+  public static final MuleVersion v4_4_0 = new MuleVersion("4.4.0");
+  public static final MuleVersion v4_5_0 = new MuleVersion("4.5.0");
+  public static final MuleVersion v4_6_0 = new MuleVersion("4.6.0");
+  public static final MuleVersion v4_6_1 = new MuleVersion("4.6.1");
+  public static final MuleVersion v4_7_0 = new MuleVersion("4.7.0");
+  public static final MuleVersion v4_8_0 = new MuleVersion("4.8.0");
 
   private Semver semver;
 
