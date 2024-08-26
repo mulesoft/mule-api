@@ -34,6 +34,7 @@ module org.mule.runtime.api.test {
   requires jsonassert;
 
   exports org.mule.runtime.api.test;
+  exports org.mule.runtime.api.test.component;
   exports org.mule.runtime.api.test.component.execution;
   exports org.mule.runtime.api.test.component.location;
   exports org.mule.runtime.api.test.el;
