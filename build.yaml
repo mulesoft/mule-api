@@ -11,3 +11,5 @@ additionalTestConfigs:
     testJdkTool: OPEN-JDK8
   jdk11:
     testJdkTool: OPEN-JDK11
+  jdk21:
+    testJdkTool: TEMURIN-JDK21
