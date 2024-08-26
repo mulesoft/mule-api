@@ -298,8 +298,9 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.
    * 
    * @since 4.5.0
+   * @deprecated since 4.9.0, `optional` attribute in entries are no longer supported
    */
-  // TODO W-10736276 Remove this feature flag along with the work for W-10736276
+  @Deprecated
   DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
       "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
       "W-10736301", "4.5.0", DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY),

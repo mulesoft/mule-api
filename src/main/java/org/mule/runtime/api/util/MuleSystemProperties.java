@@ -364,7 +364,10 @@ public final class MuleSystemProperties {
    * If set to true, {@code optional} attribute in entries in a `registry-bootstrap.properties` will be ignored.
    *
    * @since 4.5.0
+   * 
+   * @deprecated since 4.9 setting its value does not have any effect
    */
+  @Deprecated
   public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalEntries";
 
