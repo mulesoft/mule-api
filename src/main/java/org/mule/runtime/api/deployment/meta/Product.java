@@ -58,10 +58,12 @@ public enum Product {
       return MULE_EE;
     }
     if (coreLibraryName.equals("Mule Core")
-        || coreLibraryName.equals("Mule 4 Runtime Extension model")) {
+        || coreLibraryName.equals("Mule 4 Runtime Extension model")
+        || coreLibraryName.equals("Mule Manifest")) {
       return MULE;
     } else if (coreLibraryName.equals("Mule EE Core")
-        || coreLibraryName.equals("Mule 4 EE Runtime Extension model")) {
+        || coreLibraryName.equals("Mule 4 EE Runtime Extension model")
+        || coreLibraryName.equals("Mule EE Manifest")) {
       return MULE_EE;
     }
     throw new IllegalArgumentException(format("Core library name %s could not be recognized", coreLibraryName));
