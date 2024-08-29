@@ -531,13 +531,13 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
-   * the initial state. This will only apply to Standalone/Hybrid deployments and has no effect in CloudHub.
+   * the initial state. This will only apply to Standalone/Hybrid deployments.
    *
    * @since 4.8
    */
   HONOUR_PERSISTED_FLOW_STATE(
       "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state. "
-          + "This will only apply to Standalone/Hybrid deployments and has no effect in CloudHub.",
+          + "This will only apply to Standalone/Hybrid deployments.",
       "W-15750334",
       "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
 
