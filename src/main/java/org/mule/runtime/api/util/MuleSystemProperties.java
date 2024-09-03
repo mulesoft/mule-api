@@ -364,7 +364,10 @@ public final class MuleSystemProperties {
    * If set to true, {@code optional} attribute in entries in a `registry-bootstrap.properties` will be ignored.
    *
    * @since 4.5.0
+   * 
+   * @deprecated since 4.9 setting its value does not have any effect
    */
+  @Deprecated
   public static final String DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "disable.registryBootstrapOptionalEntries";
 
@@ -690,7 +693,7 @@ public final class MuleSystemProperties {
 
   /**
    * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
-   * the initial state.
+   * the initial state. This will only apply to Standalone/Hybrid deployments.
    *
    * @since 4.8.0
    */

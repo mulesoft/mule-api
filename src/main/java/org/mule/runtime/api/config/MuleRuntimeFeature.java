@@ -298,8 +298,9 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.
    * 
    * @since 4.5.0
+   * @deprecated since 4.9.0, `optional` attribute in entries are no longer supported
    */
-  // TODO W-10736276 Remove this feature flag along with the work for W-10736276
+  @Deprecated
   DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES(
       "When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.",
       "W-10736301", "4.5.0", DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY),
@@ -530,12 +531,13 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of
-   * the initial state.
+   * the initial state. This will only apply to Standalone/Hybrid deployments.
    *
    * @since 4.8
    */
   HONOUR_PERSISTED_FLOW_STATE(
-      "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
+      "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state. "
+          + "This will only apply to Standalone/Hybrid deployments.",
       "W-15750334",
       "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
 
