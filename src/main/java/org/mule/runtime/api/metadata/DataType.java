@@ -8,6 +8,8 @@ package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
 import static org.mule.runtime.api.metadata.MediaType.ANY;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.ExpressionFunction;
@@ -22,6 +24,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME type and encoding.
@@ -109,36 +113,136 @@ public interface DataType extends Serializable {
     return superType.isCompatibleWith(subType);
   }
 
-  DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
-  DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
-  DataType JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
-  DataType HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
-  DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
-  DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
+  /**
+   * {@link DataType} implementation that dynamically determines what implementation to use. In case {@link org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY} is set, an implementation for every implementation loader will be available.
+   *
+   * @since 1.8
+   */
+  class DynamicDelegateDataType implements DataType {
+
+    private final Supplier<DataType> delegateSupplier;
+    private final DataType delegate;
+    private final Map<ClassLoader, DataType> cache = new ConcurrentHashMap<>();
+
+    public DynamicDelegateDataType(Supplier<DataType> delegateSupplier) {
+      this.delegateSupplier = delegateSupplier;
+      this.delegate = delegateSupplier.get();
+    }
+
+    public DataType getDelegate() {
+      if (isResolveMuleImplementationLoadersDynamically()) {
+        return cache.computeIfAbsent(getMuleImplementationsLoader(), classLoader -> delegateSupplier.get());
+      } else {
+        return delegate;
+      }
+    }
+
+    @Override
+    public Class<?> getType() {
+      return getDelegate().getType();
+    }
+
+    @Override
+    public MediaType getMediaType() {
+      return getDelegate().getMediaType();
+    }
+
+    @Override
+    public boolean isCompatibleWith(DataType dataType) {
+      return getDelegate().isCompatibleWith(dataType);
+    }
+
+    @Override
+    public boolean isStreamType() {
+      return getDelegate().isStreamType();
+    }
+
+  }
+
+  /**
+   * {@link DynamicDelegateDataType} implementation that implements {@link CollectionDataType}.
+   *
+   * @since 1.8
+   */
+  class DynamicCollectionDelegateDataType extends DynamicDelegateDataType implements CollectionDataType {
+
+    public DynamicCollectionDelegateDataType(Supplier<DataType> delegateSupplier) {
+      super(delegateSupplier);
+    }
+
+    @Override
+    public DataType getItemDataType() {
+      return ((CollectionDataType) getDelegate()).getItemDataType();
+    }
+
+  }
+
+  /**
+   * {@link DynamicDelegateDataType} implementation that implements {@link MapDataType}.
+   *
+   * @since 1.8
+   */
+  class DynamicMapDelegateDataType extends DynamicDelegateDataType implements MapDataType {
+
+    public DynamicMapDelegateDataType(Supplier<DataType> delegateSupplier) {
+      super(delegateSupplier);
+    }
+
+    @Override
+    public DataType getKeyDataType() {
+      return ((MapDataType) getDelegate()).getKeyDataType();
+    }
+
+    @Override
+    public DataType getValueDataType() {
+      return ((MapDataType) getDelegate()).getValueDataType();
+    }
+
+  }
+
+  DataType TEXT_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.TEXT).build());
+
+  DataType XML_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.XML).build());
+
+  DataType JSON_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build());
+
+  DataType HTML_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.HTML).build());
+
+  DataType ATOM_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.ATOM).build());
+
+  DataType RSS_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.RSS).build());
 
   // Common Java types
-  DataType STRING = fromType(String.class);
-  DataType NUMBER = fromType(Number.class);
-  DataType BOOLEAN = fromType(Boolean.class);
-  DataType OBJECT = fromType(Object.class);
-  DataType BYTE_ARRAY = fromType(byte[].class);
-  DataType INPUT_STREAM = fromType(InputStream.class);
-  DataType ITERATOR = fromType(Iterator.class);
-  DataType CURSOR_STREAM_PROVIDER = fromType(CursorStreamProvider.class);
-  DataType CURSOR_ITERATOR_PROVIDER = fromType(CursorIteratorProvider.class);
-  DataType TYPED_VALUE = fromType(TypedValue.class);
-  DataType MULE_MESSAGE = builder().type(Message.class).mediaType(ANY).build();
-  CollectionDataType MULE_MESSAGE_COLLECTION =
-      (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
-          .mediaType(ANY).build();
-  CollectionDataType MULE_MESSAGE_LIST =
-      (CollectionDataType) getDefaultFactory().create().collectionType(List.class).itemType(Message.class)
-          .mediaType(ANY).build();
-  MapDataType MULE_MESSAGE_MAP =
-      (MapDataType) getDefaultFactory().create().mapType(Map.class).keyType(String.class).valueType(Message.class)
-          .valueMediaType(ANY).build();
-  MapDataType MULTI_MAP_STRING_STRING =
-      (MapDataType) getDefaultFactory().create().mapType(MultiMap.class).keyType(String.class).valueType(String.class).build();
+  DataType STRING = new DynamicDelegateDataType(() -> fromType(String.class));
+
+  DataType NUMBER = new DynamicDelegateDataType(() -> fromType(Number.class));
+
+  DataType BOOLEAN = new DynamicDelegateDataType(() -> fromType(Boolean.class));
+
+  DataType OBJECT = new DynamicDelegateDataType(() -> fromType(Object.class));
+
+  DataType BYTE_ARRAY = new DynamicDelegateDataType(() -> fromType(byte[].class));
+
+  DataType INPUT_STREAM = new DynamicDelegateDataType(() -> fromType(InputStream.class));
+
+  DataType ITERATOR = new DynamicDelegateDataType(() -> fromType(Iterator.class));
+
+  DataType CURSOR_STREAM_PROVIDER = new DynamicDelegateDataType(() -> fromType(CursorStreamProvider.class));
+
+  DataType CURSOR_ITERATOR_PROVIDER = new DynamicDelegateDataType(() -> fromType(CursorIteratorProvider.class));
+
+  DataType TYPED_VALUE = new DynamicDelegateDataType(() -> fromType(TypedValue.class));
+
+  DataType MULE_MESSAGE = new DynamicDelegateDataType(() -> builder().type(Message.class).mediaType(ANY).build());
+
+  CollectionDataType MULE_MESSAGE_COLLECTION = new DynamicCollectionDelegateDataType(() -> getDefaultFactory().create()
+      .collectionType(Collection.class).itemType(Message.class).mediaType(ANY).build());
+  CollectionDataType MULE_MESSAGE_LIST = new DynamicCollectionDelegateDataType(() -> getDefaultFactory().create().collectionType(List.class)
+      .itemType(Message.class).mediaType(ANY).build());
+  MapDataType MULE_MESSAGE_MAP = new DynamicMapDelegateDataType(() -> getDefaultFactory().create().mapType(Map.class).keyType(String.class)
+      .valueType(Message.class).valueMediaType(ANY).build());
+  MapDataType MULTI_MAP_STRING_STRING = new DynamicMapDelegateDataType(() -> getDefaultFactory().create().mapType(MultiMap.class)
+      .keyType(String.class).valueType(String.class).build());
 
   /**
    * The object type of the source object to transform.
