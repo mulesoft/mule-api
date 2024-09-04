@@ -114,7 +114,9 @@ public interface DataType extends Serializable {
   }
 
   /**
-   * {@link DataType} implementation that dynamically determines what implementation to use. In case {@link org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY} is set, an implementation for every implementation loader will be available.
+   * {@link DataType} implementation that dynamically determines what implementation to use. In case
+   * {@link org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY} is set, an
+   * implementation for every implementation loader will be available.
    *
    * @since 1.8
    */
@@ -204,7 +206,8 @@ public interface DataType extends Serializable {
 
   DataType XML_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.XML).build());
 
-  DataType JSON_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build());
+  DataType JSON_STRING =
+      new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build());
 
   DataType HTML_STRING = new DynamicDelegateDataType(() -> builder().type(String.class).mediaType(MediaType.HTML).build());
 
@@ -237,10 +240,12 @@ public interface DataType extends Serializable {
 
   CollectionDataType MULE_MESSAGE_COLLECTION = new DynamicCollectionDelegateDataType(() -> getDefaultFactory().create()
       .collectionType(Collection.class).itemType(Message.class).mediaType(ANY).build());
-  CollectionDataType MULE_MESSAGE_LIST = new DynamicCollectionDelegateDataType(() -> getDefaultFactory().create().collectionType(List.class)
-      .itemType(Message.class).mediaType(ANY).build());
-  MapDataType MULE_MESSAGE_MAP = new DynamicMapDelegateDataType(() -> getDefaultFactory().create().mapType(Map.class).keyType(String.class)
-      .valueType(Message.class).valueMediaType(ANY).build());
+  CollectionDataType MULE_MESSAGE_LIST =
+      new DynamicCollectionDelegateDataType(() -> getDefaultFactory().create().collectionType(List.class)
+          .itemType(Message.class).mediaType(ANY).build());
+  MapDataType MULE_MESSAGE_MAP =
+      new DynamicMapDelegateDataType(() -> getDefaultFactory().create().mapType(Map.class).keyType(String.class)
+          .valueType(Message.class).valueMediaType(ANY).build());
   MapDataType MULTI_MAP_STRING_STRING = new DynamicMapDelegateDataType(() -> getDefaultFactory().create().mapType(MultiMap.class)
       .keyType(String.class).valueType(String.class).build());
 
