@@ -70,6 +70,7 @@ public class DefaultComponentIdentifier implements ComponentIdentifier, Serializ
      */
     @Override
     public Builder namespace(String namespace) {
+      namespace = namespace.trim();
       componentIdentifier.namespace = namespace;
       componentIdentifier.namespaceLowerCase = namespace.toLowerCase();
       return this;
@@ -87,7 +88,7 @@ public class DefaultComponentIdentifier implements ComponentIdentifier, Serializ
      */
     @Override
     public Builder name(String identifier) {
-      componentIdentifier.name = identifier;
+      componentIdentifier.name = identifier.trim();
       return this;
     }
 
