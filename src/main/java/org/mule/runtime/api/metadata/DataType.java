@@ -159,6 +159,20 @@ public interface DataType extends Serializable {
       return getDelegate().isStreamType();
     }
 
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof DataType)) {
+        return false;
+      }
+
+      DataType that = o instanceof DynamicDelegateDataType ? ((DynamicDelegateDataType) o).getDelegate() : (DataType) o;
+
+      return this.getDelegate().equals(that);
+    }
+
   }
 
   /**
