@@ -118,6 +118,10 @@ public interface DataType extends Serializable {
    * {@link org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY} is set, an
    * implementation for every implementation loader will be available.
    * <p>
+   * This is intended to be a transparent wrapper to any {@link DataType}, meaning that a {@link DynamicDelegateDataType} with an
+   * instance of {@code SomeDataType} as {@code delegate} is considered equal to the {@code SomeDataType} instance. This implies
+   * that the {@link #equals(Object)} and {@link #hashCode()} methods will return the same in both cases.
+   * <p>
    * NOTE: The {@code delegateSupplier} provided must be {@link Serializable}.
    *
    * @since 1.8
