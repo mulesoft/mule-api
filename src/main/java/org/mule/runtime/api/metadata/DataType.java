@@ -8,6 +8,8 @@ package org.mule.runtime.api.metadata;
 
 import static org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory.getDefaultFactory;
 import static org.mule.runtime.api.metadata.MediaType.ANY;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.getMuleImplementationsLoader;
+import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtils.isResolveMuleImplementationLoadersDynamically;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.el.ExpressionFunction;
@@ -22,6 +24,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Supplier;
 
 /**
  * Defines a Java type and its association with additional information about the data, like MIME type and encoding.
@@ -109,36 +113,186 @@ public interface DataType extends Serializable {
     return superType.isCompatibleWith(subType);
   }
 
-  DataType TEXT_STRING = builder().type(String.class).mediaType(MediaType.TEXT).build();
-  DataType XML_STRING = builder().type(String.class).mediaType(MediaType.XML).build();
-  DataType JSON_STRING = builder().type(String.class).mediaType(MediaType.APPLICATION_JSON).build();
-  DataType HTML_STRING = builder().type(String.class).mediaType(MediaType.HTML).build();
-  DataType ATOM_STRING = builder().type(String.class).mediaType(MediaType.ATOM).build();
-  DataType RSS_STRING = builder().type(String.class).mediaType(MediaType.RSS).build();
+  /**
+   * {@link DataType} implementation that dynamically determines what implementation to use. In case
+   * {@link org.mule.runtime.api.util.MuleSystemProperties.RESOLVE_MULE_IMPLEMENTATIONS_LOADER_DYNAMICALLY} is set, an
+   * implementation for every implementation loader will be available.
+   * <p>
+   * This is intended to be a transparent wrapper to any {@link DataType}, meaning that a {@link DynamicDelegateDataType} with an
+   * instance of {@code SomeDataType} as {@code delegate} is considered equal to the {@code SomeDataType} instance. This implies
+   * that the {@link #equals(Object)} and {@link #hashCode()} methods will return the same in both cases.
+   * <p>
+   * NOTE: The {@code delegateSupplier} provided must be {@link Serializable}.
+   *
+   * @since 1.8
+   */
+  class DynamicDelegateDataType implements DataType {
+
+    private static final long serialVersionUID = -4590745924767485440L;
+
+    private final Supplier<DataType> delegateSupplier;
+    private final DataType delegate;
+    private transient Map<ClassLoader, DataType> cache = new ConcurrentHashMap<>();
+
+    public DynamicDelegateDataType(Supplier<DataType> delegateSupplier) {
+      this.delegateSupplier = delegateSupplier;
+      this.delegate = delegateSupplier.get();
+    }
+
+    public DataType getDelegate() {
+      if (isResolveMuleImplementationLoadersDynamically()) {
+        // The cache might be null due to serialization
+        if (cache == null) {
+          cache = new ConcurrentHashMap<>();
+        }
+
+        return cache.computeIfAbsent(getMuleImplementationsLoader(), classLoader -> delegateSupplier.get());
+      } else {
+        return delegate;
+      }
+    }
+
+    @Override
+    public Class<?> getType() {
+      return getDelegate().getType();
+    }
+
+    @Override
+    public MediaType getMediaType() {
+      return getDelegate().getMediaType();
+    }
+
+    @Override
+    public boolean isCompatibleWith(DataType dataType) {
+      return getDelegate().isCompatibleWith(dataType);
+    }
+
+    @Override
+    public boolean isStreamType() {
+      return getDelegate().isStreamType();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) {
+        return true;
+      }
+      if (!(o instanceof DataType)) {
+        return false;
+      }
+
+      DataType that = o instanceof DynamicDelegateDataType ? ((DynamicDelegateDataType) o).getDelegate() : (DataType) o;
+
+      return this.getDelegate().equals(that);
+    }
+
+    @Override
+    public int hashCode() {
+      return getDelegate().hashCode();
+    }
+  }
+
+  /**
+   * {@link DynamicDelegateDataType} implementation that implements {@link CollectionDataType}.
+   *
+   * @since 1.8
+   */
+  class DynamicCollectionDelegateDataType extends DynamicDelegateDataType implements CollectionDataType {
+
+    public DynamicCollectionDelegateDataType(Supplier<DataType> delegateSupplier) {
+      super(delegateSupplier);
+    }
+
+    @Override
+    public DataType getItemDataType() {
+      return ((CollectionDataType) getDelegate()).getItemDataType();
+    }
+
+  }
+
+  /**
+   * {@link DynamicDelegateDataType} implementation that implements {@link MapDataType}.
+   *
+   * @since 1.8
+   */
+  class DynamicMapDelegateDataType extends DynamicDelegateDataType implements MapDataType {
+
+    public DynamicMapDelegateDataType(Supplier<DataType> delegateSupplier) {
+      super(delegateSupplier);
+    }
+
+    @Override
+    public DataType getKeyDataType() {
+      return ((MapDataType) getDelegate()).getKeyDataType();
+    }
+
+    @Override
+    public DataType getValueDataType() {
+      return ((MapDataType) getDelegate()).getValueDataType();
+    }
+
+  }
+
+  DataType TEXT_STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+      .mediaType(MediaType.TEXT).build());
+
+  DataType XML_STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+      .mediaType(MediaType.XML).build());
+
+  DataType JSON_STRING =
+      new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+          .mediaType(MediaType.APPLICATION_JSON).build());
+
+  DataType HTML_STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+      .mediaType(MediaType.HTML).build());
+
+  DataType ATOM_STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+      .mediaType(MediaType.ATOM).build());
+
+  DataType RSS_STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(String.class)
+      .mediaType(MediaType.RSS).build());
 
   // Common Java types
-  DataType STRING = fromType(String.class);
-  DataType NUMBER = fromType(Number.class);
-  DataType BOOLEAN = fromType(Boolean.class);
-  DataType OBJECT = fromType(Object.class);
-  DataType BYTE_ARRAY = fromType(byte[].class);
-  DataType INPUT_STREAM = fromType(InputStream.class);
-  DataType ITERATOR = fromType(Iterator.class);
-  DataType CURSOR_STREAM_PROVIDER = fromType(CursorStreamProvider.class);
-  DataType CURSOR_ITERATOR_PROVIDER = fromType(CursorIteratorProvider.class);
-  DataType TYPED_VALUE = fromType(TypedValue.class);
-  DataType MULE_MESSAGE = builder().type(Message.class).mediaType(ANY).build();
+  DataType STRING = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(String.class));
+
+  DataType NUMBER = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(Number.class));
+
+  DataType BOOLEAN = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(Boolean.class));
+
+  DataType OBJECT = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(Object.class));
+
+  DataType BYTE_ARRAY = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(byte[].class));
+
+  DataType INPUT_STREAM = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(InputStream.class));
+
+  DataType ITERATOR = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(Iterator.class));
+
+  DataType CURSOR_STREAM_PROVIDER =
+      new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(CursorStreamProvider.class));
+
+  DataType CURSOR_ITERATOR_PROVIDER =
+      new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(CursorIteratorProvider.class));
+
+  DataType TYPED_VALUE = new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> fromType(TypedValue.class));
+
+  DataType MULE_MESSAGE =
+      new DynamicDelegateDataType((Supplier<DataType> & Serializable) () -> builder().type(Message.class).mediaType(ANY).build());
+
   CollectionDataType MULE_MESSAGE_COLLECTION =
-      (CollectionDataType) getDefaultFactory().create().collectionType(Collection.class).itemType(Message.class)
-          .mediaType(ANY).build();
+      new DynamicCollectionDelegateDataType((Supplier<DataType> & Serializable) () -> getDefaultFactory().create()
+          .collectionType(Collection.class).itemType(Message.class).mediaType(ANY).build());
   CollectionDataType MULE_MESSAGE_LIST =
-      (CollectionDataType) getDefaultFactory().create().collectionType(List.class).itemType(Message.class)
-          .mediaType(ANY).build();
+      new DynamicCollectionDelegateDataType((Supplier<DataType> & Serializable) () -> getDefaultFactory().create()
+          .collectionType(List.class)
+          .itemType(Message.class).mediaType(ANY).build());
   MapDataType MULE_MESSAGE_MAP =
-      (MapDataType) getDefaultFactory().create().mapType(Map.class).keyType(String.class).valueType(Message.class)
-          .valueMediaType(ANY).build();
+      new DynamicMapDelegateDataType((Supplier<DataType> & Serializable) () -> getDefaultFactory().create().mapType(Map.class)
+          .keyType(String.class)
+          .valueType(Message.class).valueMediaType(ANY).build());
   MapDataType MULTI_MAP_STRING_STRING =
-      (MapDataType) getDefaultFactory().create().mapType(MultiMap.class).keyType(String.class).valueType(String.class).build();
+      new DynamicMapDelegateDataType((Supplier<DataType> & Serializable) () -> getDefaultFactory().create()
+          .mapType(MultiMap.class)
+          .keyType(String.class).valueType(String.class).build());
 
   /**
    * The object type of the source object to transform.
