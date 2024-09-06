@@ -6,10 +6,9 @@
  */
 package org.mule.runtime.api.el.validation.constraints;
 
-import static org.mule.runtime.api.el.validation.Severity.WARNING;
-
 import org.mule.runtime.api.el.validation.GenericConstraintViolation;
 import org.mule.runtime.api.el.validation.Location;
+import org.mule.runtime.api.el.validation.Severity;
 
 /**
  * A typed constraint violation triggered when an element annotated with {@link @Deprecated} is used in a script. It appends
@@ -26,10 +25,11 @@ public class DeprecatedFeatureConstraintValidation extends GenericConstraintViol
   public DeprecatedFeatureConstraintValidation(String kind,
                                                String message,
                                                Location location,
+                                               Severity severity,
                                                String name,
                                                String replacement,
                                                String since) {
-    super(WARNING, kind, message, location);
+    super(severity, kind, message, location);
     this.name = name;
     this.replacement = replacement;
     this.since = since;

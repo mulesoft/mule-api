@@ -6,11 +6,10 @@
  */
 package org.mule.runtime.api.el.validation.constraints;
 
-import static org.mule.runtime.api.el.validation.Severity.ERROR;
-
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.runtime.api.el.validation.GenericConstraintViolation;
 import org.mule.runtime.api.el.validation.Location;
+import org.mule.runtime.api.el.validation.Severity;
 
 import java.util.Optional;
 
@@ -29,9 +28,10 @@ public class CloseDoesNotAllowExtraPropertiesConstraintValidation extends Generi
   public CloseDoesNotAllowExtraPropertiesConstraintValidation(String kind,
                                                               String message,
                                                               Location location,
+                                                              Severity severity,
                                                               String property,
                                                               String typeId) {
-    super(ERROR, kind, message, location);
+    super(severity, kind, message, location);
     this.property = property;
     this.typeId = typeId;
   }

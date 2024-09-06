@@ -6,11 +6,10 @@
  */
 package org.mule.runtime.api.el.validation.constraints;
 
-import static org.mule.runtime.api.el.validation.Severity.ERROR;
-
 import org.mule.metadata.api.annotation.TypeIdAnnotation;
 import org.mule.runtime.api.el.validation.GenericConstraintViolation;
 import org.mule.runtime.api.el.validation.Location;
+import org.mule.runtime.api.el.validation.Severity;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,10 +30,11 @@ public class PropertyNotDefinedConstraintValidation extends GenericConstraintVio
   public PropertyNotDefinedConstraintValidation(String kind,
                                                 String message,
                                                 Location location,
+                                                Severity severity,
                                                 String property,
                                                 List<String> options,
                                                 String typeId) {
-    super(ERROR, kind, message, location);
+    super(severity, kind, message, location);
     this.property = property;
     this.options = options;
     this.typeId = typeId;
