@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.notification;
 
+import static java.lang.Boolean.getBoolean;
+
 import java.util.EventObject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -119,14 +121,30 @@ public abstract class AbstractServerNotification extends EventObject implements 
   protected static synchronized void registerAction(String name, int i) {
     String lowerCaseName = name.toLowerCase();
     Integer id = new Integer(i);
+    boolean register = true;
+    boolean failOnRepeatedAction = !getBoolean("mule.server.action.repetition.allowed");
     if (actionNameToId.containsKey(lowerCaseName)) {
-      throw new IllegalStateException("Action " + name + " already registered");
+      register = false;
+      if (failOnRepeatedAction) {
+        throw new IllegalStateException("Action " + name + " already registered");
+      } else if (!actionNameToId.get(lowerCaseName).equals(id)) {
+        throw new IllegalStateException("Action " + name + " already registered with id " + actionNameToId.get(lowerCaseName)
+            + ", attempted to redefine with id " + id);
+      }
     }
     if (actionIdToName.containsKey(id)) {
-      throw new IllegalStateException("Action id " + i + " already registered");
+      register = false;
+      if (failOnRepeatedAction) {
+        throw new IllegalStateException("Action id " + i + " already registered");
+      } else if (!actionIdToName.get(id).equals(lowerCaseName)) {
+        throw new IllegalStateException("Action id " + i + " already registered with name " + actionIdToName.get(id)
+            + "', attempted to redefine with name " + lowerCaseName);
+      }
     }
-    actionIdToName.put(id, lowerCaseName);
-    actionNameToId.put(lowerCaseName, id);
+    if (register) {
+      actionIdToName.put(id, lowerCaseName);
+      actionNameToId.put(lowerCaseName, id);
+    }
   }
 
   public static String getActionName(int action) {
