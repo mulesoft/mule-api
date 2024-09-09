@@ -6,6 +6,10 @@
  */
 package org.mule.runtime.api.artifact;
 
+import static java.util.Optional.empty;
+
+import java.util.Optional;
+
 /**
  * The coordinates that identify an artifact, in the form of a Maven GAV
  *
@@ -27,4 +31,14 @@ public interface ArtifactCoordinates {
    * @return The version
    */
   String getVersion();
+
+  /**
+   * @return the classifier, if set
+   * 
+   * @since 1.8
+   */
+  default Optional<String> getClassifier() {
+    return empty();
+  }
+
 }
