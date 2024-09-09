@@ -194,7 +194,9 @@ module org.mule.runtime.api {
   opens org.mule.runtime.api.metadata to
       org.mule.runtime.extensions.support,
       com.google.gson,
-      org.mule.runtime.api.test;
+      org.mule.runtime.api.test,
+      // Introspection by kryo used by mule serializer
+      kryo.shaded;
   opens org.mule.runtime.api.metadata.resolving to
       com.google.gson;
   opens org.mule.runtime.api.value to
