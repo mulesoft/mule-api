@@ -5,6 +5,7 @@ upstreamProjects:
 # Uncomment it after they are copied
 # "mavenSettingsXmlId" : "mule-runtime-maven-settings-MuleSettings",
 projectType: runtime
+mavenTool: "3.9.9"
 jdkTool: OPEN-JDK17
 additionalTestConfigs:
   jdk8:
