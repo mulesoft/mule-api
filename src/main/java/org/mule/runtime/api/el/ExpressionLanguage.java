@@ -92,6 +92,7 @@ public interface ExpressionLanguage extends Disposable {
    * @param typeBindings         input {@link TypeBindings} required for phases >= {@link ValidationPhase#SCOPE}.
    * @param outputType           input {@link TypeBindings} required for phases >= {@link ValidationPhase#SCOPE}.
    * @return if script is valid an empty or a list with the {@link ConstraintViolation}s.
+   * @since 1.9
    */
   default List<ConstraintViolation> validate(String script, String nameIdentifier,
                                              ValidationPhase validationScopePhase,

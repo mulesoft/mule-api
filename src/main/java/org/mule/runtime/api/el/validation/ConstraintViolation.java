@@ -6,9 +6,6 @@
  */
 package org.mule.runtime.api.el.validation;
 
-import static org.mule.runtime.api.el.validation.Severity.ERROR;
-import static org.mule.runtime.api.el.validation.Severity.WARNING;
-
 import org.mule.api.annotation.NoImplement;
 
 /**
@@ -40,27 +37,4 @@ public interface ConstraintViolation {
    */
   Location getLocation();
 
-  /**
-   * Creates a {@link Severity#WARNING} constraint violation.
-   *
-   * @param kind     The kind of constraint violation.
-   * @param message  A message describing the constraint violated.
-   * @param location The {@link Location} in the script where the constraint violation happened.
-   * @return A {@link ConstraintViolation}.
-   */
-  static ConstraintViolation warning(String kind, String message, Location location) {
-    return new GenericConstraintViolation(WARNING, kind, message, location);
-  }
-
-  /**
-   * Creates an {@link Severity#ERROR} constraint violation.
-   *
-   * @param kind     The kind of constraint violation.
-   * @param message  A message describing the constraint violated.
-   * @param location The {@link Location} in the script where the constraint violation happened.
-   * @return A {@link ConstraintViolation}.
-   */
-  static ConstraintViolation error(String kind, String message, Location location) {
-    return new GenericConstraintViolation(ERROR, kind, message, location);
-  }
 }

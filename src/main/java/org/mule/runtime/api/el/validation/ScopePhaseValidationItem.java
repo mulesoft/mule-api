@@ -14,7 +14,8 @@ import java.util.Map;
  * Represents a scope phase validation item
  *
  * @since 1.5.0
- * @deprecated since 1.9.0.
+ * @deprecated since 1.9.0. Replaced with new validation API that not only include scope phase but also the rest of the phases.
+ *             {@link ConstraintViolation}.
  */
 @NoImplement
 @Deprecated

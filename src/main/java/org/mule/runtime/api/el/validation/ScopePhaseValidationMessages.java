@@ -14,7 +14,8 @@ import java.util.List;
  * Represents the result of the scope validation
  *
  * @since 1.5.0
- * @deprecated since 1.9.0.
+ * @deprecated since 1.9.0. Replaced with new validation API that not only include scope phase but also the rest of the phases.
+ *             {@link ConstraintViolation}.
  */
 @NoImplement
 @Deprecated
