@@ -60,6 +60,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.dsl;
   exports org.mule.runtime.api.el;
   exports org.mule.runtime.api.el.validation;
+  exports org.mule.runtime.api.el.validation.constraints;
   exports org.mule.runtime.api.event;
   exports org.mule.runtime.api.exception;
   exports org.mule.runtime.api.functional;
