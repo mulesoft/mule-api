@@ -28,5 +28,10 @@ public final class JavaConstants {
    */
   public static final String JAVA_VERSION_17 = "17";
 
+  /**
+   * The version for Java 21
+   */
+  public static final String JAVA_VERSION_21 = "21";
+
   private JavaConstants() {}
 }
