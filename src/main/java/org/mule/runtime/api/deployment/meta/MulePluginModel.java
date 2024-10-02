@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.model.ExtensionModel;
 
@@ -25,6 +28,8 @@ import java.util.Optional;
  */
 @NoExtend
 public class MulePluginModel extends AbstractMuleArtifactModel {
+
+  public static final String EXTENSION_LOADER_DESCRIPTOR = "extensionModelLoaderDescriptor";
 
   private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
   private final LicenseModel license;
@@ -86,6 +91,7 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
     /**
      * @return a well formed {@link MulePluginModel}
      */
+    @Override
     public MulePluginModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getBundleDescriptorLoader() != null, "bundleDescriber cannot be null");
