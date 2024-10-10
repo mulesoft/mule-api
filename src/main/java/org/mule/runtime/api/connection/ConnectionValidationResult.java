@@ -98,4 +98,13 @@ public class ConnectionValidationResult {
   public Exception getException() {
     return this.exception;
   }
+
+  @Override
+  public String toString() {
+    if (validationStatus) {
+      return "ConnectionValidationResult(success)";
+    } else {
+      return "ConnectionValidationResult(" + errorType + ": " + message + ")";
+    }
+  }
 }
