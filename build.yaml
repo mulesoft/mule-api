@@ -1,5 +1,5 @@
 upstreamProjects:
-  Mule-runtime/metadata-model-api/support/1.8.x,
+  Mule-runtime/metadata-model-api/1.8.1,
   Mule-runtime/mule-artifact-declaration/1.8.1
 # Comment public setting to get oldMuleArtifact 4.3.0 from private repo till we move them to the public Repo
 # Uncomment it after they are copied
