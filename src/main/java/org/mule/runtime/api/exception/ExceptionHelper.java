@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.exception;
 
+import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
+
 import static java.lang.Math.min;
 import static java.lang.String.format;
 import static java.lang.System.arraycopy;
@@ -13,7 +15,6 @@ import static java.lang.System.lineSeparator;
 import static java.lang.Thread.currentThread;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
-import static org.mule.runtime.api.exception.MuleException.MULE_VERBOSE_EXCEPTIONS;
 
 import org.mule.runtime.api.legacy.exception.ExceptionReader;
 import org.mule.runtime.api.util.collection.SmallMap;
@@ -142,7 +143,7 @@ public class ExceptionHelper {
       if (cause instanceof MuleException) {
         muleExceptionInfo.putAll(((MuleException) cause).getInfo());
         if (cause instanceof SuppressedMuleException) {
-          suppressedMuleException = ((SuppressedMuleException) cause).getSuppressedException();
+          suppressedMuleException = ((SuppressedMuleException) cause).obtainSuppressedException();
         } else {
           exception = (MuleException) cause;
         }
@@ -394,7 +395,7 @@ public class ExceptionHelper {
     MuleException suppressedCause = null;
     while (cause != null && cause != suppressedCause) {
       if (cause instanceof SuppressedMuleException) {
-        suppressedCause = ((SuppressedMuleException) cause).getSuppressedException();
+        suppressedCause = ((SuppressedMuleException) cause).obtainSuppressedException();
       } else {
         exceptions.add(cause);
       }

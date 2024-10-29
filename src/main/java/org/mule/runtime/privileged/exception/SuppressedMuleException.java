@@ -7,6 +7,7 @@
 package org.mule.runtime.privileged.exception;
 
 import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.api.exception.MuleExceptionInfo;
 import org.mule.runtime.api.message.Error;
 
 import static java.util.Objects.requireNonNull;
@@ -34,7 +35,7 @@ import static java.util.Objects.requireNonNull;
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying
  * ConnectionException's error type}).
  * 
- * @since 1.2.3, 1.3
+ * @since 1.2.3, 1.3 // This is not the right version.
  */
 public class SuppressedMuleException extends MuleException {
 
@@ -49,7 +50,8 @@ public class SuppressedMuleException extends MuleException {
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
   protected SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
-    super(requireNonNull(throwable, "Exception cannot be null"));
+    // Avoid returning suppressed exception as part of the cause three when possible.
+    super(requireNonNull(throwable.equals(causeToSuppress) ? throwable.getCause() : throwable, "Exception cannot be null"));
     this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
     addSuppressionToMuleExceptionInfo(causeToSuppress);
   }
@@ -62,7 +64,7 @@ public class SuppressedMuleException extends MuleException {
    * @param causeToSuppress Exception that is being suppressed.
    */
   private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
-    this.getExceptionInfo().addSuppressedCause(causeToSuppress);
+    this.getExceptionInfo().addSuppressedCause(new SuppressedMuleExceptionInfo(causeToSuppress));
     this.addAllInfo(causeToSuppress.getAdditionalInfo());
     Throwable nestedCause = causeToSuppress;
     while (nestedCause.getCause() != null && nestedCause.getCause() != nestedCause) {
@@ -70,7 +72,8 @@ public class SuppressedMuleException extends MuleException {
       if (nestedCause instanceof MuleException) {
         this.addAllInfo(((MuleException) nestedCause).getAdditionalInfo());
         if (nestedCause instanceof SuppressedMuleException) {
-          this.getExceptionInfo().addSuppressedCause(((SuppressedMuleException) nestedCause).getSuppressedException());
+          this.getExceptionInfo().addSuppressedCause(new SuppressedMuleExceptionInfo((((SuppressedMuleException) nestedCause)
+              .obtainSuppressedException())));
         }
       }
     }
@@ -89,7 +92,7 @@ public class SuppressedMuleException extends MuleException {
   /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
-  public MuleException getSuppressedException() {
+  public MuleException obtainSuppressedException() {
     return suppressedException;
   }
 
@@ -127,4 +130,19 @@ public class SuppressedMuleException extends MuleException {
     // SuppressedException is meant to marks as suppressed another exception that is part of the cause tree.
     return "Suppressed: " + super.getSummaryMessage();
   }
+
+  public static class SuppressedMuleExceptionInfo extends MuleException {
+
+    private final MuleException externalImplementation;
+
+    public SuppressedMuleExceptionInfo(MuleException externalImplementation) {
+      this.externalImplementation = externalImplementation;
+    }
+
+    @Override
+    public MuleExceptionInfo getExceptionInfo() {
+      return externalImplementation.getExceptionInfo();
+    }
+  }
+
 }

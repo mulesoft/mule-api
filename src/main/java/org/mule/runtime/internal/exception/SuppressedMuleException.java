@@ -11,6 +11,7 @@ import org.mule.runtime.api.exception.MuleException;
 /**
  * @see org.mule.runtime.privileged.exception.SuppressedMuleException
  * @since 1.2.3, 1.3
+ * @deprecated Replaced by {@link org.mule.runtime.privileged.exception.SuppressedMuleException}.
  */
 public class SuppressedMuleException extends org.mule.runtime.privileged.exception.SuppressedMuleException {
 
