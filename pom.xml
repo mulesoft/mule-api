@@ -6,6 +6,7 @@
         <groupId>org.mule</groupId>
         <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
         <version>4.9.0-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <groupId>org.mule.runtime</groupId>
@@ -337,16 +338,6 @@
                             <directory>${project.build.java11SourceDirectory}</directory>
                             <directory>${project.build.java11TestSourceDirectory}</directory>
                         </directories>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <configuration>
-                        <header>${licensePath}</header>
-                        <properties>
-                            <year>${licenseYear}</year>
-                        </properties>
                     </configuration>
                 </plugin>
                 <plugin>
