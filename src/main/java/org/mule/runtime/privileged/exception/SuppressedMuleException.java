@@ -6,11 +6,12 @@
  */
 package org.mule.runtime.privileged.exception;
 
+import static java.util.Objects.requireNonNull;
+import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
+
 import org.mule.runtime.api.exception.MuleException;
 import org.mule.runtime.api.exception.MuleExceptionInfo;
 import org.mule.runtime.api.message.Error;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps a provided exception, suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime
@@ -133,15 +134,35 @@ public class SuppressedMuleException extends MuleException {
 
   public static class SuppressedMuleExceptionInfo extends MuleException {
 
-    private final MuleException externalImplementation;
+    private final MuleException suppressedException;
 
-    public SuppressedMuleExceptionInfo(MuleException externalImplementation) {
-      this.externalImplementation = externalImplementation;
+    public SuppressedMuleExceptionInfo(MuleException suppressedException) {
+      this.suppressedException = suppressedException;
+      this.setMessage(getRootMuleException(suppressedException).getMessage());
     }
 
     @Override
     public MuleExceptionInfo getExceptionInfo() {
-      return externalImplementation.getExceptionInfo();
+      return suppressedException.getExceptionInfo();
+    }
+
+    public MuleException obtainSuppressedException() {
+      return suppressedException;
+    }
+
+    @Override
+    public String getSummaryMessage() {
+      return suppressedException.getSummaryMessage();
+    }
+
+    @Override
+    public String getVerboseMessage() {
+      return suppressedException.getVerboseMessage();
+    }
+
+    @Override
+    public String getDetailedMessage() {
+      return suppressedException.getDetailedMessage();
     }
   }
 
