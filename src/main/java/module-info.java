@@ -202,5 +202,6 @@ module org.mule.runtime.api {
       com.google.gson;
   opens org.mule.runtime.api.value to
       com.google.gson;
-
+  opens org.mule.runtime.api.functional to
+      kryo.shaded;
 }
