@@ -12,8 +12,10 @@ import org.mule.runtime.internal.util.ClassUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.JarURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -104,6 +106,27 @@ public class IOUtils {
       }
     }
     return url;
+  }
+
+  /**
+   * Returns an {@link InputStream} that will read from an {@link URL} connection without caching when the resource is inside a
+   * jar. This is important when working with resources obtained via {@link ClassLoader#getResource(String)} in order to avoid
+   * file descriptor leaks (closing the stream does not clean the cache). This method can be used to safely open a stream from a
+   * {@link URL} obtained via {@link #getResourceAsUrl} too.
+   * <p>
+   * Note that {@link ClassLoader#getResourceAsStream(String)} already take care of closing such resources as part of closing the
+   * stream, therefore caching is not a problem in that case.
+   *
+   * @param url The URL to connect to.
+   * @return The InputStream that will not leave any cached resource after closing.
+   * @throws IOException If it fails while obtaining the InputStream.
+   */
+  public static InputStream getInputStreamWithCacheControl(URL url) throws IOException {
+    URLConnection urlConnection = url.openConnection();
+    if (urlConnection instanceof JarURLConnection) {
+      urlConnection.setUseCaches(false);
+    }
+    return urlConnection.getInputStream();
   }
 
 }
