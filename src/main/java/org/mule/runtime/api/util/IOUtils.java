@@ -111,10 +111,10 @@ public class IOUtils {
   /**
    * Returns an {@link InputStream} that will read from an {@link URL} connection without caching when the resource is inside a
    * jar. This is important when working with resources obtained via {@link ClassLoader#getResource(String)} in order to avoid
-   * file descriptor leaks (closing the stream does not clean the cache). This method can be used to safely open a stream from a
+   * file descriptor leaks (closing the stream does not clean the cache). This method can be used to safely read from a
    * {@link URL} obtained via {@link #getResourceAsUrl} too.
    * <p>
-   * Note that {@link ClassLoader#getResourceAsStream(String)} already take care of closing such resources as part of closing the
+   * Note that {@link ClassLoader#getResourceAsStream(String)} already takes care of closing such resources as part of closing the
    * stream, therefore caching is not a problem in that case.
    *
    * @param url The URL to connect to.
