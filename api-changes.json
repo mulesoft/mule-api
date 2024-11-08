@@ -1,4 +1,21 @@
 {
+  "1.9.0": {
+    "revapi": {
+      "differences": {
+        "differences": [
+        // 4.10
+// ------------------>>
+          {
+            "ignore": true,
+            "code": "java.class.removed",
+            "old": "interface org.mule.runtime.api.app.declaration.serialization.ArtifactDeclarationJsonSerializer",
+            "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE"
+          }
+// <<------------------
+        ]
+      }
+    }
+  },
   "1.7.0": {
     "revapi": {
       "ignore": [

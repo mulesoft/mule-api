@@ -15,9 +15,6 @@ module org.mule.runtime.api.test {
   requires transitive org.mule.runtime.api.annotations;
   requires org.mule.runtime.metadata.model.api;
   requires org.mule.runtime.metadata.model.message;
-  requires org.mule.runtime.artifact.declaration;
-  requires org.mule.runtime.artifact.declaration.persistence;
-
 
   requires com.github.benmanes.caffeine;
   requires com.google.common;
