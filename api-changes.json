@@ -1,5 +1,17 @@
-{ 
-   "1.6.7": {
+{
+  "1.6.10": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.method.added",
+          "new": "method java.io.InputStream org.mule.runtime.api.util.IOUtils::getInputStreamWithCacheControl(java.net.URL) throws java.io.IOException",
+          "justification": "W-17050930: Plugin JAR file can't be deleted in Windows."
+        }
+      ]
+    }
+  },
+  "1.6.7": {
     "revapi": {
       "ignore": [
         {
