@@ -6,11 +6,11 @@
  */
 package org.mule.runtime.internal.util.classloader;
 
-import static java.util.Arrays.asList;
-
-import java.util.List;
+import java.util.stream.Stream;
 
 public class CallerClassUtils {
+
+  private static final CallingClasses callingClasses = new CallingClasses();
 
   private CallerClassUtils() {
     // Nothing to do
@@ -23,7 +23,7 @@ public class CallerClassUtils {
    * @return a {@link ClassLoader} with access to {@code accessibleClassName}.
    */
   public static ClassLoader getCallerClassClassLoader(String accessibleClassName) {
-    return new CallingClasses().getCallingClasses().stream()
+    return Stream.of(callingClasses.getCallingClasses())
         .map(Class::getClassLoader)
         .filter(classLoader -> classLoader != null && classLoader != CallerClassUtils.class.getClassLoader())
         .filter(classLoader -> {
@@ -34,7 +34,8 @@ public class CallerClassUtils {
             return false;
           }
         })
-        .findFirst().orElseThrow(() -> new RuntimeException("Class loader not found"));
+        .findFirst()
+        .orElseThrow(() -> new RuntimeException("Class loader not found"));
   }
 
   private static class CallingClasses extends SecurityManager {
@@ -43,8 +44,8 @@ public class CallerClassUtils {
       // Nothing to do
     }
 
-    public List<Class<?>> getCallingClasses() {
-      return asList(getClassContext());
+    public Class<?>[] getCallingClasses() {
+      return getClassContext();
     }
 
   }
