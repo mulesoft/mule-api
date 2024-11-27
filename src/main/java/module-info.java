@@ -151,7 +151,8 @@ module org.mule.runtime.api {
 
   // Allow extensions-support to create objects from these packages dynamically
   opens org.mule.runtime.api.connection to
-      org.mule.runtime.extensions.support;
+      org.mule.runtime.extensions.support,
+      kryo.shaded;
   opens org.mule.runtime.api.exception to
       org.mule.runtime.extensions.support,
       // Introspection by kryo used by mule serializer
