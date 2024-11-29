@@ -26,6 +26,11 @@ public final class MuleArtifactLoaderDescriptor {
   private final String id;
   private final Map<String, Object> attributes;
 
+  public MuleArtifactLoaderDescriptor() {
+    id = null;
+    attributes = Collections.emptyMap();
+  }
+
   /**
    * Creates an immutable implementation of {@link MuleArtifactLoaderDescriptor}
    *

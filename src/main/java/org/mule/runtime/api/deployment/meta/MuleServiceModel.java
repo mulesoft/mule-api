@@ -29,6 +29,11 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
 
   private final List<MuleServiceContractModel> contracts;
 
+  public MuleServiceModel() {
+    super("defaultName", "4.0.0", null, new MuleArtifactLoaderDescriptor(), new MuleArtifactLoaderDescriptor());
+    contracts = emptyList();
+  }
+
   private MuleServiceModel(String name, String minMuleVersion, Product product,
                            MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                            MuleArtifactLoaderDescriptor bundleDescriptorLoader,

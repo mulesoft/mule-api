@@ -27,6 +27,11 @@ public class MuleServiceContractModel {
   private final String serviceProviderClassName;
   private final String contractClassName;
 
+  public MuleServiceContractModel() {
+    serviceProviderClassName = null;
+    contractClassName = null;
+  }
+
   /**
    * Creates a new instance
    *
