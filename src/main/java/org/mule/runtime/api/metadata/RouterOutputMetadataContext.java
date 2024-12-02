@@ -7,9 +7,12 @@
 package org.mule.runtime.api.metadata;
 
 import org.mule.api.annotation.Experimental;
+import org.mule.api.annotation.NoImplement;
+import org.mule.metadata.api.model.MetadataType;
 import org.mule.metadata.message.api.MessageMetadataType;
 
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.function.Supplier;
 
 /**
@@ -21,6 +24,7 @@ import java.util.function.Supplier;
  * @since 1.7.0
  */
 @Experimental
+@NoImplement
 public interface RouterOutputMetadataContext {
 
   /**
@@ -35,5 +39,15 @@ public interface RouterOutputMetadataContext {
    * @return a {@link Supplier} describing the typed message that initially entered the router
    */
   Supplier<MessageMetadataType> getRouterInputMessageType();
+
+  /**
+   * @param parameterName the name of the parameter.
+   * @return the parameter's resolved {@link MetadataType}.
+   * @throws NoSuchElementException     if the parameter doesn't exist in the component.
+   * @throws MetadataResolvingException if there is an issue when computing the type from the current bindings in context.
+   *
+   * @since 1.8
+   */
+  MetadataType getParameterResolvedType(String parameterName) throws NoSuchElementException, MetadataResolvingException;
 
 }

@@ -1,4 +1,26 @@
 {
+  "1.9.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.metadata.RouterOutputMetadataContext",
+          "new": "interface org.mule.runtime.api.metadata.RouterOutputMetadataContext",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "justification": "W-17050998: Interface must not be implemented by third parties. Also, still experimental"
+        },
+        {
+          "ignore": true,
+          "code": "java.annotation.added",
+          "old": "interface org.mule.runtime.api.metadata.ScopeOutputMetadataContext",
+          "new": "interface org.mule.runtime.api.metadata.ScopeOutputMetadataContext",
+          "annotation": "@org.mule.api.annotation.NoImplement",
+          "justification": "W-17050998: Interface must not be implemented by third parties. Also, still experimental"
+        }
+      ]
+    }
+  },
   "1.7.0": {
     "revapi": {
       "ignore": [
