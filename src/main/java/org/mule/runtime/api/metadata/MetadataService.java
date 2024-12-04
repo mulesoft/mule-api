@@ -33,7 +33,8 @@ import java.util.function.Supplier;
  * configuration.
  *
  * @since 1.0
- * @deprecated use Mule Framework's Tooling services instead.
+ * @deprecated since 4.8 use Mule Framework's Tooling services instead. This is only kept for compatibility with the legacy MTS
+ *             support
  */
 @NoImplement
 @Deprecated
