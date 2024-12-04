@@ -33,8 +33,10 @@ import java.util.function.Supplier;
  * configuration.
  *
  * @since 1.0
+ * @deprecated use Mule Framework's Tooling services instead.
  */
 @NoImplement
+@Deprecated
 public interface MetadataService {
 
   /**
