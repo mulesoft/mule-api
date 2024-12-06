@@ -12,9 +12,10 @@ import static org.mule.runtime.api.util.classloader.MuleImplementationLoaderUtil
 import static java.lang.String.format;
 import static java.util.ServiceLoader.load;
 
+import static com.github.benmanes.caffeine.cache.Caffeine.newBuilder;
+
 import org.mule.api.annotation.NoExtend;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
 
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public abstract class AbstractDataTypeBuilderFactory {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataTypeBuilderFactory.class);
 
   private static final LoadingCache<ClassLoader, AbstractDataTypeBuilderFactory> DATA_TYPE_BUILDER_FACTORIES_CACHE =
-      Caffeine.newBuilder()
+      newBuilder()
           .weakKeys()
           .build(classLoader -> {
             final AbstractDataTypeBuilderFactory factory =
