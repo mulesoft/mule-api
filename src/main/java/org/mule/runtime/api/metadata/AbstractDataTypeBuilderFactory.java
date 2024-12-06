@@ -14,6 +14,9 @@ import static java.util.ServiceLoader.load;
 
 import org.mule.api.annotation.NoExtend;
 
+import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.LoadingCache;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,14 +30,21 @@ public abstract class AbstractDataTypeBuilderFactory {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDataTypeBuilderFactory.class);
 
+  private static final LoadingCache<ClassLoader, AbstractDataTypeBuilderFactory> DATA_TYPE_BUILDER_FACTORIES_CACHE =
+      Caffeine.newBuilder()
+          .weakKeys()
+          .build(classLoader -> {
+            final AbstractDataTypeBuilderFactory factory =
+                load(AbstractDataTypeBuilderFactory.class, getMuleImplementationsLoader()).iterator().next();
+            LOGGER.info(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
+                               factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
+
+            return factory;
+          });
+
   private static AbstractDataTypeBuilderFactory loadFactory() {
     try {
-      final AbstractDataTypeBuilderFactory factory =
-          load(AbstractDataTypeBuilderFactory.class, getMuleImplementationsLoader()).iterator().next();
-      LOGGER.info(format("Loaded AbstractDataTypeBuilderFactory implementation '%s' from classloader '%s'",
-                         factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
-
-      return factory;
+      return DATA_TYPE_BUILDER_FACTORIES_CACHE.get(getMuleImplementationsLoader());
     } catch (Throwable t) {
       LOGGER.error("Error loading AbstractDataTypeBuilderFactory implementation.", t);
       throw t;
