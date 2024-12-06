@@ -187,6 +187,11 @@ public interface DataType extends Serializable {
     public int hashCode() {
       return getDelegate().hashCode();
     }
+
+    @Override
+    public String toString() {
+      return getDelegate().toString();
+    }
   }
 
   /**
