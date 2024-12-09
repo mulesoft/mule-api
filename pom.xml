@@ -10,7 +10,7 @@
 
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.8.2-SNAPSHOT</version>
+    <version>1.8.2-rc1</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
