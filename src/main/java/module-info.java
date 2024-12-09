@@ -134,9 +134,6 @@ module org.mule.runtime.api {
   exports org.mule.runtime.privileged.event;
   exports org.mule.runtime.privileged.exception;
 
-  // For runtime-extension-model and extensions-support
-  exports org.mule.runtime.privileged.metadata;
-
   // Internals exposed to test module
   exports org.mule.runtime.internal.exception to
       org.mule.runtime.api.test;
