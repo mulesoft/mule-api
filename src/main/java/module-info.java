@@ -22,8 +22,6 @@ module org.mule.runtime.api {
   requires transitive org.mule.runtime.api.annotations;
   requires org.mule.runtime.metadata.model.api;
   requires org.mule.runtime.metadata.model.message;
-  requires org.mule.runtime.artifact.declaration;
-  requires org.mule.runtime.artifact.declaration.persistence;
   
   requires jakarta.activation;
   requires java.naming;
@@ -41,7 +39,6 @@ module org.mule.runtime.api {
   requires org.apache.commons.lang3;
   requires semver4j;
   
-  exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
   exports org.mule.runtime.api.bulk;
   exports org.mule.runtime.api.util.classloader;
