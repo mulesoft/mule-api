@@ -1,4 +1,28 @@
 {
+  "1.8.2": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.method.added",
+          "new": "method java.io.InputStream org.mule.runtime.api.util.IOUtils::getInputStreamWithCacheControl(java.net.URL) throws java.io.IOException",
+          "justification": "W-17050930: Plugin JAR file can't be deleted in Windows."
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_COMMIT_ON_REDELIVERY_EXHAUSTED",
+          "justification": "W-17403761: Redelivery Policy - infinite loop when the redelivery is exhausted in a source configured with transactions and On Error Propagate"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.privileged.metadata.InternalMetadataContext",
+          "justification": "W-17050998: Cleaning up privileged APIs no longer needed"
+        }
+      ]
+    }
+  },
   "1.7.0": {
     "revapi": {
       "ignore": [
