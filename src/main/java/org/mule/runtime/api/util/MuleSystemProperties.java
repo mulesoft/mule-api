@@ -928,6 +928,15 @@ public final class MuleSystemProperties {
   public static final String COMMIT_REDELIVERY_EXHAUSTED = SYSTEM_PROPERTY_PREFIX + "commit.on.redelivery.exhausted";
 
   /**
+   * When set to true, transactions started by sources won't be committed in case of a redelivery exhausted error.
+   *
+   * @since 4.9.0, 4.8.2, 4.6.10
+   */
+  @KillSwitch
+  public static final String DISABLE_COMMIT_ON_REDELIVERY_EXHAUSTED =
+      SYSTEM_PROPERTY_PREFIX + "disable.commit.on.redelivery.exhausted";
+
+  /**
    * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
    *
    * @since 4.5.0
