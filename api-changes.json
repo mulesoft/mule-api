@@ -1,4 +1,16 @@
 {
+  "1.9.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.class.removed",
+          "old": "interface org.mule.runtime.privileged.metadata.InternalMetadataContext",
+          "justification": "W-17050998: Cleaning up privileged APIs no longer needed"
+        }
+      ]
+    }
+  },
   "1.7.0": {
     "revapi": {
       "ignore": [
