@@ -32,8 +32,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
-import jakarta.activation.MimeType;
-import jakarta.activation.MimeTypeParseException;
+import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 
 import com.github.benmanes.caffeine.cache.Cache;
 
