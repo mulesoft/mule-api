@@ -117,7 +117,7 @@
         <artifactDeclarationVersion>1.10.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.10.0-SNAPSHOT</muleModuleMavenPluginVersion>
 
-        <caffeine.java8.version>2.9.3</caffeine.java8.version>
+        <caffeine.java8.version>3.1.8</caffeine.java8.version>
         
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
