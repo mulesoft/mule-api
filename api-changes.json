@@ -1,4 +1,16 @@
 {
+  "1.6.11": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_COMMIT_ON_REDELIVERY_EXHAUSTED",
+          "justification": "W-17403761: Redelivery Policy - infinite loop when the redelivery is exhausted in a source configured with transactions and On Error Propagate"
+        }
+      ]
+    }
+  },
   "1.6.10": {
     "revapi": {
       "ignore": [
