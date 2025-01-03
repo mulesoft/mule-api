@@ -14,6 +14,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.DEFAULT_ERROR_HANDL
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_APPLY_OBJECT_PROCESSOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_ATTRIBUTE_PARAMETER_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_JMX_FOR_COMMONS_POOL2_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_POJO_TEXT_CDATA_WHITESPACE_TRIMMING_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_REGISTRY_BOOTSTRAP_OPTIONAL_ENTRIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.DISABLE_SCHEDULER_LOGGING_PROPERTY;
@@ -539,7 +540,13 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state. "
           + "This will only apply to Standalone/Hybrid deployments.",
       "W-15750334",
-      "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
+      "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY),
+
+  DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE(
+      "When disabled, dynamic resolution of notification handling will not happen after the mule artifact is initialized. "
+          + "This can result in race conditions that can affect monitoring metrics.",
+      "W-16828516",
+      "", DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY);
 
   private final String description;
   private final String issueId;
