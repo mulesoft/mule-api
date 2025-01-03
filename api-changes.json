@@ -1,4 +1,22 @@
 {
+  "1.9.1": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE",
+          "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY",
+          "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
+        }
+      ]
+    }
+  },
   "1.9.0": {
     "revapi": {
       "ignore": [
