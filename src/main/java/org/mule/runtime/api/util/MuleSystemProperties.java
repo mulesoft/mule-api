@@ -887,6 +887,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "honour.persisted.flow.state";
 
   /**
+   * When disabled, dynamic resolution of notification handling will not happen after the mule artifact is initialized. This can
+   * result in race conditions that can affect monitoring metrics.
+   *
+   * @since 4.6.11
+   */
+  public static final String DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "disable.optimised.notification.handler.dynamic.resolution.update.based.on.delegate";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
