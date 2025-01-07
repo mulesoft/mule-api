@@ -7,6 +7,7 @@ upstreamProjects:
 projectType: runtime
 mavenTool: "3.9.9"
 jdkTool: OPEN-JDK17
+changeCaseType: dryrun
 additionalTestConfigs:
   jdk8:
     testJdkTool: OPEN-JDK8
