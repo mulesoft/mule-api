@@ -130,6 +130,7 @@ public interface DataType extends Serializable {
     private final Supplier<DataType> delegateSupplier;
     private final DataType delegate;
     private transient Map<ClassLoader, DataType> cache = new ConcurrentHashMap<>();
+    private transient int hashCode = 0;
 
     public DynamicDelegateDataType(Supplier<DataType> delegateSupplier) {
       this.delegateSupplier = delegateSupplier;
@@ -185,7 +186,20 @@ public interface DataType extends Serializable {
 
     @Override
     public int hashCode() {
-      return getDelegate().hashCode();
+      if (isResolveMuleImplementationLoadersDynamically()) {
+        if (hashCode == 0) {
+          hashCode = getDelegate().hashCode();
+        }
+
+        return hashCode;
+      } else {
+        return getDelegate().hashCode();
+      }
+    }
+
+    @Override
+    public String toString() {
+      return getDelegate().toString();
     }
   }
 

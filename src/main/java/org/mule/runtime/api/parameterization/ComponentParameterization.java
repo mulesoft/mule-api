@@ -6,9 +6,6 @@
  */
 package org.mule.runtime.api.parameterization;
 
-import java.util.Map;
-import java.util.Optional;
-
 import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.component.ComponentIdentifier;
@@ -17,6 +14,9 @@ import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
 import org.mule.runtime.api.util.Pair;
 import org.mule.runtime.internal.parameterization.ComponentParameterizationBuilder;
+
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Represents a specific configuration for a concrete {@link ParameterizedModel}.
@@ -44,7 +44,6 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
    * @param paramName      the name of the parameter within the group
    * @return the value of the parameter.
    */
-  // TODO W-11214395 determine how complex parameters will be represented.
   Object getParameter(String paramGroupName, String paramName);
 
   /**
@@ -54,7 +53,6 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
    * @param param      the model of the parameter within the group
    * @return the value of the parameter.
    */
-  // TODO W-11214395 determine how complex parameters will be represented.
   Object getParameter(ParameterGroupModel paramGroup, ParameterModel param);
 
   /**
@@ -64,7 +62,6 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
    * 
    * @return the parameters as a map.
    */
-  // TODO W-11214395 determine how complex parameters will be represented.
   Map<Pair<ParameterGroupModel, ParameterModel>, Object> getParameters();
 
   /**
@@ -79,10 +76,8 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
   /**
    * Callback to be used with {@link ComponentParameterization#forEachParameter(ParameterAction)}.
    */
-  // TODO W-11214395 convert this into a visitor with a different method for each param type?
   public interface ParameterAction {
 
-    // TODO W-11214395 determine how complex parameters will be represented.
     void accept(ParameterGroupModel paramGroup, ParameterModel param, Object paramValue);
   }
 
