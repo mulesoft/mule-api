@@ -45,6 +45,8 @@ module org.mule.runtime.api.test {
   exports org.mule.runtime.api.test.message.error.matcher;
   exports org.mule.runtime.api.test.meta;
   exports org.mule.runtime.api.test.meta.model;
+  exports org.mule.runtime.api.test.meta.model.connection;
+  exports org.mule.runtime.api.test.meta.model.deprecated;
   exports org.mule.runtime.api.test.meta.model.declaration.fuent;
   exports org.mule.runtime.api.test.meta.model.tck;
   exports org.mule.runtime.api.test.meta.model.util;
