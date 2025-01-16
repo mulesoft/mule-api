@@ -133,7 +133,7 @@
         <muleApiAnnotationsVersion>1.5.12</muleApiAnnotationsVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
-        <muleBomVersion>4.6.11-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.6.11</muleBomVersion>
         <jsonassert.version>1.5.2</jsonassert.version>
     </properties>
 
