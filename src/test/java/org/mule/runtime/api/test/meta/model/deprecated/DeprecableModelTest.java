@@ -6,8 +6,9 @@
  */
 package org.mule.runtime.api.test.meta.model.deprecated;
 
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.mockito.Mockito.mock;
 
 import org.mule.runtime.api.meta.model.deprecated.DeprecableModel;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
@@ -31,7 +32,7 @@ public class DeprecableModelTest {
     DeprecableModel deprecableModel = new TestDeprecableModel(Optional.of(deprecationModel));
     boolean isDeprecated = deprecableModel.isDeprecated();
 
-    assertTrue("isDeprecated should return true when a deprecation model is present", isDeprecated);
+    assertThat("isDeprecated should return true when a deprecation model is present", isDeprecated, is(true));
   }
 
   private static class TestDeprecableModel implements DeprecableModel {

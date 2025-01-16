@@ -7,7 +7,8 @@
 package org.mule.runtime.api.test.meta.model.connection;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.mule.runtime.api.meta.model.connection.ConnectionManagementType;
 
