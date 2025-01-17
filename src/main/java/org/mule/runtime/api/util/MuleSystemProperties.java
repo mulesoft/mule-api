@@ -896,6 +896,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "disable.optimised.notification.handler.dynamic.resolution.update.based.on.delegate";
 
   /**
+   * When enabled, body contents will not be sent on NTLM type 1 requests. This saves resources by not sending a payload that will
+   * never be consumed (the server will reject it until the dance is completed).
+   *
+   * @since 4.9.0, 4.8.4, 4.6.12
+   */
+  public static final String NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY =
+    SYSTEM_PROPERTY_PREFIX + "ntlm.avoid.send.payload.on.type1";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
