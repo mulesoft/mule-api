@@ -31,6 +31,7 @@ public final class MuleVersion {
   public static final MuleVersion v4_6_1 = new MuleVersion("4.6.1");
   public static final MuleVersion v4_7_0 = new MuleVersion("4.7.0");
   public static final MuleVersion v4_8_0 = new MuleVersion("4.8.0");
+  public static final MuleVersion v4_9_0 = new MuleVersion("4.9.0");
 
   private Semver semver;
 

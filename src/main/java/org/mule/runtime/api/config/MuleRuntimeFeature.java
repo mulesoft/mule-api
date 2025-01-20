@@ -38,6 +38,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_RESERVED_PRO
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_PRINT_DETAILED_COMPOSITE_EXCEPTION_LOG_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC;
+import static org.mule.runtime.api.util.MuleSystemProperties.NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
@@ -546,7 +547,12 @@ public enum MuleRuntimeFeature implements Feature {
       "When disabled, dynamic resolution of notification handling will not happen after the mule artifact is initialized. "
           + "This can result in race conditions that can affect monitoring metrics.",
       "W-16828516",
-      "", DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY);
+      "", DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY),
+
+  NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1(
+      "When enabled, body contents will not be sent on NTLM type 1 requests. This saves resources by not sending a payload that will never be consumed (the server will reject it until the dance is completed).",
+      "W-17107281",
+      "4.9.0", NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY);
 
   private final String description;
   private final String issueId;
