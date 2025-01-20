@@ -23,6 +23,18 @@
         {
           "ignore": true,
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY",
+          "justification": "W-17216089: Feature flag to avoid sending body on NTLM type 1 requests."
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1",
+          "justification": "W-17216089: Feature flag to avoid sending body on NTLM type 1 requests."
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_COMMIT_ON_REDELIVERY_EXHAUSTED",
           "justification": "W-17403761: Redelivery Policy - infinite loop when the redelivery is exhausted in a source configured with transactions and On Error Propagate"
         }
