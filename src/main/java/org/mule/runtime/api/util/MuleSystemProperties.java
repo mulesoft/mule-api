@@ -902,7 +902,7 @@ public final class MuleSystemProperties {
    * @since 4.9.0, 4.8.4, 4.6.12
    */
   public static final String NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY =
-    SYSTEM_PROPERTY_PREFIX + "ntlm.avoid.send.payload.on.type1";
+      SYSTEM_PROPERTY_PREFIX + "ntlm.avoid.send.payload.on.type1";
 
   /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
