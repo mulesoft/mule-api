@@ -1,4 +1,22 @@
 {
+  "1.6.12": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE",
+          "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
+        },
+        {
+        "ignore": true,
+        "code": "java.field.addedStaticField",
+        "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY",
+        "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
+        }
+      ]
+    }
+  },
   "1.6.11": {
     "revapi": {
       "ignore": [
@@ -7,18 +25,6 @@
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_COMMIT_ON_REDELIVERY_EXHAUSTED",
           "justification": "W-17403761: Redelivery Policy - infinite loop when the redelivery is exhausted in a source configured with transactions and On Error Propagate"
-        },
-        {
-          "ignore": true,
-          "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE",
-          "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
-        },
-        {
-          "ignore": true,
-          "code": "java.field.addedStaticField",
-          "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY",
-          "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
         }
       ]
     }
