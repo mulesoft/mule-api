@@ -13,13 +13,7 @@
         "code": "java.field.addedStaticField",
         "new": "field org.mule.runtime.api.util.MuleSystemProperties.DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY",
         "justification": "W-16828516: Race condition that affects monitoring. Everything has a default."
-        }
-      ]
-    }
-  },
-  "1.6.11": {
-    "revapi": {
-      "ignore": [
+        },
         {
           "ignore": true,
           "code": "java.field.addedStaticField",
@@ -31,7 +25,13 @@
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1",
           "justification": "W-17216089: Feature flag to avoid sending body on NTLM type 1 requests."
-        },
+        }
+      ]
+    }
+  },
+  "1.6.11": {
+    "revapi": {
+      "ignore": [
         {
           "ignore": true,
           "code": "java.field.addedStaticField",
