@@ -125,7 +125,7 @@
         <oldMuleArtifactVersion>1.7.0-rc1</oldMuleArtifactVersion>
         <muleApiAnnotationsVersion>1.8.0-rc4</muleApiAnnotationsVersion>
 
-        <muleBomVersion>4.9.0-rc3</muleBomVersion>
+        <muleBomVersion>4.9.0-rc4</muleBomVersion>
     </properties>
 
     <dependencyManagement>
