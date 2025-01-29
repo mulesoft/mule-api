@@ -8,6 +8,7 @@ projectType: runtime
 mavenTool: "3.9.9"
 jdkTool: OPEN-JDK17
 NA101ConfigItem: true
+changeCaseType: dryrun
 additionalTestConfigs:
   jdk8:
     testJdkTool: OPEN-JDK8
