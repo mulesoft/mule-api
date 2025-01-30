@@ -1,4 +1,52 @@
 {
+  "1.8.5": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.method.defaultMethodAddedToInterface",
+          "new": "method java.util.List<org.mule.runtime.api.el.validation.ConstraintViolation> org.mule.runtime.api.el.ExpressionLanguage::validate(java.lang.String, java.lang.String, org.mule.runtime.api.el.validation.ValidationPhase, org.mule.metadata.message.api.el.TypeBindings, java.util.Optional<org.mule.metadata.api.model.MetadataType>)",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "interface org.mule.runtime.api.el.validation.ConstraintViolation",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.el.validation.GenericConstraintViolation",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "enum org.mule.runtime.api.el.validation.ValidationPhase",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.el.validation.constraints.CloseDoesNotAllowExtraPropertiesConstraintValidation",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.el.validation.constraints.DeprecatedFeatureConstraintValidation",
+          "justification": "W-16497173: EL Validation API"
+        },
+        {
+          "ignore": true,
+          "code": "java.class.added",
+          "new": "class org.mule.runtime.api.el.validation.constraints.PropertyNotDefinedConstraintValidation",
+          "justification": "W-16497173: EL Validation API"
+        }
+      ]
+    }
+  },
   "1.8.3": {
     "revapi": {
       "ignore": [
