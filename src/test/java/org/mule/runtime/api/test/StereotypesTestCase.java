@@ -11,8 +11,13 @@ import static org.mule.runtime.api.meta.model.stereotype.StereotypeModelBuilder.
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.Is.isA;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertThrows;
 
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
+
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -54,5 +59,27 @@ public class StereotypesTestCase {
 
     StereotypeModel otherLeaf = newStereotype("other", "A").withParent(midA).build();
     assertThat(leafA.isAssignableTo(otherLeaf), is(false));
+  }
+
+  @Test
+  public void assignableShouldNotBeNull() {
+    assertThrows(IllegalArgumentException.class, () -> midA.isAssignableTo(null));
+  }
+
+  @Test
+  public void stereotypePropertiesShouldNotBeNull() {
+    assertThat(rootA.getType(), is("ROOT"));
+    assertThat(rootA.getNamespace(), is("A"));
+    assertThat(rootA.getParent(), isA(Optional.class));
+  }
+
+  @Test
+  public void stereotypeHashCodeShouldNotBeNull() {
+    assertThat(midA.hashCode(), notNullValue());
+  }
+
+  @Test
+  public void stereotypeToStringShouldNotBeNull() {
+    assertThat(midA.toString(), notNullValue());
   }
 }
