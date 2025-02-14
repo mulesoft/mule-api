@@ -113,7 +113,7 @@
         <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
-        <artifactDeclarationVersion>1.8.4</artifactDeclarationVersion>
+        <artifactDeclarationVersion>1.8.5</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.8.4</muleModuleMavenPluginVersion>
 
         <junitVersion>4.13.2</junitVersion>
