@@ -30,6 +30,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAI
 import static org.mule.runtime.api.util.MuleSystemProperties.ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FOREACH_ROUTER_REJECTS_MAP_EXPRESSIONS_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_ERROR_MAPPINGS_WHEN_POLICY_APPLIED_ON_OPERATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
@@ -552,7 +553,12 @@ public enum MuleRuntimeFeature implements Feature {
   NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1(
       "When enabled, body contents will not be sent on NTLM type 1 requests. This saves resources by not sending a payload that will never be consumed (the server will reject it until the dance is completed).",
       "W-17107281",
-      "4.9.0", NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY);
+      "4.9.0", NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY),
+
+  FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT(
+      "When enabled, the processors that perform fork and join work (currently Scatter Gather and Parallel For Each), will take care of completing the child event contexts when there is a timeout.",
+      "W-16941297",
+      "4.10.0", FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY);
 
   private final String description;
   private final String issueId;
