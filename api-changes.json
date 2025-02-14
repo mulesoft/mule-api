@@ -1,4 +1,28 @@
 {
+  "1.9.2": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT",
+          "justification": "W-16941297: Feature flag"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY",
+          "justification": "W-16941297: Feature flag"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.meta.MuleVersion.v4_10_0",
+          "justification": "W-16941297: Feature flag"
+        }
+      ]
+    }
+  },
   "1.9.1": {
     "revapi": {
       "ignore": [
