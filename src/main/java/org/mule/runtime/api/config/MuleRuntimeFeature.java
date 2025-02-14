@@ -18,6 +18,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.ENABLE_PROFILING_SE
 import static org.mule.runtime.api.util.MuleSystemProperties.ENTITY_RESOLVER_FAIL_ON_FIRST_ERROR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.ERROR_AND_ROLLBACK_TX_WHEN_TIMEOUT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.FORCE_RUNTIME_PROFILING_CONSUMERS_ENABLEMENT_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HANDLE_SPLITTER_EXCEPTION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_INSECURE_TLS_CONFIGURATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.HONOUR_PERSISTED_FLOW_STATE_PROPERTY;
@@ -353,7 +354,12 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_PERSISTED_FLOW_STATE(
       "When enabled, flows will honour the state configured in flows.deployment.properties when restarting the app, regardless of the initial state.",
-      "W-15750334", "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY);
+      "W-15750334", "4.8.0", HONOUR_PERSISTED_FLOW_STATE_PROPERTY),
+
+  FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT(
+      "When enabled, the processors that perform fork and join work (currently Scatter Gather and Parallel For Each), will take care of completing the child event contexts when there is a timeout.",
+      "W-16941297",
+      "4.10.0", FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY);
 
   private final String description;
   private final String issueId;
