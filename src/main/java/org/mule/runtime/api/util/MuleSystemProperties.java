@@ -905,6 +905,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "ntlm.avoid.send.payload.on.type1";
 
   /**
+   * When enabled, the processors that perform fork and join work (currently Scatter Gather and Parallel For Each), will take care
+   * of completing the child event contexts when there is a timeout.
+   *
+   * @since 4.10.0, 4.9.2, 4.6.14, 4.4.0-202503
+   */
+  public static final String FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "forkJoin.completeChildContextsOnTimeout";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
