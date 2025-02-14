@@ -138,7 +138,7 @@
         <semver4jVersion>3.1.0</semver4jVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
-        <muleBomVersion>4.4.0-20250124</muleBomVersion>
+        <muleBomVersion>4.4.0-20250213</muleBomVersion>
     </properties>
 
     <dependencyManagement>
