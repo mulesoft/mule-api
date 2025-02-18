@@ -104,8 +104,8 @@ public class SuppressedMuleExceptionTestCase {
                                                   ExceptionWithAdditionalInfo.class);
     List<MuleException> suppressions = ((MuleException) suppressedAnotherTestException).getExceptionInfo().getSuppressedCauses();
     assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedAnotherTestException).getSuppressedException()),
-                        sameInstance(((SuppressedMuleException) suppressedTestException).getSuppressedException())));
+               contains(sameInstance(((SuppressedMuleException) suppressedAnotherTestException).obtainSuppressedException()),
+                        sameInstance(((SuppressedMuleException) suppressedTestException).obtainSuppressedException())));
   }
 
   @Test
@@ -115,7 +115,7 @@ public class SuppressedMuleExceptionTestCase {
     assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
     List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
     assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).obtainSuppressedException())));
   }
 
   @Test
@@ -125,7 +125,7 @@ public class SuppressedMuleExceptionTestCase {
     assertThat(suppressedSelfCausedException, is(instanceOf(SuppressedMuleException.class)));
     List<MuleException> suppressions = ((MuleException) suppressedSelfCausedException).getExceptionInfo().getSuppressedCauses();
     assertThat(suppressions,
-               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).getSuppressedException())));
+               contains(sameInstance(((SuppressedMuleException) suppressedSelfCausedException).obtainSuppressedException())));
   }
 
   @Test
