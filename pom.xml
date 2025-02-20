@@ -6,7 +6,7 @@
     <version>1.6.15-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
-    <description>API for Mule Runtime</description>
+    <description>API for Mule Runtime TEST-4.9.3-SNAPSHOT-UPDATE-4.9.x</description>
     <url>https://github.com/mulesoft/mule-api</url>
     <organization>
         <name>MuleSoft, Inc.</name>
