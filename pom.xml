@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.6.14-SNAPSHOT</version>
+    <version>1.6.15-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -107,8 +107,8 @@
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
         <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <artifactDeclarationVersion>1.6.14-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.5.15-SNAPSHOT</muleModuleMavenPluginVersion>
+        <artifactDeclarationVersion>1.6.15-SNAPSHOT</artifactDeclarationVersion>
+        <muleModuleMavenPluginVersion>1.5.16-SNAPSHOT</muleModuleMavenPluginVersion>
         <hamcrestVersion>2.2</hamcrestVersion>
         <xDocLint>-Xdoclint:none</xDocLint>
         <javaFormatter.plugin.version>2.14.0</javaFormatter.plugin.version>
@@ -128,12 +128,12 @@
         <allure.maven.plugin.version>2.12.0</allure.maven.plugin.version>
         <jacoco.version>0.8.10</jacoco.version>
         <maven.enforcer.plugin.version>1.4.1</maven.enforcer.plugin.version>
-        <oldMuleArtifactVersion>1.6.12-rc1</oldMuleArtifactVersion>
-        <muleRevapiExtensionVersion>1.6.15-SNAPSHOT</muleRevapiExtensionVersion>
-        <muleApiAnnotationsVersion>1.5.15-SNAPSHOT</muleApiAnnotationsVersion>
+        <oldMuleArtifactVersion>1.6.14-rc1</oldMuleArtifactVersion>
+        <muleRevapiExtensionVersion>1.6.16-SNAPSHOT</muleRevapiExtensionVersion>
+        <muleApiAnnotationsVersion>1.5.16-SNAPSHOT</muleApiAnnotationsVersion>
         <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version>
         <maven.site.plugin.version>3.9.0</maven.site.plugin.version>
-        <muleBomVersion>4.6.14-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.6.15-SNAPSHOT</muleBomVersion>
         <jsonassert.version>1.5.2</jsonassert.version>
     </properties>
 
