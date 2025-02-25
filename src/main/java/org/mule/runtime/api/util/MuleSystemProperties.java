@@ -727,6 +727,14 @@ public final class MuleSystemProperties {
   public static final String FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "forkJoin.completeChildContextsOnTimeout";
 
+  /**
+   * When enabled, the installed UBP server plugin will be started and pricing metrics will be collected.
+   *
+   * @since 4.10.0
+   */
+  public static final String FORCE_ENABLED_UBP_SERVER_PLLUGIN_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "force.enabled.ubp.server.plugin";
+
   // <<<<<<<<<<
 
   // >>>>>>>>>>
