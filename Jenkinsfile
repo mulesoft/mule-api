@@ -1,2 +1,2 @@
-@Library('mule-runtime-library@W-17808758-CC-before-uploading-prod')_
+@Library('mule-runtime-library@integration/W-17808758-cc-before-uploading')_
 runtimeBuild()
