@@ -117,6 +117,8 @@
         <artifactDeclarationVersion>1.10.0-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.10.0-SNAPSHOT</muleModuleMavenPluginVersion>
 
+        <javax.inject.version>1</javax.inject.version>
+
         <caffeine.java8.version>2.9.3</caffeine.java8.version>
         
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
@@ -143,6 +145,13 @@
                 <version>${muleBomVersion}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Added for compatibility with javax.inject aling with jakarta.inject -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>${javax.inject.version}</version>
             </dependency>
 
             <!-- Ensure this artifact still works with Java 8 -->
@@ -181,6 +190,10 @@
         <dependency>
             <groupId>jakarta.inject</groupId>
             <artifactId>jakarta.inject-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
         </dependency>
 
         <dependency>
