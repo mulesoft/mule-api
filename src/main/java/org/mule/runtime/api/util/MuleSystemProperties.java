@@ -30,6 +30,8 @@ public final class MuleSystemProperties {
 
   public static final String SYSTEM_PROPERTY_PREFIX = "mule.";
 
+  public static final String SOME_NEW_PROPERTY = "some.new";
+
   public static final String MULE_CONTEXT_PROPERTY = SYSTEM_PROPERTY_PREFIX + "context";
   public static final String MULE_ENCODING_SYSTEM_PROPERTY = SYSTEM_PROPERTY_PREFIX + "encoding";
 
