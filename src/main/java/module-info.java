@@ -25,10 +25,10 @@ module org.mule.runtime.api {
   requires org.mule.runtime.artifact.declaration;
   requires org.mule.runtime.artifact.declaration.persistence;
   
+  requires jakarta.activation;
   requires java.naming;
   requires java.sql;
-  requires jakarta.activation;
-  requires transitive jakarta.inject;
+  requires transitive java.inject;
   
   // SLF4J is the API provided by the Mule Runtime
   // for artifacts to use the underlying logging functionality
@@ -41,7 +41,6 @@ module org.mule.runtime.api {
   requires org.apache.commons.lang3;
   requires semver4j;
   
-  exports javax.inject;
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
   exports org.mule.runtime.api.bulk;

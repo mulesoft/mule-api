@@ -401,29 +401,6 @@
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <!-- Old Java EE dependencies, kept for backwards compatibility -->
-                                <artifactItem>
-                                    <groupId>javax.inject</groupId>
-                                    <artifactId>javax.inject</artifactId>
-                                    <version>1</version>
-                                    <outputDirectory>${project.build.outputDirectory}</outputDirectory>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
             </plugin>
             <plugin>
