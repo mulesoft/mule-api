@@ -28,7 +28,7 @@ module org.mule.runtime.api {
   requires jakarta.activation;
   requires java.naming;
   requires java.sql;
-  requires transitive jakarta.inject;
+  requires transitive java.inject;
   // Old Java EE dependencies (with javax package prefix), kept for backwards compatibility
   requires transitive javax.inject;
   
