@@ -28,7 +28,9 @@ module org.mule.runtime.api {
   requires jakarta.activation;
   requires java.naming;
   requires java.sql;
-  requires transitive java.inject;
+  requires transitive jakarta.inject;
+  // Old Java EE dependencies (with javax package prefix), kept for backwards compatibility
+  requires transitive javax.inject;
   
   // SLF4J is the API provided by the Mule Runtime
   // for artifacts to use the underlying logging functionality
