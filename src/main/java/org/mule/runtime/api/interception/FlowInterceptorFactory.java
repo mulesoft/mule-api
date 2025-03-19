@@ -14,8 +14,8 @@ import java.util.function.Supplier;
 /**
  * Abstract Factory for creating {@link FlowInterceptor} instances.
  * <p>
- * Implementations may have fields annotated with {@link javax.inject.Inject @Inject}, which will be resolved before attempting to
- * call {@link #get()}.
+ * Implementations may have fields annotated with {@link jakarta.inject.Inject @Inject}, which will be resolved before attempting
+ * to call {@link #get()}.
  *
  * @since 1.4
  */

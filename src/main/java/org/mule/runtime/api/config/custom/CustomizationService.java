@@ -38,6 +38,7 @@ public interface CustomizationService {
    * @param <T>         the service type
    * @deprecated since 1.6, use {@link #interceptDefaultServiceImpl(String, Consumer)}.
    */
+  @Deprecated
   <T> void overrideDefaultServiceImpl(String serviceId, T serviceImpl);
 
   /**
@@ -88,7 +89,7 @@ public interface CustomizationService {
    * Allows to override a service provided by default on a mule context. The provided class will be used to instantiate the
    * service that replaces the default one if it's replacing an existent service.
    * <p>
-   * The service class can be annotated with {@code javax.inject.Inject} and implement methods from {@link Lifecycle}.
+   * The service class can be annotated with {@code jakarta.inject.Inject} and implement methods from {@link Lifecycle}.
    *
    * @param serviceId    identifier of the services implementation to customize.
    * @param serviceClass the service class
@@ -113,7 +114,7 @@ public interface CustomizationService {
    * Allows to define a custom service on a mule context. The provided class will be used to instantiate the service that replaces
    * the default one if it's replacing an existent service.
    * <p>
-   * The service class can be annotated with {@code javax.inject.Inject} and implement methods from {@link Lifecycle}.
+   * The service class can be annotated with {@code jakarta.inject.Inject} and implement methods from {@link Lifecycle}.
    *
    * @param serviceId    identifier of the services implementation to register. Non empty.
    * @param serviceClass the service class. Non null.

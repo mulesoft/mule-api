@@ -14,7 +14,7 @@ import java.util.Optional;
 /**
  * Interface to access artifact objects.
  * <p>
- * {@link javax.inject.Inject} must should be the preferred option to access artifact services like
+ * {@link jakarta.inject.Inject} must be the preferred option to access artifact services like
  * {@link org.mule.runtime.api.store.ObjectStoreManager}, {@link org.mule.runtime.api.serialization.ObjectSerializer}, etc.
  * 
  * @since 1.0
