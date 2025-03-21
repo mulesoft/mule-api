@@ -20,8 +20,9 @@ import org.mule.runtime.api.meta.NamedObject;
  * Service implementations can implement lifecycle interfaces {@link Startable} and {@link Stoppable}. Lifecycle will be applied
  * when the container is started/stopped.
  * <p>
- * Implementations may overload methods from the Service interface with {@link javax.inject.Inject @Inject} and add any parameters
- * to be resolved from the Mule application context. When such invocation is made, those injected parameters cannot be null.
+ * Implementations may overload methods from the Service interface with {@link jakarta.inject.Inject @Inject} and add any
+ * parameters to be resolved from the Mule application context. When such invocation is made, those injected parameters cannot be
+ * null.
  *
  * @since 1.0
  */
