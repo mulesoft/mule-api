@@ -8,7 +8,7 @@ global:
     event: always
     on-production-branches-only: true
     slack-channels:
-      - gateway-bot
+      - D19NN7B96 # direct message Alejandro Nosenzo
 
 stages:
   precheck:
