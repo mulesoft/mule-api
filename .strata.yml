@@ -3,7 +3,7 @@ global:
   email-only-last-committer-on-dev-branch: true
   production-branches:
     - master
-    - W-18021352-TEST-STRATA
+    - W-18021352-TEST-STRATA-2
   notifications:
     event: always
     on-production-branches-only: true
