@@ -11,52 +11,12 @@ global:
       - D19NN7B96 # direct message Alejandro Nosenzo
 
 stages:
-  precheck:
-    - step:
-        name: snapshot-check
-        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_rhel9:85
-        when:
-          - operator: EQ
-            value: $$IS_PRODUCTION_BRANCH
-            other: "true"
-          - operator: NEQ
-            value: $$BRANCH_NAME
-            other: develop
-        commands:
-          - dnf install -y -q xmlstarlet
-          - bash script/check-snapshots.sh
-
   build:
+    # this user-defined step provides build/utest coverage for the repo
     - step:
-        name: unit-test
-        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_rhel9_java_build/java8:202
-        environment:
-          - name: NEXUS_BASE_URL
-          - name: NEXUS_USERNAME
-          - name: NEXUS_PASSWORD
+        name: mvn-test
+        # a list of available and approved images can be found here:
+        # https://confluence.internal.salesforce.com/display/ZEN/Docker+Images
+        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_centos7_java_build
         commands:
-          - mvn --no-transfer-progress --show-version --settings settings.xml clean install
-
-  package:
-    - docker-build
-
-  integration-test:
-    - sonarqube:
-        enabled: false
-
-  publish:
-    - docker-push
-    - step:
-        name: create-git-tag
-        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_rhel9_devel:49
-        when:
-          - operator: EQ
-            value: $$IS_PRODUCTION_BRANCH
-            other: "true"
-          - operator: NEQ
-            value: $$BRANCH_NAME
-            other: develop
-        environment:
-          - name: SFCI_PRODUCTION_BRANCH_BUILD_VERSION
-        commands:
-          - git tag -f "v${SFCI_PRODUCTION_BRANCH_BUILD_VERSION}"
+          - mvn verify
