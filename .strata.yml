@@ -12,11 +12,14 @@ global:
 
 stages:
   build:
-    # this user-defined step provides build/utest coverage for the repo
     - step:
-        name: mvn-test
+        name: mvn-build
         # a list of available and approved images can be found here:
         # https://confluence.internal.salesforce.com/display/ZEN/Docker+Images
-        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_centos7_java_build
+        image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_centos7_java_build:latest
         commands:
-          - mvn verify
+          - rm -rf /root/.m2/repository/
+          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
+          - mvn install
+  publish:
+    - maven-publish
