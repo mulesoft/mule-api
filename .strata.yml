@@ -23,7 +23,7 @@ stages:
           - name: NEXUS_PASSWORD
         commands:
           - git --version
-          - dnf module install -y maven:3.9
+          - dnf module install -y maven
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
           - mvn --no-transfer-progress --show-version --settings settings.xml clean install
