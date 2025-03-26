@@ -19,7 +19,7 @@
         <mirror>
             <id>nexus</id>
             <mirrorOf>*,!project</mirrorOf>
-            <url>${env.NEXUS_BASE_URL}/groups/public</url>
+            <url>${env.NEXUS_BASE_URL}/groups/mulesoft-maven-all</url>
         </mirror>
     </mirrors>
 
