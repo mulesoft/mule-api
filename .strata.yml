@@ -22,6 +22,8 @@ stages:
           - name: NEXUS_USERNAME
           - name: NEXUS_PASSWORD
         commands:
+          - git --version
+          -
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
           - mvn -show-version --settings settings.xml clean install
