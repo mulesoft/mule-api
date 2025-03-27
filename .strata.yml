@@ -24,6 +24,7 @@ stages:
         commands:
           - git --version
           - dnf module install -y maven
+          - sudo dnf install maven
           - dnf module list maven*
           # test 2
           #          - rm -rf /root/.m2/repository/
