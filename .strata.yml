@@ -9,6 +9,7 @@ global:
     on-production-branches-only: true
     slack-channels:
       - D19NN7B96 # direct message Alejandro Nosenzo
+  enable-concurrent-builds: false
 
 stages:
   build:
@@ -23,6 +24,7 @@ stages:
           - name: NEXUS_PASSWORD
         commands:
           - git --version
+          - wget https://downloads.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
 # The only available version is maven 3.8.5 so we are going to use sdkman
 #          - dnf update
 #          - dnf search --showduplicates maven
