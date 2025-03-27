@@ -106,7 +106,14 @@ public abstract class AbstractServerNotification extends EventObject implements 
 
   @Override
   public String toString() {
-    return getEventName() + "{" + "action=" + getActionName(action) + ", resourceId=" + resourceIdentifier + ", serverId="
+    String actionName;
+    try {
+      actionName = getActionName(action);
+    } catch (IllegalArgumentException e) {
+      actionName = NO_ACTION_NAME;
+    }
+
+    return getEventName() + "{" + "action=" + actionName + ", resourceId=" + resourceIdentifier + ", serverId="
         + serverId + ", timestamp=" + timestamp + "}";
   }
 
