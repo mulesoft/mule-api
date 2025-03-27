@@ -24,9 +24,10 @@ stages:
         commands:
           - git --version
           - sudo dnf update
+          - dnf search --showduplicates maven
           - dnf module install -y maven
           - sudo dnf install maven
-          - dnf module list maven*
+          - dnf module list maven
           # test 2
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
