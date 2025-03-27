@@ -24,6 +24,7 @@ stages:
         commands:
           - git --version
           - dnf module install -y maven
+          - dnf module list maven*
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
           - mvn --no-transfer-progress --show-version --settings settings.xml clean install
