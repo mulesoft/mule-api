@@ -16,8 +16,8 @@ MAVEN_TAR_DOWNLOAD_URL=${NEXUS_URL}/repositories/central/org/apache/maven/apache
 echo "#### Download apache-maven binary from Nexus"
 curl "$MAVEN_TAR_DOWNLOAD_URL" -u $NEXUS_USERNAME:$NEXUS_PASSWORD -o apache-maven-${MAVEN_VERSION}-bin.tar.gz
 # Verify the sha values are correct for what we expect (no tampering)
-echo $(sha1sum apache-maven-${MAVEN_VERSION}-bin.tar.gz)
-echo "$MAVEN_TAR_DOWNLOAD_SHA1 apache-maven-${MAVEN_VERSION}-bin.tar.gz" | sha1sum -c -
+echo $(sha512sum apache-maven-${MAVEN_VERSION}-bin.tar.gz)
+echo "$MAVEN_TAR_DOWNLOAD_SHA512 apache-maven-${MAVEN_VERSION}-bin.tar.gz" | sha512sum -c -
 
 MAVEN_DIR=$(set -- /usr/local/apache*; echo $1) && ln -s ${MAVEN_DIR}/bin/* /usr/bin/
 export PATH=${MAVEN_HOME}/bin:${PATH}
