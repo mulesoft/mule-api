@@ -21,5 +21,6 @@ echo "$MAVEN_TAR_DOWNLOAD_SHA512 apache-maven-${MAVEN_VERSION}-bin.tar.gz" | sha
 
 MAVEN_DIR=$(set -- /usr/local/apache*; echo $1) && ln -s ${MAVEN_DIR}/bin/* /usr/bin/
 export PATH=${MAVEN_HOME}/bin:${PATH}
+mvn --version
 rm -rf apache-maven-${MAVEN_VERSION}-bin.tar.gz
 
