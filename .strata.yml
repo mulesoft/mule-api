@@ -29,7 +29,9 @@ stages:
 
         commands:
           - git --version
-          - sh setup_build.sh
+          - export PATH=$(sh download_maven.sh)/bin:${PATH}
+          - echo $PATH
+          - mvn --version
           # test 2
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
