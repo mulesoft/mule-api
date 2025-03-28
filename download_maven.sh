@@ -26,7 +26,7 @@ MAVEN_TARGET_BASE_DIR=/usr/local
 tar xzf ${MAVEN_TAR_FILE_NAME} --directory ${MAVEN_TARGET_BASE_DIR}
 
 MAVEN_DIR=$(set -- ${MAVEN_TARGET_BASE_DIR}/apache*; echo $1)
-ln -s ${MAVEN_DIR}/bin/* /usr/bin/
+#ln -s ${MAVEN_DIR}/bin/* /usr/bin/
 rm -rf ${MAVEN_TAR_FILE_NAME}
 
 echo ${MAVEN_DIR}
