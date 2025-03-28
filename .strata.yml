@@ -29,6 +29,7 @@ stages:
 
         commands:
           - git --version
+          - dnf remove maven
           - export PATH=$(sh download_maven.sh)/bin:${PATH}
           - echo $PATH
           - mvn --version
