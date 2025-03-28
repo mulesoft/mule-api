@@ -22,19 +22,14 @@ stages:
           - name: NEXUS_BASE_URL
           - name: NEXUS_USERNAME
           - name: NEXUS_PASSWORD
+          - name: MAVEN_VERSION
+            value: '3.9.9'
+          - name: MAVEN_TAR_DOWNLOAD_SHA1
+            value:
+
         commands:
           - git --version
-          - wget https://downloads.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz
-# The only available version is maven 3.8.5 so we are going to use sdkman
-#          - dnf update
-#          - dnf search --showduplicates maven
-#          - dnf module install -y maven
-#          - dnf install maven
-#          - dnf module list maven
-          - curl -s "https://get.sdkman.io" | bash
-          - source "$HOME/.sdkman/bin/sdkman-init.sh"
-          - sdk version
-          - sdk install maven
+          - sh setup_build.sh
           # test 2
           #          - rm -rf /root/.m2/repository/
           #          - ln -s /cix/tmp/.strata/.m2/repository /root/.m2/repository
