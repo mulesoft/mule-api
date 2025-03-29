@@ -21,7 +21,7 @@ MAVEN_TAR_DOWNLOAD_URL=${NEXUS_URL}/repositories/central/org/apache/maven/apache
 curl -sS "$MAVEN_TAR_DOWNLOAD_URL" -u $NEXUS_USERNAME:$NEXUS_PASSWORD -o ${MAVEN_TAR_FILE_NAME}
 # Verify the sha values are correct for what we expect (no tampering)
 #echo $(sha512sum ${MAVEN_TAR_FILE_NAME})
-echo "$MAVEN_TAR_DOWNLOAD_SHA512 ${MAVEN_TAR_FILE_NAME}" | sha512sum -c -
+echo "$MAVEN_TAR_DOWNLOAD_SHA512 ${MAVEN_TAR_FILE_NAME}" | sha512sum --quiet -c -
 
 MAVEN_TARGET_BASE_DIR=/usr/local
 tar xzf ${MAVEN_TAR_FILE_NAME} --directory ${MAVEN_TARGET_BASE_DIR}
