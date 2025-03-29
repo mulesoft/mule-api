@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e +x
+set -e
+set -x
 
 if [ -z ${NEXUS_BASE_URL+x} ]; then
 #	echo "warning: NEXUS_BASE_URL is not set. Setting default value"
