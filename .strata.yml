@@ -4,6 +4,7 @@ global:
   production-branches:
     - master
     - W-18021352-TEST-STRATA-2
+    - W-18021352
   notifications:
     event: always
     on-production-branches-only: true
