@@ -4,12 +4,14 @@ global:
   production-branches:
     - master
     - r:W-18021352(.*)
+#    - r:
   notifications:
     event: always
     on-production-branches-only: true
     slack-channels:
       - D19NN7B96 # direct message Alejandro Nosenzo
   enable-concurrent-builds: false
+  enable-console-logging: false
 
 stages:
   build:
