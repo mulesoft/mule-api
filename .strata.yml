@@ -11,7 +11,7 @@ global:
     slack-channels:
       - D19NN7B96 # direct message Alejandro Nosenzo
   enable-concurrent-builds: false
-  enable-console-logging: false
+#  enable-console-logging: false
 
 stages:
   build:
