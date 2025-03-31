@@ -29,6 +29,7 @@ stages:
           - name: MAVEN_TAR_DOWNLOAD_SHA512
             value: a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b
         commands:
+          - pwd
           - git --version
           # Configure maven local repo
           - rm -rf /root/.m2/repository/
@@ -44,6 +45,13 @@ stages:
           - mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout --settings settings.xml
           - mvn clean install -Dmaven.test.failure.ignore=true --no-transfer-progress -batch-mode --show-version --settings settings.xml
           - mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout --settings settings.xml
+    - resultng-transform:
+        gus-scrum-team-name: "Your GUS Team"
+        gus-notify: false
+        slack-notify: true
+        slack-channel: D19NN7B96 # direct message Alejandro Nosenzo
+        run-on-production-branch-only: true
+    - resultng-publish
   publish:
     - maven-publish:
         maven-publish-jar-image: docker.repo.local.sfdc.net/sfci/docker-images/sfdc_rhel9_java_build:latest
