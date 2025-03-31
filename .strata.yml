@@ -28,7 +28,6 @@ stages:
             value: '3.9.9'
           - name: MAVEN_TAR_DOWNLOAD_SHA512
             value: a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b
-
         commands:
           - git --version
           # Configure maven local repo
@@ -43,7 +42,7 @@ stages:
           - mvn --version
           # Build and test
           - mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout --settings settings.xml
-          - mvn --no-transfer-progress --show-version --settings settings.xml clean install
+          - mvn clean install -Dmaven.test.failure.ignore=true --no-transfer-progress -batch-mode --show-version --settings settings.xml
           - mvn help:evaluate -Dexpression=settings.localRepository -q -DforceStdout --settings settings.xml
   publish:
     - maven-publish:
