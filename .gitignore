@@ -30,3 +30,8 @@ testdir/
 hostkey.ser
 *.h2.db
 /.java-version
+
+# Run SFCI locally
+.cixconfig
+.v2-plugin.yaml
+gen_v2_configs.sh
