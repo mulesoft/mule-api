@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.privileged.exception;
 
-import org.mule.runtime.api.exception.MuleException;
-import org.mule.runtime.api.message.Error;
-
+import static org.mule.runtime.api.exception.ExceptionHelper.getRootMuleException;
 import static java.util.Objects.requireNonNull;
+
+import org.mule.runtime.api.exception.MuleException;
+import org.mule.runtime.api.exception.MuleExceptionInfo;
+import org.mule.runtime.api.message.Error;
 
 /**
  * Wraps a provided exception, suppressing a {@link MuleException} that is part of it's cause tree, meaning that the Mule Runtime
@@ -34,7 +36,7 @@ import static java.util.Objects.requireNonNull;
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying
  * ConnectionException's error type}).
  * 
- * @since 1.2.3, 1.3
+ * @since 1.2.3, 1.3 // This is not the right version.
  */
 public class SuppressedMuleException extends MuleException {
 
@@ -50,7 +52,7 @@ public class SuppressedMuleException extends MuleException {
    */
   protected SuppressedMuleException(Throwable throwable, MuleException causeToSuppress) {
     super(requireNonNull(throwable, "Exception cannot be null"));
-    this.suppressedException = requireNonNull(causeToSuppress, "Cannot suppress a null cause");
+    this.suppressedException = requireNonNull((causeToSuppress), "Cannot suppress a null cause");
     addSuppressionToMuleExceptionInfo(causeToSuppress);
   }
 
@@ -62,7 +64,7 @@ public class SuppressedMuleException extends MuleException {
    * @param causeToSuppress Exception that is being suppressed.
    */
   private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
-    this.getExceptionInfo().addSuppressedCause(causeToSuppress);
+    this.getExceptionInfo().addSuppressedCause(new SuppressedMuleExceptionInfo(causeToSuppress));
     this.addAllInfo(causeToSuppress.getAdditionalInfo());
     Throwable nestedCause = causeToSuppress;
     while (nestedCause.getCause() != null && nestedCause.getCause() != nestedCause) {
@@ -70,7 +72,8 @@ public class SuppressedMuleException extends MuleException {
       if (nestedCause instanceof MuleException) {
         this.addAllInfo(((MuleException) nestedCause).getAdditionalInfo());
         if (nestedCause instanceof SuppressedMuleException) {
-          this.getExceptionInfo().addSuppressedCause(((SuppressedMuleException) nestedCause).getSuppressedException());
+          this.getExceptionInfo().addSuppressedCause(new SuppressedMuleExceptionInfo((((SuppressedMuleException) nestedCause)
+              .obtainSuppressedException())));
         }
       }
     }
@@ -89,7 +92,7 @@ public class SuppressedMuleException extends MuleException {
   /**
    * @return {@link MuleException} that has been suppressed by this {@link SuppressedMuleException}.
    */
-  public MuleException getSuppressedException() {
+  public MuleException obtainSuppressedException() {
     return suppressedException;
   }
 
@@ -98,17 +101,17 @@ public class SuppressedMuleException extends MuleException {
    * The search will stop if a {@link SuppressedMuleException} is found, making no suppression.
    * 
    * @param exception       Exception that will be wrapped, suppressing the exception itself or one of it's causes.
-   * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
+   * @param classToSuppress Class of the {@link MuleException} that has to be suppressed.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
    */
-  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> causeToSuppress) {
-    Throwable cause = exception;
-    while (cause != null && !(cause instanceof SuppressedMuleException)) {
-      if (causeToSuppress.isInstance(cause)) {
-        return new SuppressedMuleException(exception, (MuleException) cause);
+  public static Throwable suppressIfPresent(Throwable exception, Class<? extends MuleException> classToSuppress) {
+    Throwable exceptionCause = exception;
+    while (exceptionCause != null && !(exceptionCause instanceof SuppressedMuleException)) {
+      if (classToSuppress.isInstance(exceptionCause)) {
+        return new SuppressedMuleException(exception, (MuleException) exceptionCause);
       }
-      if (cause.getCause() != cause) {
-        cause = cause.getCause();
+      if (exceptionCause.getCause() != exceptionCause) {
+        exceptionCause = exceptionCause.getCause();
       } else {
         break;
       }
@@ -118,13 +121,48 @@ public class SuppressedMuleException extends MuleException {
 
   @Override
   public String getVerboseMessage() {
-    // SuppressedException is meant to marks as suppressed another exception that is part of the cause tree.
+    // SuppressedException is meant to mark as suppressed another exception that is part of the cause tree.
     return "Suppressed: " + super.getSummaryMessage();
   }
 
   @Override
   public String getSummaryMessage() {
-    // SuppressedException is meant to marks as suppressed another exception that is part of the cause tree.
+    // SuppressedException is meant to mark as suppressed another exception that is part of the cause tree.
     return "Suppressed: " + super.getSummaryMessage();
   }
+
+  public static class SuppressedMuleExceptionInfo extends MuleException {
+
+    private final MuleException suppressedException;
+
+    public SuppressedMuleExceptionInfo(MuleException suppressedException) {
+      this.suppressedException = suppressedException;
+      this.setMessage(getRootMuleException(suppressedException).getMessage());
+    }
+
+    @Override
+    public MuleExceptionInfo getExceptionInfo() {
+      return suppressedException.getExceptionInfo();
+    }
+
+    public MuleException obtainSuppressedException() {
+      return suppressedException;
+    }
+
+    @Override
+    public String getSummaryMessage() {
+      return suppressedException.getSummaryMessage();
+    }
+
+    @Override
+    public String getVerboseMessage() {
+      return suppressedException.getVerboseMessage();
+    }
+
+    @Override
+    public String getDetailedMessage() {
+      return suppressedException.getDetailedMessage();
+    }
+  }
+
 }
