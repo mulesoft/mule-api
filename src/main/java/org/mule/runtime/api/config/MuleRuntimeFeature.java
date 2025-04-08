@@ -565,12 +565,12 @@ public enum MuleRuntimeFeature implements Feature {
    * When enabled, policy isolation will utilize a dedicated classloader environment, isolated from the domain's, to prevent
    * potential dependency conflicts. This ensures that policies run with their own set of dependencies.
    *
-   * @since 4.9.4, 4.6.15
+   * @since 4.10.0, 4.9.4, 4.6.15
    */
   SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION(
       "When enabled, policy isolation will utilize a dedicated classloader environment, isolated from the domain's, to prevent potential dependency conflicts. This ensures that policies run with their own set of dependencies.",
       "W-17340911",
-      "4.6.0", USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY);
+      "4.10.0", USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issueId;
