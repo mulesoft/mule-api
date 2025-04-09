@@ -22,9 +22,9 @@ public interface Initialisable {
    * In case that the {@link #initialise()} method execution fails then mule will call the {@link Disposable#dispose()} method if
    * the class also implements {@link Disposable} allowing the object to dispose any allocated resource during
    * {@link #initialise()}
-   * 
+   *
    * @throws InitialisationException if a fatal error occurs causing the Mule instance to shutdown
-   * 
+   *
    * @see Disposable
    */
   void initialise() throws InitialisationException;

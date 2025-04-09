@@ -299,7 +299,7 @@ public enum MuleRuntimeFeature implements Feature {
 
   /**
    * When enabled, `optional` attribute in entries in a `registry-bootstrap.properties` will be ignored.
-   * 
+   *
    * @since 4.5.0
    * @deprecated since 4.9.0, `optional` attribute in entries are no longer supported
    */
@@ -311,7 +311,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, org.mule.runtime.core.privileged.registry.ObjectProcessor implementations will not be applied on objects
    * registered into the `SimpleRegistry`.
-   * 
+   *
    * @since 4.5.0
    */
   // TODO W-10781591 Remove this feature flag along with the work for W-10781591
@@ -371,7 +371,7 @@ public enum MuleRuntimeFeature implements Feature {
    * <p>
    * Log extract for a connectivity error at the Web Service Consumer (HTTP:CONNECTIVITY is being suppressed):
    * </p>
-   * 
+   *
    * <pre>
    * Error type : WSC:INVALID_WSDL
    * Caused by  : HTTP:CONNECTIVITY
@@ -459,7 +459,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
    * and Async"
-   * 
+   *
    * @since 4.5.0, 4.4.0-202306
    */
   CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES(
@@ -515,7 +515,7 @@ public enum MuleRuntimeFeature implements Feature {
   /**
    * When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String,
    * OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.
-   * 
+   *
    * @since 1.8
    */
   UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC(

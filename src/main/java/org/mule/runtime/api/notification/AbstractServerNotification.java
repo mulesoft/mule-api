@@ -177,7 +177,7 @@ public abstract class AbstractServerNotification extends EventObject implements 
 
   /**
    * The name that identifies this particular notification type.
-   * 
+   *
    * @return the notification event name.
    */
   public abstract String getEventName();

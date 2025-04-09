@@ -16,7 +16,7 @@ import java.util.Optional;
  * <p>
  * {@link jakarta.inject.Inject} must be the preferred option to access artifact services like
  * {@link org.mule.runtime.api.store.ObjectStoreManager}, {@link org.mule.runtime.api.serialization.ObjectSerializer}, etc.
- * 
+ *
  * @since 1.0
  */
 @NoImplement
@@ -27,7 +27,7 @@ public interface Registry {
    * <p>
    * If there are multiple services registered then an exception will be raised. If that could be the case then {@code {@link
    * #lookupAllByType(Class)}} should be used instead.
-   * 
+   *
    * @param objectType the service type
    * @param <T>        the type of the service
    * @return the service if a single implementation was found, empty if no implementation was found. If more than one

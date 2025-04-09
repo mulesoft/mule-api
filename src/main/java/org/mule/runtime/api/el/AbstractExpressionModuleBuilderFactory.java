@@ -30,7 +30,8 @@ public abstract class AbstractExpressionModuleBuilderFactory {
   private static AbstractExpressionModuleBuilderFactory loadFactory() {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class,
-                                                                  getMuleImplementationsLoader()).iterator().next();
+                                                                  getMuleImplementationsLoader())
+          .iterator().next();
       if (LOGGER.isDebugEnabled()) {
         LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
                             factory.getClass().getName(), factory.getClass().getClassLoader().toString()));

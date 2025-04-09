@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 /**
  * Decorates {@link DataSource} if required in order to work with XA transactions
- * 
+ *
  * @since 1.0
  */
 public interface DataSourceDecorator {

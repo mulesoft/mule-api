@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * A model that fully describes the deprecation of a part of the extension model that is a {@link DeprecableModel}.
- * 
+ *
  * @since 1.2
  */
 public interface DeprecationModel {

@@ -10,7 +10,7 @@ import org.mule.api.annotation.NoImplement;
 
 /**
  * Interface for {@link SchedulerMessageSource} scheduler configuration.
- * 
+ *
  * @since 1.0
  */
 @NoImplement

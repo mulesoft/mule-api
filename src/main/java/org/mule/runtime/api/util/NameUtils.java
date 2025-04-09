@@ -62,7 +62,7 @@ public class NameUtils {
   /**
    * Converts an string with multiple parts separated by {@code separator} to another string where each part is concatenated using
    * camel case for each part expect for the first part which will be all lowercase.
-   * 
+   *
    * @param value     the input string
    * @param separator the string that represents the separator
    * @return the converted value.

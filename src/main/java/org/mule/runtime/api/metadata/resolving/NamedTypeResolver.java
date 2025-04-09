@@ -26,7 +26,7 @@ public interface NamedTypeResolver {
   /**
    * This is the name of the TypeResolver. It should not be repeated among {@link InputTypeResolver} and
    * {@link OutputTypeResolver} which are used together.
-   * 
+   *
    * @return name of the resolver
    */
   String getResolverName();

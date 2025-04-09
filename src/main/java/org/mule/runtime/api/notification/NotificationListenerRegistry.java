@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 /**
  * Allows to register/unregister {@link NotificationListener}s for {@link Notification}s fired by the Mule container, extensions
  * and applications.
- * 
+ *
  * @since 4.0
  */
 public interface NotificationListenerRegistry {

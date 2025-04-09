@@ -26,7 +26,7 @@ public interface RouterOutputMetadataContext {
   /**
    * Describes the payload and attribute types that exit each route through a {@link Map} which keys are the route name and the
    * value a {@link MessageMetadataType} supplier.
-   * 
+   *
    * @return an unmodifiable {@link Map}, could be empty may not be {@code null}
    */
   Map<String, Supplier<MessageMetadataType>> getRouteOutputMessageTypes();

@@ -17,7 +17,7 @@ import org.mule.runtime.api.exception.MuleException;
  * In case that the {@link #start()} method execution fails then mule will call the {@link Stoppable#stop()} method if the class
  * also implements {@link Stoppable} allowing the object to dispose any allocated resource during {@link #start()}
  * <p/>
- * 
+ *
  * @see Stoppable
  */
 public interface Startable {
