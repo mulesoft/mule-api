@@ -317,6 +317,15 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
 
   /**
+   * When set to true, policy isolation will utilize a separate classloader environment, separate from the domain's, to prevent
+   * potential dependency conflicts.
+   *
+   * @since 4.10.0, 4.9.4, 4.6.15
+   */
+  public static final String USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "policy.isolation.separateClassLoader";
+
+  /**
    * If set to true, Mule will handle redirect requests. If set to false, we will delegate the redirect to Grizzly.
    *
    * @since 4.5.0, 4.4.0-202112, 4.3.0-202112
