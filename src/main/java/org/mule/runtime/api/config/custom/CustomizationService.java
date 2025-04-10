@@ -73,7 +73,7 @@ public interface CustomizationService {
 
     /**
      * Sets the new service implementation that overrides the default one.
-     * 
+     *
      * @param newServiceImpl the new service implementation.
      */
     void overrideServiceImpl(T newServiceImpl);

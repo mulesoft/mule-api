@@ -20,7 +20,7 @@ import java.util.function.Function;
  * <p>
  * This exists to prevent an issue with {@link Collections#unmodifiableMap(Map)} in which an already unmodifiable map is wrapped
  * again. This is fixed already in Java 17.
- * 
+ *
  * @param <K> the generic type of the keys
  * @param <V> the generic type of the values
  * @since 1.4, 1.3.1

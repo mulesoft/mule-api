@@ -31,7 +31,7 @@ public class NestedChainDeclarer extends NestedComponentDeclarer<NestedChainDecl
 
   /**
    * Sets the chain's {@link ChainExecutionOccurrence}
-   * 
+   *
    * @param occurrence an occurrence. Cannot be {@code null}
    * @return {@code this} declarer
    */

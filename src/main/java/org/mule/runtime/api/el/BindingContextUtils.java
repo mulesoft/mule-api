@@ -57,7 +57,7 @@ public class BindingContextUtils {
 
   /**
    * Key for the event parameters binding
-   * 
+   *
    * @since 1.5.0
    */
   public static final String PARAMS = "params";
@@ -93,7 +93,7 @@ public class BindingContextUtils {
 
   /**
    * {@link DataType} for the event parameters binding
-   * 
+   *
    * @since 1.5.0
    */
   private static final DataType PARAMS_DATA_TYPE = VARS_DATA_TYPE;
@@ -109,7 +109,7 @@ public class BindingContextUtils {
 
   /**
    * {@link TypedValue} to use in the absence of event params.
-   * 
+   *
    * @since 1.5.0
    */
   public final static TypedValue EMPTY_PARAMS = new TypedValue<>(emptyMap(), PARAMS_DATA_TYPE);

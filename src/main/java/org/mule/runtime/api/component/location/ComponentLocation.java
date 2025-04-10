@@ -62,10 +62,10 @@ public interface ComponentLocation {
    * <p>
    * If the component with this location is obtained through an import, the location of the first import will be the first element
    * of the returned list. Any other nested imported locations will be the subsequent elements of the returned list.
-   * 
+   *
    * @return a {@link List} containing an element for every {@code import} location leading to the file containing the owning
    *         component.
-   * 
+   *
    * @since 1.5
    */
   List<URI> getImportChain();

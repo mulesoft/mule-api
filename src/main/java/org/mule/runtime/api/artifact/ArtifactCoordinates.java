@@ -34,7 +34,7 @@ public interface ArtifactCoordinates {
 
   /**
    * @return the classifier, if set
-   * 
+   *
    * @since 1.8
    */
   default Optional<String> getClassifier() {

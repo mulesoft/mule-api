@@ -68,7 +68,7 @@ public interface InterceptionEvent extends Event {
 
   /**
    * Creates a {@link BindingContext} for the target event to use with a {@link MuleExpressionLanguage}.
-   * 
+   *
    * @return a {@link BindingContext} representing the data of the target event.
    */
   BindingContext asBindingContext();

@@ -20,7 +20,7 @@ public interface ObjectProvider extends Component {
 
   /**
    * Finds an object by name
-   * 
+   *
    * @param name the object name
    * @return the object if there's one, empty otherwise.
    */
@@ -28,7 +28,7 @@ public interface ObjectProvider extends Component {
 
   /**
    * Finds an object by type
-   * 
+   *
    * @param objectType the object type.
    * @return the object if there's one, empty otherwise. In case there are many, then it will fail unless there's a preferred one.
    *         How the preferred one is defined is up to the {@link ObjectProvider} implementation.

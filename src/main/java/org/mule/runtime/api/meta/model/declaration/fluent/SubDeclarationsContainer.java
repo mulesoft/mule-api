@@ -75,7 +75,7 @@ final class SubDeclarationsContainer {
 
   /**
    * Sets the {@link ConstructDeclaration}s to be the ones in {@code declarations}
-   * 
+   *
    * @param declarations
    */
   public void setConstructs(List<ConstructDeclaration> declarations) {

@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * The set of products available
- * 
+ *
  * @since 1.0
  */
 public enum Product {

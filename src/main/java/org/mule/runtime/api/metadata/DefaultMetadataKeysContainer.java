@@ -16,7 +16,7 @@ import java.util.Set;
 
 /**
  * Default implementation of {@link MetadataKeysContainer}.
- * 
+ *
  * @since 1.0
  */
 final class DefaultMetadataKeysContainer implements MetadataKeysContainer {

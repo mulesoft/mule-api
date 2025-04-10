@@ -11,7 +11,7 @@ package org.mule.runtime.api.notification;
  * agents, etc to communicate a change of state to each other. The Action value for the event is arbitary. However care should be
  * taken not to set the action code to an existing action code. To ensure this doesn't happen always set the action code greater
  * than the CUSTOM_ACTION_START_RANGE.
- * 
+ *
  * @see CustomNotificationListener
  */
 public class CustomNotification extends AbstractServerNotification {
@@ -23,7 +23,7 @@ public class CustomNotification extends AbstractServerNotification {
 
   /**
    * Creates a custom action event
-   * 
+   *
    * @param message the message to associate with the event
    * @param action  the action code for the event
    * @throws IllegalArgumentException if the action value is less than CUSTOM_ACTION_START_RANGE

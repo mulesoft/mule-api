@@ -134,7 +134,7 @@ public class NestedRouteDeclarer extends Declarer<NestedRouteDeclaration>
    *
    * @param stereotype a {@link StereotypeModel}
    * @return {@code this} declarer
-   * 
+   *
    * @since 1.7
    */
   @Override

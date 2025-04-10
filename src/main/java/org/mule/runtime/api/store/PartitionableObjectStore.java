@@ -104,7 +104,7 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
 
   /**
    * Closes the partition of the give {@code partitionName}
-   * 
+   *
    * @param partitionName the name of the partition to close
    * @throws ObjectStoreException if an exception occurred while closing the partition
    */
@@ -121,7 +121,7 @@ public interface PartitionableObjectStore<T extends Serializable> extends Object
 
   /**
    * Clears the contents of the partition, but the partition itself remains functional
-   * 
+   *
    * @param partitionName the name of the partition
    * @throws ObjectStoreException if an exception occurred while clearing the partition
    */

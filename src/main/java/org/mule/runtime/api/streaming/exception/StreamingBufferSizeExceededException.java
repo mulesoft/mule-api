@@ -19,7 +19,7 @@ public final class StreamingBufferSizeExceededException extends MuleRuntimeExcep
 
   /**
    * Creates a new instance
-   * 
+   *
    * @param maxBufferSize the maximum size in bytes of the exceeded buffer
    */
   public StreamingBufferSizeExceededException(int maxBufferSize) {

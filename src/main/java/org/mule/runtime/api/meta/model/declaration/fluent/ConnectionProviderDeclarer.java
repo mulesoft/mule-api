@@ -43,7 +43,7 @@ public final class ConnectionProviderDeclarer
 
   /**
    * Sets the type of connection management that the provider performs
-   * 
+   *
    * @param connectionManagementType a {@link ConnectionManagementType}
    * @return {@code this} declarer
    */

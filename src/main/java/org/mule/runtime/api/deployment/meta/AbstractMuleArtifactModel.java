@@ -52,7 +52,7 @@ public abstract class AbstractMuleArtifactModel {
 
   /**
    * Creates a new model
-   * 
+   *
    * @param name                             name of the artifact
    * @param minMuleVersion                   minimum Mule Runtime version that requires to work correctly.
    * @param requiredProduct                  the target product for the artifact

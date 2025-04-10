@@ -100,7 +100,7 @@ public abstract class BaseDeclaration<T extends BaseDeclaration> implements Desc
 
   /**
    * Sets the {@link #displayModel} for this declaration
-   * 
+   *
    * @param displayModel a {@link DisplayModel}
    */
   public void setDisplayModel(DisplayModel displayModel) {

@@ -8,7 +8,7 @@ package org.mule.runtime.api.el.validation;
 
 /**
  * The kind of {@link ScopePhaseValidationItem}
- * 
+ *
  * @since 1.5.0
  * @deprecated since 1.9.0. Replaced with new validation API that not only include scope phase but also the rest of the phases. *
  *             {@link ConstraintViolation}.
@@ -18,7 +18,7 @@ public enum ScopePhaseValidationItemKind {
   /**
    * Indicated that a function is deprecated. These functions are discouraged from using, typically because it is dangerous, or
    * because a better alternative exists.
-   * 
+   *
    * The following are the set of {@link ScopePhaseValidationItem#getParams()}} params according to this kind:
    * <ul>
    * <li>'function': The name of the deprecated function.</li>

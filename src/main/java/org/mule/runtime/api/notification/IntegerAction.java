@@ -12,7 +12,7 @@ import org.mule.runtime.api.notification.Notification.Action;
 
 /**
  * Adapter of Mule 3 notification actions, modeled as integers, to the new Mule 4 mechanism.
- * 
+ *
  * @since 4.0
  */
 public final class IntegerAction implements Action {

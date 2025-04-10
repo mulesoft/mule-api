@@ -12,7 +12,7 @@ import org.mule.runtime.api.metadata.resolving.TypeKeysResolver;
 
 /**
  * This interface allows the exposure of the {@link MetadataKey}s associated to the {@link TypeKeysResolver} of the component.
- * 
+ *
  * @since 1.0
  */
 @NoImplement

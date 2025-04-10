@@ -244,7 +244,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Creates a new instance backed by the given {@code delegate}
-   * 
+   *
    * @param delegate a delegate
    */
   private SmallMap(SmallMapDelegate<K, V> delegate) {
@@ -277,7 +277,7 @@ public class SmallMap<K, V> implements Map<K, V>, Serializable {
 
   /**
    * Creates a copy of this map. This is the most performing way of copying a SmallMap
-   * 
+   *
    * @return a copy of {@code this} instance.
    */
   public SmallMap<K, V> copy() {

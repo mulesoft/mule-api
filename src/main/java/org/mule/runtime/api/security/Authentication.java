@@ -36,7 +36,7 @@ public interface Authentication extends Serializable {
 
   /**
    * Makes a copy of this {@link Authentication} with the passed properties set.
-   * 
+   *
    * @param properties a group of properties available for the returned {@link Authentication}. MAy be {@code null}
    */
   Authentication setProperties(Map<String, Object> properties);

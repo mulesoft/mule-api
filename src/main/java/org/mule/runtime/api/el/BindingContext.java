@@ -63,7 +63,7 @@ public interface BindingContext {
 
   /**
    * Returns all modules
-   * 
+   *
    * @return a {@link Collection} of all modules
    */
   Collection<ExpressionModule> modules();
@@ -83,7 +83,7 @@ public interface BindingContext {
      *
      * @param value      the value to bind
      * @param identifier the keyword to use in the EL to access the {@code value}
-     * 
+     *
      * @since 1.1
      */
     default Builder addBinding(String identifier, Supplier<TypedValue> value) {
@@ -99,7 +99,7 @@ public interface BindingContext {
 
     /**
      * Will add a new module to this binding
-     * 
+     *
      * @param expressionModule The module to be added
      */
     Builder addModule(ExpressionModule expressionModule);

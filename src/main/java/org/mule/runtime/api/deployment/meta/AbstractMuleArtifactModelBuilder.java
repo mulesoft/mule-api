@@ -40,7 +40,7 @@ public abstract class AbstractMuleArtifactModelBuilder<T extends AbstractMuleArt
 
   /**
    * Sets the required product for the artifact.
-   * 
+   *
    * @param product the required product for the artifact.
    * @return {@code this} builder
    */

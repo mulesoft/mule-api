@@ -17,14 +17,14 @@ import org.mule.runtime.api.scheduler.Scheduler;
  * <p>
  * The concrete type of the {@link Notification} is an indication of the kind of component that caused the event, and in may
  * contain additional data describing the event.
- * 
+ *
  * @since 4.0
  */
 public interface Notification {
 
   /**
    * Indicates the synchronicity of the processing of this notification.
-   * 
+   *
    * @return Whether the execution of the listeners for this notification will happen on the same thread that called
    *         {@link NotificationDispatcher#dispatch(Notification)} or will be dispatched to a {@link Scheduler} for asynchronous
    *         processing.
@@ -35,7 +35,7 @@ public interface Notification {
 
   /**
    * Informs the kind of event that caused this notification to be fired.
-   * 
+   *
    * @return the kind of action that caused this notification to be fired.
    */
   Action getAction();

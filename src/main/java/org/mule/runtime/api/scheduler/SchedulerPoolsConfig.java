@@ -14,7 +14,7 @@ import java.util.concurrent.Executor;
 
 /**
  * Parameters to use when building the {@link Executor}s for the scheduler service.
- * 
+ *
  * @since 1.0
  */
 @NoImplement

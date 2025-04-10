@@ -25,7 +25,7 @@ import java.util.Optional;
  * model}.
  *
  * @param <M> the actual {@link ParameterizedModel} sub-type of the component .
- * 
+ *
  * @since 1.5
  */
 @NoImplement
@@ -39,7 +39,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
 
   /**
    * Obtains the value of a parameter of the declared component.
-   * 
+   *
    * @param paramGroupName the name of the parameter group
    * @param paramName      the name of the parameter within the group
    * @return the value of the parameter.
@@ -48,7 +48,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
 
   /**
    * Obtains the value of a parameter of the declared component.
-   * 
+   *
    * @param paramGroup the model of the parameter group
    * @param param      the model of the parameter within the group
    * @return the value of the parameter.
@@ -59,7 +59,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
    * Returns all the parameters of the declared model that have values.
    * <p>
    * Parameters with a default value but no explicit value set are contained in the returned map.
-   * 
+   *
    * @return the parameters as a map.
    */
   Map<Pair<ParameterGroupModel, ParameterModel>, Object> getParameters();
@@ -68,7 +68,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
    * Iterates through the parameters that have values and calls the provided {@code action} on each one.
    * <p>
    * Parameters with a default value but no explicit value set have the action called for.
-   * 
+   *
    * @param action a callback to be called for every parameter.
    */
   void forEachParameter(ParameterAction action);
@@ -96,7 +96,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
     /**
      * Performs validations on the parameters provided through {@link #withParameter(String, String, Object)}. If valid, returns a
      * {@link ComponentParameterization}, otherwise an {@link IllegalStateException} is thrown.
-     * 
+     *
      * @return a valid {@link ComponentParameterization}.
      * @throws IllegalStateException if any provided parameter is invalid, indicating which parameter and the reason for it being
      *                               invalid.
@@ -105,7 +105,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
 
     /**
      * Sets a parameter with a given value.
-     * 
+     *
      * @param paramGroupName the name of the group containing the parameter to set.
      * @param paramName      the name of the parameter within the {@code paramGroupName} group to set.
      * @param paramValue     the value of the parameter to set
@@ -117,7 +117,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
 
     /**
      * Sets a parameter with a given value, automatically determining the group the parameter belongs to.
-     * 
+     *
      * @param paramName  the name of the parameter within the {@code paramGroupName} group to set.
      * @param paramValue the value of the parameter to set
      * @return this builder
@@ -146,7 +146,7 @@ public interface ComponentParameterization<M extends ParameterizedModel> {
 
   /**
    * Provides a brand new builder instance for creating a {@link ComponentParameterization}.
-   * 
+   *
    * @param <M>   the actual {@link ParameterizedModel} sub-type of the component.
    * @param model the actual model of the declared component.
    * @return a new builder instance.

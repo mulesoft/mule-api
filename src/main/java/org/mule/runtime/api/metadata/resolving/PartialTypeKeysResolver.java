@@ -25,7 +25,7 @@ public interface PartialTypeKeysResolver<T> extends TypeKeysResolver {
    * them as a multi level {@link MetadataKey}.
    *
    * For example, if we have a location key composed by:
-   * 
+   *
    * <pre>
    * {@code
    *  Location: {

@@ -14,7 +14,7 @@ import org.mule.runtime.api.lifecycle.Initialisable;
  * This interface may make use of {@link org.mule.runtime.api.lifecycle.Lifecycle} interfaces. If {@link Initialisable} is
  * implemented then it will be called after all the components in the artifact where initialised. Same with
  * {@link org.mule.runtime.api.lifecycle.Startable}.
- * 
+ *
  * @since 1.0
  */
 public interface ConfigurableObjectProvider extends ObjectProvider {

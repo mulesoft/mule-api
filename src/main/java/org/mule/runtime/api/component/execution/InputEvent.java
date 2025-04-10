@@ -21,7 +21,7 @@ import java.util.Optional;
  * Interface for defining the content of an event.
  * <p/>
  * {@link InputEvent} can be used to trigger the execution of processor chains programmatically.
- * 
+ *
  * @since 1.0
  */
 @NoImplement

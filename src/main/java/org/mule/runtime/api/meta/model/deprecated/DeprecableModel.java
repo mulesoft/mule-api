@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * Interface that indicates that this part of an extension can be deprecated
- * 
+ *
  * @since 1.2
  */
 public interface DeprecableModel {

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 /**
  * Immutable implementation of {@link MetadataAttributes}.
- * 
+ *
  * @since 1.0
  */
 public final class MetadataAttributes {

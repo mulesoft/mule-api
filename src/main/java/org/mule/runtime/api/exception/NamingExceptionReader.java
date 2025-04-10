@@ -40,7 +40,7 @@ class NamingExceptionReader implements ExceptionReader {
 
   /**
    * Returns a map of the non-stanard information stored on the exception
-   * 
+   *
    * @param t the exception to extract the information from
    * @return a map of the non-stanard information stored on the exception
    */

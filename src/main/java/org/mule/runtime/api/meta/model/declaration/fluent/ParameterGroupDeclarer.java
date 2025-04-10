@@ -22,7 +22,7 @@ public class ParameterGroupDeclarer<D extends ParameterGroupDeclaration> extends
 
   /**
    * Creates a new instance
-   * 
+   *
    * @param declaration a declaration
    */
   public ParameterGroupDeclarer(D declaration) {
