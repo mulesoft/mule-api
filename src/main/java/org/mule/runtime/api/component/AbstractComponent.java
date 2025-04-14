@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.api.component;
 
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_LIGHT_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
+
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.unmodifiableMap;
-import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
-import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
 import org.mule.runtime.api.component.location.Location;
@@ -34,6 +36,7 @@ public abstract class AbstractComponent implements Component {
   private Location rootContainerLocation;
   private ComponentIdentifier identifier;
   private String representation;
+  private String representationLight;
   private String dslSource;
 
   @Override
@@ -53,6 +56,7 @@ public abstract class AbstractComponent implements Component {
     rootContainerLocation = initRootContainerName();
     identifier = (ComponentIdentifier) getAnnotation(ANNOTATION_NAME);
     representation = (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
+    representationLight = (String) getAnnotation(REPRESENTATION_LIGHT_ANNOTATION_KEY);
     dslSource = (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
 
@@ -82,6 +86,11 @@ public abstract class AbstractComponent implements Component {
   @Override
   public String getRepresentation() {
     return representation;
+  }
+
+  @Override
+  public String getRepresentationLight() {
+    return representationLight;
   }
 
   @Override

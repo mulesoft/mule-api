@@ -8,6 +8,7 @@ package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
 import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
+import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_LIGHT_ANNOTATION_KEY;
 import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
@@ -51,6 +52,13 @@ public interface Component {
      * Annotation that defines the representation for the element to be used in error reporting.
      */
     QName REPRESENTATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation");
+
+    /**
+     * Annotation that defines a light representation for the element.
+     * 
+     * @since 1.10
+     */
+    QName REPRESENTATION_LIGHT_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation_light");
   }
 
   /**
@@ -104,6 +112,13 @@ public interface Component {
    */
   default String getRepresentation() {
     return (String) getAnnotation(REPRESENTATION_ANNOTATION_KEY);
+  }
+
+  /**
+   * @return a light representation of a flow element.
+   */
+  default String getRepresentationLight() {
+    return (String) getAnnotation(REPRESENTATION_LIGHT_ANNOTATION_KEY);
   }
 
   /**
