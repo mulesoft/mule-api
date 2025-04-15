@@ -28,6 +28,8 @@ module org.mule.runtime.api {
   requires jakarta.activation;
   requires java.naming;
   requires java.sql;
+  // for QName, used for component annotations
+  requires transitive java.xml;
   requires transitive jakarta.inject;
   // Old Java EE dependencies (with javax package prefix), kept for backwards compatibility
   requires transitive javax.inject;
