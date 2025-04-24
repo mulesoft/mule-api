@@ -809,6 +809,20 @@ public final class MuleSystemProperties {
    */
   public static final String ENABLE_SDK_POLLING_SOURCE_LIMIT = SYSTEM_PROPERTY_PREFIX + "enablePollingSourceLimit";
 
+  /**
+   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
+   * expression.
+   */
+  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
+      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
+
+  /**
+   * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
+   */
+  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
+    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+  }
+
   // <<<<<<<<<<
 
   // >>>>>>>>>>
@@ -826,17 +840,6 @@ public final class MuleSystemProperties {
    */
   @Deprecated
   public static final String MULE_JRE_EXTENSION_PACKAGES = SYSTEM_PROPERTY_PREFIX + "classloading.jreExtension.packages";
-
-  /**
-   * When set to "true", the default value of the parseTemplate operation targetValue parameter will be the "#[message]"
-   * expression.
-   * 
-   * @deprecated since 4.7 setting its value does not have any effect
-   */
-  @Deprecated
-  @KillSwitch
-  public static final String PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE =
-      SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue";
 
   /**
    * Forces the validation of all loaded extension models
@@ -1073,15 +1076,6 @@ public final class MuleSystemProperties {
    */
   @Deprecated
   public static boolean isForceExtensionValidation() {
-    return false;
-  }
-
-  /**
-   * @return {@code false}
-   * @deprecated since 4.7 this is a no-op
-   */
-  @Deprecated
-  public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
     return false;
   }
 
