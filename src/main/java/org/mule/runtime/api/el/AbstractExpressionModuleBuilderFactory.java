@@ -31,7 +31,7 @@ public abstract class AbstractExpressionModuleBuilderFactory {
     try {
       final AbstractExpressionModuleBuilderFactory factory = load(AbstractExpressionModuleBuilderFactory.class,
                                                                   getMuleImplementationsLoader())
-          .iterator().next();
+                                                                      .iterator().next();
       if (LOGGER.isDebugEnabled()) {
         LOGGER.debug(format("Loaded ExpressionModuleBuilderFactory implementation '%s' from classloader '%s'",
                             factory.getClass().getName(), factory.getClass().getClassLoader().toString()));

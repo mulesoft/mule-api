@@ -29,8 +29,8 @@ public abstract class AbstractMuleMessageBuilderFactory {
     try {
       final AbstractMuleMessageBuilderFactory factory = load(AbstractMuleMessageBuilderFactory.class,
                                                              getMuleImplementationsLoader())
-          .iterator()
-          .next();
+                                                                 .iterator()
+                                                                 .next();
       LOGGER.info(format("Loaded MuleMessageBuilderFactory implementation '%s' from classloader '%s'",
                          factory.getClass().getName(), factory.getClass().getClassLoader().toString()));
 
