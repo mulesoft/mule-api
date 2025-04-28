@@ -49,6 +49,7 @@ import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBR
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.USE_TRANSACTION_SINK_INDEX_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import static java.util.Optional.ofNullable;
@@ -558,7 +559,18 @@ public enum MuleRuntimeFeature implements Feature {
   FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT(
       "When enabled, the processors that perform fork and join work (currently Scatter Gather and Parallel For Each), will take care of completing the child event contexts when there is a timeout.",
       "W-16941297",
-      "4.10.0", FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY);
+      "4.10.0", FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT_PROPERTY),
+
+  /**
+   * When enabled, policy isolation will utilize a dedicated classloader environment, isolated from the domain's, to prevent
+   * potential dependency conflicts. This ensures that policies run with their own set of dependencies.
+   *
+   * @since 4.10.0, 4.9.5, 4.6.17
+   */
+  SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION(
+      "When enabled, policy isolation will utilize a dedicated classloader environment, isolated from the domain's, to prevent potential dependency conflicts. This ensures that policies run with their own set of dependencies.",
+      "W-17340911",
+      "4.10.0", USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY);
 
   private final String description;
   private final String issueId;
