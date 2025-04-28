@@ -320,7 +320,7 @@ public final class MuleSystemProperties {
    * When set to true, policy isolation will utilize a separate classloader environment, separate from the domain's, to prevent
    * potential dependency conflicts.
    *
-   * @since 4.10.0, 4.9.4, 4.6.15
+   * @since 4.10.0, 4.9.5, 4.6.17
    */
   public static final String USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "policy.isolation.separateClassLoader";
