@@ -48,7 +48,9 @@ public interface EventContext {
    * @return a timestamp indicating when the execution of this context began.
    * @since 1.10
    */
-  Instant getStartTime();
+  default Instant getStartTime() {
+    return Instant.MIN;
+  }
 
   /**
    *
