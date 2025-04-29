@@ -9,7 +9,6 @@ package org.mule.runtime.api.test.component;
 import static org.mule.runtime.api.component.AbstractComponent.LOCATION_KEY;
 import static org.mule.runtime.api.component.AbstractComponent.ROOT_CONTAINER_NAME_KEY;
 import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
-import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_LIGHT_ANNOTATION_KEY;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.sameInstance;
@@ -57,11 +56,9 @@ public class ComponentRepresentationTestCase {
 
     final Map<QName, Object> annotations = new HashMap<>();
     annotations.put(REPRESENTATION_ANNOTATION_KEY, "representation");
-    annotations.put(REPRESENTATION_LIGHT_ANNOTATION_KEY, "representationLight");
     comp.setAnnotations(annotations);
 
     assertThat(comp.getRepresentation(), is("representation"));
-    assertThat(comp.getRepresentationLight(), is("representationLight"));
   }
 
   @Test

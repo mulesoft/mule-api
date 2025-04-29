@@ -8,7 +8,6 @@ package org.mule.runtime.api.component;
 
 import static org.mule.runtime.api.component.AbstractComponent.ANNOTATION_NAME;
 import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_ANNOTATION_KEY;
-import static org.mule.runtime.api.component.Component.Annotations.REPRESENTATION_LIGHT_ANNOTATION_KEY;
 import static org.mule.runtime.api.component.Component.Annotations.SOURCE_ELEMENT_ANNOTATION_KEY;
 
 import org.mule.runtime.api.component.location.ComponentLocation;
@@ -54,11 +53,12 @@ public interface Component {
     QName REPRESENTATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation");
 
     /**
-     * Annotation that defines a light representation for the element.
+     * Annotation that defines the location within the artifact source for the element.
      * 
      * @since 1.10
      */
-    QName REPRESENTATION_LIGHT_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation_light");
+    QName SOURCE_LOCATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceLocation");
+
   }
 
   /**
@@ -115,16 +115,10 @@ public interface Component {
   }
 
   /**
-   * @return a light representation of a flow element.
-   */
-  default String getRepresentationLight() {
-    return (String) getAnnotation(REPRESENTATION_LIGHT_ANNOTATION_KEY);
-  }
-
-  /**
    * @return the source code of this element in the DSL.
    */
   default String getDslSource() {
     return (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
+
 }
