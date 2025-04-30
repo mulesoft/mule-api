@@ -1,4 +1,22 @@
 {
+  "1.9.5": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION",
+          "justification": "W-17340911: Resolve loader constraint violation when policy isolation is enabled"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY",
+          "justification": "W-17340911: Resolve loader constraint violation when policy isolation is enabled"
+        }
+      ]
+    }
+  },
   "1.9.2": {
     "revapi": {
       "ignore": [
