@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.mule</groupId>
         <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
-        <version>4.9.4-SNAPSHOT</version>
+        <version>4.9.5-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.9.4-SNAPSHOT</version>
+    <version>1.9.5-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -114,8 +114,8 @@
         <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
-        <artifactDeclarationVersion>1.9.4-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.9.4-SNAPSHOT</muleModuleMavenPluginVersion>
+        <artifactDeclarationVersion>1.9.5-SNAPSHOT</artifactDeclarationVersion>
+        <muleModuleMavenPluginVersion>1.9.5-SNAPSHOT</muleModuleMavenPluginVersion>
 
         <caffeine.java8.version>2.9.3</caffeine.java8.version>
         
@@ -123,9 +123,9 @@
         <licenseYear>2023</licenseYear>
 
         <oldMuleArtifactVersion>1.7.0-rc1</oldMuleArtifactVersion>
-        <muleApiAnnotationsVersion>1.8.4-SNAPSHOT</muleApiAnnotationsVersion>
+        <muleApiAnnotationsVersion>1.8.5-SNAPSHOT</muleApiAnnotationsVersion>
 
-        <muleBomVersion>4.9.4-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.9.5-SNAPSHOT</muleBomVersion>
     </properties>
 
     <dependencyManagement>
