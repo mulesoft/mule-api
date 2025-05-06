@@ -820,7 +820,7 @@ public final class MuleSystemProperties {
    * @return True if the default value of the parseTemplate operation targetValue parameter must be the "#[message]" expression.
    */
   public static boolean isParseTemplateUseLegacyDefaultTargetValue() {
-    return parseBoolean(getProperty(SYSTEM_PROPERTY_PREFIX + "parse.template.use.legacy.default.targetValue", "false"));
+    return parseBoolean(getProperty(PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE, "false"));
   }
 
   // <<<<<<<<<<
