@@ -8,6 +8,7 @@ package org.mule.runtime.api.time;
 
 import org.mule.api.annotation.NoImplement;
 
+import java.time.Instant;
 import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
@@ -37,4 +38,12 @@ public interface TimeSupplier extends Supplier<Long>, LongSupplier {
    */
   @Override
   long getAsLong();
+
+  /**
+   * Returns {@link Instant#now()}
+   *
+   * @return the current instant
+   * @since 1.10
+   */
+  Instant getAsInstant();
 }

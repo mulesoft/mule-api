@@ -45,6 +45,7 @@ module org.mule.runtime.api {
   requires org.apache.commons.lang3;
   requires semver4j;
   
+  exports org.mule.runtime.api.alert;
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;
   exports org.mule.runtime.api.bulk;
