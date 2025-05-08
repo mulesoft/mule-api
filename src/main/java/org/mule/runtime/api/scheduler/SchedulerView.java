@@ -21,6 +21,33 @@ public interface SchedulerView {
   String getName();
 
   /**
+   * 
+   * @return
+   * @since 1.10
+   */
+  default String getActualExecutorId() {
+    return "";
+  }
+
+  /**
+   * 
+   * @return
+   * @since 1.10
+   */
+  default String getActualExecutorToString() {
+    return "";
+  }
+
+  /**
+   * 
+   * @return
+   * @since 1.10
+   */
+  default String getThreadType() {
+    return "";
+  }
+
+  /**
    * @see Scheduler#isShutdown()
    */
   boolean isShutdown();
