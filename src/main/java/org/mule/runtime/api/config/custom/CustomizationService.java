@@ -111,6 +111,25 @@ public interface CustomizationService {
   <T> void registerCustomServiceImpl(String serviceId, T serviceImpl);
 
   /**
+   * Allows to define a custom service on a mule context.
+   * <p>
+   * The service implementation can be annotated with @Inject and implement methods from {@link Lifecycle}.
+   * <p>
+   * The service identifier can be used to locate the service in the mule registry.
+   *
+   * @param serviceId   identifier of the services implementation to register. Non empty.
+   * @param serviceImpl the service implementation instance. Non null.
+   * @param baseContext {@code true} if this service has to bee present in the base Context, {@code false} if it may depend on
+   *                    artifact specific objects.
+   * @param <T>         the service type
+   * 
+   * @since 1.10
+   */
+  default <T> void registerCustomServiceImpl(String serviceId, T serviceImpl, boolean baseContext) {
+    registerCustomServiceImpl(serviceId, serviceImpl);
+  }
+
+  /**
    * Allows to define a custom service on a mule context. The provided class will be used to instantiate the service that replaces
    * the default one if it's replacing an existent service.
    * <p>
@@ -121,5 +140,23 @@ public interface CustomizationService {
    * @param <T>          the service type
    */
   <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass);
+
+  /**
+   * Allows to define a custom service on a mule context. The provided class will be used to instantiate the service that replaces
+   * the default one if it's replacing an existent service.
+   * <p>
+   * The service class can be annotated with {@code jakarta.inject.Inject} and implement methods from {@link Lifecycle}.
+   *
+   * @param serviceId    identifier of the services implementation to register. Non empty.
+   * @param serviceClass the service class. Non null.
+   * @param baseContext  {@code true} if this service has to bee present in the base Context, {@code false} if it may depend on
+   *                     artifact specific objects.
+   * @param <T>          the service type
+   * 
+   * @since 1.10
+   */
+  default <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass, boolean baseContext) {
+    registerCustomServiceClass(serviceId, serviceClass);
+  }
 
 }
