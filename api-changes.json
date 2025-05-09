@@ -4,6 +4,14 @@
       "ignore": [
         {
           "ignore": true,
+          "code": "java.annotation.removed",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-18324755: Re introduce W-13588449 fix"
+        },
+        {
+          "ignore": true,
           "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION",
           "justification": "W-17340911: Resolve loader constraint violation when policy isolation is enabled"
