@@ -1,4 +1,18 @@
 {
+  "1.10.0": {
+    "revapi": {
+      "ignore": [
+        {
+          "ignore": true,
+          "code": "java.annotation.removed",
+          "old": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.PARSE_TEMPLATE_USE_LEGACY_DEFAULT_TARGET_VALUE",
+          "annotation": "@org.mule.api.annotation.properties.KillSwitch",
+          "justification": "W-18324755: Re introduce W-13588449 fix"
+        }
+      ]
+    }
+  },
   "1.9.0": {
     "revapi": {
       "ignore": [
