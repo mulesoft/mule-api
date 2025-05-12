@@ -747,7 +747,7 @@ public final class MuleSystemProperties {
    * @since 4.10, 4.9.5, 4.6.17, 4.4.202506
    */
   public static final String GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT =
-      SYSTEM_PROPERTY_PREFIX + "gracefuleShutdown.defaultTimeout";
+      SYSTEM_PROPERTY_PREFIX + "gracefulShutdown.defaultTimeout";
 
   // <<<<<<<<<<
 
