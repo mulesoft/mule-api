@@ -50,5 +50,5 @@ public interface TimeSupplier extends Supplier<Long>, LongSupplier {
   default Instant getAsInstant() {
     return ofEpochMilli(getAsLong());
   }
-  
+
 }
