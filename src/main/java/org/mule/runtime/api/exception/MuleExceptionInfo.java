@@ -89,7 +89,7 @@ public final class MuleExceptionInfo implements Serializable {
   private void writeCause(StringBuilder buffer, MuleException causedByException) {
     ErrorType causedByErrorType = causedByException.getExceptionInfo().getErrorType();
     if (causedByErrorType != null) {
-      buffer.append(causedByErrorType.toString()).append(": ");
+      buffer.append(causedByErrorType).append(": ");
     }
     buffer.append(causedByException.getMessage());
   }
