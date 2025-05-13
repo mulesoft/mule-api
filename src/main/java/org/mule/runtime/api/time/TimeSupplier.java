@@ -6,6 +6,8 @@
  */
 package org.mule.runtime.api.time;
 
+import static java.time.Instant.ofEpochMilli;
+
 import org.mule.api.annotation.NoImplement;
 
 import java.time.Instant;
@@ -45,5 +47,8 @@ public interface TimeSupplier extends Supplier<Long>, LongSupplier {
    * @return the current instant
    * @since 1.10
    */
-  Instant getAsInstant();
+  default Instant getAsInstant() {
+    return ofEpochMilli(getAsLong());
+  }
+  
 }
