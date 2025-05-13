@@ -923,6 +923,19 @@ public final class MuleSystemProperties {
       SYSTEM_PROPERTY_PREFIX + "forkJoin.completeChildContextsOnTimeout";
 
   /**
+   * Sets the value in millis to use as the default graceful shutdown of an application.
+   * <p>
+   * This value will be used only if the {@code shutdownTimeout} is not set in the {@code configuration} of the application, if
+   * set there it will be honored instead of this default.
+   * <p>
+   * If this is not set, the default value is 5000 millis.
+   * 
+   * @since 4.10, 4.9.5, 4.6.17, 4.4.202506
+   */
+  public static final String GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT =
+      SYSTEM_PROPERTY_PREFIX + "gracefulShutdown.defaultTimeout";
+
+  /**
    * Returns {@code true} if a {@link java.lang.ModuleLayer} will be used for creating the isolated context for the classes of the
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
