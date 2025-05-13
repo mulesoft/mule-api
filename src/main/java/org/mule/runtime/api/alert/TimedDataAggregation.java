@@ -6,6 +6,11 @@
  */
 package org.mule.runtime.api.alert;
 
+import org.mule.api.annotation.Experimental;
+import org.mule.api.annotation.NoInstantiate;
+
+import java.time.Instant;
+
 /**
  * Provides the results of the aggregation of a given data type for time intervals of 1, 5 and 15 minutes.
  * 
@@ -13,18 +18,31 @@ package org.mule.runtime.api.alert;
  * 
  * @since 1.10
  */
+@NoInstantiate
+@Experimental
 public final class TimedDataAggregation<A> {
 
-  private A agg1;
-  private A agg5;
-  private A agg15;
-  private A agg60;
+  private final Instant creationTime;
 
-  TimedDataAggregation(A agg1, A agg5, A agg15, A agg60) {
+  private final A agg1;
+  private final A agg5;
+  private final A agg15;
+  private final A agg60;
+
+  TimedDataAggregation(Instant creationTime, A agg1, A agg5, A agg15, A agg60) {
+    this.creationTime = creationTime;
+
     this.agg1 = agg1;
     this.agg5 = agg5;
     this.agg15 = agg15;
     this.agg60 = agg60;
+  }
+
+  /**
+   * @return the instant when this aggregation was calculated.
+   */
+  public Instant getCreationTime() {
+    return creationTime;
   }
 
   /**

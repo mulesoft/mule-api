@@ -50,6 +50,7 @@ public class TimedDataBufferTestCase {
     assertThat(aggregation.forLast1MinInterval(), is("base"));
     assertThat(aggregation.forLast5MinsInterval(), is("base"));
     assertThat(aggregation.forLast15MinsInterval(), is("base"));
+    assertThat(aggregation.forLast60MinsInterval(), is("base"));
   }
 
   @Test
@@ -71,12 +72,13 @@ public class TimedDataBufferTestCase {
     assertThat(aggregation.forLast1MinInterval(), contains("c"));
     assertThat(aggregation.forLast5MinsInterval(), contains("b", "c"));
     assertThat(aggregation.forLast15MinsInterval(), contains("a", "b", "c"));
+    assertThat(aggregation.forLast60MinsInterval(), contains("a", "b", "c"));
   }
 
   @Test
   public void cleanOnPut() {
     timedDataBuffer.put("a");
-    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(16));
+    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(61));
     timedDataBuffer.put("c");
 
     TimedDataAggregation<List<String>> aggregation = timedDataBuffer.aggregate(Collections.<String>emptyList(), (a, t) -> {
@@ -89,12 +91,13 @@ public class TimedDataBufferTestCase {
     assertThat(aggregation.forLast1MinInterval(), contains("c"));
     assertThat(aggregation.forLast5MinsInterval(), contains("c"));
     assertThat(aggregation.forLast15MinsInterval(), contains("c"));
+    assertThat(aggregation.forLast60MinsInterval(), contains("c"));
   }
 
   @Test
   public void cleanOnAggregate() {
     timedDataBuffer.put("a");
-    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(16));
+    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(61));
 
     TimedDataAggregation<List<String>> aggregation = timedDataBuffer.aggregate(Collections.<String>emptyList(), (a, t) -> {
       List<String> partialAggregation = new ArrayList<String>();
@@ -106,6 +109,7 @@ public class TimedDataBufferTestCase {
     assertThat(aggregation.forLast1MinInterval(), emptyIterable());
     assertThat(aggregation.forLast5MinsInterval(), emptyIterable());
     assertThat(aggregation.forLast15MinsInterval(), emptyIterable());
+    assertThat(aggregation.forLast60MinsInterval(), emptyIterable());
   }
 
   @Test

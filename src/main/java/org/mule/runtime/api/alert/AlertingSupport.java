@@ -6,6 +6,7 @@
  */
 package org.mule.runtime.api.alert;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.api.annotation.NoImplement;
 
 /**
@@ -15,6 +16,7 @@ import org.mule.api.annotation.NoImplement;
  * @since 1.10
  */
 @NoImplement
+@Experimental
 public interface AlertingSupport {
 
   /**

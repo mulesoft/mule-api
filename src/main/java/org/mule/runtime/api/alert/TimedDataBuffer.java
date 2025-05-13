@@ -9,6 +9,7 @@ package org.mule.runtime.api.alert;
 import static java.time.Instant.now;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
+import org.mule.api.annotation.Experimental;
 import org.mule.runtime.api.time.TimeSupplier;
 import org.mule.runtime.internal.alert.TimedData;
 
@@ -26,6 +27,7 @@ import java.util.function.Supplier;
  * 
  * @param <T> the type of the data to be stored in this buffer.
  */
+@Experimental
 public class TimedDataBuffer<T> {
 
   private final Supplier<Instant> instantSupplier;
@@ -42,13 +44,13 @@ public class TimedDataBuffer<T> {
    * @param timeSupplier the supplier of the timestamps to associate with the added data.
    */
   public TimedDataBuffer(TimeSupplier timeSupplier) {
-    this.instantSupplier = () -> timeSupplier.getAsInstant();
+    this.instantSupplier = timeSupplier::getAsInstant;
   }
 
   /**
    * Adds a data point for the current instant in time.
    * <p>
-   * This will also remove entries older than 15 minutes.
+   * This will also remove entries older than 60 minutes.
    * 
    * @param data the data to add for this instant.
    */
@@ -61,9 +63,9 @@ public class TimedDataBuffer<T> {
   }
 
   /**
-   * This will also remove entries older than 15 minutes.
+   * This will also remove entries older than 60 minutes.
    * 
-   * @return the number of elements within the 15 minute interval.
+   * @return the number of elements within the 60 minute interval.
    */
   public int size() {
     evictOldEntries(instantSupplier.get());
@@ -73,14 +75,14 @@ public class TimedDataBuffer<T> {
 
   /**
    * Aggregates the currently stored data using the provided {@code accumulator} for the time intervals of the last minute, 5
-   * minutes, and 15 minutes.
+   * minutes, 15 minutes and 60 minutes.
    * <p>
    * The accumulator will be called once for every item on each interval it is present. The order of the invocations will be the
    * same as the insertion order.
    * <p>
    * If there is no data stored, the aggregations will be {@code baseIntevalAggregation}.
    * <p>
-   * This will also remove entries older than 15 minutes.
+   * This will also remove entries older than 60 minutes.
    * 
    * @param <A>                    the type of the aggregation result.
    * @param baseIntevalAggregation an empty aggregation.
@@ -117,7 +119,7 @@ public class TimedDataBuffer<T> {
       }
     }
 
-    return new TimedDataAggregation<>(agg1, agg5, agg15, agg60);
+    return new TimedDataAggregation<>(now, agg1, agg5, agg15, agg60);
   }
 
   private void evictOldEntries(final Instant now) {
