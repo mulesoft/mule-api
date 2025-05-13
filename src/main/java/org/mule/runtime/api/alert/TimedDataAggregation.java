@@ -54,7 +54,7 @@ public final class TimedDataAggregation<A> {
   public A forLast60MinsInterval() {
     return agg60;
   }
-  
+
   @Override
   public String toString() {
     return agg1 + ", " + agg5 + ", " + agg15 + ", " + agg60;

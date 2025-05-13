@@ -111,11 +111,11 @@ public class TimedDataBufferTestCase {
   @Test
   public void cleanOnSize() {
     timedDataBuffer.put("a");
-    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(10));
+    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(50));
     timedDataBuffer.put("c");
 
     assertThat(timedDataBuffer.size(), is(2));
-    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(20));
+    mutableTimeSupplier.setCurrentTimeMillis(MINUTES.toMillis(70));
     assertThat(timedDataBuffer.size(), is(1));
   }
 
