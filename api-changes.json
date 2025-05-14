@@ -5,6 +5,12 @@
         {
           "ignore": true,
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT",
+          "justification": "W-18476347: Make the shutdown timeout configurable "
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.FORK_JOIN_COMPLETE_CHILDREN_ON_TIMEOUT",
           "justification": "W-16941297: Feature flag"
         },
