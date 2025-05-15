@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
 
 /**
  * Utility class to validate the names used for global components name attribute.
- * 
+ *
  * @since 1.0
  */
 public class NameValidationUtil {
@@ -31,7 +31,7 @@ public class NameValidationUtil {
 
   /**
    * Validates that the given {@code string} does not contain any {@link #SPECIAL_CHARACTERS} character
-   * 
+   *
    * @param string the string to validate.
    * @throws IllegalArgumentException if the string contains an invalid character.
    */

@@ -10,21 +10,21 @@ import java.util.Optional;
 
 /**
  * A feature that can be enabled or disabled according to a certain configuration.
- * 
+ *
  * @since 4.4.0 4.3.1
  */
 public interface Feature {
 
   /**
    * Description of the feature. This description will be part of end user documentation.
-   * 
+   *
    * @return The feature description.
    */
   String getDescription();
 
   /**
    * The issue that caused this feature addition. For instance, <code>MULE-1234</code>.
-   * 
+   *
    * @return Issue that motivated the feature.
    */
   String getIssueId();
@@ -53,7 +53,7 @@ public interface Feature {
    * without considering any other condition. The feature will be enabled according to the value provided, by parsing it as a
    * boolean.
    * </p>
-   * 
+   *
    * <p>
    * For instance if {@link #getOverridingSystemPropertyName()}:
    * </p>
@@ -63,11 +63,11 @@ public interface Feature {
    * <li>Is not set <strong>or</strong> there isn't a System Property defined with a the value assigned to it, then the proper
    * feature flagging criteria will be applied according to how it was configured.</li>
    * </ol>
-   * 
+   *
    * <p>
    * In other words:
    * </p>
-   * 
+   *
    * <ol>
    * <li>If {@link #getOverridingSystemPropertyName} is set to <code>some.meaningful.name</code>
    * <ol>

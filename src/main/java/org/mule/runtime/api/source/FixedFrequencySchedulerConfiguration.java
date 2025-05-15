@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Configuration for fixed frequency scheduler
- * 
+ *
  * @since 1.0
  */
 public interface FixedFrequencySchedulerConfiguration extends SchedulerConfiguration {

@@ -32,7 +32,7 @@ public interface ExpressionLanguageConfiguration {
 
   /**
    * Returns an instance of FeatureFlaggingService with per deployment configured {@link org.mule.runtime.api.config.Feature}s
-   * 
+   *
    * @return
    * @since 1.4.0, 1.3.1
    */

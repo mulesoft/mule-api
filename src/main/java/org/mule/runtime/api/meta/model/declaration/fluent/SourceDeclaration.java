@@ -76,7 +76,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the success {@link SourceCallbackDeclaration}
-   * 
+   *
    * @param successCallback a callback declaration or {@code null}
    */
   public void setSuccessCallback(SourceCallbackDeclaration successCallback) {
@@ -100,7 +100,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the error {@link SourceCallbackDeclaration}
-   * 
+   *
    * @param errorCallback a callback declaration or {@code null}
    */
   public void setErrorCallback(SourceCallbackDeclaration errorCallback) {
@@ -116,7 +116,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the terminate {@link SourceCallbackDeclaration}
-   * 
+   *
    * @param terminateCallback a callback declaration or {@code null}
    */
   public void setTerminateCallback(SourceCallbackDeclaration terminateCallback) {
@@ -136,7 +136,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets whether the declared source should only run in the primary node when in cluster mode
-   * 
+   *
    * @param runsOnPrimaryNodeOnly whether to only run on the primary node
    */
   public void setRunsOnPrimaryNodeOnly(boolean runsOnPrimaryNodeOnly) {
@@ -145,7 +145,7 @@ public class SourceDeclaration extends ExecutableComponentDeclaration<SourceDecl
 
   /**
    * Sets the back pressure {@link SourceCallbackDeclaration}
-   * 
+   *
    * @param backPressureCallback a callback declaration or {@code null}
    * @since 1.1
    */

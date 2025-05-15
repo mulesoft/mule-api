@@ -92,11 +92,11 @@ public class ComponentMetadataTypesDescriptor {
 
     /**
      * Allows to view not only the dynamic metadata of a component, but static metadata as well.
-     * 
+     *
      * @param keepNonDynamicMetadata {@code true} if static metadata must be kept, {@code false} if only dynamic metadata is kept.
      *                               Default value is {@code false}.
      * @return this builder
-     * 
+     *
      * @since 1.5
      */
     public ComponentMetadataTypesDescriptor.ComponentMetadataTypesDescriptorBuilder keepNonDynamicMetadata(boolean keepNonDynamicMetadata) {

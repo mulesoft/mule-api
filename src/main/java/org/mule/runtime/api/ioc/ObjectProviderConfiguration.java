@@ -10,14 +10,14 @@ import org.mule.runtime.api.component.ConfigurationProperties;
 
 /**
  * Configuration for the {@link ObjectProvider}
- * 
+ *
  * @since 1.0
  */
 public interface ObjectProviderConfiguration {
 
   /**
    * {@link ObjectProvider} implementation for objects of the mule runtime.
-   * 
+   *
    * @return {@link ObjectProvider} implementation for objects of the mule runtime.
    */
   ObjectProvider getArtifactObjectProvider();

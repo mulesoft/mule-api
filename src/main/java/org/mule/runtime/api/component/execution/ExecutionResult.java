@@ -21,7 +21,7 @@ public interface ExecutionResult {
 
   /**
    * Obtain the result {@link Event}
-   * 
+   *
    * @return the result Event.
    */
   Event getEvent();

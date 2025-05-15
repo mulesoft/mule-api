@@ -84,7 +84,7 @@ public abstract class DeclarationWalker {
   /**
    * Invoked when an {@link OperationDeclaration} is found in the traversed {@code extensionDeclaration}.
    * <p>
-   * 
+   *
    * @param owner       The declaration that owns the operation
    * @param declaration the {@link WithOperationsDeclaration}
    */

@@ -42,7 +42,7 @@ public class NestedChainDeclaration extends NestedComponentDeclaration<NestedCha
 
   /**
    * Sets the chain's {@link ChainExecutionOccurrence}
-   * 
+   *
    * @param occurrence an occurrence. Cannot be {@code null}
    * @since 1.7.0
    */

@@ -325,7 +325,7 @@ public final class MediaType implements Serializable {
 
   /**
    * Returns true if this mimeType was defined in the Mule App by the developer
-   * 
+   *
    * @return True if defined in the Mule App
    * @since 1.2.4
    */

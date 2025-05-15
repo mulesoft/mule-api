@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Mule API I/O Utilities.
- * 
+ *
  * @since 1.2.0
  */
 public class IOUtils {
@@ -34,7 +34,7 @@ public class IOUtils {
   /**
    * This method wraps {@link org.apache.commons.io.IOUtils}' <code>toByteArray(InputStream)</code> method but catches any
    * {@link IOException} and wraps it into a {@link RuntimeException}.
-   * 
+   *
    * @param input
    * @return the byte array representation of the stream.
    */

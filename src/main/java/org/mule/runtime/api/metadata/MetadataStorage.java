@@ -19,7 +19,7 @@ import java.util.Optional;
  * This component provides the capability to store data so future requests for that data can be served faster and accessed from
  * every {@link InputTypeResolver}, {@link TypeKeysResolver} and {@link OutputTypeResolver}. It also allows to evict entries in
  * case recalculations are needed.
- * 
+ *
  * @since 1.5
  */
 @NoImplement
@@ -66,7 +66,7 @@ public interface MetadataStorage {
 
   /**
    * Evicts the key in the storage.
-   * 
+   *
    * @return true if the key was in the storage, false if not.
    */
   boolean evictEntry(Serializable key);

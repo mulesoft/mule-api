@@ -21,7 +21,7 @@ import java.util.Optional;
 
 /**
  * Default implementation for {@link InputEvent}.
- * 
+ *
  * @since 1.0
  */
 public class DefaultInputEvent implements InputEvent {

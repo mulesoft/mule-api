@@ -74,7 +74,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String,
    * OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.
-   * 
+   *
    * @since 1.8
    */
   public static final String MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC =
@@ -102,7 +102,7 @@ public final class MuleSystemProperties {
    * Comma-separated list of packages to force as registrable.
    * <p>
    * Refer to {@link ExtensionDeclarer#isTypeRegistrable}.
-   * 
+   *
    * @since 1.4
    */
   public static final String MULE_FORCE_REGISTRABLE_EXTENSION_TYPE_PACKAGES =
@@ -342,7 +342,7 @@ public final class MuleSystemProperties {
    * <code>mule -M-Dmule.deploy.applications=app1:app2:app3</code>
    * <p>
    * Using this property will disable the directory polling to find new artifacts to deploy.
-   * 
+   *
    * @since 4.0
    */
   public static final String DEPLOYMENT_APPLICATION_PROPERTY = SYSTEM_PROPERTY_PREFIX + "deploy.applications";
@@ -373,7 +373,7 @@ public final class MuleSystemProperties {
    * If set to true, {@code optional} attribute in entries in a `registry-bootstrap.properties` will be ignored.
    *
    * @since 4.5.0
-   * 
+   *
    * @deprecated since 4.9 setting its value does not have any effect
    */
   @Deprecated
@@ -392,7 +392,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, the application model will be validated with the region classloader. When disabled, it will be validated with
    * the application classloader.
-   * 
+   *
    * @since 4.5.0
    */
   public static final String VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY =
@@ -432,7 +432,7 @@ public final class MuleSystemProperties {
    * <p>
    * Log extract for a connectivity error at the Web Service Consumer (HTTP:CONNECTIVITY is being suppressed):
    * </p>
-   * 
+   *
    * <pre>
    * Error type : WSC:INVALID_WSDL
    * Caused by  : HTTP:CONNECTIVITY
@@ -516,7 +516,7 @@ public final class MuleSystemProperties {
   /**
    * When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
    * and Async.
-   * 
+   *
    * @since 4.5.0, 4.4.0-202306
    */
   public static final String CREATE_CHILD_POLICY_CONTEXT_FOR_PARALLEL_SCOPES_PROPERTY =
@@ -572,7 +572,7 @@ public final class MuleSystemProperties {
    * <li><b>11</b>: defaults to {@code false}.</li>
    * <li><b>17 and higher</b>: defaults to {@code true}.</li>
    * </ul>
-   * 
+   *
    * @since 4.6.0
    */
   public static final String CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER =
@@ -743,7 +743,7 @@ public final class MuleSystemProperties {
    * set there it will be honored instead of this default.
    * <p>
    * If this is not set, the default value is 5000 millis.
-   * 
+   *
    * @since 4.10, 4.9.5, 4.6.17, 4.4.202506
    */
   public static final String GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT =
@@ -856,7 +856,7 @@ public final class MuleSystemProperties {
 
   /**
    * Forces the validation of all loaded extension models
-   * 
+   *
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
@@ -971,7 +971,7 @@ public final class MuleSystemProperties {
 
   /**
    * When set to true, transactions will be committed in case of redelivery exhausted error.
-   * 
+   *
    * @since 4.5.0, 4.4.0-202209, 4.3.0-202209
    * @deprecated since 4.7 setting its value does not have any effect
    */
@@ -995,7 +995,7 @@ public final class MuleSystemProperties {
    * If set to true, the deployment process will use the SpringLifecycleObjectSorter during initialization/disposal.
    *
    * @since 4.5.0
-   * 
+   *
    * @deprecated since 4.7 setting its value does not have any effect
    */
   @Deprecated
@@ -1035,7 +1035,7 @@ public final class MuleSystemProperties {
    * <li><b>11</b>: defaults to {@code false}.</li>
    * <li><b>17 and higher</b>: defaults to {@code true}.</li>
    * </ul>
-   * 
+   *
    * @since 4.5.0
    * @deprecated since 4.7 setting its value does not have any effect
    */
@@ -1068,7 +1068,7 @@ public final class MuleSystemProperties {
    * container and the services ({@code true}) or a classLoader will be used ({@code false}).
    * <p>
    * Ref: {@link #CLASSLOADER_CONTAINER_JPMS_MODULE_LAYER}
-   * 
+   *
    * @since 4.6.0
    */
   public static boolean classloaderContainerJpmsModuleLayer() {
@@ -1084,7 +1084,7 @@ public final class MuleSystemProperties {
 
   /**
    * @return {@code false}
-   * 
+   *
    * @deprecated since 4.7 this is a no-op
    */
   @Deprecated

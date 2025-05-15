@@ -73,7 +73,7 @@ public interface CustomizationService {
 
     /**
      * Sets the new service implementation that overrides the default one.
-     * 
+     *
      * @param newServiceImpl the new service implementation.
      */
     void overrideServiceImpl(T newServiceImpl);
@@ -122,7 +122,7 @@ public interface CustomizationService {
    * @param baseContext {@code true} if this service has to bee present in the base Context, {@code false} if it may depend on
    *                    artifact specific objects.
    * @param <T>         the service type
-   * 
+   *
    * @since 1.10
    */
   default <T> void registerCustomServiceImpl(String serviceId, T serviceImpl, boolean baseContext) {
@@ -152,7 +152,7 @@ public interface CustomizationService {
    * @param baseContext  {@code true} if this service has to bee present in the base Context, {@code false} if it may depend on
    *                     artifact specific objects.
    * @param <T>          the service type
-   * 
+   *
    * @since 1.10
    */
   default <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass, boolean baseContext) {

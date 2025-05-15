@@ -28,7 +28,7 @@ public interface DataTypeParamsBuilder {
    * {@link DataType} being built, unless it had been previously set.
    * <p>
    * An encoding set by a call to this method can be overridden by calling {@link #charset(String)}.
-   * 
+   *
    * @param mediaType the MIME type string to set. If null or empty, the builder is not changed.
    * @return this builder.
    * @throws IllegalArgumentException if the given media type string is invalid.
@@ -42,7 +42,7 @@ public interface DataTypeParamsBuilder {
    * {@link DataType} being built, unless it had been previously set.
    * <p>
    * An encoding set by a call to this method can be overridden by calling {@link #charset(String)}.
-   * 
+   *
    * @param mediaType the media type to set. If null, the builder is not changed.
    * @return this builder.
    */
@@ -67,7 +67,7 @@ public interface DataTypeParamsBuilder {
 
   /**
    * Builds a new {@link DataType} with the values set in this builder.
-   * 
+   *
    * @return a newly built {@link DataType}.
    */
   DataType build();

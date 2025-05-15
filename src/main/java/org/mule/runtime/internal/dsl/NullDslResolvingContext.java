@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * Null implementation of a {@link DslResolvingContext}
- * 
+ *
  * @since 4.0
  */
 public class NullDslResolvingContext implements DslResolvingContext {

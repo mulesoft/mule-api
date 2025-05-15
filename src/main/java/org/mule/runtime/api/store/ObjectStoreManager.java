@@ -106,7 +106,7 @@ public interface ObjectStoreManager {
 
   /**
    * Returns the default partition, which is unbounded and persistent
-   * 
+   *
    * @param <T> the generic type of the items in the store
    * @return the default partition {@link ObjectStore}
    */

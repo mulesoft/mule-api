@@ -8,7 +8,7 @@ package org.mule.runtime.api.artifact;
 
 /**
  * Provides values for different types of artifacts that a Mule container may be able to handle.
- * 
+ *
  * @since 1.9
  */
 public enum ArtifactType {

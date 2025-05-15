@@ -13,7 +13,7 @@ import java.util.concurrent.locks.Lock;
  * <p>
  * All mule components that require synchronization for access shared data must be synchronized using locks from the
  * {@link LockFactory} implementation.
- * 
+ *
  * @since 1.0
  */
 public interface LockFactory {

@@ -22,7 +22,7 @@ public interface ExceptionReader {
 
   /**
    * Returns a map of the non-standard information stored on the exception
-   * 
+   *
    * @param t the exception to extract the information from
    * @return a map of the non-standard information stored on the exception
    */

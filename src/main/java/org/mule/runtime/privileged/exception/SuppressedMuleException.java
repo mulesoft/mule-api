@@ -17,23 +17,23 @@ import static java.util.Objects.requireNonNull;
  * not be taken into account during the {@link Error} resolution. <br/>
  * <br/>
  * Example without suppression: <br/>
- * 
+ *
  * <pre>
  * throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link org.mule.runtime.api.connection.ConnectionException}(), {@link org.mule.runtime.api.message.ErrorType customErrorType})
  * </pre>
- * 
+ *
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning ConnectionException's error type (discarding the
  * top level customErrorType). <br/>
  * <br/>
  * Same example with suppression: <br/>
- * 
+ *
  * <pre>
  * throw new {@link org.mule.runtime.api.exception.TypedException}(new {@link SuppressedMuleException}(new {@link org.mule.runtime.api.connection.ConnectionException}()), {@link org.mule.runtime.api.message.ErrorType customErrorType})
  * </pre>
- * 
+ *
  * will resolve to an {@link Error} with {@link Error#getErrorType()} returning customErrorType (discarding the underlying
  * ConnectionException's error type}).
- * 
+ *
  * @since 1.2.3, 1.3
  */
 public class SuppressedMuleException extends MuleException {
@@ -44,7 +44,7 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Constructs a new {@link SuppressedMuleException}
-   * 
+   *
    * @param throwable       Exception that will be wrapped.
    * @param causeToSuppress The cause that wants to be suppressed. Cannot be null.
    */
@@ -58,7 +58,7 @@ public class SuppressedMuleException extends MuleException {
    * Completes the {@link org.mule.runtime.api.exception.MuleExceptionInfo} of a {@link SuppressedMuleException} by adding the
    * {@link MuleException} that is being suppressed and traversing its causes to include any other suppression found and also the
    * additional information from all the {@link MuleException}s.
-   * 
+   *
    * @param causeToSuppress Exception that is being suppressed.
    */
   private void addSuppressionToMuleExceptionInfo(MuleException causeToSuppress) {
@@ -78,7 +78,7 @@ public class SuppressedMuleException extends MuleException {
 
   /**
    * Unwraps a {@link SuppressedMuleException}.
-   * 
+   *
    * @return First cause that is not an instance of {@link SuppressedMuleException}.
    */
   public Throwable unwrap() {
@@ -96,7 +96,7 @@ public class SuppressedMuleException extends MuleException {
   /**
    * Wraps the provided exception, suppressing the exception itself or the first cause that is an instance of the provided class.
    * The search will stop if a {@link SuppressedMuleException} is found, making no suppression.
-   * 
+   *
    * @param exception       Exception that will be wrapped, suppressing the exception itself or one of it's causes.
    * @param causeToSuppress Class of the {@link MuleException} that has to be suppressed.
    * @return {@link SuppressedMuleException} or provided exception if no cause to suppress is found.
