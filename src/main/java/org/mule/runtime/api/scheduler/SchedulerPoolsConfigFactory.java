@@ -10,7 +10,7 @@ import java.util.Optional;
 
 /**
  * Provides an instance of {@link SchedulerPoolsConfig} to use when building the infrastructure for the {@link Scheduler}s.
- * 
+ *
  * @since 1.0
  */
 public interface SchedulerPoolsConfigFactory {

@@ -75,7 +75,7 @@ public interface Scheduler extends ScheduledExecutorService {
   /**
    * @return the string to append to the name of the thread that executes a task for this Scheduler, or {@code null} if nothing is
    *         to be appended.
-   * 
+   *
    * @since 1.1
    */
   default String getThreadNameSuffix() {

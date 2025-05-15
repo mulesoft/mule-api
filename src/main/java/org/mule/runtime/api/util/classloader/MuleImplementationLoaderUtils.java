@@ -69,7 +69,7 @@ public class MuleImplementationLoaderUtils {
 
   /**
    * The given {@link ClassLoader} will be used as the implementations class loader.
-   * 
+   *
    * @param classLoader {@link ClassLoader} to look for implementations.
    * @throws IllegalStateException    if the implementations class loader has been already set or the dynamic lookup was
    *                                  configured.

@@ -59,7 +59,7 @@ public abstract class AbstractDataTypeBuilderFactory {
    * <p>
    * If more than one implementation is found, the classLoading order of those implementations will determine which one is used.
    * Information about this will be logged to aid in the troubleshooting of those cases.
-   * 
+   *
    * @return the implementation of this builder factory provided by the Mule Runtime.
    */
   static final AbstractDataTypeBuilderFactory getDefaultFactory() {

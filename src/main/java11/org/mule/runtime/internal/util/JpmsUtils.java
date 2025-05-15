@@ -15,7 +15,7 @@ public class JpmsUtils {
 
   /**
    * Determines whether the caller class is a member of a named module.
-   * 
+   *
    * @param caller class to determine whether it's a member of a named module.
    * @return {@code true} if the class belongs to a named module, {@code false} otherwise.
    */

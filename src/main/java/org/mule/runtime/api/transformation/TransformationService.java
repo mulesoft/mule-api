@@ -17,7 +17,7 @@ public interface TransformationService {
    * Given a {@code value) it will try to transform it to the expected type defined in the {@code expectedDataType}
    *
    * @param value the value to transform
-   * 
+   *
    * @param valueDataType    the value's {@link DataType }
    * @param expectedDataType the expected type's {@link DataType}
    * @return the transformed value

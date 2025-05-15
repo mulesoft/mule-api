@@ -170,7 +170,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
    *
    * @param fieldValueProviderModels List of {@link FieldValueProviderModel}s
    * @return {@code this} declarer
-   * 
+   *
    * @since 1.4.0
    */
   public T withFieldValueProviderModels(List<FieldValueProviderModel> fieldValueProviderModels) {
@@ -180,7 +180,7 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
 
   /**
    * Sets the given {@link List} of {@link StereotypeModel}
-   * 
+   *
    * @param stereotypeModels a {@link List} of {@link StereotypeModel}
    * @return {@code this} declarer
    */

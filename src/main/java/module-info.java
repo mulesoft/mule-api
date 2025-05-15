@@ -8,7 +8,7 @@ import org.mule.api.annotation.jpms.PrivilegedApi;
 
 /**
  * API for Mule Runtime.
- * 
+ *
  * @moduleGraph
  * @since 1.5
  */
@@ -24,7 +24,7 @@ module org.mule.runtime.api {
   requires org.mule.runtime.metadata.model.message;
   requires org.mule.runtime.artifact.declaration;
   requires org.mule.runtime.artifact.declaration.persistence;
-  
+
   requires jakarta.activation;
   requires java.naming;
   requires java.sql;
@@ -33,18 +33,18 @@ module org.mule.runtime.api {
   requires transitive jakarta.inject;
   // Old Java EE dependencies (with javax package prefix), kept for backwards compatibility
   requires transitive javax.inject;
-  
+
   // SLF4J is the API provided by the Mule Runtime
   // for artifacts to use the underlying logging functionality
   requires transitive org.slf4j;
-  
+
   requires com.github.benmanes.caffeine;
   requires com.google.common;
   requires com.google.gson;
   requires org.apache.commons.io;
   requires org.apache.commons.lang3;
   requires semver4j;
-  
+
   exports org.mule.runtime.api.alert;
   exports org.mule.runtime.api.app.declaration.serialization;
   exports org.mule.runtime.api.artifact;

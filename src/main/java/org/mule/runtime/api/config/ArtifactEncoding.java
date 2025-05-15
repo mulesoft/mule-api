@@ -12,7 +12,7 @@ import java.nio.charset.Charset;
 
 /**
  * Allows to query the encoding configured for the current deployable artifact.
- * 
+ *
  * @since 4.10
  */
 @NoImplement

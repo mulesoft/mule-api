@@ -11,7 +11,7 @@ import org.mule.runtime.api.exception.MuleRuntimeException;
 
 /**
  * Exception thrown by {@link ExecutableComponent} when there was a unhandled error within the execution of a set of components.
- * 
+ *
  * @since 1.0
  */
 public final class ComponentExecutionException extends MuleRuntimeException {

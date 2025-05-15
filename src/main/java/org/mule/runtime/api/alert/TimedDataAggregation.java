@@ -13,9 +13,9 @@ import java.time.Instant;
 
 /**
  * Provides the results of the aggregation of a given data type for time intervals of 1, 5 and 15 minutes.
- * 
+ *
  * @param <A> the type of the aggregation result.
- * 
+ *
  * @since 1.10
  */
 @NoInstantiate

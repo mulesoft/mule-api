@@ -24,7 +24,7 @@ import java.util.function.Supplier;
  * Data structure that stores data points for different moments in time.
  * <p>
  * Data is kept at least for 60 minutes. Items that were added more than 60 minutes ago will be eventually removed.
- * 
+ *
  * @param <T> the type of the data to be stored in this buffer.
  */
 @Experimental
@@ -40,7 +40,7 @@ public class TimedDataBuffer<T> {
 
   /**
    * Creates a new timed buffer.
-   * 
+   *
    * @param timeSupplier the supplier of the timestamps to associate with the added data.
    */
   public TimedDataBuffer(TimeSupplier timeSupplier) {
@@ -51,7 +51,7 @@ public class TimedDataBuffer<T> {
    * Adds a data point for the current instant in time.
    * <p>
    * This will also remove entries older than 60 minutes.
-   * 
+   *
    * @param data the data to add for this instant.
    */
   public void put(T data) {
@@ -64,7 +64,7 @@ public class TimedDataBuffer<T> {
 
   /**
    * This will also remove entries older than 60 minutes.
-   * 
+   *
    * @return the number of elements within the 60 minute interval.
    */
   public int size() {
@@ -83,7 +83,7 @@ public class TimedDataBuffer<T> {
    * If there is no data stored, the aggregations will be {@code baseIntevalAggregation}.
    * <p>
    * This will also remove entries older than 60 minutes.
-   * 
+   *
    * @param <A>                    the type of the aggregation result.
    * @param baseIntevalAggregation an empty aggregation.
    * @param accumulator            function to be called for each item, on the current aggregation result and the item itself.

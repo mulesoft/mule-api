@@ -40,7 +40,7 @@ public interface LocationPart {
   /**
    * @return the line number in the config file of the application where this component is defined, if it was defined in a config
    *         file.
-   * 
+   *
    * @deprecated Use {@link #getLine()} instead.
    */
   @Deprecated
@@ -49,7 +49,7 @@ public interface LocationPart {
   /**
    * @return the start column in the config file of the application where this component is defined, if it was defined in a config
    *         file.
-   * 
+   *
    * @deprecated Use {@link #getColumn()} instead.
    */
   @Deprecated

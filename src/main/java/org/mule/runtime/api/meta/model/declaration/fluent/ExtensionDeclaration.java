@@ -126,7 +126,7 @@ public class ExtensionDeclaration extends NamedDeclaration<ExtensionDeclaration>
 
   /**
    * Set the {@link ConstructDeclaration}s of this declaration to be the ones defined in {@code constructs}.
-   * 
+   *
    * @param constructs
    */
   public void setConstructs(List<ConstructDeclaration> constructs) {
