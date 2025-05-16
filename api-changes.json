@@ -4,6 +4,12 @@
       "ignore": [
         {
           "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT",
+          "justification": "W-18476347: Make the shutdown timeout configurable "
+        },
+        {
+          "ignore": true,
           "code": "java.method.defaultMethodAddedToInterface",
           "new": "method java.util.List<org.mule.runtime.api.el.validation.ConstraintViolation> org.mule.runtime.api.el.ExpressionLanguage::validate(java.lang.String, java.lang.String, org.mule.runtime.api.el.validation.ValidationPhase, org.mule.metadata.message.api.el.TypeBindings, java.util.Optional<org.mule.metadata.api.model.MetadataType>)",
           "justification": "W-16497173: EL Validation API"
