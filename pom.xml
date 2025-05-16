@@ -122,7 +122,7 @@
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
 
-        <oldMuleArtifactVersion>1.9.4-rc1</oldMuleArtifactVersion>
+        <oldMuleArtifactVersion>1.7.0-rc1</oldMuleArtifactVersion>
         <muleApiAnnotationsVersion>1.8.5-SNAPSHOT</muleApiAnnotationsVersion>
 
         <muleBomVersion>4.9.5-SNAPSHOT</muleBomVersion>
