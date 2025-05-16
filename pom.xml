@@ -114,7 +114,7 @@
         <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
-        <artifactDeclarationVersion>1.9.5-SNAPSHOT</artifactDeclarationVersion>
+        <artifactDeclarationVersion>1.9.6-SNAPSHOT</artifactDeclarationVersion>
         <muleModuleMavenPluginVersion>1.9.5-SNAPSHOT</muleModuleMavenPluginVersion>
 
         <caffeine.java8.version>2.9.3</caffeine.java8.version>
