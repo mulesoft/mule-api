@@ -99,6 +99,7 @@ module org.mule.runtime.api {
   exports org.mule.runtime.api.meta.model.stereotype;
   exports org.mule.runtime.api.meta.model.util;
   exports org.mule.runtime.api.meta.model.version;
+  exports org.mule.runtime.api.meta.version;
   exports org.mule.runtime.api.memory.management;
   exports org.mule.runtime.api.memory.provider;
   exports org.mule.runtime.api.memory.provider.type;

@@ -8,6 +8,8 @@ package org.mule.runtime.api.meta;
 
 import static com.vdurmont.semver4j.Semver.SemverType.LOOSE;
 
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
+
 import com.google.common.base.Joiner;
 import com.vdurmont.semver4j.Semver;
 import com.vdurmont.semver4j.SemverException;
@@ -54,6 +56,10 @@ public final class MuleVersion {
     } catch (SemverException sve) {
       throw new IllegalArgumentException("Invalid version " + version);
     }
+
+    if (this.semver.getPatch() == null) {
+      throw new IllegalArgumentException("Fishing...");
+    }
   }
 
   /**
@@ -71,19 +77,38 @@ public final class MuleVersion {
   }
 
   public boolean atLeastBase(String baseVersion) {
-    return getBaseVersion().atLeastBase(new MuleVersion(baseVersion));
+    // Use the method with MuleVersion instead of MuleMinorVersion just in case this is being called with a revision version part
+    return atLeastBase(new MuleVersion(baseVersion));
   }
 
+  /**
+   * @deprecated use {@link #atLeastBase(MuleMinorVersion)} instead.
+   */
+  @Deprecated
   public boolean atLeastBase(MuleVersion baseVersion) {
-    return getBaseVersion().atLeast(baseVersion.getBaseVersion());
+    return atLeastBase(baseVersion.getBaseVersion());
+  }
+
+  public boolean atLeastBase(MuleMinorVersion baseVersion) {
+    return sameBaseVersion(baseVersion) || newerThan(baseVersion);
+  }
+
+  /**
+   * @param otherVersion the other version
+   * @return true if both have the same major and minor version, false otherwise
+   * @deprecated use {@link #sameBaseVersion(MuleMinorVersion)} instead.
+   */
+  @Deprecated
+  public boolean sameBaseVersion(MuleVersion otherVersion) {
+    return getBaseVersion().equals(otherVersion.getBaseVersion());
   }
 
   /**
    * @param otherVersion the other version
    * @return true if both have the same major and minor version, false otherwise
    */
-  public boolean sameBaseVersion(MuleVersion otherVersion) {
-    return getBaseVersion().sameAs(otherVersion.getBaseVersion());
+  public boolean sameBaseVersion(MuleMinorVersion otherVersion) {
+    return getBaseVersion().equals(otherVersion);
   }
 
   public boolean sameAs(String version) {
@@ -127,6 +152,17 @@ public final class MuleVersion {
     return false;
   }
 
+  public boolean newerThan(MuleMinorVersion version) {
+    if (getMajor() > version.getMajor()) {
+      return true;
+    } else if (getMajor() == version.getMajor()) {
+      if (getMinor() > version.getMinor()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /**
    * Returns a string representing the complete numeric version, without suffixes. If the revision is not present, then it will be
    * set to 0 (zero).<br/>
@@ -164,8 +200,8 @@ public final class MuleVersion {
     return this.semver.getSuffixTokens() != null && this.semver.getSuffixTokens().length > 0;
   }
 
-  private MuleVersion getBaseVersion() {
-    return new MuleVersion(getMajor() + "." + getMinor());
+  public MuleMinorVersion getBaseVersion() {
+    return new MuleMinorVersion(getMajor(), getMinor());
   }
 
   @Override
