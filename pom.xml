@@ -126,7 +126,7 @@
         <oldMuleArtifactVersion>1.8.4-rc1</oldMuleArtifactVersion>
         <muleApiAnnotationsVersion>1.7.7-SNAPSHOT</muleApiAnnotationsVersion>
 
-        <muleBomVersion>4.8.6-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.8.7-SNAPSHOT</muleBomVersion>
         <jsonassert.version>1.5.2</jsonassert.version>
     </properties>
 
