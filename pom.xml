@@ -5,12 +5,12 @@
     <parent>
         <groupId>org.mule</groupId>
         <artifactId>mule-plugin-mgmt-parent-pom</artifactId>
-        <version>4.8.6-SNAPSHOT</version>
+        <version>4.8.7-SNAPSHOT</version>
     </parent>
 
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.8.6-SNAPSHOT</version>
+    <version>1.8.7-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
@@ -113,8 +113,8 @@
         <javaReleaseVersion>8</javaReleaseVersion>
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
-        <artifactDeclarationVersion>1.8.6-SNAPSHOT</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.8.6-SNAPSHOT</muleModuleMavenPluginVersion>
+        <artifactDeclarationVersion>1.8.7-SNAPSHOT</artifactDeclarationVersion>
+        <muleModuleMavenPluginVersion>1.8.7-SNAPSHOT</muleModuleMavenPluginVersion>
 
         <junitVersion>4.13.2</junitVersion>
         <hamcrestVersion>2.2</hamcrestVersion>
@@ -123,10 +123,10 @@
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
 
-        <oldMuleArtifactVersion>1.8.4-rc1</oldMuleArtifactVersion>
-        <muleApiAnnotationsVersion>1.7.6-SNAPSHOT</muleApiAnnotationsVersion>
+        <oldMuleArtifactVersion>1.8.6-rc1</oldMuleArtifactVersion>
+        <muleApiAnnotationsVersion>1.7.7-SNAPSHOT</muleApiAnnotationsVersion>
 
-        <muleBomVersion>4.8.6-SNAPSHOT</muleBomVersion>
+        <muleBomVersion>4.8.7-SNAPSHOT</muleBomVersion>
         <jsonassert.version>1.5.2</jsonassert.version>
     </properties>
 
