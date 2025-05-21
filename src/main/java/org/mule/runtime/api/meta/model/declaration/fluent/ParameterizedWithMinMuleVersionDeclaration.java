@@ -6,11 +6,12 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
+import static java.util.Optional.ofNullable;
+
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 
 import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 
 /**
@@ -50,4 +51,10 @@ public abstract class ParameterizedWithMinMuleVersionDeclaration<T extends Param
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
     this.minMuleVersion = minMuleVersion;
   }
+
+  @Override
+  public void withMinMuleVersion(MuleMinorVersion minMuleVersion) {
+    withMinMuleVersion(new MuleVersion(minMuleVersion.toString() + ".0"));
+  }
+
 }

@@ -52,6 +52,39 @@ public class MuleMinorVersion {
     return minor;
   }
 
+  /**
+   * Returns true if the version represented by the current object is equals newer to the version sent as parameter.
+   *
+   * @param version
+   * @return
+   */
+  public boolean atLeast(String version) {
+    return atLeast(new MuleMinorVersion(version));
+  }
+
+  public boolean atLeast(MuleMinorVersion version) {
+    return equals(version) || newerThan(version);
+  }
+
+  public boolean priorTo(String version) {
+    return priorTo(new MuleMinorVersion(version));
+  }
+
+  public boolean priorTo(MuleMinorVersion version) {
+    return !atLeast(version);
+  }
+
+  public boolean newerThan(MuleMinorVersion version) {
+    if (getMajor() > version.getMajor()) {
+      return true;
+    } else if (getMajor() == version.getMajor()) {
+      if (getMinor() > version.getMinor()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @Override
   public String toString() {
     return major + "." + minor;

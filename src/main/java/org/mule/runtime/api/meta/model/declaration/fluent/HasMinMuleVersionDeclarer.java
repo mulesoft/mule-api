@@ -8,6 +8,7 @@ package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 
 /**
  * Interface for a declarer which declares minimum mule version for its usage.
@@ -23,7 +24,17 @@ public interface HasMinMuleVersionDeclarer<T> {
    *
    * @param minMuleVersion the minimum mule version for the declarer
    * @return {@code this} declarer
+   * @deprecated since 1.10 use {@link #withMinMuleVersion(MuleMinorVersion)} instead.
    */
+  @Deprecated
   T withMinMuleVersion(MuleVersion minMuleVersion);
+
+  /**
+   * Use this method to specify a {@link MuleMinorVersion} which is the minimum required for the usage of the declarer
+   *
+   * @param minMuleVersion the minimum mule version for the declarer
+   * @return {@code this} declarer
+   */
+  T withMinMuleVersion(MuleMinorVersion minMuleVersion);
 
 }
