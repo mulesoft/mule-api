@@ -6,12 +6,14 @@
  */
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
-import static java.util.Optional.ofNullable;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.meta.ExpressionSupport.SUPPORTED;
 import static org.mule.runtime.api.meta.model.ParameterDslConfiguration.getDefaultInstance;
 import static org.mule.runtime.api.meta.model.parameter.ParameterRole.BEHAVIOUR;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
+import static java.util.Optional.ofNullable;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
@@ -23,6 +25,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -222,4 +225,10 @@ public class ParameterDeclaration extends AbstractParameterDeclaration<Parameter
   public void withMinMuleVersion(MuleVersion minMuleVersion) {
     this.minMuleVersion = minMuleVersion;
   }
+
+  @Override
+  public void withMinMuleVersion(MuleMinorVersion minMuleVersion) {
+    withMinMuleVersion(new MuleVersion(minMuleVersion.toString() + ".0"));
+  }
+
 }

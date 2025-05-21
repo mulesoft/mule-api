@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import org.mule.runtime.api.meta.MuleVersion;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 
 /**
  * Base class for a component which can be used to create a {@link BaseDeclaration} and has a minimum version required for its
@@ -30,8 +31,15 @@ public class ParameterizedWithMinMuleVersionDeclarer<T extends ParameterizedWith
   /**
    * {@inheritDoc}
    */
+  @Override
   public T withMinMuleVersion(MuleVersion minMuleVersion) {
     this.declaration.withMinMuleVersion(minMuleVersion);
     return (T) this;
   }
+
+  @Override
+  public T withMinMuleVersion(MuleMinorVersion minMuleVersion) {
+    return withMinMuleVersion(new MuleVersion(minMuleVersion.toString() + ".0"));
+  }
+
 }
