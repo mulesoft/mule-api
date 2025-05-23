@@ -11,7 +11,7 @@
 
     <groupId>org.mule.runtime</groupId>
     <artifactId>mule-api</artifactId>
-    <version>1.9.6-rc1</version>
+    <version>1.9.6-rc2</version>
     <packaging>jar</packaging>
     <name>Mule API</name>
     <description>API for Mule Runtime</description>
