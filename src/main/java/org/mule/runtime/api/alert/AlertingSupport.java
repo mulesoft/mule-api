@@ -29,8 +29,8 @@ public interface AlertingSupport {
   /**
    * Triggers an alert with the given additional data.
    *
-   * @param alertName the unique name to identify the alert being raised.
-   * @param alertData additional data related to the alert being triggered.
+   * @param alertName the unique name to identify the alert being raised, not null.
+   * @param alertData additional data related to the alert being triggered. May be null.
    */
   <T> void triggerAlert(String alertName, T alertData);
 

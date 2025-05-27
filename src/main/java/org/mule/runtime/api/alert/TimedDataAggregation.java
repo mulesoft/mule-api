@@ -29,7 +29,7 @@ public final class TimedDataAggregation<A> {
   private final A agg15;
   private final A agg60;
 
-  TimedDataAggregation(Instant creationTime, A agg1, A agg5, A agg15, A agg60) {
+  public TimedDataAggregation(Instant creationTime, A agg1, A agg5, A agg15, A agg60) {
     this.creationTime = creationTime;
 
     this.agg1 = agg1;
@@ -75,6 +75,6 @@ public final class TimedDataAggregation<A> {
 
   @Override
   public String toString() {
-    return agg1 + ", " + agg5 + ", " + agg15 + ", " + agg60;
+    return "1min: " + agg1 + ", 5min: " + agg5 + ", 15min: " + agg15 + ", 60min: " + agg60;
   }
 }
