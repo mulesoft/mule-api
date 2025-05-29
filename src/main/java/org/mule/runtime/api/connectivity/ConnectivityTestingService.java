@@ -17,8 +17,10 @@ import org.mule.runtime.api.exception.ObjectNotFoundException;
  * A {@code ConnectivityTestingService}
  *
  * @since 4.0
+ * @deprecated Used only by fat-tooling, since 4.10 use the mule-framework instead.
  */
 @NoImplement
+@Deprecated // (since = "4.10", forRemoval = true)
 public interface ConnectivityTestingService {
 
   /**
