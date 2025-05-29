@@ -176,6 +176,7 @@ module org.mule.runtime.api {
 
   // Allow introspection for serialization/deserialization by Gson and Kryo
   opens org.mule.runtime.api.component to
+      org.mule.weave.module.java,
       org.mule.runtime.extensions.support,
       com.google.gson,
       kryo.shaded;
