@@ -28,6 +28,8 @@ module org.mule.runtime.api {
   requires jakarta.activation;
   requires java.naming;
   requires java.sql;
+  // for QName, used for component annotations
+  requires transitive java.xml;
   requires transitive java.inject;
   
   // SLF4J is the API provided by the Mule Runtime

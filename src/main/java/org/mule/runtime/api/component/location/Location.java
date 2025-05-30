@@ -289,7 +289,7 @@ public interface Location {
 
     private void verifyIndexPartAfterProcessor(String part) {
       if (location.parts.getLast().equals(PROCESSORS)) {
-        checkState(isNumeric(part), "Only an index part can follow a processors part");
+        checkState(isNumeric(part), "Only an index part can follow a processors part, was '" + part + "'");
       }
     }
 
