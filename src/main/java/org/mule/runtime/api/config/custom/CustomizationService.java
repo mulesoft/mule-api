@@ -6,9 +6,15 @@
  */
 package org.mule.runtime.api.config.custom;
 
+import static org.mule.runtime.api.artifact.ArtifactType.APP;
+
+import static java.util.Collections.emptyMap;
+
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.artifact.ArtifactType;
 import org.mule.runtime.api.lifecycle.Lifecycle;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -157,6 +163,26 @@ public interface CustomizationService {
    */
   default <T> void registerCustomServiceClass(String serviceId, Class<T> serviceClass, boolean baseContext) {
     registerCustomServiceClass(serviceId, serviceClass);
+  }
+
+  /**
+   * Allows to fine-tune the service customization depending on the properties of the artifact.
+   *
+   * @return the artifactProperties of the deployment for which services are being customized
+   * @since 4.10
+   */
+  default Map<String, String> getArtifactProperties() {
+    return emptyMap();
+  }
+
+  /**
+   * Allows to fine-tune the service customization depending on the type of the artifact.
+   *
+   * @return the type of the deployment for which services are being customized
+   * @since 4.10
+   */
+  default ArtifactType getArtifactType() {
+    return APP;
   }
 
 }
