@@ -10,6 +10,7 @@ import static java.util.ServiceLoader.load;
 import static java.util.stream.StreamSupport.stream;
 
 import org.mule.api.annotation.NoImplement;
+import org.mule.runtime.api.config.custom.ServiceConfigurator;
 import org.mule.runtime.api.connection.ConnectionValidationResult;
 
 import java.util.stream.Stream;
@@ -23,8 +24,10 @@ import java.util.stream.Stream;
  * connectivity testing must exists for the strategy to work.
  *
  * @since 1.0
+ * @deprecated Used only by fat-tooling, since 4.10 use the mule-framework instead.
  */
 @NoImplement
+@Deprecated // (since = "4.10", forRemoval = true)
 public interface ConnectivityTestingStrategy {
 
   /**
