@@ -14,7 +14,9 @@ import javax.sql.DataSource;
  * Decorates {@link DataSource} if required in order to work with XA transactions
  *
  * @since 1.0
+ * @deprecated since 4.10 use the new XA connection provider introduced in 4.10 instead.
  */
+@Deprecated // (since = "4.10", forRemoval = true)
 public interface DataSourceDecorator {
 
   /**
