@@ -7,7 +7,8 @@
 package org.mule.runtime.api.test.metadata;
 
 import static org.hamcrest.CoreMatchers.containsString;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import static org.mockito.Mockito.mock;
 
 import org.mule.runtime.api.metadata.DataType;

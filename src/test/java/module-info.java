@@ -9,6 +9,10 @@
  *
  * @since 1.5
  */
+
+import org.mule.runtime.api.metadata.AbstractDataTypeBuilderFactory;
+import org.mule.runtime.api.test.metadata.DefaultDataTypeBuilderFactory;
+
 module org.mule.runtime.api.test {
 
   requires transitive org.mule.runtime.api;
@@ -17,7 +21,6 @@ module org.mule.runtime.api.test {
   requires org.mule.runtime.metadata.model.message;
   requires org.mule.runtime.artifact.declaration;
   requires org.mule.runtime.artifact.declaration.persistence;
-
 
   requires com.github.benmanes.caffeine;
   requires com.google.common;
@@ -64,4 +67,6 @@ module org.mule.runtime.api.test {
 
   opens org.mule.runtime.api.test.exception to org.mockito;
   opens org.mule.runtime.api.test.meta.model.util to org.mockito;
+
+  provides AbstractDataTypeBuilderFactory with DefaultDataTypeBuilderFactory;
 }
