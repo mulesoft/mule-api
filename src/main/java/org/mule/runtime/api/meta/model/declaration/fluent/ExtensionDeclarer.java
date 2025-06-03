@@ -26,6 +26,7 @@ import org.mule.runtime.api.meta.model.XmlDslModel;
 import org.mule.runtime.api.meta.model.deprecated.DeprecationModel;
 import org.mule.runtime.api.meta.model.error.ErrorModel;
 import org.mule.runtime.api.meta.model.notification.NotificationModel;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 import org.mule.runtime.api.util.JavaConstants;
 
 import java.util.Collection;
@@ -401,6 +402,11 @@ public class ExtensionDeclarer extends Declarer<ExtensionDeclaration>
   public ExtensionDeclarer withMinMuleVersion(MuleVersion minMuleVersion) {
     declaration.withMinMuleVersion(minMuleVersion);
     return this;
+  }
+
+  @Override
+  public ExtensionDeclarer withMinMuleVersion(MuleMinorVersion minMuleVersion) {
+    return withMinMuleVersion(new MuleVersion(minMuleVersion.toString() + ".0"));
   }
 
   /**

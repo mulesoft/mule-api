@@ -7,6 +7,7 @@
 package org.mule.runtime.api.meta.model.declaration.fluent;
 
 import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
+
 import org.mule.metadata.api.model.MetadataType;
 import org.mule.runtime.api.meta.ExpressionSupport;
 import org.mule.runtime.api.meta.MuleVersion;
@@ -20,6 +21,7 @@ import org.mule.runtime.api.meta.model.parameter.ParameterModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterRole;
 import org.mule.runtime.api.meta.model.parameter.ValueProviderModel;
 import org.mule.runtime.api.meta.model.stereotype.StereotypeModel;
+import org.mule.runtime.api.meta.version.MuleMinorVersion;
 
 import java.util.List;
 
@@ -223,4 +225,10 @@ public class ParameterDeclarer<T extends ParameterDeclarer>
     declaration.withMinMuleVersion(minMuleVersion);
     return (T) this;
   }
+
+  @Override
+  public T withMinMuleVersion(MuleMinorVersion minMuleVersion) {
+    return withMinMuleVersion(new MuleVersion(minMuleVersion.toString() + ".0"));
+  }
+
 }

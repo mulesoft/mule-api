@@ -2,6 +2,15 @@
   "1.10.0": {
     "revapi": {
       "ignore": [
+		{
+		  "ignore": true,
+		  "code": "java.method.visibilityIncreased",
+		  "old": "method org.mule.runtime.api.meta.MuleVersion org.mule.runtime.api.meta.MuleVersion::getBaseVersion()",
+		  "new": "method org.mule.runtime.api.meta.version.MuleMinorVersion org.mule.runtime.api.meta.MuleVersion::getBaseVersion()",
+		  "oldVisibility": "private",
+		  "newVisibility": "public",
+		  "justification": "ADD YOUR EXPLANATION FOR THE NECESSITY OF THIS CHANGE - MuleVersion is already final"
+		},
         {
           "ignore": true,
           "code": "java.annotation.removed",
