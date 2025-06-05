@@ -55,7 +55,7 @@ public interface Component {
     /**
      * Annotation that defines the location within the artifact source for the element.
      * 
-     * @since 1.10
+     * @since 1.10, 1.9.7
      */
     QName SOURCE_LOCATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceLocation");
 
