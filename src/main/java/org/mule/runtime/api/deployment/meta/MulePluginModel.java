@@ -31,8 +31,12 @@ public class MulePluginModel extends AbstractMuleArtifactModel {
 
   public static final String EXTENSION_LOADER_DESCRIPTOR = "extensionModelLoaderDescriptor";
 
-  private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
-  private final LicenseModel license;
+  private MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
+  private LicenseModel license;
+
+  private MulePluginModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   private MulePluginModel(String name, String minMuleVersion, Product product,
                           MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,

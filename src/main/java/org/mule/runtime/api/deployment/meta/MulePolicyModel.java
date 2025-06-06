@@ -28,7 +28,11 @@ import java.util.Set;
 @NoExtend
 public class MulePolicyModel extends AbstractMuleArtifactModel {
 
-  private final Set<String> supportedJavaVersions;
+  private Set<String> supportedJavaVersions;
+
+  private MulePolicyModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   private MulePolicyModel(String name, String minMuleVersion,
                           Product product,

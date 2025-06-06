@@ -6,10 +6,12 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+
 import static java.util.Optional.empty;
 import static java.util.Optional.ofNullable;
+
 import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
 
 import org.mule.api.annotation.NoExtend;
 
@@ -26,8 +28,12 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
 
   private static final String PLUGIN_CLASS_NAME = "pluginClassName";
 
-  private final MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
-  private final String pluginClassName;
+  private MuleArtifactLoaderDescriptor extensionModelLoaderDescriptor;
+  private String pluginClassName;
+
+  private MuleServerPluginModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   private MuleServerPluginModel(String name, String minMuleVersion, Product product,
                                 MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
@@ -80,6 +86,7 @@ public class MuleServerPluginModel extends AbstractMuleArtifactModel {
     /**
      * @return a well formed {@link MuleServerPluginModel}
      */
+    @Override
     public MuleServerPluginModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(!isBlank(pluginClassName), "pluginClassName cannot be blank");

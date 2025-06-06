@@ -6,11 +6,14 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
-import static java.util.Collections.emptyList;
-import static java.util.Collections.unmodifiableList;
-import static org.apache.commons.lang3.StringUtils.isBlank;
 import static org.mule.runtime.api.util.Preconditions.checkArgument;
 import static org.mule.runtime.api.util.Preconditions.checkState;
+
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
+
 import org.mule.api.annotation.NoExtend;
 
 import java.util.List;
@@ -27,7 +30,11 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
   private static final String CONTRACT_CLASS_NAME = "contractClassName";
   private static final String SERVICE_PROVIDER_CLASS_NAME = "serviceProviderClassName";
 
-  private final List<MuleServiceContractModel> contracts;
+  private List<MuleServiceContractModel> contracts;
+
+  private MuleServiceModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   private MuleServiceModel(String name, String minMuleVersion, Product product,
                            MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
@@ -80,6 +87,7 @@ public class MuleServiceModel extends AbstractMuleArtifactModel {
     /**
      * @return a well formed {@link MuleServiceModel}
      */
+    @Override
     public MuleServiceModel build() {
       checkArgument(!isBlank(getName()), "name cannot be a blank");
       checkArgument(getMinMuleVersion() != null, "minMuleVersion cannot be null");

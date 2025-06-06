@@ -17,9 +17,13 @@ import java.util.Optional;
  */
 public final class LicenseModel {
 
-  private final String requiredEntitlement;
-  private final String provider;
-  private final boolean allowsEvaluation;
+  private String requiredEntitlement;
+  private String provider;
+  private boolean allowsEvaluation;
+
+  private LicenseModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   /**
    * Creates an immutable implementation of {@link LicenseModel}

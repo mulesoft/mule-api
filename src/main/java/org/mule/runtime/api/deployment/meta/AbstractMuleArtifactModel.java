@@ -6,14 +6,17 @@
  */
 package org.mule.runtime.api.deployment.meta;
 
+import static org.mule.runtime.api.meta.MuleVersion.NO_REVISION;
+import static org.mule.runtime.api.util.Preconditions.checkArgument;
+import static org.mule.runtime.api.util.Preconditions.checkState;
+
 import static java.lang.String.format;
 import static java.lang.String.join;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
+
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static org.mule.runtime.api.meta.MuleVersion.NO_REVISION;
-import static org.mule.runtime.api.util.Preconditions.checkArgument;
-import static org.mule.runtime.api.util.Preconditions.checkState;
+
 import org.mule.api.annotation.NoExtend;
 import org.mule.runtime.api.meta.MuleVersion;
 import org.mule.runtime.api.meta.model.ExtensionModel;
@@ -44,11 +47,15 @@ public abstract class AbstractMuleArtifactModel {
 
 
 
-  private final String name;
-  private final String minMuleVersion;
-  private final Product requiredProduct;
-  private final MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor;
-  private final MuleArtifactLoaderDescriptor bundleDescriptorLoader;
+  private String name;
+  private String minMuleVersion;
+  private Product requiredProduct;
+  private MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor;
+  private MuleArtifactLoaderDescriptor bundleDescriptorLoader;
+
+  protected AbstractMuleArtifactModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   /**
    * Creates a new model
@@ -59,8 +66,7 @@ public abstract class AbstractMuleArtifactModel {
    * @param classLoaderModelLoaderDescriptor describes how to create the class loader for the artifact.
    * @param bundleDescriptorLoader           indicates how to load the bundle descriptor.
    */
-  protected AbstractMuleArtifactModel(
-                                      String name, String minMuleVersion,
+  protected AbstractMuleArtifactModel(String name, String minMuleVersion,
                                       Product requiredProduct, MuleArtifactLoaderDescriptor classLoaderModelLoaderDescriptor,
                                       MuleArtifactLoaderDescriptor bundleDescriptorLoader) {
     checkArgument(classLoaderModelLoaderDescriptor != null, "classLoaderModelLoaderDescriptor cannot be null");
