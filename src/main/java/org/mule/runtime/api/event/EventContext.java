@@ -40,9 +40,17 @@ public interface EventContext {
   String getCorrelationId();
 
   /**
-   * @return a timestamp indicating when the message was received by the connector source
+   * @return a timestamp indicating when the message was received by the connector source.
    */
   Instant getReceivedTime();
+
+  /**
+   * @return a timestamp indicating when the execution of this context began.
+   * @since 1.10, 1.9.7
+   */
+  default Instant getStartTime() {
+    return Instant.MIN;
+  }
 
   /**
    *

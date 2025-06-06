@@ -51,6 +51,14 @@ public interface Component {
      * Annotation that defines the representation for the element to be used in error reporting.
      */
     QName REPRESENTATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "representation");
+
+    /**
+     * Annotation that defines the location within the artifact source for the element.
+     * 
+     * @since 1.10, 1.9.7
+     */
+    QName SOURCE_LOCATION_ANNOTATION_KEY = new QName(NS_MULE_PARSER_METADATA, "sourceLocation");
+
   }
 
   /**
@@ -112,4 +120,5 @@ public interface Component {
   default String getDslSource() {
     return (String) getAnnotation(SOURCE_ELEMENT_ANNOTATION_KEY);
   }
+
 }
