@@ -24,8 +24,12 @@ import org.apache.commons.lang3.StringUtils;
 @NoExtend
 public class MuleServiceContractModel {
 
-  private final String serviceProviderClassName;
-  private final String contractClassName;
+  private String serviceProviderClassName;
+  private String contractClassName;
+
+  private MuleServiceContractModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   /**
    * Creates a new instance

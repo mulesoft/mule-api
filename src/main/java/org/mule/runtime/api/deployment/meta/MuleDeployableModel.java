@@ -31,13 +31,17 @@ import java.util.Set;
 @NoExtend
 public abstract class MuleDeployableModel extends AbstractMuleArtifactModel {
 
-  private final Set<String> configs;
-  private final List<String> secureProperties;
-  private final Set<String> supportedJavaVersions;
+  private Set<String> configs;
+  private List<String> secureProperties;
+  private Set<String> supportedJavaVersions;
 
   // this field must be true by default because it's the default value used when deserializing this class with no content.
   private Boolean redeploymentEnabled = true;
-  private final String logConfigFile;
+  private String logConfigFile;
+
+  protected MuleDeployableModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   /**
    * Creates a new model
