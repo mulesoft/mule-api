@@ -48,7 +48,7 @@ public final class MuleSystemProperties {
   public static final String MULE_ENABLE_STREAMING_STATISTICS = SYSTEM_PROPERTY_PREFIX + "streaming.enableStatistics";
 
   /**
-   * System property key for the default size of a streaming buffer bucket
+   * System property key for the default size of a streaming buffer bucket, in bytes
    */
   public static final String MULE_STREAMING_BUCKET_SIZE = SYSTEM_PROPERTY_PREFIX + "streaming.bucketSize";
 
@@ -439,6 +439,17 @@ public final class MuleSystemProperties {
    */
   public static final String ENABLE_POLICY_ISOLATION_PROPERTY =
       SYSTEM_PROPERTY_PREFIX + "enable.policy.isolation";
+
+  /**
+   * When set to true, cursors from bytes repeatable streams 'read' methods will return immediately after readily available data
+   * has been read. If set to false, 'read' methods will not return until the requested 'len' has been read. Setting this to
+   * 'true' is useful, for instance, so that SSE events sent over HTTP can be processed as they arrive instead of being buffered
+   * by repeatable streaming.
+   *
+   * @since 4.10.0, 4.9.7, 4.6.20, 4.4.1
+   */
+  public static final String REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY =
+      SYSTEM_PROPERTY_PREFIX + "repeatableStreaming.bytes.eagerRead";
 
   /**
    * If set to true, Mule will handle redirect requests. If set to false, we will delegate the redirect to Grizzly.
