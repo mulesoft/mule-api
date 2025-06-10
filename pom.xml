@@ -115,7 +115,7 @@
         <project.build.java11SourceDirectory>${project.basedir}/src/main/java11</project.build.java11SourceDirectory>
         <project.build.java11TestSourceDirectory>${project.basedir}/src/test/java11</project.build.java11TestSourceDirectory>
         <artifactDeclarationVersion>1.10.0-20250610</artifactDeclarationVersion>
-        <muleModuleMavenPluginVersion>1.10.0-SNAPSHOT</muleModuleMavenPluginVersion>
+        <muleModuleMavenPluginVersion>1.10.0-20250610</muleModuleMavenPluginVersion>
 
         <caffeine.java8.version>2.9.3</caffeine.java8.version>
         <mockito.java8.version>4.11.0</mockito.java8.version>
