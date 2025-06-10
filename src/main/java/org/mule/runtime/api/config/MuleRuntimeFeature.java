@@ -42,14 +42,15 @@ import static org.mule.runtime.api.util.MuleSystemProperties.MULE_UNSUPPORTED_EX
 import static org.mule.runtime.api.util.MuleSystemProperties.NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PARALLEL_FOREACH_FLATTEN_MESSAGE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.RETHROW_EXCEPTIONS_IN_IDEMPOTENT_MESSAGE_VALIDATOR_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SET_VARIABLE_WITH_NULL_VALUE_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.START_EXTENSION_COMPONENTS_WITH_ARTIFACT_CLASSLOADER_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPORT_NATIVE_LIBRARY_DEPENDENCIES_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.SUPPRESS_ERRORS_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.TO_STRING_TRANSFORMER_TRANSFORM_ITERATOR_ELEMENTS_PROPERTY;
-import static org.mule.runtime.api.util.MuleSystemProperties.USE_TRANSACTION_SINK_INDEX_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY;
+import static org.mule.runtime.api.util.MuleSystemProperties.USE_TRANSACTION_SINK_INDEX_PROPERTY;
 import static org.mule.runtime.api.util.MuleSystemProperties.VALIDATE_APPLICATION_MODEL_WITH_REGION_CLASSLOADER_PROPERTY;
 
 import static java.util.Optional.ofNullable;
@@ -570,7 +571,20 @@ public enum MuleRuntimeFeature implements Feature {
   SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION(
       "When enabled, policy isolation will utilize a dedicated classloader environment, isolated from the domain's, to prevent potential dependency conflicts. This ensures that policies run with their own set of dependencies.",
       "W-17340911",
-      "4.10.0", USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY);
+      "4.10.0", USE_SEPARATE_CLASSLOADER_FOR_POLICY_ISOLATION_PROPERTY),
+
+  /**
+   * When enabled, cursors from bytes repeatable streams 'read' methods will return immediately after readily available data has
+   * been read. If disabled, 'read' methods will not return until the requested 'len' has been read. Setting this to 'true' is
+   * useful, for instance, so that SSE events sent over HTTP can be processed as they arrive instead of being buffered by
+   * repeatable streaming.
+   *
+   * @since 4.10.0, 4.9.7, 4.6.20, 4.4.1
+   */
+  ENABLE_REPEATABLE_STREAMING_BYTES_EAGER_READ(
+      "When enabled, cursors from repeatable streams 'read' methods will return immediately after readily available data has been read. If disabled, 'read' methods will not return until the requested 'len' has been read. Setting this to 'true' is useful, for instance, so that SSE events sent over HTTP can be processed as they arrive instead of being buffered by repeatable streaming.",
+      "W-18716253",
+      "4.10.0", REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY);
 
   private final String description;
   private final String issueId;
