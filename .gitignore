@@ -30,3 +30,6 @@ testdir/
 hostkey.ser
 *.h2.db
 /.java-version
+
+# Allure
+.allure
