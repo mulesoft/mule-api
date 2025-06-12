@@ -5,6 +5,18 @@
         {
           "ignore": true,
           "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.config.MuleRuntimeFeature.ENABLE_REPEATABLE_STREAMING_BYTES_EAGER_READ",
+          "justification": "W-18716253: Repeatable streams wait to fill the whole buffer instead of returning immediately available data"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
+          "new": "field org.mule.runtime.api.util.MuleSystemProperties.REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY",
+          "justification": "W-18716253: Repeatable streams wait to fill the whole buffer instead of returning immediately available data"
+        },
+        {
+          "ignore": true,
+          "code": "java.field.addedStaticField",
           "new": "field org.mule.runtime.api.util.MuleSystemProperties.GRACEFUL_SHUTDOWN_DEFAULT_TIMEOUT",
           "justification": "W-18476347: Make the shutdown timeout configurable "
         },
