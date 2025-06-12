@@ -23,8 +23,12 @@ import java.util.Map;
  */
 public final class MuleArtifactLoaderDescriptor {
 
-  private final String id;
-  private final Map<String, Object> attributes;
+  private String id;
+  private Map<String, Object> attributes;
+
+  private MuleArtifactLoaderDescriptor() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   /**
    * Creates an immutable implementation of {@link MuleArtifactLoaderDescriptor}

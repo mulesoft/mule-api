@@ -23,7 +23,11 @@ import java.util.Set;
 @NoExtend
 public class MuleApplicationModel extends MuleDeployableModel {
 
-  private final String domain;
+  private String domain;
+
+  private MuleApplicationModel() {
+    // Nothing to do, this is just for allowing instantiation to GSON
+  }
 
   private MuleApplicationModel(String name,
                                String minMuleVersion,
