@@ -100,7 +100,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_RESERVED_PROPERTIES(
       "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides are be ignored).",
-      "MULE-17659", "4.4.0, 4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+      "MULE-17659", "4.4.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
    * When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.
@@ -259,7 +259,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
       "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
-      "MULE-19919", "4.5.0, 4.4.1, 4.3.1", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
+      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
 
   /**
    * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
@@ -386,7 +386,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   SUPPRESS_ERRORS(
       "When enabled, error suppression will happen. This will affect, for example, the Web Service Consumer connector and the Until Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be treated as underlying causes.",
-      "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY),
+      "W-11308645", "4.5.0", SUPPRESS_ERRORS_PROPERTY),
 
   /**
    * When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of
@@ -427,7 +427,7 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created\n"
           +
           "to avoid deadlock.",
-      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
+      "W-12128703", "4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
 
   /**
    * When enabled, if an application access a native library, the rest of its declared native libraries are also loaded. This
