@@ -100,7 +100,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_RESERVED_PROPERTIES(
       "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides are be ignored).",
-      "MULE-17659", "4.4.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+      "MULE-17659", "4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
    * When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.
@@ -503,7 +503,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
       "When enabled, implicit configuration for the XML SDK won't be created.",
-      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
+      "W-10634129", "4.7.0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
 
   /**
    * When enabled, the MDC context will reset after XML SDK Operation has been executed.
