@@ -26,6 +26,7 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
   private ConnectionManagementType connectionManagementType;
   private final Set<ExternalLibraryModel> externalLibraryModels = new LinkedHashSet<>();
   private boolean supportsConnectivityTesting = true;
+  private boolean supportsXa = false;
 
   /**
    * {@inheritDoc}
@@ -74,5 +75,13 @@ public class ConnectionProviderDeclaration extends StereotypedDeclaration<Connec
 
   public void setSupportsConnectivityTesting(boolean supportsConnectivityTesting) {
     this.supportsConnectivityTesting = supportsConnectivityTesting;
+  }
+
+  public boolean isSupportsXa() {
+    return supportsXa;
+  }
+
+  public void setSupportsXa(boolean supportsXa) {
+    this.supportsXa = supportsXa;
   }
 }

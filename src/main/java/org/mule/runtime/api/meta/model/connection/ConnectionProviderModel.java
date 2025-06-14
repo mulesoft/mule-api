@@ -10,10 +10,10 @@ package org.mule.runtime.api.meta.model.connection;
 import org.mule.api.annotation.NoImplement;
 import org.mule.runtime.api.connection.ConnectionProvider;
 import org.mule.runtime.api.meta.DescribedObject;
-import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.NamedObject;
 import org.mule.runtime.api.meta.model.EnrichableModel;
 import org.mule.runtime.api.meta.model.HasExternalLibraries;
+import org.mule.runtime.api.meta.model.declaration.fluent.HasSemanticTerms;
 import org.mule.runtime.api.meta.model.deprecated.DeprecableModel;
 import org.mule.runtime.api.meta.model.display.HasDisplayModel;
 import org.mule.runtime.api.meta.model.parameter.ParameterizedModel;
@@ -45,4 +45,10 @@ public interface ConnectionProviderModel
    * @return whether this provider supports connectivity testing or not
    */
   boolean supportsConnectivityTesting();
+
+  /**
+   * @return whether this provider connections may participate in an XA transaction.
+   * @since 1.10
+   */
+  boolean supportsXa();
 }

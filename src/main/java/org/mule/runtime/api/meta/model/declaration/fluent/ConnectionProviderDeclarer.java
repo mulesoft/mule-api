@@ -36,6 +36,7 @@ public final class ConnectionProviderDeclarer
    * @param description a description
    * @return {@code this} declarer
    */
+  @Override
   public ConnectionProviderDeclarer describedAs(String description) {
     declaration.setDescription(description);
     return this;
@@ -81,6 +82,11 @@ public final class ConnectionProviderDeclarer
 
   public ConnectionProviderDeclarer supportsConnectivityTesting(boolean supportsConnectivityTesting) {
     declaration.setSupportsConnectivityTesting(supportsConnectivityTesting);
+    return this;
+  }
+
+  public ConnectionProviderDeclarer supportsXa(boolean supportsXa) {
+    declaration.setSupportsXa(supportsXa);
     return this;
   }
 
