@@ -36,6 +36,17 @@ public interface Feature {
   String getSince();
 
   /**
+   * Returns the minimum Java version required for this feature to be enabled. This method is used to enforce Java version
+   * requirements for features that depend on specific Java capabilities.
+   *
+   * @return The minimum Java version required for this feature, or null if there is no minimum version requirement.
+   * @since 4.10.0
+   */
+  default String getMinJavaVersion() {
+    return null;
+  }
+
+  /**
    * A comma-separated list of versions (must include all the different minors) since this feature will be enabled by default. Any
    * relevant artifact (application, policy... etc) with a minMuleVersion matching this list will have this {@link Feature}
    * enabled by default.
