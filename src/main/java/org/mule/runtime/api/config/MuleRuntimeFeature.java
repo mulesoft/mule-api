@@ -100,7 +100,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   HONOUR_RESERVED_PROPERTIES(
       "When enabled, reserved properties such as 'app.name' can't be overridden by global properties (overrides are be ignored).",
-      "MULE-17659", "4.4.0, 4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
+      "MULE-17659", "4.3.0", HONOUR_RESERVED_PROPERTIES_PROPERTY),
 
   /**
    * When enabled, DataWeave will correctly handle splitter exceptions, avoiding Scala serialization issues.
@@ -120,7 +120,7 @@ public enum MuleRuntimeFeature implements Feature {
   BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER(
       "When enabled, batch aggregators with fixed size aggregators commit only when a full block is processed.",
       "MULE-19218",
-      "", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
+      "Never", BATCH_FIXED_AGGREGATOR_TRANSACTION_RECORD_BUFFER_PROPERTY),
 
   /**
    * When enabled, Connection errors will be computed as part of alerts triggering.
@@ -259,7 +259,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING(
       "When enabled, the default error handler added by the runtime will not rollback a transaction that should not be rollback by it",
-      "MULE-19919", "4.5.0, 4.4.1, 4.3.1", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
+      "MULE-19919", "4.5.0", DEFAULT_ERROR_HANDLER_NOT_ROLLBACK_IF_NOT_CORRESPONDING_PROPERTY),
 
   /**
    * When enabled, expression validations will be enforced for targetValue, not allowing a literal value.
@@ -386,7 +386,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   SUPPRESS_ERRORS(
       "When enabled, error suppression will happen. This will affect, for example, the Web Service Consumer connector and the Until Successful scope that will always report errors from their corresponding namespaces (MULE and WSC). Suppressed errors will be treated as underlying causes.",
-      "W-11308645", "4.5.0, 4.4.0-202210, 4.3.0-202210", SUPPRESS_ERRORS_PROPERTY),
+      "W-11308645", "Always", SUPPRESS_ERRORS_PROPERTY),
 
   /**
    * When enabled, internal exceptions when processing an event in the 'idempotent-message-validator' will be rethrown instead of
@@ -427,7 +427,7 @@ public enum MuleRuntimeFeature implements Feature {
       "When enabled, flux sinks will be cached using index as part of the key. If a sink is already in use, new sink will be created\n"
           +
           "to avoid deadlock.",
-      "W-12128703", "4.0.0, 4.1.0, 4.2.0, 4.3.0, 4.4.0, 4.5.0", USE_TRANSACTION_SINK_INDEX_PROPERTY),
+      "W-12128703", "Always", USE_TRANSACTION_SINK_INDEX_PROPERTY),
 
   /**
    * When enabled, if an application access a native library, the rest of its declared native libraries are also loaded. This
@@ -448,7 +448,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @since 4.5.0
    */
   PUT_TRACE_ID_AND_SPAN_ID_IN_MDC("When enabled, the trace id and span id will be added to the MDC when available.",
-      "W-12979787", "4.5.0", PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY),
+      "W-12979787", "Never", PUT_TRACE_ID_AND_SPAN_ID_IN_MDC_PROPERTY),
   /**
    * When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.
    *
@@ -456,7 +456,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE(
       "When enabled the ancestor-mule-span-id value will be added in the trace state when a span is propagated.",
-      "W-13215870", "", ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY),
+      "W-13215870", "Never", ADD_MULE_SPECIFIC_TRACING_INFORMATION_IN_TRACE_STATE_PROPERTY),
 
   /**
    * "When enabled, a new (Source) Policy Context is created for the execution of parallel scopes: ParallelForeach, ScatterGather
@@ -503,7 +503,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION(
       "When enabled, implicit configuration for the XML SDK won't be created.",
-      "W-10634129", "4.7,0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
+      "W-10634129", "4.7.0", MULE_DISABLE_XML_SDK_IMPLICIT_CONFIGURATION_CREATION),
 
   /**
    * When enabled, the MDC context will reset after XML SDK Operation has been executed.
@@ -522,7 +522,7 @@ public enum MuleRuntimeFeature implements Feature {
    */
   UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC(
       "When enabled, org.mule.runtime.extension.api.client.ExtensionsClient deprecated methods (executeAsync(String, String, OperationParameters) and execute(String, String, OperationParameters)) will throw an UnsupportedOperationException.",
-      "W-15399821", "4.8.0", MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC),
+      "W-15399821", "4.8.0", MULE_UNSUPPORTED_EXTENSIONS_CLIENT_RUN_ASYNC, "JAVA_21"),
 
   /**
    * When enabled, root element of `import` targets will validated to be the same as the importing config.
@@ -550,7 +550,7 @@ public enum MuleRuntimeFeature implements Feature {
       "When disabled, dynamic resolution of notification handling will not happen after the mule artifact is initialized. "
           + "This can result in race conditions that can affect monitoring metrics.",
       "W-16828516",
-      "", DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY),
+      "Never", DISABLE_OPTIMISED_NOTIFICATION_HANDLER_DYNAMIC_RESOLUTION_UPDATE_BASED_ON_DELEGATE_PROPERTY),
 
   NTLM_AVOID_SEND_PAYLOAD_ON_TYPE_1(
       "When enabled, body contents will not be sent on NTLM type 1 requests. This saves resources by not sending a payload that will never be consumed (the server will reject it until the dance is completed).",
@@ -584,11 +584,12 @@ public enum MuleRuntimeFeature implements Feature {
   ENABLE_REPEATABLE_STREAMING_BYTES_EAGER_READ(
       "When enabled, cursors from repeatable streams 'read' methods will return immediately after readily available data has been read. If disabled, 'read' methods will not return until the requested 'len' has been read. Setting this to 'true' is useful, for instance, so that SSE events sent over HTTP can be processed as they arrive instead of being buffered by repeatable streaming.",
       "W-18716253",
-      "4.10.0", REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY);
+      "Never", REPEATABLE_STREAMING_BYTES_EAGER_READ_PROPERTY);
 
   private final String description;
   private final String issueId;
   private final String enabledByDefaultSince;
+  private final String minJavaVersion;
   private final String overridingSystemPropertyName;
 
   /**
@@ -597,7 +598,7 @@ public enum MuleRuntimeFeature implements Feature {
    * @param enabledByDefaultSince See {@link Feature#getEnabledByDefaultSince()}.
    */
   MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince) {
-    this(description, issueId, enabledByDefaultSince, null);
+    this(description, issueId, enabledByDefaultSince, null, null);
   }
 
   /**
@@ -606,12 +607,27 @@ public enum MuleRuntimeFeature implements Feature {
    * @param enabledByDefaultSince        See {@link Feature#getEnabledByDefaultSince()}.
    * @param overridingSystemPropertyName See {@link Feature#getOverridingSystemPropertyName()}.
    */
-  MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince, String overridingSystemPropertyName) {
+  MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince,
+                     String overridingSystemPropertyName) {
+    this(description, issueId, enabledByDefaultSince, overridingSystemPropertyName, null);
+  }
+
+  /**
+   * @param description                  Description of the feature. This description will be part of end user documentation.
+   * @param issueId                      The issue that caused this feature addition. For instance, <code>MULE-1234</code>.
+   * @param enabledByDefaultSince        See {@link Feature#getEnabledByDefaultSince()}.
+   * @param overridingSystemPropertyName See {@link Feature#getOverridingSystemPropertyName()}.
+   * @param minJavaVersion               The minimum Java version required for this feature.
+   */
+  MuleRuntimeFeature(String description, String issueId, String enabledByDefaultSince,
+                     String overridingSystemPropertyName, String minJavaVersion) {
     this.description = description;
     this.issueId = issueId;
     this.enabledByDefaultSince = enabledByDefaultSince;
     this.overridingSystemPropertyName = overridingSystemPropertyName;
+    this.minJavaVersion = minJavaVersion;
   }
+
 
   @Override
   public String getDescription() {
@@ -631,6 +647,11 @@ public enum MuleRuntimeFeature implements Feature {
   @Override
   public String getEnabledByDefaultSince() {
     return enabledByDefaultSince;
+  }
+
+  @Override
+  public String getMinJavaVersion() {
+    return minJavaVersion;
   }
 
   @Override
