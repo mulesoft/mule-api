@@ -119,6 +119,8 @@
 
         <caffeine.java8.version>2.9.3</caffeine.java8.version>
         <mockito.java8.version>4.11.0</mockito.java8.version>
+
+        <surefire.args.mockito/>
         
         <licensePath>LICENSE_HEADER_CPAL.txt</licensePath>
         <licenseYear>2023</licenseYear>
