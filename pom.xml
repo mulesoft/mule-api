@@ -123,7 +123,7 @@
         <licenseYear>2023</licenseYear>
 
         <oldMuleArtifactVersion>1.9.6-rc1</oldMuleArtifactVersion>
-        <muleApiAnnotationsVersion>1.8.7-SNAPSHOT</muleApiAnnotationsVersion>
+        <muleApiAnnotationsVersion>1.8.7-rc1</muleApiAnnotationsVersion>
 
         <muleBomVersion>4.9.7-SNAPSHOT</muleBomVersion>
     </properties>
