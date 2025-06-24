@@ -628,6 +628,10 @@ public enum MuleRuntimeFeature implements Feature {
     this.minJavaVersion = minJavaVersion;
   }
 
+  @Override
+  public String getName() {
+    return name();
+  }
 
   @Override
   public String getDescription() {

@@ -46,6 +46,10 @@ public interface Feature {
     return null;
   }
 
+  default String getName() {
+    return null;
+  }
+
   /**
    * A comma-separated list of versions (must include all the different minors) since this feature will be enabled by default. Any
    * relevant artifact (application, policy... etc) with a minMuleVersion matching this list will have this {@link Feature}
